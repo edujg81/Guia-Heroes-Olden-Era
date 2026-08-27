@@ -24,6 +24,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   const tabs = [
     { id: 'build-order', label: 'Cronograma', mobileLabel: 'Cronograma', icon: Shield },
+    { id: 'structures', label: 'Estructuras & Ciudad', mobileLabel: 'Ciudad', icon: Castle },
     { id: 'faction-laws', label: 'Leyes de Facción', mobileLabel: 'Leyes', icon: Scroll },
     { id: 'spells', label: 'Grimorio & Hechizos', mobileLabel: 'Grimorio', icon: BookOpen },
     { id: 'combat-tactics', label: 'Tácticas', mobileLabel: 'Tácticas', icon: Flame },

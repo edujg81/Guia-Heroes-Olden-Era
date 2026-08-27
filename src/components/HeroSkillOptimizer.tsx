@@ -8,12 +8,16 @@ import { FactionId, FACTIONS_METADATA, getFactionTheme } from '../data/factionDa
 
 interface HeroSkillOptimizerProps {
   selectedFaction?: FactionId;
+  themeMode?: 'dark' | 'light';
 }
 
-export const HeroSkillOptimizer: React.FC<HeroSkillOptimizerProps> = ({ selectedFaction = 'Mazmorra' }) => {
+export const HeroSkillOptimizer: React.FC<HeroSkillOptimizerProps> = ({ 
+  selectedFaction = 'Mazmorra',
+  themeMode = 'dark',
+}) => {
   const [activeSubTab, setActiveSubTab] = useStickyState<'heroes' | 'official-skills' | 'subclasses'>('heroes', 'active_hero_subtab');
   const meta = FACTIONS_METADATA[selectedFaction] || FACTIONS_METADATA.Mazmorra;
-  const theme = getFactionTheme(selectedFaction);
+  const theme = getFactionTheme(selectedFaction, themeMode);
 
   return (
     <div className="space-y-6">
@@ -70,13 +74,13 @@ export const HeroSkillOptimizer: React.FC<HeroSkillOptimizerProps> = ({ selected
 
       {/* Active Sub-Tab View (Persisted in DOM) */}
       <div className={activeSubTab === 'heroes' ? 'block' : 'hidden'}>
-        <RecommendedHeroes selectedFaction={selectedFaction} />
+        <RecommendedHeroes selectedFaction={selectedFaction} themeMode={themeMode} />
       </div>
       <div className={activeSubTab === 'subclasses' ? 'block' : 'hidden'}>
-        <SubclassesBrowser selectedFaction={selectedFaction} />
+        <SubclassesBrowser selectedFaction={selectedFaction} themeMode={themeMode} />
       </div>
       <div className={activeSubTab === 'official-skills' ? 'block' : 'hidden'}>
-        <OfficialSkillsBrowser />
+        <OfficialSkillsBrowser themeMode={themeMode} />
       </div>
     </div>
   );

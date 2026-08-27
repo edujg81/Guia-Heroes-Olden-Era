@@ -344,3 +344,65 @@ export interface TacticalScenario {
   turnByTurnLoop?: string[];
   counterPlayNote?: string;
 }
+
+export interface TownStructureCost {
+  gold?: number;
+  wood?: number;
+  ore?: number;
+  gems?: number;
+  crystal?: number;
+  mercury?: number;
+  sulfur?: number;
+  alchemicalDust?: number;
+}
+
+export interface StructureUpgradeLevel {
+  level: number;
+  name: string;
+  nameEn?: string;
+  cost: TownStructureCost;
+  prerequisites: string[];
+  effects: string[];
+  bonusIncome?: string;
+  growthBonus?: string;
+  defenseBonus?: string;
+  strategicTip?: string;
+}
+
+export interface UnitUpgradeBranch {
+  unitName: string;
+  nameEn?: string;
+  role: string;
+  keyAbilities: string[];
+  statsBonus?: string;
+  upgradeCost?: TownStructureCost;
+}
+
+export interface TownStructure {
+  id: string;
+  name: string;
+  nameEn: string;
+  category: 'Cívica y Economía' | 'Fortificaciones' | 'Magia & Cofradía' | 'Moradas de Criaturas' | 'Estructuras Especiales de Facción';
+  faction: string; // FactionId
+  tier?: number; // For dwellings: 1 to 7
+  dwellingTier?: number;
+  unitRecruited?: string;
+  unitRecruitedBase?: string;
+  dwellingUpgradeCost?: TownStructureCost;
+  unitUpgrades?: {
+    branchA: string;
+    branchB: string;
+    branchADetails?: UnitUpgradeBranch;
+    branchBDetails?: UnitUpgradeBranch;
+  };
+  cost: TownStructureCost;
+  prerequisites: string[];
+  prerequisiteIds?: string[];
+  effects: string[];
+  strategicTip: string;
+  timingRecommendation: string;
+  isFactionUnique?: boolean;
+  upgradeLevels?: StructureUpgradeLevel[];
+}
+
+

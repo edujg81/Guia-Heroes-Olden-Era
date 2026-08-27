@@ -5,12 +5,16 @@ import { Swords, ShieldAlert, Zap, Flame, UserCheck, Bot, Sparkles, ChevronRight
 
 interface CombatTacticsProps {
   selectedFaction?: FactionId;
+  themeMode?: 'dark' | 'light';
 }
 
-export const CombatTactics: React.FC<CombatTacticsProps> = ({ selectedFaction = 'Mazmorra' }) => {
+export const CombatTactics: React.FC<CombatTacticsProps> = ({ 
+  selectedFaction = 'Mazmorra',
+  themeMode = 'dark',
+}) => {
   const scenarios = getCombatTacticsForFaction(selectedFaction);
   const meta = FACTIONS_METADATA[selectedFaction] || FACTIONS_METADATA.Mazmorra;
-  const theme = getFactionTheme(selectedFaction);
+  const theme = getFactionTheme(selectedFaction, themeMode);
 
   const defaultScenarioId = scenarios[0]?.id || 'scenario-1';
   const [selectedScenario, setSelectedScenario] = useStickyState<string>(defaultScenarioId, `combat_selected_scenario_${selectedFaction}`);

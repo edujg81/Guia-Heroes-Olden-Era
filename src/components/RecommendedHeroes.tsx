@@ -32,6 +32,7 @@ import {
 
 interface RecommendedHeroesProps {
   selectedFaction?: FactionId;
+  themeMode?: 'dark' | 'light';
 }
 
 const FACTION_CLASS_NAMES: Record<FactionId, { guerrero: string; mago: string }> = {
@@ -122,10 +123,13 @@ const FACTION_HERO_HIGHLIGHTS: Record<FactionId, {
   },
 };
 
-export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFaction = 'Mazmorra' }) => {
+export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ 
+  selectedFaction = 'Mazmorra',
+  themeMode = 'dark',
+}) => {
   const heroes = getHeroesForFaction(selectedFaction);
   const meta = FACTIONS_METADATA[selectedFaction] || FACTIONS_METADATA.Mazmorra;
-  const theme = getFactionTheme(selectedFaction);
+  const theme = getFactionTheme(selectedFaction, themeMode);
   const highlights = FACTION_HERO_HIGHLIGHTS[selectedFaction] || FACTION_HERO_HIGHLIGHTS.Mazmorra;
   const defaultHeroId = heroes[0]?.id || (selectedFaction === 'Templo' ? 'hero-lord-edgar' : 'hero-enatee');
 
@@ -204,35 +208,47 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
   return (
     <div className="space-y-6">
       {/* Top Banner with Strategy Context */}
-      <div className={`bg-black/40 border ${theme.border} rounded-2xl p-5 ${theme.shadowAccent} backdrop-blur-md transition-colors duration-300`}>
+      <div className={`border rounded-2xl p-5 ${theme.shadowAccent} backdrop-blur-md transition-colors duration-300 ${
+        themeMode === 'light'
+          ? 'bg-white border-slate-200 shadow-md'
+          : `bg-black/40 border ${theme.border}`
+      }`}>
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1.5 flex-wrap">
               <span className={`${theme.bgBadge} ${theme.textAccent} text-[11px] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded border ${theme.borderSubtle} flex items-center gap-1.5 font-mono`}>
-                <Crown className="w-3.5 h-3.5 text-yellow-400" />
+                <Crown className="w-3.5 h-3.5 text-amber-500 dark:text-yellow-400" />
                 Comandantes de {meta.name} • {meta.region}
               </span>
-              <span className="text-xs text-slate-400 font-mono">
+              <span className={`text-xs font-mono ${themeMode === 'light' ? 'text-slate-500' : 'text-slate-400'}`}>
                 {heroes.length} Héroes Disponibles
               </span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-serif text-white uppercase tracking-wide">
+            <h2 className={`text-xl sm:text-2xl font-serif uppercase tracking-wide font-bold ${
+              themeMode === 'light' ? 'text-slate-900' : 'text-white'
+            }`}>
               Héroes Oficiales de {meta.name} & Guía de Progresión
             </h2>
-            <p className="text-xs text-slate-400 mt-1 max-w-3xl leading-relaxed">
+            <p className={`text-xs mt-1 max-w-3xl leading-relaxed ${
+              themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'
+            }`}>
               Catálogo verificado para <em>Heroes of Might and Magic: Olden Era</em>. Análisis completo de los comandantes de {meta.name}, especialidades únicas, orden de habilidades y sinergias con el Árbol de Leyes y tácticas de combate.
             </p>
           </div>
 
           {/* Search bar */}
           <div className="relative min-w-[240px]">
-            <Search className={`w-4 h-4 ${theme.textAccent} absolute left-3 top-1/2 -translate-y-1/2`} />
+            <Search className={`w-4 h-4 ${themeMode === 'light' ? 'text-purple-600' : theme.textAccent} absolute left-3 top-1/2 -translate-y-1/2`} />
             <input
               type="text"
               placeholder="Buscar por nombre, especialidad o rol..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className={`w-full bg-black/60 border ${theme.borderSubtle} rounded-xl pl-9 pr-3 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-current font-sans`}
+              className={`w-full rounded-xl pl-9 pr-3 py-2 text-xs font-sans focus:outline-none transition-colors ${
+                themeMode === 'light'
+                  ? 'bg-slate-50 border border-slate-300 text-slate-900 placeholder-slate-400 focus:border-purple-600 focus:bg-white'
+                  : `bg-black/60 border ${theme.borderSubtle} text-slate-200 placeholder-slate-500 focus:border-current`
+              }`}
             />
           </div>
         </div>
@@ -241,7 +257,9 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
         <div className={`mt-4 pt-4 border-t ${theme.borderSubtle} flex items-center gap-3 overflow-x-auto no-scrollbar pb-1`}>
           {/* Class Filter */}
           <div className="flex items-center gap-1.5 text-xs shrink-0">
-            <span className="text-slate-500 font-mono text-[10px] uppercase">Clase:</span>
+            <span className={`${themeMode === 'light' ? 'text-slate-600' : 'text-slate-500'} font-mono text-[10px] uppercase font-bold`}>
+              Clase:
+            </span>
             {[
               { id: 'all', label: `Todas (${heroes.length})` },
               {
@@ -259,6 +277,8 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
                 className={`px-2.5 py-1 text-xs rounded-md font-semibold transition-all font-mono whitespace-nowrap cursor-pointer ${
                   classFilter === c.id
                     ? `${theme.primaryButton} shadow-md`
+                    : themeMode === 'light'
+                    ? 'bg-slate-100 text-slate-700 hover:text-slate-900 border border-slate-200'
                     : 'bg-black/40 text-slate-400 hover:text-slate-200 border border-slate-800'
                 }`}
               >
@@ -269,7 +289,9 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
 
           {/* Role Filter */}
           <div className="flex items-center gap-1.5 text-xs shrink-0">
-            <span className="text-slate-500 font-mono text-[10px] uppercase">Rol:</span>
+            <span className={`${themeMode === 'light' ? 'text-slate-600' : 'text-slate-500'} font-mono text-[10px] uppercase font-bold`}>
+              Rol:
+            </span>
             {[
               { id: 'all', label: 'Todos' },
               { id: 'Principal Mágico', label: 'Main Mágico' },
@@ -283,6 +305,8 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
                 className={`px-2.5 py-1 text-xs rounded-md font-semibold transition-all font-mono whitespace-nowrap cursor-pointer ${
                   roleFilter === r.id
                     ? `${theme.primaryButton} shadow-md`
+                    : themeMode === 'light'
+                    ? 'bg-slate-100 text-slate-700 hover:text-slate-900 border border-slate-200'
                     : 'bg-black/40 text-slate-400 hover:text-slate-200 border border-slate-800'
                 }`}
               >
@@ -295,47 +319,59 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
 
       {/* Hero Selection Summary Cards (Meta Recommendations) */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className={`bg-gradient-to-br ${theme.bgBadge} via-black/60 to-black/80 border ${theme.borderSubtle} rounded-xl p-4 shadow-lg`}>
+        <div className={`rounded-xl p-4 shadow-lg border transition-all ${
+          themeMode === 'light'
+            ? `${theme.bgCard} ${theme.border} ${theme.glow}`
+            : `bg-gradient-to-br ${theme.bgBadge} via-black/60 to-black/80 ${theme.borderSubtle}`
+        }`}>
           <div className="flex items-center gap-2 mb-2">
             <Sparkles className={`w-4 h-4 ${theme.textAccent}`} />
             <h4 className={`text-xs font-bold uppercase ${theme.textAccent} font-mono tracking-wider`}>
               {highlights.magicTitle}
             </h4>
           </div>
-          <div className="text-sm font-bold text-yellow-300 font-serif mb-1">
+          <div className={`text-sm font-bold font-serif mb-1 ${themeMode === 'light' ? 'text-amber-800' : 'text-yellow-300'}`}>
             {highlights.magicNames}
           </div>
-          <p className="text-xs text-slate-300 leading-relaxed">
+          <p className={`text-xs leading-relaxed ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>
             {highlights.magicDesc}
           </p>
         </div>
 
-        <div className={`bg-gradient-to-br from-teal-950/50 via-black/60 to-black/80 border border-teal-800/60 rounded-xl p-4 shadow-lg`}>
+        <div className={`rounded-xl p-4 shadow-lg border transition-all ${
+          themeMode === 'light'
+            ? 'bg-teal-50/90 border-teal-300 shadow-[0_4px_20px_rgba(13,148,136,0.18)]'
+            : 'bg-gradient-to-br from-teal-950/50 via-black/60 to-black/80 border-teal-800/60'
+        }`}>
           <div className="flex items-center gap-2 mb-2">
-            <Compass className="w-4 h-4 text-teal-400" />
-            <h4 className="text-xs font-bold uppercase text-teal-200 font-mono tracking-wider">
+            <Compass className={`w-4 h-4 ${themeMode === 'light' ? 'text-teal-700' : 'text-teal-400'}`} />
+            <h4 className={`text-xs font-bold uppercase font-mono tracking-wider ${themeMode === 'light' ? 'text-teal-800' : 'text-teal-200'}`}>
               {highlights.physTitle}
             </h4>
           </div>
-          <div className="text-sm font-bold text-teal-300 font-serif mb-1">
+          <div className={`text-sm font-bold font-serif mb-1 ${themeMode === 'light' ? 'text-teal-900' : 'text-teal-300'}`}>
             {highlights.physNames}
           </div>
-          <p className="text-xs text-slate-300 leading-relaxed">
+          <p className={`text-xs leading-relaxed ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>
             {highlights.physDesc}
           </p>
         </div>
 
-        <div className={`bg-gradient-to-br from-amber-950/50 via-black/60 to-black/80 border border-amber-800/60 rounded-xl p-4 shadow-lg`}>
+        <div className={`rounded-xl p-4 shadow-lg border transition-all ${
+          themeMode === 'light'
+            ? 'bg-amber-50/90 border-amber-300 shadow-[0_4px_20px_rgba(217,119,6,0.18)]'
+            : 'bg-gradient-to-br from-amber-950/50 via-black/60 to-black/80 border-amber-800/60'
+        }`}>
           <div className="flex items-center gap-2 mb-2">
-            <Users className="w-4 h-4 text-amber-400" />
-            <h4 className="text-xs font-bold uppercase text-amber-200 font-mono tracking-wider">
+            <Users className={`w-4 h-4 ${themeMode === 'light' ? 'text-amber-700' : 'text-amber-400'}`} />
+            <h4 className={`text-xs font-bold uppercase font-mono tracking-wider ${themeMode === 'light' ? 'text-amber-800' : 'text-amber-200'}`}>
               {highlights.econTitle}
             </h4>
           </div>
-          <div className="text-sm font-bold text-amber-300 font-serif mb-1">
+          <div className={`text-sm font-bold font-serif mb-1 ${themeMode === 'light' ? 'text-amber-900' : 'text-amber-300'}`}>
             {highlights.econNames}
           </div>
-          <p className="text-xs text-slate-300 leading-relaxed">
+          <p className={`text-xs leading-relaxed ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>
             {highlights.econDesc}
           </p>
         </div>
@@ -346,10 +382,12 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
         {/* Left Column: Heroes Roster List (4 cols) */}
         <div className="lg:col-span-5 space-y-3">
           <div className="flex items-center justify-between px-1">
-            <span className="text-xs font-mono uppercase text-slate-400 font-bold tracking-wider">
+            <span className={`text-xs font-mono uppercase font-bold tracking-wider ${
+              themeMode === 'light' ? 'text-slate-700' : 'text-slate-400'
+            }`}>
               Seleccionar Héroe ({filteredHeroes.length})
             </span>
-            <span className={`text-[10px] ${theme.textAccent} font-mono`}>
+            <span className={`text-[10px] ${themeMode === 'light' ? 'text-purple-700 font-bold' : theme.textAccent} font-mono`}>
               Haz clic para ver detalles
             </span>
           </div>
@@ -361,16 +399,24 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
 
               const tierBadgeColor =
                 hero.tierRank.includes('S+')
-                  ? 'bg-red-950/80 text-red-300 border-red-700/60'
+                  ? themeMode === 'light'
+                    ? 'bg-red-100 text-red-900 border-red-300'
+                    : 'bg-red-950/80 text-red-300 border-red-700/60'
                   : hero.tierRank.includes('Tier S')
-                  ? 'bg-amber-950/80 text-amber-300 border-amber-700/60'
+                  ? themeMode === 'light'
+                    ? 'bg-amber-100 text-amber-900 border-amber-300'
+                    : 'bg-amber-950/80 text-amber-300 border-amber-700/60'
                   : hero.tierRank.includes('Tier A')
-                  ? `${theme.bgBadge} ${theme.textAccent} ${theme.borderSubtle}`
+                  ? themeMode === 'light'
+                    ? 'bg-purple-100 text-purple-900 border-purple-300'
+                    : `${theme.bgBadge} ${theme.textAccent} ${theme.borderSubtle}`
+                  : themeMode === 'light'
+                  ? 'bg-blue-100 text-blue-900 border-blue-300'
                   : 'bg-blue-950/80 text-blue-300 border-blue-700/60';
 
               const classColor = hero.heroType === 'Mago'
-                ? theme.textAccent
-                : 'text-teal-400';
+                ? themeMode === 'light' ? 'text-purple-700 font-bold' : theme.textAccent
+                : themeMode === 'light' ? 'text-teal-700 font-bold' : 'text-teal-400';
 
               return (
                 <div
@@ -378,7 +424,11 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
                   onClick={() => setSelectedHeroId(hero.id)}
                   className={`p-3.5 rounded-xl border transition-all cursor-pointer backdrop-blur-sm relative overflow-hidden ${
                     isSelected
-                      ? `${theme.bgBadge} ${theme.border} ${theme.shadowAccent} ring-1 ring-current`
+                      ? themeMode === 'light'
+                        ? 'bg-purple-50/90 border-purple-400 shadow-md ring-2 ring-purple-300'
+                        : `${theme.bgBadge} ${theme.border} ${theme.shadowAccent} ring-1 ring-current`
+                      : themeMode === 'light'
+                      ? 'bg-white border-slate-200 hover:border-purple-300 hover:bg-slate-50/70 shadow-xs'
                       : `bg-black/50 ${theme.borderSubtle} hover:border-amber-400/50 hover:bg-black/70`
                   }`}
                 >
@@ -392,16 +442,24 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
                           {hero.heroType} / {hero.heroClass}
                         </span>
                       </div>
-                      <h3 className="text-base font-serif text-white font-bold tracking-wide">
+                      <h3 className={`text-base font-serif font-bold tracking-wide ${
+                        themeMode === 'light' ? 'text-slate-950' : 'text-white'
+                      }`}>
                         {hero.name}
                       </h3>
-                      <div className="text-xs text-slate-400 font-sans italic">
+                      <div className={`text-xs font-sans italic ${
+                        themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'
+                      }`}>
                         {hero.title}
                       </div>
                     </div>
 
                     <div className="flex flex-col items-end gap-1">
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-black/60 text-slate-300 border border-slate-800">
+                      <span className={`text-[10px] font-mono px-2 py-0.5 rounded border ${
+                        themeMode === 'light'
+                          ? 'bg-slate-100 text-slate-700 border-slate-200'
+                          : 'bg-black/60 text-slate-300 border-slate-800'
+                      }`}>
                         {hero.role}
                       </span>
                       <button
@@ -412,7 +470,11 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
                         }}
                         className={`text-[9px] font-mono px-2 py-0.5 rounded border transition-all cursor-pointer ${
                           isComparing
-                            ? 'bg-teal-700 text-white border-teal-400'
+                            ? themeMode === 'light'
+                              ? 'bg-teal-600 text-white border-teal-600 font-bold'
+                              : 'bg-teal-700 text-white border-teal-400'
+                            : themeMode === 'light'
+                            ? 'bg-slate-100 text-slate-600 hover:text-slate-900 border-slate-200'
                             : 'bg-black/40 text-slate-400 hover:text-slate-200 border-slate-700'
                         }`}
                       >
@@ -421,11 +483,17 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
                     </div>
                   </div>
 
-                  <div className="mt-2.5 pt-2 border-t border-purple-900/30 flex items-center justify-between text-xs">
-                    <span className="text-yellow-400/90 font-mono text-[11px] truncate">
+                  <div className={`mt-2.5 pt-2 border-t flex items-center justify-between text-xs ${
+                    themeMode === 'light' ? 'border-slate-200' : 'border-purple-900/30'
+                  }`}>
+                    <span className={`font-mono text-[11px] truncate font-semibold ${
+                      themeMode === 'light' ? 'text-amber-900' : 'text-yellow-400/90'
+                    }`}>
                       ★ {hero.specialtyName}
                     </span>
-                    <span className="text-slate-400 text-[10px] shrink-0 font-mono">
+                    <span className={`text-[10px] shrink-0 font-mono ${
+                      themeMode === 'light' ? 'text-slate-500' : 'text-slate-400'
+                    }`}>
                       {hero.initialArmy.split(',')[0]}
                     </span>
                   </div>
@@ -437,48 +505,86 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
 
         {/* Right Column: Hero Full Dossier (7 cols) */}
         <div className="lg:col-span-7 space-y-4">
-          <div className={`bg-black/60 border ${theme.border} rounded-2xl p-5 shadow-2xl backdrop-blur-md space-y-5`}>
+          <div className={`border rounded-2xl p-5 shadow-2xl backdrop-blur-md space-y-5 transition-colors ${
+            themeMode === 'light'
+              ? 'bg-white border-slate-200 shadow-xl'
+              : `bg-black/60 border ${theme.border}`
+          }`}>
             {/* Dossier Header */}
-            <div className={`flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b ${theme.borderSubtle} pb-4`}>
+            <div className={`flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b pb-4 ${
+              themeMode === 'light' ? 'border-slate-200' : theme.borderSubtle
+            }`}>
               <div>
                 <div className="flex items-center gap-2 flex-wrap mb-1">
-                  <span className={`${theme.bgBadge} ${theme.textAccent} text-[10px] font-bold uppercase px-2.5 py-0.5 rounded border ${theme.borderSubtle} font-mono`}>
+                  <span className={`text-[10px] font-bold uppercase px-2.5 py-0.5 rounded border font-mono ${
+                    themeMode === 'light'
+                      ? 'bg-purple-100 text-purple-900 border-purple-300'
+                      : `${theme.bgBadge} ${theme.textAccent} ${theme.borderSubtle}`
+                  }`}>
                     {selectedHero.heroType} / {selectedHero.heroClass}
                   </span>
-                  <span className="bg-amber-950/80 text-amber-300 text-[10px] font-bold uppercase px-2.5 py-0.5 rounded border border-amber-700/60 font-mono">
+                  <span className={`text-[10px] font-bold uppercase px-2.5 py-0.5 rounded border font-mono ${
+                    themeMode === 'light'
+                      ? 'bg-amber-100 text-amber-900 border-amber-300'
+                      : 'bg-amber-950/80 text-amber-300 border-amber-700/60'
+                  }`}>
                     {selectedHero.role}
                   </span>
-                  <span className="bg-red-950/80 text-red-300 text-[10px] font-bold uppercase px-2.5 py-0.5 rounded border border-red-700/60 font-mono">
+                  <span className={`text-[10px] font-bold uppercase px-2.5 py-0.5 rounded border font-mono ${
+                    themeMode === 'light'
+                      ? 'bg-red-100 text-red-900 border-red-300'
+                      : 'bg-red-950/80 text-red-300 border-red-700/60'
+                  }`}>
                     {selectedHero.tierRank}
                   </span>
                 </div>
-                <h3 className="text-2xl font-serif text-white font-bold tracking-wide">
+                <h3 className={`text-2xl font-serif font-bold tracking-wide ${
+                  themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                }`}>
                   {selectedHero.name}
                 </h3>
-                <p className={`text-xs ${theme.textAccent} font-sans italic`}>
+                <p className={`text-xs font-sans italic ${
+                  themeMode === 'light' ? 'text-purple-800 font-semibold' : theme.textAccent
+                }`}>
                   "{selectedHero.title}"
                 </p>
               </div>
 
-              <div className={`bg-black/70 border ${theme.borderSubtle} p-3 rounded-xl min-w-[180px]`}>
-                <div className="text-[10px] uppercase font-mono text-slate-400 font-bold mb-1">
+              <div className={`p-3 rounded-xl min-w-[180px] border ${
+                themeMode === 'light'
+                  ? 'bg-slate-50 border-slate-200'
+                  : `bg-black/70 border ${theme.borderSubtle}`
+              }`}>
+                <div className={`text-[10px] uppercase font-mono font-bold mb-1 ${
+                  themeMode === 'light' ? 'text-slate-500' : 'text-slate-400'
+                }`}>
                   Recomendación de Uso
                 </div>
-                <div className="text-xs text-slate-200 leading-snug">
+                <div className={`text-xs leading-snug font-medium ${
+                  themeMode === 'light' ? 'text-slate-800' : 'text-slate-200'
+                }`}>
                   {selectedHero.recommendedStartingTier}
                 </div>
               </div>
             </div>
 
             {/* Specialty Callout */}
-            <div className={`bg-gradient-to-r from-amber-950/40 via-black/40 to-black/60 border border-amber-500/40 rounded-xl p-4`}>
+            <div className={`rounded-xl p-4 border transition-colors ${
+              themeMode === 'light'
+                ? 'bg-amber-50/90 border-2 border-amber-300 shadow-sm'
+                : 'bg-gradient-to-r from-amber-950/40 via-black/40 to-black/60 border border-amber-500/40'
+            }`}>
               <div className="flex items-center gap-2 mb-1">
-                <Star className="w-4 h-4 text-yellow-400" />
-                <span className="text-xs font-mono font-bold uppercase text-yellow-300 tracking-wider">
+                <Star className="w-4 h-4 text-amber-500 fill-amber-500 dark:text-yellow-400 dark:fill-yellow-400" />
+                <span className={`text-xs font-mono font-bold uppercase tracking-wider ${
+                  themeMode === 'light' ? 'text-amber-950' : 'text-yellow-300'
+                }`}>
                   Especialidad Única: {selectedHero.specialtyName}
                 </span>
               </div>
-              <p className="text-xs text-slate-200 leading-relaxed font-sans">
+              <p className={`text-xs leading-relaxed font-sans ${
+                themeMode === 'light' ? 'text-slate-700 font-medium' : 'text-slate-200'
+              }`}>
                 {selectedHero.specialtyEffect}
               </p>
             </div>
@@ -486,62 +592,84 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
             {/* Stat Growth & Initial Assets */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Stat Growth */}
-              <div className={`bg-black/50 border ${theme.borderSubtle} rounded-xl p-3.5 space-y-2.5`}>
+              <div className={`rounded-xl p-3.5 space-y-2.5 border ${
+                themeMode === 'light'
+                  ? 'bg-slate-50 border-slate-200'
+                  : `bg-black/50 border ${theme.borderSubtle}`
+              }`}>
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-mono uppercase font-bold text-slate-400 flex items-center gap-1.5">
-                    <TrendingUp className="w-3.5 h-3.5 text-teal-400" />
+                  <span className={`text-[11px] font-mono uppercase font-bold flex items-center gap-1.5 ${
+                    themeMode === 'light' ? 'text-slate-700' : 'text-slate-400'
+                  }`}>
+                    <TrendingUp className={`w-3.5 h-3.5 ${themeMode === 'light' ? 'text-teal-600' : 'text-teal-400'}`} />
                     Crecimiento de Atributos (% Nivel 1-20)
                   </span>
                 </div>
 
                 <div className="space-y-1.5 text-xs">
                   <div>
-                    <div className="flex justify-between text-[11px] font-mono text-slate-300 mb-0.5">
-                      <span className="text-red-400">Ataque Físico</span>
+                    <div className={`flex justify-between text-[11px] font-mono mb-0.5 ${
+                      themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
+                    }`}>
+                      <span className={themeMode === 'light' ? 'text-red-700 font-bold' : 'text-red-400'}>Ataque Físico</span>
                       <span>{selectedHero.statGrowth.attack}%</span>
                     </div>
-                    <div className="w-full h-1.5 bg-black/60 rounded-full overflow-hidden border border-slate-800">
+                    <div className={`w-full h-1.5 rounded-full overflow-hidden border ${
+                      themeMode === 'light' ? 'bg-slate-200 border-slate-300' : 'bg-black/60 border-slate-800'
+                    }`}>
                       <div
-                        className="h-full bg-gradient-to-r from-red-700 to-red-500"
+                        className="h-full bg-gradient-to-r from-red-600 to-red-500"
                         style={{ width: `${selectedHero.statGrowth.attack}%` }}
                       ></div>
                     </div>
                   </div>
 
                   <div>
-                    <div className="flex justify-between text-[11px] font-mono text-slate-300 mb-0.5">
-                      <span className="text-blue-400">Defensa</span>
+                    <div className={`flex justify-between text-[11px] font-mono mb-0.5 ${
+                      themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
+                    }`}>
+                      <span className={themeMode === 'light' ? 'text-blue-700 font-bold' : 'text-blue-400'}>Defensa</span>
                       <span>{selectedHero.statGrowth.defense}%</span>
                     </div>
-                    <div className="w-full h-1.5 bg-black/60 rounded-full overflow-hidden border border-slate-800">
+                    <div className={`w-full h-1.5 rounded-full overflow-hidden border ${
+                      themeMode === 'light' ? 'bg-slate-200 border-slate-300' : 'bg-black/60 border-slate-800'
+                    }`}>
                       <div
-                        className="h-full bg-gradient-to-r from-blue-700 to-blue-500"
+                        className="h-full bg-gradient-to-r from-blue-600 to-blue-500"
                         style={{ width: `${selectedHero.statGrowth.defense}%` }}
                       ></div>
                     </div>
                   </div>
 
                   <div>
-                    <div className="flex justify-between text-[11px] font-mono text-slate-300 mb-0.5">
-                      <span className="text-purple-400">Poder Mágico (SP)</span>
+                    <div className={`flex justify-between text-[11px] font-mono mb-0.5 ${
+                      themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
+                    }`}>
+                      <span className={themeMode === 'light' ? 'text-purple-700 font-bold' : 'text-purple-400'}>Poder Mágico (SP)</span>
                       <span>{selectedHero.statGrowth.spellPower}%</span>
                     </div>
-                    <div className="w-full h-1.5 bg-black/60 rounded-full overflow-hidden border border-slate-800">
+                    <div className={`w-full h-1.5 rounded-full overflow-hidden border ${
+                      themeMode === 'light' ? 'bg-slate-200 border-slate-300' : 'bg-black/60 border-slate-800'
+                    }`}>
                       <div
-                        className="h-full bg-gradient-to-r from-purple-700 to-purple-400"
+                        className="h-full bg-gradient-to-r from-purple-600 to-purple-400"
                         style={{ width: `${selectedHero.statGrowth.spellPower}%` }}
                       ></div>
                     </div>
                   </div>
 
                   <div>
-                    <div className="flex justify-between text-[11px] font-mono text-slate-300 mb-0.5">
-                      <span className="text-cyan-400">Conocimiento (Maná)</span>
+                    <div className={`flex justify-between text-[11px] font-mono mb-0.5 ${
+                      themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
+                    }`}>
+                      <span className={themeMode === 'light' ? 'text-teal-700 font-bold' : 'text-cyan-400'}>Conocimiento (Maná)</span>
                       <span>{selectedHero.statGrowth.knowledge}%</span>
                     </div>
-                    <div className="w-full h-1.5 bg-black/60 rounded-full overflow-hidden border border-slate-800">
+                    <div className={`w-full h-1.5 rounded-full overflow-hidden border ${
+                      themeMode === 'light' ? 'bg-slate-200 border-slate-300' : 'bg-black/60 border-slate-800'
+                    }`}>
                       <div
-                        className="h-full bg-gradient-to-r from-cyan-700 to-cyan-400"
+                        className="h-full bg-gradient-to-r from-teal-600 to-cyan-400"
                         style={{ width: `${selectedHero.statGrowth.knowledge}%` }}
                       ></div>
                     </div>
@@ -550,25 +678,41 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
               </div>
 
               {/* Initial Army & Skills */}
-              <div className={`bg-black/50 border ${theme.borderSubtle} rounded-xl p-3.5 space-y-3`}>
+              <div className={`rounded-xl p-3.5 space-y-3 border ${
+                themeMode === 'light'
+                  ? 'bg-slate-50 border-slate-200'
+                  : `bg-black/50 border ${theme.borderSubtle}`
+              }`}>
                 <div>
-                  <span className="text-[10px] font-mono uppercase font-bold text-slate-400 block mb-1">
+                  <span className={`text-[10px] font-mono uppercase font-bold block mb-1 ${
+                    themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'
+                  }`}>
                     Ejército Inicial en Taberna:
                   </span>
-                  <div className={`text-xs font-mono text-yellow-300 bg-black/60 p-2 rounded-lg border ${theme.borderSubtle}`}>
+                  <div className={`text-xs font-mono p-2 rounded-lg border font-semibold ${
+                    themeMode === 'light'
+                      ? 'bg-amber-50 border-amber-200 text-amber-950'
+                      : `text-yellow-300 bg-black/60 border ${theme.borderSubtle}`
+                  }`}>
                     {selectedHero.initialArmy}
                   </div>
                 </div>
 
                 <div>
-                  <span className="text-[10px] font-mono uppercase font-bold text-slate-400 block mb-1">
+                  <span className={`text-[10px] font-mono uppercase font-bold block mb-1 ${
+                    themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'
+                  }`}>
                     Habilidades de Inicio:
                   </span>
                   <div className="flex flex-wrap gap-1.5">
                     {selectedHero.initialSkills.map((sk, idx) => (
                       <span
                         key={idx}
-                        className={`text-[11px] font-mono ${theme.bgBadge} ${theme.textAccent} px-2 py-0.5 rounded border ${theme.borderSubtle}`}
+                        className={`text-[11px] font-mono px-2 py-0.5 rounded border font-semibold ${
+                          themeMode === 'light'
+                            ? 'bg-purple-100 text-purple-900 border-purple-200'
+                            : `${theme.bgBadge} ${theme.textAccent} border ${theme.borderSubtle}`
+                        }`}
                       >
                         {sk}
                       </span>
@@ -580,35 +724,59 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
 
             {/* Tactical Playstyle & Day 1 Action */}
             <div className="space-y-3">
-              <div className={`bg-black/40 border ${theme.borderSubtle} rounded-xl p-3.5`}>
-                <span className={`text-[10px] font-mono uppercase font-bold ${theme.textAccent} flex items-center gap-1.5 mb-1`}>
-                  <Flame className="w-3.5 h-3.5 text-teal-400" />
+              <div className={`rounded-xl p-3.5 border ${
+                themeMode === 'light'
+                  ? 'bg-slate-50 border-slate-200'
+                  : `bg-black/40 border ${theme.borderSubtle}`
+              }`}>
+                <span className={`text-[10px] font-mono uppercase font-bold flex items-center gap-1.5 mb-1 ${
+                  themeMode === 'light' ? 'text-purple-900' : theme.textAccent
+                }`}>
+                  <Flame className={`w-3.5 h-3.5 ${themeMode === 'light' ? 'text-purple-600' : 'text-teal-400'}`} />
                   Estilo de Juego Táctico & Combate:
                 </span>
-                <p className="text-xs text-slate-200 leading-relaxed">
+                <p className={`text-xs leading-relaxed ${
+                  themeMode === 'light' ? 'text-slate-700' : 'text-slate-200'
+                }`}>
                   {selectedHero.tacticalPlaystyle}
                 </p>
               </div>
 
-              <div className="bg-amber-950/20 border border-amber-900/40 rounded-xl p-3.5">
-                <span className="text-[10px] font-mono uppercase font-bold text-amber-400 flex items-center gap-1.5 mb-1">
-                  <Compass className="w-3.5 h-3.5 text-amber-400" />
+              <div className={`rounded-xl p-3.5 border ${
+                themeMode === 'light'
+                  ? 'bg-amber-50/70 border-amber-200'
+                  : 'bg-amber-950/20 border-amber-900/40'
+              }`}>
+                <span className={`text-[10px] font-mono uppercase font-bold flex items-center gap-1.5 mb-1 ${
+                  themeMode === 'light' ? 'text-amber-900' : 'text-amber-400'
+                }`}>
+                  <Compass className={`w-3.5 h-3.5 ${themeMode === 'light' ? 'text-amber-600' : 'text-amber-400'}`} />
                   Acción Óptima en Día 1 (Apertura de Partida):
                 </span>
-                <p className="text-xs text-slate-200 leading-relaxed">
+                <p className={`text-xs leading-relaxed ${
+                  themeMode === 'light' ? 'text-slate-700' : 'text-slate-200'
+                }`}>
                   {selectedHero.day1Action}
                 </p>
               </div>
             </div>
 
             {/* Ideal 8-Skill Build */}
-            <div className={`bg-black/50 border ${theme.borderSubtle} rounded-xl p-4 space-y-2.5`}>
+            <div className={`rounded-xl p-4 space-y-2.5 border ${
+              themeMode === 'light'
+                ? 'bg-slate-50 border-slate-200'
+                : `bg-black/50 border ${theme.borderSubtle}`
+            }`}>
               <div className="flex items-center justify-between">
-                <span className={`text-xs font-mono uppercase font-bold ${theme.textAccent} flex items-center gap-1.5`}>
+                <span className={`text-xs font-mono uppercase font-bold flex items-center gap-1.5 ${
+                  themeMode === 'light' ? 'text-purple-950' : theme.textAccent
+                }`}>
                   <GitBranch className="w-3.5 h-3.5" />
                   Build Ideal de 8 Habilidades (Nivel 1 a 25)
                 </span>
-                <span className={`text-[10px] ${theme.textAccent} font-mono`}>
+                <span className={`text-[10px] font-mono ${
+                  themeMode === 'light' ? 'text-purple-700 font-semibold' : theme.textAccent
+                }`}>
                   Haz clic en cualquier habilidad para inspeccionar sus 6 subhabilidades
                 </span>
               </div>
@@ -626,13 +794,25 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
                       key={sIdx}
                       type="button"
                       onClick={() => officialSkill && setInspectedSkill(officialSkill)}
-                      className={`bg-black/60 p-2.5 rounded-lg border ${theme.borderSubtle} hover:border-amber-400/80 hover:bg-black/80 transition-all text-xs flex items-center justify-between gap-2 shadow-sm text-left group cursor-pointer`}
+                      className={`p-2.5 rounded-lg border transition-all text-xs flex items-center justify-between gap-2 shadow-xs text-left group cursor-pointer ${
+                        themeMode === 'light'
+                          ? 'bg-white hover:bg-purple-50/60 border-slate-200 hover:border-purple-300'
+                          : `bg-black/60 hover:bg-black/80 border ${theme.borderSubtle} hover:border-amber-400/80`
+                      }`}
                     >
                       <div className="flex items-center gap-2 min-w-0">
-                        <span className={`w-5 h-5 rounded-full ${theme.bgBadge} ${theme.textAccent} font-mono font-bold text-[10px] flex items-center justify-center shrink-0 border ${theme.borderSubtle} group-hover:border-amber-400`}>
+                        <span className={`w-5 h-5 rounded-full font-mono font-bold text-[10px] flex items-center justify-center shrink-0 border ${
+                          themeMode === 'light'
+                            ? 'bg-purple-100 text-purple-900 border-purple-200 group-hover:border-purple-400'
+                            : `${theme.bgBadge} ${theme.textAccent} border ${theme.borderSubtle} group-hover:border-amber-400`
+                        }`}>
                           {sIdx + 1}
                         </span>
-                        <span className="text-slate-100 font-semibold truncate group-hover:text-amber-200">
+                        <span className={`font-semibold truncate ${
+                          themeMode === 'light'
+                            ? 'text-slate-800 group-hover:text-purple-900'
+                            : 'text-slate-100 group-hover:text-amber-200'
+                        }`}>
                           {cleanName}
                         </span>
                       </div>
@@ -640,7 +820,11 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
                         <span
                           className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border uppercase ${
                             isExperta
-                              ? 'bg-yellow-950/60 text-yellow-300 border-yellow-800/60'
+                              ? themeMode === 'light'
+                                ? 'bg-amber-100 text-amber-900 border-amber-300'
+                                : 'bg-yellow-950/60 text-yellow-300 border-yellow-800/60'
+                              : themeMode === 'light'
+                              ? 'bg-purple-100 text-purple-900 border-purple-200'
                               : `${theme.bgBadge} ${theme.textAccent} ${theme.borderSubtle}`
                           }`}
                         >
@@ -654,20 +838,38 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
             </div>
 
             {/* Dedicated Recommended Subskills Section for the Selected Hero */}
-            <div className={`bg-gradient-to-br from-black/80 via-black/60 to-black/90 border-2 border-yellow-600/50 rounded-2xl p-4 sm:p-5 space-y-4 shadow-xl ring-1 ring-yellow-500/20`}>
-              <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b ${theme.borderSubtle} pb-3`}>
+            <div className={`border-2 rounded-2xl p-4 sm:p-5 space-y-4 shadow-xl transition-colors ${
+              themeMode === 'light'
+                ? 'bg-gradient-to-br from-amber-50/70 via-white to-amber-50/50 border-amber-300 ring-1 ring-amber-200 shadow-md'
+                : 'bg-gradient-to-br from-black/80 via-black/60 to-black/90 border-yellow-600/50 ring-1 ring-yellow-500/20'
+            }`}>
+              <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b pb-3 ${
+                themeMode === 'light' ? 'border-amber-200' : theme.borderSubtle
+              }`}>
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-yellow-950/80 border border-yellow-500/70 flex items-center justify-center text-yellow-300 shadow-md">
-                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center shadow-md border ${
+                    themeMode === 'light'
+                      ? 'bg-amber-100 border-amber-300 text-amber-900'
+                      : 'bg-yellow-950/80 border-yellow-500/70 text-yellow-300'
+                  }`}>
+                    <Star className="w-4 h-4 fill-current text-current" />
                   </div>
                   <div>
-                    <h4 className="text-sm sm:text-base font-bold text-white font-serif flex items-center gap-2">
+                    <h4 className={`text-sm sm:text-base font-bold font-serif flex items-center gap-2 ${
+                      themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                    }`}>
                       Elección Recomendada de Subhabilidades
-                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-yellow-950 text-yellow-300 border border-yellow-700">
+                      <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${
+                        themeMode === 'light'
+                          ? 'bg-amber-100 text-amber-900 border-amber-300'
+                          : 'bg-yellow-950 text-yellow-300 border-yellow-700'
+                      }`}>
                         Meta Canónico
                       </span>
                     </h4>
-                    <p className={`text-[11px] ${theme.textAccent} font-sans`}>
+                    <p className={`text-[11px] font-sans ${
+                      themeMode === 'light' ? 'text-slate-600' : theme.textAccent
+                    }`}>
                       Qué subhabilidad elegir en cada nivel de maestría para maximizar a <strong>{selectedHero.name}</strong>
                     </p>
                   </div>
@@ -676,7 +878,11 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
                 <button
                   type="button"
                   onClick={() => setShowSubskillsDetails(!showSubskillsDetails)}
-                  className={`px-3 py-1 ${theme.bgBadge} hover:bg-black/60 border ${theme.borderSubtle} ${theme.textAccent} text-xs font-mono font-semibold rounded-lg transition-colors shrink-0 self-start sm:self-auto cursor-pointer`}
+                  className={`px-3 py-1 text-xs font-mono font-semibold rounded-lg transition-colors shrink-0 self-start sm:self-auto cursor-pointer border ${
+                    themeMode === 'light'
+                      ? 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-800'
+                      : `${theme.bgBadge} hover:bg-black/60 border ${theme.borderSubtle} ${theme.textAccent}`
+                  }`}
                 >
                   {showSubskillsDetails ? 'Contraer Detalles' : 'Ver Todos los Detalles'}
                 </button>
@@ -691,15 +897,27 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
                     return (
                       <div
                         key={idx}
-                        className={`bg-black/60 border ${theme.borderSubtle} hover:border-yellow-600/60 rounded-xl p-3.5 space-y-2.5 transition-all`}
+                        className={`rounded-xl p-3.5 space-y-2.5 transition-all border ${
+                          themeMode === 'light'
+                            ? 'bg-white border-slate-200 hover:border-amber-400 shadow-xs'
+                            : `bg-black/60 border ${theme.borderSubtle} hover:border-yellow-600/60`
+                        }`}
                       >
                         {/* Skill Header */}
-                        <div className={`flex items-center justify-between gap-2 border-b ${theme.borderSubtle} pb-2`}>
+                        <div className={`flex items-center justify-between gap-2 border-b pb-2 ${
+                          themeMode === 'light' ? 'border-slate-100' : theme.borderSubtle
+                        }`}>
                           <div className="flex items-center gap-2">
-                            <span className="w-5 h-5 rounded-full bg-yellow-950 text-yellow-300 font-mono font-bold text-[10px] flex items-center justify-center border border-yellow-600/60 shrink-0">
+                            <span className={`w-5 h-5 rounded-full font-mono font-bold text-[10px] flex items-center justify-center border shrink-0 ${
+                              themeMode === 'light'
+                                ? 'bg-amber-100 text-amber-900 border-amber-300'
+                                : 'bg-yellow-950 text-yellow-300 border-yellow-600/60'
+                            }`}>
                               {idx + 1}
                             </span>
-                            <span className="text-xs sm:text-sm font-bold text-white">
+                            <span className={`text-xs sm:text-sm font-bold ${
+                              themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                            }`}>
                               {choice.skillName}
                             </span>
                           </div>
@@ -708,7 +926,11 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
                             <button
                               type="button"
                               onClick={() => setInspectedSkill(offSkill)}
-                              className={`text-[10px] font-mono ${theme.textAccent} hover:text-yellow-300 flex items-center gap-1 cursor-pointer transition-colors`}
+                              className={`text-[10px] font-mono flex items-center gap-1 cursor-pointer transition-colors ${
+                                themeMode === 'light'
+                                  ? 'text-purple-700 hover:text-purple-900 font-semibold'
+                                  : `${theme.textAccent} hover:text-yellow-300`
+                              }`}
                             >
                               <BookOpen className="w-3 h-3" />
                               Ver árbol completo
@@ -724,29 +946,49 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
                               (s) => normalize(s.name) === normalize(choice.advancedSubskill)
                             );
                             return (
-                              <div className={`bg-black/40 border ${theme.borderSubtle} rounded-lg p-3 space-y-1.5 relative`}>
+                              <div className={`rounded-lg p-3 space-y-1.5 relative border ${
+                                themeMode === 'light'
+                                  ? 'bg-purple-50/70 border-purple-200'
+                                  : `bg-black/40 border ${theme.borderSubtle}`
+                              }`}>
                                 <div className="flex items-center justify-between gap-1">
-                                  <span className={`text-[10px] font-mono font-bold uppercase ${theme.textAccent} flex items-center gap-1`}>
+                                  <span className={`text-[10px] font-mono font-bold uppercase flex items-center gap-1 ${
+                                    themeMode === 'light' ? 'text-purple-900' : theme.textAccent
+                                  }`}>
                                     <Target className="w-3 h-3" />
                                     Nivel 2 • Avanzado
                                   </span>
-                                  <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-yellow-950/90 text-yellow-300 border border-yellow-600/70 flex items-center gap-1">
+                                  <span className={`text-[9px] font-mono font-bold px-1.5 py-0.5 rounded border flex items-center gap-1 ${
+                                    themeMode === 'light'
+                                      ? 'bg-amber-100 text-amber-900 border-amber-300'
+                                      : 'bg-yellow-950/90 text-yellow-300 border-yellow-600/70'
+                                  }`}>
                                     <Check className="w-2.5 h-2.5" /> Recomendada
                                   </span>
                                 </div>
 
-                                <div className="text-xs font-bold text-white">
+                                <div className={`text-xs font-bold ${
+                                  themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                                }`}>
                                   {choice.advancedSubskill}
                                 </div>
 
                                 {advSubObj && (
-                                  <p className="text-[11px] text-slate-300 leading-snug">
+                                  <p className={`text-[11px] leading-snug ${
+                                    themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
+                                  }`}>
                                     {advSubObj.effect}
                                   </p>
                                 )}
 
-                                <div className="text-[10px] text-yellow-200/90 bg-yellow-950/30 p-2 rounded border border-yellow-800/40 leading-relaxed">
-                                  <strong className="text-yellow-300 font-mono block mb-0.5">💡 Sinergia Táctica:</strong>
+                                <div className={`text-[10px] p-2 rounded border leading-relaxed ${
+                                  themeMode === 'light'
+                                    ? 'bg-amber-100/70 text-amber-950 border-amber-300'
+                                    : 'bg-yellow-950/30 text-yellow-200/90 border-yellow-800/40'
+                                }`}>
+                                  <strong className={`font-mono block mb-0.5 ${
+                                    themeMode === 'light' ? 'text-amber-900' : 'text-yellow-300'
+                                  }`}>💡 Sinergia Táctica:</strong>
                                   {choice.advancedReason}
                                 </div>
                               </div>
@@ -760,30 +1002,50 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
                                 (s) => normalize(s.name) === normalize(choice.expertSubskill || '')
                               );
                               return (
-                                <div className="bg-yellow-950/20 border border-yellow-700/60 rounded-lg p-3 space-y-1.5 relative">
+                                <div className={`rounded-lg p-3 space-y-1.5 relative border ${
+                                  themeMode === 'light'
+                                    ? 'bg-amber-50/80 border-amber-300'
+                                    : 'bg-yellow-950/20 border-yellow-700/60'
+                                }`}>
                                   <div className="flex items-center justify-between gap-1">
-                                    <span className="text-[10px] font-mono font-bold uppercase text-yellow-300 flex items-center gap-1">
-                                      <Award className="w-3 h-3 text-yellow-400" />
+                                    <span className={`text-[10px] font-mono font-bold uppercase flex items-center gap-1 ${
+                                      themeMode === 'light' ? 'text-amber-900' : 'text-yellow-300'
+                                    }`}>
+                                      <Award className="w-3 h-3 text-amber-600 dark:text-yellow-400" />
                                       Nivel 3 • Experto
                                     </span>
-                                    <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-yellow-950/90 text-yellow-300 border border-yellow-600/70 flex items-center gap-1">
+                                    <span className={`text-[9px] font-mono font-bold px-1.5 py-0.5 rounded border flex items-center gap-1 ${
+                                      themeMode === 'light'
+                                        ? 'bg-amber-100 text-amber-900 border-amber-300'
+                                        : 'bg-yellow-950/90 text-yellow-300 border-yellow-600/70'
+                                    }`}>
                                       <Check className="w-2.5 h-2.5" /> Recomendada
                                     </span>
                                   </div>
 
-                                  <div className="text-xs font-bold text-yellow-100">
+                                  <div className={`text-xs font-bold ${
+                                    themeMode === 'light' ? 'text-slate-900' : 'text-yellow-100'
+                                  }`}>
                                     {choice.expertSubskill}
                                   </div>
 
                                   {expSubObj && (
-                                    <p className="text-[11px] text-slate-300 leading-snug">
+                                    <p className={`text-[11px] leading-snug ${
+                                      themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
+                                    }`}>
                                       {expSubObj.effect}
                                     </p>
                                   )}
 
                                   {choice.expertReason && (
-                                    <div className="text-[10px] text-yellow-200/90 bg-yellow-950/30 p-2 rounded border border-yellow-800/40 leading-relaxed">
-                                      <strong className="text-yellow-300 font-mono block mb-0.5">💡 Sinergia Táctica:</strong>
+                                    <div className={`text-[10px] p-2 rounded border leading-relaxed ${
+                                      themeMode === 'light'
+                                        ? 'bg-amber-100/70 text-amber-950 border-amber-300'
+                                        : 'bg-yellow-950/30 text-yellow-200/90 border-yellow-800/40'
+                                    }`}>
+                                      <strong className={`font-mono block mb-0.5 ${
+                                        themeMode === 'light' ? 'text-amber-900' : 'text-yellow-300'
+                                      }`}>💡 Sinergia Táctica:</strong>
                                       {choice.expertReason}
                                     </div>
                                   )}
@@ -791,8 +1053,14 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
                               );
                             })()
                           ) : (
-                            <div className="bg-black/30 border border-slate-800 rounded-lg p-3 flex items-center justify-center text-center">
-                              <span className="text-[11px] font-mono text-slate-500 italic">
+                            <div className={`border rounded-lg p-3 flex items-center justify-center text-center ${
+                              themeMode === 'light'
+                                ? 'bg-slate-50 border-slate-200'
+                                : 'bg-black/30 border-slate-800'
+                            }`}>
+                              <span className={`text-[11px] font-mono italic ${
+                                themeMode === 'light' ? 'text-slate-500' : 'text-slate-500'
+                              }`}>
                                 Se mantiene en nivel Avanzado según el build
                               </span>
                             </div>
@@ -817,20 +1085,38 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
                 : OFFICIAL_SUBCLASSES.filter((s) => s.faction === selectedFaction);
 
               return (
-                <div className={`bg-gradient-to-br from-black/90 via-black/70 to-black/90 border-2 ${theme.border} rounded-2xl p-4 sm:p-5 space-y-4 shadow-xl ${theme.shadowAccent}`}>
-                  <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b ${theme.borderSubtle} pb-3`}>
+                <div className={`border-2 rounded-2xl p-4 sm:p-5 space-y-4 shadow-xl ${theme.shadowAccent} transition-colors ${
+                  themeMode === 'light'
+                    ? 'bg-white border-slate-200 shadow-md'
+                    : `bg-gradient-to-br from-black/90 via-black/70 to-black/90 ${theme.border}`
+                }`}>
+                  <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b pb-3 ${
+                    themeMode === 'light' ? 'border-slate-200' : theme.borderSubtle
+                  }`}>
                     <div className="flex items-center gap-2">
-                      <div className={`w-8 h-8 rounded-lg ${theme.bgBadge} border ${theme.borderSubtle} flex items-center justify-center ${theme.textAccent} shadow-md`}>
+                      <div className={`w-8 h-8 rounded-lg border flex items-center justify-center shadow-md ${
+                        themeMode === 'light'
+                          ? 'bg-purple-100 text-purple-900 border-purple-300'
+                          : `${theme.bgBadge} border ${theme.borderSubtle} ${theme.textAccent}`
+                      }`}>
                         <Award className="w-4 h-4" />
                       </div>
                       <div>
-                        <h4 className="text-sm sm:text-base font-bold text-white font-serif flex items-center gap-2">
+                        <h4 className={`text-sm sm:text-base font-bold font-serif flex items-center gap-2 ${
+                          themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                        }`}>
                           Rutas Oficiales de Subclase (Clase de Prestigio)
-                          <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded ${theme.bgBadge} ${theme.textAccent} border ${theme.borderSubtle}`}>
+                          <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${
+                            themeMode === 'light'
+                              ? 'bg-purple-100 text-purple-900 border-purple-200'
+                              : `${theme.bgBadge} ${theme.textAccent} ${theme.borderSubtle}`
+                          }`}>
                             {selectedHero.heroClass}
                           </span>
                         </h4>
-                        <p className={`text-[11px] ${theme.textAccent} font-sans`}>
+                        <p className={`text-[11px] font-sans ${
+                          themeMode === 'light' ? 'text-slate-600' : theme.textAccent
+                        }`}>
                           Desbloqueo automático al llevar a <strong>Experto</strong> las 5 habilidades requeridas (Nivel 16-20+)
                         </p>
                       </div>
@@ -855,21 +1141,31 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
                           key={sub.id}
                           className={`rounded-xl p-4 space-y-3 border transition-all ${
                             isPrimaryRecommendation
-                              ? `bg-black/70 ${theme.border} shadow-md ring-1 ring-current`
+                              ? themeMode === 'light'
+                                ? 'bg-amber-50/80 border-2 border-amber-300 shadow-sm ring-1 ring-amber-300'
+                                : `bg-black/70 ${theme.border} shadow-md ring-1 ring-current`
+                              : themeMode === 'light'
+                              ? 'bg-slate-50 border-slate-200'
                               : `bg-black/50 ${theme.borderSubtle} opacity-90`
                           }`}
                         >
                           <div className="flex items-start justify-between gap-2">
                             <div>
                               <div className="flex items-center gap-1.5">
-                                <span className="text-xs sm:text-sm font-bold text-white font-serif">
+                                <span className={`text-xs sm:text-sm font-bold font-serif ${
+                                  themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                                }`}>
                                   {sub.name}
                                 </span>
-                                <span className="text-[10px] font-mono text-slate-400">
+                                <span className={`text-[10px] font-mono ${
+                                  themeMode === 'light' ? 'text-slate-500' : 'text-slate-400'
+                                }`}>
                                   ({sub.nameEn})
                                 </span>
                               </div>
-                              <span className="text-[10px] font-mono font-bold text-yellow-400 block mt-0.5">
+                              <span className={`text-[10px] font-mono font-bold block mt-0.5 ${
+                                themeMode === 'light' ? 'text-amber-900' : 'text-yellow-400'
+                              }`}>
                                 ★ {sub.bonusTitle}
                               </span>
                             </div>
@@ -877,7 +1173,11 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
                             <span
                               className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded border shrink-0 ${
                                 isPrimaryRecommendation
-                                  ? 'bg-yellow-950 text-yellow-300 border-yellow-600'
+                                  ? themeMode === 'light'
+                                    ? 'bg-amber-100 text-amber-900 border-amber-300'
+                                    : 'bg-yellow-950 text-yellow-300 border-yellow-600'
+                                  : themeMode === 'light'
+                                  ? 'bg-slate-200 text-slate-700 border-slate-300'
                                   : 'bg-slate-900 text-slate-400 border-slate-700'
                               }`}
                             >
@@ -885,15 +1185,25 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
                             </span>
                           </div>
 
-                          <p className="text-[11px] text-slate-300 leading-snug">
+                          <p className={`text-[11px] leading-snug ${
+                            themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
+                          }`}>
                             {sub.bonusEffect}
                           </p>
 
                           {/* 5 Skills Progress Tracker */}
-                          <div className={`space-y-1.5 pt-1 border-t ${theme.borderSubtle}`}>
+                          <div className={`space-y-1.5 pt-1 border-t ${
+                            themeMode === 'light' ? 'border-slate-200' : theme.borderSubtle
+                          }`}>
                             <div className="flex items-center justify-between text-[10px] font-mono">
-                              <span className={`${theme.textAccent} font-bold uppercase`}>5 Habilidades Requeridas a Experto:</span>
-                              <span className={`font-bold ${matchingCount >= 4 ? 'text-emerald-400' : 'text-yellow-400'}`}>
+                              <span className={`font-bold uppercase ${
+                                themeMode === 'light' ? 'text-slate-700' : theme.textAccent
+                              }`}>5 Habilidades Requeridas a Experto:</span>
+                              <span className={`font-bold ${
+                                matchingCount >= 4
+                                  ? themeMode === 'light' ? 'text-emerald-700' : 'text-emerald-400'
+                                  : themeMode === 'light' ? 'text-amber-800' : 'text-yellow-400'
+                              }`}>
                                 {matchingCount}/5 en la Build
                               </span>
                             </div>
@@ -908,12 +1218,20 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
                                     key={rIdx}
                                     className={`text-[10px] font-mono px-2 py-1 rounded flex items-center justify-between border ${
                                       isPresent
-                                        ? 'bg-emerald-950/40 text-emerald-300 border-emerald-800/60'
+                                        ? themeMode === 'light'
+                                          ? 'bg-emerald-50 text-emerald-900 border-emerald-300 font-semibold'
+                                          : 'bg-emerald-950/40 text-emerald-300 border-emerald-800/60'
+                                        : themeMode === 'light'
+                                        ? 'bg-slate-100 text-slate-600 border-slate-200'
                                         : 'bg-black/40 text-slate-400 border-slate-800'
                                     }`}
                                   >
                                     <div className="flex items-center gap-1.5 truncate">
-                                      <span className={`w-3.5 h-3.5 rounded-full ${theme.bgBadge} text-[8px] flex items-center justify-center text-yellow-300 shrink-0 font-bold`}>
+                                      <span className={`w-3.5 h-3.5 rounded-full text-[8px] flex items-center justify-center shrink-0 font-bold ${
+                                        themeMode === 'light'
+                                          ? 'bg-purple-200 text-purple-900'
+                                          : `${theme.bgBadge} text-yellow-300`
+                                      }`}>
                                         {rIdx + 1}
                                       </span>
                                       <span className="truncate">{req.name} ({req.nameEn})</span>
@@ -935,8 +1253,14 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
             })()}
 
             {/* Synergies with Laws and Guild Spells */}
-            <div className={`bg-black/40 border ${theme.borderSubtle} rounded-xl p-3.5 text-xs text-slate-300 leading-relaxed`}>
-              <strong className="text-yellow-400 font-mono block mb-1">
+            <div className={`rounded-xl p-3.5 text-xs leading-relaxed border ${
+              themeMode === 'light'
+                ? 'bg-amber-50/70 border-amber-200 text-slate-800'
+                : `bg-black/40 border ${theme.borderSubtle} text-slate-300`
+            }`}>
+              <strong className={`font-mono block mb-1 ${
+                themeMode === 'light' ? 'text-amber-900 font-bold' : 'text-yellow-400'
+              }`}>
                 ⚡ Sinergia de Leyes & Hechizos Neutrales de Cofradía:
               </strong>
               {selectedHero.synergyCombo}
@@ -946,27 +1270,49 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
           {/* Modal / Popup for Inspected Official Skill & Subskills */}
           {inspectedSkill && (
             <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-              <div className={`bg-[#12111b] border-2 ${theme.border} rounded-2xl max-w-2xl w-full p-5 sm:p-6 space-y-4 shadow-2xl overflow-y-auto max-h-[90vh] ${theme.shadowAccent}`}>
-                <div className={`flex items-center justify-between border-b ${theme.borderSubtle} pb-3`}>
+              <div className={`border-2 rounded-2xl max-w-2xl w-full p-5 sm:p-6 space-y-4 shadow-2xl overflow-y-auto max-h-[90vh] ${theme.shadowAccent} ${
+                themeMode === 'light'
+                  ? 'bg-white border-slate-300 text-slate-900'
+                  : `bg-[#12111b] border-2 ${theme.border} text-white`
+              }`}>
+                <div className={`flex items-center justify-between border-b pb-3 ${
+                  themeMode === 'light' ? 'border-slate-200' : theme.borderSubtle
+                }`}>
                   <div className="flex items-center gap-2.5">
-                    <div className={`w-8 h-8 rounded-lg ${theme.bgBadge} border ${theme.borderSubtle} flex items-center justify-center ${theme.textAccent}`}>
+                    <div className={`w-8 h-8 rounded-lg border flex items-center justify-center ${
+                      themeMode === 'light'
+                        ? 'bg-purple-100 text-purple-900 border-purple-300'
+                        : `${theme.bgBadge} border ${theme.borderSubtle} ${theme.textAccent}`
+                    }`}>
                       <BookOpen className="w-4 h-4" />
                     </div>
                     <div>
-                      <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                      <h3 className={`text-base sm:text-lg font-bold flex items-center gap-2 ${
+                        themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                      }`}>
                         {inspectedSkill.name}
-                        <span className={`text-[10px] font-mono px-2 py-0.5 rounded ${theme.bgBadge} ${theme.textAccent} border ${theme.borderSubtle}`}>
+                        <span className={`text-[10px] font-mono px-2 py-0.5 rounded border ${
+                          themeMode === 'light'
+                            ? 'bg-purple-100 text-purple-900 border-purple-300'
+                            : `${theme.bgBadge} ${theme.textAccent} ${theme.borderSubtle}`
+                        }`}>
                           {inspectedSkill.category} {inspectedSkill.faction ? `• ${inspectedSkill.faction}` : ''}
                         </span>
                       </h3>
-                      <span className="text-[11px] text-slate-400 font-mono">
+                      <span className={`text-[11px] font-mono ${
+                        themeMode === 'light' ? 'text-slate-500' : 'text-slate-400'
+                      }`}>
                         Base de Datos Oficial • Heroes of Might & Magic: Olden Era
                       </span>
                     </div>
                   </div>
                   <button
                     onClick={() => setInspectedSkill(null)}
-                    className={`p-1.5 rounded-lg bg-black/60 border ${theme.borderSubtle} text-slate-400 hover:text-white hover:border-slate-500 transition-colors cursor-pointer`}
+                    className={`p-1.5 rounded-lg border transition-colors cursor-pointer ${
+                      themeMode === 'light'
+                        ? 'bg-slate-100 border-slate-300 text-slate-600 hover:text-slate-900'
+                        : `bg-black/60 border ${theme.borderSubtle} text-slate-400 hover:text-white hover:border-slate-500`
+                    }`}
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -974,23 +1320,45 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
 
                 {/* Selection Guide in Modal */}
                 {inspectedSkill.selectionGuide && (
-                  <div className="bg-gradient-to-r from-amber-950/40 to-black/40 border border-yellow-600/50 p-3.5 rounded-xl space-y-2 text-xs">
-                    <div className="flex items-center gap-1.5 text-yellow-300 font-bold font-mono">
-                      <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
+                  <div className={`p-3.5 rounded-xl space-y-2 text-xs border ${
+                    themeMode === 'light'
+                      ? 'bg-amber-50/80 border-amber-300'
+                      : 'bg-gradient-to-r from-amber-950/40 to-black/40 border-yellow-600/50'
+                  }`}>
+                    <div className={`flex items-center gap-1.5 font-bold font-mono ${
+                      themeMode === 'light' ? 'text-amber-950' : 'text-yellow-300'
+                    }`}>
+                      <Star className="w-3.5 h-3.5 fill-current text-current" />
                       Guía Táctica de Selección Recomendada
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
-                      <div className={`bg-black/50 p-2 rounded border ${theme.borderSubtle}`}>
-                        <span className="text-yellow-400 font-bold block mb-0.5">
+                      <div className={`p-2 rounded border ${
+                        themeMode === 'light'
+                          ? 'bg-white border-amber-200'
+                          : `bg-black/50 ${theme.borderSubtle}`
+                      }`}>
+                        <span className={`font-bold block mb-0.5 ${
+                          themeMode === 'light' ? 'text-purple-900' : 'text-yellow-400'
+                        }`}>
                           ★ Avanzado: {inspectedSkill.selectionGuide.advanced.recommendedName}
                         </span>
-                        <p className="text-slate-300">{inspectedSkill.selectionGuide.advanced.why}</p>
+                        <p className={themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}>
+                          {inspectedSkill.selectionGuide.advanced.why}
+                        </p>
                       </div>
-                      <div className="bg-black/50 p-2 rounded border border-yellow-900/60">
-                        <span className="text-yellow-400 font-bold block mb-0.5">
+                      <div className={`p-2 rounded border ${
+                        themeMode === 'light'
+                          ? 'bg-white border-amber-200'
+                          : 'bg-black/50 border-yellow-900/60'
+                      }`}>
+                        <span className={`font-bold block mb-0.5 ${
+                          themeMode === 'light' ? 'text-amber-900' : 'text-yellow-400'
+                        }`}>
                           ★ Experto: {inspectedSkill.selectionGuide.expert.recommendedName}
                         </span>
-                        <p className="text-slate-300">{inspectedSkill.selectionGuide.expert.why}</p>
+                        <p className={themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}>
+                          {inspectedSkill.selectionGuide.expert.why}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -998,29 +1366,57 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
 
                 {/* Mastery Levels */}
                 <div className="space-y-2">
-                  <span className={`text-xs font-mono uppercase font-bold ${theme.textAccent} flex items-center gap-1.5`}>
-                    <Zap className="w-3.5 h-3.5 text-yellow-400" />
+                  <span className={`text-xs font-mono uppercase font-bold flex items-center gap-1.5 ${
+                    themeMode === 'light' ? 'text-purple-900' : theme.textAccent
+                  }`}>
+                    <Zap className="w-3.5 h-3.5 text-amber-500 dark:text-yellow-400" />
                     Niveles de Maestría
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
-                    <div className={`bg-black/50 border ${theme.borderSubtle} p-2.5 rounded-lg`}>
-                      <span className={`text-[10px] font-mono ${theme.textAccent} font-bold block mb-0.5`}>Básico</span>
-                      <p className="text-[11px] text-slate-300">{inspectedSkill.upgrades.basic}</p>
+                    <div className={`p-2.5 rounded-lg border ${
+                      themeMode === 'light'
+                        ? 'bg-slate-50 border-slate-200'
+                        : `bg-black/50 border ${theme.borderSubtle}`
+                    }`}>
+                      <span className={`text-[10px] font-mono font-bold block mb-0.5 ${
+                        themeMode === 'light' ? 'text-purple-800' : theme.textAccent
+                      }`}>Básico</span>
+                      <p className={`text-[11px] ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>
+                        {inspectedSkill.upgrades.basic}
+                      </p>
                     </div>
-                    <div className={`bg-black/50 border ${theme.borderSubtle} p-2.5 rounded-lg`}>
-                      <span className={`text-[10px] font-mono ${theme.textAccent} font-bold block mb-0.5`}>Avanzado</span>
-                      <p className="text-[11px] text-slate-300">{inspectedSkill.upgrades.advanced}</p>
+                    <div className={`p-2.5 rounded-lg border ${
+                      themeMode === 'light'
+                        ? 'bg-slate-50 border-slate-200'
+                        : `bg-black/50 border ${theme.borderSubtle}`
+                    }`}>
+                      <span className={`text-[10px] font-mono font-bold block mb-0.5 ${
+                        themeMode === 'light' ? 'text-purple-800' : theme.textAccent
+                      }`}>Avanzado</span>
+                      <p className={`text-[11px] ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>
+                        {inspectedSkill.upgrades.advanced}
+                      </p>
                     </div>
-                    <div className="bg-black/50 border border-yellow-900/60 p-2.5 rounded-lg">
-                      <span className="text-[10px] font-mono text-yellow-300 font-bold block mb-0.5">Experto</span>
-                      <p className="text-[11px] text-slate-300">{inspectedSkill.upgrades.expert}</p>
+                    <div className={`p-2.5 rounded-lg border ${
+                      themeMode === 'light'
+                        ? 'bg-amber-50 border-amber-300'
+                        : 'bg-black/50 border-yellow-900/60'
+                    }`}>
+                      <span className={`text-[10px] font-mono font-bold block mb-0.5 ${
+                        themeMode === 'light' ? 'text-amber-900' : 'text-yellow-300'
+                      }`}>Experto</span>
+                      <p className={`text-[11px] ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>
+                        {inspectedSkill.upgrades.expert}
+                      </p>
                     </div>
                   </div>
                 </div>
 
                 {/* Advanced Subskills */}
                 <div className="space-y-2">
-                  <span className={`text-xs font-mono uppercase font-bold ${theme.textAccent} flex items-center gap-1.5`}>
+                  <span className={`text-xs font-mono uppercase font-bold flex items-center gap-1.5 ${
+                    themeMode === 'light' ? 'text-purple-900' : theme.textAccent
+                  }`}>
                     <Target className="w-3.5 h-3.5" />
                     Subhabilidades de Nivel Avanzado (Selecciona 1 de 3 en Nivel 2)
                   </span>
@@ -1028,26 +1424,42 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
                     {inspectedSkill.subskills.advanced.map((sub, idx) => (
                       <div
                         key={idx}
-                        className={`p-2.5 rounded-lg space-y-1 ${
+                        className={`p-2.5 rounded-lg space-y-1 border ${
                           sub.isRecommendedMeta
-                            ? 'bg-yellow-950/30 border-2 border-yellow-500/80'
+                            ? themeMode === 'light'
+                              ? 'bg-purple-50 border-2 border-purple-300'
+                              : 'bg-yellow-950/30 border-2 border-yellow-500/80'
+                            : themeMode === 'light'
+                            ? 'bg-slate-50 border-slate-200'
                             : `bg-black/60 border ${theme.borderSubtle}`
                         }`}
                       >
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-1.5">
-                            <span className={`w-3.5 h-3.5 rounded-full ${theme.bgBadge} ${theme.textAccent} text-[8px] font-mono flex items-center justify-center border ${theme.borderSubtle}`}>
+                            <span className={`w-3.5 h-3.5 rounded-full text-[8px] font-mono flex items-center justify-center border ${
+                              themeMode === 'light'
+                                ? 'bg-purple-100 text-purple-900 border-purple-300'
+                                : `${theme.bgBadge} ${theme.textAccent} border ${theme.borderSubtle}`
+                            }`}>
                               A{idx + 1}
                             </span>
-                            <span className="text-xs font-bold text-white">{sub.name}</span>
+                            <span className={`text-xs font-bold ${
+                              themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                            }`}>{sub.name}</span>
                           </div>
                           {sub.isRecommendedMeta && (
-                            <span className="text-[8px] font-mono font-bold px-1.5 py-0.2 rounded bg-yellow-950 text-yellow-300 border border-yellow-600">
+                            <span className={`text-[8px] font-mono font-bold px-1.5 py-0.2 rounded border ${
+                              themeMode === 'light'
+                                ? 'bg-amber-100 text-amber-900 border-amber-300'
+                                : 'bg-yellow-950 text-yellow-300 border border-yellow-600'
+                            }`}>
                               ⭐ Recomendada
                             </span>
                           )}
                         </div>
-                        <p className="text-[11px] text-slate-300 leading-snug">{sub.effect}</p>
+                        <p className={`text-[11px] leading-snug ${
+                          themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
+                        }`}>{sub.effect}</p>
                       </div>
                     ))}
                   </div>
@@ -1055,34 +1467,52 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
 
                 {/* Expert Subskills */}
                 <div className="space-y-2">
-                  <span className="text-xs font-mono uppercase font-bold text-yellow-300 flex items-center gap-1.5">
-                    <Award className="w-3.5 h-3.5 text-yellow-400" />
+                  <span className={`text-xs font-mono uppercase font-bold flex items-center gap-1.5 ${
+                    themeMode === 'light' ? 'text-amber-900' : 'text-yellow-300'
+                  }`}>
+                    <Award className="w-3.5 h-3.5 text-amber-500 dark:text-yellow-400" />
                     Subhabilidades de Nivel Experto (Selecciona 1 de 3 en Nivel 3)
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                     {inspectedSkill.subskills.expert.map((sub, idx) => (
                       <div
                         key={idx}
-                        className={`p-2.5 rounded-lg space-y-1 ${
+                        className={`p-2.5 rounded-lg space-y-1 border ${
                           sub.isRecommendedMeta
-                            ? 'bg-yellow-950/30 border-2 border-yellow-500/80'
+                            ? themeMode === 'light'
+                              ? 'bg-amber-50 border-2 border-amber-300'
+                              : 'bg-yellow-950/30 border-2 border-yellow-500/80'
+                            : themeMode === 'light'
+                            ? 'bg-slate-50 border-slate-200'
                             : 'bg-[#1b1722] border border-yellow-900/60'
                         }`}
                       >
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-1.5">
-                            <span className="w-3.5 h-3.5 rounded-full bg-yellow-950 text-yellow-200 text-[8px] font-mono flex items-center justify-center border border-yellow-700">
+                            <span className={`w-3.5 h-3.5 rounded-full text-[8px] font-mono flex items-center justify-center border ${
+                              themeMode === 'light'
+                                ? 'bg-amber-100 text-amber-900 border-amber-300'
+                                : 'bg-yellow-950 text-yellow-200 border-yellow-700'
+                            }`}>
                               E{idx + 1}
                             </span>
-                            <span className="text-xs font-bold text-yellow-100">{sub.name}</span>
+                            <span className={`text-xs font-bold ${
+                              themeMode === 'light' ? 'text-slate-900' : 'text-yellow-100'
+                            }`}>{sub.name}</span>
                           </div>
                           {sub.isRecommendedMeta && (
-                            <span className="text-[8px] font-mono font-bold px-1.5 py-0.2 rounded bg-yellow-950 text-yellow-300 border border-yellow-600">
+                            <span className={`text-[8px] font-mono font-bold px-1.5 py-0.2 rounded border ${
+                              themeMode === 'light'
+                                ? 'bg-amber-100 text-amber-900 border-amber-300'
+                                : 'bg-yellow-950 text-yellow-300 border border-yellow-600'
+                            }`}>
                               ⭐ Recomendada
                             </span>
                           )}
                         </div>
-                        <p className="text-[11px] text-slate-300 leading-snug">{sub.effect}</p>
+                        <p className={`text-[11px] leading-snug ${
+                          themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
+                        }`}>{sub.effect}</p>
                       </div>
                     ))}
                   </div>
@@ -1091,7 +1521,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
                 <div className="text-right pt-2">
                   <button
                     onClick={() => setInspectedSkill(null)}
-                    className={`px-4 py-1.5 ${theme.primaryButton} rounded-lg text-xs font-semibold font-mono transition-colors cursor-pointer`}
+                    className={`px-4 py-1.5 ${theme.primaryButton} rounded-lg text-xs font-semibold font-mono transition-colors cursor-pointer shadow-md`}
                   >
                     Cerrar
                   </button>
@@ -1102,38 +1532,60 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
 
           {/* Side-by-Side Compare Panel if active */}
           {compareHero && (
-            <div className="bg-black/70 border border-teal-800/60 rounded-2xl p-5 shadow-xl space-y-4">
-              <div className="flex items-center justify-between border-b border-teal-900/40 pb-2">
+            <div className={`border rounded-2xl p-5 shadow-xl space-y-4 ${
+              themeMode === 'light'
+                ? 'bg-white border-teal-300'
+                : 'bg-black/70 border-teal-800/60'
+            }`}>
+              <div className={`flex items-center justify-between border-b pb-2 ${
+                themeMode === 'light' ? 'border-teal-200' : 'border-teal-900/40'
+              }`}>
                 <div className="flex items-center gap-2">
-                  <Scale className="w-4 h-4 text-teal-400" />
-                  <h4 className="text-xs font-mono font-bold uppercase text-teal-200 tracking-wider">
+                  <Scale className={`w-4 h-4 ${themeMode === 'light' ? 'text-teal-600' : 'text-teal-400'}`} />
+                  <h4 className={`text-xs font-mono font-bold uppercase tracking-wider ${
+                    themeMode === 'light' ? 'text-teal-900' : 'text-teal-200'
+                  }`}>
                     Comparativa: {selectedHero.name} vs {compareHero.name}
                   </h4>
                 </div>
                 <button
                   type="button"
                   onClick={() => setCompareHeroId(null)}
-                  className="text-xs text-slate-400 hover:text-slate-200 cursor-pointer font-mono"
+                  className={`text-xs cursor-pointer font-mono ${
+                    themeMode === 'light' ? 'text-slate-600 hover:text-slate-900' : 'text-slate-400 hover:text-slate-200'
+                  }`}
                 >
                   Cerrar
                 </button>
               </div>
 
               <div className="grid grid-cols-2 gap-4 text-xs">
-                <div className={`space-y-2 bg-black/40 p-3 rounded-lg border ${theme.borderSubtle}`}>
-                  <div className={`font-bold ${theme.textAccent} font-serif`}>{selectedHero.name}</div>
-                  <div className="text-[11px] text-slate-400">Rol: {selectedHero.role}</div>
-                  <div className="text-[11px] text-yellow-400/90 font-mono">Esp: {selectedHero.specialtyName}</div>
-                  <div className="text-[11px] text-slate-300">Poder Mágico: {selectedHero.statGrowth.spellPower}%</div>
-                  <div className="text-[11px] text-slate-300">Ataque Físico: {selectedHero.statGrowth.attack}%</div>
+                <div className={`space-y-2 p-3 rounded-lg border ${
+                  themeMode === 'light'
+                    ? 'bg-purple-50/70 border-purple-200'
+                    : `bg-black/40 ${theme.borderSubtle}`
+                }`}>
+                  <div className={`font-bold font-serif ${
+                    themeMode === 'light' ? 'text-purple-950' : theme.textAccent
+                  }`}>{selectedHero.name}</div>
+                  <div className={`text-[11px] ${themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'}`}>Rol: {selectedHero.role}</div>
+                  <div className={`text-[11px] font-mono ${themeMode === 'light' ? 'text-amber-900 font-semibold' : 'text-yellow-400/90'}`}>Esp: {selectedHero.specialtyName}</div>
+                  <div className={`text-[11px] ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>Poder Mágico: {selectedHero.statGrowth.spellPower}%</div>
+                  <div className={`text-[11px] ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>Ataque Físico: {selectedHero.statGrowth.attack}%</div>
                 </div>
 
-                <div className="space-y-2 bg-black/40 p-3 rounded-lg border border-teal-900/40">
-                  <div className="font-bold text-teal-300 font-serif">{compareHero.name}</div>
-                  <div className="text-[11px] text-slate-400">Rol: {compareHero.role}</div>
-                  <div className="text-[11px] text-yellow-400/90 font-mono">Esp: {compareHero.specialtyName}</div>
-                  <div className="text-[11px] text-slate-300">Poder Mágico: {compareHero.statGrowth.spellPower}%</div>
-                  <div className="text-[11px] text-slate-300">Ataque Físico: {compareHero.statGrowth.attack}%</div>
+                <div className={`space-y-2 p-3 rounded-lg border ${
+                  themeMode === 'light'
+                    ? 'bg-teal-50/70 border-teal-200'
+                    : 'bg-black/40 border-teal-900/40'
+                }`}>
+                  <div className={`font-bold font-serif ${
+                    themeMode === 'light' ? 'text-teal-950' : 'text-teal-300'
+                  }`}>{compareHero.name}</div>
+                  <div className={`text-[11px] ${themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'}`}>Rol: {compareHero.role}</div>
+                  <div className={`text-[11px] font-mono ${themeMode === 'light' ? 'text-amber-900 font-semibold' : 'text-yellow-400/90'}`}>Esp: {compareHero.specialtyName}</div>
+                  <div className={`text-[11px] ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>Poder Mágico: {compareHero.statGrowth.spellPower}%</div>
+                  <div className={`text-[11px] ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>Ataque Físico: {compareHero.statGrowth.attack}%</div>
                 </div>
               </div>
             </div>
@@ -1142,14 +1594,24 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
       </div>
 
       {/* Strategy Guide: Hero Progression Timeline */}
-      <div className={`bg-black/40 border ${theme.border} rounded-2xl p-5 shadow-xl space-y-4`}>
-        <div className={`border-b ${theme.borderSubtle} pb-2 flex items-center justify-between`}>
+      <div className={`border rounded-2xl p-5 shadow-xl space-y-4 ${
+        themeMode === 'light'
+          ? 'bg-white border-slate-200 shadow-md'
+          : `bg-black/40 border ${theme.border}`
+      }`}>
+        <div className={`border-b pb-2 flex items-center justify-between ${
+          themeMode === 'light' ? 'border-slate-200' : theme.borderSubtle
+        }`}>
           <div>
-            <h3 className="text-base font-serif text-white uppercase tracking-wide flex items-center gap-2">
-              <TrendingUp className="w-4 h-4 text-yellow-400" />
+            <h3 className={`text-base font-serif uppercase tracking-wide flex items-center gap-2 font-bold ${
+              themeMode === 'light' ? 'text-slate-900' : 'text-white'
+            }`}>
+              <TrendingUp className="w-4 h-4 text-amber-500 dark:text-yellow-400" />
               <span>Hitos de Progresión de Héroes (Nivel 1 a 25)</span>
             </h3>
-            <p className="text-xs text-slate-400 font-mono mt-0.5">
+            <p className={`text-xs font-mono mt-0.5 ${
+              themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'
+            }`}>
               Ruta óptima de desarrollo durante los 56 días de campaña.
             </p>
           </div>
@@ -1159,12 +1621,20 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ selectedFa
           {HERO_SELECTION_GUIDELINES.keyMilestones.map((ms, idx) => (
             <div
               key={idx}
-              className={`bg-black/50 border ${theme.borderSubtle} p-3.5 rounded-xl space-y-1.5`}
+              className={`p-3.5 rounded-xl space-y-1.5 border ${
+                themeMode === 'light'
+                  ? 'bg-slate-50 border-slate-200'
+                  : `bg-black/50 border ${theme.borderSubtle}`
+              }`}
             >
-              <div className="text-xs font-mono font-bold text-yellow-400 uppercase">
+              <div className={`text-xs font-mono font-bold uppercase ${
+                themeMode === 'light' ? 'text-amber-900' : 'text-yellow-400'
+              }`}>
                 {ms.level}
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <p className={`text-xs leading-relaxed ${
+                themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
+              }`}>
                 {ms.focus}
               </p>
             </div>

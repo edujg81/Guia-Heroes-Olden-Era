@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Header } from './components/Header';
 import { DayByDayPlanner } from './components/DayByDayPlanner';
+import { TownStructuresBrowser } from './components/TownStructuresBrowser';
 import { FactionLawsTree } from './components/FactionLawsTree';
 import { SpellGrimoire } from './components/SpellGrimoire';
 import { CombatTactics } from './components/CombatTactics';
@@ -52,22 +53,25 @@ export default function App() {
       {/* Main Content Area: Persist mounted views to never lose user match context */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 space-y-6">
         <div className={activeTab === 'build-order' ? 'block' : 'hidden'}>
-          <DayByDayPlanner selectedFaction={selectedFaction} />
+          <DayByDayPlanner selectedFaction={selectedFaction} themeMode={themeMode} />
+        </div>
+        <div className={activeTab === 'structures' ? 'block' : 'hidden'}>
+          <TownStructuresBrowser selectedFaction={selectedFaction} themeMode={themeMode} />
         </div>
         <div className={activeTab === 'faction-laws' ? 'block' : 'hidden'}>
-          <FactionLawsTree selectedFaction={selectedFaction} />
+          <FactionLawsTree selectedFaction={selectedFaction} themeMode={themeMode} />
         </div>
         <div className={activeTab === 'spells' ? 'block' : 'hidden'}>
-          <SpellGrimoire selectedFaction={selectedFaction} />
+          <SpellGrimoire selectedFaction={selectedFaction} themeMode={themeMode} />
         </div>
         <div className={activeTab === 'combat-tactics' ? 'block' : 'hidden'}>
-          <CombatTactics selectedFaction={selectedFaction} />
+          <CombatTactics selectedFaction={selectedFaction} themeMode={themeMode} />
         </div>
         <div className={activeTab === 'units' ? 'block' : 'hidden'}>
-          <UnitMatrix selectedFaction={selectedFaction} />
+          <UnitMatrix selectedFaction={selectedFaction} themeMode={themeMode} />
         </div>
         <div className={activeTab === 'hero-skills' ? 'block' : 'hidden'}>
-          <HeroSkillOptimizer selectedFaction={selectedFaction} />
+          <HeroSkillOptimizer selectedFaction={selectedFaction} themeMode={themeMode} />
         </div>
       </main>
 

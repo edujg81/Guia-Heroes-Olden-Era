@@ -26,9 +26,13 @@ import {
 
 interface DayByDayPlannerProps {
   selectedFaction?: FactionId;
+  themeMode?: 'dark' | 'light';
 }
 
-export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({ selectedFaction = 'Mazmorra' }) => {
+export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({ 
+  selectedFaction = 'Mazmorra',
+  themeMode = 'dark',
+}) => {
   const [completedDays, setCompletedDays] = useStickyState<Record<number, boolean>>({}, `planner_completed_days_${selectedFaction}`);
   const [selectedDay, setSelectedDay] = useStickyState<number>(1, `planner_selected_day_${selectedFaction}`);
   const [selectedMonth, setSelectedMonth] = useStickyState<1 | 2 | 'all'>('all', 'planner_selected_month');
@@ -38,7 +42,7 @@ export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({ selectedFactio
 
   const allSteps = getBuildStepsForFaction(selectedFaction);
   const meta = FACTIONS_METADATA[selectedFaction] || FACTIONS_METADATA.Mazmorra;
-  const theme = getFactionTheme(selectedFaction);
+  const theme = getFactionTheme(selectedFaction, themeMode);
 
   const filteredSteps = allSteps.filter((step) => {
     // Month filter
@@ -549,6 +553,11 @@ export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({ selectedFactio
               {currentStep.cost.mercury && (
                 <span className="bg-black/60 px-2 py-0.5 rounded border border-rose-800/40 font-mono text-rose-300">
                   {currentStep.cost.mercury} Mercurio
+                </span>
+              )}
+              {currentStep.cost.sulfur && (
+                <span className="bg-black/60 px-2 py-0.5 rounded border border-yellow-800/40 font-mono text-yellow-300">
+                  {currentStep.cost.sulfur} Azufre
                 </span>
               )}
               {currentStep.cost.alchemicalDust && (
