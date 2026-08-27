@@ -1,0 +1,6 @@
+{
+  "name": "Guía Estratégica Mazmorra - Heroes Olden Era",
+  "description": "Guía táctica paso a paso, cronogramas de 56 días, árboles de leyes de facción, grimorio de hechizos, matriz de unidades y optimizador de héroes para las facciones de Heroes of Might and Magic: Olden Era (Mazmorra, Templo y más).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
