@@ -200,7 +200,7 @@ export interface RecommendedSpell {
   masterfulName?: string;
   tier: number;
   type: 'Combate' | 'Aventura / Mapa' | 'Control de Masas' | 'Daño Masivo' | 'Soporte' | string;
-  school: 'Sombras (Nightshade)' | 'Arcana' | 'Luz (Light)' | 'Primigenia (Primal)' | 'Primigenia / Tierra' | 'Universal / Aventura' | 'Neutral / Aventura (Universal)' | string;
+  school: 'Nochesombra (Nightshade)' | 'Arcana' | 'Luz (Light)' | 'Primigenia (Primal)' | 'Neutral / Aventura (Universal)' | string;
   schoolRequirement: string;
   priority: 'Imprescindible (P1)' | 'Muy Alta (P2)' | 'Alta (P3)' | 'Media (P3)' | 'Situacional' | 'Básica (P4)' | string;
   manaCost: number;
@@ -299,7 +299,7 @@ export interface DungeonHero {
   id: string;
   name: string;
   title: string;
-  heroClass: 'Brujo (Warlock)' | 'Señor de la Guerra (Overlord)' | 'Explorador / Apoyo' | string;
+  heroClass: 'Brujo (Warlock)' | 'Adalid (Overlord)' | 'Explorador / Apoyo' | string;
   heroType: 'Guerrero' | 'Mago';
   role: 'Principal Mágico' | 'Principal Físico' | 'Apertura Rápida Día 1' | 'Secundario & Logística' | string;
   tierRank: 'Tier S+ (Meta)' | 'Tier S' | 'Tier A (Especialista)' | 'Tier Secundario' | 'Tier S (Anti-Mago)' | string;
