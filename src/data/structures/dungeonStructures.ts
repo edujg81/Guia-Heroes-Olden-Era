@@ -24,7 +24,7 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
         level: 1,
         name: 'Nivel I: Palacio Bizantino',
         nameEn: 'Byzantine Palace',
-        cost: { gold: 0 },
+        cost: { gold: 5000 },
         prerequisites: [],
         effects: ['Otorga al reino 500 de oro, puntos de ley y puntos de astrología al día.', '+1 al límite de héroes.'],
         bonusIncome: '+500 Oro, Puntos de ley, Puntos de astrología / día',
@@ -47,7 +47,7 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
         cost: { gold: 5000, wood: 10, ore: 10 },
         prerequisites: ['Palacio Bizantino II'],
         effects: ['Otorga al reino 1000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora de nivel 2.'],
-        bonusIncome: '+2.000 Oro / día',
+        bonusIncome: '+1000 Oro, Puntos de ley, Puntos de astrología / día',
         strategicTip: 'Prioridad máxima al inicio de la Semana 2.'
       }
     ]
@@ -58,57 +58,58 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
   // =========================================================================
   {
     id: 'dungeon-fortifications',
-    name: 'Fortificaciones de la Mazmorra (Fortifications)',
+    name: 'Fortificaciones',
     nameEn: 'Fortifications',
     category: 'Fortificaciones',
     faction: 'Mazmorra',
-    cost: { gold: 1500, wood: 10, ore: 10 },
+    cost: { gold: 2500, wood: 0, ore: 5 },
     prerequisites: [],
     effects: [
-      'Murallas excavadas en roca viva con foso de magma volcánico.',
-      'Habilita la construcción de todas las moradas de criaturas.',
-      'Se mejora a Ciudadela Militar (+50% crecimiento de tropas y balista de azufre) y Castillo (+100% crecimiento y 3 torres de hechicería oscura).'
+      'Proporciona una muralla durante los asedios.',
+      'Permite al constructor elegir mejoras defensivas.',
+      'Al mejorarse aumenta el crecimiento de tropas.'
     ],
     strategicTip: 'Mejorar a Ciudadela en el Día 7 de la Semana 1 para aumentar la producción de tropas del primer reset semanal.',
-    timingRecommendation: 'Fuerte (Día 1) / Ciudadela (Día 7) / Castillo (Semana 2).',
+    timingRecommendation: 'Fortificaciones (Día 1) / Fortificaciones II (Día 7) / Fortificaciones III (Semana 2).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Fuerte Subterráneo (Fort)',
+        name: 'Nivel I: Fortificaciones',
         nameEn: 'Underground Fort',
-        cost: { gold: 1500, wood: 10, ore: 10 },
+        cost: { gold: 2500, wood: 0, ore: 5 },
         prerequisites: [],
-        effects: ['Otorga murallas defensivas de roca basáltica.', 'Habilita el mapa de asedio con foso de lava.', 'Requisito para construir todas las moradas de criaturas.'],
-        defenseBonus: 'Murallas de Asedio + Foso de Magma básico',
-        growthBonus: 'Habilita producción base de criaturas',
+        effects: ['Proporciona una muralla durante los asedios.', 'Permite al constructor elegir una mejora defensiva de nivel 1.'],
+        defenseBonus: 'Refuerzo de murallas, trampas o más salidas',
+        growthBonus: '',
         strategicTip: 'Construir el Día 1 si no se inicia con él.'
       },
       {
         level: 2,
-        name: 'Nivel II: Ciudadela del Inframundo (Citadel)',
+        name: 'Nivel II: Fortificaciones II',
         nameEn: 'Underworld Citadel',
-        cost: { gold: 3000, ore: 5 },
-        prerequisites: ['Nivel I: Fuerte Subterráneo (Fort)'],
+        cost: { gold: 2500, ore: 10 },
+        prerequisites: ['Nivel I: Fortificaciones'],
         effects: [
-          'Añade una Torre Central de Balista Volcánica que dispara bolas de fuego a los sitiadores cada ronda.',
+          'Añade dos torres a las almenas que disparan a los atacantes durante los asedios.',
+          'Permite al constructor elegir una mejora defensiva de nivel 2.',
           'Aumenta la producción semanal de todas las criaturas de la Mazmorra en un +50% adicional.'
         ],
-        defenseBonus: 'Torre Central de Asedio con Balista Volcánica',
+        defenseBonus: '2 Torres Defensivas',
         growthBonus: '+50% Crecimiento semanal de tropas',
         strategicTip: 'Construir el Día 7 de la Semana 1.'
       },
       {
         level: 3,
-        name: 'Nivel III: Castillo de Sombras (Castle)',
+        name: 'Nivel III: Fortificaciones III',
         nameEn: 'Shadow Castle',
-        cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Nivel II: Ciudadela del Inframundo (Citadel)', 'Nivel de Ciudad 12'],
+        cost: { gold: 5000, wood: 0, ore: 15 },
+        prerequisites: ['Nivel II: Fortificaciones II'],
         effects: [
-          'Añade 2 Torres Laterales de Hechicería Oscura suplementarias.',
-          'Refuerza las murallas con piedra negra irrompible y ensancha el foso con lava abrasadora.',
+          'Añade una gran torre más a las almenas que dispara a los atacantes durante los asedios y se asienta junto a la muralla.',
+          'Permite al constructor elegir una mejora defensiva de nivel 3.',
           'Duplica el crecimiento de todas las criaturas de la ciudad (+100% total).'
         ],
-        defenseBonus: '3 Torres Defensivas + Murallas Reforzadas + Foso de Lava Abrasadora',
+        defenseBonus: '1 Torre Defensiva',
         growthBonus: '+100% Crecimiento semanal de tropas (Duplica producción)',
         strategicTip: 'Esencial para duplicar la producción de Hidras y Dragones Negros.'
       }
