@@ -6,59 +6,49 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
   // =========================================================================
   {
     id: 'dungeon-byzantine-palace',
-    name: 'Palacio Bizantino / Cueva del Consejo (Byzantine Palace)',
+    name: 'Palacio Bizantino',
     nameEn: 'Byzantine Palace',
     category: 'Cívica y Economía',
     faction: 'Mazmorra',
-    cost: { gold: 2500, wood: 5, ore: 5 },
-    prerequisites: ['Taberna (Tavern)'],
+    cost: { gold: 5000 },
+    prerequisites: [],
     effects: [
       'Sede señorial de los hechiceros oscuros y señores del inframundo.',
-      'Genera oro diario mediante tributos y comercio de gemas preciosas.',
-      'Se mejora a lo largo de 4 niveles cívicos (Cueva del Consejo -> Palacio Bizantino -> Ciudadela Subterránea -> Capitolio Tiránico).'
+      'Otorga al reino oro, puntos de ley y puntos de astrología al día. Aumenta el límite de héroes (si lo permite el escenario)',
+      'Se mejora a lo largo de 3 niveles cívicos (Palacio Bizantino -> Palacio Bizantino II -> Palacio Bizantino III).'
     ],
-    strategicTip: 'Mejora a Nivel II (Palacio Bizantino) en el Día 2 para acelerar el desarrollo hacia Minotauros y Dragones Negros.',
+    strategicTip: 'Mejora a Nivel II (Palacio Bizantino II) en el Día 2 para acelerar el desarrollo hacia Minotauros y Dragones Negros.',
     timingRecommendation: 'Día 2-4 (Nivel II) / Semana 2 (Nivel III).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Cueva del Consejo (Village Hall)',
-        nameEn: 'Council Cave',
+        name: 'Nivel I: Palacio Bizantino',
+        nameEn: 'Byzantine Palace',
         cost: { gold: 0 },
         prerequisites: [],
-        effects: ['Estructura civil base predeterminada.', 'Genera +500 de Oro por día.', 'Permite construir 1 edificio por turno.'],
-        bonusIncome: '+500 Oro / día',
+        effects: ['Otorga al reino 500 de oro, puntos de ley y puntos de astrología al día.', '+1 al límite de héroes.'],
+        bonusIncome: '+500 Oro, Puntos de ley, Puntos de astrología / día',
         strategicTip: 'Asentamiento subterráneo inicial básico.'
       },
       {
         level: 2,
-        name: 'Nivel II: Palacio Bizantino (Town Hall)',
-        nameEn: 'Byzantine Palace Town Hall',
+        name: 'Nivel II: Palacio Bizantino II',
+        nameEn: 'Byzantine Palace II',
         cost: { gold: 2500, wood: 5, ore: 5 },
-        prerequisites: ['Taberna (Tavern)'],
-        effects: ['Aumenta los ingresos a +1.000 de Oro por día (+500 netos).', 'Desbloquea moradas intermedias de inframundo.'],
-        bonusIncome: '+1.000 Oro / día',
+        prerequisites: ['Palacio Bizantino'],
+        effects: ['Otorga al reino 750 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora económica de nivel 1.'],
+        bonusIncome: '+750 Oro, Puntos de ley, Puntos de astrología / día',
         strategicTip: 'Construir el Día 2 o 3 para estabilizar las finanzas de la Mazmorra.'
       },
       {
         level: 3,
-        name: 'Nivel III: Ciudadela Subterránea (City Hall)',
-        nameEn: 'Underground City Hall',
+        name: 'Nivel III: Palacio Bizantino III',
+        nameEn: 'Byzantine Palace III',
         cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Nivel de Ciudad 9', 'Palacio Bizantino', 'Mercado', 'Cofradía de Magos Nivel 1', 'Fortificaciones I (Fuerte)'],
-        effects: ['Aumenta los ingresos a +2.000 de Oro por día (+1.000 netos).', 'Consolida la renta para mantener Hidras y Dragones Negros.'],
+        prerequisites: ['Palacio Bizantino II'],
+        effects: ['Otorga al reino 1000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora de nivel 2.'],
         bonusIncome: '+2.000 Oro / día',
         strategicTip: 'Prioridad máxima al inicio de la Semana 2.'
-      },
-      {
-        level: 4,
-        name: 'Nivel IV: Capitolio Tiránico (Tyrant Capitol)',
-        nameEn: 'Tyrant Capitol',
-        cost: { gold: 10000, wood: 15, ore: 15 },
-        prerequisites: ['Nivel de Ciudad 15', 'Ciudadela Subterránea', 'Fortificaciones III (Castillo)'],
-        effects: ['Aumenta los ingresos a +4.000 de Oro por día (+2.000 netos).', 'Máxima potencia económica subterránea. (Límite: 1 Capitolio por jugador).'],
-        bonusIncome: '+4.000 Oro / día',
-        strategicTip: 'Erigir en la capital durante la Semana 3.'
       }
     ]
   },
