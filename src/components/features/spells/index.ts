@@ -1,0 +1,2 @@
+// Spells feature components
+export {};

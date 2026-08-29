@@ -1,0 +1,2 @@
+// Heroes feature components
+export {};
