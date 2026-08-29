@@ -1,2 +1,3 @@
-// Heroes feature components
-export {};
+export * from './HeroGuideCard';
+export * from './HeroDetailModal';
+export * from './HeroGuideView';
