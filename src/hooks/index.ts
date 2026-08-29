@@ -1,2 +1,2 @@
-// Shared custom hooks barrel
 export * from '../utils/useStickyState';
+export { useApp, useTheme } from '../context/AppContext';

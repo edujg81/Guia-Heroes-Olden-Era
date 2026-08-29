@@ -1,4 +1,5 @@
 import { BuildStep, UnitInfo, DungeonHero, TacticalScenario, FactionLaw, FactionLawPreset } from '../types';
+import { getHeroesByFactionKey } from './heroesData';
 
 // Mazmorra (Dungeon)
 import { FULL_56_DAY_BUILD_STEPS, DUNGEON_UNITS, DUNGEON_HEROES, TACTICAL_SCENARIOS } from './dungeonData';
@@ -615,21 +616,7 @@ export function getUnitsForFaction(faction: FactionId | string): UnitInfo[] {
 }
 
 export function getHeroesForFaction(faction: FactionId | string): DungeonHero[] {
-  switch (faction) {
-    case 'Templo':
-      return TEMPLE_HEROES;
-    case 'Arboleda':
-      return ARBOLEDA_HEROES;
-    case 'Necrópolis':
-      return NECROPOLIS_HEROES;
-    case 'Enjambre':
-      return ENJAMBRE_HEROES;
-    case 'Cisma':
-      return CISMA_HEROES;
-    case 'Mazmorra':
-    default:
-      return DUNGEON_HEROES;
-  }
+  return getHeroesByFactionKey(faction);
 }
 
 export function getCombatTacticsForFaction(faction: FactionId | string): TacticalScenario[] {
