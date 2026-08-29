@@ -236,7 +236,7 @@ export const TownStructuresBrowser: React.FC<TownStructuresBrowserProps> = ({
               Estructuras, Árbol de Mejoras & Costes (<span className={theme.textAccent}>{selectedFaction}</span>)
             </h2>
             <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-3xl">
-              Explora los costes exactos, prerrequisitos estrictos y opciones de mejora disponibles para la facción <strong className={theme.textAccent}>{selectedFaction}</strong>: desde los 4 niveles del palacio cívico y los 3 niveles de fortificaciones, hasta las moradas de criaturas Tier 1 a 7 con sus ramas dobles de evolución.
+              Explora los costes exactos, prerrequisitos estrictos y opciones de mejora disponibles para la facción <strong className={theme.textAccent}>{selectedFaction}</strong>: desde los 3 niveles del palacio cívico y los 3 niveles de fortificaciones, hasta las moradas de criaturas Tier 1 a 7 con sus ramas dobles de evolución.
             </p>
           </div>
 

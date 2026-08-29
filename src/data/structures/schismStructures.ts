@@ -2,123 +2,114 @@ import { TownStructure } from '../../types';
 
 export const SCHISM_STRUCTURES: TownStructure[] = [
   // =========================================================================
-  // CENTRO CÍVICO & PALACIO DE GOBIERNO (REMANENTE ABISAL) - MULTI-NIVEL
+  // CENTRO CÍVICO & PALACIO DE GOBIERNO (REMANENTE ABISAL) - MULTI-NIVEL (1 a 3)
   // =========================================================================
   {
     id: 'schism-abyssal-remnant',
-    name: 'Remanente Abisal / Aguja del Vacío (Abyssal Remnant)',
+    name: 'Remanente Abisal',
     nameEn: 'Abyssal Remnant',
     category: 'Cívica y Economía',
     faction: 'Cisma',
-    cost: { gold: 2500, wood: 5, ore: 5 },
-    prerequisites: ['Taberna (Tavern)'],
+    cost: { gold: 5000 },
+    prerequisites: [],
     effects: [
       'Núcleo de energía de la falla interdimensional y trono de los señores cósmicos.',
-      'Genera oro diario mediante la transmutación de materia caótica.',
-      'Se mejora a lo largo de 4 niveles cívicos (Aguja del Vacío -> Remanente Abisal -> Ciudadela del Caos -> Capitolio del Abismo).'
+      'Otorga al reino oro, puntos de ley y puntos de astrología al día. Aumenta el límite de héroes (si lo permite el escenario)',
+      'Se mejora a lo largo de 3 niveles cívicos (Remanente Abisal -> Remanente Abisal II -> Remanente Abisal III).'
     ],
-    strategicTip: 'Mejora a Nivel II (Remanente Abisal) en el Día 2 para acelerar los ritos de invocación cósmica.',
+    strategicTip: 'Mejora a Nivel II (Remanente Abisal II) en el Día 2 para acelerar los ritos de invocación cósmica.',
     timingRecommendation: 'Día 2-4 (Nivel II) / Semana 2 (Nivel III).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Aguja del Vacío (Village Hall)',
-        nameEn: 'Void Spire',
-        cost: { gold: 0 },
+        name: 'Nivel I: Remanente Abisal',
+        nameEn: 'Abyssal Remnant',
+        cost: { gold: 5000 },
         prerequisites: [],
-        effects: ['Estructura civil base predeterminada.', 'Genera +500 de Oro por día.', 'Permite construir 1 edificio por turno.'],
-        bonusIncome: '+500 Oro / día',
+        effects: ['Otorga al reino 500 de oro, puntos de ley y puntos de astrología al día.', '+1 al límite de héroes.'],
+        bonusIncome: '+500 Oro, Puntos de ley, Puntos de astrología / día',
         strategicTip: 'Asentamiento inicial del Cisma.'
       },
       {
         level: 2,
-        name: 'Nivel II: Remanente Abisal (Town Hall)',
-        nameEn: 'Abyssal Remnant Town Hall',
+        name: 'Nivel II: Remanente Abisal II',
+        nameEn: 'Abyssal Remnant II',
         cost: { gold: 2500, wood: 5, ore: 5 },
-        prerequisites: ['Taberna (Tavern)'],
-        effects: ['Aumenta los ingresos a +1.000 de Oro por día (+500 netos).', 'Desbloquea moradas intermedias de aberraciones cósmicas.'],
-        bonusIncome: '+1.000 Oro / día',
+        prerequisites: ['Remanente Abisal'],
+        effects: ['Otorga al reino 750 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora económica de nivel 1.'],
+        bonusIncome: '+750 Oro, Puntos de ley, Puntos de astrología / día',
         strategicTip: 'Construir el Día 2 o 3 para financiar los ritos.'
       },
       {
         level: 3,
-        name: 'Nivel III: Ciudadela del Caos (City Hall)',
-        nameEn: 'Chaos City Hall',
+        name: 'Nivel III: Remanente Abisal III',
+        nameEn: 'Abyssal Remnant III',
         cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Nivel de Ciudad 9', 'Remanente Abisal', 'Mercado', 'Cofradía de Magos Nivel 1', 'Fortificaciones I (Fuerte)'],
-        effects: ['Aumenta los ingresos a +2.000 de Oro por día (+1.000 netos).', 'Sustenta la invocación de Atormentadores y Señores del Abismo.'],
-        bonusIncome: '+2.000 Oro / día',
+        prerequisites: ['Remanente Abisal II'],
+        effects: ['Otorga al reino 1000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora de nivel 2.'],
+        bonusIncome: '+1000 Oro, Puntos de ley, Puntos de astrología / día',
         strategicTip: 'Prioridad al inicio de la Semana 2.'
-      },
-      {
-        level: 4,
-        name: 'Nivel IV: Capitolio del Abismo (Abyss Capitol)',
-        nameEn: 'Abyss Capitol',
-        cost: { gold: 10000, wood: 15, ore: 15 },
-        prerequisites: ['Nivel de Ciudad 15', 'Ciudadela del Caos', 'Fortificaciones III (Castillo)'],
-        effects: ['Aumenta los ingresos a +4.000 de Oro por día (+2.000 netos).', 'Máxima potencia económica del Cisma. (Límite: 1 Capitolio por jugador).'],
-        bonusIncome: '+4.000 Oro / día',
-        strategicTip: 'Erigir en la capital durante la Semana 3.'
       }
     ]
   },
 
   // =========================================================================
-  // FORTIFICACIONES (FUERTE / CIUDADELA MILITAR / CASTILLO) - MULTI-NIVEL
+  // FORTIFICACIONES (NIVELES I, II y III)
   // =========================================================================
   {
     id: 'schism-fortifications',
-    name: 'Fortificaciones del Cisma (Fortifications)',
+    name: 'Fortificaciones',
     nameEn: 'Fortifications',
     category: 'Fortificaciones',
     faction: 'Cisma',
-    cost: { gold: 1500, wood: 10, ore: 10 },
+    cost: { gold: 2500, wood: 0, ore: 5 },
     prerequisites: [],
     effects: [
-      'Murallas de obsidiana deformada por la gravedad con foso de energía abisal pura.',
-      'Habilita la construcción de todas las moradas de criaturas.',
-      'Se mejora a Ciudadela Militar (+50% crecimiento de tropas y torre de plasma caótico) y Castillo (+100% crecimiento y 3 torres de distorsión cósmica).'
+      'Proporciona una muralla durante los asedios.',
+      'Permite al constructor elegir mejoras defensivas.',
+      'Al mejorarse aumenta el crecimiento de tropas.'
     ],
-    strategicTip: 'Mejorar a Ciudadela en el Día 7 para multiplicar la invocación de tropas cósmicas.',
-    timingRecommendation: 'Fuerte (Día 1) / Ciudadela (Día 7) / Castillo (Semana 2).',
+    strategicTip: 'Mejorar a Fortificaciones II en el Día 7 para multiplicar la invocación de tropas cósmicas.',
+    timingRecommendation: 'Fortificaciones (Día 1) / Fortificaciones II (Día 7) / Fortificaciones III (Semana 2).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Fuerte del Vacío (Fort)',
+        name: 'Nivel I: Fortificaciones',
         nameEn: 'Void Fort',
-        cost: { gold: 1500, wood: 10, ore: 10 },
+        cost: { gold: 2500, wood: 0, ore: 5 },
         prerequisites: [],
-        effects: ['Otorga murallas defensivas de obsidiana.', 'Habilita el mapa de asedio con foso de energía abisal.', 'Requisito para construir todas las moradas de criaturas.'],
-        defenseBonus: 'Murallas de Asedio + Foso de Energía básica',
-        growthBonus: 'Habilita producción base de criaturas',
+        effects: ['Proporciona una muralla durante los asedios.', 'Permite al constructor elegir una mejora defensiva de nivel 1.'],
+        defenseBonus: 'Refuerzo de murallas, trampas o más salidas',
+        growthBonus: '',
         strategicTip: 'Construir el Día 1 si no se inicia con él.'
       },
       {
         level: 2,
-        name: 'Nivel II: Ciudadela de la Falla (Citadel)',
+        name: 'Nivel II: Fortificaciones II',
         nameEn: 'Rift Citadel',
-        cost: { gold: 3000, ore: 5 },
-        prerequisites: ['Nivel I: Fuerte del Vacío (Fort)'],
+        cost: { gold: 2500, ore: 10 },
+        prerequisites: ['Nivel I: Fortificaciones'],
         effects: [
-          'Añade una Torre Central de Proyección de Plasma Abisal que dispara automáticamente a los invasores.',
+          'Añade dos torres a las almenas que disparan a los atacantes durante los asedios.',
+          'Permite al constructor elegir una mejora defensiva de nivel 2.',
           'Aumenta la producción semanal de todas las criaturas en un +50% adicional.'
         ],
-        defenseBonus: 'Torre Central de Asedio con Plasma Caótico',
+        defenseBonus: '2 Torres Defensivas',
         growthBonus: '+50% Crecimiento semanal de tropas',
         strategicTip: 'Construir el Día 7 de la Semana 1.'
       },
       {
         level: 3,
-        name: 'Nivel III: Castillo de la Entropía (Castle)',
+        name: 'Nivel III: Fortificaciones III',
         nameEn: 'Entropy Castle',
-        cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Nivel II: Ciudadela de la Falla (Citadel)', 'Nivel de Ciudad 12'],
+        cost: { gold: 5000, wood: 0, ore: 15 },
+        prerequisites: ['Nivel II: Fortificaciones II'],
         effects: [
-          'Añade 2 Torres Laterales de Rayos Entrópicos suplementarias.',
-          'Refuerza las murallas con campos gravitatorios y llena el foso con fuego de antimateria.',
+          'Añade una gran torre más a las almenas que dispara a los atacantes durante los asedios y se asienta junto a la muralla.',
+          'Permite al constructor elegir una mejora defensiva de nivel 3.',
           'Duplica el crecimiento de todas las criaturas de la ciudad (+100% total).'
         ],
-        defenseBonus: '3 Torres Defensivas + Murallas de Obsidiana + Foso de Antimateria',
+        defenseBonus: '1 Torre Defensiva',
         growthBonus: '+100% Crecimiento semanal de tropas (Duplica producción)',
         strategicTip: 'Esencial para invocar hordas de horrores de pesadilla.'
       }

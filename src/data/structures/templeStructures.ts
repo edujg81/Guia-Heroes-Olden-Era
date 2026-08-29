@@ -2,123 +2,114 @@ import { TownStructure } from '../../types';
 
 export const TEMPLE_STRUCTURES: TownStructure[] = [
   // =========================================================================
-  // CENTRO CÍVICO & PALACIO DE GOBIERNO (TEMPLO SOLAR) - MULTI-NIVEL
+  // CENTRO CÍVICO & PALACIO DE GOBIERNO (TEMPLO SOLAR) - MULTI-NIVEL (1 a 3)
   // =========================================================================
   {
     id: 'temple-solar-temple',
-    name: 'Templo Solar / Palacio Cívico (Solar Temple)',
+    name: 'Templo Solar',
     nameEn: 'Solar Temple',
     category: 'Cívica y Economía',
     faction: 'Templo',
-    cost: { gold: 2500, wood: 5, ore: 5 },
-    prerequisites: ['Taberna (Tavern)'],
+    cost: { gold: 5000 },
+    prerequisites: [],
     effects: [
       'Sede principal de gobierno y centro ceremonial de la fe de la Luz.',
-      'Genera oro diario para financiar ejércitos y expansiones.',
-      'Se puede mejorar a lo largo de 4 niveles cívicos (Aldea -> Ayuntamiento -> Ciudadela -> Capitolio).'
+      'Otorga al reino oro, puntos de ley y puntos de astrología al día. Aumenta el límite de héroes (si lo permite el escenario)',
+      'Se mejora a lo largo de 3 niveles cívicos (Templo Solar -> Templo Solar II -> Templo Solar III).'
     ],
-    strategicTip: 'Mejora a Nivel II (Ayuntamiento Solar) en el Día 2 para acelerar el flujo de oro hacia las moradas.',
+    strategicTip: 'Mejora a Nivel II (Templo Solar II) en el Día 2 para acelerar el flujo de oro hacia las moradas.',
     timingRecommendation: 'Día 2-4 (Nivel II) / Semana 2 (Nivel III).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Aldea Solar (Village Hall)',
-        nameEn: 'Solar Village Hall',
-        cost: { gold: 0 },
+        name: 'Nivel I: Templo Solar',
+        nameEn: 'Solar Temple',
+        cost: { gold: 5000 },
         prerequisites: [],
-        effects: ['Estructura civil base predeterminada.', 'Genera +500 de Oro por día.', 'Permite construir 1 edificio por turno.'],
-        bonusIncome: '+500 Oro / día',
+        effects: ['Otorga al reino 500 de oro, puntos de ley y puntos de astrología al día.', '+1 al límite de héroes.'],
+        bonusIncome: '+500 Oro, Puntos de ley, Puntos de astrología / día',
         strategicTip: 'Asentamiento inicial básico.'
       },
       {
         level: 2,
-        name: 'Nivel II: Ayuntamiento Solar (Town Hall)',
-        nameEn: 'Solar Town Hall',
+        name: 'Nivel II: Templo Solar II',
+        nameEn: 'Solar Temple II',
         cost: { gold: 2500, wood: 5, ore: 5 },
-        prerequisites: ['Taberna (Tavern)'],
-        effects: ['Aumenta los ingresos a +1.000 de Oro por día (+500 netos).', 'Desbloquea moradas de tropas de Tier intermedio.'],
-        bonusIncome: '+1.000 Oro / día',
+        prerequisites: ['Templo Solar'],
+        effects: ['Otorga al reino 750 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora económica de nivel 1.'],
+        bonusIncome: '+750 Oro, Puntos de ley, Puntos de astrología / día',
         strategicTip: 'Construir el Día 2 o 3 para estabilizar las finanzas.'
       },
       {
         level: 3,
-        name: 'Nivel III: Ciudadela Solar (City Hall)',
-        nameEn: 'Solar City Hall',
+        name: 'Nivel III: Templo Solar III',
+        nameEn: 'Solar Temple III',
         cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Nivel de Ciudad 9', 'Ayuntamiento Solar', 'Mercado', 'Cofradía de Magos Nivel 1', 'Fortificaciones I (Fuerte)'],
-        effects: ['Aumenta los ingresos a +2.000 de Oro por día (+1.000 netos).', 'Consolida la renta necesaria para sostener tropas de Tier 5, 6 y 7.'],
-        bonusIncome: '+2.000 Oro / día',
+        prerequisites: ['Templo Solar II'],
+        effects: ['Otorga al reino 1000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora de nivel 2.'],
+        bonusIncome: '+1000 Oro, Puntos de ley, Puntos de astrología / día',
         strategicTip: 'Prioridad máxima al inicio de la Semana 2.'
-      },
-      {
-        level: 4,
-        name: 'Nivel IV: Capitolio Solar (Solar Capitol)',
-        nameEn: 'Solar Capitol',
-        cost: { gold: 10000, wood: 15, ore: 15 },
-        prerequisites: ['Nivel de Ciudad 15', 'Ciudadela Solar', 'Fortificaciones III (Castillo)'],
-        effects: ['Aumenta los ingresos a +4.000 de Oro por día (+2.000 netos).', 'Máxima potencia económica del reino. (Límite: 1 Capitolio por jugador).'],
-        bonusIncome: '+4.000 Oro / día',
-        strategicTip: 'Erigir en la capital durante la Semana 3 para reclutar ángeles sin descanso.'
       }
     ]
   },
 
   // =========================================================================
-  // FORTIFICACIONES (FUERTE / CIUDADELA MILITAR / CASTILLO) - MULTI-NIVEL
+  // FORTIFICACIONES (NIVELES I, II y III)
   // =========================================================================
   {
     id: 'temple-fortifications',
-    name: 'Fortificaciones del Templo (Fortifications)',
+    name: 'Fortificaciones',
     nameEn: 'Fortifications',
     category: 'Fortificaciones',
     faction: 'Templo',
-    cost: { gold: 1500, wood: 10, ore: 10 },
+    cost: { gold: 2500, wood: 0, ore: 5 },
     prerequisites: [],
     effects: [
-      'Sistema de defensa amurallado con murallas bendecidas y torres de ballesteros.',
-      'Habilita la construcción de todas las moradas de criaturas.',
-      'Se mejora a Ciudadela Militar (+50% crecimiento de tropas y catapulta) y Castillo (+100% crecimiento y 3 torres defensivas).'
+      'Proporciona una muralla durante los asedios.',
+      'Permite al constructor elegir mejoras defensivas.',
+      'Al mejorarse aumenta el crecimiento de tropas.'
     ],
-    strategicTip: 'Mejorar a Ciudadela en el Día 7 de la Semana 1 para aumentar la producción de tropas del primer reset semanal.',
-    timingRecommendation: 'Fuerte (Día 1) / Ciudadela (Día 7) / Castillo (Semana 2).',
+    strategicTip: 'Mejorar a Fortificaciones II en el Día 7 de la Semana 1 para aumentar la producción de tropas del primer reset semanal.',
+    timingRecommendation: 'Fortificaciones (Día 1) / Fortificaciones II (Día 7) / Fortificaciones III (Semana 2).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Fuerte del Templo (Fort)',
+        name: 'Nivel I: Fortificaciones',
         nameEn: 'Temple Fort',
-        cost: { gold: 1500, wood: 10, ore: 10 },
+        cost: { gold: 2500, wood: 0, ore: 5 },
         prerequisites: [],
-        effects: ['Otorga murallas defensivas de piedra.', 'Habilita el mapa de asedio con foso defensivo.', 'Requisito para construir todas las moradas de criaturas.'],
-        defenseBonus: 'Murallas de Asedio + Foso básico',
-        growthBonus: 'Habilita producción base de criaturas',
+        effects: ['Proporciona una muralla durante los asedios.', 'Permite al constructor elegir una mejora defensiva de nivel 1.'],
+        defenseBonus: 'Refuerzo de murallas, trampas o más salidas',
+        growthBonus: '',
         strategicTip: 'Construir el Día 1 si no se inicia con él.'
       },
       {
         level: 2,
-        name: 'Nivel II: Ciudadela Militar (Citadel)',
+        name: 'Nivel II: Fortificaciones II',
         nameEn: 'Temple Citadel',
-        cost: { gold: 3000, ore: 5 },
-        prerequisites: ['Nivel I: Fuerte del Templo (Fort)'],
+        cost: { gold: 2500, ore: 10 },
+        prerequisites: ['Nivel I: Fortificaciones'],
         effects: [
-          'Añade una Torre Central de Catapulta con artillería pesada que dispara automáticamente cada ronda.',
+          'Añade dos torres a las almenas que disparan a los atacantes durante los asedios.',
+          'Permite al constructor elegir una mejora defensiva de nivel 2.',
           'Aumenta la producción semanal de todas las tropas de la ciudad en un +50% adicional.'
         ],
-        defenseBonus: 'Torre Central de Asedio (disparo automático pesado)',
+        defenseBonus: '2 Torres Defensivas',
         growthBonus: '+50% Crecimiento semanal de tropas',
         strategicTip: 'Construir el Día 7 de la Semana 1 para acumular un 50% más de tropas el Día 1 de la Semana 2.'
       },
       {
         level: 3,
-        name: 'Nivel III: Castillo Sagrado (Castle)',
+        name: 'Nivel III: Fortificaciones III',
         nameEn: 'Holy Castle',
-        cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Nivel II: Ciudadela Militar (Citadel)', 'Nivel de Ciudad 12'],
+        cost: { gold: 5000, wood: 0, ore: 15 },
+        prerequisites: ['Nivel II: Fortificaciones II'],
         effects: [
-          'Añade 2 Torres Laterales de Ballesteros suplementarias.',
-          'Refuerza las murallas con más puntos de vida y ensancha el foso con agua bendita.',
+          'Añade una gran torre más a las almenas que dispara a los atacantes durante los asedios y se asienta junto a la muralla.',
+          'Permite al constructor elegir una mejora defensiva de nivel 3.',
           'Duplica el crecimiento de todas las criaturas de la ciudad (+100% total).'
         ],
-        defenseBonus: '3 Torres Defensivas + Murallas Fortificadas + Foso Bendito',
+        defenseBonus: '1 Torre Defensiva',
         growthBonus: '+100% Crecimiento semanal de tropas (Duplica producción)',
         strategicTip: 'Esencial en Semana 2 o 3 para mantener superioridad numérica en masa de campeones y ángeles.'
       }

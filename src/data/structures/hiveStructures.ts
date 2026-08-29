@@ -2,123 +2,114 @@ import { TownStructure } from '../../types';
 
 export const HIVE_STRUCTURES: TownStructure[] = [
   // =========================================================================
-  // CENTRO CÍVICO & PALACIO DE GOBIERNO (CORAZÓN DEL APIARIO) - MULTI-NIVEL
+  // CENTRO CÍVICO & PALACIO DE GOBIERNO (CORAZÓN DEL APIARIO) - MULTI-NIVEL (1 a 3)
   // =========================================================================
   {
     id: 'hive-apiarys-heart',
-    name: 'Corazón del Apiario / Núcleo de Cría (Apiary\'s Heart)',
+    name: 'Corazón del Apiario',
     nameEn: 'Apiary\'s Heart',
     category: 'Cívica y Economía',
     faction: 'Enjambre',
-    cost: { gold: 2500, wood: 5, ore: 5 },
-    prerequisites: ['Taberna (Tavern)'],
+    cost: { gold: 5000 },
+    prerequisites: [],
     effects: [
       'Cámara central de la mente enjambrada y depósito de miel biológica y recursos.',
-      'Genera oro diario mediante la labor incesante de obreras y larvas.',
-      'Se mejora a lo largo de 4 niveles cívicos (Núcleo de Cría -> Corazón del Apiario -> Ciudadela de Quitina -> Capitolio de la Horda).'
+      'Otorga al reino oro, puntos de ley y puntos de astrología al día. Aumenta el límite de héroes (si lo permite el escenario)',
+      'Se mejora a lo largo de 3 niveles cívicos (Corazón del Apiario -> Corazón del Apiario II -> Corazón del Apiario III).'
     ],
-    strategicTip: 'Mejora a Nivel II (Corazón del Apiario) en el Día 2 para acelerar la eclosión de zánganos y larvas.',
+    strategicTip: 'Mejora a Nivel II (Corazón del Apiario II) en el Día 2 para acelerar la eclosión de zánganos y larvas.',
     timingRecommendation: 'Día 2-4 (Nivel II) / Semana 2 (Nivel III).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Núcleo de Cría (Village Hall)',
-        nameEn: 'Brood Core',
-        cost: { gold: 0 },
+        name: 'Nivel I: Corazón del Apiario',
+        nameEn: 'Apiary\'s Heart',
+        cost: { gold: 5000 },
         prerequisites: [],
-        effects: ['Estructura civil base predeterminada.', 'Genera +500 de Oro por día.', 'Permite construir 1 edificio por turno.'],
-        bonusIncome: '+500 Oro / día',
+        effects: ['Otorga al reino 500 de oro, puntos de ley y puntos de astrología al día.', '+1 al límite de héroes.'],
+        bonusIncome: '+500 Oro, Puntos de ley, Puntos de astrología / día',
         strategicTip: 'Asentamiento inicial del enjambre.'
       },
       {
         level: 2,
-        name: 'Nivel II: Corazón del Apiario (Town Hall)',
-        nameEn: 'Apiary\'s Heart Town Hall',
+        name: 'Nivel II: Corazón del Apiario II',
+        nameEn: 'Apiary\'s Heart II',
         cost: { gold: 2500, wood: 5, ore: 5 },
-        prerequisites: ['Taberna (Tavern)'],
-        effects: ['Aumenta los ingresos a +1.000 de Oro por día (+500 netos).', 'Desbloquea moradas intermedias quitinosas.'],
-        bonusIncome: '+1.000 Oro / día',
+        prerequisites: ['Corazón del Apiario'],
+        effects: ['Otorga al reino 750 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora económica de nivel 1.'],
+        bonusIncome: '+750 Oro, Puntos de ley, Puntos de astrología / día',
         strategicTip: 'Construir el Día 2 o 3 para expandir la colonia.'
       },
       {
         level: 3,
-        name: 'Nivel III: Ciudadela de Quitina (City Hall)',
-        nameEn: 'Chitin City Hall',
+        name: 'Nivel III: Corazón del Apiario III',
+        nameEn: 'Apiary\'s Heart III',
         cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Nivel de Ciudad 9', 'Corazón del Apiario', 'Mercado', 'Cofradía de Magos Nivel 1', 'Fortificaciones I (Fuerte)'],
-        effects: ['Aumenta los ingresos a +2.000 de Oro por día (+1.000 netos).', 'Sustenta la masa de mantis, escorpiones y soberanas.'],
-        bonusIncome: '+2.000 Oro / día',
+        prerequisites: ['Corazón del Apiario II'],
+        effects: ['Otorga al reino 1000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora de nivel 2.'],
+        bonusIncome: '+1000 Oro, Puntos de ley, Puntos de astrología / día',
         strategicTip: 'Prioridad al inicio de la Semana 2.'
-      },
-      {
-        level: 4,
-        name: 'Nivel IV: Capitolio de la Horda (Horde Capitol)',
-        nameEn: 'Horde Capitol',
-        cost: { gold: 10000, wood: 15, ore: 15 },
-        prerequisites: ['Nivel de Ciudad 15', 'Ciudadela de Quitina', 'Fortificaciones III (Castillo)'],
-        effects: ['Aumenta los ingresos a +4.000 de Oro por día (+2.000 netos).', 'Máxima potencia económica del enjambre. (Límite: 1 Capitolio por jugador).'],
-        bonusIncome: '+4.000 Oro / día',
-        strategicTip: 'Erigir en la capital durante la Semana 3.'
       }
     ]
   },
 
   // =========================================================================
-  // FORTIFICACIONES (FUERTE / CIUDADELA MILITAR / CASTILLO) - MULTI-NIVEL
+  // FORTIFICACIONES (NIVELES I, II y III)
   // =========================================================================
   {
     id: 'hive-fortifications',
-    name: 'Fortificaciones del Enjambre (Fortifications)',
+    name: 'Fortificaciones',
     nameEn: 'Fortifications',
     category: 'Fortificaciones',
     faction: 'Enjambre',
-    cost: { gold: 1500, wood: 10, ore: 10 },
+    cost: { gold: 2500, wood: 0, ore: 5 },
     prerequisites: [],
     effects: [
-      'Murallas de resina orgánica endurecida y foso de ácido cáustico.',
-      'Habilita la construcción de todas las moradas de criaturas.',
-      'Se mejora a Ciudadela Militar (+50% crecimiento de tropas y esputo de ácido defensivo) y Castillo (+100% crecimiento y 3 torres de aguijones corrosivos).'
+      'Proporciona una muralla durante los asedios.',
+      'Permite al constructor elegir mejoras defensivas.',
+      'Al mejorarse aumenta el crecimiento de tropas.'
     ],
-    strategicTip: 'Mejorar a Ciudadela en el Día 7 para multiplicar la eclosión de zánganos e insectos.',
-    timingRecommendation: 'Fuerte (Día 1) / Ciudadela (Día 7) / Castillo (Semana 2).',
+    strategicTip: 'Mejorar a Fortificaciones II en el Día 7 para multiplicar la eclosión de zánganos e insectos.',
+    timingRecommendation: 'Fortificaciones (Día 1) / Fortificaciones II (Día 7) / Fortificaciones III (Semana 2).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Fuerte Quitináceo (Fort)',
+        name: 'Nivel I: Fortificaciones',
         nameEn: 'Chitin Fort',
-        cost: { gold: 1500, wood: 10, ore: 10 },
+        cost: { gold: 2500, wood: 0, ore: 5 },
         prerequisites: [],
-        effects: ['Otorga murallas defensivas de secreción quitinosa.', 'Habilita el mapa de asedio con foso corrosivo.', 'Requisito para construir todas las moradas de criaturas.'],
-        defenseBonus: 'Murallas de Asedio + Foso de Ácido básico',
-        growthBonus: 'Habilita producción base de criaturas',
+        effects: ['Proporciona una muralla durante los asedios.', 'Permite al constructor elegir una mejora defensiva de nivel 1.'],
+        defenseBonus: 'Refuerzo de murallas, trampas o más salidas',
+        growthBonus: '',
         strategicTip: 'Construir el Día 1 si no se inicia con él.'
       },
       {
         level: 2,
-        name: 'Nivel II: Ciudadela del Nido (Citadel)',
+        name: 'Nivel II: Fortificaciones II',
         nameEn: 'Hive Citadel',
-        cost: { gold: 3000, ore: 5 },
-        prerequisites: ['Nivel I: Fuerte Quitináceo (Fort)'],
+        cost: { gold: 2500, ore: 10 },
+        prerequisites: ['Nivel I: Fortificaciones'],
         effects: [
-          'Añade una Torre Central de Esputo de Ácido que dispara automáticamente a los invasores en cada ronda.',
+          'Añade dos torres a las almenas que disparan a los atacantes durante los asedios.',
+          'Permite al constructor elegir una mejora defensiva de nivel 2.',
           'Aumenta la producción semanal de todas las criaturas en un +50% adicional.'
         ],
-        defenseBonus: 'Torre Central de Asedio Cáustica',
+        defenseBonus: '2 Torres Defensivas',
         growthBonus: '+50% Crecimiento semanal de tropas',
         strategicTip: 'Construir el Día 7 de la Semana 1.'
       },
       {
         level: 3,
-        name: 'Nivel III: Castillo del Hormiguero (Castle)',
+        name: 'Nivel III: Fortificaciones III',
         nameEn: 'Horde Castle',
-        cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Nivel II: Ciudadela del Nido (Citadel)', 'Nivel de Ciudad 12'],
+        cost: { gold: 5000, wood: 0, ore: 15 },
+        prerequisites: ['Nivel II: Fortificaciones II'],
         effects: [
-          'Añade 2 Torres Laterales de Aguijoneras suplementarias.',
-          'Refuerza las murallas con quitina blindada y ensancha el foso con ácido letal.',
+          'Añade una gran torre más a las almenas que dispara a los atacantes durante los asedios y se asienta junto a la muralla.',
+          'Permite al constructor elegir una mejora defensiva de nivel 3.',
           'Duplica el crecimiento de todas las criaturas de la ciudad (+100% total).'
         ],
-        defenseBonus: '3 Torres Defensivas + Murallas de Quitina Blindada + Foso Letal',
+        defenseBonus: '1 Torre Defensiva',
         growthBonus: '+100% Crecimiento semanal de tropas (Duplica producción)',
         strategicTip: 'Multiplica la masa de criaturas más grande del juego.'
       }

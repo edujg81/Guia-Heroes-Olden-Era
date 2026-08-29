@@ -2,123 +2,114 @@ import { TownStructure } from '../../types';
 
 export const NECROPOLIS_STRUCTURES: TownStructure[] = [
   // =========================================================================
-  // CENTRO CÍVICO & PALACIO DE GOBIERNO (ROSTRO ETERNO) - MULTI-NIVEL
+  // CENTRO CÍVICO & PALACIO DE GOBIERNO (ROSTRO ETERNO) - MULTI-NIVEL (1 a 3)
   // =========================================================================
   {
     id: 'necropolis-eternal-visage',
-    name: 'Rostro Eterno / Palacio Nigromántico (Eternal Visage)',
+    name: 'Rostro Eterno',
     nameEn: 'Eternal Visage',
     category: 'Cívica y Economía',
     faction: 'Necrópolis',
-    cost: { gold: 2500, wood: 5, ore: 5 },
-    prerequisites: ['Taberna (Tavern)'],
+    cost: { gold: 5000 },
+    prerequisites: [],
     effects: [
       'Sede principal de la corona no-muerta y centro de canalización nigromántica.',
-      'Genera oro diario para financiar el levantamiento de hordas esqueléticas y construcciones profanas.',
-      'Se mejora a lo largo de 4 niveles cívicos (Mausoleo de Ánimas -> Rostro Eterno -> Ciudadela de la Muerte -> Capitolio de las Sombras).'
+      'Otorga al reino oro, puntos de ley y puntos de astrología al día. Aumenta el límite de héroes (si lo permite el escenario)',
+      'Se mejora a lo largo de 3 niveles cívicos (Rostro Eterno -> Rostro Eterno II -> Rostro Eterno III).'
     ],
-    strategicTip: 'Mejora a Nivel II (Rostro Eterno) en el Día 2 para acumular oro para las moradas de nigromancia.',
+    strategicTip: 'Mejora a Nivel II (Rostro Eterno II) en el Día 2 para acumular oro para las moradas de nigromancia.',
     timingRecommendation: 'Día 2-4 (Nivel II) / Semana 2 (Nivel III).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Mausoleo de Ánimas (Village Hall)',
-        nameEn: 'Soul Mausoleum',
-        cost: { gold: 0 },
+        name: 'Nivel I: Rostro Eterno',
+        nameEn: 'Eternal Visage',
+        cost: { gold: 5000 },
         prerequisites: [],
-        effects: ['Estructura civil base predeterminada.', 'Genera +500 de Oro por día.', 'Permite construir 1 edificio por turno.'],
-        bonusIncome: '+500 Oro / día',
+        effects: ['Otorga al reino 500 de oro, puntos de ley y puntos de astrología al día.', '+1 al límite de héroes.'],
+        bonusIncome: '+500 Oro, Puntos de ley, Puntos de astrología / día',
         strategicTip: 'Asentamiento inicial básico.'
       },
       {
         level: 2,
-        name: 'Nivel II: Rostro Eterno (Town Hall)',
-        nameEn: 'Eternal Visage Town Hall',
+        name: 'Nivel II: Rostro Eterno II',
+        nameEn: 'Eternal Visage II',
         cost: { gold: 2500, wood: 5, ore: 5 },
-        prerequisites: ['Taberna (Tavern)'],
-        effects: ['Aumenta los ingresos a +1.000 de Oro por día (+500 netos).', 'Desbloquea moradas de tropas de Tier intermedio.'],
-        bonusIncome: '+1.000 Oro / día',
+        prerequisites: ['Rostro Eterno'],
+        effects: ['Otorga al reino 750 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora económica de nivel 1.'],
+        bonusIncome: '+750 Oro, Puntos de ley, Puntos de astrología / día',
         strategicTip: 'Construir el Día 2 o 3 para acelerar la compra de tropas.'
       },
       {
         level: 3,
-        name: 'Nivel III: Ciudadela de la Muerte (City Hall)',
-        nameEn: 'Necrotic City Hall',
+        name: 'Nivel III: Rostro Eterno III',
+        nameEn: 'Eternal Visage III',
         cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Nivel de Ciudad 9', 'Rostro Eterno', 'Mercado', 'Cofradía de Magos Nivel 1', 'Fortificaciones I (Fuerte)'],
-        effects: ['Aumenta los ingresos a +2.000 de Oro por día (+1.000 netos).', 'Consolida la renta para mantener Caballeros de la Muerte y Dragones de Hueso.'],
-        bonusIncome: '+2.000 Oro / día',
+        prerequisites: ['Rostro Eterno II'],
+        effects: ['Otorga al reino 1000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora de nivel 2.'],
+        bonusIncome: '+1000 Oro, Puntos de ley, Puntos de astrología / día',
         strategicTip: 'Prioridad al inicio de la Semana 2.'
-      },
-      {
-        level: 4,
-        name: 'Nivel IV: Capitolio de las Sombras (Shadow Capitol)',
-        nameEn: 'Shadow Capitol',
-        cost: { gold: 10000, wood: 15, ore: 15 },
-        prerequisites: ['Nivel de Ciudad 15', 'Ciudadela de la Muerte', 'Fortificaciones III (Castillo)'],
-        effects: ['Aumenta los ingresos a +4.000 de Oro por día (+2.000 netos).', 'Máxima potencia económica fúnebre. (Límite: 1 Capitolio por jugador).'],
-        bonusIncome: '+4.000 Oro / día',
-        strategicTip: 'Erigir en la capital durante la Semana 3.'
       }
     ]
   },
 
   // =========================================================================
-  // FORTIFICACIONES (FUERTE / CIUDADELA MILITAR / CASTILLO) - MULTI-NIVEL
+  // FORTIFICACIONES (NIVELES I, II y III)
   // =========================================================================
   {
     id: 'necropolis-fortifications',
-    name: 'Fortificaciones de la Necrópolis (Fortifications)',
+    name: 'Fortificaciones',
     nameEn: 'Fortifications',
     category: 'Fortificaciones',
     faction: 'Necrópolis',
-    cost: { gold: 1500, wood: 10, ore: 10 },
+    cost: { gold: 2500, wood: 0, ore: 5 },
     prerequisites: [],
     effects: [
-      'Murallas de hueso y piedra calavera con foso de miasma corrosivo.',
-      'Habilita la construcción de todas las moradas de criaturas.',
-      'Se mejora a Ciudadela Militar (+50% crecimiento de tropas y catapulta de hueso) y Castillo (+100% crecimiento y 3 torres de proyectiles espectrales).'
+      'Proporciona una muralla durante los asedios.',
+      'Permite al constructor elegir mejoras defensivas.',
+      'Al mejorarse aumenta el crecimiento de tropas.'
     ],
-    strategicTip: 'Mejorar a Ciudadela en el Día 7 para multiplicar la generación semanal de esqueletos y espectros.',
-    timingRecommendation: 'Fuerte (Día 1) / Ciudadela (Día 7) / Castillo (Semana 2).',
+    strategicTip: 'Mejorar a Fortificaciones II en el Día 7 para multiplicar la generación semanal de esqueletos y espectros.',
+    timingRecommendation: 'Fortificaciones (Día 1) / Fortificaciones II (Día 7) / Fortificaciones III (Semana 2).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Fuerte de Hueso (Fort)',
+        name: 'Nivel I: Fortificaciones',
         nameEn: 'Bone Fort',
-        cost: { gold: 1500, wood: 10, ore: 10 },
+        cost: { gold: 2500, wood: 0, ore: 5 },
         prerequisites: [],
-        effects: ['Otorga murallas defensivas con púas de hueso.', 'Habilita el mapa de asedio con foso de miasma.', 'Requisito para construir todas las moradas de criaturas.'],
-        defenseBonus: 'Murallas de Asedio + Foso de Miasma básico',
-        growthBonus: 'Habilita producción base de criaturas',
+        effects: ['Proporciona una muralla durante los asedios.', 'Permite al constructor elegir una mejora defensiva de nivel 1.'],
+        defenseBonus: 'Refuerzo de murallas, trampas o más salidas',
+        growthBonus: '',
         strategicTip: 'Construir el Día 1 si no se inicia con él.'
       },
       {
         level: 2,
-        name: 'Nivel II: Ciudadela Necrótica (Citadel)',
+        name: 'Nivel II: Fortificaciones II',
         nameEn: 'Necrotic Citadel',
-        cost: { gold: 3000, ore: 5 },
-        prerequisites: ['Nivel I: Fuerte de Hueso (Fort)'],
+        cost: { gold: 2500, ore: 10 },
+        prerequisites: ['Nivel I: Fortificaciones'],
         effects: [
-          'Añade una Torre Central de Catapulta con proyectiles de cráneos incendiarios que dispara automáticamente cada ronda.',
+          'Añade dos torres a las almenas que disparan a los atacantes durante los asedios.',
+          'Permite al constructor elegir una mejora defensiva de nivel 2.',
           'Aumenta la producción semanal de todas las tropas no-muertas en un +50% adicional.'
         ],
-        defenseBonus: 'Torre Central de Asedio Espectral',
+        defenseBonus: '2 Torres Defensivas',
         growthBonus: '+50% Crecimiento semanal de tropas',
         strategicTip: 'Construir el Día 7 de la Semana 1 para cosechar hordas el Día 8.'
       },
       {
         level: 3,
-        name: 'Nivel III: Castillo del Terror (Castle)',
+        name: 'Nivel III: Fortificaciones III',
         nameEn: 'Dread Castle',
-        cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Nivel II: Ciudadela Necrótica (Citadel)', 'Nivel de Ciudad 12'],
+        cost: { gold: 5000, wood: 0, ore: 15 },
+        prerequisites: ['Nivel II: Fortificaciones II'],
         effects: [
-          'Añade 2 Torres Laterales de Arqueros Esqueléticos suplementarias.',
-          'Refuerza las murallas con piedra profana y llena el foso con niebla venenosa.',
+          'Añade una gran torre más a las almenas que dispara a los atacantes durante los asedios y se asienta junto a la muralla.',
+          'Permite al constructor elegir una mejora defensiva de nivel 3.',
           'Duplica el crecimiento de todas las criaturas de la ciudad (+100% total).'
         ],
-        defenseBonus: '3 Torres Defensivas + Murallas Reforzadas + Foso Venenoso',
+        defenseBonus: '1 Torre Defensiva',
         growthBonus: '+100% Crecimiento semanal de tropas (Duplica producción)',
         strategicTip: 'Multiplica la horda no-muerta exponencialmente.'
       }

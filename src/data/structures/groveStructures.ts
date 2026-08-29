@@ -2,123 +2,114 @@ import { TownStructure } from '../../types';
 
 export const GROVE_STRUCTURES: TownStructure[] = [
   // =========================================================================
-  // CENTRO CÍVICO & PALACIO DE GOBIERNO (PALACIO DE LA ARBOLEDA) - MULTI-NIVEL
+  // CENTRO CÍVICO & PALACIO DE GOBIERNO (PALACIO DE LA ARBOLEDA) - MULTI-NIVEL (1 a 3)
   // =========================================================================
   {
     id: 'grove-grove-palace',
-    name: 'Palacio de la Arboleda / Claro Silvano (Grove Palace)',
+    name: 'Palacio de la Arboleda',
     nameEn: 'Grove Palace',
     category: 'Cívica y Economía',
     faction: 'Arboleda',
-    cost: { gold: 2500, wood: 5, ore: 5 },
-    prerequisites: ['Taberna (Tavern)'],
+    cost: { gold: 5000 },
+    prerequisites: [],
     effects: [
       'Sede señorial de los reyes élficos y guardianes del bosque.',
-      'Genera oro diario a partir de la armonía con la naturaleza.',
-      'Se mejora a lo largo de 4 niveles cívicos (Claro Silvano -> Palacio de la Arboleda -> Ciudadela de los Robles -> Capitolio de la Naturaleza).'
+      'Otorga al reino oro, puntos de ley y puntos de astrología al día. Aumenta el límite de héroes (si lo permite el escenario)',
+      'Se mejora a lo largo de 3 niveles cívicos (Palacio de la Arboleda -> Palacio de la Arboleda II -> Palacio de la Arboleda III).'
     ],
-    strategicTip: 'Mejora a Nivel II (Palacio de la Arboleda) en el Día 2 para acelerar el desarrollo hacia el Thunder Lair y Fénix.',
+    strategicTip: 'Mejora a Nivel II (Palacio de la Arboleda II) en el Día 2 para acelerar el desarrollo hacia el Thunder Lair y Fénix.',
     timingRecommendation: 'Día 2-4 (Nivel II) / Semana 2 (Nivel III).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Claro Silvano (Village Hall)',
-        nameEn: 'Sylvan Glade',
-        cost: { gold: 0 },
+        name: 'Nivel I: Palacio de la Arboleda',
+        nameEn: 'Grove Palace',
+        cost: { gold: 5000 },
         prerequisites: [],
-        effects: ['Estructura civil base predeterminada.', 'Genera +500 de Oro por día.', 'Permite construir 1 edificio por turno.'],
-        bonusIncome: '+500 Oro / día',
+        effects: ['Otorga al reino 500 de oro, puntos de ley y puntos de astrología al día.', '+1 al límite de héroes.'],
+        bonusIncome: '+500 Oro, Puntos de ley, Puntos de astrología / día',
         strategicTip: 'Asentamiento inicial básico.'
       },
       {
         level: 2,
-        name: 'Nivel II: Palacio de la Arboleda (Town Hall)',
-        nameEn: 'Grove Palace Town Hall',
+        name: 'Nivel II: Palacio de la Arboleda II',
+        nameEn: 'Grove Palace II',
         cost: { gold: 2500, wood: 5, ore: 5 },
-        prerequisites: ['Taberna (Tavern)'],
-        effects: ['Aumenta los ingresos a +1.000 de Oro por día (+500 netos).', 'Desbloquea moradas intermedias de la naturaleza.'],
-        bonusIncome: '+1.000 Oro / día',
+        prerequisites: ['Palacio de la Arboleda'],
+        effects: ['Otorga al reino 750 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora económica de nivel 1.'],
+        bonusIncome: '+750 Oro, Puntos de ley, Puntos de astrología / día',
         strategicTip: 'Construir el Día 2 o 3 para asegurar fondos.'
       },
       {
         level: 3,
-        name: 'Nivel III: Ciudadela de los Robles (City Hall)',
-        nameEn: 'Oak City Hall',
+        name: 'Nivel III: Palacio de la Arboleda III',
+        nameEn: 'Grove Palace III',
         cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Nivel de Ciudad 9', 'Palacio de la Arboleda', 'Mercado', 'Cofradía de Magos Nivel 1', 'Fortificaciones I (Fuerte)'],
-        effects: ['Aumenta los ingresos a +2.000 de Oro por día (+1.000 netos).', 'Financia el reclutamiento de Herbomantes, Águilas del Trueno y Fénix.'],
-        bonusIncome: '+2.000 Oro / día',
+        prerequisites: ['Palacio de la Arboleda II'],
+        effects: ['Otorga al reino 1000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora de nivel 2.'],
+        bonusIncome: '+1000 Oro, Puntos de ley, Puntos de astrología / día',
         strategicTip: 'Prioridad al inicio de la Semana 2.'
-      },
-      {
-        level: 4,
-        name: 'Nivel IV: Capitolio de la Naturaleza (Nature Capitol)',
-        nameEn: 'Nature Capitol',
-        cost: { gold: 10000, wood: 15, ore: 15 },
-        prerequisites: ['Nivel de Ciudad 15', 'Ciudadela de los Robles', 'Fortificaciones III (Castillo)'],
-        effects: ['Aumenta los ingresos a +4.000 de Oro por día (+2.000 netos).', 'Máxima potencia económica silvana. (Límite: 1 Capitolio por jugador).'],
-        bonusIncome: '+4.000 Oro / día',
-        strategicTip: 'Erigir en la capital durante la Semana 3.'
       }
     ]
   },
 
   // =========================================================================
-  // FORTIFICACIONES (FUERTE / CIUDADELA MILITAR / CASTILLO) - MULTI-NIVEL
+  // FORTIFICACIONES (NIVELES I, II y III)
   // =========================================================================
   {
     id: 'grove-fortifications',
-    name: 'Fortificaciones de la Arboleda (Fortifications)',
+    name: 'Fortificaciones',
     nameEn: 'Fortifications',
     category: 'Fortificaciones',
     faction: 'Arboleda',
-    cost: { gold: 1500, wood: 10, ore: 10 },
+    cost: { gold: 2500, wood: 0, ore: 5 },
     prerequisites: [],
     effects: [
-      'Murallas de madera de roble ancestral y zarzas espinosas con foso de agua cristalina.',
-      'Habilita la construcción de todas las moradas de criaturas.',
-      'Se mejora a Ciudadela Militar (+50% crecimiento de tropas y balista de madera) y Castillo (+100% crecimiento y 3 torres de arqueros silvanos).'
+      'Proporciona una muralla durante los asedios.',
+      'Permite al constructor elegir mejoras defensivas.',
+      'Al mejorarse aumenta el crecimiento de tropas.'
     ],
-    strategicTip: 'Mejorar a Ciudadela en el Día 7 para obtener 50% más de tropas en el primer reset semanal.',
-    timingRecommendation: 'Fuerte (Día 1) / Ciudadela (Día 7) / Castillo (Semana 2).',
+    strategicTip: 'Mejorar a Fortificaciones II en el Día 7 para obtener 50% más de tropas en el primer reset semanal.',
+    timingRecommendation: 'Fortificaciones (Día 1) / Fortificaciones II (Día 7) / Fortificaciones III (Semana 2).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Fuerte Silvano (Fort)',
+        name: 'Nivel I: Fortificaciones',
         nameEn: 'Sylvan Fort',
-        cost: { gold: 1500, wood: 10, ore: 10 },
+        cost: { gold: 2500, wood: 0, ore: 5 },
         prerequisites: [],
-        effects: ['Otorga murallas defensivas de madera y piedra.', 'Habilita el mapa de asedio con foso natural.', 'Requisito para construir todas las moradas de criaturas.'],
-        defenseBonus: 'Murallas de Asedio + Foso básico',
-        growthBonus: 'Habilita producción base de criaturas',
+        effects: ['Proporciona una muralla durante los asedios.', 'Permite al constructor elegir una mejora defensiva de nivel 1.'],
+        defenseBonus: 'Refuerzo de murallas, trampas o más salidas',
+        growthBonus: '',
         strategicTip: 'Construir el Día 1 si no se inicia con él.'
       },
       {
         level: 2,
-        name: 'Nivel II: Ciudadela Verde (Citadel)',
+        name: 'Nivel II: Fortificaciones II',
         nameEn: 'Green Citadel',
-        cost: { gold: 3000, ore: 5 },
-        prerequisites: ['Nivel I: Fuerte Silvano (Fort)'],
+        cost: { gold: 2500, ore: 10 },
+        prerequisites: ['Nivel I: Fortificaciones'],
         effects: [
-          'Añade una Torre Central de Balista con disparos de troncos perforantes cada ronda.',
+          'Añade dos torres a las almenas que disparan a los atacantes durante los asedios.',
+          'Permite al constructor elegir una mejora defensiva de nivel 2.',
           'Aumenta la producción semanal de todas las criaturas en un +50% adicional.'
         ],
-        defenseBonus: 'Torre Central de Asedio con Balista Pesada',
+        defenseBonus: '2 Torres Defensivas',
         growthBonus: '+50% Crecimiento semanal de tropas',
         strategicTip: 'Construir el Día 7 de la Semana 1.'
       },
       {
         level: 3,
-        name: 'Nivel III: Castillo Arbóreo (Castle)',
+        name: 'Nivel III: Fortificaciones III',
         nameEn: 'Arboreal Castle',
-        cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Nivel II: Ciudadela Verde (Citadel)', 'Nivel de Ciudad 12'],
+        cost: { gold: 5000, wood: 0, ore: 15 },
+        prerequisites: ['Nivel II: Fortificaciones II'],
         effects: [
-          'Añade 2 Torres Laterales de Arqueros Silvanos suplementarias.',
-          'Refuerza las murallas con raíces vivas regenerativas y zarzas venenosas en el foso.',
+          'Añade una gran torre más a las almenas que dispara a los atacantes durante los asedios y se asienta junto a la muralla.',
+          'Permite al constructor elegir una mejora defensiva de nivel 3.',
           'Duplica el crecimiento de todas las criaturas de la ciudad (+100% total).'
         ],
-        defenseBonus: '3 Torres Defensivas + Murallas de Raíces Vivas + Foso de Espinas',
+        defenseBonus: '1 Torre Defensiva',
         growthBonus: '+100% Crecimiento semanal de tropas (Duplica producción)',
         strategicTip: 'Duplica el reclutamiento de Fénix y Águilas del Trueno.'
       }
