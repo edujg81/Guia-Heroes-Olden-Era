@@ -27,7 +27,12 @@ export const OfficialSkillsBrowser: React.FC<OfficialSkillsBrowserProps> = ({
         skill.subskills.expert.some((s) => s.name.toLowerCase().includes(searchTerm.toLowerCase()) || s.effect.toLowerCase().includes(searchTerm.toLowerCase()));
 
       const matchesCategory = selectedCategory === 'all' || skill.category === selectedCategory;
-      const matchesFaction = selectedFaction === 'all' || (skill.faction && skill.faction === selectedFaction);
+      const matchesFaction =
+        selectedFaction === 'all' ||
+        (skill.faction &&
+          (skill.faction === selectedFaction ||
+            (selectedFaction === 'Foresta' && skill.faction === 'Arboleda') ||
+            (selectedFaction === 'Colmena' && skill.faction === 'Enjambre')));
 
       return matchesSearch && matchesCategory && matchesFaction;
     });
@@ -145,9 +150,9 @@ export const OfficialSkillsBrowser: React.FC<OfficialSkillsBrowserProps> = ({
                 <option value="all">Todas las Facciones</option>
                 <option value="Mazmorra">Mazmorra (Fuerza del Triunvirato)</option>
                 <option value="Cisma">Cisma (Comunión abisal)</option>
-                <option value="Enjambre">Enjambre (Invocar enjambre)</option>
+                <option value="Colmena">Colmena (Invocar enjambre)</option>
                 <option value="Templo">Templo (Justicia)</option>
-                <option value="Arboleda">Arboleda (Murmullo)</option>
+                <option value="Foresta">Foresta (Murmullo)</option>
                 <option value="Necrópolis">Necrópolis (Nigromancia)</option>
               </select>
             )}

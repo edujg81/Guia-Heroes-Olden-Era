@@ -96,7 +96,7 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
       ],
     },
     startingHeroes: ['Jänhei', 'Pauper', 'Tellaris el Traicionado', 'Adahn', 'Lord Edgar'],
-    requiredByClasses: ['Furia del cielo (Arboleda)', 'Imparable (Cisma)', 'Madre de cría (Enjambre)', 'Heredero de Amelchia (Mazmorra)', 'Tejedor de almas (Necrópolis)', 'Dechado (Templo)'],
+    requiredByClasses: ['Furia del cielo (Foresta)', 'Imparable (Cisma)', 'Madre de cría (Colmena)', 'Heredero de Amelchia (Mazmorra)', 'Tejedor de almas (Necrópolis)', 'Dechado (Templo)'],
   },
   {
     id: 'combate',
@@ -241,7 +241,7 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
       ],
     },
     startingHeroes: ['Reina de Hielo Hel\'Ghat', 'Zoran el Autofundado', 'Enatee', 'Baluarte', 'John Johnson', 'Julius'],
-    requiredByClasses: ['Enviado celestial (Arboleda)', 'Insondable (Cisma)', 'Progenitor (Enjambre)', 'Enviado de Lengua de Plata (Mazmorra)', 'Heraldo de la perdición (Necrópolis)', 'Gran Inquisidor (Templo)'],
+    requiredByClasses: ['Enviado celestial (Foresta)', 'Insondable (Cisma)', 'Progenitor (Colmena)', 'Enviado de Lengua de Plata (Mazmorra)', 'Heraldo de la perdición (Necrópolis)', 'Gran Inquisidor (Templo)'],
   },
   {
     id: 'diplomacia',
@@ -289,7 +289,7 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
       ],
     },
     startingHeroes: ['Seductora Sh\'a', 'Ylwari', 'Rey de Reyes', 'Elias el Alegre'],
-    requiredByClasses: ['Favorecidos por el azar (Arboleda)', 'Insensible (Cisma)', 'Progenitor (Enjambre)', 'Guardaespaldas de Baltasar (Mazmorra)', 'Podredumbre ambulante (Necrópolis)', 'Dechado (Templo)'],
+    requiredByClasses: ['Favorecidos por el azar (Foresta)', 'Insensible (Cisma)', 'Progenitor (Colmena)', 'Guardaespaldas de Baltasar (Mazmorra)', 'Podredumbre ambulante (Necrópolis)', 'Dechado (Templo)'],
   },
   {
     id: 'economia',
@@ -337,7 +337,7 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
       ],
     },
     startingHeroes: ['Bathym, Duque de las Joyas', 'Creta, hija de Navarr', 'Glastor', 'Clarissa'],
-    requiredByClasses: ['Enviado celestial (Arboleda)', 'Insensible (Cisma)', 'Madre de cría (Enjambre)', 'Gran mercader (Mazmorra)', 'Cronomante (Necrópolis)', 'Ascendente (Templo)'],
+    requiredByClasses: ['Enviado celestial (Foresta)', 'Insensible (Cisma)', 'Madre de cría (Colmena)', 'Gran mercader (Mazmorra)', 'Cronomante (Necrópolis)', 'Ascendente (Templo)'],
   },
   {
     id: 'exploracion',
@@ -385,7 +385,7 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
       ],
     },
     startingHeroes: ['Eith', 'Ulkuth', 'Mouaren', 'Natalida', 'Leon Dedos Pegajosos'],
-    requiredByClasses: ['Enviado celestial (Arboleda)', 'Sin límites (Cisma)', 'Señor del caos (Enjambre)', 'Enviado de Lengua de Plata (Mazmorra)', 'Heraldo de la perdición (Necrópolis)', 'Gran Inquisidor (Templo)'],
+    requiredByClasses: ['Enviado celestial (Foresta)', 'Sin límites (Cisma)', 'Señor del caos (Colmena)', 'Enviado de Lengua de Plata (Mazmorra)', 'Heraldo de la perdición (Necrópolis)', 'Gran Inquisidor (Templo)'],
   },
   {
     id: 'fuerza-del-triunvirato',
@@ -501,7 +501,7 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
       ],
     },
     startingHeroes: ['El juglar', 'Cuerno Negro', 'Zakron el Grande', 'Laura'],
-    requiredByClasses: ['Furia del cielo (Arboleda)', 'Sin límites (Cisma)', 'Señor del caos (Enjambre)', 'Enviado de Lengua de Plata (Mazmorra)', 'Heraldo de la perdición (Necrópolis)', 'Ascendente (Templo)'],
+    requiredByClasses: ['Furia del cielo (Foresta)', 'Sin límites (Cisma)', 'Señor del caos (Colmena)', 'Enviado de Lengua de Plata (Mazmorra)', 'Heraldo de la perdición (Necrópolis)', 'Ascendente (Templo)'],
   },
   {
     id: 'invocar-avatar',
@@ -549,13 +549,13 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
       ],
     },
     startingHeroes: ['Suli', 'Urgo el Cambiante', 'Funerella', 'Zenith'],
-    requiredByClasses: ['Enviado celestial (Arboleda)', 'Insondable (Cisma)', 'Progenitor (Enjambre)', 'Heredero de Amelchia (Mazmorra)', 'Tejedor de almas (Necrópolis)', 'Dechado (Templo)'],
+    requiredByClasses: ['Enviado celestial (Foresta)', 'Insondable (Cisma)', 'Progenitor (Colmena)', 'Heredero de Amelchia (Mazmorra)', 'Tejedor de almas (Necrópolis)', 'Dechado (Templo)'],
   },
   {
     id: 'invocar-enjambre',
     name: 'Invocar enjambre',
     category: 'Facción',
-    faction: 'Enjambre',
+    faction: 'Colmena',
     upgrades: {
       basic: 'Una vez por ronda, pone huevos. Al comenzar la siguiente ronda, generan una formación de larvas de fuego con el 8 % de los PV totales de los engendros de la Colmena del ejército. La fuerza de sus aptitudes aumenta con el nivel del héroe.',
       advanced: 'Una vez por ronda, pone huevos. Al comenzar la siguiente ronda, generan una formación de larvas de fuego con el 12 % de los PV totales de los engendros de la Colmena del ejército. La fuerza de sus aptitudes aumenta con el nivel del héroe.',
@@ -733,7 +733,7 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
       ],
     },
     startingHeroes: ['Colajengibre', 'La Mirada Colectiva', 'Lengua de Oro', 'Devir, hijo de Devir', 'Aeos la Exaltada'],
-    requiredByClasses: ['Pozo de vigor (Arboleda)', 'Sin límites (Cisma)', 'Madre de cría (Enjambre)', 'Guardaespaldas de Baltasar (Mazmorra)', 'Podredumbre ambulante (Necrópolis)', 'Bravucón (Templo)'],
+    requiredByClasses: ['Pozo de vigor (Foresta)', 'Sin límites (Cisma)', 'Madre de cría (Colmena)', 'Guardaespaldas de Baltasar (Mazmorra)', 'Podredumbre ambulante (Necrópolis)', 'Bravucón (Templo)'],
   },
   {
     id: 'logistica',
@@ -781,7 +781,7 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
       ],
     },
     startingHeroes: ['Nihil', 'Tölketh', 'Fleu', 'Marl', 'Ister'],
-    requiredByClasses: ['Furia del cielo (Arboleda)', 'Insondable (Cisma)', 'Devorador de almas (Enjambre)', 'Gran mercader (Mazmorra)', 'Tejedor de almas (Necrópolis)', 'Ascendente (Templo)'],
+    requiredByClasses: ['Furia del cielo (Foresta)', 'Insondable (Cisma)', 'Devorador de almas (Colmena)', 'Gran mercader (Mazmorra)', 'Tejedor de almas (Necrópolis)', 'Ascendente (Templo)'],
   },
   {
     id: 'magia-arcana',
@@ -829,7 +829,7 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
       ],
     },
     startingHeroes: ['Echolily', 'Mártir Tho', 'Ra\'Davok', 'Gleard el Gris', 'Mag'],
-    requiredByClasses: ['Enviado celestial (Arboleda)', 'Insondable (Cisma)', 'Progenitor (Enjambre)', 'Gran mercader (Mazmorra)', 'Tejedor de almas (Necrópolis)', 'Gran Inquisidor (Templo)'],
+    requiredByClasses: ['Enviado celestial (Foresta)', 'Insondable (Cisma)', 'Progenitor (Colmena)', 'Gran mercader (Mazmorra)', 'Tejedor de almas (Necrópolis)', 'Gran Inquisidor (Templo)'],
   },
   {
     id: 'magia-de-batalla',
@@ -877,7 +877,7 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
       ],
     },
     startingHeroes: ['Viejo Peregrino', 'Oriax', 'Milossa la Dorada'],
-    requiredByClasses: ['Pozo de vigor (Arboleda)', 'Imparable (Cisma)', 'Devorador de almas (Enjambre)', 'Gran mercader (Mazmorra)', 'Cronomante (Necrópolis)', 'Gran Inquisidor (Templo)'],
+    requiredByClasses: ['Pozo de vigor (Foresta)', 'Imparable (Cisma)', 'Devorador de almas (Colmena)', 'Gran mercader (Mazmorra)', 'Cronomante (Necrópolis)', 'Gran Inquisidor (Templo)'],
   },
   {
     id: 'magia-de-luz-solar',
@@ -925,7 +925,7 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
       ],
     },
     startingHeroes: ['Mila', 'Rauktol el Soleado', 'Lia la Desatada', 'Vesper'],
-    requiredByClasses: ['Pozo de vigor (Arboleda)', 'Sin límites (Cisma)', 'Devorador de almas (Enjambre)', 'Enviado de Lengua de Plata (Mazmorra)', 'Cronomante (Necrópolis)', 'Dechado (Templo)'],
+    requiredByClasses: ['Pozo de vigor (Foresta)', 'Sin límites (Cisma)', 'Devorador de almas (Colmena)', 'Enviado de Lengua de Plata (Mazmorra)', 'Cronomante (Necrópolis)', 'Dechado (Templo)'],
   },
   {
     id: 'magia-de-nochesombra',
@@ -973,7 +973,7 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
       ],
     },
     startingHeroes: ['Hermana Keiri', 'Leira', 'Lodos', 'Hilasombras Oona', 'Nadir'],
-    requiredByClasses: ['Furia del cielo (Arboleda)', 'Insensible (Cisma)', 'Madre de cría (Enjambre)', 'Guardaespaldas de Baltasar (Mazmorra)', 'Podredumbre ambulante (Necrópolis)', 'Bravucón (Templo)'],
+    requiredByClasses: ['Furia del cielo (Foresta)', 'Insensible (Cisma)', 'Madre de cría (Colmena)', 'Guardaespaldas de Baltasar (Mazmorra)', 'Podredumbre ambulante (Necrópolis)', 'Bravucón (Templo)'],
   },
   {
     id: 'magia-primigenia',
@@ -1021,13 +1021,13 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
       ],
     },
     startingHeroes: ['Aeliniel', 'Glacia', 'Halon', 'Vim', 'Wal\'kha', 'Khariseth'],
-    requiredByClasses: ['Favorecidos por el azar (Arboleda)', 'Imparable (Cisma)', 'Señor del caos (Enjambre)', 'Heredero de Amelchia (Mazmorra)', 'Heraldo de la perdición (Necrópolis)', 'Ascendente (Templo)'],
+    requiredByClasses: ['Favorecidos por el azar (Foresta)', 'Imparable (Cisma)', 'Señor del caos (Colmena)', 'Heredero de Amelchia (Mazmorra)', 'Heraldo de la perdición (Necrópolis)', 'Ascendente (Templo)'],
   },
   {
     id: 'murmullo',
     name: 'Murmullo',
     category: 'Facción',
-    faction: 'Arboleda',
+    faction: 'Foresta',
     upgrades: {
       basic: 'Genera 1 carga(s) de concentración al inicio de cada batalla.',
       advanced: 'Genera 2 carga(s) de concentración al inicio de cada batalla.',
@@ -1204,7 +1204,7 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
       ],
     },
     startingHeroes: ['Gorel Punta de Lanza', 'Grellekh el Traidor', 'Niev', 'Onkos', 'Keandra'],
-    requiredByClasses: ['Favorecidos por el azar (Arboleda)', 'Sin límites (Cisma)', 'Señor del caos (Enjambre)', 'Guardaespaldas de Baltasar (Mazmorra)', 'Cronomante (Necrópolis)', 'Bravucón (Templo)'],
+    requiredByClasses: ['Favorecidos por el azar (Foresta)', 'Sin límites (Cisma)', 'Señor del caos (Colmena)', 'Guardaespaldas de Baltasar (Mazmorra)', 'Cronomante (Necrópolis)', 'Bravucón (Templo)'],
   },
   {
     id: 'percepcion',
@@ -1252,7 +1252,7 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
       ],
     },
     startingHeroes: ['Tía Daliar', 'Nor', 'Kelarr, hijo de Navarr', 'Pip'],
-    requiredByClasses: ['Pozo de vigor (Arboleda)', 'Imparable (Cisma)', 'Devorador de almas (Enjambre)', 'Heredero de Amelchia (Mazmorra)', 'Tejedor de almas (Necrópolis)', 'Gran Inquisidor (Templo)'],
+    requiredByClasses: ['Pozo de vigor (Foresta)', 'Imparable (Cisma)', 'Devorador de almas (Colmena)', 'Heredero de Amelchia (Mazmorra)', 'Tejedor de almas (Necrópolis)', 'Gran Inquisidor (Templo)'],
   },
   {
     id: 'reclutamiento',
@@ -1348,7 +1348,7 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
       ],
     },
     startingHeroes: ['Xirr', 'Artorius Veritas'],
-    requiredByClasses: ['Pozo de vigor (Arboleda)', 'Insensible (Cisma)', 'Devorador de almas (Enjambre)', 'Gran mercader (Mazmorra)', 'Podredumbre ambulante (Necrópolis)', 'Ascendente (Templo)'],
+    requiredByClasses: ['Pozo de vigor (Foresta)', 'Insensible (Cisma)', 'Devorador de almas (Colmena)', 'Gran mercader (Mazmorra)', 'Podredumbre ambulante (Necrópolis)', 'Ascendente (Templo)'],
   },
   {
     id: 'sabiduria',
@@ -1396,7 +1396,7 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
       ],
     },
     startingHeroes: ['Vatawna', 'El Doncel de Hierro', 'Groo', 'Funerella'],
-    requiredByClasses: ['Favorecidos por el azar (Arboleda)', 'Insensible (Cisma)', 'Madre de cría (Enjambre)', 'Guardaespaldas de Baltasar (Mazmorra)', 'Podredumbre ambulante (Necrópolis)', 'Bravucón (Templo)'],
+    requiredByClasses: ['Favorecidos por el azar (Foresta)', 'Insensible (Cisma)', 'Madre de cría (Colmena)', 'Guardaespaldas de Baltasar (Mazmorra)', 'Podredumbre ambulante (Necrópolis)', 'Bravucón (Templo)'],
   },
   {
     id: 'suerte',
@@ -1444,7 +1444,7 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
       ],
     },
     startingHeroes: ['Octavia', 'Vorágine', 'Rhea', 'Maestro Klastor', 'Kestrel'],
-    requiredByClasses: ['Favorecidos por el azar (Arboleda)', 'Insondable (Cisma)', 'Señor del caos (Enjambre)', 'Enviado de Lengua de Plata (Mazmorra)', 'Heraldo de la perdición (Necrópolis)', 'Bravucón (Templo)'],
+    requiredByClasses: ['Favorecidos por el azar (Foresta)', 'Insondable (Cisma)', 'Señor del caos (Colmena)', 'Enviado de Lengua de Plata (Mazmorra)', 'Heraldo de la perdición (Necrópolis)', 'Bravucón (Templo)'],
   },
   {
     id: 'taumaturgia',
@@ -1540,7 +1540,7 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
       ],
     },
     startingHeroes: [],
-    requiredByClasses: ['Furia del cielo (Arboleda)', 'Imparable (Cisma)', 'Progenitor (Enjambre)', 'Heredero de Amelchia (Mazmorra)', 'Cronomante (Necrópolis)', 'Dechado (Templo)'],
+    requiredByClasses: ['Furia del cielo (Foresta)', 'Imparable (Cisma)', 'Progenitor (Colmena)', 'Heredero de Amelchia (Mazmorra)', 'Cronomante (Necrópolis)', 'Dechado (Templo)'],
   },
 ];
 

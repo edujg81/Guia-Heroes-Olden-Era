@@ -250,7 +250,7 @@ export interface OfficialSkill {
   id: string;
   name: string;
   category: 'Común' | 'Clase' | 'Facción';
-  faction?: 'Mazmorra' | 'Cisma' | 'Enjambre' | 'Templo' | 'Arboleda' | 'Necrópolis';
+  faction?: 'Mazmorra' | 'Cisma' | 'Colmena' | 'Templo' | 'Foresta' | 'Necrópolis' | 'Enjambre' | 'Arboleda';
   upgrades: {
     basic: string;
     advanced: string;
@@ -275,7 +275,7 @@ export interface SubclassInfo {
   id: string;
   name: string;
   nameEn: string;
-  faction: 'Mazmorra' | 'Templo' | 'Arboleda' | 'Necrópolis' | 'Cisma' | 'Enjambre';
+  faction: 'Mazmorra' | 'Templo' | 'Foresta' | 'Necrópolis' | 'Cisma' | 'Colmena' | 'Arboleda' | 'Enjambre';
   baseClass: string;
   classType: 'Guerrero' | 'Mago';
   bonusTitle: string;

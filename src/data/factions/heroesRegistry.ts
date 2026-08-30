@@ -8,13 +8,15 @@ import necropolisHeroes from './necropolis/heroes';
 import hiveHeroes from './hive/heroes';
 import schismHeroes from './schism/heroes';
 
-export type FactionIdentifier = 'Mazmorra' | 'Templo' | 'Arboleda' | 'Necrópolis' | 'Enjambre' | 'Cisma';
+export type FactionIdentifier = 'Mazmorra' | 'Templo' | 'Foresta' | 'Arboleda' | 'Necrópolis' | 'Colmena' | 'Enjambre' | 'Cisma';
 
-export const FACTION_HEROES_REGISTRY: Record<FactionIdentifier, DungeonHero[]> = {
+export const FACTION_HEROES_REGISTRY: Record<string, DungeonHero[]> = {
   Mazmorra: dungeonHeroes,
   Templo: templeHeroes,
+  Foresta: groveHeroes,
   Arboleda: groveHeroes,
   Necrópolis: necropolisHeroes,
+  Colmena: hiveHeroes,
   Enjambre: hiveHeroes,
   Cisma: schismHeroes,
 };

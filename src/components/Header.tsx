@@ -35,7 +35,7 @@ export const Header: React.FC<HeaderProps> = ({
   const currentMeta = FACTIONS_METADATA[selectedFaction] || FACTIONS_METADATA.Mazmorra;
   const theme = getFactionTheme(selectedFaction, themeMode);
 
-  const factionList: FactionId[] = ['Mazmorra', 'Templo', 'Arboleda', 'Necrópolis', 'Enjambre', 'Cisma'];
+  const factionList: FactionId[] = ['Mazmorra', 'Templo', 'Foresta', 'Necrópolis', 'Colmena', 'Cisma'];
 
   const toggleTheme = () => {
     if (setThemeMode) {
@@ -57,11 +57,11 @@ export const Header: React.FC<HeaderProps> = ({
                 href={
                   selectedFaction === 'Templo'
                     ? 'https://wiki.hoodedhorse.com/Heroes_of_Might_and_Magic_Olden_Era/Temple'
-                    : selectedFaction === 'Arboleda'
+                    : selectedFaction === 'Foresta' || selectedFaction === 'Arboleda'
                     ? 'https://wiki.hoodedhorse.com/Heroes_of_Might_and_Magic_Olden_Era/Sylvan'
                     : selectedFaction === 'Necrópolis'
                     ? 'https://wiki.hoodedhorse.com/Heroes_of_Might_and_Magic_Olden_Era/Necropolis'
-                    : selectedFaction === 'Enjambre'
+                    : selectedFaction === 'Colmena' || selectedFaction === 'Enjambre'
                     ? 'https://wiki.hoodedhorse.com/Heroes_of_Might_and_Magic_Olden_Era/Hive'
                     : selectedFaction === 'Cisma'
                     ? 'https://wiki.hoodedhorse.com/Heroes_of_Might_and_Magic_Olden_Era/Schism'
