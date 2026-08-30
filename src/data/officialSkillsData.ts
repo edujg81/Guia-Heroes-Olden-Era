@@ -1141,7 +1141,6 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
       'Adahn',
       'Artorius Veritas',
       'Baluarte',
-      'Ethric',
       'Funerella',
       'Hilasombras Oona',
       'Kel\'Ghul',
@@ -1396,7 +1395,7 @@ const OFFICIAL_SKILLS_RAW_DATA: OfficialSkill[] = [
         },
       ],
     },
-    startingHeroes: ['Vatawna', 'El Doncel de Hierro', 'Groo', 'Ethric'],
+    startingHeroes: ['Vatawna', 'El Doncel de Hierro', 'Groo', 'Funerella'],
     requiredByClasses: ['Favorecidos por el azar (Arboleda)', 'Insensible (Cisma)', 'Madre de cría (Enjambre)', 'Guardaespaldas de Baltasar (Mazmorra)', 'Podredumbre ambulante (Necrópolis)', 'Bravucón (Templo)'],
   },
   {

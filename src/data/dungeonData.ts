@@ -1290,7 +1290,7 @@ export const DUNGEON_UNITS: UnitInfo[] = [
       whenToPickA: 'Elige Rama A (Infernal) para agilizar la limpieza del mapa en juego temprano y cuando juegues con héroes agresivos de Ataque rápido.',
       whenToPickB: 'Elige Rama B (Tóxico) en partidas contra facciones blindadas (Orden, Bastión) para debilitar sus defensas ante tus Minotauros e Hidras.',
       synergyHeroA: 'Zakron / Devir (Especialistas ofensivos y de carga)',
-      synergyHeroB: 'Typhona / Valeska (Control y defensa sostenida)',
+      synergyHeroB: 'Typhona / Aguijón (Control y defensa sostenida)',
     },
   },
 
@@ -1518,7 +1518,7 @@ export const DUNGEON_UNITS: UnitInfo[] = [
       whenToPickA: 'Elige Rama A (Jaspe) para maximizar la capacidad ofensiva pura y romper formaciones blindadas.',
       whenToPickB: 'Elige Rama B (Áurea) si requieres una unidad duelista que aguante asaltos múltiples y diezme enjambres gracias al contraataque ilimitado.',
       synergyHeroA: 'Devir / Zakron (Ataque y penetración masiva)',
-      synergyHeroB: 'Valeska / Typhona (Especialistas en defensa y contraataque)',
+      synergyHeroB: 'Aguijón / Typhona (Especialistas en defensa y contraataque)',
     },
   },
 
