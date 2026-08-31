@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
-import { RECOMMENDED_SPELLS, ASTROLOGY_POINT_SOURCES, ASTROLOGY_TIER_COSTS } from '../data/dungeonData';
+import { RECOMMENDED_SPELLS } from '../data/dungeonData';
 import { RecommendedSpell, SpellLevelInfo } from '../types';
 import { useStickyState } from '../utils/useStickyState';
-import { FactionId, getFactionTheme } from '../data/factionDataProvider';
+import { FactionId, FACTIONS_METADATA, getFactionTheme } from '../data/factionDataProvider';
+import {
+  FACTION_SPELL_COMBOS,
+  FACTION_MAGIC_PROFILES,
+  getFactionSpellPriority,
+  getFactionCombos,
+  getFactionMagicProfile,
+  FactionSpellCombo,
+} from '../data/factionSpellData';
 import {
   Sparkles,
   Zap,
@@ -22,6 +30,11 @@ import {
   ChevronUp,
   ShieldAlert,
   SlidersHorizontal,
+  Swords,
+  Skull,
+  Shield,
+  Target,
+  Check,
 } from 'lucide-react';
 
 interface SpellGrimoireProps {
@@ -30,15 +43,29 @@ interface SpellGrimoireProps {
 }
 
 export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({ 
-  selectedFaction = 'Mazmorra',
+  selectedFaction: initialFaction = 'Mazmorra',
   themeMode = 'dark',
 }) => {
-  const theme = getFactionTheme(selectedFaction, themeMode);
+  const [activeFaction, setActiveFaction] = useState<FactionId>(initialFaction);
+
+  // Keep synced if parent changes faction
+  React.useEffect(() => {
+    setActiveFaction(initialFaction);
+  }, [initialFaction]);
+
+  const theme = getFactionTheme(activeFaction, themeMode);
+  const factionMeta = FACTIONS_METADATA[activeFaction] || FACTIONS_METADATA.Mazmorra;
+  const magicProfile = getFactionMagicProfile(activeFaction);
+  const factionCombos = getFactionCombos(activeFaction);
+
   const [selectedSchool, setSelectedSchool] = useStickyState<string>('all', 'spells_selected_school');
   const [selectedType, setSelectedType] = useStickyState<string>('all', 'spells_selected_type');
   const [selectedPriority, setSelectedPriority] = useStickyState<string>('all', 'spells_selected_priority');
   const [selectedTier, setSelectedTier] = useStickyState<string>('all', 'spells_selected_tier');
+  const [filterOnlyFactionMeta, setFilterOnlyFactionMeta] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [selectedComboTab, setSelectedComboTab] = useState<number>(0);
+  
   const [learnedSpells, setLearnedSpells] = useStickyState<Record<string, boolean>>({
     'spell-slow': true,
     'spell-arcane-bolt': true,
@@ -47,6 +74,7 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
     'spell-armageddon': true,
   }, 'spells_learned_records');
   const [showMechanicsGuide, setShowMechanicsGuide] = useStickyState<boolean>(true, 'spells_show_mechanics_guide');
+  const [showFactionProfile, setShowFactionProfile] = useStickyState<boolean>(true, 'spells_show_faction_profile');
   const [expandAllLevels, setExpandAllLevels] = useStickyState<boolean>(false, 'spells_expand_all_levels');
   const [activeSpellLevels, setActiveSpellLevels] = useState<Record<string, number>>({});
 
@@ -70,27 +98,66 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
     }));
   };
 
+  // Helper to get priority for currently active faction
+  const getEffectivePriority = (spell: RecommendedSpell): string => {
+    const factionPrio = getFactionSpellPriority(spell.id, activeFaction);
+    return factionPrio ? factionPrio.priority : spell.priority;
+  };
+
   const filteredSpells = RECOMMENDED_SPELLS.filter((spell) => {
+    const effectivePriority = getEffectivePriority(spell);
+    const factionPrioInfo = getFactionSpellPriority(spell.id, activeFaction);
+
+    if (filterOnlyFactionMeta) {
+      const isMetaForFaction = effectivePriority.includes('Imprescindible') || effectivePriority.includes('Muy Alta');
+      if (!isMetaForFaction) return false;
+    }
+
     const matchesSchool = selectedSchool === 'all' || spell.school.includes(selectedSchool);
     const matchesType = selectedType === 'all' || spell.type === selectedType;
-    const matchesPriority = selectedPriority === 'all' || spell.priority.includes(selectedPriority);
+    const matchesPriority =
+      selectedPriority === 'all' ||
+      effectivePriority.includes(selectedPriority) ||
+      spell.priority.includes(selectedPriority);
     const matchesTier = selectedTier === 'all' || spell.tier.toString() === selectedTier;
+    
     const matchesSearch =
       spell.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       spell.nameEn.toLowerCase().includes(searchTerm.toLowerCase()) ||
       (spell.masterfulName && spell.masterfulName.toLowerCase().includes(searchTerm.toLowerCase())) ||
       spell.effect.toLowerCase().includes(searchTerm.toLowerCase()) ||
       spell.tacticalUtility.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      spell.schoolRequirement.toLowerCase().includes(searchTerm.toLowerCase());
+      spell.schoolRequirement.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (factionPrioInfo && factionPrioInfo.synergyTip.toLowerCase().includes(searchTerm.toLowerCase()));
 
     return matchesSchool && matchesType && matchesPriority && matchesTier && matchesSearch;
   });
 
   const totalLearned = Object.values(learnedSpells).filter(Boolean).length;
 
+  const renderComboIcon = (iconType: string) => {
+    switch (iconType) {
+      case 'flame':
+        return <Flame className="w-5 h-5 text-red-500" />;
+      case 'zap':
+        return <Zap className="w-5 h-5 text-purple-400" />;
+      case 'shield':
+        return <Shield className="w-5 h-5 text-emerald-400" />;
+      case 'compass':
+        return <Compass className="w-5 h-5 text-cyan-400" />;
+      case 'skull':
+        return <Skull className="w-5 h-5 text-purple-400" />;
+      case 'sparkles':
+        return <Sparkles className="w-5 h-5 text-amber-400" />;
+      case 'swords':
+      default:
+        return <Swords className="w-5 h-5 text-amber-500" />;
+    }
+  };
+
   return (
     <div className="space-y-6">
-      {/* Top Banner */}
+      {/* Top Banner & Faction Selector */}
       <div className={`border rounded-2xl p-5 backdrop-blur-md transition-colors duration-300 ${
         themeMode === 'light'
           ? 'bg-white border-slate-200 shadow-md text-slate-800'
@@ -122,16 +189,16 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
             <h2 className={`text-xl sm:text-2xl font-serif uppercase tracking-wide flex items-center gap-2 ${
               themeMode === 'light' ? 'text-slate-900' : 'text-white'
             }`}>
-              <span>Grimorio de Magia, Costes de Desbloqueo y Niveles de Mejora</span>
+              <span>Grimorio de Magia y Sinergias Tácticas</span>
             </h2>
             <p className={`text-xs mt-1 max-w-3xl leading-relaxed ${
               themeMode === 'light' ? 'text-slate-700' : 'text-slate-400'
             }`}>
-              En <em>Heroes of Might and Magic: Olden Era</em>, los hechizos se desbloquean en el <strong>Observatorio del Reino</strong> o <strong>Cofradías de Magos</strong> y se potencian hasta el <strong>Nivel 4 (Versión Magistral)</strong> mediante <strong>Polvo Alquímico (Alchemical Dust)</strong>, oro y recursos raros.
+              En <em>Heroes of Might and Magic: Olden Era</em>, cada una de las 6 facciones de <strong>Jadame</strong> tiene afinidades elementales únicas, prioridades de desbloqueo en la Cofradía y combos tácticos con versiones <strong>Magistrales (Nivel 4)</strong>.
             </p>
           </div>
 
-          {/* Search bar */}
+          {/* Search bar & Level View Toggle */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
             <div className="relative min-w-[240px]">
               <Search className={`w-4 h-4 ${themeMode === 'light' ? 'text-purple-700' : theme.textAccent} absolute left-3 top-1/2 -translate-y-1/2`} />
@@ -163,29 +230,154 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
           </div>
         </div>
 
+        {/* Faction Switcher Ribbon */}
+        <div className="mt-4 pt-3 border-t border-slate-700/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className={`text-[11px] font-mono font-bold uppercase tracking-wider ${
+              themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'
+            }`}>
+              Facción para Prioridades & Combos:
+            </span>
+            {(['Templo', 'Necrópolis', 'Mazmorra', 'Foresta', 'Colmena', 'Cisma'] as const).map((fac) => {
+              const isSelected = activeFaction === fac;
+              const facTheme = getFactionTheme(fac, themeMode);
+              return (
+                <button
+                  key={fac}
+                  onClick={() => setActiveFaction(fac)}
+                  className={`px-3 py-1 text-xs rounded-lg font-mono font-semibold transition-all flex items-center gap-1.5 cursor-pointer ${
+                    isSelected
+                      ? `${facTheme.primaryButton} shadow-md text-white ring-1 ring-white/30 scale-105`
+                      : themeMode === 'light'
+                        ? 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300'
+                        : 'bg-black/50 text-slate-400 hover:text-white border border-slate-800'
+                  }`}
+                >
+                  <span>{fac}</span>
+                  {isSelected && <Check className="w-3 h-3" />}
+                </button>
+              );
+            })}
+          </div>
+
+          <button
+            onClick={() => setShowFactionProfile(!showFactionProfile)}
+            className={`text-xs font-mono flex items-center gap-1 px-2.5 py-1 rounded-lg border transition-all cursor-pointer self-start sm:self-auto ${
+              showFactionProfile
+                ? themeMode === 'light'
+                  ? 'bg-purple-50 text-purple-900 border-purple-300'
+                  : `${theme.bgBadge} ${theme.textAccent} ${theme.borderSubtle}`
+                : themeMode === 'light'
+                  ? 'bg-slate-100 text-slate-600 border-slate-300'
+                  : 'bg-black/40 text-slate-400 border-slate-800'
+            }`}
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            {showFactionProfile ? 'Ocultar Doctrina Mágica' : 'Ver Doctrina Mágica'}
+            {showFactionProfile ? <ChevronUp className="w-3.5 h-3.5 ml-0.5" /> : <ChevronDown className="w-3.5 h-3.5 ml-0.5" />}
+          </button>
+        </div>
+
+        {/* Faction Magic Doctrine & Affinities Panel */}
+        {showFactionProfile && (
+          <div className={`mt-4 rounded-xl p-4 border transition-all ${
+            themeMode === 'light'
+              ? 'bg-slate-50 border-slate-200 text-slate-800'
+              : `bg-black/60 ${theme.borderSubtle} text-slate-300`
+          }`}>
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3 mb-3 border-b pb-3 border-slate-700/30">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className={`font-serif font-bold text-base ${themeMode === 'light' ? 'text-slate-900' : 'text-white'}`}>
+                  Doctrina Mágica de {magicProfile.name}
+                </span>
+                <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${
+                  themeMode === 'light'
+                    ? 'bg-indigo-100 text-indigo-900 border-indigo-300 font-semibold'
+                    : 'bg-indigo-950/60 text-indigo-300 border-indigo-800/50'
+                }`}>
+                  Primaria: {magicProfile.primarySchool}
+                </span>
+                <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${
+                  themeMode === 'light'
+                    ? 'bg-cyan-100 text-cyan-900 border-cyan-300 font-semibold'
+                    : 'bg-cyan-950/60 text-cyan-300 border-cyan-800/50'
+                }`}>
+                  Secundaria: {magicProfile.secondarySchool}
+                </span>
+              </div>
+
+              <div className={`text-xs font-mono ${themeMode === 'light' ? 'text-purple-900 font-semibold' : theme.textAccent}`}>
+                Economía de Maná: {magicProfile.manaEconomyStrategy}
+              </div>
+            </div>
+
+            <p className="text-xs leading-relaxed mb-3">
+              <strong className={themeMode === 'light' ? 'text-slate-900' : 'text-white'}>Estrategia Nuclear: </strong>
+              {magicProfile.doctrine}
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs font-mono">
+              <div className={`p-2.5 rounded-lg border ${
+                themeMode === 'light' ? 'bg-white border-amber-200' : 'bg-black/40 border-amber-900/40'
+              }`}>
+                <span className={`text-[10px] font-bold uppercase block mb-1 flex items-center gap-1 ${
+                  themeMode === 'light' ? 'text-amber-900' : 'text-amber-400'
+                }`}>
+                  <Award className="w-3.5 h-3.5" />
+                  Hechizos Magistrales Nivel 4 Prioritarios:
+                </span>
+                <ul className="space-y-1 text-[11px] font-sans">
+                  {magicProfile.preferredMasterfulSpells.map((sp, idx) => (
+                    <li key={idx} className="flex items-start gap-1.5">
+                      <span className="text-amber-500 font-bold">•</span>
+                      <span>{sp}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className={`p-2.5 rounded-lg border ${
+                themeMode === 'light' ? 'bg-white border-emerald-200' : 'bg-black/40 border-emerald-900/40'
+              }`}>
+                <span className={`text-[10px] font-bold uppercase block mb-1 flex items-center gap-1 ${
+                  themeMode === 'light' ? 'text-emerald-900' : 'text-emerald-400'
+                }`}>
+                  <Target className="w-3.5 h-3.5" />
+                  Ruta de Adquisición (Día 1 vs Late Game):
+                </span>
+                <div className="space-y-1.5 text-[11px] font-sans">
+                  <div>
+                    <strong className={themeMode === 'light' ? 'text-emerald-800' : 'text-emerald-300'}>Día 1-7 (Apertura): </strong>
+                    <span>{magicProfile.day1EssentialSpells.join(', ')}</span>
+                  </div>
+                  <div>
+                    <strong className={themeMode === 'light' ? 'text-purple-800' : 'text-purple-300'}>Win Condition (Late Game): </strong>
+                    <span>{magicProfile.lateGameWinConditionSpells.join(', ')}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Filter controls */}
         <div className={`mt-4 pt-4 border-t flex items-center gap-3 overflow-x-auto no-scrollbar pb-1 ${
           themeMode === 'light' ? 'border-slate-200' : theme.borderSubtle
         }`}>
-          {/* Tier Filter */}
-          <div className="flex items-center gap-1.5 text-xs shrink-0">
-            <span className={`font-mono text-[10px] uppercase ${themeMode === 'light' ? 'text-slate-600 font-semibold' : 'text-slate-500'}`}>Tier Cofradía:</span>
-            {(['all', '1', '2', '3', '4', '5'] as const).map((t) => (
-              <button
-                key={t}
-                onClick={() => setSelectedTier(t)}
-                className={`px-2.5 py-1 text-xs rounded-md font-semibold transition-all font-mono whitespace-nowrap cursor-pointer ${
-                  selectedTier === t
-                    ? 'bg-amber-600 text-white border border-amber-400/50 shadow-sm'
-                    : themeMode === 'light'
-                      ? 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300'
-                      : 'bg-black/40 text-slate-400 hover:text-slate-200 border border-slate-800'
-                }`}
-              >
-                {t === 'all' ? 'Todos' : `Tier ${t}`}
-              </button>
-            ))}
-          </div>
+          {/* Faction Meta Quick Toggle */}
+          <button
+            onClick={() => setFilterOnlyFactionMeta(!filterOnlyFactionMeta)}
+            className={`px-3 py-1.5 text-xs rounded-lg font-mono font-bold transition-all shrink-0 flex items-center gap-1.5 cursor-pointer ${
+              filterOnlyFactionMeta
+                ? 'bg-amber-500 text-black border border-amber-300 shadow-md ring-2 ring-amber-400/40'
+                : themeMode === 'light'
+                  ? 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300'
+                  : 'bg-black/60 text-slate-300 border border-slate-800 hover:text-white'
+            }`}
+          >
+            <Star className={`w-3.5 h-3.5 ${filterOnlyFactionMeta ? 'fill-current' : 'text-amber-500'}`} />
+            <span>⭐ Imprescindibles para {activeFaction}</span>
+          </button>
 
           {/* School Filter */}
           <div className="flex items-center gap-1.5 text-xs shrink-0">
@@ -203,6 +395,26 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
                 }`}
               >
                 {sch === 'all' ? 'Todas' : sch === 'Neutral' ? 'Neutral / Aventura' : sch}
+              </button>
+            ))}
+          </div>
+
+          {/* Tier Filter */}
+          <div className="flex items-center gap-1.5 text-xs shrink-0">
+            <span className={`font-mono text-[10px] uppercase ${themeMode === 'light' ? 'text-slate-600 font-semibold' : 'text-slate-500'}`}>Tier:</span>
+            {(['all', '1', '2', '3', '4', '5'] as const).map((t) => (
+              <button
+                key={t}
+                onClick={() => setSelectedTier(t)}
+                className={`px-2.5 py-1 text-xs rounded-md font-semibold transition-all font-mono whitespace-nowrap cursor-pointer ${
+                  selectedTier === t
+                    ? 'bg-amber-600 text-white border border-amber-400/50 shadow-sm'
+                    : themeMode === 'light'
+                      ? 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300'
+                      : 'bg-black/40 text-slate-400 hover:text-slate-200 border border-slate-800'
+                }`}
+              >
+                {t === 'all' ? 'Todos' : `Tier ${t}`}
               </button>
             ))}
           </div>
@@ -230,7 +442,7 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
           {/* Priority Filter */}
           <div className="flex items-center gap-1.5 text-xs shrink-0">
             <span className={`font-mono text-[10px] uppercase ${themeMode === 'light' ? 'text-slate-600 font-semibold' : 'text-slate-500'}`}>Prioridad:</span>
-            {(['all', 'Imprescindible', 'Muy Alta'] as const).map((p) => (
+            {(['all', 'Imprescindible', 'Muy Alta', 'Alta'] as const).map((p) => (
               <button
                 key={p}
                 onClick={() => setSelectedPriority(p)}
@@ -249,54 +461,43 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
         </div>
       </div>
 
-      {/* Magic System & Upgrade Rules Card */}
-      <div className={`border rounded-2xl p-5 transition-colors ${
+      {/* Mechanics & Upgrade Cost System Guide */}
+      <div className={`border rounded-2xl p-5 backdrop-blur-md transition-colors duration-300 ${
         themeMode === 'light'
-          ? 'bg-slate-50/90 border-slate-200 shadow-md text-slate-800'
-          : `bg-gradient-to-r ${theme.bgBadge} via-slate-900/60 to-black/70 ${theme.borderSubtle} ${theme.shadowAccent}`
+          ? 'bg-white border-slate-200 shadow-md text-slate-800'
+          : `bg-black/40 ${theme.border} ${theme.shadowAccent}`
       }`}>
-        <div className="flex items-center justify-between gap-4 mb-3">
+        <div className="flex items-center justify-between gap-2 mb-3">
           <div className="flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
-            <h3 className={`text-sm font-mono font-bold uppercase tracking-wider ${
-              themeMode === 'light' ? 'text-slate-900' : theme.textAccent
+            <Orbit className={`w-5 h-5 ${themeMode === 'light' ? 'text-purple-700' : theme.textAccent}`} />
+            <h3 className={`font-serif font-bold text-sm sm:text-base uppercase tracking-wide ${
+              themeMode === 'light' ? 'text-slate-900' : 'text-white'
             }`}>
-              Mecánicas Oficiales de Magia, Observatorio y Niveles de Mejora en Olden Era
+              Sistema de Desbloqueo y Niveles 1 a 4 (Polvo Alquímico)
             </h3>
           </div>
           <button
             onClick={() => setShowMechanicsGuide(!showMechanicsGuide)}
-            className={`text-xs font-mono flex items-center gap-1 cursor-pointer ${
-              themeMode === 'light' ? 'text-purple-700 hover:text-purple-900 font-bold' : 'text-cyan-400 hover:text-cyan-300'
-            }`}
+            className={`text-xs font-mono flex items-center gap-1 ${themeMode === 'light' ? 'text-slate-600 hover:text-purple-900' : 'text-slate-400 hover:text-white'} transition-colors cursor-pointer`}
           >
-            {showMechanicsGuide ? (
-              <>Ocultar Sistema <ChevronUp className="w-3.5 h-3.5" /></>
-            ) : (
-              <>Ver Sistema Completo <ChevronDown className="w-3.5 h-3.5" /></>
-            )}
+            {showMechanicsGuide ? 'Ocultar Guía' : 'Mostrar Guía'}
+            {showMechanicsGuide ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
           </button>
         </div>
 
-        <p className={`text-xs leading-relaxed mb-3 ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>
-          En <strong>Olden Era</strong>, el sistema de magia está interconectado con la infraestructura del reino. Cada hechizo progresa a través de <strong>4 Niveles de Eficacia</strong>, alcanzando su forma <strong>Magistral (Masterful)</strong> con efectos masivos o sinergias únicas.
-        </p>
-
         {showMechanicsGuide && (
-          <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 pt-3 border-t text-xs ${
-            themeMode === 'light' ? 'border-slate-200' : theme.borderSubtle
-          }`}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 text-xs">
             <div className={`rounded-xl p-3.5 space-y-1.5 border ${
-              themeMode === 'light' ? 'bg-white border-cyan-200 shadow-sm' : `bg-black/60 ${theme.borderSubtle}`
+              themeMode === 'light' ? 'bg-white border-cyan-200 shadow-sm' : 'bg-black/60 border-cyan-900/40'
             }`}>
               <div className={`flex items-center justify-between font-mono font-bold text-[11px] uppercase ${
                 themeMode === 'light' ? 'text-cyan-900' : 'text-cyan-400'
               }`}>
-                <span>1. Observatorio & Cofradía</span>
-                <BookOpen className="w-3.5 h-3.5" />
+                <span>1. Desbloqueo Base</span>
+                <Coins className="w-3.5 h-3.5" />
               </div>
               <p className={`text-[11px] leading-relaxed ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>
-                El <strong>Observatorio</strong> es la biblioteca global de tu reino. Al erigir una Cofradía de Magos, se desbloquean hechizos gratis al azar o puedes comprarlos manualmente mediante la fórmula: <code className={themeMode === 'light' ? 'text-amber-900 bg-amber-50 px-1 rounded border border-amber-200 font-semibold' : 'text-amber-300 bg-black/40 px-1 rounded'}>Tier × (2 Cristales, 2 Gemas, 2 Mercurio) + Oro</code>.
+                Construir la Cofradía desbloquea hechizos gratis al azar. También puedes comprarlos en el <strong>Observatorio</strong> gastando <strong>Puntos de Astrología</strong> u Oro + Cristales/Gemas/Mercurio.
               </p>
             </div>
 
@@ -310,7 +511,7 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
                 <Gem className="w-3.5 h-3.5" />
               </div>
               <p className={`text-[11px] leading-relaxed ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>
-                Cada subida de nivel de un hechizo requiere <strong>25 Polvo Alquímico (Alchemical Dust)</strong> + Oro y recursos raros. El polvo se consigue desmontando artefactos, en eventos de mapa o visitando santuarios alquímicos.
+                Cada subida de nivel de un hechizo requiere <strong>25 Polvo Alquímico (Alchemical Dust)</strong> + Oro y recursos raros. El polvo se consigue desmontando artefactos, en eventos de mapa o santuarios.
               </p>
             </div>
 
@@ -324,7 +525,7 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
                 <Layers className="w-3.5 h-3.5" />
               </div>
               <p className={`text-[11px] leading-relaxed ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>
-                Si construyes una 2ª, 3ª o 4ª Cofradía de Magos en otras ciudades y generan el mismo hechizo, <strong>se sube de nivel automáticamente sin gastar Polvo Alquímico</strong>.
+                Si construyes una 2ª, 3ª o 4ª Cofradía en otras ciudades y generan el mismo hechizo, <strong>se sube de nivel automáticamente sin gastar Polvo Alquímico</strong>.
               </p>
             </div>
 
@@ -345,48 +546,225 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
         )}
       </div>
 
-      {/* Top 3 Combo Highlights */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className={`rounded-xl p-4 border transition-all ${
-          themeMode === 'light'
-            ? 'bg-red-50/90 border-red-200 shadow-sm'
-            : 'bg-gradient-to-br from-red-950/40 to-black/60 border-red-900/50'
-        }`}>
-          <div className="flex items-center gap-2 mb-2">
-            <Flame className={`w-4 h-4 ${themeMode === 'light' ? 'text-red-600' : 'text-red-400'}`} />
-            <h4 className={`text-xs font-bold uppercase tracking-wider ${themeMode === 'light' ? 'text-red-950' : 'text-red-200'}`}>Combo 1: Drago-Armageddon Magistral</h4>
+      {/* Top 3 Faction Tactical Combos Section */}
+      <div className={`border rounded-2xl p-5 backdrop-blur-md transition-colors duration-300 ${
+        themeMode === 'light'
+          ? 'bg-white border-slate-200 shadow-md text-slate-800'
+          : `bg-black/40 ${theme.border} ${theme.shadowAccent}`
+      }`}>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+          <div>
+            <div className="flex items-center gap-2">
+              <Swords className={`w-5 h-5 ${themeMode === 'light' ? 'text-amber-700' : 'text-amber-400'}`} />
+              <h3 className={`font-serif font-bold text-base sm:text-lg uppercase tracking-wide ${
+                themeMode === 'light' ? 'text-slate-900' : 'text-white'
+              }`}>
+                Top 3 Combos Mágicos Canónicos • {activeFaction}
+              </h3>
+            </div>
+            <p className={`text-xs mt-0.5 ${themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'}`}>
+              Secuencias tácticas optimizadas paso a paso para dominar combates y asedios en Jadame.
+            </p>
           </div>
-          <p className={`text-xs leading-relaxed ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-400'}`}>
-            <strong className={themeMode === 'light' ? 'text-slate-900' : 'text-slate-200'}>Armageddon Nivel 4 (28 Maná)</strong> con Postura Mágica. Los <strong className={themeMode === 'light' ? 'text-slate-900' : 'text-slate-200'}>Dragones Negros</strong> son 100% inmunes a magia Nivel 5; el ejército rival entero es vaporizado en Turno 1 mientras tus Dragones quedan 100% intactos.
-          </p>
+
+          {/* Combo Selector Tabs */}
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+            {factionCombos.map((combo, idx) => (
+              <button
+                key={combo.id}
+                onClick={() => setSelectedComboTab(idx)}
+                className={`px-3 py-1.5 text-xs font-mono font-bold rounded-lg transition-all flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
+                  selectedComboTab === idx
+                    ? `${theme.primaryButton} text-white shadow-md ring-1 ring-white/20`
+                    : themeMode === 'light'
+                      ? 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300'
+                      : 'bg-black/50 text-slate-400 hover:text-white border border-slate-800'
+                }`}
+              >
+                <span>Combo {idx + 1}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className={`rounded-xl p-4 border transition-all ${
-          themeMode === 'light'
-            ? 'bg-cyan-50/90 border-cyan-200 shadow-sm'
-            : 'bg-gradient-to-br from-cyan-950/40 to-black/60 border-cyan-900/50'
-        }`}>
-          <div className="flex items-center gap-2 mb-2">
-            <Compass className={`w-4 h-4 ${themeMode === 'light' ? 'text-cyan-600' : 'text-cyan-400'}`} />
-            <h4 className={`text-xs font-bold uppercase tracking-wider ${themeMode === 'light' ? 'text-cyan-950' : 'text-cyan-200'}`}>Combo 2: Macro-Movilidad Neutral</h4>
-          </div>
-          <p className={`text-xs leading-relaxed ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-400'}`}>
-            <strong className={themeMode === 'light' ? 'text-slate-900' : 'text-slate-200'}>Portal a la Ciudad Nivel 4</strong> (Doble salto diario conservando 60% de movimiento) + <strong className={themeMode === 'light' ? 'text-slate-900' : 'text-slate-200'}>Puerta Dimensional Nivel 4</strong> (4 saltos de 20 casillas). Recluta de todo tu imperio y salta sobre la capital rival en 1 turno.
-          </p>
-        </div>
+        {/* Selected Combo Detailed Card */}
+        {factionCombos[selectedComboTab] && (() => {
+          const combo = factionCombos[selectedComboTab];
+          return (
+            <div className={`rounded-xl p-4 sm:p-5 border transition-all ${
+              themeMode === 'light'
+                ? 'bg-gradient-to-br from-amber-50/70 via-purple-50/40 to-white border-amber-200 shadow-sm'
+                : 'bg-gradient-to-br from-black/80 via-black/60 to-purple-950/20 border-amber-500/30 shadow-[0_0_20px_rgba(245,158,11,0.1)]'
+            }`}>
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 mb-3 border-b pb-3 border-slate-700/30">
+                <div className="flex items-center gap-2.5">
+                  <div className={`p-2 rounded-xl border ${
+                    themeMode === 'light' ? 'bg-amber-100 border-amber-300' : 'bg-black/60 border-amber-500/40'
+                  }`}>
+                    {renderComboIcon(combo.iconType)}
+                  </div>
+                  <div>
+                    <h4 className={`text-base sm:text-lg font-serif font-bold ${
+                      themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                    }`}>
+                      {combo.title}
+                    </h4>
+                    <p className={`text-xs ${themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'}`}>
+                      {combo.subtitle}
+                    </p>
+                  </div>
+                </div>
 
-        <div className={`rounded-xl p-4 border transition-all ${
-          themeMode === 'light'
-            ? 'bg-purple-50/90 border-purple-200 shadow-sm'
-            : 'bg-gradient-to-br from-purple-950/40 to-black/60 border-purple-900/50'
-        }`}>
-          <div className="flex items-center gap-2 mb-2">
-            <Zap className={`w-4 h-4 ${themeMode === 'light' ? 'text-purple-600' : 'text-purple-400'}`} />
-            <h4 className={`text-xs font-bold uppercase tracking-wider ${themeMode === 'light' ? 'text-purple-950' : 'text-purple-200'}`}>Combo 3: Control & Asalto de Hidras</h4>
-          </div>
-          <p className={`text-xs leading-relaxed ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-400'}`}>
-            <strong className={themeMode === 'light' ? 'text-slate-900' : 'text-slate-200'}>Lentitud Masiva Nivel 4</strong> (Inmoviliza a todo el ejército rival) seguido de <strong className={themeMode === 'light' ? 'text-slate-900' : 'text-slate-200'}>Teletransporte Magistral Nivel 4</strong> para soltar a la Hidra en medio de 4 escuadras con +20% Ataque y acción inmediata.
-          </p>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className={`text-[11px] font-mono px-2.5 py-0.5 rounded border font-semibold ${
+                    themeMode === 'light'
+                      ? 'bg-purple-100 text-purple-900 border-purple-300'
+                      : 'bg-purple-950/60 text-purple-300 border-purple-800/50'
+                  }`}>
+                    Escuela: {combo.school}
+                  </span>
+                  <span className={`text-[11px] font-mono px-2.5 py-0.5 rounded border font-semibold ${
+                    themeMode === 'light'
+                      ? 'bg-amber-100 text-amber-900 border-amber-300'
+                      : 'bg-amber-950/60 text-amber-300 border-amber-800/50'
+                  }`}>
+                    Fase: {combo.timing}
+                  </span>
+                </div>
+              </div>
+
+              {/* Key Spells Involved & Beneficiaries */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4 text-xs">
+                <div className={`p-3 rounded-lg border ${
+                  themeMode === 'light' ? 'bg-white border-slate-200' : 'bg-black/50 border-slate-800'
+                }`}>
+                  <span className={`text-[10px] font-mono font-bold uppercase block mb-1.5 ${
+                    themeMode === 'light' ? 'text-cyan-900' : 'text-cyan-400'
+                  }`}>
+                    🔮 Hechizos Clave del Combo:
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {combo.keySpells.map((ks, i) => (
+                      <span
+                        key={i}
+                        className={`text-xs px-2.5 py-1 rounded-md font-mono border flex items-center gap-1.5 ${
+                          themeMode === 'light'
+                            ? 'bg-cyan-50 text-cyan-950 border-cyan-200 font-semibold'
+                            : 'bg-cyan-950/40 text-cyan-200 border-cyan-800/40'
+                        }`}
+                      >
+                        <Zap className="w-3 h-3 text-cyan-500" />
+                        <strong>{ks.spellName}</strong>
+                        <span className="text-[10px] opacity-75">({ks.manaCost} Maná)</span>
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className={`p-3 rounded-lg border ${
+                  themeMode === 'light' ? 'bg-white border-slate-200' : 'bg-black/50 border-slate-800'
+                }`}>
+                  <span className={`text-[10px] font-mono font-bold uppercase block mb-1.5 ${
+                    themeMode === 'light' ? 'text-amber-900' : 'text-amber-400'
+                  }`}>
+                    ⚔️ Unidades & Héroes Beneficiados:
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {combo.beneficiaryUnits.map((u, i) => (
+                      <span
+                        key={i}
+                        className={`text-xs px-2 py-0.5 rounded border font-sans ${
+                          themeMode === 'light'
+                            ? 'bg-amber-50 text-amber-950 border-amber-200'
+                            : 'bg-amber-950/30 text-amber-200 border-amber-900/40'
+                        }`}
+                      >
+                        {u}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Execution Steps */}
+              <div className="space-y-2 mb-3">
+                <span className={`text-[11px] font-mono font-bold uppercase block flex items-center gap-1 ${
+                  themeMode === 'light' ? 'text-slate-800' : 'text-slate-300'
+                }`}>
+                  <Target className="w-3.5 h-3.5 text-amber-500" />
+                  Secuencia de Ejecución Táctica (Turno a Turno):
+                </span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {combo.executionSteps.map((step, idx) => (
+                    <div
+                      key={idx}
+                      className={`p-2.5 rounded-lg border text-xs flex items-start gap-2 ${
+                        themeMode === 'light'
+                          ? 'bg-white/80 border-slate-200 text-slate-800'
+                          : 'bg-black/40 border-slate-800 text-slate-300'
+                      }`}
+                    >
+                      <span className={`text-[11px] font-mono font-bold px-1.5 py-0.5 rounded shrink-0 ${
+                        themeMode === 'light' ? 'bg-purple-100 text-purple-900' : 'bg-purple-950/80 text-purple-300'
+                      }`}>
+                        {idx + 1}
+                      </span>
+                      <span className="leading-relaxed">{step}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Competitive Advantage Callout */}
+              <div className={`p-3 rounded-lg border text-xs flex items-start gap-2 ${
+                themeMode === 'light'
+                  ? 'bg-emerald-50 border-emerald-300 text-emerald-950'
+                  : 'bg-emerald-950/30 border-emerald-800/50 text-emerald-300'
+              }`}>
+                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                <div>
+                  <strong className="block font-mono text-[11px] uppercase tracking-wider mb-0.5">
+                    Ventaja Competitiva en el Meta de Olden Era:
+                  </strong>
+                  <p className="font-sans leading-relaxed">{combo.competitiveAdvantage}</p>
+                </div>
+              </div>
+            </div>
+          );
+        })()}
+
+        {/* 3 Combos Grid Overview */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
+          {factionCombos.map((c, i) => (
+            <div
+              key={c.id}
+              onClick={() => setSelectedComboTab(i)}
+              className={`rounded-xl p-3 border transition-all cursor-pointer ${
+                selectedComboTab === i
+                  ? themeMode === 'light'
+                    ? 'bg-amber-100/70 border-amber-400 shadow-sm ring-1 ring-amber-400'
+                    : 'bg-amber-950/30 border-amber-400 shadow-sm ring-1 ring-amber-400/50'
+                  : themeMode === 'light'
+                    ? 'bg-slate-50 hover:bg-slate-100 border-slate-200'
+                    : 'bg-black/30 hover:bg-black/50 border-slate-800'
+              }`}
+            >
+              <div className="flex items-center justify-between gap-2 mb-1">
+                <span className="text-[11px] font-mono font-bold text-amber-500">Combo {i + 1}</span>
+                <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded border ${
+                  themeMode === 'light' ? 'bg-white border-slate-200' : 'bg-black/40 border-slate-800'
+                }`}>
+                  {c.timing}
+                </span>
+              </div>
+              <h5 className={`text-xs font-serif font-bold truncate ${themeMode === 'light' ? 'text-slate-900' : 'text-white'}`}>
+                {c.title.replace(/^Combo \d+: /, '')}
+              </h5>
+              <p className={`text-[11px] line-clamp-2 mt-1 ${themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'}`}>
+                {c.subtitle}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -394,7 +772,10 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {filteredSpells.map((spell) => {
           const isLearned = !!learnedSpells[spell.id];
-          const isEssential = spell.priority.includes('Imprescindible');
+          const factionPrioInfo = getFactionSpellPriority(spell.id, activeFaction);
+          const effectivePriority = factionPrioInfo ? factionPrioInfo.priority : spell.priority;
+          const isEssential = effectivePriority.includes('Imprescindible');
+          const isVeryHigh = effectivePriority.includes('Muy Alta');
           const isNeutral = !!spell.isNeutral;
           const activeLevelNum = getSpellActiveLevel(spell.id);
           const activeLevel = spell.levels.find((l) => l.level === activeLevelNum) || spell.levels[0];
@@ -438,8 +819,12 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
                     : 'bg-black/60 border-cyan-500/50 hover:border-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.15)]'
                   : isEssential
                   ? themeMode === 'light'
-                    ? 'bg-white border-amber-300 hover:border-amber-400 shadow-sm'
-                    : 'bg-black/60 border-amber-500/40 hover:border-amber-400'
+                    ? 'bg-white border-amber-300 hover:border-amber-400 shadow-sm ring-1 ring-amber-300/60'
+                    : 'bg-black/60 border-amber-500/50 hover:border-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.12)]'
+                  : isVeryHigh
+                  ? themeMode === 'light'
+                    ? 'bg-white border-indigo-200 hover:border-indigo-300 shadow-sm'
+                    : 'bg-black/60 border-indigo-500/40 hover:border-indigo-400'
                   : themeMode === 'light'
                     ? 'bg-white border-slate-200 hover:border-purple-300 shadow-sm'
                     : `bg-black/50 ${theme.borderSubtle} hover:border-amber-400/60`
@@ -467,6 +852,21 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
                       }`}>
                         <Zap className="w-3 h-3 text-cyan-600 dark:text-cyan-400" />
                         {activeLevel.manaCost} Maná
+                      </span>
+
+                      {/* Faction specific priority badge */}
+                      <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border flex items-center gap-1 ${
+                        isEssential
+                          ? 'bg-amber-500 text-black border-amber-300 font-bold'
+                          : isVeryHigh
+                          ? themeMode === 'light'
+                            ? 'bg-purple-100 text-purple-900 border-purple-300 font-semibold'
+                            : 'bg-purple-950/60 text-purple-300 border-purple-700/50'
+                          : themeMode === 'light'
+                            ? 'bg-slate-100 text-slate-700 border-slate-300'
+                            : 'bg-black/50 text-slate-400 border-slate-800'
+                      }`}>
+                        {isEssential ? '⭐' : '🔷'} {effectivePriority} ({activeFaction})
                       </span>
                     </div>
 
@@ -529,20 +929,50 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
                   </div>
                 </div>
 
-                {/* Tactical utility */}
-                <div className={`mb-4 p-2.5 rounded-xl border text-xs ${
-                  themeMode === 'light'
-                    ? 'bg-purple-50/60 border-purple-200 text-slate-800'
-                    : `${theme.bgBadge} border ${theme.borderSubtle}`
+                {/* Faction-Specific Tactical Synergy Callout */}
+                <div className={`mb-4 p-3 rounded-xl border text-xs ${
+                  factionPrioInfo
+                    ? isEssential
+                      ? themeMode === 'light'
+                        ? 'bg-amber-50/80 border-amber-300 text-slate-800 shadow-sm'
+                        : 'bg-gradient-to-r from-amber-950/30 to-black/50 border-amber-500/40 text-slate-200'
+                      : themeMode === 'light'
+                      ? 'bg-purple-50/70 border-purple-200 text-slate-800'
+                      : `${theme.bgBadge} border ${theme.borderSubtle}`
+                    : themeMode === 'light'
+                    ? 'bg-slate-50 border-slate-200 text-slate-800'
+                    : 'bg-black/40 border-slate-800 text-slate-300'
                 }`}>
-                  <span className={`text-[10px] uppercase font-bold tracking-wider block mb-1 flex items-center gap-1 ${
-                    themeMode === 'light' ? 'text-purple-900' : theme.textAccent
-                  }`}>
-                    <Sparkles className="w-3 h-3 text-amber-500" />
-                    Utilidad Táctica para {selectedFaction}:
-                  </span>
-                  <p className={`leading-relaxed font-sans text-xs ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>
-                    {spell.tacticalUtility}
+                  <div className="flex items-center justify-between gap-2 mb-1.5 flex-wrap">
+                    <span className={`text-[10px] uppercase font-bold tracking-wider flex items-center gap-1 ${
+                      isEssential
+                        ? themeMode === 'light' ? 'text-amber-900' : 'text-amber-300'
+                        : themeMode === 'light' ? 'text-purple-900' : theme.textAccent
+                    }`}>
+                      <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                      Sinergia Táctica Canónica con {activeFaction}:
+                    </span>
+
+                    {factionPrioInfo?.keyUnitsBenefited && (
+                      <div className="flex items-center gap-1 flex-wrap">
+                        {factionPrioInfo.keyUnitsBenefited.map((u, i) => (
+                          <span
+                            key={i}
+                            className={`text-[9px] font-mono px-1.5 py-0.2 rounded border ${
+                              themeMode === 'light'
+                                ? 'bg-white border-amber-200 text-slate-700'
+                                : 'bg-black/60 border-amber-900/40 text-amber-200'
+                            }`}
+                          >
+                            {u}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  <p className={`leading-relaxed font-sans text-xs ${themeMode === 'light' ? 'text-slate-800' : 'text-slate-200'}`}>
+                    {factionPrioInfo ? factionPrioInfo.synergyTip : spell.tacticalUtility}
                   </p>
                 </div>
 
