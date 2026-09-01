@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FactionId, getUnitsForFaction, FACTIONS_METADATA, getFactionTheme } from '../data/factionDataProvider';
 import { UnitVariant } from '../types';
 import { useStickyState } from '../utils/useStickyState';
+import { UnitStatRadarChart } from './ui/UnitStatRadarChart';
 import {
   Shield,
   Eye,
@@ -338,7 +339,15 @@ export const UnitMatrix: React.FC<UnitMatrixProps> = ({
 
       {/* COMPARISON VIEW (3 Columns: Base vs Branch A vs Branch B) */}
       {selectedBranch === 'comparison' ? (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className="space-y-4">
+          <UnitStatRadarChart
+            baseVariant={selectedUnit.variants.base}
+            branchAVariant={selectedUnit.variants.branchA}
+            branchBVariant={selectedUnit.variants.branchB}
+            selectedBranch={selectedBranch}
+            themeMode={themeMode}
+          />
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {[
             { variant: selectedUnit.variants.base, color: 'slate', badge: 'Base' },
             { variant: selectedUnit.variants.branchA, color: 'faction', badge: 'Rama A (Ofensiva/Élite)' },
@@ -516,6 +525,7 @@ export const UnitMatrix: React.FC<UnitMatrixProps> = ({
               </button>
             </div>
           ))}
+          </div>
         </div>
       ) : (
         /* SINGLE VARIANT DETAILED CARD */

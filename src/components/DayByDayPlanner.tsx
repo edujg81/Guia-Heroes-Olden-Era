@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { FactionId, getBuildStepsForFaction, FACTIONS_METADATA, getFactionTheme } from '../data/factionDataProvider';
 import { getOpponentTacticForDay } from '../data/dungeonOpponentTactics';
 import { WaxSealBadge } from './ui/WaxSealBadge';
+import { InteractivePlannerTimeline } from './ui/InteractivePlannerTimeline';
+import { BuildResourceCalculator } from './ui/BuildResourceCalculator';
 import { useStickyState } from '../utils/useStickyState';
 import {
   CheckCircle2,
@@ -273,6 +275,22 @@ export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({
           </span>
         </div>
       </div>
+
+      {/* Interactive Timeline & Phase Selector */}
+      <InteractivePlannerTimeline
+        selectedDay={selectedDay}
+        onSelectDay={(day) => setSelectedDay(day)}
+        selectedFaction={selectedFaction}
+        completedDays={completedDays}
+        themeMode={themeMode}
+      />
+
+      {/* Live Cost & Resource Calculator */}
+      <BuildResourceCalculator
+        allSteps={allSteps}
+        completedDays={completedDays}
+        themeMode={themeMode}
+      />
 
       {/* 2-Column Direct Workspace: List of Days + Selected Day Detail */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">

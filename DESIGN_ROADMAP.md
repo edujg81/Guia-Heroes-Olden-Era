@@ -22,10 +22,10 @@ Este documento registra las mejoras de diseño, identidad visual y experiencia d
 
 ---
 
-### 2. Ergonomía Visual en la Visualización de Datos Competitivos ⏳ [PENDIENTE]
-- [ ] **Matriz de Unidades Comparativa con Gráficos Radar/Proporción**: Visualización comparativa inmediata de estadísticas (Ataque, Defensa, Daño, Salud, Velocidad, Iniciativa) entre la criatura base y sus dos ramas de mejora alternativas.
-- [ ] **Línea de Tiempo Interactiva para el Planner Día a Día (56 Días)**: Visor tipo árbol de expansión con hitos clave (Día 1, Día 7, Rush Día 14, Día 21) y selector rápido de fase táctica (Semana 1: Apertura, Semana 2: Rush, Semana 3+: Expansión).
-- [ ] **Calculadora de Costes y Recursos en Tiempo Real**: Panel interactivo flotante o de cabecera que calcula en vivo el coste acumulado (Oro, Madera, Mineral, Mercurio, Gemas, Cristales) al marcar estructuras completadas.
+### 2. Ergonomía Visual en la Visualización de Datos Competitivos ✅ [COMPLETADO]
+- [x] **Matriz de Unidades Comparativa con Gráficos Radar/Proporción**: Visualización comparativa inmediata de estadísticas (Ataque, Defensa, Daño, Salud, Velocidad, Iniciativa) entre la criatura base y sus dos ramas de mejora alternativas (`UnitStatRadarChart.tsx`).
+- [x] **Línea de Tiempo Interactiva para el Planner Día a Día (56 Días)**: Visor tipo árbol de expansión con hitos clave (Día 1, Día 7, Rush Día 14, Día 21) y selector rápido de fase táctica (Semana 1: Apertura, Semana 2: Rush, Semana 3+: Expansión) (`InteractivePlannerTimeline.tsx`).
+- [x] **Calculadora de Costes y Recursos en Tiempo Real**: Panel interactivo flotante o de cabecera que calcula en vivo el coste acumulado (Oro, Madera, Mineral, Mercurio, Gemas, Cristales, Polvo Alquímico) al marcar estructuras completadas (`BuildResourceCalculator.tsx`).
 
 ---
 
