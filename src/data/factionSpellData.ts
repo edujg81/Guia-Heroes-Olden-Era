@@ -265,11 +265,11 @@ export const FACTION_SPELL_COMBOS: Record<CanonicalFactionKey, FactionSpellCombo
         { spellId: 'spell-animate-dead', spellName: 'Reanimar Muertos N4 (Legión Eterna)', level: 'Nivel 4', manaCost: 16 },
         { spellId: 'spell-despair', spellName: 'Desesperación Masiva (N4)', level: 'Nivel 4', manaCost: 8 },
       ],
-      beneficiaryUnits: ['Esqueletos Guerreros', 'Momias Ancestrales', 'Dragones de Hueso'],
-      recommendedHeroes: ['Mortis', 'Khorag'],
+      beneficiaryUnits: ['Esqueletos Guerreros', 'Caballeros del Terror', 'Señores de los Vampiros'],
+      recommendedHeroes: ['Baluarte', 'Adahn'],
       executionSteps: [
         'Lanza Desesperación Masiva N4 (-4 Moral y -4 Suerte al rival) para congelar sus turnos por baja moral.',
-        'Usa tus pilas de esqueletos y zombis para absorber el daño de asalto.',
+        'Usa tus falanges de Esqueletos y Sabuesos para absorber el daño de asalto.',
         'En los turnos 3 y 4, lanza Reanimar Muertos Magistral N4 (revive 550 + 110×Poder PV).',
         'El 100% de las criaturas no-muertas reanimadas con el Nivel 4 permanecen de forma permanente tras la victoria.',
       ],
@@ -630,7 +630,7 @@ export const FACTION_SPELL_PRIORITIES: Record<CanonicalFactionKey, Record<string
     'spell-animate-dead': {
       priority: 'Imprescindible (P1)',
       synergyTip: 'Reanima pilas caídas de no-muertos; en Nivel 4 las tropas levantadas permanecen al 100% de forma definitiva.',
-      keyUnitsBenefited: ['Esqueletos', 'Momias', 'Dragones de Hueso'],
+      keyUnitsBenefited: ['Esqueletos', 'Caballeros del Terror', 'Señores de los Vampiros'],
     },
     'spell-vampiric-touch': {
       priority: 'Muy Alta (P2)',

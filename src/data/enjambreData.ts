@@ -86,8 +86,8 @@ export const ENJAMBRE_56_DAY_BUILD_STEPS: BuildStep[] = [
     day: 6,
     month: 1,
     week: 1,
-    title: 'Día 6: Nido de Feromonas & Cofradía de Biocombate Nivel 1',
-    building: 'Nido de Feromonas & Cofradía Nivel 1',
+    title: 'Día 6: Cofradía de Biocombate Nivel 1 (Furia de la Reina & Celeridad)',
+    building: 'Cofradía de Biocombate Nivel 1',
     cost: { gold: 2000, wood: 5, ore: 5 },
     heroActions: [
       'Aprende biohechizos de Enjambre (Furia de la Reina, Celeridad Quinosa, Nube de Ácido).',
@@ -188,8 +188,8 @@ export const ENJAMBRE_56_DAY_BUILD_STEPS: BuildStep[] = [
     day: 12,
     month: 1,
     week: 2,
-    title: 'Día 12: Cofradía de Biocombate Nivel 2 & Glándulas de Ácido',
-    building: 'Cofradía Nivel 2 & Glándulas de Ácido',
+    title: 'Día 12: Cofradía de Biocombate Nivel 2 (Lluvia de Ácido & Feromonas)',
+    building: 'Cofradía de Biocombate Nivel 2',
     cost: { gold: 2000, wood: 5, ore: 5 },
     heroActions: [
       'Aprende Lluvia de Ácido y Feromonas de Frenesí.',

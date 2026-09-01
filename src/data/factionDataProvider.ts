@@ -668,7 +668,7 @@ export const FACTIONS_METADATA: Record<FactionId, FactionMetadata> = {
     region: 'Tierras Marchitas de Jadame',
     alignment: 'Muerte & Oscuridad',
     primaryMechanic: 'Nigromancia & Resurrección de Sangre',
-    primaryMechanicDesc: 'Levantar ejércitos de esqueletos, Señores Vampiros inmortales y Dragones de Hueso desmoralizadores.',
+    primaryMechanicDesc: 'Levantar ejércitos de esqueletos, Señores de los Vampiros inmortales y Caballeros del Terror devastadores.',
     startingGold: '10.000',
     colorScheme: {
       primary: 'slate',
