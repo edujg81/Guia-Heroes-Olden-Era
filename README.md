@@ -1,67 +1,80 @@
-# 🏛️ Heroes of Might and Magic: Olden Era — Compendio de Estrategia & Planificación
+# 🏛️ Heroes of Might and Magic: Olden Era — Compendio Canónico & Plataforma Táctica de Jadame
 
-> **Guía Técnica de Arquitectura, Manual de Componentes y Sistema de Simulación Táctica**
+> **Manual de Arquitectura, Guía Estratégica Competitiva y Sistema de Simulación Táctica**
 > 
-> *Versión del Proyecto:* 1.3.0 • *Stack:* React 19 + TypeScript 5.8 + Tailwind CSS v4 + Vite 6 + Motion
+> *Versión del Proyecto:* 1.4.0 • *Stack:* React 19 + TypeScript 5.8 + Tailwind CSS v4 + Vite 6 + Motion + Lucide Icons
 
 ---
 
 ## 📑 Tabla de Contenidos
 
 1. [Visión General del Proyecto](#-visión-general-del-proyecto)
-2. [Estructura Actual del Proyecto](#-estructura-actual-del-proyecto)
-3. [Módulos Principales y Responsabilidad de Componentes](#-módulos-principales-y-responsabilidad-de-componentes)
-   - [Núcleo y Shell (`/src/context`, `/src/hooks`, `/src/App.tsx`)](#núcleo-y-shell)
-   - [Design System Atómico (`/src/components/ui`)](#design-system-atómico)
-   - [Vistas de Características (`/src/components/features`)](#vistas-de-características)
-   - [Capa de Datos Desacoplada (`/src/data`)](#capa-de-datos-desacoplada)
-4. [Flujo de Carga Dinámica (Data-Driven Engine)](#-flujo-de-carga-dinámica-data-driven-engine)
-5. [Guía de Ejecución y Scripts](#-guía-de-ejecución-y-scripts)
+2. [Las 6 Facciones Oficiales de Jadame](#-las-6-facciones-oficiales-de-jadame)
+3. [Estructura del Proyecto y Directorios](#-estructura-del-proyecto-y-directorios)
+4. [Módulos Principales del Compendio](#-módulos-principales-del-compendio)
+   - [Planificador de 56 Días](#1-planificador-cívico-y-militar-de-56-días)
+   - [Grimorio de Hechizos y Astrología](#2-grimorio-de-hechizos-astrología-y-mejoras-magistrales)
+   - [Árbol de Leyes de Facción](#3-árbol-de-leyes-de-facción-y-sellos)
+   - [Matriz de Unidades y Evolución](#4-matriz-de-criaturas-tier-1-7-y-doble-evolución)
+   - [Optimizador y Catálogo de Héroes](#5-guía-y-optimizador-de-héroes-competitivos)
+   - [Árboles de Habilidades y Subclases](#6-habilidades-oficiales-y-subclases-de-prestigio)
+   - [Manual Táctico de Combate](#7-manual-táctico-de-combate-y-formaciones)
+5. [Capa de Estado y Design System](#-capa-de-estado-y-design-system)
+6. [Flujo Data-Driven y Extensibilidad](#-flujo-data-driven-y-extensibilidad)
+7. [Guía de Ejecución y Scripts](#-guía-de-ejecución-y-scripts)
 
 ---
 
 ## 🎯 Visión General del Proyecto
 
-Esta aplicación es una plataforma interactiva de estrategia competitiva, optimización de héroes, planificación cívica día a día (Campaña de 56 Días) y simulación táctica para el videojuego *Heroes of Might and Magic: Olden Era*.
+Esta aplicación es una plataforma web integral, modular y de alto rendimiento diseñada para la comunidad competitiva y estratégica de **Heroes of Might and Magic: Olden Era**, ambientado en el continente de **Jadame**.
 
-Soporta las **6 facciones canónicas**:
-- 🟣 **Mazmorra (Dungeon)**
-- 🟡 **Templo (Temple)**
-- 🟢 **Arboleda (Grove / Sylvan)**
-- ⚪ **Necrópolis (Necropolis)**
-- 🟠 **Enjambre (Hive / Swarm)**
-- 🔵 **Cisma (Schism)**
+Proporciona herramientas de cálculo de tempo económico para los **Días 1 al 7**, optimización de builds de comandantes, catálogo exhaustivo de los 10 árboles de habilidades, matrices de unidades con evoluciones alternativas, simulación de leyes cívicas y un grimorio completo con fórmulas de desbloqueo, costes de astrología y mejoras mágicas con Polvo Alquímico.
 
 ---
 
-## 🌳 Estructura Actual del Proyecto
+## 🛡️ Las 6 Facciones Oficiales de Jadame
+
+El compendio cubre de forma exhaustiva y canónica las 6 facciones del juego:
+
+1. 🟡 **Templo (Temple)**: Furia sagrada, caballeros de armadura pesada, clérigos y huestes celestiales.
+2. ⚪ **Necrópolis (Necropolis)**: No-muertos, vampiros inmortales, nigromancia acumulativa y magia de sombras.
+3. 🟣 **Mazmorra (Dungeon)**: Elfos oscuros, minotauros, hidras, dragones negros y hechicería elemental devastadora.
+4. 🟢 **Foresta / Arboleda (Sylvan / Grove)**: Elfos silvanos, cazadores de élite, ents ancestrales, unicornios y magia de la naturaleza.
+5. 🟠 **Colmena / Enjambre (Hive / Swarm)**: Horda insectoide de Beelzebub y el Rey Libélula (9 Ejecutores / Might y 9 Heraldos / Magic).
+6. 🔵 **Cisma (Schism)**: Constructos mecánicos, enanos oscuros, magia cronológica de distorsión y alquimia bélica.
+
+---
+
+## 🌳 Estructura del Proyecto y Directorios
 
 ```text
-├── index.html                           # Entry-point HTML con metadatos SEO y tipografías
+├── index.html                           # Entry-point HTML con metadatos y tipografías
 ├── package.json                         # Dependencias (React 19, Tailwind v4, Motion, Lucide)
-├── tsconfig.json                        # Configuración estricta de compilación TypeScript
-├── vite.config.ts                       # Configuración de empaquetado Vite con soporte Tailwind v4
+├── tsconfig.json                        # Configuración estricta de TypeScript 5.8
+├── vite.config.ts                       # Configuración de empaquetado Vite
 ├── metadata.json                        # Manifiesto de capacidades y configuración de la app
-├── README.md                            # Documentación técnica general y manual de usuario
-├── ARCHITECTURE.md                      # Blueprint arquitectónico y reglas de diseño estricto
+├── README.md                            # Documentación general y manual técnico
+├── ARCHITECTURE.md                      # Blueprint arquitectónico y protocolos de extensión
+├── AGENTS.md                            # Instrucciones y reglas para agentes de desarrollo
 │
 └── src/
     ├── main.tsx                         # Bootstrap del árbol React DOM
-    ├── App.tsx                          # Shell principal con persistencia y conmutación de vistas
-    ├── index.css                        # Entry point de estilos globales (Tailwind v4 theme variables)
-    ├── types.ts                         # Definiciones de tipos TypeScript de todo el dominio
+    ├── App.tsx                          # Shell principal con persistencia y keep-alive de pestañas
+    ├── index.css                        # Estilos globales y variables de tema dinámico Tailwind v4
+    ├── types.ts                         # Definiciones de tipos TypeScript principales del dominio
     │
     ├── types/                           # Sistema modular de tipado
     │   └── index.ts                     # Barrel export de tipos
     │
     ├── context/                         # Capa de Estado Global Unificado
-    │   ├── AppContext.tsx               # Proveedor principal: facción, tab, themeMode, tema dinámico
+    │   ├── AppContext.tsx               # Proveedor principal: facción, tab, themeMode, tema reactivo
     │   ├── ThemeContext.tsx             # Contexto de compatibilidad de tematización
     │   └── index.ts                     # Barrel export de contextos
     │
     ├── hooks/                           # Hooks de Negocio y Utilidades
     │   ├── useStickyState.ts            # Sincronización transparente con localStorage
-    │   └── index.ts                     # Barrel export de hooks
+    │   └── index.ts                     # Barrel export de hooks (useApp, useStickyState)
     │
     ├── components/
     │   ├── layout/                      # Componentes estructurales de layout
@@ -71,7 +84,7 @@ Soporta las **6 facciones canónicas**:
     │   ├── ui/                          # Design System Atómico Reutilizable
     │   │   ├── GenericGuideTemplate.tsx # Plantilla genérica para renderizado uniforme de guías
     │   │   ├── ResourceBadge.tsx        # Badge normalizado para recursos (Oro, Madera, Gemas, etc.)
-    │   │   ├── TierBadge.tsx            # Badge distintivo de rangos y niveles (T1-T7, S+, S, A)
+    │   │   ├── TierBadge.tsx            # Badge distintivo de rangos (T1-T7, Tier S+, S, A)
     │   │   ├── SearchBar.tsx            # Input de búsqueda con debouncing e icono de limpieza
     │   │   ├── FilterChipGroup.tsx      # Selector de filtros por píldoras con conteo dinámico
     │   │   └── index.ts                 # Barrel export del Design System
@@ -94,32 +107,35 @@ Soporta las **6 facciones canónicas**:
     │   ├── OfficialSkillsBrowser.tsx    # Explorador de los 10 árboles oficiales de habilidades
     │   └── SubclassesBrowser.tsx        # Clases de prestigio y combinaciones de maestría
     │
-    └── data/                            # Capa de Datos y Modelos de Simulación
+    └── data/                            # Capa de Datos Desacoplada (Data-Driven)
         ├── factionDataProvider.ts       # Proveedor centralizador y selector reactivo de facción
         ├── heroesData.ts                # Catálogo unificado y funciones de búsqueda de héroes
-        ├── dungeonData.ts               # Dataset Mazmorra (Dungeon): 56 días, unidades, héroes
-        ├── templeData.ts                # Dataset Templo (Temple)
-        ├── arboledaData.ts              # Dataset Arboleda (Grove)
-        ├── necropolisData.ts            # Dataset Necrópolis (Necropolis)
-        ├── enjambreData.ts              # Dataset Enjambre (Hive)
-        ├── cismaData.ts                 # Dataset Cisma (Schism)
+        ├── factionSpellData.ts          # Synergies mágicas, prioridades y combos por facción
+        ├── officialSkillsData.ts        # Árboles canónicos de habilidades primarias y secundarias
+        ├── subclassesData.ts            # Matriz de subclases de prestigio de Jadame
+        ├── dungeonData.ts               # Dataset Mazmorra (56 días, unidades, héroes, tácticas)
+        ├── templeData.ts                # Dataset Templo
+        ├── arboledaData.ts              # Dataset Foresta / Arboleda
+        ├── necropolisData.ts            # Dataset Necrópolis
+        ├── enjambreData.ts              # Dataset Colmena / Enjambre
+        ├── cismaData.ts                 # Dataset Cisma
         │
         ├── factions/                    # Módulos de datos desacoplados por facción
         │   ├── heroesRegistry.ts        # Registro extensible de héroes en runtime
         │   ├── dungeon/heroes.ts        # Héroes de Mazmorra
         │   ├── temple/heroes.ts         # Héroes de Templo
-        │   ├── grove/heroes.ts          # Héroes de Arboleda
+        │   ├── grove/heroes.ts          # Héroes de Foresta
         │   ├── necropolis/heroes.ts     # Héroes de Necrópolis
-        │   ├── hive/heroes.ts           # Héroes de Enjambre
+        │   ├── hive/heroes.ts           # Héroes de Colmena
         │   └── schism/heroes.ts         # Héroes de Cisma
         │
         ├── structures/                  # Arquitectura de edificios de ciudad
         │   ├── townStructuresData.ts    # Exportador unificado de estructuras
         │   ├── dungeonStructures.ts     # Edificios de Mazmorra
         │   ├── templeStructures.ts      # Edificios de Templo
-        │   ├── groveStructures.ts       # Edificios de Arboleda
+        │   ├── groveStructures.ts       # Edificios de Foresta
         │   ├── necropolisStructures.ts  # Edificios de Necrópolis
-        │   ├── hiveStructures.ts        # Edificios de Enjambre
+        │   ├── hiveStructures.ts        # Edificios de Colmena
         │   └── schismStructures.ts      # Edificios de Cisma
         │
         └── spells/                      # Compendio de magia y astrología
@@ -127,50 +143,78 @@ Soporta las **6 facciones canónicas**:
             ├── arcaneSpells.ts          # Magia Arcana
             ├── daylightSpells.ts        # Magia de Luz (Daylight)
             ├── nightshadeSpells.ts      # Magia Nochesombra (Nightshade)
-            ├── primalSpells.ts          # Magia Primigenia (Primal / Tierra / Fuego)
+            ├── primalSpells.ts          # Magia Primigenia (Primal)
             └── neutralSpells.ts         # Magia de Aventura / Neutral (Universal)
 ```
 
 ---
 
-## 🧩 Módulos Principales y Responsabilidad de Componentes
+## 🧩 Módulos Principales del Compendio
 
-### Núcleo y Shell
-* **`AppContext.tsx`**: Administra de forma centralizada la facción activa (`selectedFaction`), la pestaña activa (`activeTab`), el modo visual (`themeMode`) y computa la paleta de colores reactiva correspondiente.
-* **`App.tsx`**: Monta la jerarquía principal y preserva el estado de navegación del usuario mediante el patrón *keep-alive* con clases `block / hidden`.
+### 1. Planificador Cívico y Militar de 56 Días
+* **Desarrollo Día a Día**: Ruta paso a paso optimizada para las 8 semanas de juego (56 días).
+* **Priorización de Recursos**: Cálculo exacto de ingresos de oro, madera, mineral y recursos raros.
+* **Hitos Críticos**: Identificación de momentos clave como el Capitoliar Día 7 o la primera criatura Tier 7 en la Semana 2.
 
-### Design System Atómico
-* **`GenericGuideTemplate.tsx`**: Contenedor estándar que inyecta automáticamente el encabezado tematizado de facción, barra de búsqueda, chips de filtrado y área de contenido.
-* **`ResourceBadge.tsx`**: Formateador visual con iconos y colores para los recursos del juego (🪙 Oro, 🪵 Madera, ⛏️ Mineral, 🧪 Azufre, 💧 Mercurio, 💎 Gemas, 🔮 Cristal, ✨ Maná, 📜 Ley).
-* **`TierBadge.tsx`**: Badge con contraste cromático adaptado para niveles Tier 1 a 7 y rangos competitivos (Tier S+, S, A).
+### 2. Grimorio de Hechizos, Astrología y Mejoras Magistrales
+* **5 Escuelas Mágicas**: Luz (*Daylight*), Nochesombra (*Nightshade*), Primigenia (*Primal*), Arcana (*Arcane*) y Aventura (*Universal*).
+* **Fórmula de Desbloqueo en Observatorio**: `Tier × (2 Cristales, 2 Gemas, 2 Mercurio) + Oro`.
+* **Escala de Niveles 1 al 4**: Progresión con Polvo Alquímico (*Dust*) hasta la forma **Magistral (Masterful)**.
+* **Sinergias de Facción**: Consejos tácticos específicos para cada facción y unidades beneficiadas.
 
-### Capa de Datos Desacoplada
-* **`heroesData.ts`**: Fuente unificada para el consumo de héroes de las 6 facciones, con helpers de búsqueda por ID y filtrado por facción.
-* **`heroesRegistry.ts`**: Capa de registro extensible que permite agregar nuevos comandantes en tiempo de compilación o ejecución.
+### 3. Árbol de Leyes de Facción y Sellos
+* **Mecánica de Sellos Cívicos**: Configuración de leyes con sus modificadores económicos y militares.
+* **Presets Competitivos**: Configuraciones prediseñadas para aperturas agresivas de Día 1, economías de late game o defensas de asedio.
+
+### 4. Matriz de Criaturas Tier 1-7 y Doble Evolución
+* **Evoluciones Alternativas**: Análisis comparativo de ambas variantes de mejora para cada unidad de Tier 1 a 7.
+* **Estadísticas Completas**: Ataque, defensa, daño mínimo/máximo, puntos de vida, velocidad e iniciativa.
+* **Habilidades Especiales**: Desglose de pasivas, auras, ataques sin represalia y disparos a distancia.
+
+### 5. Guía y Optimizador de Héroes Competitivos
+* **Tier List y Roles**: Clasificación (Tier S+, S, A, B) y categorización de roles (Main de Asalto, Farmeo Día 1, Hechicero, Soporte).
+* **Especialidades Únicas**: Explicación de cómo escala la pasiva única de cada comandante por nivel.
+* **Builds Óptimas**: Secuencia de habilidades recomendada y sinergias con tropas y artefactos.
+
+### 6. Habilidades Oficiales y Subclases de Prestigio
+* **10 Árboles Oficiales**: Explorador interactivo con las 6 sub-habilidades por cada rama primaria.
+* **Subclases de Prestigio**: Matriz de combinaciones de habilidades que desbloquean clases especiales de Jadame con bonificaciones pasivas.
+
+### 7. Manual Táctico de Combate y Formaciones
+* **Secuencia de Turnos e Iniciativa**: Estrategias para ganar el primer movimiento y neutralizar tiradores enemigos.
+* **Posicionamiento Hexagonal**: Diagramas y tácticas de colocación en el campo de batalla.
 
 ---
 
-## 🔄 Flujo de Carga Dinámica (Data-Driven Engine)
+## 🎨 Capa de Estado y Design System
 
-1. El usuario selecciona una facción en el `Header` (ejemplo: *Arboleda*).
-2. `AppContext` actualiza el estado global y las variables CSS en `:root` (`--theme-primary-hex`, scrollbar).
-3. Cada vista de la aplicación (Héroes, Unidades, Estructuras, Leyes, Hechizos) consulta automáticamente el dataset correspondiente a la facción activa a través de los proveedores de datos (`factionDataProvider.ts`, `heroesData.ts`).
-4. La interfaz se re-renderiza con los datos específicos de la facción sin recargas de página ni bifurcaciones complejas en la UI.
+* **`AppContext`**: Gestiona de forma centralizada la facción activa (`selectedFaction`), la pestaña activa (`activeTab`), el modo visual (`themeMode`) e inyecta la paleta de colores reactiva en tiempo real.
+* **Variables CSS Dinámicas**: Adaptación automática de bordes, brillos, badges y botones al color temático de cada facción.
+* **Componentes Atómicos**: `ResourceBadge`, `TierBadge`, `SearchBar` y `FilterChipGroup` aseguran coherencia visual sin duplicación de clases.
+
+---
+
+## 🔄 Flujo Data-Driven y Extensibilidad
+
+1. **Desacoplamiento Total**: Ningún componente de interfaz contiene arrays estáticos de datos.
+2. **Carga Reactiva**: Al seleccionar una facción en el `Header`, todas las vistas consultan automáticamente los proveedores de datos (`factionDataProvider.ts`, `heroesData.ts`, `factionSpellData.ts`).
+3. **Ampliación Sin Tocar UI**: Para añadir nuevos héroes, hechizos o leyes, basta con agregar el objeto tipado en el fichero de datos correspondiente en `/src/data/`.
 
 ---
 
 ## 🚀 Guía de Ejecución y Scripts
 
 ```bash
-# Instalación de dependencias
+# Instalar dependencias del proyecto
 npm install
 
-# Ejecución en modo desarrollo
+# Iniciar servidor de desarrollo en http://localhost:3000
 npm run dev
 
-# Verificación de tipos TypeScript
+# Validar tipado y sintaxis estricta con TypeScript
 npm run lint
 
-# Compilación para producción
+# Compilar paquete de producción optimizado
 npm run build
 ```
+

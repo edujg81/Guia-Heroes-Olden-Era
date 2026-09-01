@@ -11,42 +11,44 @@
 ## 📑 Tabla de Contenidos
 
 1. [Visión y Principios Arquitectónicos](#1-visión-y-principios-arquitectónicos)
-2. [Estructura Actual del Árbol de Directorios](#2-estructura-actual-del-árbol-de-directorios)
+2. [Estructura del Árbol de Directorios](#2-estructura-del-árbol-de-directorios)
 3. [Implementación de la Capa de Estado y Design System](#3-implementación-de-la-capa-de-estado-y-design-system)
    - [Estado Global Unificado (`/src/context/AppContext.tsx`)](#estado-global-unificado-srccontextappcontexttsx)
    - [Design System Atómico (`/src/components/ui/`)](#design-system-atómico-srccomponentsui)
    - [Plantilla Genérica Universal (`GenericGuideTemplate.tsx`)](#plantilla-genérica-universal-genericguidetemplatetsx)
-4. [Estrategia de Escalabilidad Data-Driven (Zero-Code Additions)](#4-estrategia-de-escalabilidad-data-driven-zero-code-additions)
-   - [Registro y Carga Dinámica de Héroes (`heroesData.ts` & `heroesRegistry.ts`)](#registro-y-carga-dinámica-de-héroes-heroesdatats--heroesregistryts)
-   - [Protocolo para Añadir un Nuevo Héroe](#protocolo-para-añadir-un-nuevo-héroe)
+4. [Modelos de Dominio y Contratos TypeScript](#4-modelos-de-dominio-y-contratos-typescript)
+5. [Estrategia de Escalabilidad Data-Driven (Zero-Code Additions)](#5-estrategia-de-escalabilidad-data-driven-zero-code-additions)
+   - [Protocolo para Añadir o Modificar un Héroe](#protocolo-para-añadir-o-modificar-un-héroe)
+   - [Protocolo para Añadir o Modificar un Hechizo](#protocolo-para-añadir-o-modificar-un-hechizo)
    - [Protocolo para Añadir una Nueva Facción](#protocolo-para-añadir-una-nueva-facción)
-5. [Matriz de Estado y Verificación Técnica](#5-matriz-de-estado-y-verificación-técnica)
+6. [Matriz de Estado y Verificación Técnica](#6-matriz-de-estado-y-verificación-técnica)
 
 ---
 
 ## 1. Visión y Principios Arquitectónicos
 
-1. **Separation of Concerns (SoC):** Desacoplamiento estricto entre la presentación visual (componentes de interfaz), la lógica de estado y persistencia (hooks y contexts), y el modelo de datos (archivos de dominio).
-2. **Data-Driven Dynamic Ingestion:** La interfaz de usuario opera como un motor de renderizado universal. Cada sección (Héroes, Unidades, Estructuras, Leyes, Hechizos) renderiza dinámicamente según la facción activa seleccionada.
-3. **Strict Type Safety:** Contratos tipados con TypeScript en `src/types.ts` y `src/types/index.ts`, garantizando validación y autocompletado en tiempo de compilación.
+1. **Separation of Concerns (SoC):** Desacoplamiento estricto entre la presentación visual (componentes de interfaz en `/src/components/`), la lógica de estado y persistencia (`/src/context/` y `/src/hooks/`), y el modelo de datos (archivos en `/src/data/`).
+2. **Data-Driven Dynamic Ingestion:** La interfaz de usuario opera como un motor de renderizado universal. Cada módulo (Héroes, Unidades, Estructuras, Leyes, Hechizos, Tácticas) renderiza dinámicamente según la facción activa seleccionada sin lógica hardcodeada.
+3. **Strict Type Safety:** Contratos tipados con TypeScript 5.8 en `src/types.ts` y `src/types/index.ts`, garantizando validación estricta y autocompletado en tiempo de compilación.
 4. **Reutilización y Consistencia Visual:** Eliminación de clases duplicadas mediante componentes atómicos (`ResourceBadge`, `TierBadge`, `SearchBar`, `FilterChipGroup`).
+5. **Fidelidad Canónica con Jadame:** Todos los datos de unidades, comandantes, habilidades y hechizos se ajustan exclusivamente al lore y las mecánicas oficiales de *Heroes of Might and Magic: Olden Era*.
 
 ---
 
-## 2. Estructura Actual del Árbol de Directorios
+## 2. Estructura del Árbol de Directorios
 
 ```text
 src/
 ├── main.tsx                         # Bootstrap de React DOM
-├── App.tsx                          # Shell principal con persistencia de vistas
-├── index.css                        # Estilos globales y variables de tema Tailwind v4
+├── App.tsx                          # Shell principal con persistencia y keep-alive de vistas
+├── index.css                        # Estilos globales y variables de tema dinámico Tailwind v4
 ├── types.ts                         # Tipos de dominio para todo el compendio
 │
 ├── types/                           # Sistema modular de tipado
 │   └── index.ts                     # Barrel export de tipos
 │
 ├── context/                         # Capa de Estado Global
-│   ├── AppContext.tsx               # Contexto centralizado (facción, tab, tema)
+│   ├── AppContext.tsx               # Contexto centralizado (facción, tab, tema, paleta de color)
 │   ├── ThemeContext.tsx             # Contexto de compatibilidad
 │   └── index.ts                     # Barrel export de contextos
 │
@@ -56,7 +58,7 @@ src/
 │
 ├── components/
 │   ├── layout/                      # Estructura del Shell
-│   │   ├── Header.tsx               # Barra superior con selector de facciones
+│   │   ├── Header.tsx               # Barra superior con selector de facciones y switch de tema
 │   │   └── index.ts                 # Barrel export de layout
 │   │
 │   ├── ui/                          # Design System Atómico
@@ -77,9 +79,9 @@ src/
 │   ├── DayByDayPlanner.tsx          # Planificador 56 días
 │   ├── TownStructuresBrowser.tsx    # Edificios de ciudad y moradas
 │   ├── FactionLawsTree.tsx          # Árbol de leyes de facción
-│   ├── SpellGrimoire.tsx            # Grimorio de hechizos
-│   ├── UnitMatrix.tsx               # Matriz de criaturas
-│   ├── CombatTactics.tsx            # Tácticas de combate
+│   ├── SpellGrimoire.tsx            # Grimorio de hechizos (5 escuelas de magia)
+│   ├── UnitMatrix.tsx               # Matriz de criaturas y evoluciones alternativas
+│   ├── CombatTactics.tsx            # Tácticas de combate y enfrentamientos
 │   ├── HeroSkillOptimizer.tsx       # Sub-navegador de héroes y habilidades
 │   ├── RecommendedHeroes.tsx        # Recomendaciones de comandantes
 │   ├── OfficialSkillsBrowser.tsx    # 10 árboles oficiales de habilidades
@@ -88,20 +90,23 @@ src/
 └── data/                            # Capa de Datos Desacoplada
     ├── factionDataProvider.ts       # Proveedor centralizador y selector reactivo
     ├── heroesData.ts                # Catálogo unificado de héroes
+    ├── factionSpellData.ts          # Prioridades de magia y combos por facción
+    ├── officialSkillsData.ts        # Árboles oficiales de habilidades
+    ├── subclassesData.ts            # Matriz de subclases de Jadame
     ├── dungeonData.ts               # Mazmorra (Dungeon)
     ├── templeData.ts                # Templo (Temple)
-    ├── arboledaData.ts              # Arboleda (Grove)
+    ├── arboledaData.ts              # Foresta / Arboleda (Sylvan)
     ├── necropolisData.ts            # Necrópolis (Necropolis)
-    ├── enjambreData.ts              # Enjambre (Hive)
+    ├── enjambreData.ts              # Colmena / Enjambre (Hive)
     ├── cismaData.ts                 # Cisma (Schism)
     │
     ├── factions/                    # Módulos específicos por facción
     │   ├── heroesRegistry.ts        # Registro extensible en runtime
     │   ├── dungeon/heroes.ts        # Héroes de Mazmorra
     │   ├── temple/heroes.ts         # Héroes de Templo
-    │   ├── grove/heroes.ts          # Héroes de Arboleda
+    │   ├── grove/heroes.ts          # Héroes de Foresta
     │   ├── necropolis/heroes.ts     # Héroes de Necrópolis
-    │   ├── hive/heroes.ts           # Héroes de Enjambre
+    │   ├── hive/heroes.ts           # Héroes de Colmena
     │   └── schism/heroes.ts         # Héroes de Cisma
     │
     ├── structures/                  # Edificios por facción
@@ -114,7 +119,7 @@ src/
 
 ### Estado Global Unificado (`/src/context/AppContext.tsx`)
 
-Centraliza el estado de la aplicación, evitando prop-drilling:
+Centraliza el estado de la aplicación, evitando prop-drilling y actualizando reactivamente las variables CSS de tema en `:root`:
 
 ```tsx
 import { useApp } from '../hooks';
@@ -127,10 +132,10 @@ export function MyComponent() {
 
 ### Design System Atómico (`/src/components/ui/`)
 
-* **`ResourceBadge`**: Normaliza visualmente los costes y ganancias de recursos con iconos y colores temáticos.
-* **`TierBadge`**: Formatea rangos de tropas (Tier 1 a 7) y héroes (Tier S+, S, A) con alto contraste.
+* **`ResourceBadge`**: Normaliza visualmente los costes y ganancias de recursos (🪙 Oro, 🪵 Madera, ⛏️ Mineral, 💧 Mercurio, 💎 Gemas, 🔮 Cristal, ✨ Maná, 📜 Puntos de Ley).
+* **`TierBadge`**: Formatea rangos de tropas (Tier 1 a 7) y héroes (Tier S+, S, A) con contraste accesible (WCAG AA).
 * **`SearchBar`**: Campo de búsqueda reactivo con icono de lupa y botón de limpieza inmediata.
-* **`FilterChipGroup`**: Botones de selección de filtros con conteo de elementos y soporte de iconos.
+* **`FilterChipGroup`**: Botones de selección de filtros por categorías con conteo de elementos y soporte de iconos.
 
 ### Plantilla Genérica Universal (`GenericGuideTemplate.tsx`)
 
@@ -142,62 +147,82 @@ Proporciona la estructura visual estándar para todas las guías del compendio:
 
 ---
 
-## 4. Estrategia de Escalabilidad Data-Driven (Zero-Code Additions)
+## 4. Modelos de Dominio y Contratos TypeScript
 
-### Registro y Carga Dinámica de Héroes (`heroesData.ts` & `heroesRegistry.ts`)
+El sistema de tipos en `src/types.ts` garantiza la integridad de todos los datasets:
 
-Los datos de los héroes están desacoplados de la lógica de interfaz. La función `getHeroesByFactionKey(selectedFaction)` obtiene de inmediato el dataset correspondiente para alimentar componentes genéricos como `HeroGuideView`.
+* **`DungeonHero`**: Comandante con nombre canónico, clase, tipo (Might / Magic), tier competitivo, especialidad con escalado por nivel, habilidades iniciales, ejército de salida, build recomendada y combo de sinergia.
+* **`UnitInfo`**: Criatura de Tier 1-7 con sus 2 variantes de evolución alternativa, estadísticas de combate (ataque, defensa, daño, salud, velocidad, iniciativa) y pasivas especiales.
+* **`BuildStep`**: Paso del planificador de 56 días con día, semana, estructura a construir, coste exacto de recursos, ruta de exploración y objetivo militar.
+* **`FactionLaw`**: Ley cívica con sello, efectos pasivos, prerrequisitos y modificadores.
+* **`SpellData` / `SpellLevel`**: Hechizo con escuela mágica, tier (1-5), coste de maná, coste de astrología, fórmula de compra en Observatorio y desglose de progresión Nivel 1 a Nivel 4 (Magistral).
 
-### Protocolo para Añadir un Nuevo Héroe
+---
 
-Para añadir un nuevo comandante a una facción:
+## 5. Estrategia de Escalabilidad Data-Driven (Zero-Code Additions)
 
-1. Abrir el archivo correspondiente en `/src/data/factions/{faction}/heroes.ts` (o el dataset principal en `src/data/`).
-2. Insertar el objeto con la estructura `DungeonHero`:
+### Protocolo para Añadir o Modificar un Héroe
+
+1. Localizar el fichero correspondiente en `/src/data/factions/{faction}/heroes.ts` o el dataset principal en `src/data/`.
+2. Añadir la entrada respetando la interfaz `DungeonHero`:
 
 ```typescript
 {
-  id: 'hero-malakor',
-  name: 'Malakor',
-  title: 'El Invocador del Vacío',
-  heroClass: 'Brujo',
-  heroType: 'Mago',
-  role: 'Principal Mágico',
-  tierRank: 'Tier S+ (Meta)',
-  specialtyName: 'Convocación del Vacío',
-  specialtyEffect: '+20% de efectividad en conjuros de invocación.',
-  initialSkills: ['Taumaturgia básica', 'Magia primigenia básica'],
-  initialArmy: 'Troglodita 20, Infiltrador 8',
-  recommendedStartingTier: 'Especialista en control de campo de batalla.',
-  statGrowth: { attack: 15, defense: 20, spellPower: 45, knowledge: 20 },
-  tacticalPlaystyle: 'Lanza invocaciones en el primer turno para absorber represalias.',
-  idealSkillBuild: ['Taumaturgia (Experta)', 'Sabiduría (Experta)'],
-  synergyCombo: 'Sinergia con Dragones Negros.'
+  id: 'hero-khashar',
+  name: 'Khashar',
+  title: 'El Estratega de Sombras',
+  heroClass: 'Ejecutor',
+  heroType: 'Poder',
+  role: 'Main de Asalto',
+  tierRank: 'Tier S (Competitivo)',
+  specialtyName: 'Enjambre Implacable',
+  specialtyEffect: 'Aumenta el daño de las Avispas Asesinas en +5% por cada 2 niveles del héroe.',
+  initialSkills: ['Liderazgo básico', 'Tácticas básicas'],
+  initialArmy: 'Avispas 25, Larvas 40',
+  recommendedStartingTier: 'Excelente para limpiar campamentos neutrales en Semana 1 sin bajas.',
+  statGrowth: { attack: 40, defense: 30, spellPower: 15, knowledge: 15 },
+  tacticalPlaystyle: 'Lanza a las tropas rápidas en Turno 1 para trabar a los arqueros enemigos.',
+  idealSkillBuild: ['Liderazgo (Experto)', 'Ataque (Experto)', 'Logística (Experta)'],
+  synergyCombo: 'Sinergia con Avispas y Mantis devoradoras.'
 }
 ```
 
-3. El sistema lo renderizará inmediatamente en las vistas de héroes, filtros y modales sin necesidad de modificar componentes React.
+3. El héroe aparecerá inmediatamente en `HeroGuideView`, en el modal flotante y en los filtros de búsqueda sin necesidad de alterar código React.
+
+### Protocolo para Añadir o Modificar un Hechizo
+
+1. Ubicar la escuela mágica en `/src/data/spells/` (`daylightSpells.ts`, `nightshadeSpells.ts`, `primalSpells.ts`, `arcaneSpells.ts`, `neutralSpells.ts`).
+2. Implementar los 4 niveles de progresión y los costes canónicos:
+   - **Coste de Desbloqueo Base**: `Tier × (2 Cristales, 2 Gemas, 2 Mercurio) + Oro`.
+   - **Progresión de Polvo Alquímico**:
+     - Nivel 1: Desbloqueo base (0 Polvo).
+     - Nivel 2: 25 Polvo + 1.000 Oro.
+     - Nivel 3: 25 Polvo + 1.500 Oro + 2 Recursos Raros.
+     - Nivel 4 (Magistral): 25 Polvo + 2.000 Oro + 4 Recursos Raros.
+3. Registrar la sinergia por facción en `src/data/factionSpellData.ts`.
 
 ### Protocolo para Añadir una Nueva Facción
 
 1. Añadir el identificador en `FactionId` (`src/data/factionDataProvider.ts`).
 2. Configurar la paleta de colores y metadatos en `FACTION_THEMES` y `FACTIONS_METADATA`.
-3. Crear el archivo de datos correspondiente en `/src/data/` o `/src/data/factions/{faction}/`.
-4. El selector del `Header` y todas las vistas del compendio renderizarán la nueva facción de forma automática.
+3. Crear el archivo de datos correspondiente en `/src/data/` (unidades, 56 días, leyes, estructuras).
+4. El selector del `Header` y todas las vistas del compendio renderizarán la nueva facción automáticamente.
 
 ---
 
-## 5. Matriz de Estado y Verificación Técnica
+## 6. Matriz de Estado y Verificación Técnica
 
 | Requisito Arquitectónico | Estado | Módulo Responsable |
 | :--- | :--- | :--- |
 | **Separación de Datos de Héroes** | ✅ Implementado | `/src/data/heroesData.ts` & `/src/data/factions/` |
+| **Grimorio de 5 Escuelas Mágicas** | ✅ Implementado | `/src/data/spells/` & `/src/data/factionSpellData.ts` |
 | **Design System Atómico** | ✅ Implementado | `/src/components/ui/` |
 | **Plantilla Genérica de Guías** | ✅ Implementado | `/src/components/ui/GenericGuideTemplate.tsx` |
 | **Estado Global Centralizado** | ✅ Implementado | `/src/context/AppContext.tsx` |
-| **Verificación de Tipos Estricta** | ✅ Verificado (0 errors) | `tsc --noEmit` |
+| **Verificación de Tipos Estricta** | ✅ Verificado (0 errores) | `tsc --noEmit` |
 | **Compilación de Producción** | ✅ Verificado | `vite build` |
 
 ---
 
-*Documento sincronizado y validado según los estándares de ingeniería de software para aplicaciones React + TypeScript modernas.*
+*Documento sincronizado y validado según los estándares de ingeniería de software para aplicaciones React 19 + TypeScript modernas.*
+
