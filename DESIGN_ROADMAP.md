@@ -29,10 +29,10 @@ Este documento registra las mejoras de diseño, identidad visual y experiencia d
 
 ---
 
-### 3. Simulador de Árbol de Habilidades y Especialidades de Héroes ⏳ [PENDIENTE]
-- [ ] **Selector Visual del Árbol de Habilidades de Jadame**: Cuadrícula interactiva con conectores visuales para habilidades primarias/secundarias y cálculo de prerrequisitos de subclases.
-- [ ] **Simulador de Asignación de Puntos (Nivel 1 al 20)**: Contador interactivo de puntos restantes para planificar builds completas antes de jugar.
-- [ ] **Tarjetas de Héroe con Vista 'Ficha de Comandante'**: Pestañas de acceso rápido por héroe (Estadísticas, Ruta 1-20, Tácticas de Creeping y Sinergias).
+### 3. Simulador de Árbol de Habilidades y Especialidades de Héroes ✅ [COMPLETADO]
+- [x] **Selector Visual del Árbol de Habilidades de Jadame**: Cuadrícula interactiva con conectores visuales para habilidades primarias/secundarias y cálculo de prerrequisitos de subclases.
+- [x] **Simulador de Asignación de Puntos (Nivel 1 al 20)**: Contador interactivo de puntos restantes para planificar builds completas antes de jugar (`HeroBuildSimulator.tsx`).
+- [x] **Tarjetas de Héroe con Vista 'Ficha de Comandante'**: Pestañas de acceso rápido por héroe (Estadísticas, Ruta 1-20, Tácticas de Creeping y Sinergias en `RecommendedHeroes.tsx`).
 
 ---
 

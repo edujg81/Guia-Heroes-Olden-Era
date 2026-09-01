@@ -12,6 +12,16 @@ import {
   FactionSpellCombo,
 } from '../data/factionSpellData';
 import {
+  formatEffectWithSpellPower,
+  parseSpellFormula,
+} from '../utils/spellScalingCalculator';
+import {
+  SpellPowerSlider,
+  SpellSchoolSigilSelector,
+  SpellScalingDataTable,
+  SpellVersusComparator,
+} from './features/spells';
+import {
   Sparkles,
   Zap,
   Flame,
@@ -35,6 +45,9 @@ import {
   Shield,
   Target,
   Check,
+  TrendingUp,
+  Grid,
+  Table,
 } from 'lucide-react';
 
 interface SpellGrimoireProps {
@@ -57,6 +70,11 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
   const factionMeta = FACTIONS_METADATA[activeFaction] || FACTIONS_METADATA.Mazmorra;
   const magicProfile = getFactionMagicProfile(activeFaction);
   const factionCombos = getFactionCombos(activeFaction);
+
+  // View mode switcher: 'grimoire' | 'scaling_table' | 'versus'
+  const [spellsViewMode, setSpellsViewMode] = useStickyState<'grimoire' | 'scaling_table' | 'versus'>('grimoire', 'spells_view_mode');
+  // Spell Power state (1 to 30 SP)
+  const [spellPower, setSpellPower] = useStickyState<number>(10, 'spells_spell_power');
 
   const [selectedSchool, setSelectedSchool] = useStickyState<string>('all', 'spells_selected_school');
   const [selectedType, setSelectedType] = useStickyState<string>('all', 'spells_selected_type');

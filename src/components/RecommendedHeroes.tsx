@@ -34,6 +34,7 @@ import {
 interface RecommendedHeroesProps {
   selectedFaction?: FactionId;
   themeMode?: 'dark' | 'light';
+  onOpenSimulator?: (heroId: string) => void;
 }
 
 const FACTION_CLASS_NAMES: Record<FactionId, { guerrero: string; mago: string }> = {
@@ -151,6 +152,7 @@ const FACTION_HERO_HIGHLIGHTS: Record<FactionId, {
 export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({ 
   selectedFaction = 'Mazmorra',
   themeMode = 'dark',
+  onOpenSimulator,
 }) => {
   const heroes = getHeroesForFaction(selectedFaction);
   const meta = FACTIONS_METADATA[selectedFaction] || FACTIONS_METADATA.Mazmorra;
@@ -159,6 +161,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
   const defaultHeroId = heroes[0]?.id || (selectedFaction === 'Templo' ? 'hero-lord-edgar' : 'hero-enatee');
 
   const [selectedHeroId, setSelectedHeroId] = useStickyState<string>(defaultHeroId, `heroes_selected_hero_id_${selectedFaction}`);
+  const [dossierTab, setDossierTab] = useState<'overview' | 'skills' | 'tactics' | 'synergies'>('overview');
   const [classFilter, setClassFilter] = useStickyState<string>('all', 'heroes_class_filter');
   const [roleFilter, setRoleFilter] = useStickyState<string>('all', 'heroes_role_filter');
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -585,6 +588,54 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
               </div>
             </div>
 
+            {/* Ficha de Comandante Tabs Navigation & Simulator Jump */}
+            <div className={`flex flex-wrap items-center justify-between gap-2 p-1.5 rounded-xl border ${
+              themeMode === 'light' ? 'bg-slate-100/80 border-slate-200' : 'bg-black/60 border-slate-800'
+            }`}>
+              <div className="flex items-center gap-1 overflow-x-auto no-scrollbar w-full sm:w-auto">
+                {[
+                  { id: 'overview', label: '📊 Ficha & Stats' },
+                  { id: 'skills', label: '🗺️ Ruta 1-20 & Habilidades' },
+                  { id: 'tactics', label: '⚔️ Tácticas D1-7' },
+                  { id: 'synergies', label: '🤝 Sinergias & Subclase' },
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setDossierTab(tab.id as any)}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all cursor-pointer shrink-0 border ${
+                      dossierTab === tab.id
+                        ? themeMode === 'light'
+                          ? 'bg-white text-purple-950 border-purple-300 shadow-sm font-bold'
+                          : `${theme.bgBadge} ${theme.textAccent} border ${theme.borderSubtle} font-bold shadow-sm`
+                        : themeMode === 'light'
+                        ? 'text-slate-600 hover:text-slate-900 border-transparent hover:bg-white/50'
+                        : 'text-slate-400 hover:text-slate-200 border-transparent hover:bg-white/5'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+
+              {onOpenSimulator && (
+                <button
+                  type="button"
+                  onClick={() => onOpenSimulator(selectedHero.id)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold flex items-center gap-1.5 transition-all cursor-pointer border shadow-sm ${
+                    themeMode === 'light'
+                      ? 'bg-amber-500 hover:bg-amber-600 text-black border-amber-600'
+                      : 'bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border-amber-500/50'
+                  }`}
+                  title="Abre el simulador interactivo de habilidades con este héroe"
+                >
+                  <GitBranch className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Probar en Simulador</span>
+                  <ArrowRight className="w-3 h-3" />
+                </button>
+              )}
+            </div>
+
             {/* Specialty Callout */}
             <div className={`rounded-xl p-4 border transition-colors ${
               themeMode === 'light'
@@ -606,455 +657,405 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
               </p>
             </div>
 
-            {/* Stat Growth & Initial Assets */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Stat Growth */}
-              <div className={`rounded-xl p-3.5 space-y-2.5 border ${
-                themeMode === 'light'
-                  ? 'bg-slate-50 border-slate-200'
-                  : `bg-black/50 border ${theme.borderSubtle}`
-              }`}>
-                <div className="flex items-center justify-between">
-                  <span className={`text-[11px] font-mono uppercase font-bold flex items-center gap-1.5 ${
-                    themeMode === 'light' ? 'text-slate-700' : 'text-slate-400'
-                  }`}>
-                    <TrendingUp className={`w-3.5 h-3.5 ${themeMode === 'light' ? 'text-teal-600' : 'text-teal-400'}`} />
-                    Crecimiento de Atributos (% Nivel 1-20)
-                  </span>
-                </div>
-
-                <div className="space-y-1.5 text-xs">
-                  <div>
-                    <div className={`flex justify-between text-[11px] font-mono mb-0.5 ${
-                      themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
+            {/* TAB 1: OVERVIEW (Ficha & Stats) */}
+            {(dossierTab === 'overview' || dossierTab === 'tactics') && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Stat Growth */}
+                <div className={`rounded-xl p-3.5 space-y-2.5 border ${
+                  themeMode === 'light'
+                    ? 'bg-slate-50 border-slate-200'
+                    : `bg-black/50 border ${theme.borderSubtle}`
+                }`}>
+                  <div className="flex items-center justify-between">
+                    <span className={`text-[11px] font-mono uppercase font-bold flex items-center gap-1.5 ${
+                      themeMode === 'light' ? 'text-slate-700' : 'text-slate-400'
                     }`}>
-                      <span className={themeMode === 'light' ? 'text-red-700 font-bold' : 'text-red-400'}>Ataque Físico</span>
-                      <span>{selectedHero.statGrowth.attack}%</span>
-                    </div>
-                    <div className={`w-full h-1.5 rounded-full overflow-hidden border ${
-                      themeMode === 'light' ? 'bg-slate-200 border-slate-300' : 'bg-black/60 border-slate-800'
-                    }`}>
-                      <div
-                        className="h-full bg-gradient-to-r from-red-600 to-red-500"
-                        style={{ width: `${selectedHero.statGrowth.attack}%` }}
-                      ></div>
-                    </div>
+                      <TrendingUp className={`w-3.5 h-3.5 ${themeMode === 'light' ? 'text-teal-600' : 'text-teal-400'}`} />
+                      Crecimiento de Atributos (% Nivel 1-20)
+                    </span>
                   </div>
 
-                  <div>
-                    <div className={`flex justify-between text-[11px] font-mono mb-0.5 ${
-                      themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
-                    }`}>
-                      <span className={themeMode === 'light' ? 'text-blue-700 font-bold' : 'text-blue-400'}>Defensa</span>
-                      <span>{selectedHero.statGrowth.defense}%</span>
-                    </div>
-                    <div className={`w-full h-1.5 rounded-full overflow-hidden border ${
-                      themeMode === 'light' ? 'bg-slate-200 border-slate-300' : 'bg-black/60 border-slate-800'
-                    }`}>
-                      <div
-                        className="h-full bg-gradient-to-r from-blue-600 to-blue-500"
-                        style={{ width: `${selectedHero.statGrowth.defense}%` }}
-                      ></div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className={`flex justify-between text-[11px] font-mono mb-0.5 ${
-                      themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
-                    }`}>
-                      <span className={themeMode === 'light' ? 'text-purple-700 font-bold' : 'text-purple-400'}>Poder Mágico (SP)</span>
-                      <span>{selectedHero.statGrowth.spellPower}%</span>
-                    </div>
-                    <div className={`w-full h-1.5 rounded-full overflow-hidden border ${
-                      themeMode === 'light' ? 'bg-slate-200 border-slate-300' : 'bg-black/60 border-slate-800'
-                    }`}>
-                      <div
-                        className="h-full bg-gradient-to-r from-purple-600 to-purple-400"
-                        style={{ width: `${selectedHero.statGrowth.spellPower}%` }}
-                      ></div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className={`flex justify-between text-[11px] font-mono mb-0.5 ${
-                      themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
-                    }`}>
-                      <span className={themeMode === 'light' ? 'text-teal-700 font-bold' : 'text-cyan-400'}>Conocimiento (Maná)</span>
-                      <span>{selectedHero.statGrowth.knowledge}%</span>
-                    </div>
-                    <div className={`w-full h-1.5 rounded-full overflow-hidden border ${
-                      themeMode === 'light' ? 'bg-slate-200 border-slate-300' : 'bg-black/60 border-slate-800'
-                    }`}>
-                      <div
-                        className="h-full bg-gradient-to-r from-teal-600 to-cyan-400"
-                        style={{ width: `${selectedHero.statGrowth.knowledge}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Initial Army & Skills */}
-              <div className={`rounded-xl p-3.5 space-y-3 border ${
-                themeMode === 'light'
-                  ? 'bg-slate-50 border-slate-200'
-                  : `bg-black/50 border ${theme.borderSubtle}`
-              }`}>
-                <div>
-                  <span className={`text-[10px] font-mono uppercase font-bold block mb-1 ${
-                    themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'
-                  }`}>
-                    Ejército Inicial en Taberna:
-                  </span>
-                  <div className={`text-xs font-mono p-2 rounded-lg border font-semibold ${
-                    themeMode === 'light'
-                      ? 'bg-amber-50 border-amber-200 text-amber-950'
-                      : `text-yellow-300 bg-black/60 border ${theme.borderSubtle}`
-                  }`}>
-                    {selectedHero.initialArmy}
-                  </div>
-                </div>
-
-                <div>
-                  <span className={`text-[10px] font-mono uppercase font-bold block mb-1 ${
-                    themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'
-                  }`}>
-                    Habilidades de Inicio:
-                  </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {selectedHero.initialSkills.map((sk, idx) => (
-                      <span
-                        key={idx}
-                        className={`text-[11px] font-mono px-2 py-0.5 rounded border font-semibold ${
-                          themeMode === 'light'
-                            ? 'bg-purple-100 text-purple-900 border-purple-200'
-                            : `${theme.bgBadge} ${theme.textAccent} border ${theme.borderSubtle}`
-                        }`}
-                      >
-                        {sk}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Tactical Playstyle & Day 1 Action */}
-            <div className="space-y-3">
-              <div className={`rounded-xl p-3.5 border ${
-                themeMode === 'light'
-                  ? 'bg-slate-50 border-slate-200'
-                  : `bg-black/40 border ${theme.borderSubtle}`
-              }`}>
-                <span className={`text-[10px] font-mono uppercase font-bold flex items-center gap-1.5 mb-1 ${
-                  themeMode === 'light' ? 'text-purple-900' : theme.textAccent
-                }`}>
-                  <Flame className={`w-3.5 h-3.5 ${themeMode === 'light' ? 'text-purple-600' : 'text-teal-400'}`} />
-                  Estilo de Juego Táctico & Combate:
-                </span>
-                <p className={`text-xs leading-relaxed ${
-                  themeMode === 'light' ? 'text-slate-700' : 'text-slate-200'
-                }`}>
-                  {selectedHero.tacticalPlaystyle}
-                </p>
-              </div>
-
-              <div className={`rounded-xl p-3.5 border ${
-                themeMode === 'light'
-                  ? 'bg-amber-50/70 border-amber-200'
-                  : 'bg-amber-950/20 border-amber-900/40'
-              }`}>
-                <span className={`text-[10px] font-mono uppercase font-bold flex items-center gap-1.5 mb-1 ${
-                  themeMode === 'light' ? 'text-amber-900' : 'text-amber-400'
-                }`}>
-                  <Compass className={`w-3.5 h-3.5 ${themeMode === 'light' ? 'text-amber-600' : 'text-amber-400'}`} />
-                  Acción Óptima en Día 1 (Apertura de Partida):
-                </span>
-                <p className={`text-xs leading-relaxed ${
-                  themeMode === 'light' ? 'text-slate-700' : 'text-slate-200'
-                }`}>
-                  {selectedHero.day1Action}
-                </p>
-              </div>
-            </div>
-
-            {/* Ideal 8-Skill Build */}
-            <div className={`rounded-xl p-4 space-y-2.5 border ${
-              themeMode === 'light'
-                ? 'bg-slate-50 border-slate-200'
-                : `bg-black/50 border ${theme.borderSubtle}`
-            }`}>
-              <div className="flex items-center justify-between">
-                <span className={`text-xs font-mono uppercase font-bold flex items-center gap-1.5 ${
-                  themeMode === 'light' ? 'text-purple-950' : theme.textAccent
-                }`}>
-                  <GitBranch className="w-3.5 h-3.5" />
-                  Build Ideal de 8 Habilidades (Nivel 1 a 25)
-                </span>
-                <span className={`text-[10px] font-mono ${
-                  themeMode === 'light' ? 'text-purple-700 font-semibold' : theme.textAccent
-                }`}>
-                  Haz clic en cualquier habilidad para inspeccionar sus 6 subhabilidades
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {selectedHero.idealSkillBuild.map((skillStr, sIdx) => {
-                  const isExperta = skillStr.includes('(Experta)');
-                  const isAvanzada = skillStr.includes('(Avanzada)');
-                  const cleanName = skillStr.replace(/\s*\((Experta|Avanzada|Básica)\)/, '');
-                  const tierLabel = isExperta ? 'Experta' : isAvanzada ? 'Avanzada' : 'Básica';
-                  const officialSkill = findOfficialSkill(cleanName);
-
-                  return (
-                    <button
-                      key={sIdx}
-                      type="button"
-                      onClick={() => officialSkill && setInspectedSkill(officialSkill)}
-                      className={`p-2.5 rounded-lg border transition-all text-xs flex items-center justify-between gap-2 shadow-xs text-left group cursor-pointer ${
-                        themeMode === 'light'
-                          ? 'bg-white hover:bg-purple-50/60 border-slate-200 hover:border-purple-300'
-                          : `bg-black/60 hover:bg-black/80 border ${theme.borderSubtle} hover:border-amber-400/80`
-                      }`}
-                    >
-                      <div className="flex items-center gap-2 min-w-0">
-                        <span className={`w-5 h-5 rounded-full font-mono font-bold text-[10px] flex items-center justify-center shrink-0 border ${
-                          themeMode === 'light'
-                            ? 'bg-purple-100 text-purple-900 border-purple-200 group-hover:border-purple-400'
-                            : `${theme.bgBadge} ${theme.textAccent} border ${theme.borderSubtle} group-hover:border-amber-400`
-                        }`}>
-                          {sIdx + 1}
-                        </span>
-                        <span className={`font-semibold truncate ${
-                          themeMode === 'light'
-                            ? 'text-slate-800 group-hover:text-purple-900'
-                            : 'text-slate-100 group-hover:text-amber-200'
-                        }`}>
-                          {cleanName}
-                        </span>
+                  <div className="space-y-1.5 text-xs">
+                    <div>
+                      <div className={`flex justify-between text-[11px] font-mono mb-0.5 ${
+                        themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
+                      }`}>
+                        <span className={themeMode === 'light' ? 'text-red-700 font-bold' : 'text-red-400'}>Ataque Físico</span>
+                        <span>{selectedHero.statGrowth.attack}%</span>
                       </div>
-                      <div className="flex items-center gap-1.5 shrink-0">
+                      <div className={`w-full h-1.5 rounded-full overflow-hidden border ${
+                        themeMode === 'light' ? 'bg-slate-200 border-slate-300' : 'bg-black/60 border-slate-800'
+                      }`}>
+                        <div
+                          className="h-full bg-gradient-to-r from-red-600 to-red-500"
+                          style={{ width: `${selectedHero.statGrowth.attack}%` }}
+                        ></div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className={`flex justify-between text-[11px] font-mono mb-0.5 ${
+                        themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
+                      }`}>
+                        <span className={themeMode === 'light' ? 'text-blue-700 font-bold' : 'text-blue-400'}>Defensa</span>
+                        <span>{selectedHero.statGrowth.defense}%</span>
+                      </div>
+                      <div className={`w-full h-1.5 rounded-full overflow-hidden border ${
+                        themeMode === 'light' ? 'bg-slate-200 border-slate-300' : 'bg-black/60 border-slate-800'
+                      }`}>
+                        <div
+                          className="h-full bg-gradient-to-r from-blue-600 to-blue-500"
+                          style={{ width: `${selectedHero.statGrowth.defense}%` }}
+                        ></div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className={`flex justify-between text-[11px] font-mono mb-0.5 ${
+                        themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
+                      }`}>
+                        <span className={themeMode === 'light' ? 'text-purple-700 font-bold' : 'text-purple-400'}>Poder Mágico (SP)</span>
+                        <span>{selectedHero.statGrowth.spellPower}%</span>
+                      </div>
+                      <div className={`w-full h-1.5 rounded-full overflow-hidden border ${
+                        themeMode === 'light' ? 'bg-slate-200 border-slate-300' : 'bg-black/60 border-slate-800'
+                      }`}>
+                        <div
+                          className="h-full bg-gradient-to-r from-purple-600 to-purple-400"
+                          style={{ width: `${selectedHero.statGrowth.spellPower}%` }}
+                        ></div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className={`flex justify-between text-[11px] font-mono mb-0.5 ${
+                        themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
+                      }`}>
+                        <span className={themeMode === 'light' ? 'text-teal-700 font-bold' : 'text-cyan-400'}>Conocimiento (Maná)</span>
+                        <span>{selectedHero.statGrowth.knowledge}%</span>
+                      </div>
+                      <div className={`w-full h-1.5 rounded-full overflow-hidden border ${
+                        themeMode === 'light' ? 'bg-slate-200 border-slate-300' : 'bg-black/60 border-slate-800'
+                      }`}>
+                        <div
+                          className="h-full bg-gradient-to-r from-teal-600 to-cyan-400"
+                          style={{ width: `${selectedHero.statGrowth.knowledge}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Initial Army & Skills */}
+                <div className={`rounded-xl p-3.5 space-y-3 border ${
+                  themeMode === 'light'
+                    ? 'bg-slate-50 border-slate-200'
+                    : `bg-black/50 border ${theme.borderSubtle}`
+                }`}>
+                  <div>
+                    <span className={`text-[10px] font-mono uppercase font-bold block mb-1 ${
+                      themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'
+                    }`}>
+                      Ejército Inicial en Taberna:
+                    </span>
+                    <div className={`text-xs font-mono p-2 rounded-lg border font-semibold ${
+                      themeMode === 'light'
+                        ? 'bg-amber-50 border-amber-200 text-amber-950'
+                        : `text-yellow-300 bg-black/60 border ${theme.borderSubtle}`
+                    }`}>
+                      {selectedHero.initialArmy}
+                    </div>
+                  </div>
+
+                  <div>
+                    <span className={`text-[10px] font-mono uppercase font-bold block mb-1 ${
+                      themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'
+                    }`}>
+                      Habilidades de Inicio:
+                    </span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {selectedHero.initialSkills.map((sk, idx) => (
                         <span
-                          className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border uppercase ${
-                            isExperta
-                              ? themeMode === 'light'
-                                ? 'bg-amber-100 text-amber-900 border-amber-300'
-                                : 'bg-yellow-950/60 text-yellow-300 border-yellow-800/60'
-                              : themeMode === 'light'
+                          key={idx}
+                          className={`text-[11px] font-mono px-2 py-0.5 rounded border font-semibold ${
+                            themeMode === 'light'
                               ? 'bg-purple-100 text-purple-900 border-purple-200'
-                              : `${theme.bgBadge} ${theme.textAccent} ${theme.borderSubtle}`
+                              : `${theme.bgBadge} ${theme.textAccent} border ${theme.borderSubtle}`
                           }`}
                         >
-                          {tierLabel}
+                          {sk}
                         </span>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Dedicated Recommended Subskills Section for the Selected Hero */}
-            <div className={`border-2 rounded-2xl p-4 sm:p-5 space-y-4 shadow-xl transition-colors ${
-              themeMode === 'light'
-                ? 'bg-gradient-to-br from-amber-50/70 via-white to-amber-50/50 border-amber-300 ring-1 ring-amber-200 shadow-md'
-                : 'bg-gradient-to-br from-black/80 via-black/60 to-black/90 border-yellow-600/50 ring-1 ring-yellow-500/20'
-            }`}>
-              <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b pb-3 ${
-                themeMode === 'light' ? 'border-amber-200' : theme.borderSubtle
-              }`}>
-                <div className="flex items-center gap-2">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center shadow-md border ${
-                    themeMode === 'light'
-                      ? 'bg-amber-100 border-amber-300 text-amber-900'
-                      : 'bg-yellow-950/80 border-yellow-500/70 text-yellow-300'
-                  }`}>
-                    <Star className="w-4 h-4 fill-current text-current" />
+                      ))}
+                    </div>
                   </div>
-                  <div>
-                    <h4 className={`text-sm sm:text-base font-bold font-serif flex items-center gap-2 ${
-                      themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                </div>
+              </div>
+            )}
+
+            {/* TAB 3: TACTICS & DAY 1 ACTION */}
+            {(dossierTab === 'overview' || dossierTab === 'tactics') && (
+              <div className="space-y-3">
+                <div className={`rounded-xl p-3.5 border ${
+                  themeMode === 'light'
+                    ? 'bg-slate-50 border-slate-200'
+                    : `bg-black/40 border ${theme.borderSubtle}`
+                }`}>
+                  <span className={`text-[10px] font-mono uppercase font-bold flex items-center gap-1.5 mb-1 ${
+                    themeMode === 'light' ? 'text-purple-900' : theme.textAccent
+                  }`}>
+                    <Flame className={`w-3.5 h-3.5 ${themeMode === 'light' ? 'text-purple-600' : 'text-teal-400'}`} />
+                    Estilo de Juego Táctico & Combate:
+                  </span>
+                  <p className={`text-xs leading-relaxed ${
+                    themeMode === 'light' ? 'text-slate-700' : 'text-slate-200'
+                  }`}>
+                    {selectedHero.tacticalPlaystyle}
+                  </p>
+                </div>
+
+                <div className={`rounded-xl p-3.5 border ${
+                  themeMode === 'light'
+                    ? 'bg-amber-50/70 border-amber-200'
+                    : 'bg-amber-950/20 border-amber-900/40'
+                }`}>
+                  <span className={`text-[10px] font-mono uppercase font-bold flex items-center gap-1.5 mb-1 ${
+                    themeMode === 'light' ? 'text-amber-900' : 'text-amber-400'
+                  }`}>
+                    <Compass className={`w-3.5 h-3.5 ${themeMode === 'light' ? 'text-amber-600' : 'text-amber-400'}`} />
+                    Acción Óptima en Día 1 (Apertura de Partida):
+                  </span>
+                  <p className={`text-xs leading-relaxed ${
+                    themeMode === 'light' ? 'text-slate-700' : 'text-slate-200'
+                  }`}>
+                    {selectedHero.day1Action}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* TAB 2: SKILLS & SUB-SKILLS (Ruta 1-20 & Habilidades) */}
+            {(dossierTab === 'overview' || dossierTab === 'skills') && (
+              <>
+                {/* Ideal 8-Skill Build */}
+                <div className={`rounded-xl p-4 space-y-2.5 border ${
+                  themeMode === 'light'
+                    ? 'bg-slate-50 border-slate-200'
+                    : `bg-black/50 border ${theme.borderSubtle}`
+                }`}>
+                  <div className="flex items-center justify-between">
+                    <span className={`text-xs font-mono uppercase font-bold flex items-center gap-1.5 ${
+                      themeMode === 'light' ? 'text-purple-950' : theme.textAccent
                     }`}>
-                      Elección Recomendada de Subhabilidades
-                      <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${
-                        themeMode === 'light'
-                          ? 'bg-amber-100 text-amber-900 border-amber-300'
-                          : 'bg-yellow-950 text-yellow-300 border-yellow-700'
-                      }`}>
-                        Meta Canónico
-                      </span>
-                    </h4>
-                    <p className={`text-[11px] font-sans ${
-                      themeMode === 'light' ? 'text-slate-600' : theme.textAccent
+                      <GitBranch className="w-3.5 h-3.5" />
+                      Build Ideal de 8 Habilidades (Nivel 1 a 25)
+                    </span>
+                    <span className={`text-[10px] font-mono ${
+                      themeMode === 'light' ? 'text-purple-700 font-semibold' : theme.textAccent
                     }`}>
-                      Qué subhabilidad elegir en cada nivel de maestría para maximizar a <strong>{selectedHero.name}</strong>
-                    </p>
+                      Haz clic en cualquier habilidad para inspeccionar sus 6 subhabilidades
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {selectedHero.idealSkillBuild.map((skillStr, sIdx) => {
+                      const isExperta = skillStr.includes('(Experta)');
+                      const isAvanzada = skillStr.includes('(Avanzada)');
+                      const cleanName = skillStr.replace(/\s*\((Experta|Avanzada|Básica)\)/, '');
+                      const tierLabel = isExperta ? 'Experta' : isAvanzada ? 'Avanzada' : 'Básica';
+                      const officialSkill = findOfficialSkill(cleanName);
+
+                      return (
+                        <button
+                          key={sIdx}
+                          type="button"
+                          onClick={() => officialSkill && setInspectedSkill(officialSkill)}
+                          className={`p-2.5 rounded-lg border transition-all text-xs flex items-center justify-between gap-2 shadow-xs text-left group cursor-pointer ${
+                            themeMode === 'light'
+                              ? 'bg-white hover:bg-purple-50/60 border-slate-200 hover:border-purple-300'
+                              : `bg-black/60 hover:bg-black/80 border ${theme.borderSubtle} hover:border-amber-400/80`
+                          }`}
+                        >
+                          <div className="flex items-center gap-2 min-w-0">
+                            <span className={`w-5 h-5 rounded-full font-mono font-bold text-[10px] flex items-center justify-center shrink-0 border ${
+                              themeMode === 'light'
+                                ? 'bg-purple-100 text-purple-900 border-purple-200 group-hover:border-purple-400'
+                                : `${theme.bgBadge} ${theme.textAccent} border ${theme.borderSubtle} group-hover:border-amber-400`
+                            }`}>
+                              {sIdx + 1}
+                            </span>
+                            <span className={`font-semibold truncate ${
+                              themeMode === 'light'
+                                ? 'text-slate-800 group-hover:text-purple-900'
+                                : 'text-slate-100 group-hover:text-amber-200'
+                            }`}>
+                              {cleanName}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1.5 shrink-0">
+                            <span
+                              className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border uppercase ${
+                                isExperta
+                                  ? themeMode === 'light'
+                                    ? 'bg-amber-100 text-amber-900 border-amber-300'
+                                    : 'bg-yellow-950/60 text-yellow-300 border-yellow-800/60'
+                                  : themeMode === 'light'
+                                  ? 'bg-purple-100 text-purple-900 border-purple-200'
+                                  : `${theme.bgBadge} ${theme.textAccent} ${theme.borderSubtle}`
+                              }`}
+                            >
+                              {tierLabel}
+                            </span>
+                          </div>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => setShowSubskillsDetails(!showSubskillsDetails)}
-                  className={`px-3 py-1 text-xs font-mono font-semibold rounded-lg transition-colors shrink-0 self-start sm:self-auto cursor-pointer border ${
-                    themeMode === 'light'
-                      ? 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-800'
-                      : `${theme.bgBadge} hover:bg-black/60 border ${theme.borderSubtle} ${theme.textAccent}`
-                  }`}
-                >
-                  {showSubskillsDetails ? 'Contraer Detalles' : 'Ver Todos los Detalles'}
-                </button>
-              </div>
-
-              {showSubskillsDetails && (
-                <div className="grid grid-cols-1 gap-3.5">
-                  {getSubskillChoicesForHero(selectedHero).map((choice, idx) => {
-                    const cleanName = choice.skillName.replace(/\s*\((Experta|Avanzada|Básica)\)/, '');
-                    const offSkill = findOfficialSkill(cleanName);
-
-                    return (
-                      <div
-                        key={idx}
-                        className={`rounded-xl p-3.5 space-y-2.5 transition-all border ${
-                          themeMode === 'light'
-                            ? 'bg-white border-slate-200 hover:border-amber-400 shadow-xs'
-                            : `bg-black/60 border ${theme.borderSubtle} hover:border-yellow-600/60`
-                        }`}
-                      >
-                        {/* Skill Header */}
-                        <div className={`flex items-center justify-between gap-2 border-b pb-2 ${
-                          themeMode === 'light' ? 'border-slate-100' : theme.borderSubtle
+                {/* Dedicated Recommended Subskills Section for the Selected Hero */}
+                <div className={`border-2 rounded-2xl p-4 sm:p-5 space-y-4 shadow-xl transition-colors ${
+                  themeMode === 'light'
+                    ? 'bg-gradient-to-br from-amber-50/70 via-white to-amber-50/50 border-amber-300 ring-1 ring-amber-200 shadow-md'
+                    : 'bg-gradient-to-br from-black/80 via-black/60 to-black/90 border-yellow-600/50 ring-1 ring-yellow-500/20'
+                }`}>
+                  <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b pb-3 ${
+                    themeMode === 'light' ? 'border-amber-200' : theme.borderSubtle
+                  }`}>
+                    <div className="flex items-center gap-2">
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center shadow-md border ${
+                        themeMode === 'light'
+                          ? 'bg-amber-100 border-amber-300 text-amber-900'
+                          : 'bg-yellow-950/80 border-yellow-500/70 text-yellow-300'
+                      }`}>
+                        <Star className="w-4 h-4 fill-current text-current" />
+                      </div>
+                      <div>
+                        <h4 className={`text-sm sm:text-base font-bold font-serif flex items-center gap-2 ${
+                          themeMode === 'light' ? 'text-slate-900' : 'text-white'
                         }`}>
-                          <div className="flex items-center gap-2">
-                            <span className={`w-5 h-5 rounded-full font-mono font-bold text-[10px] flex items-center justify-center border shrink-0 ${
+                          Elección Recomendada de Subhabilidades
+                          <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${
+                            themeMode === 'light'
+                              ? 'bg-amber-100 text-amber-900 border-amber-300'
+                              : 'bg-yellow-950 text-yellow-300 border-yellow-700'
+                          }`}>
+                            Meta Canónico
+                          </span>
+                        </h4>
+                        <p className={`text-[11px] font-sans ${
+                          themeMode === 'light' ? 'text-slate-600' : theme.textAccent
+                        }`}>
+                          Qué subhabilidad elegir en cada nivel de maestría para maximizar a <strong>{selectedHero.name}</strong>
+                        </p>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => setShowSubskillsDetails(!showSubskillsDetails)}
+                      className={`px-3 py-1 text-xs font-mono font-semibold rounded-lg transition-colors shrink-0 self-start sm:self-auto cursor-pointer border ${
+                        themeMode === 'light'
+                          ? 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-800'
+                          : `${theme.bgBadge} hover:bg-black/60 border ${theme.borderSubtle} ${theme.textAccent}`
+                      }`}
+                    >
+                      {showSubskillsDetails ? 'Contraer Detalles' : 'Ver Todos los Detalles'}
+                    </button>
+                  </div>
+
+                  {showSubskillsDetails && (
+                    <div className="grid grid-cols-1 gap-3.5">
+                      {getSubskillChoicesForHero(selectedHero).map((choice, idx) => {
+                        const cleanName = choice.skillName.replace(/\s*\((Experta|Avanzada|Básica)\)/, '');
+                        const offSkill = findOfficialSkill(cleanName);
+
+                        return (
+                          <div
+                            key={idx}
+                            className={`rounded-xl p-3.5 space-y-2.5 transition-all border ${
                               themeMode === 'light'
-                                ? 'bg-amber-100 text-amber-900 border-amber-300'
-                                : 'bg-yellow-950 text-yellow-300 border-yellow-600/60'
+                                ? 'bg-white border-slate-200 hover:border-amber-400 shadow-xs'
+                                : `bg-black/60 border ${theme.borderSubtle} hover:border-yellow-600/60`
+                            }`}
+                          >
+                            {/* Skill Header */}
+                            <div className={`flex items-center justify-between gap-2 border-b pb-2 ${
+                              themeMode === 'light' ? 'border-slate-100' : theme.borderSubtle
                             }`}>
-                              {idx + 1}
-                            </span>
-                            <span className={`text-xs sm:text-sm font-bold ${
-                              themeMode === 'light' ? 'text-slate-900' : 'text-white'
-                            }`}>
-                              {choice.skillName}
-                            </span>
-                          </div>
-
-                          {offSkill && (
-                            <button
-                              type="button"
-                              onClick={() => setInspectedSkill(offSkill)}
-                              className={`text-[10px] font-mono flex items-center gap-1 cursor-pointer transition-colors ${
-                                themeMode === 'light'
-                                  ? 'text-purple-700 hover:text-purple-900 font-semibold'
-                                  : `${theme.textAccent} hover:text-yellow-300`
-                              }`}
-                            >
-                              <BookOpen className="w-3 h-3" />
-                              Ver árbol completo
-                            </button>
-                          )}
-                        </div>
-
-                        {/* Dual Cards: Advanced Pick (Lvl 2) and Expert Pick (Lvl 3) */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-                          {/* Advanced Recommended */}
-                          {(() => {
-                            const advSubObj = offSkill?.subskills.advanced.find(
-                              (s) => normalize(s.name) === normalize(choice.advancedSubskill)
-                            );
-                            return (
-                              <div className={`rounded-lg p-3 space-y-1.5 relative border ${
-                                themeMode === 'light'
-                                  ? 'bg-purple-50/70 border-purple-200'
-                                  : `bg-black/40 border ${theme.borderSubtle}`
-                              }`}>
-                                <div className="flex items-center justify-between gap-1">
-                                  <span className={`text-[10px] font-mono font-bold uppercase flex items-center gap-1 ${
-                                    themeMode === 'light' ? 'text-purple-900' : theme.textAccent
-                                  }`}>
-                                    <Target className="w-3 h-3" />
-                                    Nivel 2 • Avanzado
-                                  </span>
-                                  <span className={`text-[9px] font-mono font-bold px-1.5 py-0.5 rounded border flex items-center gap-1 ${
-                                    themeMode === 'light'
-                                      ? 'bg-amber-100 text-amber-900 border-amber-300'
-                                      : 'bg-yellow-950/90 text-yellow-300 border-yellow-600/70'
-                                  }`}>
-                                    <Check className="w-2.5 h-2.5" /> Recomendada
-                                  </span>
-                                </div>
-
-                                <div className={`text-xs font-bold ${
+                              <div className="flex items-center gap-2">
+                                <span className={`w-5 h-5 rounded-full font-mono font-bold text-[10px] flex items-center justify-center border shrink-0 ${
+                                  themeMode === 'light'
+                                    ? 'bg-amber-100 text-amber-900 border-amber-300'
+                                    : 'bg-yellow-950 text-yellow-300 border-yellow-600/60'
+                                }`}>
+                                  {idx + 1}
+                                </span>
+                                <span className={`text-xs sm:text-sm font-bold ${
                                   themeMode === 'light' ? 'text-slate-900' : 'text-white'
                                 }`}>
-                                  {choice.advancedSubskill}
-                                </div>
-
-                                {advSubObj && (
-                                  <p className={`text-[11px] leading-snug ${
-                                    themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
-                                  }`}>
-                                    {advSubObj.effect}
-                                  </p>
-                                )}
-
-                                <div className={`text-[10px] p-2 rounded border leading-relaxed ${
-                                  themeMode === 'light'
-                                    ? 'bg-amber-100/70 text-amber-950 border-amber-300'
-                                    : 'bg-yellow-950/30 text-yellow-200/90 border-yellow-800/40'
-                                }`}>
-                                  <strong className={`font-mono block mb-0.5 ${
-                                    themeMode === 'light' ? 'text-amber-900' : 'text-yellow-300'
-                                  }`}>💡 Sinergia Táctica:</strong>
-                                  {choice.advancedReason}
-                                </div>
+                                  {choice.skillName}
+                                </span>
                               </div>
-                            );
-                          })()}
 
-                          {/* Expert Recommended */}
-                          {choice.expertSubskill ? (
-                            (() => {
-                              const expSubObj = offSkill?.subskills.expert.find(
-                                (s) => normalize(s.name) === normalize(choice.expertSubskill || '')
-                              );
-                              return (
-                                <div className={`rounded-lg p-3 space-y-1.5 relative border ${
-                                  themeMode === 'light'
-                                    ? 'bg-amber-50/80 border-amber-300'
-                                    : 'bg-yellow-950/20 border-yellow-700/60'
-                                }`}>
-                                  <div className="flex items-center justify-between gap-1">
-                                    <span className={`text-[10px] font-mono font-bold uppercase flex items-center gap-1 ${
-                                      themeMode === 'light' ? 'text-amber-900' : 'text-yellow-300'
-                                    }`}>
-                                      <Award className="w-3 h-3 text-amber-600 dark:text-yellow-400" />
-                                      Nivel 3 • Experto
-                                    </span>
-                                    <span className={`text-[9px] font-mono font-bold px-1.5 py-0.5 rounded border flex items-center gap-1 ${
-                                      themeMode === 'light'
-                                        ? 'bg-amber-100 text-amber-900 border-amber-300'
-                                        : 'bg-yellow-950/90 text-yellow-300 border-yellow-600/70'
-                                    }`}>
-                                      <Check className="w-2.5 h-2.5" /> Recomendada
-                                    </span>
-                                  </div>
+                              {offSkill && (
+                                <button
+                                  type="button"
+                                  onClick={() => setInspectedSkill(offSkill)}
+                                  className={`text-[10px] font-mono flex items-center gap-1 cursor-pointer transition-colors ${
+                                    themeMode === 'light'
+                                      ? 'text-purple-700 hover:text-purple-900 font-semibold'
+                                      : `${theme.textAccent} hover:text-yellow-300`
+                                  }`}
+                                >
+                                  <BookOpen className="w-3 h-3" />
+                                  Ver árbol completo
+                                </button>
+                              )}
+                            </div>
 
-                                  <div className={`text-xs font-bold ${
-                                    themeMode === 'light' ? 'text-slate-900' : 'text-yellow-100'
+                            {/* Dual Cards: Advanced Pick (Lvl 2) and Expert Pick (Lvl 3) */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                              {/* Advanced Recommended */}
+                              {(() => {
+                                const advSubObj = offSkill?.subskills.advanced.find(
+                                  (s) => normalize(s.name) === normalize(choice.advancedSubskill)
+                                );
+                                return (
+                                  <div className={`rounded-lg p-3 space-y-1.5 relative border ${
+                                    themeMode === 'light'
+                                      ? 'bg-purple-50/70 border-purple-200'
+                                      : `bg-black/40 border ${theme.borderSubtle}`
                                   }`}>
-                                    {choice.expertSubskill}
-                                  </div>
+                                    <div className="flex items-center justify-between gap-1">
+                                      <span className={`text-[10px] font-mono font-bold uppercase flex items-center gap-1 ${
+                                        themeMode === 'light' ? 'text-purple-900' : theme.textAccent
+                                      }`}>
+                                        <Target className="w-3 h-3" />
+                                        Nivel 2 • Avanzado
+                                      </span>
+                                      <span className={`text-[9px] font-mono font-bold px-1.5 py-0.5 rounded border flex items-center gap-1 ${
+                                        themeMode === 'light'
+                                          ? 'bg-amber-100 text-amber-900 border-amber-300'
+                                          : 'bg-yellow-950/90 text-yellow-300 border-yellow-600/70'
+                                      }`}>
+                                        <Check className="w-2.5 h-2.5" /> Recomendada
+                                      </span>
+                                    </div>
 
-                                  {expSubObj && (
-                                    <p className={`text-[11px] leading-snug ${
-                                      themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
+                                    <div className={`text-xs font-bold ${
+                                      themeMode === 'light' ? 'text-slate-900' : 'text-white'
                                     }`}>
-                                      {expSubObj.effect}
-                                    </p>
-                                  )}
+                                      {choice.advancedSubskill}
+                                    </div>
 
-                                  {choice.expertReason && (
+                                    {advSubObj && (
+                                      <p className={`text-[11px] leading-snug ${
+                                        themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
+                                      }`}>
+                                        {advSubObj.effect}
+                                      </p>
+                                    )}
+
                                     <div className={`text-[10px] p-2 rounded border leading-relaxed ${
                                       themeMode === 'light'
                                         ? 'bg-amber-100/70 text-amber-950 border-amber-300'
@@ -1063,225 +1064,289 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                                       <strong className={`font-mono block mb-0.5 ${
                                         themeMode === 'light' ? 'text-amber-900' : 'text-yellow-300'
                                       }`}>💡 Sinergia Táctica:</strong>
-                                      {choice.expertReason}
+                                      {choice.advancedReason}
                                     </div>
-                                  )}
-                                </div>
-                              );
-                            })()
-                          ) : (
-                            <div className={`border rounded-lg p-3 flex items-center justify-center text-center ${
-                              themeMode === 'light'
-                                ? 'bg-slate-50 border-slate-200'
-                                : 'bg-black/30 border-slate-800'
-                            }`}>
-                              <span className={`text-[11px] font-mono italic ${
-                                themeMode === 'light' ? 'text-slate-500' : 'text-slate-500'
-                              }`}>
-                                Se mantiene en nivel Avanzado según el build
-                              </span>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-
-            {/* Dedicated Official Subclasses Section for Selected Hero */}
-            {(() => {
-              const isMage = selectedHero.heroType === 'Mago';
-
-              const matchedSubclasses = OFFICIAL_SUBCLASSES.filter(
-                (s) => s.faction === selectedFaction && (isMage ? s.classType === 'Mago' : s.classType === 'Guerrero')
-              );
-              const relevantSubclasses = matchedSubclasses.length > 0
-                ? matchedSubclasses
-                : OFFICIAL_SUBCLASSES.filter((s) => s.faction === selectedFaction);
-
-              return (
-                <div className={`border-2 rounded-2xl p-4 sm:p-5 space-y-4 shadow-xl ${theme.shadowAccent} transition-colors ${
-                  themeMode === 'light'
-                    ? 'bg-white border-slate-200 shadow-md'
-                    : `bg-gradient-to-br from-black/90 via-black/70 to-black/90 ${theme.border}`
-                }`}>
-                  <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b pb-3 ${
-                    themeMode === 'light' ? 'border-slate-200' : theme.borderSubtle
-                  }`}>
-                    <div className="flex items-center gap-2">
-                      <div className={`w-8 h-8 rounded-lg border flex items-center justify-center shadow-md ${
-                        themeMode === 'light'
-                          ? 'bg-purple-100 text-purple-900 border-purple-300'
-                          : `${theme.bgBadge} border ${theme.borderSubtle} ${theme.textAccent}`
-                      }`}>
-                        <Award className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <h4 className={`text-sm sm:text-base font-bold font-serif flex items-center gap-2 ${
-                          themeMode === 'light' ? 'text-slate-900' : 'text-white'
-                        }`}>
-                          Rutas Oficiales de Subclase (Clase de Prestigio)
-                          <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${
-                            themeMode === 'light'
-                              ? 'bg-purple-100 text-purple-900 border-purple-200'
-                              : `${theme.bgBadge} ${theme.textAccent} ${theme.borderSubtle}`
-                          }`}>
-                            {selectedHero.heroClass}
-                          </span>
-                        </h4>
-                        <p className={`text-[11px] font-sans ${
-                          themeMode === 'light' ? 'text-slate-600' : theme.textAccent
-                        }`}>
-                          Desbloqueo automático al llevar a <strong>Experto</strong> las 5 habilidades requeridas (Nivel 16-20+)
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {relevantSubclasses.map((sub) => {
-                      // Check how many of the 5 required skills are in the hero's ideal build
-                      const heroSkillsClean = selectedHero.idealSkillBuild.map((s) =>
-                        s.replace(/\s*\((Experta|Avanzada|Básica)\)/, '').trim().toLowerCase()
-                      );
-
-                      const matchingCount = sub.requiredSkills.filter((req) =>
-                        heroSkillsClean.some((hs) => hs.includes(req.name.toLowerCase()) || req.name.toLowerCase().includes(hs))
-                      ).length;
-
-                      const isPrimaryRecommendation = matchingCount >= 3;
-
-                      return (
-                        <div
-                          key={sub.id}
-                          className={`rounded-xl p-4 space-y-3 border transition-all ${
-                            isPrimaryRecommendation
-                              ? themeMode === 'light'
-                                ? 'bg-amber-50/80 border-2 border-amber-300 shadow-sm ring-1 ring-amber-300'
-                                : `bg-black/70 ${theme.border} shadow-md ring-1 ring-current`
-                              : themeMode === 'light'
-                              ? 'bg-slate-50 border-slate-200'
-                              : `bg-black/50 ${theme.borderSubtle} opacity-90`
-                          }`}
-                        >
-                          <div className="flex items-start justify-between gap-2">
-                            <div>
-                              <div className="flex items-center gap-1.5">
-                                <span className={`text-xs sm:text-sm font-bold font-serif ${
-                                  themeMode === 'light' ? 'text-slate-900' : 'text-white'
-                                }`}>
-                                  {sub.name}
-                                </span>
-                                <span className={`text-[10px] font-mono ${
-                                  themeMode === 'light' ? 'text-slate-500' : 'text-slate-400'
-                                }`}>
-                                  ({sub.nameEn})
-                                </span>
-                              </div>
-                              <span className={`text-[10px] font-mono font-bold block mt-0.5 ${
-                                themeMode === 'light' ? 'text-amber-900' : 'text-yellow-400'
-                              }`}>
-                                ★ {sub.bonusTitle}
-                              </span>
-                            </div>
-
-                            <span
-                              className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded border shrink-0 ${
-                                isPrimaryRecommendation
-                                  ? themeMode === 'light'
-                                    ? 'bg-amber-100 text-amber-900 border-amber-300'
-                                    : 'bg-yellow-950 text-yellow-300 border-yellow-600'
-                                  : themeMode === 'light'
-                                  ? 'bg-slate-200 text-slate-700 border-slate-300'
-                                  : 'bg-slate-900 text-slate-400 border-slate-700'
-                              }`}
-                            >
-                              {isPrimaryRecommendation ? '⭐ Ruta Recomendada' : 'Ruta Alternativa'}
-                            </span>
-                          </div>
-
-                          <p className={`text-[11px] leading-snug ${
-                            themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
-                          }`}>
-                            {sub.bonusEffect}
-                          </p>
-
-                          {/* 5 Skills Progress Tracker */}
-                          <div className={`space-y-1.5 pt-1 border-t ${
-                            themeMode === 'light' ? 'border-slate-200' : theme.borderSubtle
-                          }`}>
-                            <div className="flex items-center justify-between text-[10px] font-mono">
-                              <span className={`font-bold uppercase ${
-                                themeMode === 'light' ? 'text-slate-700' : theme.textAccent
-                              }`}>5 Habilidades Requeridas a Experto:</span>
-                              <span className={`font-bold ${
-                                matchingCount >= 4
-                                  ? themeMode === 'light' ? 'text-emerald-700' : 'text-emerald-400'
-                                  : themeMode === 'light' ? 'text-amber-800' : 'text-yellow-400'
-                              }`}>
-                                {matchingCount}/5 en la Build
-                              </span>
-                            </div>
-
-                            <div className="grid grid-cols-1 gap-1">
-                              {sub.requiredSkills.map((req, rIdx) => {
-                                const isPresent = heroSkillsClean.some(
-                                  (hs) => hs.includes(req.name.toLowerCase()) || req.name.toLowerCase().includes(hs)
-                                );
-                                return (
-                                  <div
-                                    key={rIdx}
-                                    className={`text-[10px] font-mono px-2 py-1 rounded flex items-center justify-between border ${
-                                      isPresent
-                                        ? themeMode === 'light'
-                                          ? 'bg-emerald-50 text-emerald-900 border-emerald-300 font-semibold'
-                                          : 'bg-emerald-950/40 text-emerald-300 border-emerald-800/60'
-                                        : themeMode === 'light'
-                                        ? 'bg-slate-100 text-slate-600 border-slate-200'
-                                        : 'bg-black/40 text-slate-400 border-slate-800'
-                                    }`}
-                                  >
-                                    <div className="flex items-center gap-1.5 truncate">
-                                      <span className={`w-3.5 h-3.5 rounded-full text-[8px] flex items-center justify-center shrink-0 font-bold ${
-                                        themeMode === 'light'
-                                          ? 'bg-purple-200 text-purple-900'
-                                          : `${theme.bgBadge} text-yellow-300`
-                                      }`}>
-                                        {rIdx + 1}
-                                      </span>
-                                      <span className="truncate">{req.name} ({req.nameEn})</span>
-                                    </div>
-                                    <span className="text-[9px] shrink-0 font-semibold">
-                                      {isPresent ? '✓ Incluida' : 'Opcional'}
-                                    </span>
                                   </div>
                                 );
-                              })}
+                              })()}
+
+                              {/* Expert Recommended */}
+                              {choice.expertSubskill ? (
+                                (() => {
+                                  const expSubObj = offSkill?.subskills.expert.find(
+                                    (s) => normalize(s.name) === normalize(choice.expertSubskill || '')
+                                  );
+                                  return (
+                                    <div className={`rounded-lg p-3 space-y-1.5 relative border ${
+                                      themeMode === 'light'
+                                        ? 'bg-amber-50/80 border-amber-300'
+                                        : 'bg-yellow-950/20 border-yellow-700/60'
+                                    }`}>
+                                      <div className="flex items-center justify-between gap-1">
+                                        <span className={`text-[10px] font-mono font-bold uppercase flex items-center gap-1 ${
+                                          themeMode === 'light' ? 'text-amber-900' : 'text-yellow-300'
+                                        }`}>
+                                          <Award className="w-3 h-3 text-amber-600 dark:text-yellow-400" />
+                                          Nivel 3 • Experto
+                                        </span>
+                                        <span className={`text-[9px] font-mono font-bold px-1.5 py-0.5 rounded border flex items-center gap-1 ${
+                                          themeMode === 'light'
+                                            ? 'bg-amber-100 text-amber-900 border-amber-300'
+                                            : 'bg-yellow-950/90 text-yellow-300 border-yellow-600/70'
+                                        }`}>
+                                          <Check className="w-2.5 h-2.5" /> Recomendada
+                                        </span>
+                                      </div>
+
+                                      <div className={`text-xs font-bold ${
+                                        themeMode === 'light' ? 'text-slate-900' : 'text-yellow-100'
+                                      }`}>
+                                        {choice.expertSubskill}
+                                      </div>
+
+                                      {expSubObj && (
+                                        <p className={`text-[11px] leading-snug ${
+                                          themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
+                                        }`}>
+                                          {expSubObj.effect}
+                                        </p>
+                                      )}
+
+                                      {choice.expertReason && (
+                                        <div className={`text-[10px] p-2 rounded border leading-relaxed ${
+                                          themeMode === 'light'
+                                            ? 'bg-amber-100/70 text-amber-950 border-amber-300'
+                                            : 'bg-yellow-950/30 text-yellow-200/90 border-yellow-800/40'
+                                        }`}>
+                                          <strong className={`font-mono block mb-0.5 ${
+                                            themeMode === 'light' ? 'text-amber-900' : 'text-yellow-300'
+                                          }`}>💡 Sinergia Táctica:</strong>
+                                          {choice.expertReason}
+                                        </div>
+                                      )}
+                                    </div>
+                                  );
+                                })()
+                              ) : (
+                                <div className={`border rounded-lg p-3 flex items-center justify-center text-center ${
+                                  themeMode === 'light'
+                                    ? 'bg-slate-50 border-slate-200'
+                                    : 'bg-black/30 border-slate-800'
+                                }`}>
+                                  <span className={`text-[11px] font-mono italic ${
+                                    themeMode === 'light' ? 'text-slate-500' : 'text-slate-500'
+                                  }`}>
+                                    Se mantiene en nivel Avanzado según el build
+                                  </span>
+                                </div>
+                              )}
                             </div>
                           </div>
-                        </div>
-                      );
-                    })}
-                  </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
-              );
-            })()}
+              </>
+            )}
 
-            {/* Synergies with Laws and Guild Spells */}
-            <div className={`rounded-xl p-3.5 text-xs leading-relaxed border ${
-              themeMode === 'light'
-                ? 'bg-amber-50/70 border-amber-200 text-slate-800'
-                : `bg-black/40 border ${theme.borderSubtle} text-slate-300`
-            }`}>
-              <strong className={`font-mono block mb-1 ${
-                themeMode === 'light' ? 'text-amber-900 font-bold' : 'text-yellow-400'
-              }`}>
-                ⚡ Sinergia de Leyes & Hechizos Neutrales de Cofradía:
-              </strong>
-              {selectedHero.synergyCombo}
-            </div>
+            {/* TAB 4: SYNERGIES & SUBCLASSES */}
+            {(dossierTab === 'overview' || dossierTab === 'synergies') && (
+              <>
+                {/* Dedicated Official Subclasses Section for Selected Hero */}
+                {(() => {
+                  const isMage = selectedHero.heroType === 'Mago';
+
+                  const matchedSubclasses = OFFICIAL_SUBCLASSES.filter(
+                    (s) => s.faction === selectedFaction && (isMage ? s.classType === 'Mago' : s.classType === 'Guerrero')
+                  );
+                  const relevantSubclasses = matchedSubclasses.length > 0
+                    ? matchedSubclasses
+                    : OFFICIAL_SUBCLASSES.filter((s) => s.faction === selectedFaction);
+
+                  return (
+                    <div className={`border-2 rounded-2xl p-4 sm:p-5 space-y-4 shadow-xl ${theme.shadowAccent} transition-colors ${
+                      themeMode === 'light'
+                        ? 'bg-white border-slate-200 shadow-md'
+                        : `bg-gradient-to-br from-black/90 via-black/70 to-black/90 ${theme.border}`
+                    }`}>
+                      <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b pb-3 ${
+                        themeMode === 'light' ? 'border-slate-200' : theme.borderSubtle
+                      }`}>
+                        <div className="flex items-center gap-2">
+                          <div className={`w-8 h-8 rounded-lg border flex items-center justify-center shadow-md ${
+                            themeMode === 'light'
+                              ? 'bg-purple-100 text-purple-900 border-purple-300'
+                              : `${theme.bgBadge} border ${theme.borderSubtle} ${theme.textAccent}`
+                          }`}>
+                            <Award className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <h4 className={`text-sm sm:text-base font-bold font-serif flex items-center gap-2 ${
+                              themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                            }`}>
+                              Rutas Oficiales de Subclase (Clase de Prestigio)
+                              <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${
+                                themeMode === 'light'
+                                  ? 'bg-purple-100 text-purple-900 border-purple-200'
+                                  : `${theme.bgBadge} ${theme.textAccent} ${theme.borderSubtle}`
+                              }`}>
+                                {selectedHero.heroClass}
+                              </span>
+                            </h4>
+                            <p className={`text-[11px] font-sans ${
+                              themeMode === 'light' ? 'text-slate-600' : theme.textAccent
+                            }`}>
+                              Desbloqueo automático al llevar a <strong>Experto</strong> las 5 habilidades requeridas (Nivel 16-20+)
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {relevantSubclasses.map((sub) => {
+                          // Check how many of the 5 required skills are in the hero's ideal build
+                          const heroSkillsClean = selectedHero.idealSkillBuild.map((s) =>
+                            s.replace(/\s*\((Experta|Avanzada|Básica)\)/, '').trim().toLowerCase()
+                          );
+
+                          const matchingCount = sub.requiredSkills.filter((req) =>
+                            heroSkillsClean.some((hs) => hs.includes(req.name.toLowerCase()) || req.name.toLowerCase().includes(hs))
+                          ).length;
+
+                          const isPrimaryRecommendation = matchingCount >= 3;
+
+                          return (
+                            <div
+                              key={sub.id}
+                              className={`rounded-xl p-4 space-y-3 border transition-all ${
+                                isPrimaryRecommendation
+                                  ? themeMode === 'light'
+                                    ? 'bg-amber-50/80 border-2 border-amber-300 shadow-sm ring-1 ring-amber-300'
+                                    : `bg-black/70 ${theme.border} shadow-md ring-1 ring-current`
+                                  : themeMode === 'light'
+                                  ? 'bg-slate-50 border-slate-200'
+                                  : `bg-black/50 ${theme.borderSubtle} opacity-90`
+                              }`}
+                            >
+                              <div className="flex items-start justify-between gap-2">
+                                <div>
+                                  <div className="flex items-center gap-1.5">
+                                    <span className={`text-xs sm:text-sm font-bold font-serif ${
+                                      themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                                    }`}>
+                                      {sub.name}
+                                    </span>
+                                    <span className={`text-[10px] font-mono ${
+                                      themeMode === 'light' ? 'text-slate-500' : 'text-slate-400'
+                                    }`}>
+                                      ({sub.nameEn})
+                                    </span>
+                                  </div>
+                                  <span className={`text-[10px] font-mono font-bold block mt-0.5 ${
+                                    themeMode === 'light' ? 'text-amber-900' : 'text-yellow-400'
+                                  }`}>
+                                    ★ {sub.bonusTitle}
+                                  </span>
+                                </div>
+
+                                <span
+                                  className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded border shrink-0 ${
+                                    isPrimaryRecommendation
+                                      ? themeMode === 'light'
+                                        ? 'bg-amber-100 text-amber-900 border-amber-300'
+                                        : 'bg-yellow-950 text-yellow-300 border-yellow-600'
+                                      : themeMode === 'light'
+                                      ? 'bg-slate-200 text-slate-700 border-slate-300'
+                                      : 'bg-slate-900 text-slate-400 border-slate-700'
+                                  }`}
+                                >
+                                  {isPrimaryRecommendation ? '⭐ Ruta Recomendada' : 'Ruta Alternativa'}
+                                </span>
+                              </div>
+
+                              <p className={`text-[11px] leading-snug ${
+                                themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
+                              }`}>
+                                {sub.bonusEffect}
+                              </p>
+
+                              {/* 5 Skills Progress Tracker */}
+                              <div className={`space-y-1.5 pt-1 border-t ${
+                                themeMode === 'light' ? 'border-slate-200' : theme.borderSubtle
+                              }`}>
+                                <div className="flex items-center justify-between text-[10px] font-mono">
+                                  <span className={`font-bold uppercase ${
+                                    themeMode === 'light' ? 'text-slate-700' : theme.textAccent
+                                  }`}>5 Habilidades Requeridas a Experto:</span>
+                                  <span className={`font-bold ${
+                                    matchingCount >= 4
+                                      ? themeMode === 'light' ? 'text-emerald-700' : 'text-emerald-400'
+                                      : themeMode === 'light' ? 'text-amber-800' : 'text-yellow-400'
+                                  }`}>
+                                    {matchingCount}/5 en la Build
+                                  </span>
+                                </div>
+
+                                <div className="grid grid-cols-1 gap-1">
+                                  {sub.requiredSkills.map((req, rIdx) => {
+                                    const isPresent = heroSkillsClean.some(
+                                      (hs) => hs.includes(req.name.toLowerCase()) || req.name.toLowerCase().includes(hs)
+                                    );
+                                    return (
+                                      <div
+                                        key={rIdx}
+                                        className={`text-[10px] font-mono px-2 py-1 rounded flex items-center justify-between border ${
+                                          isPresent
+                                            ? themeMode === 'light'
+                                              ? 'bg-emerald-50 text-emerald-900 border-emerald-300 font-semibold'
+                                              : 'bg-emerald-950/40 text-emerald-300 border-emerald-800/60'
+                                            : themeMode === 'light'
+                                            ? 'bg-slate-100 text-slate-600 border-slate-200'
+                                            : 'bg-black/40 text-slate-400 border-slate-800'
+                                        }`}
+                                      >
+                                        <div className="flex items-center gap-1.5 truncate">
+                                          <span className={`w-3.5 h-3.5 rounded-full text-[8px] flex items-center justify-center shrink-0 font-bold ${
+                                            themeMode === 'light'
+                                              ? 'bg-purple-200 text-purple-900'
+                                              : `${theme.bgBadge} text-yellow-300`
+                                          }`}>
+                                            {rIdx + 1}
+                                          </span>
+                                          <span className="truncate">{req.name} ({req.nameEn})</span>
+                                        </div>
+                                        <span className="text-[9px] shrink-0 font-semibold">
+                                          {isPresent ? '✓ Incluida' : 'Opcional'}
+                                        </span>
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })()}
+
+                {/* Synergies with Laws and Guild Spells */}
+                <div className={`rounded-xl p-3.5 text-xs leading-relaxed border ${
+                  themeMode === 'light'
+                    ? 'bg-amber-50/70 border-amber-200 text-slate-800'
+                    : `bg-black/40 border ${theme.borderSubtle} text-slate-300`
+                }`}>
+                  <strong className={`font-mono block mb-1 ${
+                    themeMode === 'light' ? 'text-amber-900 font-bold' : 'text-yellow-400'
+                  }`}>
+                    ⚡ Sinergia de Leyes & Hechizos Neutrales de Cofradía:
+                  </strong>
+                  {selectedHero.synergyCombo}
+                </div>
+              </>
+            )}
           </div>
 
           {/* Modal / Popup for Inspected Official Skill & Subskills */}

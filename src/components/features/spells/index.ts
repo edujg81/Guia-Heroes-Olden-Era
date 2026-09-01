@@ -1,2 +1,4 @@
-// Spells feature components
-export {};
+export { SpellPowerSlider } from './SpellPowerSlider';
+export { SpellSchoolSigilSelector } from './SpellSchoolSigilSelector';
+export { SpellScalingDataTable } from './SpellScalingDataTable';
+export { SpellVersusComparator } from './SpellVersusComparator';

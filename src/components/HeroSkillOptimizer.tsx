@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { RecommendedHeroes } from './RecommendedHeroes';
+import { HeroBuildSimulator } from './HeroBuildSimulator';
 import { OfficialSkillsBrowser } from './OfficialSkillsBrowser';
 import { SubclassesBrowser } from './SubclassesBrowser';
 import { useStickyState } from '../utils/useStickyState';
-import { Users, Sparkles, BookOpen, Shield, Award } from 'lucide-react';
+import { Users, Sparkles, BookOpen, Shield, Award, GitBranch } from 'lucide-react';
 import { FactionId, FACTIONS_METADATA, getFactionTheme } from '../data/factionDataProvider';
 
 interface HeroSkillOptimizerProps {
@@ -15,9 +16,15 @@ export const HeroSkillOptimizer: React.FC<HeroSkillOptimizerProps> = ({
   selectedFaction = 'Mazmorra',
   themeMode = 'dark',
 }) => {
-  const [activeSubTab, setActiveSubTab] = useStickyState<'heroes' | 'official-skills' | 'subclasses'>('heroes', 'active_hero_subtab');
+  const [activeSubTab, setActiveSubTab] = useStickyState<'heroes' | 'simulator' | 'subclasses' | 'official-skills'>('heroes', 'active_hero_subtab');
+  const [simulatorInitialHero, setSimulatorInitialHero] = useState<string | undefined>(undefined);
   const meta = FACTIONS_METADATA[selectedFaction] || FACTIONS_METADATA.Mazmorra;
   const theme = getFactionTheme(selectedFaction, themeMode);
+
+  const handleOpenSimulatorForHero = (heroId: string) => {
+    setSimulatorInitialHero(heroId);
+    setActiveSubTab('simulator');
+  };
 
   return (
     <div className="space-y-6">
@@ -33,7 +40,22 @@ export const HeroSkillOptimizer: React.FC<HeroSkillOptimizerProps> = ({
             }`}
           >
             <Users className={`w-4 h-4 ${theme.textAccent}`} />
-            <span>Comandantes ({meta.name})</span>
+            <span>Ficha de Comandantes ({meta.name})</span>
+          </button>
+
+          <button
+            onClick={() => setActiveSubTab('simulator')}
+            className={`flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold font-mono transition-all cursor-pointer ${
+              activeSubTab === 'simulator'
+                ? `${theme.primaryButton} shadow-md`
+                : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
+            }`}
+          >
+            <GitBranch className="w-4 h-4 text-amber-400" />
+            <span>Simulador de Build (1-20)</span>
+            <span className="bg-amber-950/90 text-amber-300 border border-amber-600/80 text-[9px] px-1.5 py-0.2 rounded font-bold uppercase animate-pulse">
+              Nuevo
+            </span>
           </button>
 
           <button
@@ -74,7 +96,18 @@ export const HeroSkillOptimizer: React.FC<HeroSkillOptimizerProps> = ({
 
       {/* Active Sub-Tab View (Persisted in DOM) */}
       <div className={activeSubTab === 'heroes' ? 'block' : 'hidden'}>
-        <RecommendedHeroes selectedFaction={selectedFaction} themeMode={themeMode} />
+        <RecommendedHeroes 
+          selectedFaction={selectedFaction} 
+          themeMode={themeMode} 
+          onOpenSimulator={handleOpenSimulatorForHero} 
+        />
+      </div>
+      <div className={activeSubTab === 'simulator' ? 'block' : 'hidden'}>
+        <HeroBuildSimulator 
+          selectedFaction={selectedFaction} 
+          themeMode={themeMode} 
+          initialHeroId={simulatorInitialHero} 
+        />
       </div>
       <div className={activeSubTab === 'subclasses' ? 'block' : 'hidden'}>
         <SubclassesBrowser selectedFaction={selectedFaction} themeMode={themeMode} />
@@ -85,3 +118,4 @@ export const HeroSkillOptimizer: React.FC<HeroSkillOptimizerProps> = ({
     </div>
   );
 };
+
