@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FactionId, getBuildStepsForFaction, FACTIONS_METADATA, getFactionTheme } from '../data/factionDataProvider';
 import { getOpponentTacticForDay } from '../data/dungeonOpponentTactics';
+import { WaxSealBadge } from './ui/WaxSealBadge';
 import { useStickyState } from '../utils/useStickyState';
 import {
   CheckCircle2,
@@ -287,16 +288,16 @@ export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({
                 key={step.day}
                 id={`day-step-${step.day}`}
                 onClick={() => setSelectedDay(step.day)}
-                className={`p-3 rounded-xl border transition-all cursor-pointer relative ${
+                className={`p-4 rounded-xl border-2 transition-all cursor-pointer relative ${
                   isSelected
                     ? opponentMode === 'human'
-                      ? 'bg-red-950/40 border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.3)]'
+                      ? 'bg-red-950/50 border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.35)]'
                       : opponentMode === 'ai'
-                      ? 'bg-cyan-950/40 border-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.3)]'
+                      ? 'bg-cyan-950/50 border-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.35)]'
                       : `${theme.bgSubtle} ${theme.border} shadow-[0_0_20px_rgba(0,0,0,0.6)]`
                     : isCompleted
-                    ? 'bg-black/30 border-emerald-900/40 text-slate-400'
-                    : `bg-black/50 ${theme.borderSubtle} hover:border-slate-500 hover:bg-black/70`
+                    ? 'bg-black/30 border-emerald-900/50 text-slate-400'
+                    : `bg-black/50 ${theme.borderSubtle} hover:border-slate-400 hover:bg-black/70`
                 }`}
               >
                 <div className="flex items-start justify-between gap-3">
@@ -317,17 +318,7 @@ export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({
                         <span className={`text-[10px] font-mono font-bold uppercase tracking-wider px-1.5 py-0.5 rounded ${theme.bgBadge} border ${theme.borderSubtle} ${theme.textAccent}`}>
                           M{step.month} • S{step.week} • D{step.day}
                         </span>
-                        <span
-                          className={`text-[9px] font-bold uppercase px-1.5 py-0.2 rounded font-mono ${
-                            step.priority === 'Crítica'
-                              ? 'bg-red-950/80 text-red-300 border border-red-800/60'
-                              : step.priority === 'Alta'
-                              ? 'bg-yellow-950/80 text-yellow-300 border border-yellow-800/60'
-                              : 'bg-slate-900 text-slate-400 border border-slate-800'
-                          }`}
-                        >
-                          {step.priority}
-                        </span>
+                        <WaxSealBadge label={step.priority} size="sm" />
 
                         {/* Opponent Mode Badges on cards */}
                         {opponentMode === 'human' && (
@@ -379,8 +370,8 @@ export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({
 
         {/* Right Column: Selected Day Deep-Dive Details */}
         <div className="lg:col-span-7 flex flex-col gap-4">
-          <div className={`bg-black/60 border ${theme.border} rounded-2xl p-4 sm:p-5 shadow-[0_0_30px_rgba(0,0,0,0.4)] lg:sticky lg:top-20 backdrop-blur-md`}>
-            <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b ${theme.borderSubtle}`}>
+          <div className={`bg-black/75 border-2 ${theme.border} rounded-2xl p-5 sm:p-6 shadow-[0_4px_25px_rgba(0,0,0,0.6)] lg:sticky lg:top-20 backdrop-blur-md relative`}>
+            <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3.5 border-b ${theme.borderSubtle}`}>
               <div>
                 <span className={`text-[10px] font-mono ${theme.textAccent} uppercase tracking-widest block font-bold`}>
                   Mes {currentStep.month} • Semana {currentStep.week} • Día {currentStep.day} de 56

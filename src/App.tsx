@@ -7,6 +7,7 @@ import { SpellGrimoire } from './components/SpellGrimoire';
 import { CombatTactics } from './components/CombatTactics';
 import { UnitMatrix } from './components/UnitMatrix';
 import { HeroSkillOptimizer } from './components/HeroSkillOptimizer';
+import { FactionBackgroundPattern } from './components/ui/FactionBackgroundPattern';
 import { useStickyState } from './utils/useStickyState';
 import { FactionId, FACTIONS_METADATA, getFactionTheme } from './data/factionDataProvider';
 
@@ -33,13 +34,16 @@ export default function App() {
 
   return (
     <div 
-      className={`min-h-screen ${themeMode === 'dark' ? 'bg-[#0c0c0e] text-slate-300' : 'bg-slate-50 text-slate-800'} flex flex-col font-sans ${theme.selectionClass} transition-colors duration-300`}
+      className={`min-h-screen ${themeMode === 'dark' ? 'bg-[#0c0c0e] text-slate-300' : 'bg-slate-50 text-slate-800'} flex flex-col font-sans ${theme.selectionClass} transition-colors duration-300 relative`}
       style={{
         backgroundColor: themeMode === 'dark' ? '#0c0c0e' : '#f8fafc',
         backgroundImage: theme.gradientBg,
         backgroundAttachment: 'fixed',
       }}
     >
+      {/* Dynamic Faction Geometric SVG Texture */}
+      <FactionBackgroundPattern faction={selectedFaction} themeMode={themeMode} />
+
       {/* Top Navigation & Faction Selector */}
       <Header
         activeTab={activeTab}

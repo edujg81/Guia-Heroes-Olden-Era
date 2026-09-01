@@ -5,6 +5,7 @@ import { OFFICIAL_SKILLS_DATA } from '../data/officialSkillsData';
 import { OFFICIAL_SUBCLASSES } from '../data/subclassesData';
 import { HERO_SUBSKILL_CHOICES, SKILL_SELECTION_GUIDES } from '../data/subskillsRecommendationData';
 import { DungeonHero, OfficialSkill, HeroSubskillChoice, SubclassInfo } from '../types';
+import { WaxSealBadge } from './ui/WaxSealBadge';
 import { useStickyState } from '../utils/useStickyState';
 import {
   Sparkles,
@@ -446,7 +447,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                 <div
                   key={hero.id}
                   onClick={() => setSelectedHeroId(hero.id)}
-                  className={`p-3.5 rounded-xl border transition-all cursor-pointer backdrop-blur-sm relative overflow-hidden ${
+                  className={`p-4 rounded-xl border-2 transition-all cursor-pointer backdrop-blur-sm relative ${
                     isSelected
                       ? themeMode === 'light'
                         ? 'bg-purple-50/90 border-purple-400 shadow-md ring-2 ring-purple-300'
@@ -456,12 +457,10 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                       : `bg-black/50 ${theme.borderSubtle} hover:border-amber-400/50 hover:bg-black/70`
                   }`}
                 >
-                  <div className="flex items-start justify-between gap-2">
+                  <div className="flex items-start justify-between gap-3">
                     <div>
                       <div className="flex items-center gap-1.5 flex-wrap mb-1">
-                        <span className={`text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded border ${tierBadgeColor}`}>
-                          {hero.tierRank}
-                        </span>
+                        <WaxSealBadge label={hero.tierRank} size="sm" />
                         <span className={`text-[10px] font-mono font-semibold ${classColor}`}>
                           {hero.heroType} / {hero.heroClass}
                         </span>
@@ -529,10 +528,10 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
 
         {/* Right Column: Hero Full Dossier (7 cols) */}
         <div className="lg:col-span-7 space-y-4">
-          <div className={`border rounded-2xl p-5 shadow-2xl backdrop-blur-md space-y-5 transition-colors ${
+          <div className={`border-2 rounded-2xl p-5 sm:p-6 shadow-2xl backdrop-blur-md space-y-5 transition-colors relative ${
             themeMode === 'light'
               ? 'bg-white border-slate-200 shadow-xl'
-              : `bg-black/60 border ${theme.border}`
+              : `bg-black/75 border ${theme.border}`
           }`}>
             {/* Dossier Header */}
             <div className={`flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b pb-4 ${
@@ -554,13 +553,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                   }`}>
                     {selectedHero.role}
                   </span>
-                  <span className={`text-[10px] font-bold uppercase px-2.5 py-0.5 rounded border font-mono ${
-                    themeMode === 'light'
-                      ? 'bg-red-100 text-red-900 border-red-300'
-                      : 'bg-red-950/80 text-red-300 border-red-700/60'
-                  }`}>
-                    {selectedHero.tierRank}
-                  </span>
+                  <WaxSealBadge label={selectedHero.tierRank} size="sm" />
                 </div>
                 <h3 className={`text-2xl font-serif font-bold tracking-wide ${
                   themeMode === 'light' ? 'text-slate-900' : 'text-white'

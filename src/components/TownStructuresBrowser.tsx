@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { FactionId, FACTIONS_METADATA, getFactionTheme } from '../data/factionDataProvider';
 import { TownStructure, TownStructureCost, StructureUpgradeLevel } from '../types';
 import { getStructuresForFaction } from '../data/townStructuresData';
+import { WaxSealBadge } from './ui/WaxSealBadge';
 import {
   Castle,
   Shield,
@@ -303,30 +304,28 @@ export const TownStructuresBrowser: React.FC<TownStructuresBrowserProps> = ({
                 key={structure.id}
                 id={`structure-card-${structure.id}`}
                 onClick={() => setSelectedStructureId(structure.id)}
-                className={`p-3.5 rounded-xl border transition-all cursor-pointer relative ${
+                className={`p-4 rounded-xl border-2 transition-all cursor-pointer relative ${
                   isSelected
                     ? `${theme.bgSubtle} ${theme.border} shadow-[0_0_20px_rgba(0,0,0,0.6)] ring-1 ${theme.border}`
-                    : `bg-black/50 ${theme.borderSubtle} hover:border-slate-500 hover:bg-black/70`
+                    : `bg-black/50 ${theme.borderSubtle} hover:border-slate-400 hover:bg-black/70`
                 }`}
               >
-                <div className="flex items-start justify-between gap-2">
+                <div className="flex items-start justify-between gap-3">
                   <div>
-                    <div className="flex items-center gap-2 flex-wrap mb-1">
-                      {isDwelling && (
-                        <span className="bg-amber-950/80 text-amber-300 border border-amber-600/60 text-[10px] font-bold px-2 py-0.5 rounded font-mono">
-                          Tier {structure.tier}
-                        </span>
+                    <div className="flex items-center gap-1.5 flex-wrap mb-1">
+                      {isDwelling && structure.tier && (
+                        <WaxSealBadge label={`Tier ${structure.tier}`} size="sm" />
                       )}
                       {hasUpgradeLevels && (
                         <span className="bg-cyan-950/80 text-cyan-300 border border-cyan-600/60 text-[10px] font-bold px-2 py-0.5 rounded font-mono flex items-center gap-1">
                           <TrendingUp className="w-2.5 h-2.5 text-cyan-400" />
-                          {structure.upgradeLevels?.length} Niveles de Mejora
+                          {structure.upgradeLevels?.length} Niveles
                         </span>
                       )}
                       {isUnique && (
-                        <span className="bg-purple-950/80 text-purple-300 border border-purple-600/60 text-[10px] font-bold px-2 py-0.5 rounded font-mono flex items-center gap-1">
-                          <Crown className="w-2.5 h-2.5 text-yellow-400" />
-                          Exclusivo de {selectedFaction}
+                        <span className="bg-purple-950/80 text-purple-200 border border-purple-500/80 text-[10px] font-bold px-2 py-0.5 rounded font-mono flex items-center gap-1 shadow-[0_0_8px_rgba(168,85,247,0.4)]">
+                          <Crown className="w-2.5 h-2.5 text-amber-300" />
+                          Exclusivo
                         </span>
                       )}
                       <span className="text-[10px] font-mono text-slate-400">
@@ -346,7 +345,7 @@ export const TownStructuresBrowser: React.FC<TownStructuresBrowserProps> = ({
                   </div>
 
                   {/* Timing Recommendation Badge */}
-                  <span className="text-[10px] font-mono text-slate-400 bg-black/60 px-2 py-0.5 rounded border border-slate-800 shrink-0">
+                  <span className="text-[10px] font-mono text-slate-300 bg-black/70 px-2 py-0.5 rounded border border-slate-700 shrink-0 font-semibold">
                     {structure.timingRecommendation}
                   </span>
                 </div>
@@ -384,7 +383,7 @@ export const TownStructuresBrowser: React.FC<TownStructuresBrowserProps> = ({
         {/* Right Column: Detailed Structure Inspector with Upgrade Levels */}
         <div className="lg:col-span-6" id="structure-detail-inspector">
           {selectedStructure ? (
-            <div className={`p-5 rounded-2xl border ${theme.border} bg-black/75 shadow-2xl space-y-4 sticky top-20 backdrop-blur-md max-h-[850px] overflow-y-auto`}>
+            <div className={`p-5 sm:p-6 rounded-2xl border-2 ${theme.border} bg-black/80 shadow-2xl space-y-4 sticky top-20 backdrop-blur-md max-h-[850px] overflow-y-auto relative`}>
               {/* Header Details */}
               <div className="border-b border-slate-800 pb-3">
                 <div className="flex items-center gap-2 mb-1.5 flex-wrap">
@@ -392,13 +391,11 @@ export const TownStructuresBrowser: React.FC<TownStructuresBrowserProps> = ({
                     {selectedStructure.category}
                   </span>
                   {selectedStructure.tier && (
-                    <span className="bg-amber-950/80 text-amber-300 border border-amber-600/60 text-[10px] font-bold px-2 py-0.5 rounded font-mono">
-                      Morada Tier {selectedStructure.tier}
-                    </span>
+                    <WaxSealBadge label={`Tier ${selectedStructure.tier}`} size="sm" />
                   )}
                   {selectedStructure.isFactionUnique && (
-                    <span className="bg-purple-950/80 text-purple-300 border border-purple-600/60 text-[10px] font-bold px-2 py-0.5 rounded font-mono flex items-center gap-1">
-                      <Crown className="w-3 h-3 text-yellow-400" />
+                    <span className="bg-purple-950/80 text-purple-200 border border-purple-500/80 text-[10px] font-bold px-2 py-0.5 rounded font-mono flex items-center gap-1 shadow-[0_0_8px_rgba(168,85,247,0.4)]">
+                      <Crown className="w-3 h-3 text-amber-300" />
                       Estructura Única ({selectedStructure.faction})
                     </span>
                   )}
