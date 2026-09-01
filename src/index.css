@@ -378,3 +378,43 @@ html.dark .bg-yellow-400 *,
 html.dark .bg-yellow-500 * {
   color: #020617 !important;
 }
+
+/* =========================================================================
+   MEDIEVAL FANTASY THEMATIC UTILITIES (OLDEN ERA)
+   ========================================================================= */
+.medieval-frame {
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease-in-out;
+}
+
+.medieval-frame:hover {
+  filter: brightness(1.05);
+}
+
+.medieval-glow-purple {
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.35);
+}
+
+.medieval-glow-amber {
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.35);
+}
+
+.medieval-glow-emerald {
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.35);
+}
+
+.medieval-glow-sky {
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.35);
+}
+
+.medieval-glow-slate {
+  box-shadow: 0 0 15px rgba(148, 163, 184, 0.35);
+}
+
+.medieval-glow-orange {
+  box-shadow: 0 0 15px rgba(234, 88, 12, 0.35);
+}
+
