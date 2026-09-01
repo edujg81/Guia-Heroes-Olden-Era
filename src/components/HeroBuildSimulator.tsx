@@ -88,7 +88,7 @@ export const HeroBuildSimulator: React.FC<HeroBuildSimulatorProps> = ({
 
   const remainingPoints = totalPoints - spentPoints;
 
-  // Count active primary skills (max 6 allowed in Olden Era)
+  // Count active primary skills (max 8 allowed in Olden Era)
   const activeSkillsCount = useMemo(() => {
     return (Object.values(allocations) as AllocatedSkillState[]).filter((a) => a.tier !== 'none').length;
   }, [allocations]);
@@ -186,8 +186,8 @@ export const HeroBuildSimulator: React.FC<HeroBuildSimulatorProps> = ({
     const current = allocations[skillId] || { skillId, tier: 'none' };
     
     // Check if adding a new skill exceeds the 6-skill cap
-    if (current.tier === 'none' && targetTier !== 'none' && activeSkillsCount >= 6) {
-      alert('¡Límite alcanzado! Un héroe en Jadame puede aprender un máximo de 6 habilidades primarias.');
+    if (current.tier === 'none' && targetTier !== 'none' && activeSkillsCount >= 8) {
+      alert('¡Límite alcanzado! Un héroe en Jadame puede aprender un máximo de 8 habilidades primarias.');
       return;
     }
 
