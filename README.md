@@ -40,9 +40,9 @@ El compendio cubre de forma exhaustiva y canónica las 6 facciones del juego:
 1. 🟡 **Templo (Temple)**: Furia sagrada, caballeros de armadura pesada, clérigos y huestes celestiales.
 2. ⚪ **Necrópolis (Necropolis)**: No-muertos, vampiros inmortales, nigromancia acumulativa y magia de sombras.
 3. 🟣 **Mazmorra (Dungeon)**: Elfos oscuros, minotauros, hidras, dragones negros y hechicería elemental devastadora.
-4. 🟢 **Foresta / Arboleda (Sylvan / Grove)**: Elfos silvanos, cazadores de élite, ents ancestrales, unicornios y magia de la naturaleza.
+4. 🟢 **Foresta / Arboleda (Sylvan / Grove)**: Faunos, hoplitas, ninfas iriyads, aqualotls anfibios, herbomantes, qilins celestiales, fénix y magia de la naturaleza.
 5. 🟠 **Colmena / Enjambre (Hive / Swarm)**: Horda insectoide de Beelzebub y el Rey Libélula (9 Ejecutores / Might y 9 Heraldos / Magic).
-6. 🔵 **Cisma (Schism)**: Constructos mecánicos, enanos oscuros, magia cronológica de distorsión y alquimia bélica.
+6. 🔵 **Cisma (Schism)**: Cultistas del vacío, moradores de grietas de Vori (Ra'Shoths, Shoths, Jinetes Aga'Shoth), concubos, árbitros y enviados abisales con ritos de invocación permanente y demonología del abismo.
 
 ---
 

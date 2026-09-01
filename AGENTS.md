@@ -18,9 +18,9 @@ El proyecto es una aplicación web en castellano diseñada para proporcionar her
   1. **Templo (Temple)**: Furia sagrada, caballeros y clérigos humanos/celestiales.
   2. **Necrópolis (Necropolis)**: No-muertos, vampiros, nigromancia acumulativa y magia de sombras.
   3. **Mazmorra (Dungeon)**: Elfos oscuros, minotauros, hidras, dragones y magia elemental destructiva.
-  4. **Foresta / Arboleda (Sylvan / Grove)**: Elfos silvanos, hadas, ents, criaturas del bosque y arquería letal.
+  4. **Foresta / Arboleda (Sylvan / Grove)**: Faunos, hoplitas, ninfas iriyads, aqualotls anfibios, herbomantes, qilins celestiales y fénix míticos (sin ents ni unicornios).
   5. **Colmena / Enjambre (Hive / Swarm)**: Horda insectoide/demoniaca de Beelzebub y el Rey Libélula (9 Ejecutores y 9 Heraldos).
-  6. **Cisma (Schism)**: Constructos, enanos oscuros, magia de distorsión temporal y alquimia bélica.
+  6. **Cisma (Schism)**: Cultistas del vacío, moradores de fallas heladas de Vori (Ra'Shoths, Shoths, Jinetes Aga'Shoth), concubos, árbitros y enviados abisales con ritos de invocación permanente y demonología del vacío (sin enanos oscuros, constructos ni alquimia bélica).
 
 ---
 

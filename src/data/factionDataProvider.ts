@@ -631,8 +631,8 @@ export const FACTIONS_METADATA: Record<FactionId, FactionMetadata> = {
     nameEn: 'Sylvan / Foresta',
     region: 'Bosques Primigenios de Jadame',
     alignment: 'Naturaleza & Armonía',
-    primaryMechanic: 'Vínculo Silvano & Enraizamiento',
-    primaryMechanicDesc: 'Doble disparo de Cazadores, tanques Treant inmovilizadores y aliento ácido de Dragones Esmeralda.',
+    primaryMechanic: 'Enraizamiento & Comunión Botánica',
+    primaryMechanicDesc: 'Falange de Hoplitas defensivos, control de enredo de Iriyads, ralentización anfibia de Aqualotls, auras celestiales de Qilins y renacimiento de Fénix.',
     startingGold: '10.000',
     colorScheme: {
       primary: 'emerald',
@@ -649,8 +649,8 @@ export const FACTIONS_METADATA: Record<FactionId, FactionMetadata> = {
     nameEn: 'Sylvan / Foresta',
     region: 'Bosques Primigenios de Jadame',
     alignment: 'Naturaleza & Armonía',
-    primaryMechanic: 'Vínculo Silvano & Enraizamiento',
-    primaryMechanicDesc: 'Doble disparo de Cazadores, tanques Treant inmovilizadores y aliento ácido de Dragones Esmeralda.',
+    primaryMechanic: 'Enraizamiento & Comunión Botánica',
+    primaryMechanicDesc: 'Falange de Hoplitas defensivos, control de enredo de Iriyads, ralentización anfibia de Aqualotls, auras celestiales de Qilins y renacimiento de Fénix.',
     startingGold: '10.000',
     colorScheme: {
       primary: 'emerald',
