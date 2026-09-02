@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Header } from './components/Header';
 import { DayByDayPlanner } from './components/DayByDayPlanner';
 import { TownStructuresBrowser } from './components/TownStructuresBrowser';
@@ -8,16 +8,98 @@ import { CombatTactics } from './components/CombatTactics';
 import { UnitMatrix } from './components/UnitMatrix';
 import { HeroSkillOptimizer } from './components/HeroSkillOptimizer';
 import { FactionBackgroundPattern } from './components/ui/FactionBackgroundPattern';
+import { FactionRunicTransition } from './components/ui/FactionRunicTransition';
+import { ShortcutToast } from './components/ui/ShortcutToast';
+import { KeyboardShortcutsModal } from './components/ui/KeyboardShortcutsModal';
+import { TacticalCheatSheet } from './components/features/combat/TacticalCheatSheet';
+import { useKeyboardShortcuts } from './utils/useKeyboardShortcuts';
 import { useStickyState } from './utils/useStickyState';
 import { FactionId, FACTIONS_METADATA, getFactionTheme } from './data/factionDataProvider';
+
+const TABS = [
+  'build-order',
+  'structures',
+  'faction-laws',
+  'spells',
+  'combat-tactics',
+  'units',
+  'hero-skills',
+];
 
 export default function App() {
   const [activeTab, setActiveTab] = useStickyState<string>('build-order', 'active_tab');
   const [selectedFaction, setSelectedFaction] = useStickyState<FactionId>('Mazmorra', 'global_selected_faction');
   const [themeMode, setThemeMode] = useStickyState<'dark' | 'light'>('dark', 'color_theme_mode');
+  const [selectedDay, setSelectedDay] = useStickyState<number>(1, `planner_selected_day_${selectedFaction}`);
+
+  const [isCheatSheetOpen, setIsCheatSheetOpen] = useStickyState<boolean>(false, 'is_tactical_cheatsheet_open');
+  const [isShortcutsModalOpen, setIsShortcutsModalOpen] = useState<boolean>(false);
 
   const meta = FACTIONS_METADATA[selectedFaction] || FACTIONS_METADATA.Mazmorra;
   const theme = getFactionTheme(selectedFaction, themeMode);
+
+  // Cycle tabs backward (Q)
+  const handlePrevTab = useCallback(() => {
+    setActiveTab((curr) => {
+      const idx = TABS.indexOf(curr);
+      if (idx <= 0) return TABS[TABS.length - 1];
+      return TABS[idx - 1];
+    });
+  }, [setActiveTab]);
+
+  // Cycle tabs forward (E)
+  const handleNextTab = useCallback(() => {
+    setActiveTab((curr) => {
+      const idx = TABS.indexOf(curr);
+      if (idx === -1 || idx >= TABS.length - 1) return TABS[0];
+      return TABS[idx + 1];
+    });
+  }, [setActiveTab]);
+
+  // Previous Day (J)
+  const handlePrevDay = useCallback(() => {
+    setSelectedDay((prev) => Math.max(1, prev - 1));
+  }, [setSelectedDay]);
+
+  // Next Day (K)
+  const handleNextDay = useCallback(() => {
+    setSelectedDay((prev) => Math.min(56, prev + 1));
+  }, [setSelectedDay]);
+
+  // Toggle Theme (M)
+  const handleToggleTheme = useCallback(() => {
+    setThemeMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  }, [setThemeMode]);
+
+  // Toggle Compact Tactical Cheat Sheet (C / T)
+  const handleToggleCompactMode = useCallback(() => {
+    setIsCheatSheetOpen((prev) => !prev);
+  }, [setIsCheatSheetOpen]);
+
+  // Toggle Shortcuts Help (?)
+  const handleToggleHelp = useCallback(() => {
+    setIsShortcutsModalOpen((prev) => !prev);
+  }, []);
+
+  // Close modals / cheat sheet (Escape)
+  const handleCloseModals = useCallback(() => {
+    setIsShortcutsModalOpen(false);
+    setIsCheatSheetOpen(false);
+  }, [setIsCheatSheetOpen]);
+
+  // Global Keyboard Shortcuts Hook
+  const { lastShortcut, clearLastShortcut } = useKeyboardShortcuts({
+    onSelectFaction: setSelectedFaction,
+    onPrevDay: handlePrevDay,
+    onNextDay: handleNextDay,
+    onToggleCompactMode: handleToggleCompactMode,
+    onToggleTheme: handleToggleTheme,
+    onPrevTab: handlePrevTab,
+    onNextTab: handleNextTab,
+    onToggleHelp: handleToggleHelp,
+    onClose: handleCloseModals,
+    isEnabled: true,
+  });
 
   useEffect(() => {
     const root = document.documentElement;
@@ -34,15 +116,55 @@ export default function App() {
 
   return (
     <div 
-      className={`min-h-screen ${themeMode === 'dark' ? 'bg-[#0c0c0e] text-slate-300' : 'bg-slate-50 text-slate-800'} flex flex-col font-sans ${theme.selectionClass} transition-colors duration-300 relative`}
+      className={`min-h-screen ${themeMode === 'dark' ? 'bg-[#0c0c0e] text-slate-300' : 'bg-slate-50 text-slate-800'} flex flex-col font-sans ${theme.selectionClass} transition-colors duration-500 relative`}
       style={{
         backgroundColor: themeMode === 'dark' ? '#0c0c0e' : '#f8fafc',
         backgroundImage: theme.gradientBg,
         backgroundAttachment: 'fixed',
       }}
     >
+      {/* Screen reader skip-to-content accessibility link */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-amber-500 focus:text-slate-950 focus:font-bold focus:rounded-lg focus:shadow-xl focus:outline-none"
+      >
+        Saltar al contenido principal
+      </a>
+
       {/* Dynamic Faction Geometric SVG Texture */}
       <FactionBackgroundPattern faction={selectedFaction} themeMode={themeMode} />
+
+      {/* Smooth Faction Runic Switch Transition Announcement */}
+      <FactionRunicTransition selectedFaction={selectedFaction} themeMode={themeMode} />
+
+      {/* Keyboard Shortcut HUD Toast Notification */}
+      <ShortcutToast
+        shortcut={lastShortcut}
+        onDismiss={clearLastShortcut}
+        selectedFaction={selectedFaction}
+        themeMode={themeMode}
+      />
+
+      {/* Compact Tactical Cheat Sheet for Second Screen / Mobile during matches (C) */}
+      <TacticalCheatSheet
+        isOpen={isCheatSheetOpen}
+        onClose={() => setIsCheatSheetOpen(false)}
+        selectedFaction={selectedFaction}
+        onSelectFaction={setSelectedFaction}
+        onNavigateToDay={(day) => {
+          setSelectedDay(day);
+          setActiveTab('build-order');
+        }}
+        themeMode={themeMode}
+      />
+
+      {/* Accessible Keyboard Shortcuts Help Modal (?) */}
+      <KeyboardShortcutsModal
+        isOpen={isShortcutsModalOpen}
+        onClose={() => setIsShortcutsModalOpen(false)}
+        selectedFaction={selectedFaction}
+        themeMode={themeMode}
+      />
 
       {/* Top Navigation & Faction Selector */}
       <Header
@@ -52,12 +174,19 @@ export default function App() {
         setSelectedFaction={setSelectedFaction}
         themeMode={themeMode}
         setThemeMode={setThemeMode}
+        onToggleTacticalCheatSheet={() => setIsCheatSheetOpen((prev) => !prev)}
+        onToggleKeyboardHelp={() => setIsShortcutsModalOpen((prev) => !prev)}
       />
 
       {/* Main Content Area: Persist mounted views to never lose user match context */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 space-y-6">
+      <main id="main-content" tabIndex={-1} className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 space-y-6 focus:outline-none">
         <div className={activeTab === 'build-order' ? 'block' : 'hidden'}>
-          <DayByDayPlanner selectedFaction={selectedFaction} themeMode={themeMode} />
+          <DayByDayPlanner
+            selectedFaction={selectedFaction}
+            themeMode={themeMode}
+            selectedDay={selectedDay}
+            onSelectDay={setSelectedDay}
+          />
         </div>
         <div className={activeTab === 'structures' ? 'block' : 'hidden'}>
           <TownStructuresBrowser selectedFaction={selectedFaction} themeMode={themeMode} />
@@ -80,7 +209,7 @@ export default function App() {
       </main>
 
       {/* Immersive Footer Status Bar */}
-      <footer className={`bg-black/70 border-t ${theme.borderSubtle} py-5 mt-12 backdrop-blur-md transition-colors duration-300`}>
+      <footer className={`bg-black/70 border-t ${theme.borderSubtle} py-5 mt-12 backdrop-blur-md transition-colors duration-500`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div className="flex flex-wrap items-center gap-3 text-[11px] uppercase tracking-widest text-slate-400">
             <span className="text-slate-300 font-semibold">Campaña 56 Días</span>
@@ -94,8 +223,10 @@ export default function App() {
             </span>
           </div>
 
-          <div className="text-[11px] text-slate-500 font-mono">
-            Heroes of Might and Magic: Olden Era • Progreso Guardado Automáticamente
+          <div className="text-[11px] text-slate-500 font-mono flex items-center gap-2">
+            <span>Atajos: <kbd className="px-1 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px] border border-slate-700">?</kbd></span>
+            <span>•</span>
+            <span>Heroes of Might and Magic: Olden Era</span>
           </div>
         </div>
       </footer>

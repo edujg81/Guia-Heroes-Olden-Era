@@ -30,18 +30,28 @@ import {
 interface DayByDayPlannerProps {
   selectedFaction?: FactionId;
   themeMode?: 'dark' | 'light';
+  selectedDay?: number;
+  onSelectDay?: (day: number) => void;
 }
 
 export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({ 
   selectedFaction = 'Mazmorra',
   themeMode = 'dark',
+  selectedDay: externalSelectedDay,
+  onSelectDay: externalOnSelectDay,
 }) => {
   const [completedDays, setCompletedDays] = useStickyState<Record<number, boolean>>({}, `planner_completed_days_${selectedFaction}`);
-  const [selectedDay, setSelectedDay] = useStickyState<number>(1, `planner_selected_day_${selectedFaction}`);
+  const [internalSelectedDay, setInternalSelectedDay] = useStickyState<number>(1, `planner_selected_day_${selectedFaction}`);
   const [selectedMonth, setSelectedMonth] = useStickyState<1 | 2 | 'all'>('all', 'planner_selected_month');
   const [selectedWeek, setSelectedWeek] = useStickyState<number | 'all'>('all', 'planner_selected_week');
   const [opponentMode, setOpponentMode] = useStickyState<'all' | 'human' | 'ai'>('all', 'planner_opponent_mode');
   const [showResetConfirm, setShowResetConfirm] = useState<boolean>(false);
+
+  const selectedDay = externalSelectedDay !== undefined ? externalSelectedDay : internalSelectedDay;
+  const setSelectedDay = (day: number) => {
+    setInternalSelectedDay(day);
+    externalOnSelectDay?.(day);
+  };
 
   const allSteps = getBuildStepsForFaction(selectedFaction);
   const meta = FACTIONS_METADATA[selectedFaction] || FACTIONS_METADATA.Mazmorra;
@@ -76,6 +86,13 @@ export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({
   const currentStep = allSteps.find((s) => s.day === selectedDay) || allSteps[0];
   const currentOpponentTactic = getOpponentTacticForDay(currentStep.day, currentStep.month, currentStep.week);
   const completedCount = Object.values(completedDays).filter(Boolean).length;
+
+  React.useEffect(() => {
+    const el = document.getElementById(`day-step-${selectedDay}`);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [selectedDay]);
 
   return (
     <div className="space-y-4">

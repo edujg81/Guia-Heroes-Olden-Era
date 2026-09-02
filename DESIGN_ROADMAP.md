@@ -43,7 +43,9 @@ Este documento registra las mejoras de diseño, identidad visual y experiencia d
 
 ---
 
-### 5. Microinteracciones, Rendimiento y Accesibilidad ⏳ [PENDIENTE]
-- [ ] **Transiciones de Facción Suaves**: Desvanecimiento cruzado y transiciones de brillo rúnico sin parpadeo al alternar entre facciones.
-- [ ] **Modo Compacto / Ficha Táctica**: Vista condensada optimizada para segundas pantallas o dispositivos móviles durante partidas competitivas.
-- [ ] **Atajos de Teclado**: Teclas rápidas para navegación de facciones (1-6), avance de días (J/K) y reseteo de filtros.
+### 5. Microinteracciones, Rendimiento y Accesibilidad ✅ [COMPLETADO]
+- [x] **Transiciones de Facción Suaves**: Desvanecimiento cruzado y transiciones de brillo rúnico sin parpadeo al alternar entre facciones (`FactionRunicTransition.tsx`), con lema heráldico y escudo característico.
+- [x] **Modo Compacto / Ficha Táctica**: Vista condensada ultraligera optimizada para segundas pantallas o partidas simultáneas (`TacticalCheatSheet.tsx`), con 4 paneles rápidos (Hitos Día 1-7, Iniciativa y Velocidad de Tropas, Hechizos Meta y Leyes Cívicas Prioritarias), seleccionable en formato modal, drawer lateral o pantalla completa con tecla `C` o `T`.
+- [x] **Sistema Global de Atajos de Teclado**: Teclas rápidas para cambio directo de facciones (`1` a `6`), navegación de días de campaña (`J` / `K`), navegación de módulos (`Q` / `E`), alternar modo claro/oscuro (`M`), ficha táctica (`C` / `T`) y modal de ayuda (`?` / `H`) (`useKeyboardShortcuts.ts`).
+- [x] **Feedback Visual No Intrusivo (HUD Toast)**: Notificaciones flotantes tácticas al activar atajos (`ShortcutToast.tsx`).
+- [x] **Accesibilidad Integral WCAG AA**: Enlace de salto rápido al contenido principal (`#main-content`), navegación por foco de teclado completa, compatibilidad con lectores de pantalla y aislamiento estricto en campos de formulario.
