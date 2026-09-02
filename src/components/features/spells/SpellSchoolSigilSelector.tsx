@@ -38,6 +38,11 @@ export const SpellSchoolSigilSelector: React.FC<SpellSchoolSigilSelectorProps> =
 
   const getSchoolSpellCount = (schoolId: string): number => {
     if (schoolId === 'all') return spells.length;
+    if (schoolId.toLowerCase() === 'neutral') {
+      return spells.filter(
+        (s) => s.school.toLowerCase().includes('neutral') || s.school.toLowerCase().includes('universal')
+      ).length;
+    }
     return spells.filter((s) => s.school.toLowerCase().includes(schoolId.toLowerCase())).length;
   };
 

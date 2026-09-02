@@ -36,9 +36,10 @@ Este documento registra las mejoras de diseño, identidad visual y experiencia d
 
 ---
 
-### 4. Grimorio de Hechizos & Tablas de Daño Interactivas ⏳ [PENDIENTE]
-- [ ] **Simulador de Escalado de Poder Mágico (Spell Power Slider)**: Deslizador interactivo de Poder (1 a 30) para recalcular en vivo el daño o unidades revividas/curadas en los 4 niveles de maestría.
-- [ ] **Filtros por Escuela Mágica Canónica**: Selector táctil con los 5 sellos mágicos de Jadame (*Luz*, *Nochesombra*, *Primigenia*, *Arcana*, *Universal*).
+### 4. Grimorio de Hechizos & Tablas de Daño Interactivas ✅ [COMPLETADO]
+- [x] **Simulador de Escalado de Poder Mágico (Spell Power Slider)**: Deslizador interactivo de Poder (1 a 30) para recalcular en vivo el daño o unidades revividas/curadas en los 4 niveles de maestría (`SpellPowerSlider.tsx`, `spellScalingCalculator.ts`).
+- [x] **Filtros por Escuela Mágica Canónica**: Selector táctil con los 5 sellos mágicos de Jadame (*Luz*, *Nochesombra*, *Primigenia*, *Arcana*, *Universal*) con conteo y sinergia de facción (`SpellSchoolSigilSelector.tsx`).
+- [x] **Tabla de Escalado y Eficiencia & Comparador 1 vs 1**: Matriz interactiva de daño por maná (`SpellScalingDataTable.tsx`) y duelo comparativo directo de hechizos (`SpellVersusComparator.tsx`).
 
 ---
 
