@@ -6,6 +6,7 @@ import {
 } from '../../../utils/spellScalingCalculator';
 import { FactionId, getFactionTheme } from '../../../data/factionDataProvider';
 import { getFactionSpellPriority } from '../../../data/factionSpellData';
+import { SmartSpellHoverCard } from './SmartSpellHoverCard';
 import {
   Swords,
   Zap,
@@ -135,14 +136,23 @@ export const SpellVersusComparator: React.FC<SpellVersusComparatorProps> = ({
             }`}
           >
             <div className="flex items-center justify-between border-b pb-2 border-slate-700/20">
-              <div>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-purple-400">
-                  {spellA.school} • Tier {spellA.tier}
-                </span>
-                <h4 className="text-base font-serif font-bold text-slate-900 dark:text-white">
-                  {spellA.name} <span className="text-xs font-normal text-slate-400 italic">({spellA.nameEn})</span>
-                </h4>
-              </div>
+              <SmartSpellHoverCard
+                spell={spellA}
+                currentSpellPower={spellPower}
+                activeFaction={activeFaction}
+                themeMode={themeMode}
+              >
+                <div className="cursor-help group">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-purple-400">
+                    {spellA.school} • Tier {spellA.tier}
+                  </span>
+                  <h4 className="text-base font-serif font-bold text-slate-900 dark:text-white group-hover:text-amber-400 transition-colors flex items-center gap-1">
+                    <span>{spellA.name}</span>
+                    <Sparkles className="w-3.5 h-3.5 text-amber-500 opacity-60 group-hover:opacity-100" />
+                    <span className="text-xs font-normal text-slate-400 italic">({spellA.nameEn})</span>
+                  </h4>
+                </div>
+              </SmartSpellHoverCard>
               <span className="text-xs font-mono font-bold px-2 py-1 rounded bg-purple-950 text-purple-300 border border-purple-800">
                 {spellA.levels[0].manaCost} Maná
               </span>
@@ -205,14 +215,23 @@ export const SpellVersusComparator: React.FC<SpellVersusComparatorProps> = ({
             }`}
           >
             <div className="flex items-center justify-between border-b pb-2 border-slate-700/20">
-              <div>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-400">
-                  {spellB.school} • Tier {spellB.tier}
-                </span>
-                <h4 className="text-base font-serif font-bold text-slate-900 dark:text-white">
-                  {spellB.name} <span className="text-xs font-normal text-slate-400 italic">({spellB.nameEn})</span>
-                </h4>
-              </div>
+              <SmartSpellHoverCard
+                spell={spellB}
+                currentSpellPower={spellPower}
+                activeFaction={activeFaction}
+                themeMode={themeMode}
+              >
+                <div className="cursor-help group">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-400">
+                    {spellB.school} • Tier {spellB.tier}
+                  </span>
+                  <h4 className="text-base font-serif font-bold text-slate-900 dark:text-white group-hover:text-amber-400 transition-colors flex items-center gap-1">
+                    <span>{spellB.name}</span>
+                    <Sparkles className="w-3.5 h-3.5 text-amber-500 opacity-60 group-hover:opacity-100" />
+                    <span className="text-xs font-normal text-slate-400 italic">({spellB.nameEn})</span>
+                  </h4>
+                </div>
+              </SmartSpellHoverCard>
               <span className="text-xs font-mono font-bold px-2 py-1 rounded bg-amber-950 text-amber-300 border border-amber-800">
                 {spellB.levels[0].manaCost} Maná
               </span>

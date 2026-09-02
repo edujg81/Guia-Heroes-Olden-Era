@@ -5,6 +5,7 @@ import {
   CalculatedSpell,
 } from '../../../utils/spellScalingCalculator';
 import { FactionId, getFactionTheme } from '../../../data/factionDataProvider';
+import { SmartSpellHoverCard } from './SmartSpellHoverCard';
 import {
   ArrowUpDown,
   Zap,
@@ -252,6 +253,7 @@ export const SpellScalingDataTable: React.FC<SpellScalingDataTableProps> = ({
           </thead>
           <tbody className="divide-y divide-slate-700/20 font-mono">
             {filteredAndSortedSpells.map((s) => {
+              const rawSpell = spells.find((orig) => orig.id === s.id);
               const l1 = s.levels[0];
               const l2 = s.levels[1];
               const l3 = s.levels[2];
@@ -269,10 +271,27 @@ export const SpellScalingDataTable: React.FC<SpellScalingDataTableProps> = ({
                   {/* Name & School */}
                   <td className="p-3">
                     <div className="flex items-center gap-2">
-                      <div>
-                        <div className="font-bold text-xs sm:text-sm font-serif">{s.name}</div>
-                        <div className="text-[10px] text-slate-400 font-sans italic">{s.nameEn} • {s.school}</div>
-                      </div>
+                      {rawSpell ? (
+                        <SmartSpellHoverCard
+                          spell={rawSpell}
+                          currentSpellPower={spellPower}
+                          activeFaction={activeFaction}
+                          themeMode={themeMode}
+                        >
+                          <div className="cursor-help group">
+                            <div className="font-bold text-xs sm:text-sm font-serif group-hover:text-amber-500 transition-colors flex items-center gap-1.5">
+                              <span>{s.name}</span>
+                              <Sparkles className="w-3 h-3 text-amber-500 opacity-60 group-hover:opacity-100" />
+                            </div>
+                            <div className="text-[10px] text-slate-400 font-sans italic">{s.nameEn} • {s.school}</div>
+                          </div>
+                        </SmartSpellHoverCard>
+                      ) : (
+                        <div>
+                          <div className="font-bold text-xs sm:text-sm font-serif">{s.name}</div>
+                          <div className="text-[10px] text-slate-400 font-sans italic">{s.nameEn} • {s.school}</div>
+                        </div>
+                      )}
                     </div>
                   </td>
 

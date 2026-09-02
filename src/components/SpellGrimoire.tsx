@@ -20,6 +20,9 @@ import {
   SpellSchoolSigilSelector,
   SpellScalingDataTable,
   SpellVersusComparator,
+  MedievalCodexPage,
+  RunicGlyphAura,
+  SmartSpellHoverCard,
 } from './features/spells';
 import {
   Sparkles,
@@ -94,6 +97,7 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
   const [showMechanicsGuide, setShowMechanicsGuide] = useStickyState<boolean>(true, 'spells_show_mechanics_guide');
   const [showFactionProfile, setShowFactionProfile] = useStickyState<boolean>(true, 'spells_show_faction_profile');
   const [expandAllLevels, setExpandAllLevels] = useStickyState<boolean>(false, 'spells_expand_all_levels');
+  const [codexMode, setCodexMode] = useStickyState<boolean>(true, 'spells_codex_mode');
   const [activeSpellLevels, setActiveSpellLevels] = useState<Record<string, number>>({});
 
   const toggleSpellLearned = (id: string, e: React.MouseEvent) => {
@@ -593,7 +597,15 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
 
       {/* CANONICAL GRIMOIRE VIEW */}
       {spellsViewMode === 'grimoire' && (
-        <>
+        <MedievalCodexPage
+          selectedSchool={selectedSchool}
+          onSelectSchool={setSelectedSchool}
+          activeFaction={activeFaction}
+          themeMode={themeMode}
+          codexMode={codexMode}
+          onToggleCodexMode={() => setCodexMode(!codexMode)}
+        >
+        <div className="space-y-6">
 
       {/* Mechanics & Upgrade Cost System Guide */}
       <div className={`border rounded-2xl p-5 backdrop-blur-md transition-colors duration-300 ${
@@ -940,9 +952,16 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
                 : 'text-cyan-400 bg-cyan-950/50 border-cyan-800/50';
 
           return (
-            <div
+            <RunicGlyphAura
               key={spell.id}
-              className={`rounded-2xl p-5 border transition-all relative overflow-hidden backdrop-blur-sm flex flex-col justify-between ${
+              school={spell.school}
+              isTier4={spell.tier === 4}
+              isMasterful={activeLevelNum === 4}
+              themeMode={themeMode}
+              className="h-full"
+            >
+            <div
+              className={`rounded-2xl p-5 border transition-all relative overflow-hidden backdrop-blur-sm flex flex-col justify-between h-full ${
                 isLearned
                   ? themeMode === 'light'
                     ? 'bg-purple-50/90 border-purple-300 shadow-md ring-1 ring-purple-300'
@@ -969,9 +988,16 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
                 <div className="flex items-start justify-between gap-3 mb-2.5">
                   <div>
                     <div className="flex items-center gap-1.5 flex-wrap mb-1">
-                      <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${schoolColor}`}>
-                        {spell.school}
-                      </span>
+                      <SmartSpellHoverCard
+                        spell={spell}
+                        currentSpellPower={spellPower}
+                        activeFaction={activeFaction}
+                        themeMode={themeMode}
+                      >
+                        <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border cursor-help ${schoolColor}`}>
+                          {spell.school}
+                        </span>
+                      </SmartSpellHoverCard>
                       <span className={`text-[11px] font-mono px-2 py-0.5 rounded border ${
                         themeMode === 'light'
                           ? 'text-amber-900 bg-amber-50 border-amber-200 font-semibold'
@@ -993,14 +1019,21 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
                         const activeCalc = formatEffectWithSpellPower(activeLevel.effect, spellPower);
                         if (activeCalc.calculatedValue === null) return null;
                         return (
-                          <span className={`text-[11px] font-mono font-bold px-2 py-0.5 rounded border flex items-center gap-1 ${
-                            themeMode === 'light'
-                              ? 'text-amber-950 bg-amber-100 border-amber-300 shadow-sm'
-                              : 'text-amber-300 bg-amber-950/60 border-amber-600/50 shadow-sm'
-                          }`}>
-                            <Sparkles className="w-3 h-3 text-amber-500" />
-                            {activeCalc.calculatedValue} {activeCalc.formula?.unit} (@ {spellPower} SP)
-                          </span>
+                          <SmartSpellHoverCard
+                            spell={spell}
+                            currentSpellPower={spellPower}
+                            activeFaction={activeFaction}
+                            themeMode={themeMode}
+                          >
+                            <span className={`text-[11px] font-mono font-bold px-2 py-0.5 rounded border flex items-center gap-1 cursor-help hover:brightness-110 ${
+                              themeMode === 'light'
+                                ? 'text-amber-950 bg-amber-100 border-amber-300 shadow-sm'
+                                : 'text-amber-300 bg-amber-950/60 border-amber-600/50 shadow-sm'
+                            }`}>
+                              <Sparkles className="w-3 h-3 text-amber-500" />
+                              {activeCalc.calculatedValue} {activeCalc.formula?.unit} (@ {spellPower} SP)
+                            </span>
+                          </SmartSpellHoverCard>
                         );
                       })()}
 
@@ -1020,23 +1053,30 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
                       </span>
                     </div>
 
-                    <h3 className={`text-lg font-serif font-bold tracking-wide flex items-center gap-2 flex-wrap ${
-                      themeMode === 'light' ? 'text-slate-900' : 'text-white'
-                    }`}>
-                      <span>{spell.name}</span>
-                      <span className={`text-xs font-sans font-normal italic ${
-                        themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'
-                      }`}>({spell.nameEn})</span>
-                      {spell.masterfulName && (
-                        <span className={`text-[10px] font-mono px-2 py-0.5 rounded border ${
-                          themeMode === 'light'
-                            ? 'bg-amber-100 text-amber-950 border-amber-300 font-semibold'
-                            : 'text-yellow-300 bg-yellow-950/50 border-yellow-700/50'
-                        }`}>
-                          {spell.masterfulName}
-                        </span>
-                      )}
-                    </h3>
+                    <SmartSpellHoverCard
+                      spell={spell}
+                      currentSpellPower={spellPower}
+                      activeFaction={activeFaction}
+                      themeMode={themeMode}
+                    >
+                      <h3 className={`text-lg font-serif font-bold tracking-wide flex items-center gap-2 flex-wrap cursor-help hover:text-amber-500 transition-colors ${
+                        themeMode === 'light' ? 'text-slate-900 hover:text-purple-700' : 'text-white'
+                      }`}>
+                        <span>{spell.name}</span>
+                        <span className={`text-xs font-sans font-normal italic ${
+                          themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'
+                        }`}>({spell.nameEn})</span>
+                        {spell.masterfulName && (
+                          <span className={`text-[10px] font-mono px-2 py-0.5 rounded border ${
+                            themeMode === 'light'
+                              ? 'bg-amber-100 text-amber-950 border-amber-300 font-semibold'
+                              : 'text-yellow-300 bg-yellow-950/50 border-yellow-700/50'
+                          }`}>
+                            {spell.masterfulName}
+                          </span>
+                        )}
+                      </h3>
+                    </SmartSpellHoverCard>
                   </div>
 
                   <button
@@ -1383,10 +1423,12 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
                 </div>
               </div>
             </div>
+            </RunicGlyphAura>
           );
         })}
-      </div>
-      </>
+        </div>
+        </div>
+        </MedievalCodexPage>
       )}
     </div>
   );

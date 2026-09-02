@@ -67,10 +67,10 @@ Este documento registra las mejoras de diseño, identidad visual y experiencia d
 
 ---
 
-### 8. Grimorio & Códice Ilustrado con Microanimaciones Rúnicas ⏳ [PENDIENTE]
-- [ ] **Efecto de Paso de Página Medieval con CSS Moderno**: Transición de códice antiguo con sombra proyectada cónica y desgaste de pergamino al navegar entre las 5 escuelas de magia de Jadame.
-- [ ] **Glifos y Partículas Rúnicas Tailwind**: Animaciones CSS puras de baja sobrecarga (GPU-accelerated `transform-gpu`) que activan un resplandor temático al seleccionar hechizos de Tier 4 o habilidades maestras.
-- [ ] **Tooltips Holográficos Inteligentes (Smart Floating Cards)**: Tarjetas flotantes con detección de bordes de pantalla (*boundary-aware*) que previsualizan la evolución de daño completa al pasar el cursor sobre cualquier icono de hechizo o criatura.
+### 8. Grimorio & Códice Ilustrado con Microanimaciones Rúnicas ✅ [COMPLETADA]
+- [x] **Efecto de Paso de Página Medieval con CSS Moderno**: Transición de códice antiguo con sombra proyectada cónica (`codexPageFlipNext` / `codexPageFlipPrev`), lomo cosido en piel (`codex-spine-crease`), cantoneras doradas filigranadas y textura de pergamino desgastado (`MedievalCodexPage.tsx`) con botón conmutador de modo códice/clásico y navegación de folios con números romanos.
+- [x] **Glifos y Partículas Rúnicas Tailwind**: Componente `RunicGlyphAura.tsx` con aceleración GPU (`transform-gpu`) que proyecta un halo de energía y 4 glifos rúnicos flotantes animados (`runeFloatA-D`, `runicRingSpin`) ajustados cromáticamente al elemento mágico canónico de Jadame (Luz, Sombras, Arcana, Primigenia, Neutro) activados en hechizos de Tier 4 y nivel Magistral.
+- [x] **Tooltips Holográficos Inteligentes (Smart Floating Cards)**: Componente `SmartSpellHoverCard.tsx` montado en portal (`createPortal`) con detección de colisión en viewport de 4 ejes (*boundary-aware*), efecto holográfico translúcido con desenfoque de fondo, cálculo reactivo en vivo de escalado de daño/curación de 0 a 30 Poder Mágico (SP), desglose de costes de maná y polvo alquímico, y sinergias canónicas de facción. Integrado en las tarjetas del Grimorio, en la Tabla de Escalado y en el Comparador Versus.
 
 ---
 

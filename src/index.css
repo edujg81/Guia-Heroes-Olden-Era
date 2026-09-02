@@ -418,3 +418,235 @@ html.dark .bg-yellow-500 * {
   box-shadow: 0 0 15px rgba(234, 88, 12, 0.35);
 }
 
+/* =========================================================================
+   MEDIEVAL CODEX & RUNIC PARTICLES SYSTEM (MEJORA DE DISEÑO 8)
+   ========================================================================= */
+
+/* Aged parchment texture & conic shadows */
+.codex-parchment-dark {
+  background: 
+    radial-gradient(ellipse at 50% 0%, rgba(30, 27, 75, 0.25) 0%, transparent 70%),
+    radial-gradient(circle at 10% 20%, rgba(20, 15, 30, 0.8) 0%, rgba(10, 10, 15, 0.98) 100%);
+  box-shadow: 
+    inset 0 0 60px rgba(0, 0, 0, 0.85),
+    inset 0 0 15px rgba(0, 0, 0, 0.9),
+    0 10px 40px -10px rgba(0, 0, 0, 0.8);
+}
+
+.codex-parchment-light {
+  background: 
+    radial-gradient(ellipse at 50% 0%, rgba(254, 243, 199, 0.4) 0%, transparent 60%),
+    linear-gradient(180deg, #fefbf3 0%, #fdf6e7 50%, #f7ecd2 100%);
+  box-shadow: 
+    inset 0 0 40px rgba(180, 140, 80, 0.15),
+    inset 0 0 10px rgba(120, 80, 20, 0.1),
+    0 10px 30px -10px rgba(100, 70, 20, 0.2);
+}
+
+/* Book spine binding crease */
+.codex-spine-crease {
+  background: linear-gradient(90deg, 
+    rgba(0, 0, 0, 0.4) 0%, 
+    rgba(255, 255, 255, 0.05) 30%, 
+    rgba(0, 0, 0, 0.6) 50%, 
+    rgba(255, 255, 255, 0.03) 70%, 
+    rgba(0, 0, 0, 0.4) 100%
+  );
+}
+
+html.light .codex-spine-crease {
+  background: linear-gradient(90deg, 
+    rgba(160, 120, 60, 0.25) 0%, 
+    rgba(255, 255, 255, 0.4) 30%, 
+    rgba(120, 80, 30, 0.35) 50%, 
+    rgba(255, 255, 255, 0.3) 70%, 
+    rgba(160, 120, 60, 0.25) 100%
+  );
+}
+
+/* 3D Codex Page Flip Keyframes (GPU Accelerated) */
+@keyframes codexPageFlipNext {
+  0% {
+    transform: perspective(1400px) rotateY(0deg);
+    opacity: 1;
+    filter: brightness(1);
+  }
+  30% {
+    transform: perspective(1400px) rotateY(-8deg) translateZ(10px);
+    opacity: 0.85;
+    filter: brightness(0.92);
+  }
+  70% {
+    transform: perspective(1400px) rotateY(6deg) translateZ(-5px);
+    opacity: 0.9;
+    filter: brightness(1.05);
+  }
+  100% {
+    transform: perspective(1400px) rotateY(0deg);
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+
+@keyframes codexPageFlipPrev {
+  0% {
+    transform: perspective(1400px) rotateY(0deg);
+    opacity: 1;
+    filter: brightness(1);
+  }
+  30% {
+    transform: perspective(1400px) rotateY(8deg) translateZ(10px);
+    opacity: 0.85;
+    filter: brightness(0.92);
+  }
+  70% {
+    transform: perspective(1400px) rotateY(-6deg) translateZ(-5px);
+    opacity: 0.9;
+    filter: brightness(1.05);
+  }
+  100% {
+    transform: perspective(1400px) rotateY(0deg);
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+
+.animate-codex-page-next {
+  animation: codexPageFlipNext 0.45s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  transform-origin: left center;
+  will-change: transform, opacity;
+}
+
+.animate-codex-page-prev {
+  animation: codexPageFlipPrev 0.45s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  transform-origin: right center;
+  will-change: transform, opacity;
+}
+
+/* Conic Book Shadow */
+.conic-shadow-book {
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    rgba(0, 0, 0, 0.05) 0deg,
+    rgba(0, 0, 0, 0.4) 60deg,
+    rgba(0, 0, 0, 0.05) 120deg,
+    rgba(0, 0, 0, 0.4) 240deg,
+    rgba(0, 0, 0, 0.05) 360deg
+  );
+}
+
+/* Runic Particle Floating Keyframes (GPU-accelerated translate3d) */
+@keyframes runeFloatA {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate3d(-6px, -14px, 0) rotate(8deg);
+    opacity: 1;
+  }
+}
+
+@keyframes runeFloatB {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate3d(8px, -16px, 0) rotate(-10deg);
+    opacity: 0.95;
+  }
+}
+
+@keyframes runeFloatC {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(0.9);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate3d(-10px, -8px, 0) scale(1.15);
+    opacity: 0.85;
+  }
+}
+
+@keyframes runeFloatD {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.65;
+  }
+  50% {
+    transform: translate3d(10px, -10px, 0) scale(1.1);
+    opacity: 1;
+  }
+}
+
+@keyframes runicRingSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes runicAuraPulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.02);
+  }
+}
+
+.animate-rune-a {
+  animation: runeFloatA 4.5s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-rune-b {
+  animation: runeFloatB 5.2s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-rune-c {
+  animation: runeFloatC 3.8s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-rune-d {
+  animation: runeFloatD 4.8s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-rune-ring {
+  animation: runicRingSpin 24s linear infinite;
+  will-change: transform;
+}
+
+.animate-runic-aura {
+  animation: runicAuraPulse 3s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Smart Holographic Floating Tooltip */
+.holographic-card-dark {
+  background: linear-gradient(135deg, rgba(17, 17, 26, 0.96) 0%, rgba(10, 10, 16, 0.98) 100%);
+  backdrop-filter: blur(16px);
+  box-shadow: 
+    0 20px 40px -15px rgba(0, 0, 0, 0.9),
+    0 0 25px -5px var(--halo-glow, rgba(168, 85, 247, 0.25)),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.holographic-card-light {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.97) 0%, rgba(248, 250, 252, 0.98) 100%);
+  backdrop-filter: blur(16px);
+  box-shadow: 
+    0 20px 40px -15px rgba(15, 23, 42, 0.25),
+    0 0 20px -5px var(--halo-glow, rgba(168, 85, 247, 0.25)),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+
