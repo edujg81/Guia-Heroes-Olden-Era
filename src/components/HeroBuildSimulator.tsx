@@ -141,8 +141,8 @@ export const HeroBuildSimulator: React.FC<HeroBuildSimulatorProps> = ({
     const newAllocations: Record<string, AllocatedSkillState> = {};
     const heroChoices = HERO_SUBSKILL_CHOICES[hero.id] || [];
 
-    // Prioritize hero's ideal skill build (max 6 primary skills in game)
-    hero.idealSkillBuild.slice(0, 6).forEach((skillStr) => {
+    // Prioritize hero's ideal skill build (max 8 primary skills in game)
+    hero.idealSkillBuild.slice(0, 8).forEach((skillStr) => {
       const isExperta = skillStr.includes('(Experta)');
       const isAvanzada = skillStr.includes('(Avanzada)');
       const cleanName = skillStr.replace(/\s*\((Experta|Avanzada|Básica)\)/, '').trim();
@@ -316,7 +316,7 @@ Facción: ${selectedFaction}
 Puntos Invertidos: ${spentPoints} / ${totalPoints}
 Subclases Desbloqueadas: ${unlockedSubclasses}
 
-Habilidades Asignadas (${activeSkillsCount}/6):
+Habilidades Asignadas (${activeSkillsCount}/8):
 ${allocatedList || 'Sin habilidades asignadas'}
 
 Generado con Compendio Táctico HoMM: Olden Era`;
@@ -382,7 +382,7 @@ Generado con Compendio Táctico HoMM: Olden Era`;
                       ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30'
                       : 'bg-amber-100 text-amber-900 border border-amber-300 hover:bg-amber-200'
                   }`}
-                  title="Carga la ruta de 6 habilidades y subhabilidades recomendadas para este héroe"
+                  title="Carga la ruta de 8 habilidades y subhabilidades recomendadas para este héroe"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-amber-400" />
                   <span>Cargar Build Meta</span>
@@ -526,13 +526,13 @@ Generado con Compendio Táctico HoMM: Olden Era`;
             </div>
 
             <div className={`p-2.5 rounded-xl border flex-1 text-center font-mono ${
-              activeSkillsCount <= 6
+              activeSkillsCount <= 8
                 ? isDark ? 'bg-black/60 border-slate-800 text-slate-200' : 'bg-slate-50 border-slate-200 text-slate-800'
                 : 'bg-red-950/50 border-red-800 text-red-300'
             }`}>
               <div className="text-[10px] uppercase font-bold text-slate-400">Slots Primarios</div>
               <div className="text-base font-bold">
-                {activeSkillsCount} <span className="text-xs font-normal">/ 6 máx</span>
+                {activeSkillsCount} <span className="text-xs font-normal">/ 8 máx</span>
               </div>
             </div>
           </div>
