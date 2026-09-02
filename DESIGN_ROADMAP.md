@@ -49,3 +49,70 @@ Este documento registra las mejoras de diseño, identidad visual y experiencia d
 - [x] **Sistema Global de Atajos de Teclado**: Teclas rápidas para cambio directo de facciones (`1` a `6`), navegación de días de campaña (`J` / `K`), navegación de módulos (`Q` / `E`), alternar modo claro/oscuro (`M`), ficha táctica (`C` / `T`) y modal de ayuda (`?` / `H`) (`useKeyboardShortcuts.ts`).
 - [x] **Feedback Visual No Intrusivo (HUD Toast)**: Notificaciones flotantes tácticas al activar atajos (`ShortcutToast.tsx`).
 - [x] **Accesibilidad Integral WCAG AA**: Enlace de salto rápido al contenido principal (`#main-content`), navegación por foco de teclado completa, compatibilidad con lectores de pantalla y aislamiento estricto en campos de formulario.
+
+---
+
+### 6. Pizarra Táctica Hexagonal Interactiva (Visualizador de Campo de Batalla) ⏳ [PENDIENTE]
+- [ ] **Tablero Hexagonal SVG Reactivo**: Malla hexagonal de 11x15 casillas renderizada en SVG vectorial con Tailwind CSS, adaptada al tamaño del viewport con `ResizeObserver`.
+- [ ] **Líneas de Visión y Conos de Disparo**: Indicadores visuales de medio daño por distancia, obstrucciones de obstáculos medievales y cobertura de murallas/fosos.
+- [ ] **Rango de Amenaza y Radio de Movimiento de Criaturas**: Resaltado dinámico en hexágonos accesibles según la velocidad de la unidad seleccionada y hexágonos en zona de ataque con cálculo de contraataque disponible.
+- [ ] **Modo 'Sandwich / Flanqueo'**: Gráficos de vectores direccionales que ilustran las bonificaciones de flanqueo canónicas de *Olden Era*.
+
+---
+
+### 7. Modo Streamer & Overlay Táctico Broadcast (OBS / Segunda Pantalla) ⏳ [PENDIENTE]
+- [ ] **Vista 'Clean Broadcast' para Directos de Twitch/YouTube**: Modo de visualización minimalista con fondo transparente (`chroma-key` verde o fondo alfa) para embeber estadísticas del héroe y build order en OBS Studio.
+- [ ] **Widget de Comparación de Daño Instantáneo (Pip-in-Pip)**: Ventana flotante PIP en esquina que muestra el cálculo de daño de un ataque o hechizo sobre el objetivo fijado.
+- [ ] **Modo Compacto Ultrawide (21:9)**: Distribución bento-grid de 4 columnas optimizada para monitores ultrapanorámicos de jugadores competitivos sin espacios en blanco desaprovechados.
+
+---
+
+### 8. Grimorio & Códice Ilustrado con Microanimaciones Rúnicas ⏳ [PENDIENTE]
+- [ ] **Efecto de Paso de Página Medieval con CSS Moderno**: Transición de códice antiguo con sombra proyectada cónica y desgaste de pergamino al navegar entre las 5 escuelas de magia de Jadame.
+- [ ] **Glifos y Partículas Rúnicas Tailwind**: Animaciones CSS puras de baja sobrecarga (GPU-accelerated `transform-gpu`) que activan un resplandor temático al seleccionar hechizos de Tier 4 o habilidades maestras.
+- [ ] **Tooltips Holográficos Inteligentes (Smart Floating Cards)**: Tarjetas flotantes con detección de bordes de pantalla (*boundary-aware*) que previsualizan la evolución de daño completa al pasar el cursor sobre cualquier icono de hechizo o criatura.
+
+---
+
+### 9. Sistema de Impresión y Exportación a PDF de Hojas de Campaña ⏳ [PENDIENTE]
+- [ ] **Hoja de Ruta Imprimible en Blanco y Negro de Alto Contraste**: Estilos `@media print` dedicados para imprimir el plan de los primeros 14 días en papel A4 sin gastar tinta, con casillas de verificación manuales.
+- [ ] **Tarjeta de Ficha de Torneo Exportable en PNG**: Generación de captura gráfica vectorial de la build de héroe y ejército para compartir en redes sociales, Discord o foros competitivos.
+
+---
+
+### 10. Visualizador de Ciudad y Castillo Isométrico/2.5D (Interactive Town View Model) ⏳ [PENDIENTE]
+- [ ] **Esquema de Silueta de Castillo Interactivo**: Representación gráfica vectorial de la ciudad de la facción activa con ranuras interactivas para cada edificio (Ayuntamiento, Capitolio, Fuertes, Cofradía de Magos, Moradas de Tier 1 a 7 y Estructuras de Facción Únicas).
+- [ ] **Estados Visuales de Construcción**:
+  - *No construido*: Silueta esquemática tenue con bordes discontinuos y coste en tooltip.
+  - *En construcción / Disponible*: Efecto de andamio medieval iluminado con el color de acento de la facción.
+  - *Completado*: Ilustración de edificio activa con relieve, sello de cera de finalización y producción semanal destacada.
+- [ ] **Líneas Conectoras de Árbol de Dependencias de Ciudad**: Diagrama de flujo SVG ortogonal que traza de forma nítida los prerrequisitos entre estructuras (ej. Fuerte -> Ciudadela -> Castillo; Cofradía Nivel 1 -> Nivel 2 -> Nivel 3).
+
+---
+
+### 11. Comparador Visual de Héroes Lado a Lado (Dual Commander Split-Screen) ⏳ [PENDIENTE]
+- [ ] **Vista Dividida de 2 Columnas para Comandantes**: Interfaz para contrastar 2 héroes simultáneamente (ej. Main de Combate vs Héroe de Farmeo, o tu Héroe principal vs el Héroe del rival).
+- [ ] **Gráfica Diferencial de Barras Superpuestas**: Visualización directa de las diferencias numéricas en Ataque, Defensa, Poder Mágico, Conocimiento, Moral y Suerte con indicadores de ventaja (+/-).
+- [ ] **Matriz de Sinergia de Criaturas con Auras Temáticas**: Cuadrícula que resalta qué tropas del ejército se benefician de las especialidades pasivas de cada comandante.
+
+---
+
+### 12. Barra de Iniciativa y Secuencia de Turnos de Combate (Combat Turn Ribbon) ⏳ [PENDIENTE]
+- [ ] **Franja Horizontal de Secuencia de Iniciativa**: Barra superior inspirada en los combates tácticos por turnos que lista cronológicamente el orden en que atacarán las 14 unidades (7 aliadas y 7 enemigas).
+- [ ] **Animación de Desplazamiento por Efectos de Estado**: Reordenación visual dinámica en vivo al simular hechizos de Aceleración (*Haste*), Lentitud (*Slow*), Moral alta o efectos de aturdimiento.
+- [ ] **Indicador del Turno Activo con Borde Pulsante**: Enfoque luminoso sobre el icono de la unidad que tiene la iniciativa con datos flotantes de velocidad y alcance.
+
+---
+
+### 13. Modo Inmersivo 'Zen Commander' a Pantalla Completa ⏳ [PENDIENTE]
+- [ ] **Ocultación Dinámica de Interfaz con 1 Clic (Atajo 'Z' o 'F11')**: Minimizado automático del encabezado superior, selector de pestañas y pie de página para maximizar el área útil al 100% de la pantalla durante torneos o partidas en directo.
+- [ ] **Fondo Ambiental Dinámico con Partículas Suaves CSS**: Partículas atenuadas de baja carga gráfica temáticas por facción (ascuas volcánicas para Mazmorra, plumas de luz para Templo, niebla espectral para Necrópolis, hojas doradas para Foresta, zumbido de esporas para Colmena y cristales de hielo/vacío para Cisma).
+- [ ] **Mini-Controlador Flotante Desplegable**: Botón discreto en esquina para cambiar rápidamente de día o facción sin abandonar el modo inmersivo.
+
+---
+
+### 14. Sistema de Paletas de Accesibilidad WCAG AAA y Filtros de Daltonismo ⏳ [PENDIENTE]
+- [ ] **Modos de Alto Contraste para Daltonismo**: Modos preconfigurados para Protanopía, Deuteranopía y Tritanopía en las estadísticas de criaturas, barras de salud y árboles de habilidades.
+- [ ] **Indicadores Geométricos de Estado Universales**: Sustitución de la dependencia exclusiva en color rojo/verde por símbolos medievales estandarizados (triángulos para aumento, rombos para neutral, círculos para penalización).
+- [ ] **Selector de Tamaño de Tipografía Dinámico (Escalado de Fuente UI)**: Ajuste en tiempo real de escala de texto (100%, 115%, 130%) para optimizar la legibilidad en pantallas lejanas o televisiones de salón.
+
