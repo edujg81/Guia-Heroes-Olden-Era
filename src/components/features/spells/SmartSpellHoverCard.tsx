@@ -260,9 +260,21 @@ export const SmartSpellHoverCard: React.FC<SmartSpellHoverCardProps> = ({
             <div className="pt-2 border-t border-purple-500/20 flex items-center justify-between text-[10px] font-mono text-slate-400">
               <span className="flex items-center gap-1">
                 <Gem className="w-3 h-3 text-amber-500" />
-                Desbloqueo: {spell.unlockCost.gold.toLocaleString()} Oro
+                {spell.isNeutral || spell.unlockCost.gold === 0
+                  ? (spell.unlockCost.observationPoints !== undefined
+                      ? `Nivel 1: ${spell.unlockCost.observationPoints} Pts Observación (0 Oro)`
+                      : 'Nivel 1: Sin definir (Observatorio)')
+                  : `Desbloqueo: ${spell.unlockCost.gold.toLocaleString()} Oro`}
               </span>
-              <span className="text-amber-400 font-semibold">25 Polvo / Nivel</span>
+              {spell.isNeutral || spell.unlockCost.gold === 0 ? (
+                <span className="text-teal-400 font-semibold">
+                  {spell.unlockCost.observationPoints !== undefined
+                    ? '+1 Pto Observación / Nivel'
+                    : 'Mejora: Sin definir'}
+                </span>
+              ) : (
+                <span className="text-amber-400 font-semibold">25 Polvo / Nivel</span>
+              )}
             </div>
           </div>,
           document.body

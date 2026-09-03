@@ -14,6 +14,7 @@ import {
 import {
   formatEffectWithSpellPower,
   parseSpellFormula,
+  matchSpellSchool,
 } from '../utils/spellScalingCalculator';
 import {
   SpellPowerSlider,
@@ -148,11 +149,7 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
       if (!isMetaForFaction) return false;
     }
 
-    const matchesSchool =
-      selectedSchool === 'all' ||
-      spell.school.toLowerCase().includes(selectedSchool.toLowerCase()) ||
-      (selectedSchool.toLowerCase() === 'neutral' &&
-        (spell.school.toLowerCase().includes('universal') || spell.school.toLowerCase().includes('neutral')));
+    const matchesSchool = matchSpellSchool(spell.school, selectedSchool);
     const matchesType = selectedType === 'all' || spell.type === selectedType;
     const matchesPriority =
       selectedPriority === 'all' ||
@@ -1107,14 +1104,26 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
                   <div className={`p-2 rounded-lg border ${
                     themeMode === 'light' ? 'bg-slate-50 border-slate-200' : `bg-black/50 ${theme.borderSubtle}`
                   }`}>
-                    <span className={`text-[10px] uppercase block mb-0.5 ${themeMode === 'light' ? 'text-amber-800 font-semibold' : 'text-amber-400'}`}>Coste Desbloqueo Base:</span>
+                    <span className={`text-[10px] uppercase block mb-0.5 ${themeMode === 'light' ? 'text-amber-800 font-semibold' : 'text-amber-400'}`}>
+                      {spell.isNeutral || spell.unlockCost.gold === 0 ? 'Adquisición Neutral / Observatorio:' : 'Coste Desbloqueo Base:'}
+                    </span>
                     <span className={`text-[11px] ${themeMode === 'light' ? 'text-amber-900 font-semibold' : 'text-amber-300'}`}>
-                      {spell.unlockCost.gold > 0 ? `${spell.unlockCost.gold.toLocaleString()} Oro` : ''}
-                      {spell.unlockCost.crystals ? ` • ${spell.unlockCost.crystals} Cristales` : ''}
-                      {spell.unlockCost.gems ? ` • ${spell.unlockCost.gems} Gemas` : ''}
-                      {spell.unlockCost.mercury ? ` • ${spell.unlockCost.mercury} Mercurio` : ''}
-                      {spell.unlockCost.astrologyPoints ? ` • ${spell.unlockCost.astrologyPoints} Pts Astrología` : ''}
-                      {spell.unlockCost.insight ? ` • ${spell.unlockCost.insight} Percepción` : ''}
+                      {spell.isNeutral || spell.unlockCost.gold === 0 ? (
+                        <span className="text-teal-700 dark:text-cyan-300 font-semibold">
+                          {spell.unlockCost.observationPoints !== undefined
+                            ? `${spell.unlockCost.observationPoints} Pts de Observación (0 Oro)`
+                            : 'Sin definir (Pendiente de confirmación)'}
+                        </span>
+                      ) : (
+                        <>
+                          {spell.unlockCost.gold > 0 ? `${spell.unlockCost.gold.toLocaleString()} Oro` : ''}
+                          {spell.unlockCost.crystals ? ` • ${spell.unlockCost.crystals} Cristales` : ''}
+                          {spell.unlockCost.gems ? ` • ${spell.unlockCost.gems} Gemas` : ''}
+                          {spell.unlockCost.mercury ? ` • ${spell.unlockCost.mercury} Mercurio` : ''}
+                          {spell.unlockCost.astrologyPoints ? ` • ${spell.unlockCost.astrologyPoints} Pts Astrología` : ''}
+                          {spell.unlockCost.insight ? ` • ${spell.unlockCost.insight} Percepción` : ''}
+                        </>
+                      )}
                     </span>
                   </div>
                 </div>
@@ -1234,12 +1243,28 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
                             }`}>
                               <Gem className="w-3 h-3 text-amber-500" />
                               {lvl.level === 1 ? (
-                                <span className={themeMode === 'light' ? 'text-slate-600 font-mono' : 'text-slate-400 font-mono'}>Desbloqueo Base</span>
+                                <span className={themeMode === 'light' ? 'text-slate-600 font-mono' : 'text-slate-400 font-mono'}>
+                                  {spell.isNeutral
+                                    ? (lvl.upgradeCost.observationPoints !== undefined
+                                        ? `${lvl.upgradeCost.observationPoints} Pts de Observación (Confirmado)`
+                                        : 'Sin definir (Pendiente de confirmación)')
+                                    : 'Desbloqueo Base'}
+                                </span>
                               ) : (
                                 <span>
-                                  <strong>{lvl.upgradeCost.dust} Polvo Alquímico</strong> + {lvl.upgradeCost.gold.toLocaleString()} Oro
-                                  {lvl.upgradeCost.rareResources ? ` + ${lvl.upgradeCost.rareResources}` : ''}
-                                  {lvl.upgradeCost.insight ? ` + ${lvl.upgradeCost.insight} Percepción` : ''}
+                                  {spell.isNeutral ? (
+                                    <span className="font-semibold text-teal-700 dark:text-cyan-300">
+                                      {lvl.upgradeCost.observationPoints !== undefined || spell.unlockCost.observationPoints !== undefined
+                                        ? '+1 Punto de Observación adicional'
+                                        : 'Sin definir (Pendiente de confirmación)'}
+                                    </span>
+                                  ) : (
+                                    <>
+                                      <strong>{lvl.upgradeCost.dust} Polvo Alquímico</strong> + {lvl.upgradeCost.gold.toLocaleString()} Oro
+                                      {lvl.upgradeCost.rareResources ? ` + ${lvl.upgradeCost.rareResources}` : ''}
+                                      {lvl.upgradeCost.insight ? ` + ${lvl.upgradeCost.insight} Percepción` : ''}
+                                    </>
+                                  )}
                                 </span>
                               )}
                             </div>
@@ -1346,12 +1371,28 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
                           }`}>
                             <Gem className="w-3 h-3 text-amber-500" />
                             {activeLevel.level === 1 ? (
-                              <span className={themeMode === 'light' ? 'text-slate-600 font-sans' : 'text-slate-300 font-sans'}>Desbloqueo Base</span>
+                              <span className={themeMode === 'light' ? 'text-slate-600 font-sans' : 'text-slate-300 font-sans'}>
+                                {spell.isNeutral
+                                  ? (activeLevel.upgradeCost.observationPoints !== undefined
+                                      ? `${activeLevel.upgradeCost.observationPoints} Pts de Observación (Confirmado)`
+                                      : 'Sin definir (Pendiente de confirmación)')
+                                  : 'Desbloqueo Base'}
+                              </span>
                             ) : (
                               <span>
-                                <strong>{activeLevel.upgradeCost.dust} Polvo Alquímico</strong> + {activeLevel.upgradeCost.gold.toLocaleString()} Oro
-                                {activeLevel.upgradeCost.rareResources ? ` + ${activeLevel.upgradeCost.rareResources}` : ''}
-                                {activeLevel.upgradeCost.insight ? ` + ${activeLevel.upgradeCost.insight} Percepción` : ''}
+                                {spell.isNeutral ? (
+                                  <span className="font-semibold text-teal-700 dark:text-cyan-300">
+                                    {activeLevel.upgradeCost.observationPoints !== undefined || spell.unlockCost.observationPoints !== undefined
+                                      ? '+1 Punto de Observación adicional'
+                                      : 'Sin definir (Pendiente de confirmación)'}
+                                  </span>
+                                ) : (
+                                  <>
+                                    <strong>{activeLevel.upgradeCost.dust} Polvo Alquímico</strong> + {activeLevel.upgradeCost.gold.toLocaleString()} Oro
+                                    {activeLevel.upgradeCost.rareResources ? ` + ${activeLevel.upgradeCost.rareResources}` : ''}
+                                    {activeLevel.upgradeCost.insight ? ` + ${activeLevel.upgradeCost.insight} Percepción` : ''}
+                                  </>
+                                )}
                               </span>
                             )}
                           </div>

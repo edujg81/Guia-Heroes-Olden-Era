@@ -1,6 +1,6 @@
 import React from 'react';
 import { Sun, Moon, Flame, Orbit, Compass, Sparkles, Check, BookOpen } from 'lucide-react';
-import { CANONICAL_MAGIC_SCHOOLS, CanonicalSchoolMeta } from '../../../utils/spellScalingCalculator';
+import { CANONICAL_MAGIC_SCHOOLS, CanonicalSchoolMeta, matchSpellSchool } from '../../../utils/spellScalingCalculator';
 import { FactionId, getFactionTheme } from '../../../data/factionDataProvider';
 import { RecommendedSpell } from '../../../types';
 
@@ -38,12 +38,7 @@ export const SpellSchoolSigilSelector: React.FC<SpellSchoolSigilSelectorProps> =
 
   const getSchoolSpellCount = (schoolId: string): number => {
     if (schoolId === 'all') return spells.length;
-    if (schoolId.toLowerCase() === 'neutral') {
-      return spells.filter(
-        (s) => s.school.toLowerCase().includes('neutral') || s.school.toLowerCase().includes('universal')
-      ).length;
-    }
-    return spells.filter((s) => s.school.toLowerCase().includes(schoolId.toLowerCase())).length;
+    return spells.filter((s) => matchSpellSchool(s.school, schoolId)).length;
   };
 
   return (

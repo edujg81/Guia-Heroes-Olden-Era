@@ -174,11 +174,12 @@ export interface SpellLevelInfo {
   effect: string;
   keyBonus: string;
   upgradeCost: {
-    dust: number; // Polvo Alquímico (Alchemical Dust)
-    gold: number; // Oro
+    dust: number; // Polvo Alquímico (Alchemical Dust) - 0 para neutrales
+    gold: number; // Oro - 0 para neutrales
     rareResources?: string; // e.g. "2 Cristales, 2 Mercurio"
     insight?: number; // Para hechizos Neutrales / Astrología
-    guildCondition?: string; // Alternativa por Cofradía o Habilidad
+    observationPoints?: number; // Puntos de Observación (Observatorio de Olden Era)
+    guildCondition?: string; // Alternativa por Cofradía o Habilidad / Observatorio
   };
 }
 
@@ -189,6 +190,7 @@ export interface SpellUnlockCost {
   gems?: number;
   mercury?: number;
   astrologyPoints?: number;
+  observationPoints?: number;
   insight?: number;
   description: string;
 }
@@ -204,8 +206,11 @@ export interface RecommendedSpell {
   schoolRequirement: string;
   priority: 'Imprescindible (P1)' | 'Muy Alta (P2)' | 'Alta (P3)' | 'Media (P3)' | 'Situacional' | 'Básica (P4)' | string;
   manaCost: number;
-  astrologyCost: number; // Puntos de Astrología necesarios para comprarlo en Cofradía / Observatorio
+  astrologyCost?: number; // Puntos de Astrología necesarios para comprarlo en Cofradía / Observatorio
   astrologyPointsCost?: string;
+  observationCost?: number; // Puntos de Observación para Nivel 1 (si está confirmado)
+  observationPerLevelCost?: number; // Puntos de Observación adicionales por nivel (+1)
+  isConfirmedCost?: boolean;
   unlockCost: SpellUnlockCost;
   levels: SpellLevelInfo[];
   effect: string;

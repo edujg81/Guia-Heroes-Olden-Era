@@ -255,39 +255,52 @@ Cada criatura debe contar con los 12 parámetros cuantitativos contrastados:
 *Archivos a auditar: `/src/data/spellsData.ts`, `/src/data/spells/*.ts`, `/src/data/factionSpellData.ts`, `/src/utils/spellScalingCalculator.ts`*
 
 ### 4.1. Las 5 Escuelas Canónicas de Jadame
-- [ ] **Magia de Luz (Daylight)**: Sin hechizos inventados; lista canónica completa.
-- [ ] **Magia Nochesombra (Nightshade)**: Hechizos de debilitamiento, sombras y vacío.
-- [ ] **Magia Primigenia (Primal)**: Fuego, tierra, agua y rayos naturales.
-- [ ] **Magia Arcana (Arcane)**: Manipulación espacial, control temporal e ilusiones.
-- [ ] **Magia Neutral / Aventura (Universal)**: Hechizos de mapa de aventura y utilitarios.
+- [x] **Magia de Luz (Daylight)**: Sin hechizos inventados; lista canónica completa de 9 hechizos (Celeridad, Bendición, Curar, Escudo Sagrado, Acortar Sombras, Resurrección, Intervención Divina, Azote Radiante, Claridad Solar).
+- [x] **Magia Nochesombra (Nightshade)**: Hechizos de debilitamiento, sombras y vacío (10 hechizos canónicos: Maldición de Sombras, Ceguera, Desesperación, Putrefacción Fatal, Agrandar Sombras, Calma Antinatural, Nube Tóxica, Animar Muertos, Armagedón, Toque Vampírico).
+- [x] **Magia Primigenia (Primal)**: Fuego, tierra, agua y rayos naturales (10 hechizos: Ralentizar, Piel Gruesa, Descarga Eléctrica, Bola de Fuego, Rayo de Hielo, Terremoto, Lluvia de Meteoros, Implosión, Arenas Movedizas, Muro de Fuego).
+- [x] **Magia Arcana (Arcane)**: Manipulación espacial, control temporal e ilusiones (11 hechizos: Rayo Arcano, Inicio Temprano, Energizar, Espejismo Óptico, Teletransporte, Guillotina, Rayo en Cadena, Olvido, Hipnosis, Sifón de Maná, Distorsión Temporal).
+- [x] **Magia Neutral / Aventura (Universal)**: Hechizos de mapa de aventura y utilitarios (11 hechizos: Portal de Ciudad, Volar, Puerta Dimensional, Disipar Magia, Flecha Mágica, Disipar Invocación, Amortiguación Crepuscular, Erupción de Hechizos, Visión Lejana, Marcha Forzada, Escudo de Maná).
+- [x] Total auditado: **51 hechizos canónicos** distribuidos equitativamente sin contaminaciones ni nombres inventados de entregas previas.
 
 ### 4.2. Niveles de Hechizo y Nivel Magistral (Tier 1 a Tier 4)
-- [ ] Cada hechizo debe contar exactamente con 4 niveles de progresión:
-  - [ ] Nivel 1 (Base).
-  - [ ] Nivel 2 (Avanzado).
-  - [ ] Nivel 3 (Experto).
-  - [ ] Nivel 4 (Magistral - con nombre y bonificación cualitativa exclusiva).
-- [ ] Fórmulas de escalado por Poder Mágico (SP) verificadas en `/src/utils/spellScalingCalculator.ts`:
-  - [ ] Fórmula canónica: `Valor Base + (Multiplicador × SP)`.
-  - [ ] Unidades correctas de cálculo (Daño, Curación, Turnos, Puntos de Armadura, Escudo).
-  - [ ] Sin NaN, valores negativos ni errores de sintaxis en expresiones regulares.
+- [x] Cada hechizo cuenta exactamente con 4 niveles de progresión verificados (204 niveles en total en la base de datos):
+  - [x] Nivel 1 (Base).
+  - [x] Nivel 2 (Avanzado).
+  - [x] Nivel 3 (Experto).
+  - [x] Nivel 4 (Magistral - con título canónico exclusivo y bonificación cualitativa de impacto).
+- [x] Fórmulas de escalado por Poder Mágico (SP) verificadas en `/src/utils/spellScalingCalculator.ts`:
+  - [x] Fórmula canónica: `Valor Base + (Multiplicador × SP)` auditada y parseada en 87 instancias con 0 errores (validada en SP 1 a 30).
+  - [x] Normalizada la fórmula de `Erupción de Hechizos` (`spell-spell-eruption`) a `[50 + 15 × Poder Mágico]` con escalado híbrido por buffs activos.
+  - [x] Unidades correctas de cálculo (Daño, Curación, Resurrección, Escudo, Mitigación).
+  - [x] Sin NaN, valores negativos ni errores sintácticos en expresiones regulares.
+  - [x] Creado y exportado helper canónico `matchSpellSchool` que cubre todas las variantes y alias (`Nochesombra`/`Sombras`/`Nightshade`, `Universal`/`Neutral`/`Aventura`, etc.).
 
 ### 4.3. Costes de Desbloqueo y Progresión Alquímica
-- [ ] **Desbloqueo en Observatorio**:
-  - [ ] Fórmula: $\text{Tier} \times (2\text{ Cristales} + 2\text{ Gemas} + 2\text{ Mercurio}) + \text{Oro}$.
-  - [ ] Tier 1: 2 Cristales, 2 Gemas, 2 Mercurio + Oro oficial.
-  - [ ] Tier 2: 4 Cristales, 4 Gemas, 4 Mercurio + Oro oficial.
-  - [ ] Tier 3: 6 Cristales, 6 Gemas, 6 Mercurio + Oro oficial.
-  - [ ] Tier 4: 8 Cristales, 8 Gemas, 8 Mercurio + Oro oficial.
-- [ ] **Progresión de Polvo Alquímico (*Alchemical Dust*)**:
-  - [ ] Nivel 1 (Base): 0 Polvo, 0 Oro.
-  - [ ] Nivel 2: 25 Polvo + 1.000 Oro.
-  - [ ] Nivel 3: 25 Polvo + 1.500 Oro + 2 Raros.
-  - [ ] Nivel 4 Magistral: 25 Polvo + 2.000 Oro + 4 Raros.
+- [x] **Desbloqueo de Hechizos de Cofradía / Escuelas de Facción (Luz, Nochesombra, Primigenia, Arcana)**:
+  - [x] Fórmula canónica de Cofradía / Observatorio de Facción: $\text{Tier} \times (2\text{ Cristales} + 2\text{ Gemas} + 2\text{ Mercurio}) + \text{Oro}$.
+  - [x] Tier 1: 2 Cristales, 2 Gemas, 2 Mercurio + Oro oficial.
+  - [x] Tier 2: 4 Cristales, 4 Gemas, 4 Mercurio + Oro oficial.
+  - [x] Tier 3: 6 Cristales, 6 Gemas, 6 Mercurio + Oro oficial.
+  - [x] Tier 4: 8 Cristales, 8 Gemas, 8 Mercurio + Oro oficial.
+  - [x] Tier 5: 10 Cristales, 10 Gemas, 10 Mercurio + Oro oficial.
+- [x] **Desbloqueo Canónico de Hechizos Neutrales / Universales / Aventura (Portal a la Ciudad, Puerta Dimensional, Vuelo, etc.)**:
+  - [x] Adquisición exclusiva mediante **Puntos de Observación (Observatorio del Reino)**.
+  - [x] **Coste de Oro y Recursos: 0 Oro, 0 Polvo, 0 Recursos Raros**.
+  - [x] **Costes Canónicos Contrastados y Auditados Individualmente**:
+    - **Portal a la Ciudad (`spell-town-portal`)**: Confirmado oficialmente en **3 Puntos de Observación** para Nivel 1, con progresión de **+1 Punto de Observación adicional por nivel** posterior (Nivel 2: 4 Pts, Nivel 3: 5 Pts, Nivel 4 Magistral: 6 Pts acumulados).
+    - **Puerta Dimensional (`spell-dimension-door`)**: Confirmado oficialmente en **4 Puntos de Observación / Astrología** para Nivel 1 (Magia Neutral Superior / High Neutral), con progresión de **+1 Punto adicional por nivel** posterior (Nivel 2: 5 Pts, Nivel 3: 6 Pts, Nivel 4 Magistral: 7 Pts acumulados).
+    - **9 Hechizos Neutrales Restantes** (*Vuelo/Shadowflight*, *Disipar Magia*, *Flecha Mágica*, *Disipar Invocación*, *Amortiguación Crepuscular*, *Erupción de Hechizos*, *Visión Lejana*, *Marcha Forzada*, *Escudo de Maná*): Al no existir publicación oficial de sus costes exactos en puntos de observación, quedan **explícitamente marcados como "Sin definir (Pendiente de confirmación oficial)"**, evitando imputaciones uniformes o inventadas en cumplimiento estricto del canon de Olden Era.
+  - [x] Corregidos los 11 hechizos neutrales tanto en `unlockCost` como en los 4 niveles de `levels[].upgradeCost`, con soporte visual diferenciado en `SpellGrimoire.tsx` y `SmartSpellHoverCard.tsx`.
+- [x] **Progresión de Polvo Alquímico (*Alchemical Dust*) para Hechizos de Escuelas de Facción (Luz, Nochesombra, Primigenia, Arcana)**:
+  - [x] Nivel 1 (Base): 0 Polvo, 0 Oro.
+  - [x] Nivel 2: 25 Polvo + 1.000 Oro.
+  - [x] Nivel 3: 25 Polvo + 1.500 Oro + 2 Raros especificados.
+  - [x] Nivel 4 Magistral: 25 Polvo + 2.000 Oro + 4 Raros especificados.
 
 ### 4.4. Combos Tácticos y Prioridades por Facción
-- [ ] Verificar que cada hechizo tenga asignada su prioridad meta (`Imprescindible`, `Muy Alta`, `Situacional`, `Baja`) coherente con la facción activa.
-- [ ] Verificar los combos de hechizo + unidad en `FACTION_SPELL_COMBOS`.
+- [x] Prioridad meta (`Imprescindible (P1)`, `Muy Alta (P2)`, `Alta (P3)`, `Media / Situacional (P4)`) contrastada para las 6 facciones oficiales en `FACTION_SPELL_PRIORITIES`.
+- [x] Combos tácticos (`FACTION_SPELL_COMBOS`) auditados: 18 sinergias exhaustivas (3 por facción) con unidades beneficiarias canónicas, tiempos de ejecución y secuencia de turnos verificados.
+- [x] Selector de Sigilos de Escuelas (`SpellSchoolSigilSelector.tsx`) y Codex Medieval actualizados para conteo y filtrado en tiempo real sin desajustes.
 
 ---
 

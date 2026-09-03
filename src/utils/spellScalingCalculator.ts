@@ -218,11 +218,11 @@ export const CANONICAL_MAGIC_SCHOOLS: CanonicalSchoolMeta[] = [
     iconType: 'sun',
   },
   {
-    id: 'Sombras',
+    id: 'Nochesombra',
     name: 'Magia Nochesombra',
     nameEn: 'Nightshade Magic',
     sigilName: 'Sello Umbrío Abisal',
-    primaryFaction: ['Necrópolis', 'Cisma'],
+    primaryFaction: ['Necrópolis', 'Mazmorra', 'Cisma'],
     color: '#9333EA',
     bgLight: 'bg-purple-50 text-purple-950 border-purple-300',
     bgDark: 'bg-gradient-to-br from-purple-950/40 via-black/60 to-black/80 border-purple-500/50 text-purple-200',
@@ -236,7 +236,7 @@ export const CANONICAL_MAGIC_SCHOOLS: CanonicalSchoolMeta[] = [
     name: 'Magia Primigenia',
     nameEn: 'Primal Magic',
     sigilName: 'Sello Elemental de la Tierra',
-    primaryFaction: ['Foresta', 'Colmena'],
+    primaryFaction: ['Foresta', 'Colmena', 'Mazmorra'],
     color: '#10B981',
     bgLight: 'bg-emerald-50 text-emerald-950 border-emerald-300',
     bgDark: 'bg-gradient-to-br from-emerald-950/40 via-black/60 to-black/80 border-emerald-500/50 text-emerald-200',
@@ -250,7 +250,7 @@ export const CANONICAL_MAGIC_SCHOOLS: CanonicalSchoolMeta[] = [
     name: 'Magia Arcana',
     nameEn: 'Arcane Magic',
     sigilName: 'Sello Cósmico de Distorsión',
-    primaryFaction: ['Mazmorra', 'Templo'],
+    primaryFaction: ['Cisma', 'Mazmorra'],
     color: '#6366F1',
     bgLight: 'bg-indigo-50 text-indigo-950 border-indigo-300',
     bgDark: 'bg-gradient-to-br from-indigo-950/40 via-black/60 to-black/80 border-indigo-500/50 text-indigo-200',
@@ -274,3 +274,29 @@ export const CANONICAL_MAGIC_SCHOOLS: CanonicalSchoolMeta[] = [
     iconType: 'astral',
   },
 ];
+
+/**
+ * Canonical helper to check if a spell belongs to a given school ID,
+ * supporting all canon aliases (e.g. Sombras / Nochesombra / Nightshade, Universal / Neutral / Aventura).
+ */
+export function matchSpellSchool(spellSchool: string, targetSchoolId: string): boolean {
+  if (!targetSchoolId || targetSchoolId === 'all') return true;
+  const s = spellSchool.toLowerCase();
+  const t = targetSchoolId.toLowerCase();
+  if (t === 'neutral' || t === 'universal' || t === 'aventura') {
+    return s.includes('neutral') || s.includes('universal') || s.includes('aventura');
+  }
+  if (t === 'sombras' || t === 'nochesombra' || t === 'nightshade') {
+    return s.includes('sombras') || s.includes('nochesombra') || s.includes('nightshade');
+  }
+  if (t === 'luz' || t === 'daylight' || t === 'light') {
+    return s.includes('luz') || s.includes('daylight') || s.includes('light');
+  }
+  if (t === 'primigenia' || t === 'primal') {
+    return s.includes('primigenia') || s.includes('primal');
+  }
+  if (t === 'arcana' || t === 'arcane') {
+    return s.includes('arcana') || s.includes('arcane');
+  }
+  return s.includes(t);
+}
