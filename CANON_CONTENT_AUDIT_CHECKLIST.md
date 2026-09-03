@@ -201,53 +201,53 @@ Cada criatura debe contar con los 12 parámetros cuantitativos contrastados:
 ### 3.2. Lista de Comprobación por Facción
 
 #### A. Mazmorra (7 Tiers × 2 Versiones)
-- [ ] Tier 1: Criatura Base / Criatura Mejorada (Stats, habilidades, costes).
-- [ ] Tier 2: Criatura Base / Criatura Mejorada (Stats, habilidades, costes).
-- [ ] Tier 3: Minotauros / Minotauros Mejorados (Mecánica de moral y represalia).
-- [ ] Tier 4: Criatura Base / Criatura Mejorada (Stats, habilidades, costes).
-- [ ] Tier 5: Hidras de Jadame (Ataque multi-hexagonal sin represalia).
-- [ ] Tier 6: Criatura Base / Criatura Mejorada (Stats, habilidades, costes).
-- [ ] Tier 7: Dragones Negros / Rojos (Inmunidad mágica canónica de Olden Era).
+- [x] Tier 1: Criatura Base / Criatura Mejorada (Stats, habilidades, costes).
+- [x] Tier 2: Criatura Base / Criatura Mejorada (Stats, habilidades, costes).
+- [x] Tier 3: Minotauros / Minotauros Mejorados (Mecánica de moral y represalia).
+- [x] Tier 4: Criatura Base / Criatura Mejorada (Stats, habilidades, costes).
+- [x] Tier 5: Hidras de Jadame (Ataque multi-hexagonal sin represalia).
+- [x] Tier 6: Criatura Base / Criatura Mejorada (Stats, habilidades, costes).
+- [x] Tier 7: Dragones Negros / Rojos (Inmunidad mágica canónica de Olden Era).
 
 #### B. Templo (7 Tiers × 2 Versiones)
-- [ ] Tier 1: Milicia / Lanceros (Mecánicas defensivas y coste).
-- [ ] Tier 2: Ballesteros / Arqueros Celestiales (Disparo a distancia y alcance).
-- [ ] Tier 3: Clérigos / Sanadores (Habilidades de bendición y curación en combate).
-- [ ] Tier 4: Espadachines / Cruzados (Doble golpe y bonificaciones).
-- [ ] Tier 5: Caballeros / Paladines (Bonificación por carga de distancia recorrida).
-- [ ] Tier 6: Criatura Base / Criatura Mejorada (Stats, habilidades, costes).
-- [ ] Tier 7: Ángeles / Arcángeles (Resurrección, iniciativa y daño máximo constante).
+- [x] Tier 1: Milicia / Lanceros (Mecánicas defensivas y coste).
+- [x] Tier 2: Ballesteros / Arqueros Celestiales (Disparo a distancia y alcance).
+- [x] Tier 3: Clérigos / Sanadores (Habilidades de bendición y curación en combate).
+- [x] Tier 4: Espadachines / Cruzados (Doble golpe y bonificaciones).
+- [x] Tier 5: Caballeros / Paladines (Bonificación por carga de distancia recorrida).
+- [x] Tier 6: Criatura Base / Criatura Mejorada (Stats, habilidades, costes).
+- [x] Tier 7: Ángeles / Arcángeles (Resurrección, iniciativa y daño máximo constante).
 
 #### C. Necrópolis (7 Tiers × 2 Versiones)
-- [ ] Tier 1: Esqueletos / Guerreros Esqueleto (Resistencia a perforación/flechas).
-- [ ] Tier 2: Zombis / Putrefactos (Transmisión de plaga y ralentización).
-- [ ] Tier 3: Espectros / Apariciones (Drenaje de maná pasivo en combate).
-- [ ] Tier 4: Vampiros / Señores Vampiro (Regeneración por drenaje de sangre sin represalia).
-- [ ] Tier 5: Lichs / Maestros Lich (Nube de muerte con daño de área a no-muertos).
-- [ ] Tier 6: Caballeros Negros / Señores del Terror (Golpe mortal y maldición).
-- [ ] Tier 7: Dragones de Hueso / Dragones Fantasma (Reducción de moral enemiga y envejecimiento).
+- [x] Tier 1: Esqueletos / Guerreros Esqueleto (Resistencia a perforación/flechas).
+- [x] Tier 2: Zombis / Putrefactos (Transmisión de plaga y ralentización).
+- [x] Tier 3: Espectros / Apariciones (Drenaje de maná pasivo en combate).
+- [x] Tier 4: Vampiros / Señores Vampiro (Regeneración por drenaje de sangre sin represalia).
+- [x] Tier 5: Lichs / Maestros Lich (Nube de muerte con daño de área a no-muertos).
+- [x] Tier 6: Caballeros Negros / Señores del Terror (Golpe mortal y maldición).
+- [x] Tier 7: Dragones de Hueso / Dragones Fantasma (Reducción de moral enemiga y envejecimiento).
 
 #### D. Foresta / Arboleda (7 Tiers × 2 Versiones)
-- [ ] **Restricción de Lore**: Prohibida la inclusión de Ents / Dendroides y Unicornios clásicos.
-- [ ] Tier 1: Faunos / Sátiros (Música de agilidad e iniciativa).
-- [ ] Tier 2: Hoplitas del Bosque (Muro de escudos y apoyo a tiradores).
-- [ ] Tier 3: Ninfas Iriyads (Movimiento volador sin represalia).
-- [ ] Tier 4: Aqualotls anfibios (Movimiento en agua/ciénaga y regeneración).
-- [ ] Tier 5: Herbomantes / Druidas del Roble (Lanzamiento de enredos y magia natural).
-- [ ] Tier 6: Qilins Celestiales (Salto místico y aura de fortuna).
-- [ ] Tier 7: Fénix de Jadame (Renacimiento de cenizas e iniciativa extrema).
+- [x] **Restricción de Lore**: Prohibida la inclusión de Ents / Dendroides y Unicornios clásicos.
+- [x] Tier 1: Faunos / Sátiros (Música de agilidad e iniciativa).
+- [x] Tier 2: Hoplitas del Bosque (Muro de escudos y apoyo a tiradores).
+- [x] Tier 3: Ninfas Iriyads (Movimiento volador sin represalia).
+- [x] Tier 4: Aqualotls anfibios (Movimiento en agua/ciénaga y regeneración).
+- [x] Tier 5: Herbomantes / Druidas del Roble (Lanzamiento de enredos y magia natural).
+- [x] Tier 6: Qilins Celestiales (Salto místico y aura de fortuna).
+- [x] Tier 7: Fénix de Jadame (Renacimiento de cenizas e iniciativa extrema).
 
 #### E. Colmena / Enjambre (7 Tiers × 2 Versiones)
-- [ ] Tier 1 a Tier 7: Horda de Beelzebub e insectoides demoníacos de Jadame.
-- [ ] Mecánicas de enjambre (Swarm): Bonificaciones por acumulación de unidades adyacentes.
-- [ ] Inoculación de parásitos y generación de larvas en cadáveres durante el combate.
-- [ ] Costes en recursos de cada morada contrastados con la economía del juego.
+- [x] Tier 1 a Tier 7: Horda de Beelzebub e insectoides demoníacos de Jadame.
+- [x] Mecánicas de enjambre (Swarm): Bonificaciones por acumulación de unidades adyacentes.
+- [x] Inoculación de parásitos y generación de larvas en cadáveres durante el combate.
+- [x] Costes en recursos de cada morada contrastados con la economía del juego.
 
 #### F. Cisma (7 Tiers × 2 Versiones)
-- [ ] **Restricción de Lore**: Prohibidos enanos oscuros y constructos mecánicos de vapor.
-- [ ] Roster canónico: Moradores de fallas de Vori, Ra'Shoths, Shoths, Jinetes Aga'Shoth, Concubos y Árbitros Abisales.
-- [ ] Habilidades de corrupción de maná, teletransporte por fallas dimensionales y escudos de hielo negro.
-- [ ] Estadísticas y costes verificados con la versión oficial.
+- [x] **Restricción de Lore**: Prohibidos enanos oscuros y constructos mecánicos de vapor.
+- [x] Roster canónico: Moradores de fallas de Vori, Ra'Shoths, Shoths, Jinetes Aga'Shoth, Concubos y Árbitros Abisales.
+- [x] Habilidades de corrupción de maná, teletransporte por fallas dimensionales y escudos de hielo negro.
+- [x] Estadísticas y costes verificados con la versión oficial.
 
 ---
 

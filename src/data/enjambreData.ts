@@ -657,7 +657,7 @@ export const ENJAMBRE_UNITS: UnitInfo[] = [
       whenToPickA: 'Elige Rama A contra grupos cerrados de infantería.',
       whenToPickB: 'Elige Rama B para francotirador de precisión a objetivos individuales.',
       synergyHeroA: 'Mila (Celeridad Magistral)',
-      synergyHeroB: 'Maelstrom (Vórtice Segador)',
+      synergyHeroB: 'Xirr (Glándula de Ácido Corrosiva)',
     },
   },
   {

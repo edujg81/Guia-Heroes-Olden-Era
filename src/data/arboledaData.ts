@@ -384,8 +384,8 @@ export const ARBOLEDA_UNITS: UnitInfo[] = [
       summary: 'Arquero Fauno (Rama A) confiere a Arboleda un tirador temprano esencial para creeping sin bajas, mientras que Guerrero Fauno (Rama B) ofrece una fuerza de choque veloz con embestida.',
       whenToPickA: 'Elige Arquero Fauno para partidas estándar y asegurar cero bajas en la primera semana.',
       whenToPickB: 'Elige Guerrero Fauno en duelos agresivos donde necesites asaltar las líneas enemigas con rapidez.',
-      synergyHeroA: 'Kelarr / Guardabosques',
-      synergyHeroB: 'Bran / Héroes de choque',
+      synergyHeroA: 'Gorel Punta de Lanza / Colajengibre',
+      synergyHeroB: 'Eith / Octavia',
     },
   },
   {
@@ -526,8 +526,8 @@ export const ARBOLEDA_UNITS: UnitInfo[] = [
       summary: 'Iriyad Fúngica (Rama A) es la reina del debilitamiento y control con esporas, mientras que Iriyad de Cristal (Rama B) ofrece perforación de armadura y velocidad 8.',
       whenToPickA: 'Elige Iriyad Fúngica para neutralizar colosos enemigos y reducir su ataque.',
       whenToPickB: 'Elige Iriyad de Cristal para maximizar el daño penetrante y actuar antes.',
-      synergyHeroA: 'Thorne / Druidas de control',
-      synergyHeroB: 'Kelarr / Héroes ofensivos',
+      synergyHeroA: 'Anciano Tss\'kish / Vatawna',
+      synergyHeroB: 'Echolily / Viejo Peregrino',
     },
   },
   {
@@ -597,8 +597,8 @@ export const ARBOLEDA_UNITS: UnitInfo[] = [
       summary: 'Aqualotl Polar (Rama A) congela y ralentiza a las tropas enemigas, mientras que Aqualotl Abisal (Rama B) destruye la armadura con mordiscos corrosivos.',
       whenToPickA: 'Elige Aqualotl Polar cuando te enfrentes a rivales hiperveloces que necesites frenar.',
       whenToPickB: 'Elige Aqualotl Abisal cuando el enemigo acumule criaturas con muchísima defensa.',
-      synergyHeroA: 'Vatawna / Druidas de hielo',
-      synergyHeroB: 'Kelarr / Héroes ofensivos',
+      synergyHeroA: 'Vatawna / Glacia',
+      synergyHeroB: 'Mreowa / Gorel Punta de Lanza',
     },
   },
   {

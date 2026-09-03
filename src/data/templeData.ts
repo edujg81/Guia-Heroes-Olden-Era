@@ -640,7 +640,7 @@ export const TEMPLE_UNITS: UnitInfo[] = [
         strengths: 'Amplifica el daño que todo tu ejército inflige sobre el objetivo designado.',
         tacticalUsage: 'Dispara primero al objetivo de mayor salud antes de atacarlo con Caballería o Grifos.',
         idealMatchup: 'Minotauros, Caballeros del Terror, Treants',
-        synergyLaws: ['Disciplina de Erathia', 'Puntería de Élite'],
+        synergyLaws: ['Disciplina del Templo', 'Puntería de Élite'],
       },
       branchB: {
         id: 'branch_b',
@@ -663,8 +663,8 @@ export const TEMPLE_UNITS: UnitInfo[] = [
       summary: 'El Tirador (Rama A) es el estándar competitivo para maximizar el daño del ejército mediante Disparo Perforante, mientras que el Halconero (Rama B) destaca en mapas con muchos asedios por ignorar cobertura.',
       whenToPickA: 'En el 90% de las partidas abiertas y contra objetivos de alta salud.',
       whenToPickB: 'Cuando enfrentas castillos fortificados o enemigos con mucha protección de murallas.',
-      synergyHeroA: 'Sir Galahad, Lord Edgar',
-      synergyHeroB: 'Valentina, Exploradores',
+      synergyHeroA: 'Kestrel, Lord Edgar',
+      synergyHeroB: 'Leon Dedos Pegajosos, Viejo Lord Mandall',
     },
   },
 
@@ -736,8 +736,8 @@ export const TEMPLE_UNITS: UnitInfo[] = [
       summary: 'La Égida del Sol (Rama A) es la opción defensiva suprema para proteger arqueros, mientras que el Capitán de la Guardia (Rama B) es perfecto para composiciones ofensivas basadas en alta moral y asalto rápido.',
       whenToPickA: 'Cuando dependes del daño de tus Tiradores e Inquisidores.',
       whenToPickB: 'Cuando juegas agresivo con Caballería y Grifos buscando turnos dobles por moral.',
-      synergyHeroA: 'Lord Edgar, Valentina',
-      synergyHeroB: 'Sir Galahad, Aeos',
+      synergyHeroA: 'John Johnson, Lord Edgar',
+      synergyHeroB: 'Aeos la Exaltada, Viejo Lord Mandall',
     },
   },
 
@@ -809,8 +809,8 @@ export const TEMPLE_UNITS: UnitInfo[] = [
       summary: 'El Grifo de Templo (Rama B) es una de las unidades más devastadoras del juego gracias al Contraataque Ilimitado, permitiendo limpiar pilas enemigas enteras cuando intentan golpearlo.',
       whenToPickA: 'Cuando necesitas máxima iniciativa (14) para actuar antes que los héroes o unidades enemigas rápidas.',
       whenToPickB: 'En casi todas las batallas grandes donde el enemigo tiene múltiples tropas de combate cuerpo a cuerpo.',
-      synergyHeroA: 'Valentina, Exploradores',
-      synergyHeroB: 'Sir Galahad, Lord Edgar',
+      synergyHeroA: 'Kestrel, Leon Dedos Pegajosos',
+      synergyHeroB: 'Lord Edgar, Viejo Lord Mandall',
     },
   },
 
@@ -882,8 +882,8 @@ export const TEMPLE_UNITS: UnitInfo[] = [
       summary: 'El Hierofante (Rama B) es el soporte por excelencia para ejércitos grandes con buff masivo, mientras que el Heraldo del Sol (Rama A) proporciona control directo con ceguera sobre colosos enemigos.',
       whenToPickA: 'Contra enemigos que dependen de 1 sola pila gigante de monstruos (ej. Hidra o Dragón).',
       whenToPickB: 'En batallas de gran escala donde necesitas potenciar a todo tu ejército a la vez.',
-      synergyHeroA: 'Valentina, Sister Rebecca',
-      synergyHeroB: 'Inquisitor Alistair, Brother Cadell',
+      synergyHeroA: 'Zenith, Anastasia la Dócil',
+      synergyHeroB: 'Julius, Pip',
     },
   },
 
@@ -907,7 +907,7 @@ export const TEMPLE_UNITS: UnitInfo[] = [
         branchLabel: 'Base',
         name: 'Caballería',
         nameEn: 'Cavalry',
-        subtitle: 'Jinetes Acorazados de Erathia',
+        subtitle: 'Jinetes Acorazados del Templo',
         dwellingName: 'Hipódromo',
         cost: { gold: 550 },
         stats: { hp: 75, attack: 14, defense: 13, damage: '14-22', speed: 8, initiative: 12, weeklyGrowth: 4 },
@@ -948,15 +948,15 @@ export const TEMPLE_UNITS: UnitInfo[] = [
         strengths: 'Casi siempre obtiene turnos dobles por alta moral y tiene más salud.',
         tacticalUsage: 'Sostener combates prolongados y asegurar turnos extra en cada ronda.',
         idealMatchup: 'Ejércitos con habilidades de desmoralización (Necrópolis)',
-        synergyLaws: ['Honor de Erathia', 'Estandarte Real'],
+        synergyLaws: ['Honor del Templo', 'Estandarte Real'],
       },
     },
     comparison: {
       summary: 'La Lanza Solar (Rama A) es el ariete perfecto para matar tanques enemigos de un solo impacto, mientras que la Caballería Noble (Rama B) ofrece resistencia colosal y moral inquebrantable frente a no-muertos.',
       whenToPickA: 'Cuando necesitas reventar criaturas de altísima defensa física.',
       whenToPickB: 'Contra Necrópolis para contrarrestar sus auras de moral negativa.',
-      synergyHeroA: 'Lord Edgar, Sir Galahad',
-      synergyHeroB: 'Valentina, Aeos la Exaltada',
+      synergyHeroA: 'Keandra, Lord Edgar',
+      synergyHeroB: 'Aeos la Exaltada, Ister',
     },
   },
 
@@ -1028,8 +1028,8 @@ export const TEMPLE_UNITS: UnitInfo[] = [
       summary: 'El Excomulgador (Rama A) es el terror de los magos con su capacidad de Silencio y daño aumentado contra Cisma/Necrópolis, mientras que la Madre Superiora (Rama B) ofrece curación y purificación de maldiciones constante.',
       whenToPickA: 'Contra Mazmorra, Necrópolis o Cisma para silenciar su magia letal.',
       whenToPickB: 'Cuando buscas una composición de resistencia infinita con cero bajas.',
-      synergyHeroA: 'Inquisitor Alistair, Lord Edgar',
-      synergyHeroB: 'Sister Rebecca, Valentina',
+      synergyHeroA: 'Avis el Hereje, Lia la Desatada',
+      synergyHeroB: 'Elias el Alegre, Vesper',
     },
   },
 
@@ -1109,14 +1109,14 @@ export const TEMPLE_UNITS: UnitInfo[] = [
       summary: 'El Arcángel (Rama A) es el estándar de oro competitivo por su Resurrección y daño fijo sin azar, mientras que la Apoteosis (Rama B) es una máquina de aniquilación pura con daño de área pasivo e inmunidad mágica.',
       whenToPickA: 'En el 90% de las partidas para mantener tus ejércitos con cero bajas permanentes.',
       whenToPickB: 'Cuando buscas daño de área arrollador y el enemigo no tiene capacidad de matarte unidades fácilmente.',
-      synergyHeroA: 'Sir Galahad, Valentina, Lord Edgar',
-      synergyHeroB: 'Inquisitor Alistair, Aeos la Exaltada',
+      synergyHeroA: 'Julius, Lord Edgar, Keandra',
+      synergyHeroB: 'Aeos la Exaltada, Viejo Lord Mandall',
     },
   },
 ];
 
 // =========================================================================
-// HÉROES OFICIALES Y ESPECIALISTAS DE TEMPLO (HUMANOS DE ERATHIA)
+// HÉROES OFICIALES Y ESPECIALISTAS DE TEMPLO (CABALLEROS Y CLÉRIGOS)
 // HEROES OF MIGHT AND MAGIC: OLDEN ERA (ROSTER CANÓNICO OFICIAL)
 // Fuente oficial: https://heroes-olden-era.com/es/factions/human/heroes
 // =========================================================================
