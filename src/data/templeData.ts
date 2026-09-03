@@ -1258,7 +1258,7 @@ export const TEMPLE_HEROES: DungeonHero[] = [
   {
     id: 'hero-lord-edgar',
     name: 'Lord Edgar',
-    title: 'El Baluarte Inflexible de Erathia',
+    title: 'El Baluarte Inflexible del Templo',
     heroClass: 'Caballero',
     heroType: 'Guerrero',
     role: 'Principal Físico / S-Tier',
