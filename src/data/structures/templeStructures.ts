@@ -2,616 +2,633 @@ import { TownStructure } from '../../types';
 
 export const TEMPLE_STRUCTURES: TownStructure[] = [
   // =========================================================================
-  // CENTRO CÍVICO & PALACIO DE GOBIERNO (AYUNTAMIENTO / CAPITOLIO) - MULTI-NIVEL (1 a 4)
+  // CENTRO CÍVICO (AYUNTAMIENTO / ALCALDÍA CANÓNICA - 3 NIVELES)
   // =========================================================================
   {
     id: 'temple-solar-temple',
-    name: 'Templo Solar (Ayuntamiento / Capitolio)',
-    nameEn: 'Solar Temple (Town Hall / Capitol)',
+    name: 'Templo Solar (Ayuntamiento / Alcaldía - Niveles I, II y III)',
+    nameEn: 'Solar Temple (Town Hall / City Hall - Levels I, II & III)',
     category: 'Cívica y Economía',
     faction: 'Templo',
-    cost: { gold: 5000 },
+    cost: { gold: 2500 },
     prerequisites: [],
     effects: [
-      'Sede principal de gobierno y centro ceremonial de la fe de la Luz.',
-      'Otorga al reino oro, puntos de ley y puntos de astrología al día. Aumenta el límite de héroes (si lo permite el escenario)',
-      'Se mejora a lo largo de 4 niveles cívicos: Asentamiento (500) -> Alcaldía (1.000) -> Ciudadela Cívica (2.000) -> Capitolio (4.000 Oro/día).'
+      'Sede principal de gobierno y centro ceremonial de la fe de la Luz estructurada en 3 niveles de desarrollo.',
+      'Otorga Oro, Puntos de Ley y Puntos de Astrología diarios incrementales, expandiendo la administración de la ciudad y el límite de héroes activos.',
+      'Al ascender a Nivel II permite elegir una mejora económica especializada (+1.000 Oro, +1.000 Ley o +1.000 Astrología), y el Nivel III (Solar Temple III) consolida la gran metrópolis con el máximo rendimiento cívico de Jadame.'
     ],
-    strategicTip: 'Mejora a Nivel II en el Día 2 para acelerar el flujo de oro hacia las moradas de caballería y ángeles.',
-    timingRecommendation: 'Día 2-3 (Nivel II) / Semana 2 (Nivel III) / Semana 3 (Capitolio).',
+    strategicTip: 'Mejora a Nivel II en Día 2-3 para acelerar el flujo cívico hacia la Caballería y culmina con Solar Temple III en Semana 2 para sostener los Ángeles.',
+    timingRecommendation: 'Día 1 (Nivel I) / Día 2-3 (Nivel II) / Semana 2 (Nivel III).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Asentamiento Solar (Ayuntamiento)',
+        name: 'Nivel I: Asentamiento Solar (Town Hall)',
         nameEn: 'Solar Settlement (Town Hall)',
-        cost: { gold: 5000 },
+        cost: { gold: 2500 },
         prerequisites: [],
-        effects: ['Otorga al reino 500 de oro, puntos de ley y puntos de astrología al día.', '+1 al límite de héroes.'],
-        bonusIncome: '+500 Oro, Puntos de ley, Puntos de astrología / día',
-        strategicTip: 'Asentamiento inicial básico.'
+        effects: [
+          'Genera 1.000 de Oro, Puntos de Ley y Puntos de Astrología diarios.',
+          'Permite la administración y gobierno de la provincia.'
+        ],
+        bonusIncome: '+1.000 Oro, Puntos de Ley, Puntos de Astrología / día',
+        strategicTip: 'Base cívica inicial del Templo.'
       },
       {
         level: 2,
-        name: 'Nivel II: Templo Solar II (Alcaldía)',
+        name: 'Nivel II: Templo Solar II (City Hall)',
         nameEn: 'Solar Temple II (City Hall)',
         cost: { gold: 2500, wood: 5, ore: 5 },
-        prerequisites: ['Templo Solar (Ayuntamiento / Capitolio)'],
-        effects: ['Otorga al reino 1.000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora económica de nivel 1.'],
-        bonusIncome: '+1.000 Oro, Puntos de ley, Puntos de astrología / día',
-        strategicTip: 'Construir el Día 2 o 3 para estabilizar las finanzas del Templo.'
+        prerequisites: ['Mercado (Marketplace)'],
+        effects: [
+          'Otorga 1.000 de Oro, Puntos de Ley y Puntos de Astrología diarios.',
+          'Permite al propietario elegir una de las 3 mejoras económicas de Nivel 2 (+1.000 Oro/día, +1.000 Puntos de Ley/día, o +1.000 Puntos de Astrología/día).'
+        ],
+        bonusIncome: '+1.000 Oro, Puntos de Ley, Puntos de Astrología / día (+ mejora a elección)',
+        strategicTip: 'Construir el Día 2 o 3 para acelerar las leyes de facción o la economía dorada.'
       },
       {
         level: 3,
-        name: 'Nivel III: Templo Solar III (Ciudadela Cívica)',
-        nameEn: 'Solar Temple III (Metropolis Hall)',
+        name: 'Nivel III: Templo Solar III (Metropolis)',
+        nameEn: 'Solar Temple III (Metropolis)',
         cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Nivel II: Templo Solar II (Alcaldía)'],
-        effects: ['Otorga al reino 2.000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora de nivel 2.'],
-        bonusIncome: '+2.000 Oro, Puntos de ley, Puntos de astrología / día',
-        strategicTip: 'Prioridad al inicio de la Semana 2 para sostener el reclutamiento de Ángeles.'
-      },
-      {
-        level: 4,
-        name: 'Nivel IV: Gran Capitolio de la Luz (Capitolio)',
-        nameEn: 'Grand Radiant Capitol',
-        cost: { gold: 10000, wood: 15, ore: 15 },
-        prerequisites: ['Nivel III: Templo Solar III (Ciudadela Cívica)', 'Fortificaciones II (Ciudadela Militar)'],
+        prerequisites: ['Nivel II: Templo Solar II (City Hall)'],
         effects: [
-          'Estructura suprema cívica del Templo. Solo se puede edificar 1 Capitolio por reino/jugador.',
-          'Otorga al reino 4.000 de oro al día, además de bonificación masiva de puntos de ley y astrología.'
+          'Cúspide de la administración civil y eclesiástica del Templo en Olden Era.',
+          'Otorga 1.000 de Oro, Puntos de Ley y Puntos de Astrología diarios adicionales para el reino.',
+          'Culmina el desarrollo de la metrópolis santa, afianzando los recursos para las cruzadas celestiales.'
         ],
-        bonusIncome: '+4.000 Oro, Puntos de ley supremos, Puntos de astrología / día',
-        strategicTip: 'Garantiza la solvencia económica para el reclutamiento continuado de Arcángeles.'
+        bonusIncome: '+1.000 Oro, Puntos de Ley, Puntos de Astrología / día adicionales',
+        strategicTip: 'Edificar en Semana 2 para garantizar la economía de reclutamiento de Ángeles y Paladines.'
       }
     ]
   },
 
   // =========================================================================
-  // FORTIFICACIONES (NIVELES I, II y III)
+  // BANCO Y TESORERÍA (ECONOMÍA SUPREMA DE OLDEN ERA)
+  // =========================================================================
+  {
+    id: 'temple-bank',
+    name: 'Banco (Bank)',
+    nameEn: 'Bank',
+    category: 'Cívica y Economía',
+    faction: 'Templo',
+    cost: { gold: 2000, wood: 5, ore: 5 },
+    prerequisites: ['Mercado (Marketplace)', 'Templo Solar (Ayuntamiento / Alcaldía)'],
+    effects: [
+      'Entidad financiera del Templo que canaliza los tributos del reino.',
+      'Genera +500 de Oro diario adicional y es prerrequisito indispensable para erigir la Tesorería.'
+    ],
+    strategicTip: 'Edificar a mediados de la primera semana para abrir paso a la Tesorería.',
+    timingRecommendation: 'Semana 1 (Día 5-6).',
+  },
+  {
+    id: 'temple-treasury',
+    name: 'Tesorería (Treasury)',
+    nameEn: 'Treasury',
+    category: 'Cívica y Economía',
+    faction: 'Templo',
+    cost: { gold: 5000, wood: 10, ore: 10 },
+    prerequisites: ['Banco (Bank)', 'Mercado (Marketplace)', 'Fortificaciones (Fortifications)'],
+    effects: [
+      'Estructura económica suprema de Olden Era (equivalente canónico al Capitolio).',
+      'Genera +2.000 de Oro diario adicional de forma permanente para el reino.',
+      'Requiere haber consolidado el Banco, el Mercado y las Fortificaciones.'
+    ],
+    strategicTip: 'Proporciona la base económica dorada necesaria para costear el reclutamiento de Ángeles y Justicieros cada semana.',
+    timingRecommendation: 'Semana 2.',
+  },
+
+  // =========================================================================
+  // FORTIFICACIONES (NIVELES I, II Y III)
   // =========================================================================
   {
     id: 'temple-fortifications',
-    name: 'Fortificaciones',
+    name: 'Fortificaciones (Fortifications)',
     nameEn: 'Fortifications',
     category: 'Fortificaciones',
     faction: 'Templo',
-    cost: { gold: 2500, wood: 0, ore: 5 },
+    cost: { gold: 2500, ore: 5 },
     prerequisites: [],
     effects: [
-      'Proporciona una muralla durante los asedios.',
-      'Permite al constructor elegir mejoras defensivas.',
-      'Al mejorarse aumenta el crecimiento de tropas.'
+      'Proporciona murallas protectoras durante los asedios.',
+      'Permite elegir mejoras defensivas sagradas para la defensa de la ciudadela.',
+      'Al ascender a Niveles II y III duplica la producción de tropas del Templo (+50% y +100%).'
     ],
-    strategicTip: 'Mejorar a Fortificaciones II en el Día 7 de la Semana 1 para aumentar la producción de tropas del primer reset semanal.',
-    timingRecommendation: 'Fortificaciones (Día 1) / Fortificaciones II (Día 7) / Fortificaciones III (Semana 2).',
+    strategicTip: 'Mejorar a Nivel II en el Día 7 de la Semana 1 para aumentar la producción de tropas del reset semanal.',
+    timingRecommendation: 'Fortificaciones I (Día 1) / Fortificaciones II (Día 7) / Fortificaciones III (Semana 2).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Fortificaciones',
-        nameEn: 'Temple Fort',
-        cost: { gold: 2500, wood: 0, ore: 5 },
+        name: 'Nivel I: Fortificaciones (Fortifications)',
+        nameEn: 'Fortifications I',
+        cost: { gold: 2500, ore: 5 },
         prerequisites: [],
-        effects: ['Proporciona una muralla durante los asedios.', 'Permite al constructor elegir una mejora defensiva de nivel 1.'],
-        defenseBonus: 'Refuerzo de murallas, trampas o más salidas',
-        growthBonus: '',
-        strategicTip: 'Construir el Día 1 si no se inicia con él.'
+        effects: [
+          'Proporciona una muralla defensiva durante los asedios.',
+          'Permite elegir una mejora defensiva de nivel 1.'
+        ],
+        defenseBonus: 'Muralla perimetral de piedra bendita',
+        strategicTip: 'Defensa base de la ciudad.'
       },
       {
         level: 2,
-        name: 'Nivel II: Fortificaciones II',
-        nameEn: 'Temple Citadel',
+        name: 'Nivel II: Fortificaciones II (Citadel)',
+        nameEn: 'Fortifications II',
         cost: { gold: 2500, ore: 10 },
-        prerequisites: ['Nivel I: Fortificaciones'],
+        prerequisites: ['Nivel I: Fortificaciones (Fortifications)'],
         effects: [
-          'Añade dos torres a las almenas que disparan a los atacantes durante los asedios.',
-          'Permite al constructor elegir una mejora defensiva de nivel 2.',
-          'Aumenta la producción semanal de todas las tropas de la ciudad en un +50% adicional.'
+          'Añade dos torres a las almenas que disparan automáticamente a los atacantes durante los asedios.',
+          'Aumenta la producción semanal de todas las criaturas del Templo en un +50%.'
         ],
-        defenseBonus: '2 Torres Defensivas',
-        growthBonus: '+50% Crecimiento semanal de tropas',
-        strategicTip: 'Construir el Día 7 de la Semana 1 para acumular un 50% más de tropas el Día 1 de la Semana 2.'
+        defenseBonus: '2 Torres de arqueros sagrados',
+        growthBonus: '+50% Crecimiento semanal de criaturas',
+        strategicTip: 'Construir el Día 7 de la Semana 1 para maximizar el reclutamiento.'
       },
       {
         level: 3,
-        name: 'Nivel III: Fortificaciones III',
-        nameEn: 'Holy Castle',
-        cost: { gold: 5000, wood: 0, ore: 15 },
-        prerequisites: ['Nivel II: Fortificaciones II'],
+        name: 'Nivel III: Fortificaciones III (Castle)',
+        nameEn: 'Fortifications III',
+        cost: { gold: 5000, ore: 15 },
+        prerequisites: ['Nivel II: Fortificaciones II (Citadel)'],
         effects: [
-          'Añade una gran torre más a las almenas que dispara a los atacantes durante los asedios y se asienta junto a la muralla.',
-          'Permite al constructor elegir una mejora defensiva de nivel 3.',
-          'Duplica el crecimiento de todas las criaturas de la ciudad (+100% total).'
+          'Añade una gran torre central a las almenas con alcance total.',
+          'Duplica el crecimiento semanal de todas las criaturas de la ciudad (+100% total).'
         ],
-        defenseBonus: '1 Torre Defensiva',
-        growthBonus: '+100% Crecimiento semanal de tropas (Duplica producción)',
-        strategicTip: 'Esencial en Semana 2 o 3 para mantener superioridad numérica en masa de campeones y ángeles.'
+        defenseBonus: 'Torre Central Solar + foso exterior',
+        growthBonus: '+100% Crecimiento semanal de criaturas (duplica producción)',
+        strategicTip: 'Permite acumular grandes contingentes de Cruzados y Caballeros.'
       }
     ]
   },
 
   // =========================================================================
-  // COFRADÍA DE MAGOS DE LA LUZ - MULTI-NIVEL (1 a 5)
+  // GREMIO DE MAGOS (MAGE GUILD I A V) & CONEXIÓN AL OBSERVATORIO MÁGICO
   // =========================================================================
   {
     id: 'temple-mage-guild',
-    name: 'Cofradía de Magos de la Luz (Mage Guild)',
+    name: 'Gremio de Magos (Mage Guild)',
     nameEn: 'Mage Guild',
     category: 'Magia & Cofradía',
     faction: 'Templo',
     cost: { gold: 2000, wood: 5, ore: 5 },
     prerequisites: [],
     effects: [
-      'Gremio arcano consagrado a la magia de Luz, Fuego y Éter.',
-      'Enseña hechizos progresivamente a los héroes visitantes a lo largo de 5 niveles.',
-      'Recarga el maná del héroe visitante al 100% al finalizar el turno en la ciudad.'
+      'Gremio sacerdotal de la Luz interconectado con la red del Observatorio Mágico (Celestial Observatory).',
+      'Desbloquea hechizos de Tiers 1 a 5 en el Observatorio Mágico del reino, con alta afinidad hacia la Escuela de Luz (Daylight Magic).',
+      'Cualquier héroe que visite la ciudad aprende todos los hechizos desbloqueados y recarga su maná al 100%.'
     ],
-    strategicTip: 'El Nivel 1 es requisito para la Ciudadela Solar; el Nivel 2 es requisito para el Portal Celestial (Ángeles).',
-    timingRecommendation: 'Nivel 1 (Semana 1) / Nivel 2 (Día 5-6).',
+    strategicTip: 'Proporciona hechizos esenciales de bendición, sanación y protección divina.',
+    timingRecommendation: 'Nivel 1 (Semana 1) / Nivel 2 (Día 5-6) / Niveles 3-5 (Semanas 2-4).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel 1: Cofradía Menor',
+        name: 'Gremio de Magos Nivel 1',
         nameEn: 'Mage Guild Level 1',
         cost: { gold: 2000, wood: 5, ore: 5 },
         prerequisites: [],
-        effects: ['Enseña 5 hechizos de Nivel 1 (Bendición, Flecha Mágica, Escudo Sagrado, etc.).', 'Otorga Libro de Hechizos a los héroes visitantes si no lo poseen.'],
-        strategicTip: 'Requisito para moradas intermedias y Ciudadela Cívica.'
+        effects: ['Desbloquea hechizos de Nivel 1 en el Observatorio Mágico.', 'Otorga Libro de Hechizos y recarga maná al 100%.'],
+        strategicTip: 'Requisito para la Basílica del Umbral (Tier 4).'
       },
       {
         level: 2,
-        name: 'Nivel 2: Cofradía Media',
+        name: 'Gremio de Magos Nivel 2',
         nameEn: 'Mage Guild Level 2',
-        cost: { gold: 1000, wood: 5, ore: 5, gems: 4 },
-        prerequisites: ['Nivel 1: Cofradía Menor'],
-        effects: ['Enseña 4 hechizos de Nivel 2 (Celeridad, Rayo de Luz, Curación, etc.).', 'Requisito para el Portal Celestial (Tier 7).'],
-        strategicTip: 'Construir antes del Día 6 si vas a rushear Ángeles.'
+        cost: { gold: 1000, wood: 5, ore: 5, crystal: 4 },
+        prerequisites: ['Gremio de Magos Nivel 1'],
+        effects: ['Desbloquea hechizos de Nivel 2 en el Observatorio Mágico.'],
+        strategicTip: 'Acceso a bendiciones mayores y curación grupal.'
       },
       {
         level: 3,
-        name: 'Nivel 3: Cofradía Superior',
+        name: 'Gremio de Magos Nivel 3',
         nameEn: 'Mage Guild Level 3',
-        cost: { gold: 1000, wood: 5, ore: 5, gems: 6 },
-        prerequisites: ['Nivel 2: Cofradía Media'],
-        effects: ['Enseña 3 hechizos de Nivel 3 (Bola de Fuego, Cegar, Piel de Piedra, etc.).'],
-        strategicTip: 'Otorga acceso a hechizos de control de masas cruciales.'
+        cost: { gold: 1000, wood: 5, ore: 5, crystal: 6 },
+        prerequisites: ['Gremio de Magos Nivel 2'],
+        effects: ['Desbloquea hechizos de Nivel 3 de las escuelas canónicas en el Observatorio Mágico.'],
+        strategicTip: 'Potencia los milagros de la Luz en batallas de asedio.'
       },
       {
         level: 4,
-        name: 'Nivel 4: Círculo de Archimago',
+        name: 'Gremio de Magos Nivel 4',
         nameEn: 'Mage Guild Level 4',
-        cost: { gold: 1000, wood: 5, ore: 5, gems: 8 },
-        prerequisites: ['Nivel 3: Cofradía Superior'],
-        effects: ['Enseña 2 hechizos de Nivel 4 (Lluvia de Meteoros, Resurrección Menor, etc.).'],
-        strategicTip: 'Resurrección y hechizos de asedio devastadores.'
+        cost: { gold: 1000, wood: 5, ore: 5, crystal: 8 },
+        prerequisites: ['Gremio de Magos Nivel 3'],
+        effects: ['Desbloquea hechizos mayores de Nivel 4 en el Observatorio Mágico.'],
+        strategicTip: 'Hechizos sagrados de resurrección y escudos divinos.'
       },
       {
         level: 5,
-        name: 'Nivel 5: Sanctasanctórum Arcana',
+        name: 'Gremio de Magos Nivel 5',
         nameEn: 'Mage Guild Level 5',
-        cost: { gold: 1000, wood: 5, ore: 5, gems: 10 },
-        prerequisites: ['Nivel 4: Círculo de Archimago'],
-        effects: ['Enseña 2 hechizos de Nivel 5 de máximo poder (Resurrección Suprema, Ira Solar, etc.).'],
-        strategicTip: 'Poder arcano absoluto para late-game.'
+        cost: { gold: 1000, wood: 5, ore: 5, crystal: 10 },
+        prerequisites: ['Gremio de Magos Nivel 4'],
+        effects: ['Desbloquea hechizos supremos de Nivel 5 de Luz y Primigenia.'],
+        strategicTip: 'Milagros supremos que deciden el resultado de la partida.'
       }
     ]
   },
 
   // =========================================================================
-  // SERVICIOS CÍVICOS & ECONOMÍA
+  // SERVICIOS CÍVICOS, COMERCIO Y DEPÓSITOS
   // =========================================================================
   {
     id: 'temple-tavern',
-    name: 'Taberna Sagrada (Tavern)',
+    name: 'Taberna (Tavern)',
     nameEn: 'Tavern',
     category: 'Cívica y Economía',
     faction: 'Templo',
     cost: { gold: 500, wood: 5 },
     prerequisites: [],
     effects: [
-      'Aumenta la moral de las tropas de la guarnición en +1.',
-      'Permite contratar nuevos héroes para explorar el mapa, recolectar recursos y liderar ejércitos.',
-      'Desbloquea la Ventana de Rumores y el Ladrón de la Taberna con información de espionaje.'
+      'Aumenta la moral de la guarnición en +1.',
+      'Permite reclutar héroes adicionales (Caballeros y Clérigos) para acelerar la recogida de cofres y minas.',
+      'Permite escuchar rumores e informes del reino.'
     ],
-    strategicTip: 'Construir el Día 1 en casi todas las aperturas para reclutar un segundo héroe recolector inmediatamente.',
+    strategicTip: 'Construir el Día 1 para reclutar un segundo héroe de inmediato.',
     timingRecommendation: 'Día 1.',
   },
   {
     id: 'temple-marketplace',
-    name: 'Mercado del Templo (Marketplace)',
+    name: 'Mercado (Marketplace)',
     nameEn: 'Marketplace',
     category: 'Cívica y Economía',
     faction: 'Templo',
     cost: { gold: 500, wood: 5 },
-    prerequisites: [],
+    prerequisites: ['Taberna (Tavern)'],
     effects: [
-      'Permite intercambiar recursos y oro en el mercado del reino.',
-      'Cada mercado adicional en tu imperio mejora las tasas de conversión.',
-      'Permite enviar tributos y recursos a aliados en partidas multijugador.'
+      'Permite intercambiar recursos y oro en el mercado de la ciudad.',
+      'Las tasas de intercambio mejoran conforme el jugador controla más Mercados en su reino.',
+      'Permite convertir recursos secundarios en Cristales o Gemas para la Forja Radiante.'
     ],
-    strategicTip: 'Construir en Semana 1 para canjear recursos sobrantes por Gemas y Oro para el Portal Celestial.',
+    strategicTip: 'Construir en Semana 1 para financiar las moradas de ángeles y caballería.',
     timingRecommendation: 'Semana 1 (Día 3-5).',
   },
   {
-    id: 'temple-alchemical-depot',
-    name: 'Depósito Alquímico Sagrado (Alchemic Depot)',
-    nameEn: 'Alchemic Depot',
+    id: 'temple-artifact-merchant',
+    name: 'Comerciante de Artefactos (Artifact Merchant)',
+    nameEn: 'Artifact Merchant',
     category: 'Cívica y Economía',
     faction: 'Templo',
-    cost: { gold: 0, gems: 3, crystal: 3, mercury: 3 },
-    prerequisites: ['Mercado del Templo (Marketplace)'],
+    cost: { gold: 2000, wood: 5, ore: 5 },
+    prerequisites: ['Mercado (Marketplace)'],
     effects: [
-      'Genera +1 Gema diaria de forma pasiva (recurso raro principal del Templo).',
-      'Reduce la dependencia de minas de gemas exteriores para el mantenimiento de Ángeles y Campeones.'
+      'Establece una tienda permanente de reliquias y artefactos sagrados en la ciudad.',
+      'Permite comprar y vender artefactos de diversos tiers para equipar a los paladines y clérigos del Templo.'
     ],
-    strategicTip: 'Construir tan pronto tengas 3 de cada recurso raro secundario para asegurar gemas continuas.',
+    strategicTip: 'Permite adquirir reliquias que potencian la moral o la magia de Luz de tu comandante principal.',
     timingRecommendation: 'Semana 2.',
   },
   {
-    id: 'temple-blacksmith',
-    name: 'Herrería Sagrada (Blacksmith)',
-    nameEn: 'Blacksmith',
+    id: 'temple-resource-silo',
+    name: 'Silo de Recursos (Resource Silo)',
+    nameEn: 'Resource Silo',
     category: 'Cívica y Economía',
     faction: 'Templo',
-    cost: { gold: 1000, wood: 5 },
-    prerequisites: [],
+    cost: { gold: 0, gems: 3, mercury: 3 },
+    prerequisites: ['Mercado (Marketplace)', 'Banco (Bank)'],
     effects: [
-      'Permite adquirir la Tienda de Primeros Auxilios / Botiquín Sagrado (First Aid Tent) y la Balista Bendecida para el héroe por 2.500 de oro.',
-      'El Botiquín cura 50-100 PV por turno a la unidad aliada más dañada e incluso puede resucitar miembros caídos con la habilidad de Primeros Auxilios.',
-      'Aumenta la durabilidad de las armaduras del ejército del Templo en un +1 Defensa.'
+      'Genera +1 Cristal diario de forma pasiva (recurso raro principal del Templo).',
+      'Asegura el suministro continuo de cristales para la Forja Radiante y el Gremio de Magos.'
     ],
-    strategicTip: 'Esencial para aperturas de creeping con Paladines y Cruzados, garantizando 0 bajas mediante curación continua.',
-    timingRecommendation: 'Día 2-4.',
+    strategicTip: 'Requiere Mercado y Banco. Construir en cuanto se tengan 3 de cada recurso raro secundario para estabilizar la economía de cristales.',
+    timingRecommendation: 'Semana 2.',
+  },
+  {
+    id: 'temple-alchemical-silo',
+    name: 'Silo Alquímico (Alchemic Silo)',
+    nameEn: 'Alchemic Silo',
+    category: 'Cívica y Economía',
+    faction: 'Templo',
+    cost: { gold: 2000, ore: 5, crystal: 2 },
+    prerequisites: ['Silo de Recursos (Resource Silo)'],
+    effects: [
+      'Produce Polvo Alquímico (Alchemical Dust) diariamente.',
+      'El Polvo Alquímico es el recurso canónico esencial de Olden Era necesario para ascender moradas a niveles magistrales y potenciar hechizos en el Observatorio Mágico.'
+    ],
+    strategicTip: 'Requiere el Silo de Recursos. Vital para desbloquear las mejoras maestras de Justicieros y Arcángeles.',
+    timingRecommendation: 'Semana 2.',
   },
 
   // =========================================================================
-  // MORADAS DE CRIATURAS (TIER 1 A 7) CON MEJORAS Y DOBLE RAMA
+  // MORADAS DE CRIATURAS (TIER 1 A 7) CANÓNICAS DE OLDEN ERA
   // =========================================================================
   {
-    id: 'temple-barracks',
-    name: 'Barracones (Barracks)',
-    nameEn: 'Barracks',
+    id: 'temple-garrison',
+    name: 'Guarnición (Garrison)',
+    nameEn: 'Garrison',
     category: 'Moradas de Criaturas',
     faction: 'Templo',
     tier: 1,
-    cost: { gold: 1250, wood: 5 },
-    dwellingUpgradeCost: { gold: 1000, wood: 5 },
-    prerequisites: ['Fortificaciones I (Fuerte)'],
-    unitRecruitedBase: 'Miliciano (Militia)',
-    unitRecruited: 'Miliciano / Espadachín de la Fe',
+    dwellingTier: 1,
+    cost: { gold: 500, ore: 5 },
+    dwellingUpgradeCost: { gold: 1000, ore: 5 },
+    prerequisites: ['Fortificaciones (Fortifications)'],
+    unitRecruitedBase: 'Guardia (Guard)',
+    unitRecruited: 'Guardia / Espadachín / Alabardero Real',
     unitUpgrades: {
-      branchA: 'Soldado de Infantería / Escudero (Escudo reflectante y guardia de choque)',
-      branchB: 'Fanático Devoto (Ataque frenético con bonificación de moral divina)',
+      branchA: 'Espadachín (Armadura pesada y formación de escudo con reducción de daño a distancia)',
+      branchB: 'Alabardero Real (Mayor alcance de ataque y bonificación de daño contra caballería)',
       branchADetails: {
-        unitName: 'Escudero de la Fe (Shieldbearer)',
-        role: 'Tanque Protector de Línea Frontal',
-        keyAbilities: ['Postura de Bloqueo (-30% daño a distancia)', 'Intercepción de Aliados'],
-        statsBonus: '+2 Defensa, +3 Vida'
+        unitName: 'Espadachín',
+        nameEn: 'Swordsman',
+        role: 'Línea de Escudo Defensiva',
+        keyAbilities: ['Muro de Escudos (-25% daño de proyectiles)', 'Guardia Férrea'],
+        statsBonus: '+3 Defensa, +4 Vida'
       },
       branchBDetails: {
-        unitName: 'Fanático Devoto (Zealot Fanatic)',
-        role: 'Asaltante Ofensivo Rápido',
-        keyAbilities: ['Fervor Sagrado (+20% daño si la moral es alta)', 'Contraataque Feroz'],
+        unitName: 'Alabardero Real',
+        nameEn: 'Royal Halberdier',
+        role: 'Infantería Anticarro',
+        keyAbilities: ['Pica contra Carga (Doble daño frente a unidades grandes/rápidas)', 'Alcance de Lanza'],
         statsBonus: '+3 Ataque, +1 Iniciativa'
       }
     },
     effects: [
-      'Recluta tropas de Tier 1 de infantería para la primera línea.',
-      'Producción base: 14 unidades por semana (+50% con Ciudadela, +100% con Castillo).'
+      'Recluta la infantería básica de Tier 1 del Templo.',
+      'Producción base: 14 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Construcción obligatoria en Día 1 o Día 2 para iniciar la limpieza de mapas tempranos.',
-    timingRecommendation: 'Día 1.',
+    strategicTip: 'Infantería barata y muy resistente cuando se activa el muro de escudos.',
+    timingRecommendation: 'Día 1-2.',
   },
   {
-    id: 'temple-shooting-range',
-    name: 'Campo de Tiro (Shooting Range)',
-    nameEn: 'Shooting Range',
+    id: 'temple-mews',
+    name: 'Halconera (Mews)',
+    nameEn: 'Mews',
     category: 'Moradas de Criaturas',
     faction: 'Templo',
     tier: 2,
-    cost: { gold: 1750, wood: 5, ore: 5 },
-    dwellingUpgradeCost: { gold: 1250, wood: 5 },
-    prerequisites: ['Barracones (Barracks)'],
-    unitRecruitedBase: 'Arquero Novicio (Archer)',
-    unitRecruited: 'Arquero / Ballestero del Templo',
+    dwellingTier: 2,
+    cost: { gold: 1000, wood: 5 },
+    dwellingUpgradeCost: { gold: 1000, wood: 5 },
+    prerequisites: ['Guarnición (Garrison)'],
+    unitRecruitedBase: 'Sabueso de Caza (War Hound)',
+    unitRecruited: 'Sabueso de Caza / Sabueso de Guerra / Vigilante Alado',
     unitUpgrades: {
-      branchA: 'Tirador de Élite (Doble disparo a distancia)',
-      branchB: 'Ballestero Pesado (Ignora 50% de la armadura enemiga)',
+      branchA: 'Sabueso de Guerra (Carga rápida que desgarra armadura enemiga)',
+      branchB: 'Vigilante Alado (Acompañante rapaz con iniciativa ultra alta y visión ampliada)',
       branchADetails: {
-        unitName: 'Tirador de Élite (Marksman)',
-        role: 'Daño Constante a Distancia',
-        keyAbilities: ['Doble Disparo en rango medio/corto', 'Ojo Avizor (+2 Alcance)'],
-        statsBonus: '+2 Daño Máximo, +1 Iniciativa'
+        unitName: 'Sabueso de Guerra',
+        nameEn: 'War Hound',
+        role: 'Hostigador Rápido',
+        keyAbilities: ['Desgarre de Armadura', 'Carga Veloz (+2 casillas en primer turno)'],
+        statsBonus: '+3 Ataque, +2 Velocidad'
       },
       branchBDetails: {
-        unitName: 'Ballestero Pesado (Heavy Crossbowman)',
-        role: 'Anti-Acorazados y Destructor de Colosos',
-        keyAbilities: ['Disparo Perforante (Ignora 50% armadura)', 'Disparo sin penalizador en cuerpo a cuerpo'],
-        statsBonus: '+3 Ataque, +2 Defensa'
+        unitName: 'Vigilante Alado',
+        nameEn: 'Winged Watcher',
+        role: 'Explorador y Anulador de Iniciativa',
+        keyAbilities: ['Hostigamiento Aéreo', 'Ataque y Retirada'],
+        statsBonus: '+2 Defensa, +3 Iniciativa'
       }
     },
     effects: [
-      'Recluta tropas de Tier 2 de proyectiles para hostigar a distancia.',
-      'Producción base: 10 unidades por semana.'
+      'Recluta las bestias y exploradores de Tier 2.',
+      'Producción base: 9 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Esencial para limpiar criaturas neutrales lentas sin sufrir bajas tempranas.',
-    timingRecommendation: 'Día 2.',
+    strategicTip: 'Unidades veloces para trabar tiradores enemigos en el primer asalto.',
+    timingRecommendation: 'Día 2-3.',
   },
   {
-    id: 'temple-belfry',
-    name: 'Campanario Sagrado (Belfry)',
-    nameEn: 'Belfry',
+    id: 'temple-griffin-rookery',
+    name: 'Nido de Grifos (Griffin Rookery)',
+    nameEn: 'Griffin Rookery',
     category: 'Moradas de Criaturas',
     faction: 'Templo',
     tier: 3,
-    cost: { gold: 2000, ore: 5, gems: 3 },
-    dwellingUpgradeCost: { gold: 1500, ore: 5, gems: 2 },
-    prerequisites: ['Campo de Tiro (Shooting Range)'],
-    unitRecruitedBase: 'Gárgola del Campanario / Celador (Ward)',
-    unitRecruited: 'Celador Alado / Grifo',
+    dwellingTier: 3,
+    cost: { gold: 1500, ore: 5 },
+    dwellingUpgradeCost: { gold: 1500, ore: 5 },
+    prerequisites: ['Halconera (Mews)'],
+    unitRecruitedBase: 'Grifo (Griffin)',
+    unitRecruited: 'Grifo / Grifo Real / Grifo Sagrado',
     unitUpgrades: {
-      branchA: 'Gárgola Vengativa (Contraataques infinitos y vuelo veloz)',
-      branchB: 'Ángel de Piedra (Aura protectora que reduce el daño recibido por tropas adyacentes)',
+      branchA: 'Grifo Real (Contragolpes infinitos y picado aéreo)',
+      branchB: 'Grifo Sagrado (Aura sagrada que protege a tropas aliadas adyacentes de proyectiles)',
       branchADetails: {
-        unitName: 'Celador Vengativo (Avenging Ward)',
-        role: 'Volador de Intercepción Rápida',
-        keyAbilities: ['Contraataque Ilimitado', 'Inmunidad a Venenos'],
-        statsBonus: '+2 Velocidad, +2 Ataque'
+        unitName: 'Grifo Real',
+        nameEn: 'Royal Griffin',
+        role: 'Volador de Contragolpe Total',
+        keyAbilities: ['Contragolpes Ilimitados', 'Picado en Vuelo'],
+        statsBonus: '+3 Ataque, +2 Defensa, +8 Vida'
       },
       branchBDetails: {
-        unitName: 'Custodio Pétreo (Stone Custodian)',
-        role: 'Baluarte Defensivo de Apoyo',
-        keyAbilities: ['Aura de Bastión (+3 Def a aliados adyacentes)', 'Piel de Mármol'],
-        statsBonus: '+4 Defensa, +6 Vida'
+        unitName: 'Grifo Sagrado',
+        nameEn: 'Sacred Griffin',
+        role: 'Guardián Aéreo de la Luz',
+        keyAbilities: ['Escudo de Plumas Radiantes', 'Inmunidad a Miedo'],
+        statsBonus: '+4 Defensa, +1 Moral'
       }
     },
     effects: [
-      'Recluta criaturas voladoras de Tier 3 con alta movilidad de asedio.',
-      'Producción base: 8 unidades por semana.'
+      'Recluta los voladores pesados de Tier 3.',
+      'Producción base: 6 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Permite saltar murallas en asedios y cazar arqueros enemigos en el Turno 1.',
-    timingRecommendation: 'Día 3.',
+    strategicTip: 'El Grifo Real con contragolpes ilimitados es letal cuando se lanza contra grupos masivos de tropas débiles.',
+    timingRecommendation: 'Día 3-4.',
   },
   {
-    id: 'temple-monastery',
-    name: 'Monasterio (Monastery)',
-    nameEn: 'Monastery',
+    id: 'temple-threshold-basilica',
+    name: 'Basílica del Umbral (Threshold Basilica)',
+    nameEn: 'Threshold Basilica',
     category: 'Moradas de Criaturas',
     faction: 'Templo',
     tier: 4,
-    cost: { gold: 2500, wood: 5, gems: 5 },
-    dwellingUpgradeCost: { gold: 2000, gems: 3 },
-    prerequisites: ['Campanario Sagrado (Belfry)', 'Cofradía de Magos Nivel 1 (Mage Guild Level 1)'],
-    unitRecruitedBase: 'Clérigo (Cleric)',
-    unitRecruited: 'Clérigo / Monje Radiante',
+    dwellingTier: 4,
+    cost: { gold: 2500, wood: 5, ore: 5 },
+    dwellingUpgradeCost: { gold: 2000, wood: 5, crystal: 2 },
+    prerequisites: ['Nido de Grifos (Griffin Rookery)', 'Gremio de Magos (Mage Guild)'],
+    unitRecruitedBase: 'Inquisidor (Inquisitor)',
+    unitRecruited: 'Inquisidor / Gran Inquisidor / Purificador de la Luz',
     unitUpgrades: {
-      branchA: 'Sacerdote Solar (Ataque a distancia que cura a aliados)',
-      branchB: 'Inquisidor Marcial (Combate cuerpo a cuerpo sin penalizadores con purga de maleficios)',
+      branchA: 'Gran Inquisidor (Tirador sagrado sin penalización de melé que disipa magia negativa)',
+      branchB: 'Purificador de la Luz (Lanza proyectiles de fuego celestial con daño en área de cruz)',
       branchADetails: {
-        unitName: 'Sacerdote Solar (Sun Priest)',
-        role: 'Tirador y Sanador de Soporte',
-        keyAbilities: ['Rayo Sanador (Cura 60 HP a aliados)', 'Disparo Sagrado'],
-        statsBonus: '+2 Poder Mágico, +3 Ataque a Distancia'
+        unitName: 'Gran Inquisidor',
+        nameEn: 'Grand Inquisitor',
+        role: 'Tirador Mágico de Soporte',
+        keyAbilities: ['Sin penalización cuerpo a cuerpo', 'Disipar Maldiciones en aliados'],
+        statsBonus: '+3 Ataque, +4 Defensa, +12 Vida'
       },
       branchBDetails: {
-        unitName: 'Inquisidor Marcial (Inquisitor Warden)',
-        role: 'Antimagia y Purga de Estados',
-        keyAbilities: ['Purga de Beneficios Enemigos', 'Sin penalización en combate cuerpo a cuerpo'],
-        statsBonus: '+3 Ataque, +3 Defensa'
+        unitName: 'Purificador de la Luz',
+        nameEn: 'Light Purifier',
+        role: 'Artillero Celestial de Área',
+        keyAbilities: ['Fuego Sagrado en Cruz (Daña en área)', 'Daño adicional contra No-Muertos (+50%)'],
+        statsBonus: '+5 Ataque, +1 Iniciativa'
       }
     },
     effects: [
-      'Recluta tropas mágicas de Tier 4 con facultades de daño a distancia y bendiciones.',
-      'Producción base: 5 unidades por semana.'
+      'Recluta los tiradores sagrados de Tier 4 del Templo.',
+      'Producción base: 4 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Construir tras asegurar la Cofradía de Magos Nivel 1 en el Día 4.',
-    timingRecommendation: 'Día 4.',
+    strategicTip: 'Núcleo de daño a distancia del Templo; letal contra criaturas de la Necrópolis y el Cisma.',
+    timingRecommendation: 'Día 4-5.',
   },
   {
-    id: 'temple-inquisition-hall',
-    name: 'Salón de la Inquisición (Inquisition Hall)',
-    nameEn: 'Inquisition Hall',
+    id: 'temple-sundrop-chapel',
+    name: 'Capilla de la Gota Solar (Sundrop Chapel)',
+    nameEn: 'Sundrop Chapel',
     category: 'Moradas de Criaturas',
     faction: 'Templo',
     tier: 5,
-    cost: { gold: 4000, wood: 5, ore: 10 },
-    dwellingUpgradeCost: { gold: 2500, ore: 5, gems: 3 },
-    prerequisites: ['Monasterio (Monastery)'],
-    unitRecruitedBase: 'Cruzado Pesado (Crusader)',
-    unitRecruited: 'Cruzado / Paladín Sagrado',
+    dwellingTier: 5,
+    cost: { gold: 3500, ore: 5, crystal: 4 },
+    dwellingUpgradeCost: { gold: 3000, ore: 5, crystal: 3 },
+    prerequisites: ['Basílica del Umbral (Threshold Basilica)'],
+    unitRecruitedBase: 'Tejedor de Luz (Lightweaver)',
+    unitRecruited: 'Tejedor de Luz / Clérigo Solar / Canalizador Radiante',
     unitUpgrades: {
-      branchA: 'Paladín Justiciero (Doble golpe y aura de resistencia mágica)',
-      branchB: 'Templario Inquebrantable (Inmunidad al miedo, aturdimiento y control mental)',
+      branchA: 'Clérigo Solar (Lanza bendiciones y cura a aliados caídos cada ronda)',
+      branchB: 'Canalizador Radiante (Haz solar continuo que ciega y daña en línea recta)',
       branchADetails: {
-        unitName: 'Paladín Justiciero (Righteous Paladin)',
-        role: 'Atacante Pesado de Doble Golpe',
-        keyAbilities: ['Doble Ataque en cada acometida', 'Aura de Resistencia Sagrada (+20% vs Magia)'],
-        statsBonus: '+3 Ataque, +2 Daño Base'
+        unitName: 'Clérigo Solar',
+        nameEn: 'Solar Cleric',
+        role: 'Sanador y Buffer Sagrado',
+        keyAbilities: ['Rayo Sanador Divino', 'Aura de Bendición Permanente'],
+        statsBonus: '+4 Defensa, +15 Vida'
       },
       branchBDetails: {
-        unitName: 'Templario Inquebrantable (Steadfast Templar)',
-        role: 'Baluarte Implacable Anti-Control',
-        keyAbilities: ['Inmunidad a Cegar, Miedo y Control Mental', 'Provocación a Unidades Adyacentes'],
-        statsBonus: '+5 Defensa, +12 Vida'
+        unitName: 'Canalizador Radiante',
+        nameEn: 'Radiant Channeler',
+        role: 'Ofensivo de Haz Solar',
+        keyAbilities: ['Haz de Luz Penetrante', 'Destello Cegador (Prob. de cegar objetivo)'],
+        statsBonus: '+5 Ataque, +2 Iniciativa'
       }
     },
     effects: [
-      'Recluta unidades pesadas de choque de Tier 5.',
-      'Producción base: 4 unidades por semana.'
+      'Recluta los hechiceros y sacerdotes solares de Tier 5.',
+      'Producción base: 3 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'El núcleo de choque cuerpo a cuerpo del Templo; arrasa con tropas intermedias.',
-    timingRecommendation: 'Día 5.',
+    strategicTip: 'Mantiene vivo al ejército mediante sanación pasiva y desactiva colosos rivales con ceguera.',
+    timingRecommendation: 'Día 6 o inicio de Semana 2.',
   },
   {
-    id: 'temple-champions-hall',
-    name: 'Salón de Campeones (Champions Hall)',
-    nameEn: 'Champions Hall',
+    id: 'temple-hippodrome',
+    name: 'Hipódromo (Hippodrome)',
+    nameEn: 'Hippodrome',
     category: 'Moradas de Criaturas',
     faction: 'Templo',
     tier: 6,
-    cost: { gold: 4000, wood: 10, ore: 5, gems: 10 },
-    dwellingUpgradeCost: { gold: 3000, gems: 5 },
-    prerequisites: ['Salón de la Inquisición (Inquisition Hall)'],
-    unitRecruitedBase: 'Caballero / Campeón (Champion)',
-    unitRecruited: 'Campeón / Caballero de la Orden',
+    dwellingTier: 6,
+    cost: { gold: 5000, wood: 10, ore: 10 },
+    dwellingUpgradeCost: { gold: 4000, wood: 5, crystal: 4 },
+    prerequisites: ['Capilla de la Gota Solar (Sundrop Chapel)'],
+    unitRecruitedBase: 'Caballero (Knight)',
+    unitRecruited: 'Caballero / Caballero del Templo / Justiciero Sagrado',
     unitUpgrades: {
-      branchA: 'Caballero de la Justa (Bonificación masiva de daño por casillas recorridas en carga)',
-      branchB: 'Cruzado Sagrado (Aura de moral para todas las tropas aliadas en combate)',
+      branchA: 'Caballero del Templo (Carga de caballería que escala con la distancia recorrida)',
+      branchB: 'Justiciero Sagrado (Aura de venganza: inflige daño sagrado de represalia al recibir impactos)',
       branchADetails: {
-        unitName: 'Caballero de la Justa (Jousting Knight)',
-        role: 'Caballería de Carga Destructiva',
-        keyAbilities: ['Carga de Lanza (+10% daño adicional por cada casilla recorrida antes de impactar)'],
-        statsBonus: '+2 Velocidad, +4 Ataque en Carga'
+        unitName: 'Caballero del Templo',
+        nameEn: 'Temple Knight',
+        role: 'Caballería Pesada de Choque',
+        keyAbilities: ['Carga de Lanza Devastadora (+5% daño por casilla recorrida)', 'Pisotón Ecuestre'],
+        statsBonus: '+6 Ataque, +4 Defensa, +25 Vida'
       },
       branchBDetails: {
-        unitName: 'Cruzado de la Orden (Order Crusader)',
-        role: 'Líder Táctico y Moralizador',
-        keyAbilities: ['Aura de Inspiración (+2 Moral a todo el ejército)', 'Carga Imparable (No sufre represalia en el primer turno de carga)'],
-        statsBonus: '+4 Defensa, +15 Vida'
+        unitName: 'Justiciero Sagrado',
+        nameEn: 'Holy Justiciar',
+        role: 'Vindicador Acorazado',
+        keyAbilities: ['Retribución Radiante (Daño reflejado)', 'Inmunidad a Ralentización'],
+        statsBonus: '+7 Ataque, +2 Velocidad'
       }
     },
     effects: [
-      'Recluta caballería pesada de Tier 6 de impacto demoledor.',
-      'Producción base: 2 unidades por semana.'
+      'Recluta la caballería de choque de élite de Tier 6.',
+      'Producción base: 2 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Ideal para eliminar unidades enemigas clave en el primer turno de combate con su bonificación por carga.',
-    timingRecommendation: 'Día 6.',
+    strategicTip: 'Cruza el campo de batalla de lado a lado en un turno; maximiza la distancia recorrida para multiplicar el daño de carga.',
+    timingRecommendation: 'Semana 2.',
   },
   {
-    id: 'temple-celestial-portal',
-    name: 'Portal Celestial (Celestial Portal)',
-    nameEn: 'Celestial Portal',
+    id: 'temple-radiant-forge',
+    name: 'Forja Radiante (Radiant Forge)',
+    nameEn: 'Radiant Forge',
     category: 'Moradas de Criaturas',
     faction: 'Templo',
     tier: 7,
-    cost: { gold: 15000, wood: 10, ore: 10, gems: 15 },
-    dwellingUpgradeCost: { gold: 10000, gems: 10 },
-    prerequisites: ['Salón de Campeones (Champions Hall)', 'Cofradía de Magos Nivel 2 (Mage Guild Level 2)'],
+    dwellingTier: 7,
+    cost: { gold: 10000, ore: 15, crystal: 10 },
+    dwellingUpgradeCost: { gold: 8000, ore: 10, crystal: 8 },
+    prerequisites: ['Hipódromo (Hippodrome)', 'Gremio de Magos (Mage Guild)'],
     unitRecruitedBase: 'Ángel (Angel)',
-    unitRecruited: 'Ángel / Arcángel Celestial',
+    unitRecruited: 'Ángel / Arcángel / Serafín de la Aurora',
     unitUpgrades: {
-      branchA: 'Arcángel Supremo (Resurrección de aliados caídos y +1 a la moral de todo el ejército)',
-      branchB: 'Serafín Vengador (Daño radiante masivo en área y vuelo con espada de fuego)',
+      branchA: 'Arcángel (Resurrección de tropas caídas una vez por combate y máxima moral)',
+      branchB: 'Serafín de la Aurora (Espada de fuego divino que inflige daño sagrado verdadero y vuelo supersónico)',
       branchADetails: {
-        unitName: 'Arcángel Supremo (Archangel)',
-        role: 'Coloso Sagrado y Resucitador Supremo',
-        keyAbilities: ['Resurrección Divina (Revive 100 HP x número de Arcángeles una vez por batalla)', '+1 Moral Permanente a todo el ejército', 'Vuelo Iluminado'],
-        statsBonus: '+5 Ataque, +5 Defensa, +50 Vida, +3 Velocidad'
+        unitName: 'Arcángel',
+        nameEn: 'Archangel',
+        role: 'Coloso Celestial de Resurrección',
+        keyAbilities: ['Resurrección Divina', 'Moral Máxima (+1 permanente al ejército)', 'Espada Sagrada'],
+        statsBonus: '+10 Ataque, +10 Defensa, +100 Vida'
       },
       branchBDetails: {
-        unitName: 'Serafín Vengador (Avenging Seraph)',
-        role: 'Coloso Ofensivo de Fuego Divino',
-        keyAbilities: ['Espada de Llamas Radiantes (Daño sagrado en arco frontal de 3 casillas)', 'Aura de Castigo (+15% daño contra no-muertos y demonios)'],
-        statsBonus: '+8 Ataque, +3 Iniciativa, +40 Vida'
+        unitName: 'Serafín de la Aurora',
+        nameEn: 'Dawn Seraph',
+        role: 'Aniquilador Radiante',
+        keyAbilities: ['Daño Sagrado Puro (Ignora 50% de defensa)', 'Llama de Purificación', 'Velocidad Celestial'],
+        statsBonus: '+12 Ataque, +4 Iniciativa, +80 Vida'
       }
     },
     effects: [
-      'Recluta las criaturas legendarias de Tier 7 del Templo.',
-      'Producción base: 1 unidad por semana (+1 con Castillo).'
+      'Recluta los Ángeles supremos de Tier 7 del Templo.',
+      'Producción base: 1 unidad por semana (+1 con Fortificaciones III).'
     ],
-    strategicTip: 'El objetivo definitivo del Rush Semana 1. Los Arcángeles garantizan 0 pérdidas gracias a su habilidad de Resurrección.',
-    timingRecommendation: 'Semana 1 (Día 7) o Semana 2 (Día 1).',
+    strategicTip: 'El Arcángel puede revivir Justicieros o Cruzados caídos en el combate final, evitando pérdidas irremplazables.',
+    timingRecommendation: 'Final de Semana 1 o inicio de Semana 2.',
   },
 
   // =========================================================================
-  // ESTRUCTURAS ESPECIALES DE FACCIÓN (TEMPLO)
+  // ESTRUCTURAS ESPECIALES DE FACCIÓN (TEMPLO) CONFIRMADAS DE OLDEN ERA
   // =========================================================================
   {
-    id: 'temple-reliquary',
-    name: 'Relicario de la Luz (Reliquary of Light)',
-    nameEn: 'Reliquary of Light',
+    id: 'temple-scouting-skyship',
+    name: 'Aeronave de Reconocimiento (Scouting Skyship)',
+    nameEn: 'Scouting Skyship',
     category: 'Estructuras Especiales de Facción',
     faction: 'Templo',
     isFactionUnique: true,
-    cost: { gold: 2500, wood: 5, ore: 5, gems: 2 },
-    prerequisites: ['Cofradía de Magos Nivel 1 (Mage Guild Level 1)'],
+    cost: { gold: 2000, wood: 10, crystal: 2 },
+    prerequisites: ['Templo Solar (Ayuntamiento / Alcaldía)'],
     effects: [
-      'Otorga +1 Moral permanente a todas las criaturas del Templo en la provincia.',
-      'Aumenta la probabilidad de ataques de Moral Alta (turnos dobles) en un +15%.'
+      'Disipa permanentemente la niebla de guerra en un radio de 20 casillas alrededor de la ciudad.',
+      'Permite avistar con antelación cualquier movimiento de ejércitos o héroes rivales en las fronteras de la provincia.'
     ],
-    strategicTip: 'Construir para maximizar la sinergia de moral divina y turnos dobles en batallas decisivas.',
+    strategicTip: 'Otorga una ventaja de información colosal para anticipar emboscadas enemigas.',
     timingRecommendation: 'Semana 2.',
   },
   {
-    id: 'temple-altar-of-glory',
-    name: 'Altar de la Gloria (Altar of Glory)',
-    nameEn: 'Altar of Glory',
+    id: 'temple-guild-six-winds',
+    name: 'Gremio de los Seis Vientos (Guild of Six Winds)',
+    nameEn: 'Guild of Six Winds',
     category: 'Estructuras Especiales de Facción',
     faction: 'Templo',
     isFactionUnique: true,
-    cost: { gold: 2000, ore: 5, gems: 3 },
-    prerequisites: ['Barracones (Barracks)'],
+    cost: { gold: 2500, wood: 5, ore: 5, crystal: 3 },
+    prerequisites: ['Gremio de Magos (Mage Guild)'],
     effects: [
-      'Aumenta la producción semanal de todas las moradas de Tier 1 a 4 en un +15%.',
-      'Reduce en un -10% el coste de reclutamiento en oro de infantes y arqueros.'
+      'Permite a un héroe elegido pasar un día en la ciudad entrenando para recibir un aumento permanente de +1 a un atributo primario (Ataque, Defensa, Poder Mágico o Conocimiento).',
+      'Puede ser utilizado por diferentes héroes aliados a lo largo de la campaña.'
     ],
-    strategicTip: 'Acelera la masa de tropas baratas para sostener múltiples frentes de asedio.',
-    timingRecommendation: 'Semana 2.',
+    strategicTip: 'Ideal para optimizar los atributos del héroe principal antes de los enfrentamientos decisivos.',
+    timingRecommendation: 'Semana 2-3.',
   },
   {
-    id: 'temple-stables',
-    name: 'Establos de Caballería (Stables)',
-    nameEn: 'Stables',
+    id: 'temple-golden-calf',
+    name: 'Becerro de Oro (Golden Calf - Santuario del Grial)',
+    nameEn: 'Golden Calf',
     category: 'Estructuras Especiales de Facción',
     faction: 'Templo',
     isFactionUnique: true,
-    cost: { gold: 2000, wood: 10 },
-    prerequisites: ['Barracones (Barracks)'],
+    cost: { gold: 0 },
+    prerequisites: ['Descubrimiento del Santo Grial (Mirage)'],
     effects: [
-      'Otorga +400 puntos de movimiento terrestre durante toda la semana a cualquier héroe aliado que visite la ciudad.',
-      'Aumenta la producción semanal de Caballeros y Justicieros (Tier 6) en +2 unidades.',
-      'Otorga +1 a la Velocidad en combate a todas las unidades montadas del Templo.'
+      'Estructura suprema del Santo Grial para el Templo (construida al llevar el Grial obtenido del Espejismo en el mapa).',
+      'Genera +5.000 de Oro diario adicional para el reino.',
+      'Aumenta el crecimiento semanal de todas las criaturas del Templo en la ciudad en un +100% adicional.'
     ],
-    strategicTip: 'Crucial para mantener la ventaja logística y de exploración sobre el rival en mapas de gran escala.',
-    timingRecommendation: 'Día 4-6.',
-  },
-  {
-    id: 'temple-lighthouse',
-    name: 'Faro Sagrado (Sacred Lighthouse)',
-    nameEn: 'Sacred Lighthouse',
-    category: 'Estructuras Especiales de Facción',
-    faction: 'Templo',
-    isFactionUnique: true,
-    cost: { gold: 2000, wood: 10, ore: 10 },
-    prerequisites: [],
-    effects: [
-      'Aumenta la velocidad de movimiento de todos los barcos y transporte naval aliado en +500 puntos.',
-      'Dispersa la niebla de guerra en un radio ampliado de +3 casillas alrededor de toda la costa de la provincia.',
-      'Otorga +1 a la Moral a los ejércitos en combate cerca de cuerpos de agua.'
-    ],
-    strategicTip: 'Estructura determinante en mapas de islas o con rutas marítimas clave en Jadame.',
-    timingRecommendation: 'Situacional (Mapas con agua).',
-  },
-  {
-    id: 'temple-bastion-of-the-righteous',
-    name: 'Bastión de Cruzados (Bastion of Crusaders)',
-    nameEn: 'Bastion of Crusaders',
-    category: 'Estructuras Especiales de Facción',
-    faction: 'Templo',
-    isFactionUnique: true,
-    cost: { gold: 2500, ore: 10, gems: 2 },
-    prerequisites: ['Barracones (Barracks)', 'Fortificaciones II (Ciudadela Militar)'],
-    effects: [
-      'Aumenta el crecimiento semanal de Espadachines, Cruzados y Paladines (Tier 5) en +4 unidades.',
-      'Otorga a los Cruzados y Paladines un +15% de armadura frente a proyectiles enemigos y +1 Defensa general.'
-    ],
-    strategicTip: 'Convierte a los Cruzados en un bloque de choque casi indestructible frente a facciones con tiradores.',
-    timingRecommendation: 'Semana 2.',
-  },
-  {
-    id: 'temple-cathedral-of-light',
-    name: 'Catedral de la Luz Eterna (Cathedral of Light - Santo Grial)',
-    nameEn: 'Cathedral of Light',
-    category: 'Estructuras Especiales de Facción',
-    faction: 'Templo',
-    isFactionUnique: true,
-    cost: { gold: 5000, wood: 10, ore: 10, gems: 5 },
-    prerequisites: ['Descubrimiento del Santo Grial', 'Portal Celestial (Celestial Portal)'],
-    effects: [
-      'Estructura Suprema del Grial del Templo.',
-      'Genera +5.000 de Oro diario adicional y +50% al crecimiento de todas las criaturas de la ciudad.',
-      'Otorga Moral Máxima (+3) y +20% de resistencia a la magia a todas las tropas aliadas del reino.'
-    ],
-    strategicTip: 'Convierte tu capital en un bastión inexpugnable e imparable una vez descubierto el Grial.',
-    timingRecommendation: 'Al descubrir el Grial.',
+    strategicTip: 'Convierte la ciudad en una fuente inagotable de oro y Arcángeles.',
+    timingRecommendation: 'Al derrotar el Espejismo (Mirage).',
   },
 ];

@@ -2,206 +2,238 @@ import { TownStructure } from '../../types';
 
 export const GROVE_STRUCTURES: TownStructure[] = [
   // =========================================================================
-  // CENTRO CÍVICO & PALACIO DE GOBIERNO (AYUNTAMIENTO / CAPITOLIO) - MULTI-NIVEL (1 a 4)
+  // CENTRO CÍVICO (AYUNTAMIENTO / ALCALDÍA CANÓNICA - 3 NIVELES)
   // =========================================================================
   {
     id: 'grove-grove-palace',
-    name: 'Palacio de la Arboleda (Ayuntamiento / Capitolio)',
-    nameEn: 'Grove Palace (Town Hall / Capitol)',
+    name: 'Palacio de la Arboleda (Ayuntamiento / Alcaldía - Niveles I, II y III)',
+    nameEn: 'Grove Palace (Town Hall / City Hall - Levels I, II & III)',
     category: 'Cívica y Economía',
     faction: 'Arboleda',
-    cost: { gold: 5000 },
+    cost: { gold: 2500 },
     prerequisites: [],
     effects: [
-      'Sede señorial de los reyes élficos y guardianes del bosque.',
-      'Otorga al reino oro, puntos de ley y puntos de astrología al día. Aumenta el límite de héroes (si lo permite el escenario)',
-      'Se mejora a lo largo de 4 niveles cívicos: Asentamiento (500) -> Alcaldía (1.000) -> Ciudadela Cívica (2.000) -> Capitolio (4.000 Oro/día).'
+      'Sede señorial de los guardianes del bosque y druidas de la Arboleda estructurada en 3 niveles de desarrollo.',
+      'Otorga Oro, Puntos de Ley y Puntos de Astrología diarios incrementales, expandiendo la administración de la ciudad y el límite de héroes activos.',
+      'Al ascender a Nivel II permite elegir una mejora económica especializada (+1.000 Oro, +1.000 Ley o +1.000 Astrología), y el Nivel III (Grove Palace III) consolida la gran metrópolis silvana.'
     ],
-    strategicTip: 'Mejora a Nivel II en el Día 2 para acelerar el desarrollo hacia el Altar de Qilins y el Fénix Mítico.',
-    timingRecommendation: 'Día 2-3 (Nivel II) / Semana 2 (Nivel III) / Semana 3 (Capitolio).',
+    strategicTip: 'Mejora a Nivel II en el Día 2 para acelerar el desarrollo hacia la Guarida del Trueno (Qilins) y corona con Grove Palace III en Semana 2 para sostener los Fénix.',
+    timingRecommendation: 'Día 1 (Nivel I) / Día 2-3 (Nivel II) / Semana 2 (Nivel III).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Asentamiento Silvano (Ayuntamiento)',
+        name: 'Nivel I: Asentamiento Silvano (Town Hall)',
         nameEn: 'Sylvan Settlement (Town Hall)',
-        cost: { gold: 5000 },
+        cost: { gold: 2500 },
         prerequisites: [],
-        effects: ['Otorga al reino 500 de oro, puntos de ley y puntos de astrología al día.', '+1 al límite de héroes.'],
-        bonusIncome: '+500 Oro, Puntos de ley, Puntos de astrología / día',
-        strategicTip: 'Asentamiento inicial básico.'
+        effects: [
+          'Genera 1.000 de Oro, Puntos de Ley y Puntos de Astrología diarios.',
+          'Permite la administración de la ciudad boscosa.'
+        ],
+        bonusIncome: '+1.000 Oro, Puntos de Ley, Puntos de Astrología / día',
+        strategicTip: 'Base cívica inicial de la Arboleda.'
       },
       {
         level: 2,
-        name: 'Nivel II: Palacio de la Arboleda II (Alcaldía)',
+        name: 'Nivel II: Palacio de la Arboleda II (City Hall)',
         nameEn: 'Grove Palace II (City Hall)',
         cost: { gold: 2500, wood: 5, ore: 5 },
-        prerequisites: ['Palacio de la Arboleda (Ayuntamiento / Capitolio)'],
-        effects: ['Otorga al reino 1.000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora económica de nivel 1.'],
-        bonusIncome: '+1.000 Oro, Puntos de ley, Puntos de astrología / día',
-        strategicTip: 'Construir el Día 2 o 3 para asegurar fondos.'
+        prerequisites: ['Mercado (Marketplace)'],
+        effects: [
+          'Otorga 1.000 de Oro, Puntos de Ley y Puntos de Astrología diarios.',
+          'Permite al propietario elegir una de las 3 mejoras económicas de Nivel 2 (+1.000 Oro/día, +1.000 Puntos de Ley/día, o +1.000 Puntos de Astrología/día).'
+        ],
+        bonusIncome: '+1.000 Oro, Puntos de Ley, Puntos de Astrología / día (+ mejora a elección)',
+        strategicTip: 'Construir el Día 2 o 3 para estabilizar las finanzas forestales.'
       },
       {
         level: 3,
-        name: 'Nivel III: Palacio de la Arboleda III (Ciudadela Cívica)',
-        nameEn: 'Grove Palace III (Metropolis Hall)',
+        name: 'Nivel III: Palacio de la Arboleda III (Metropolis)',
+        nameEn: 'Grove Palace III (Metropolis)',
         cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Nivel II: Palacio de la Arboleda II (Alcaldía)'],
-        effects: ['Otorga al reino 2.000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora de nivel 2.'],
-        bonusIncome: '+2.000 Oro, Puntos de ley, Puntos de astrología / día',
-        strategicTip: 'Prioridad al inicio de la Semana 2 para sostener el coste de Qilins y Fénix.'
-      },
-      {
-        level: 4,
-        name: 'Nivel IV: Gran Capitolio del Bosque Primordial (Capitolio)',
-        nameEn: 'Grand Primeval Forest Capitol',
-        cost: { gold: 10000, wood: 15, ore: 15 },
-        prerequisites: ['Nivel III: Palacio de la Arboleda III (Ciudadela Cívica)', 'Fortificaciones II (Ciudadela Militar)'],
+        prerequisites: ['Nivel II: Palacio de la Arboleda II (City Hall)'],
         effects: [
-          'Estructura suprema cívica de la Arboleda. Solo se puede edificar 1 Capitolio por reino/jugador.',
-          'Otorga al reino 4.000 de oro al día, además de bonificación masiva de puntos de ley y astrología.'
+          'Cúspide de la armonía civil y mágica de la Arboleda en Olden Era.',
+          'Otorga 1.000 de Oro, Puntos de Ley y Puntos de Astrología diarios adicionales para el reino.',
+          'Consolida la soberanía del bosque y garantiza el flujo económico para las criaturas míticas de Jadame.'
         ],
-        bonusIncome: '+4.000 Oro, Puntos de ley supremos, Puntos de astrología / día',
-        strategicTip: 'Garantiza el oro necesario para reclutar el ejército de criaturas míticas de la Arboleda.'
+        bonusIncome: '+1.000 Oro, Puntos de Ley, Puntos de Astrología / día adicionales',
+        strategicTip: 'Edificar en Semana 2 para asegurar el continuo reclutamiento de Fénix y Qilins.'
       }
     ]
   },
 
   // =========================================================================
-  // FORTIFICACIONES (NIVELES I, II y III)
+  // BANCO Y TESORERÍA (ECONOMÍA SUPREMA DE OLDEN ERA)
+  // =========================================================================
+  {
+    id: 'grove-bank',
+    name: 'Banco (Bank)',
+    nameEn: 'Bank',
+    category: 'Cívica y Economía',
+    faction: 'Arboleda',
+    cost: { gold: 2000, wood: 5, ore: 5 },
+    prerequisites: ['Mercado (Marketplace)', 'Palacio de la Arboleda (Ayuntamiento / Alcaldía)'],
+    effects: [
+      'Entidad de ahorro y custodia de las arcas de la Arboleda.',
+      'Genera +500 de Oro diario adicional y es prerrequisito indispensable para edificar la Tesorería.'
+    ],
+    strategicTip: 'Construir para abrir paso a la Tesorería y duplicar los ingresos pasivos.',
+    timingRecommendation: 'Semana 1 (Día 5-6).',
+  },
+  {
+    id: 'grove-treasury',
+    name: 'Tesorería (Treasury)',
+    nameEn: 'Treasury',
+    category: 'Cívica y Economía',
+    faction: 'Arboleda',
+    cost: { gold: 5000, wood: 10, ore: 10 },
+    prerequisites: ['Banco (Bank)', 'Mercado (Marketplace)', 'Fortificaciones (Fortifications)'],
+    effects: [
+      'Estructura económica suprema de Olden Era (equivalente canónico al Capitolio).',
+      'Genera +2.000 de Oro diario adicional de forma permanente para el reino.',
+      'Requiere haber consolidado el Banco, el Mercado y las Fortificaciones.'
+    ],
+    strategicTip: 'Asegura el oro necesario para reclutar Qilins y Fénix sin ahogar la economía.',
+    timingRecommendation: 'Semana 2.',
+  },
+
+  // =========================================================================
+  // FORTIFICACIONES (NIVELES I, II Y III)
   // =========================================================================
   {
     id: 'grove-fortifications',
-    name: 'Fortificaciones',
+    name: 'Fortificaciones (Fortifications)',
     nameEn: 'Fortifications',
     category: 'Fortificaciones',
     faction: 'Arboleda',
-    cost: { gold: 2500, wood: 0, ore: 5 },
+    cost: { gold: 2500, ore: 5 },
     prerequisites: [],
     effects: [
-      'Proporciona una muralla durante los asedios.',
-      'Permite al constructor elegir mejoras defensivas.',
-      'Al mejorarse aumenta el crecimiento de tropas.'
+      'Proporciona murallas protectoras vivientes durante los asedios.',
+      'Permite elegir mejoras defensivas de enredaderas y almenas arbóreas.',
+      'Al ascender a Niveles II y III duplica la producción de tropas (+50% y +100%).'
     ],
-    strategicTip: 'Mejorar a Fortificaciones II en el Día 7 para obtener 50% más de tropas en el primer reset semanal.',
-    timingRecommendation: 'Fortificaciones (Día 1) / Fortificaciones II (Día 7) / Fortificaciones III (Semana 2).',
+    strategicTip: 'Mejorar a Nivel II en el Día 7 de la Semana 1 para aumentar la producción del primer reset semanal.',
+    timingRecommendation: 'Fortificaciones I (Día 1) / Fortificaciones II (Día 7) / Fortificaciones III (Semana 2).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Fortificaciones',
-        nameEn: 'Sylvan Fort',
-        cost: { gold: 2500, wood: 0, ore: 5 },
+        name: 'Nivel I: Fortificaciones (Fortifications)',
+        nameEn: 'Fortifications I',
+        cost: { gold: 2500, ore: 5 },
         prerequisites: [],
-        effects: ['Proporciona una muralla durante los asedios.', 'Permite al constructor elegir una mejora defensiva de nivel 1.'],
-        defenseBonus: 'Refuerzo de murallas, trampas o más salidas',
-        growthBonus: '',
-        strategicTip: 'Construir el Día 1 si no se inicia con él.'
+        effects: [
+          'Proporciona una muralla defensiva durante los asedios.',
+          'Permite elegir una mejora defensiva de nivel 1.'
+        ],
+        defenseBonus: 'Muralla perimetral de roble y piedra',
+        strategicTip: 'Defensa base de la ciudadela silvana.'
       },
       {
         level: 2,
-        name: 'Nivel II: Fortificaciones II',
-        nameEn: 'Green Citadel',
+        name: 'Nivel II: Fortificaciones II (Citadel)',
+        nameEn: 'Fortifications II',
         cost: { gold: 2500, ore: 10 },
-        prerequisites: ['Nivel I: Fortificaciones'],
+        prerequisites: ['Nivel I: Fortificaciones (Fortifications)'],
         effects: [
-          'Añade dos torres a las almenas que disparan a los atacantes durante los asedios.',
-          'Permite al constructor elegir una mejora defensiva de nivel 2.',
-          'Aumenta la producción semanal de todas las criaturas en un +50% adicional.'
+          'Añade dos torres a las almenas que disparan automáticamente a los atacantes durante los asedios.',
+          'Aumenta la producción semanal de todas las criaturas de la Arboleda en un +50%.'
         ],
-        defenseBonus: '2 Torres Defensivas',
-        growthBonus: '+50% Crecimiento semanal de tropas',
-        strategicTip: 'Construir el Día 7 de la Semana 1.'
+        defenseBonus: '2 Torres de proyectiles de zarzas',
+        growthBonus: '+50% Crecimiento semanal de criaturas',
+        strategicTip: 'Construir el Día 7 de la Semana 1 sin falta.'
       },
       {
         level: 3,
-        name: 'Nivel III: Fortificaciones III',
-        nameEn: 'Arboreal Castle',
-        cost: { gold: 5000, wood: 0, ore: 15 },
-        prerequisites: ['Nivel II: Fortificaciones II'],
+        name: 'Nivel III: Fortificaciones III (Castle)',
+        nameEn: 'Fortifications III',
+        cost: { gold: 5000, ore: 15 },
+        prerequisites: ['Nivel II: Fortificaciones II (Citadel)'],
         effects: [
-          'Añade una gran torre más a las almenas que dispara a los atacantes durante los asedios y se asienta junto a la muralla.',
-          'Permite al constructor elegir una mejora defensiva de nivel 3.',
-          'Duplica el crecimiento de todas las criaturas de la ciudad (+100% total).'
+          'Añade una gran torre central a las almenas con alcance total.',
+          'Duplica el crecimiento semanal de todas las criaturas de la ciudad (+100% total).'
         ],
-        defenseBonus: '1 Torre Defensiva',
-        growthBonus: '+100% Crecimiento semanal de tropas (Duplica producción)',
-        strategicTip: 'Duplica el reclutamiento de Fénix y Águilas del Trueno.'
+        defenseBonus: 'Torre Central del Gran Roble + foso de espinas',
+        growthBonus: '+100% Crecimiento semanal de criaturas (duplica producción)',
+        strategicTip: 'Esencial para duplicar la producción de Herbomantes, Qilins y Fénix.'
       }
     ]
   },
 
   // =========================================================================
-  // COFRADÍA DE MAGOS DE LA NATURALEZA - MULTI-NIVEL (1 a 5)
+  // GREMIO DE MAGOS (MAGE GUILD I A V) & CONEXIÓN AL OBSERVATORIO MÁGICO
   // =========================================================================
   {
     id: 'grove-mage-guild',
-    name: 'Cofradía de Magos de la Naturaleza (Mage Guild)',
+    name: 'Gremio de Magos (Mage Guild)',
     nameEn: 'Mage Guild',
     category: 'Magia & Cofradía',
     faction: 'Arboleda',
     cost: { gold: 2000, wood: 5, ore: 5 },
     prerequisites: [],
     effects: [
-      'Círculo druídico consagrado a la magia de Tierra, Agua, Aire y Vida silvestre.',
-      'Enseña hechizos elementales, bendiciones y regeneración a lo largo de 5 niveles.',
-      'Recarga el maná del héroe visitante al 100%.'
+      'Círculo druídico interconectado con la red del Observatorio Mágico (Celestial Observatory).',
+      'Desbloquea hechizos de Tiers 1 a 5 en el Observatorio Mágico del reino, con máxima afinidad hacia la Magia Primigenia (Primal Magic).',
+      'Cualquier héroe que visite la ciudad aprende todos los hechizos desbloqueados y recarga su maná al 100%.'
     ],
-    strategicTip: 'El Nivel 1 es requisito para la Choza de Hongos (Herbomantes); el Nivel 2 es requisito para la Pira de Fuego (Fénix).',
-    timingRecommendation: 'Nivel 1 (Semana 1) / Nivel 2 (Día 5-6).',
+    strategicTip: 'Acceso prioritario a encantamientos de regeneración, enredo de raíces y relámpagos primigenios.',
+    timingRecommendation: 'Nivel 1 (Semana 1) / Nivel 2 (Día 5-6) / Niveles 3-5 (Semanas 2-4).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel 1: Círculo de Druidas Novicios',
+        name: 'Gremio de Magos Nivel 1',
         nameEn: 'Mage Guild Level 1',
         cost: { gold: 2000, wood: 5, ore: 5 },
         prerequisites: [],
-        effects: ['Enseña 5 hechizos de Nivel 1 (Celeridad, Flecha de Hielo, Raíces Enredaderas, etc.).', 'Otorga Libro de Hechizos.'],
-        strategicTip: 'Requisito para Choza de Hongos y Ciudadela Cívica.'
+        effects: ['Desbloquea hechizos de Nivel 1 en el Observatorio Mágico.', 'Otorga Libro de Hechizos y recarga maná al 100%.'],
+        strategicTip: 'Requisito para Choza de Madetahongo (Tier 5).'
       },
       {
         level: 2,
-        name: 'Nivel 2: Círculo Arcano Druídico',
+        name: 'Gremio de Magos Nivel 2',
         nameEn: 'Mage Guild Level 2',
         cost: { gold: 1000, wood: 5, ore: 5, crystal: 4 },
-        prerequisites: ['Nivel 1: Círculo de Druidas Novicios'],
-        effects: ['Enseña 4 hechizos de Nivel 2 (Rayo Relámpago, Fortuna, Niebla Protectora, etc.).', 'Requisito para Pira de Fuego (Tier 7).'],
-        strategicTip: 'Construir antes del Día 6 para Tier 7 Rush.'
+        prerequisites: ['Gremio de Magos Nivel 1'],
+        effects: ['Desbloquea hechizos de Nivel 2 en el Observatorio Mágico.'],
+        strategicTip: 'Acceso a enredo masivo y piel de corteza.'
       },
       {
         level: 3,
-        name: 'Nivel 3: Arboleda de Sabiduría',
+        name: 'Gremio de Magos Nivel 3',
         nameEn: 'Mage Guild Level 3',
         cost: { gold: 1000, wood: 5, ore: 5, crystal: 6 },
-        prerequisites: ['Nivel 2: Círculo Arcano Druídico'],
-        effects: ['Enseña 3 hechizos de Nivel 3 (Terremoto, Escudo de Rayos, Santuario Natural, etc.).'],
-        strategicTip: 'Excelente sinergia con héroes druidas de alta Sabiduría.'
+        prerequisites: ['Gremio de Magos Nivel 2'],
+        effects: ['Desbloquea hechizos de Nivel 3 de las escuelas canónicas en el Observatorio Mágico.'],
+        strategicTip: 'Invocaciones de bestias y tormentas eléctricas primigenias.'
       },
       {
         level: 4,
-        name: 'Nivel 4: Cónclave de los Antiguos',
+        name: 'Gremio de Magos Nivel 4',
         nameEn: 'Mage Guild Level 4',
         cost: { gold: 1000, wood: 5, ore: 5, crystal: 8 },
-        prerequisites: ['Nivel 3: Arboleda de Sabiduría'],
-        effects: ['Enseña 2 hechizos de Nivel 4 (Invocación Elemental, Cadena de Relámpagos, etc.).'],
-        strategicTip: 'Cadena de Relámpagos limpia formaciones enteras de enemigos.'
+        prerequisites: ['Gremio de Magos Nivel 3'],
+        effects: ['Desbloquea hechizos mayores de Nivel 4 en el Observatorio Mágico.'],
+        strategicTip: 'Terremotos y marejadas primordiales que barren ejércitos.'
       },
       {
         level: 5,
-        name: 'Nivel 5: Corazón de Gaia',
+        name: 'Gremio de Magos Nivel 5',
         nameEn: 'Mage Guild Level 5',
         cost: { gold: 1000, wood: 5, ore: 5, crystal: 10 },
-        prerequisites: ['Nivel 4: Cónclave de los Antiguos'],
-        effects: ['Enseña 2 hechizos de Nivel 5 (Vórtice Elemental, Resurrección de la Naturaleza).'],
-        strategicTip: 'Poder de apoyo y daño masivo para partidas largas.'
+        prerequisites: ['Gremio de Magos Nivel 4'],
+        effects: ['Desbloquea hechizos supremos de Nivel 5 de Magia Primigenia.'],
+        strategicTip: 'Cataclismos de la naturaleza que cambian el curso de cualquier guerra.'
       }
     ]
   },
 
   // =========================================================================
-  // SERVICIOS CÍVICOS & ECONOMÍA
+  // SERVICIOS CÍVICOS, COMERCIO Y DEPÓSITOS
   // =========================================================================
   {
     id: 'grove-tavern',
-    name: 'Taberna Silvana (Tavern)',
+    name: 'Taberna (Tavern)',
     nameEn: 'Tavern',
     category: 'Cívica y Economía',
     faction: 'Arboleda',
@@ -209,62 +241,76 @@ export const GROVE_STRUCTURES: TownStructure[] = [
     prerequisites: [],
     effects: [
       'Aumenta la moral de la guarnición en +1.',
-      'Permite contratar nuevos héroes guardabosques y druidas.',
-      'Desbloquea la red de rumores del bosque y espionaje.'
+      'Permite reclutar héroes adicionales (Guardianes y Druidas) para acelerar la exploración del bosque.',
+      'Permite escuchar rumores de taberna e informes de inteligencia.'
     ],
-    strategicTip: 'Construir el Día 1 para reclutar exploradores veloces en terreno boscoso.',
+    strategicTip: 'Construir el Día 1 para reclutar un segundo héroe que asegure aserraderos y minas tempranas.',
     timingRecommendation: 'Día 1.',
   },
   {
     id: 'grove-marketplace',
-    name: 'Mercado de la Arboleda (Marketplace)',
+    name: 'Mercado (Marketplace)',
     nameEn: 'Marketplace',
     category: 'Cívica y Economía',
     faction: 'Arboleda',
     cost: { gold: 500, wood: 5 },
-    prerequisites: [],
+    prerequisites: ['Taberna (Tavern)'],
     effects: [
-      'Permite intercambiar recursos y oro.',
-      'Mejora las tasas de conversión conforme se controlan más mercados.',
-      'Permite canjear madera y mineral por Cristales y Oro.'
+      'Permite intercambiar recursos y oro en el mercado de la Arboleda.',
+      'Las tasas de intercambio mejoran conforme el jugador controla más Mercados en su reino.',
+      'Permite canjear madera excedente por Cristales o Mineral.'
     ],
-    strategicTip: 'Construir en Semana 1 para canjear recursos por Cristales para el Thunder Lair y Pira de Fuego.',
+    strategicTip: 'Construir en Semana 1 para financiar las moradas de Qilins y Fénix.',
     timingRecommendation: 'Semana 1 (Día 3-5).',
   },
   {
-    id: 'grove-alchemical-depot',
-    name: 'Depósito Alquímico de Cristales (Alchemic Depot)',
-    nameEn: 'Alchemic Depot',
+    id: 'grove-artifact-merchant',
+    name: 'Comerciante de Artefactos (Artifact Merchant)',
+    nameEn: 'Artifact Merchant',
     category: 'Cívica y Economía',
     faction: 'Arboleda',
-    cost: { gold: 0, gems: 3, crystal: 3, mercury: 3 },
-    prerequisites: ['Mercado de la Arboleda (Marketplace)'],
+    cost: { gold: 2000, wood: 5, ore: 5 },
+    prerequisites: ['Mercado (Marketplace)'],
     effects: [
-      'Genera +1 Cristal diario de forma pasiva (recurso raro principal de la Arboleda).',
-      'Reduce la dependencia de minas de cristal exteriores para Fénix y Águilas.'
+      'Establece una tienda permanente de talismanes y artefactos arcanos en la ciudad.',
+      'Permite comprar y vender artefactos de distintos tiers para equipar a los héroes de la Arboleda.'
     ],
-    strategicTip: 'Construir en Semana 2 para asegurar flujo ininterrumpido de cristales.',
+    strategicTip: 'Permite adquirir reliquias que potencian el Poder Mágico Primigenio o la velocidad en mapa.',
     timingRecommendation: 'Semana 2.',
   },
   {
-    id: 'grove-blacksmith',
-    name: 'Taller Silvano y Herrería Natural (Blacksmith)',
-    nameEn: 'Blacksmith',
+    id: 'grove-resource-silo',
+    name: 'Silo de Recursos (Resource Silo)',
+    nameEn: 'Resource Silo',
     category: 'Cívica y Economía',
     faction: 'Arboleda',
-    cost: { gold: 1000, wood: 5 },
-    prerequisites: [],
+    cost: { gold: 0, gems: 3, mercury: 3 },
+    prerequisites: ['Mercado (Marketplace)', 'Banco (Bank)'],
     effects: [
-      'Permite adquirir el Botiquín de Hierbas Silvano (First Aid Tent) y el Carro de Proyectiles Élfico para el héroe por 2.500 de oro.',
-      'El Botiquín Silvano cura heridas y elimina venenos y maldiciones automáticamente al inicio de cada ronda de combate.',
-      'Otorga munición mágica regenerativa a los tiradores silvestres.'
+      'Genera +1 Cristal diario de forma pasiva (recurso raro principal de la Arboleda).',
+      'Asegura el suministro continuo de cristales para la Pira del Fénix y el Gremio de Magos.'
     ],
-    strategicTip: 'Excelente complemento para mantener vivos a los tiradores y Faunos durante la exploración de bosques densos.',
-    timingRecommendation: 'Día 2-4.',
+    strategicTip: 'Requiere Mercado y Banco. Construir en cuanto se tengan 3 de cada recurso raro secundario para asegurar cristales continuos.',
+    timingRecommendation: 'Semana 2.',
+  },
+  {
+    id: 'grove-alchemical-silo',
+    name: 'Silo Alquímico (Alchemic Silo)',
+    nameEn: 'Alchemic Silo',
+    category: 'Cívica y Economía',
+    faction: 'Arboleda',
+    cost: { gold: 2000, ore: 5, crystal: 2 },
+    prerequisites: ['Silo de Recursos (Resource Silo)'],
+    effects: [
+      'Produce Polvo Alquímico (Alchemical Dust) diariamente.',
+      'El Polvo Alquímico es el recurso canónico esencial de Olden Era necesario para ascender moradas a niveles magistrales y potenciar hechizos en el Observatorio Mágico.'
+    ],
+    strategicTip: 'Requiere el Silo de Recursos. Crucial para desbloquear las mejoras maestras de Herbomantes y Qilins.',
+    timingRecommendation: 'Semana 2.',
   },
 
   // =========================================================================
-  // MORADAS DE CRIATURAS (TIER 1 A 7) CON MEJORAS Y DOBLE RAMA
+  // MORADAS DE CRIATURAS (TIER 1 A 7) CANÓNICAS DE OLDEN ERA
   // =========================================================================
   {
     id: 'grove-faun-huts',
@@ -273,103 +319,112 @@ export const GROVE_STRUCTURES: TownStructure[] = [
     category: 'Moradas de Criaturas',
     faction: 'Arboleda',
     tier: 1,
-    cost: { gold: 1250, wood: 5 },
+    dwellingTier: 1,
+    cost: { gold: 500, wood: 5 },
     dwellingUpgradeCost: { gold: 1000, wood: 5 },
-    prerequisites: ['Fortificaciones I (Fuerte)'],
+    prerequisites: ['Fortificaciones (Fortifications)'],
     unitRecruitedBase: 'Fauno (Faun)',
-    unitRecruited: 'Fauno / Sátiro del Bosque',
+    unitRecruited: 'Fauno / Sátiro / Fauno Corredor',
     unitUpgrades: {
-      branchA: 'Fauno Flautista (Música encantadora que reduce la iniciativa enemiga)',
-      branchB: 'Sátiro de Vanguardia (Ataque con salto acrobático y bonificación de suerte)',
+      branchA: 'Sátiro (Música cautivadora que duerme o confunde a los atacantes)',
+      branchB: 'Fauno Corredor (Velocidad sobresaliente y salto sobre obstáculos en bosque)',
       branchADetails: {
-        unitName: 'Fauno Flautista (Piper Faun)',
-        role: 'Controlador de Iniciativa y Soporte',
-        keyAbilities: ['Melodía Calmante (-15% Iniciativa al enemigo adyacente)', 'Movilidad Silvana'],
-        statsBonus: '+2 Velocidad, +3 Vida'
+        unitName: 'Sátiro',
+        nameEn: 'Satyr',
+        role: 'Infantería Ligera de Encanto',
+        keyAbilities: ['Flauta Encantada (Prob. de dormir a enemigo colindante)', 'Agilidad del Bosque'],
+        statsBonus: '+2 Defensa, +3 Vida'
       },
       branchBDetails: {
-        unitName: 'Sátiro Hostigador (Satyric Skirmisher)',
-        role: 'Hostigador Ágil de Primer Turno',
-        keyAbilities: ['Salto Acrobático (Ignora penalización de terreno)', 'Suerte de la Fortuna (+10% daño crítico)'],
-        statsBonus: '+3 Ataque, +1 Iniciativa'
+        unitName: 'Fauno Corredor',
+        nameEn: 'Swift Faun',
+        role: 'Asaltante Veloz',
+        keyAbilities: ['Zancada de Bosque (Sin coste de terreno)', 'Ataque de Cuerno'],
+        statsBonus: '+3 Ataque, +2 Velocidad'
       }
     },
     effects: [
-      'Recluta tropas ágiles de Tier 1 con bonificaciones en terreno boscoso.',
-      'Producción base: 14 unidades por semana (+50% con Ciudadela, +100% con Castillo).'
+      'Recluta las tropas ligeras de Tier 1 de la Arboleda.',
+      'Producción base: 14 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Excelente velocidad de movimiento inicial para rodear tropas neutrales lentas.',
-    timingRecommendation: 'Día 1.',
+    strategicTip: 'Tropas rápidas ideales para acosar y reclamar puntos de control en los turnos iniciales.',
+    timingRecommendation: 'Día 1-2.',
   },
   {
-    id: 'grove-wood-hop-farm',
-    name: 'Plantación de Lúpulo (Wood Hop Farm)',
-    nameEn: 'Wood Hop Farm',
+    id: 'grove-hop-patch',
+    name: 'Semillero de Lúpulo (Hop Patch)',
+    nameEn: 'Hop Patch',
     category: 'Moradas de Criaturas',
     faction: 'Arboleda',
     tier: 2,
-    cost: { gold: 1750, wood: 5, ore: 5 },
-    dwellingUpgradeCost: { gold: 1250, wood: 5 },
+    dwellingTier: 2,
+    cost: { gold: 1000, wood: 5 },
+    dwellingUpgradeCost: { gold: 1000, wood: 5 },
     prerequisites: ['Cabañas de Faunos (Faun Huts)'],
-    unitRecruitedBase: 'Hoplita Silvano (Wood Hoplite)',
-    unitRecruited: 'Hoplita Silvano / Guardián del Bosque',
+    unitRecruitedBase: 'Hoplita (Hoplite)',
+    unitRecruited: 'Hoplita / Falangista del Bosque / Hoplita Acorazado',
     unitUpgrades: {
-      branchA: 'Falange de Robles (Muro impenetrable de escudos con defensa aumentada)',
-      branchB: 'Lancero Guardián (Ataque a 2 casillas con daño extra a caballería)',
+      branchA: 'Falangista del Bosque (Formación de falange con bonus masivo de defensa en grupo)',
+      branchB: 'Hoplita Acorazado (Escudo pesado y golpe de pica que empuja a los rivales)',
       branchADetails: {
-        unitName: 'Falange de Robles (Oak Hoplite)',
-        role: 'Muro Defensivo Impenetrable',
-        keyAbilities: ['Muro de Picas (+4 Def si no se ha movido)', 'Resistencia a Cargas Enemigas'],
-        statsBonus: '+4 Defensa, +3 Vida'
+        unitName: 'Falangista del Bosque',
+        nameEn: 'Forest Phalangist',
+        role: 'Infantería de Falange',
+        keyAbilities: ['Muralla de Picas (+ Defensa por aliados adyacentes)', 'Parada de Carga'],
+        statsBonus: '+4 Defensa, +5 Vida'
       },
       branchBDetails: {
-        unitName: 'Lancero Guardián (Guardian Spearman)',
-        role: 'Anti-Caballería con Alcance Extendido',
-        keyAbilities: ['Ataque de 2 casillas en línea', 'Daño Doble contra Caballería y Voladores que carguen'],
-        statsBonus: '+3 Ataque, +1 Daño Base'
+        unitName: 'Hoplita Acorazado',
+        nameEn: 'Armored Hoplite',
+        role: 'Defensor de Choque',
+        keyAbilities: ['Golpe de Escudo (Empuja 1 casilla)', 'Armadura Reforzada'],
+        statsBonus: '+3 Ataque, +2 Defensa'
       }
     },
     effects: [
-      'Recluta tropas de Tier 2 defensivas de primera línea.',
-      'Producción base: 9 unidades por semana.'
+      'Recluta la infantería acorazada de falange de Tier 2.',
+      'Producción base: 9 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Su alcance y resistencia frenan las cargas enemigas en seco.',
-    timingRecommendation: 'Día 2.',
+    strategicTip: 'La falange de hoplitas es el ancla defensiva de la Arboleda para proteger a los tiradores e Iriyads.',
+    timingRecommendation: 'Día 2-3.',
   },
   {
-    id: 'grove-iriyad-spring',
-    name: 'Manantial de Ninfas (Iriyad Spring)',
-    nameEn: 'Iriyad Spring',
+    id: 'grove-menhir-circle',
+    name: 'Círculo de Menhires (Menhir Circle)',
+    nameEn: 'Menhir Circle',
     category: 'Moradas de Criaturas',
     faction: 'Arboleda',
     tier: 3,
-    cost: { gold: 2000, wood: 5, ore: 5, crystal: 3 },
-    dwellingUpgradeCost: { gold: 1500, crystal: 2 },
-    prerequisites: ['Plantación de Lúpulo (Wood Hop Farm)'],
+    dwellingTier: 3,
+    cost: { gold: 1500, ore: 5 },
+    dwellingUpgradeCost: { gold: 1500, ore: 5, crystal: 2 },
+    prerequisites: ['Semillero de Lúpulo (Hop Patch)'],
     unitRecruitedBase: 'Ninfa Iriyad (Iriyad Nymph)',
-    unitRecruited: 'Ninfa Iriyad / Ninfa Floral / Ninfa del Viento',
+    unitRecruited: 'Ninfa Iriyad / Iriyad de Enredadera / Iriyad de Cristal',
     unitUpgrades: {
-      branchA: 'Ninfa Floral (Polvo cegador que anula la réplica enemiga y vuelo sin penalización)',
-      branchB: 'Ninfa del Viento (Aura de evasión del 35% contra ataques físicos y ráfaga de espinas)',
+      branchA: 'Iriyad de Enredadera (Ataque a distancia con zarcillos que inmovilizan a la víctima)',
+      branchB: 'Iriyad de Cristal (Proyectil prismático que refleja daño mágico hacia el atacante)',
       branchADetails: {
-        unitName: 'Ninfa Floral (Floral Iriyad)',
-        role: 'Hostigadora Aérea con Ceguera y Sin Réplica',
-        keyAbilities: ['Polvo Cegador (Invalida contraataques)', 'Vuelo Rápido', 'Sin represalia enemiga'],
-        statsBonus: '+3 Ataque, +2 Velocidad, +1 Iniciativa'
+        unitName: 'Iriyad de Enredadera',
+        nameEn: 'Vine Iriyad',
+        role: 'Tiradora Inmovilizadora',
+        keyAbilities: ['Raíces Atrapadoras (Inmoviliza 1 turno)', 'Afinidad Primigenia'],
+        statsBonus: '+3 Ataque, +2 Defensa, +8 Vida'
       },
       branchBDetails: {
-        unitName: 'Ninfa del Viento (Zephyr Iriyad)',
-        role: 'Voladora Evasiva de Hostigamiento',
-        keyAbilities: ['Evasión del Viento (35% prob. esquivar golpes)', 'Ráfaga de Espinas', 'Iniciativa Superior'],
-        statsBonus: '+2 Ataque, +2 Defensa, +4 Vida'
+        unitName: 'Iriyad de Cristal',
+        nameEn: 'Crystal Iriyad',
+        role: 'Artillera Prismática',
+        keyAbilities: ['Disparo Refractario', 'Resistencia Mágica (+25%)'],
+        statsBonus: '+4 Ataque, +1 Iniciativa'
       }
     },
     effects: [
-      'Recluta tropas voladoras de Tier 3 con ataque sin contraataque.',
-      'Producción base: 7 unidades por semana.'
+      'Recluta las ninfas místicas de Tier 3 de la Arboleda.',
+      'Producción base: 6 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'La Ninfa Iriyad anula la respuesta de colosos enemigos permitiendo a los Faunos y Hoplitas golpear impunemente.',
-    timingRecommendation: 'Día 3.',
+    strategicTip: 'Inmovilizar con enredaderas a la caballería o tropas de carga enemigas desbarata su plan ofensivo.',
+    timingRecommendation: 'Día 3-4.',
   },
   {
     id: 'grove-blooming-pond',
@@ -378,254 +433,170 @@ export const GROVE_STRUCTURES: TownStructure[] = [
     category: 'Moradas de Criaturas',
     faction: 'Arboleda',
     tier: 4,
-    cost: { gold: 2500, ore: 5, crystal: 5 },
-    dwellingUpgradeCost: { gold: 2000, crystal: 3 },
-    prerequisites: ['Manantial de Ninfas (Iriyad Spring)'],
-    unitRecruitedBase: 'Aqualotl (Aqualotl)',
-    unitRecruited: 'Aqualotl / Dríada Acuática',
+    dwellingTier: 4,
+    cost: { gold: 2500, wood: 5, ore: 5 },
+    dwellingUpgradeCost: { gold: 2000, wood: 5, crystal: 2 },
+    prerequisites: ['Círculo de Menhires (Menhir Circle)'],
+    unitRecruitedBase: 'Aqualotl',
+    unitRecruited: 'Aqualotl / Aqualotl de las Mareas / Aqualotl Místico',
     unitUpgrades: {
-      branchA: 'Aqualotl Abisal (Regeneración masiva al estar en agua o ciénaga y aura curativa)',
-      branchB: 'Aqualotl Venenoso (Ataque a distancia que reduce la defensa rival en un 20%)',
+      branchA: 'Aqualotl de las Mareas (Ola de agua que empuja y ralentiza a las filas enemigas)',
+      branchB: 'Aqualotl Místico (Regeneración anfibia pasiva y resistencia a la magia de agua y frío)',
       branchADetails: {
-        unitName: 'Aqualotl Abisal (Abyssal Aqualotl)',
-        role: 'Anfibio Regenerativo y Protector',
-        keyAbilities: ['Aura Hidrófila (Regenera 15% HP por turno)', 'Curación de Aliados Cercanos'],
-        statsBonus: '+3 Defensa, +8 Vida'
+        unitName: 'Aqualotl de las Mareas',
+        nameEn: 'Tide Aqualotl',
+        role: 'Hostigador Acuático de Empuje',
+        keyAbilities: ['Ola de Empuje', 'Movilidad de Agua (Sin coste en ciénagas/charcos)'],
+        statsBonus: '+3 Ataque, +4 Defensa, +12 Vida'
       },
       branchBDetails: {
-        unitName: 'Aqualotl Venenoso (Venomous Aqualotl)',
-        role: 'Hostigador Tóxico de Posición',
-        keyAbilities: ['Mordedura Tóxica (Reduce armadura enemiga)', 'Regeneración Anfibia'],
-        statsBonus: '+3 Ataque, +1 Velocidad'
+        unitName: 'Aqualotl Místico',
+        nameEn: 'Mystic Aqualotl',
+        role: 'Tanque Anfibio Regenerativo',
+        keyAbilities: ['Regeneración Acuática (+15 HP/turno)', 'Inmunidad a Ralentización'],
+        statsBonus: '+4 Ataque, +1 Iniciativa'
       }
     },
     effects: [
-      'Recluta unidades acuáticas de Tier 4 con alta versatilidad táctica.',
-      'Producción base: 5 unidades por semana.'
+      'Recluta los anfibios de combate de Tier 4.',
+      'Producción base: 4 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Excelente sinergia con terrenos pantanosos y sostenimiento de salud prolongado.',
-    timingRecommendation: 'Día 4.',
+    strategicTip: 'Excelente combinación de aguante y capacidad de control territorial mediante empuje.',
+    timingRecommendation: 'Día 4-5.',
   },
   {
     id: 'grove-shroomwood-shack',
-    name: 'Choza del Bosque de Hongos (Shroomwood Shack)',
+    name: 'Choza de Madetahongo (Shroomwood Shack)',
     nameEn: 'Shroomwood Shack',
     category: 'Moradas de Criaturas',
     faction: 'Arboleda',
     tier: 5,
-    cost: { gold: 2750, wood: 10, gems: 4, crystal: 4, mercury: 4 },
-    dwellingUpgradeCost: { gold: 2500, crystal: 4 },
-    prerequisites: ['Estanque Floreciente (Blooming Pond)', 'Cofradía de Magos Nivel 1 (Mage Guild Level 1)'],
+    dwellingTier: 5,
+    cost: { gold: 3500, wood: 10, crystal: 4 },
+    dwellingUpgradeCost: { gold: 3000, wood: 5, crystal: 3 },
+    prerequisites: ['Estanque Floreciente (Blooming Pond)', 'Gremio de Magos (Mage Guild)'],
     unitRecruitedBase: 'Herbomante (Herbomancer)',
-    unitRecruited: 'Herbomante / Druida del Bosque',
+    unitRecruited: 'Herbomante / Maestro de Hongos / Guardián del Micelio',
     unitUpgrades: {
-      branchA: 'Archidruida del Trueno (Lanza rayos de energía y potencia el maná del héroe)',
-      branchB: 'Druida de Espinas (Enreda a enemigos en raíces paralizantes y crea muros de zarzas)',
+      branchA: 'Maestro de Hongos (Esporas venenosas que debilitan el daño y armadura enemiga)',
+      branchB: 'Guardián del Micelio (Red micelial que cura a todos los aliados colindantes y levanta brotes defensivos)',
       branchADetails: {
-        unitName: 'Archidruida del Trueno (High Thunder Druid)',
-        role: 'Lanzador de Hechizos y Canalizador de Maná',
-        keyAbilities: ['Rayo Arcano a Distancia', 'Canalización Mística (-1 coste de maná a hechizos del héroe)'],
-        statsBonus: '+3 Poder Mágico, +2 Ataque a Distancia'
+        unitName: 'Maestro de Hongos',
+        nameEn: 'Fungal Master',
+        role: 'Invocador de Esporas Venenosas',
+        keyAbilities: ['Nube de Esporas Tóxicas', 'Debilitamiento Fúngico'],
+        statsBonus: '+4 Ataque, +3 Defensa, +15 Vida'
       },
       branchBDetails: {
-        unitName: 'Druida Espinario (Bramble Druid)',
-        role: 'Control de Masas de Campo',
-        keyAbilities: ['Enredo de Espinas (Inmoviliza a la unidad objetivo por 1 turno)', 'Espinas Vengativas'],
-        statsBonus: '+4 Defensa, +10 Vida'
+        unitName: 'Guardián del Micelio',
+        nameEn: 'Mycelium Guardian',
+        role: 'Sanador y Baluarte Botánico',
+        keyAbilities: ['Sanación Micelial de Área', 'Brotes Protectores'],
+        statsBonus: '+5 Defensa, +20 Vida'
       }
     },
     effects: [
-      'Recluta lanzadores de conjuros de Tier 5 de la Arboleda.',
-      'Producción base: 3 unidades por semana.'
+      'Recluta los botánicos y druidas miceliales de Tier 5.',
+      'Producción base: 3 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Permite reducir los costes de maná del héroe y lanzar potentes ataques mágicos.',
-    timingRecommendation: 'Día 5.',
+    strategicTip: 'La red micelial permite sostener una línea defensiva casi inquebrantable curando a los Hoplitas cada ronda.',
+    timingRecommendation: 'Día 6 o inicio de Semana 2.',
   },
   {
-    id: 'grove-celestial-ridge',
-    name: 'Cumbre Celestial (Celestial Ridge)',
-    nameEn: 'Celestial Ridge',
+    id: 'grove-thunder-lair',
+    name: 'Guarida del Trueno (Thunder Lair)',
+    nameEn: 'Thunder Lair',
     category: 'Moradas de Criaturas',
     faction: 'Arboleda',
     tier: 6,
-    cost: { gold: 6500, wood: 5, ore: 5, crystal: 5 },
-    dwellingUpgradeCost: { gold: 3500, crystal: 5 },
-    prerequisites: ['Choza del Bosque de Hongos (Shroomwood Shack)'],
-    unitRecruitedBase: 'Qilin Celestial (Celestial Qilin)',
-    unitRecruited: 'Qilin Celestial / Qilin de la Fortuna',
+    dwellingTier: 6,
+    cost: { gold: 5000, wood: 10, crystal: 6 },
+    dwellingUpgradeCost: { gold: 4000, wood: 5, crystal: 4 },
+    prerequisites: ['Choza de Madetahongo (Shroomwood Shack)'],
+    unitRecruitedBase: 'Qilin',
+    unitRecruited: 'Qilin / Qilin de la Tormenta / Qilin Celestial',
     unitUpgrades: {
-      branchA: 'Qilin de la Fortuna (Aura de Suerte Suprema que otorga +2 de suerte a tropas adyacentes y salto místico)',
-      branchB: 'Qilin de Jade (Piel de jade con 40% de resistencia mágica y pisada que aturde a infantería)',
+      branchA: 'Qilin de la Tormenta (Aura eléctrica de relámpagos que electrocuta a enemigos cercanos al atacar)',
+      branchB: 'Qilin Celestial (Aura de pureza cósmica que confiere suerte máxima y velocidad celestial)',
       branchADetails: {
-        unitName: 'Qilin de la Fortuna (Fortune Qilin)',
-        role: 'Coloso de Fortuna y Salto Místico',
-        keyAbilities: ['Aura de Fortuna (+2 Suerte y +20% críticos a aliados)', 'Salto Sagrado'],
-        statsBonus: '+4 Ataque, +3 Velocidad, +30 Vida'
+        unitName: 'Qilin de la Tormenta',
+        nameEn: 'Storm Qilin',
+        role: 'Bestia Eléctrica de Choque',
+        keyAbilities: ['Paso de Trueno (Daña a objetivos al cruzar)', 'Descarga Eléctrica'],
+        statsBonus: '+6 Ataque, +4 Defensa, +30 Vida'
       },
       branchBDetails: {
-        unitName: 'Qilin de Jade (Jade Qilin)',
-        role: 'Baluarte Sagrado Anti-Magia',
-        keyAbilities: ['Piel de Jade (40% resistencia mágica)', 'Pisada Sagrada (Aturdimiento 1 turno)'],
-        statsBonus: '+2 Ataque, +6 Defensa, +35 Vida'
+        unitName: 'Qilin Celestial',
+        nameEn: 'Celestial Qilin',
+        role: 'Heraldo de la Fortuna Primigenia',
+        keyAbilities: ['Aura de Suerte Celestial (+1 a todo el ejército)', 'Carga Ligera'],
+        statsBonus: '+7 Ataque, +3 Iniciativa, +2 Velocidad'
       }
     },
     effects: [
-      'Recluta bestias celestiales místicas de Tier 6 con aura de bendición.',
-      'Producción base: 2 unidades por semana.'
+      'Recluta las bestias míticas de Tier 6 de la Arboleda.',
+      'Producción base: 2 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'El Qilin proporciona un aura que garantiza impactos críticos en casi todos los turnos del ejército.',
-    timingRecommendation: 'Día 6.',
+    strategicTip: 'Iniciativa altísima que permite iniciar hostilidades antes que las tropas pesadas rivales.',
+    timingRecommendation: 'Semana 2.',
   },
   {
-    id: 'grove-phoenix-pyre',
-    name: 'Pira del Fénix (Phoenix Pyre)',
-    nameEn: 'Phoenix Pyre',
+    id: 'grove-pyre',
+    name: 'Pira (Pyre)',
+    nameEn: 'Pyre',
     category: 'Moradas de Criaturas',
     faction: 'Arboleda',
     tier: 7,
-    cost: { gold: 12500, wood: 10, ore: 10, crystal: 15 },
-    dwellingUpgradeCost: { gold: 10000, crystal: 10 },
-    prerequisites: ['Cumbre Celestial (Celestial Ridge)', 'Cofradía de Magos Nivel 2 (Mage Guild Level 2)'],
-    unitRecruitedBase: 'Fénix Mítico (Mythic Phoenix)',
-    unitRecruited: 'Fénix Mítico / Fénix Radiante / Fénix de Cenizas',
+    dwellingTier: 7,
+    cost: { gold: 10000, wood: 15, crystal: 10 },
+    dwellingUpgradeCost: { gold: 8000, wood: 10, crystal: 8 },
+    prerequisites: ['Guarida del Trueno (Thunder Lair)', 'Gremio de Magos (Mage Guild)'],
+    unitRecruitedBase: 'Fénix (Phoenix)',
+    unitRecruited: 'Fénix / Fénix Mítico / Fénix Primigenio',
     unitUpgrades: {
-      branchA: 'Fénix Radiante (Inmortalidad: Resucita de sus cenizas al 100% una vez por batalla y velocidad máxima)',
-      branchB: 'Fénix de Cenizas (Llamarada abrasadora de área al morir y aliento de fuego primigenio)',
+      branchA: 'Fénix Mítico (Iniciativa suprema, aliento de fuego atravesador y renacimiento de cenizas)',
+      branchB: 'Fénix Primigenio (Explosión de fuego solar al morir que calcina a todos los enemigos circundantes)',
       branchADetails: {
-        unitName: 'Fénix Radiante (Radiant Phoenix)',
-        role: 'Coloso Aéreo con Renacimiento Infinito',
-        keyAbilities: ['Renacimiento de Cenizas (Revive al morir con 100% de tropas)', 'Velocidad Absoluta (Iniciativa máxima)', 'Inmunidad al Fuego'],
-        statsBonus: '+5 Ataque, +4 Velocidad, +30 Vida'
+        unitName: 'Fénix Mítico',
+        nameEn: 'Mythic Phoenix',
+        role: 'Coloso Aéreo de Máxima Iniciativa y Renacimiento',
+        keyAbilities: ['Iniciativa Extrema (Turno 1 garantizado)', 'Renacer de las Cenizas', 'Aliento de Fuego'],
+        statsBonus: '+10 Ataque, +8 Defensa, +90 Vida'
       },
       branchBDetails: {
-        unitName: 'Fénix de Cenizas (Ash Phoenix)',
-        role: 'Destructor Aéreo de Fuego Primigenio',
-        keyAbilities: ['Llamarada Póstuma (Daño masivo a todos los enemigos adyacentes al morir)', 'Aliento de Fuego Primigenio'],
-        statsBonus: '+7 Ataque, +3 Velocidad, +25 Vida'
+        unitName: 'Fénix Primigenio',
+        nameEn: 'Primal Phoenix',
+        role: 'Bomba Voladora de Fuego Solar',
+        keyAbilities: ['Nova de Incineración Mortal', 'Alas de Fuego Solar'],
+        statsBonus: '+12 Ataque, +3 Iniciativa, +80 Vida'
       }
     },
     effects: [
-      'Recluta las criaturas legendarias de Tier 7 de la Arboleda: el Fénix Mítico de Jadame.',
-      'Producción base: 1 unidad por semana (+1 con Castillo).'
+      'Recluta los Fénix legendarios de Tier 7 de la Arboleda.',
+      'Producción base: 1 unidad por semana (+1 con Fortificaciones III).'
     ],
-    strategicTip: 'El Fénix garantiza la iniciativa en todos los combates, permitiendo que tu héroe lance el primer hechizo antes que el rival.',
-    timingRecommendation: 'Semana 1 (Día 7) o Semana 2 (Día 1).',
+    strategicTip: 'La criatura más rápida del juego: asegura el primer turno para lanzar hechizos decisivos antes de que el rival pueda actuar.',
+    timingRecommendation: 'Final de Semana 1 o inicio de Semana 2.',
   },
 
   // =========================================================================
-  // ESTRUCTURAS ESPECIALES DE FACCIÓN (ARBOLEDA)
+  // ESTRUCTURAS ESPECIALES DE FACCIÓN (ARBOLEDA) CONFIRMADAS DE OLDEN ERA
   // =========================================================================
   {
-    id: 'grove-fountain-of-fortune',
-    name: 'Fuente de la Fortuna (Fountain of Fortune)',
-    nameEn: 'Fountain of Fortune',
+    id: 'grove-grail-sanctuary',
+    name: 'Santuario de la Arboleda (Grove Grail Sanctuary)',
+    nameEn: 'Grove Grail Sanctuary',
     category: 'Estructuras Especiales de Facción',
     faction: 'Arboleda',
     isFactionUnique: true,
-    cost: { gold: 2500, wood: 5, ore: 5, crystal: 2 },
-    prerequisites: ['Cabañas de Faunos (Faun Huts)'],
+    cost: { gold: 0 },
+    prerequisites: ['Descubrimiento del Santo Grial (Mirage)'],
     effects: [
-      'Otorga +2 de Suerte permanente a todas las tropas de la Arboleda en la provincia.',
-      'Aumenta la probabilidad de impactos críticos de suerte en un +20%.'
+      'Estructura suprema del Santo Grial para la Arboleda (construida portando el Grial arrebatado al Espejismo en el mapa).',
+      'Genera +5.000 de Oro diario adicional para el reino.',
+      'Aumenta el crecimiento semanal de todas las criaturas de la Arboleda en la ciudad en un +100% adicional.'
     ],
-    strategicTip: 'Multiplica el daño explosivo de tus Grandes Elfos y Piras de Fuego.',
-    timingRecommendation: 'Semana 2.',
-  },
-  {
-    id: 'grove-mystic-pond',
-    name: 'Estanque Místico Silvano (Mystic Pond)',
-    nameEn: 'Mystic Pond',
-    category: 'Estructuras Especiales de Facción',
-    faction: 'Arboleda',
-    isFactionUnique: true,
-    cost: { gold: 2000, wood: 5, crystal: 3 },
-    prerequisites: ['Choza del Bosque de Hongos (Shroomwood Shack)'],
-    effects: [
-      'Genera recursos aleatorios cada semana (de 1 a 4 unidades de recursos raros o 1.000 de oro extra).',
-      'Aumenta la producción semanal de todas las moradas de Tier 1 a 4 en un +15%.'
-    ],
-    strategicTip: 'Aporte de recursos pasivo muy valioso para financiar las mejoras de criaturas.',
-    timingRecommendation: 'Semana 2.',
-  },
-  {
-    id: 'grove-faun-grove',
-    name: 'Arboleda de los Faunos (Faun Meadow)',
-    nameEn: 'Faun Meadow',
-    category: 'Estructuras Especiales de Facción',
-    faction: 'Arboleda',
-    isFactionUnique: true,
-    cost: { gold: 2000, wood: 10 },
-    prerequisites: ['Cabañas de Faunos (Faun Huts)'],
-    effects: [
-      'Aumenta el crecimiento semanal de Faunos y Sátiros (Tier 1) en +6 unidades.',
-      'Otorga +1 a la Velocidad a los Faunos en combate en bosques y previene penalizaciones por terreno escabroso.'
-    ],
-    strategicTip: 'Convierte a los Faunos en la infantería ligera más prolífica para exploraciones tempranas.',
-    timingRecommendation: 'Semana 2.',
-  },
-  {
-    id: 'grove-menhir-sanctuary',
-    name: 'Círculo de Menhires Místicos (Standing Stones)',
-    nameEn: 'Standing Stones of the Wild',
-    category: 'Estructuras Especiales de Facción',
-    faction: 'Arboleda',
-    isFactionUnique: true,
-    cost: { gold: 2500, ore: 10, crystal: 2 },
-    prerequisites: ['Cofradía de Magos Nivel 1 (Mage Guild Level 1)'],
-    effects: [
-      'Otorga +1 Poder Mágico permanente al primer héroe aliado que lo visite cada semana.',
-      'Aumenta la eficacia de los hechizos de la escuela Primigenia (Primal Magic) en un +15% dentro del territorio del bosque.'
-    ],
-    strategicTip: 'Imprescindible para hechiceros y druidas de la Arboleda para disparar la potencia de sus invocaciones primigenias.',
-    timingRecommendation: 'Semana 2.',
-  },
-  {
-    id: 'grove-phoenix-perch',
-    name: 'Percha del Fénix (Phoenix Roost)',
-    nameEn: 'Phoenix Roost',
-    category: 'Estructuras Especiales de Facción',
-    faction: 'Arboleda',
-    isFactionUnique: true,
-    cost: { gold: 3000, wood: 10, crystal: 4 },
-    prerequisites: ['Pira del Fénix (Phoenix Pyre)'],
-    effects: [
-      'Aumenta el crecimiento semanal de Fénix Míticos (Tier 7) en +1 unidad adicional por semana.',
-      'Otorga +1 a la Iniciativa a todo el ejército de la Arboleda en batallas defensivas y de asedio.'
-    ],
-    strategicTip: 'Multiplica la presencia del Tier 7 más rápido del juego, asegurando siempre el primer turno.',
-    timingRecommendation: 'Semana 2-3.',
-  },
-  {
-    id: 'grove-nymph-spring',
-    name: 'Manantial de las Ninfas (Nymph Spring)',
-    nameEn: 'Nymph Spring',
-    category: 'Estructuras Especiales de Facción',
-    faction: 'Arboleda',
-    isFactionUnique: true,
-    cost: { gold: 2000, wood: 5, crystal: 2 },
-    prerequisites: ['Bosque Flotante de Lirios (Water Lily Grove)'],
-    effects: [
-      'Aumenta el crecimiento semanal de Ninfas Iriyads (Tier 3) en +4 unidades.',
-      'Las Ninfas purifican automáticamente estados alterados negativos de los aliados colindantes al inicio de cada ronda de combate.'
-    ],
-    strategicTip: 'Contrarresta maldiciones de sombras y ralentizaciones enemigas sin gastar turnos de maná del héroe.',
-    timingRecommendation: 'Semana 2.',
-  },
-  {
-    id: 'grove-spirit-of-the-wild',
-    name: 'Madre Naturaleza (Mother Nature - Santo Grial)',
-    nameEn: 'Mother Nature',
-    category: 'Estructuras Especiales de Facción',
-    faction: 'Arboleda',
-    isFactionUnique: true,
-    cost: { gold: 5000, wood: 10, ore: 5, crystal: 5 },
-    prerequisites: ['Descubrimiento del Santo Grial', 'Pira del Fénix (Phoenix Pyre)'],
-    effects: [
-      'Estructura Suprema del Grial de la Arboleda.',
-      'Genera +5.000 de Oro diario adicional y +50% al crecimiento de todas las criaturas de la ciudad.',
-      'Otorga +1.000 Puntos de Movimiento a todos los héroes aliados en terreno boscoso y recarga completamente el maná en cada turno.'
-    ],
-    strategicTip: 'Dominio absoluto de la movilidad y del crecimiento de tropas tras descubrir el Grial.',
-    timingRecommendation: 'Al descubrir el Grial.',
+    strategicTip: 'Multiplica la producción de Fénix y Qilins hasta dominar el continente.',
+    timingRecommendation: 'Al derrotar el Espejismo (Mirage).',
   },
 ];

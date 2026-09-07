@@ -7,6 +7,8 @@
 > - **Entorno y Lore**: Continente de **Jadame** (*Heroes of Might & Magic: Olden Era*)
 > - **Facciones Oficiales (6)**: Templo, Necrópolis, Mazmorra, Foresta (Arboleda), Colmena (Enjambre) y Cisma.
 > - **Directiva Anti-Alucinación**: Prohibición terminante de importar personajes, héroes, hechizos o reglas no confirmadas de *Heroes III*, *IV* o *V* (ej. Sandro, Gelu, Crag Hack, Solmyr, Christian, Mephala, Isra, Deemer, Gunnar, etc.).
+> - **Verificación de Datos**: Todos los datos deben ser verificados en fuentes fidedignas exclusivamente de Heroes Olden Era y usando la nomenclatura oficial de la edición en castellano.
+> - **Fuentes consultables**: `https://oldenera.th.gl/es`, `https://oldeneradb.com/`, `https://heavenlyforge.gg/es`, `https://heroes-olden-era.com/es`, `https://paradrew.com/es/olden-era/`, `https://www.olden-era.com/en`.
 
 ---
 
@@ -326,21 +328,56 @@ Cada criatura debe contar con los 12 parámetros cuantitativos contrastados:
 ## 6. MÓDULO 5: AUDITORÍA DE ESTRUCTURAS DE CIUDADELA Y CASTILLO
 *Archivos auditados y normalizados: `/src/data/townStructuresData.ts`, `/src/data/structures/*.ts`, `/src/components/TownStructuresBrowser.tsx`*
 
-### 6.1. Estructuras Comunes
-- [x] **Ayuntamiento / Capitolio**: Cadena canónica de 4 niveles de ingresos diarios normalizada en las 6 facciones (Asentamiento 500 -> Alcaldía 1.000 -> Ciudadela Cívica 2.000 -> Gran Capitolio 4.000 Oro/día).
-- [x] **Fuerte / Ciudadela / Castillo**: Modificadores de defensa y multiplicadores de crecimiento de tropas (+0%, +50%, +100%) con costes y prerrequisitos enlazados.
-- [x] **Taberna**: Generación de moral (+1) y acceso al reclutamiento de héroes y rumores de taberna.
-- [x] **Mercado y Puesto Comercial**: Tasas oficiales de intercambio de recursos de *Olden Era* y depósitos alquímicos por facción.
-- [x] **Herrería**: Carro de munición, balista, catapulta o botiquín de hierbas asignado canónicamente a cada facción con costes y descripciones tácticas.
-- [x] **Torre de Magia / Cofradía de Hechiceros**: Niveles 1 a 5 con asignación armónica de escuelas de magia de Jadame.
+### 6.1. Arquitectura Cívica, Económica y Defensiva Canónica de Olden Era
+- [x] **Centro Cívico Canónico de 3 Niveles (Town Hall / City Hall / Metropolis)**: Verificado e implementado el modelo oficial de 3 niveles progresivos de *Heroes of Might & Magic: Olden Era*:
+  - **Nivel I (Town Hall - Asentamiento de Facción)**: Sede administrativa inicial de la ciudad. Genera 1.000 de Oro diario, Puntos de Ley y Puntos de Astrología, y fija el límite de héroes activos en +1.
+  - **Nivel II (City Hall - [Nombre Canónico] II)**: Expansión de la sede cívica (Coste: 2.500 Oro, 5 Madera, 5 Mineral; Prerrequisito: Mercado). Otorga 1.000 de Oro, Puntos de Ley y Astrología al día, y permite al gobernador elegir **una de 3 mejoras económicas de Nivel 2**: +1.000 Oro/día, +1.000 Puntos de Ley/día, o +1.000 Puntos de Astrología/día.
+  - **Nivel III (Metropolis - [Nombre Canónico] III)**: Máxima cúspide cívica de la ciudad (Coste: 5.000 Oro, 10 Madera, 10 Mineral; Prerrequisito: Nivel II). Otorga 1.000 de Oro, Puntos de Ley y Puntos de Astrología diarios adicionales para el reino, consolidando el pleno potencial de desarrollo gubernamental y de leyes de Jadame.
+  - Nombres cívicos canónicos verificados por facción en los 3 niveles:
+    - *Mazmorra*: **Nivel I**: Asentamiento de Alvar (Town Hall) -> **Nivel II**: Palacio Bizantino II (City Hall) -> **Nivel III**: Palacio Bizantino III (Metropolis).
+    - *Templo*: **Nivel I**: Asentamiento Solar (Town Hall) -> **Nivel II**: Templo Solar II (City Hall) -> **Nivel III**: Templo Solar III (Metropolis).
+    - *Necrópolis*: **Nivel I**: Asentamiento Tétrico (Town Hall) -> **Nivel II**: Rostro Eterno II (City Hall) -> **Nivel III**: Rostro Eterno III (Metropolis).
+    - *Foresta / Arboleda*: **Nivel I**: Asentamiento Silvano (Town Hall) -> **Nivel II**: Palacio de la Arboleda II (City Hall) -> **Nivel III**: Palacio de la Arboleda III (Metropolis).
+    - *Colmena / Enjambre*: **Nivel I**: Asentamiento del Enjambre (Town Hall) -> **Nivel II**: Corazón del Apiario II (City Hall) -> **Nivel III**: Corazón del Apiario III (Metropolis).
+    - *Cisma*: **Nivel I**: Asentamiento del Vacío (Town Hall) -> **Nivel II**: Remanente Abisal II (City Hall) -> **Nivel III**: Remanente Abisal III (Metropolis).
+- [x] **Expansión Económica: Banco y Tesorería (Bank & Treasury)**:
+  - **Banco (Bank)**: Estructura financiera intermedia (+500 de Oro diario). Prerrequisito indispensable para la Tesorería.
+  - **Tesorería (Treasury)**: Estructura económica suprema de *Olden Era* (+2.000 de Oro diario permanente para el reino). Requiere Banco, Mercado y Fortificaciones.
+- [x] **Fortificaciones (Fortifications Niveles I, II y III)**:
+  - **Nivel I (Fortificaciones I)**: Muralla defensiva perimetral y baluartes de asedio.
+  - **Nivel II (Citadel)**: 2 torres de proyectiles automáticas en las almenas y **+50% de crecimiento semanal de todas las criaturas de la ciudad**.
+  - **Nivel III (Castle)**: Gran torre central con alcance total, foso defensivo y **+100% de crecimiento semanal (duplica la producción)**.
+- [x] **Gremio de Magos (Mage Guild Niveles 1 a 5)**:
+  - Conexión canónica directa con la red del **Observatorio Mágico** (*Celestial Observatory*).
+  - Desbloquea hechizos de Tiers 1 a 5 según la afinidad elemental de cada facción (Templo: Luz Solar; Mazmorra: Nochesombra/Primigenia; Necrópolis: Nochesombra; Arboleda: Primigenia; Enjambre: Primigenia/Nochesombra; Cisma: Arcana/Nochesombra).
+  - Recarga del 100% de maná para cualquier héroe visitante y entrega del Libro de Hechizos.
+- [x] **Servicios Cívicos, Comercio y Silos de Recursos**:
+  - **Taberna (Tavern)**: +1 Moral para la guarnición, acceso a reclutamiento de héroes adicionales y rumores del mapa. Prerrequisito del Mercado.
+  - **Mercado (Marketplace)**: Intercambio oficial de recursos según las tasas de mercado y número de mercados controlados. **Requiere la Taberna**.
+  - **Comerciante de Artefactos (Artifact Merchant)**: Tienda fija para compra y venta de artefactos y reliquias en la ciudad. Requiere Mercado.
+  - **Silo de Recursos (Resource Silo)**: Genera +1 recurso raro diario pasivo según la facción (+1 Gemas en Mazmorra; +1 Cristal en Templo y Arboleda; +1 Mercurio en Necrópolis y Cisma; +1 Azufre en Enjambre). Coste canónico: 3 de cada recurso raro secundario (sin oro). **Requiere Mercado y Banco**.
+  - **Silo Alquímico (Alchemic Silo)**: Produce **Polvo Alquímico** (*Alchemical Dust*) diariamente, necesario para ascender moradas a nivel magistral y potenciar hechizos. **Requiere el Silo de Recursos**.
 
-### 6.2. Estructuras Exclusivas de Facción
-- [x] **Mazmorra**: Vórtice de maná, academia oscura, altar de sacrificios rituales y laberinto de minotauros con bonificaciones de daño y moral.
-- [x] **Templo**: Catedral celestial, establos de caballería (+400 movimiento), faro sagrado (+500 movimiento marítimo/visión) y bastión de cruzados.
-- [x] **Necrópolis**: Amplificador de nigromancia (+10%), bóveda de calaveras, foso de putrefacción (plaga a asediantes) y mausoleo de liches.
-- [x] **Foresta**: Manantial de ninfas, arboleda de faunos (+6 crecimiento), círculo de menhires (+1 poder mágico) y percha de fénix (+1 crecimiento & iniciativa).
-- [x] **Colmena**: Incubadora de larvas (+25% Tier 1-3), nido de feromonas, nido del rey libélula (neurotoxina) y cámara de biomasa (sacrificio de prisioneros).
-- [x] **Cisma**: Portal de distorsión (teletransporte de guarniciones), monolito del vacío (-5 maná rival), cámara de resonancia astral y nexo de fallas de Vori.
+### 6.2. Moradas de Criaturas de Tier 1 a Tier 7 y Estructuras Exclusivas Canónicas
+- [x] **Mazmorra (Dungeon)**:
+  - Moradas: Cueva de Trogloditas (T1), Salón de Sombras (T2 Danzantes), Laberinto (T3 Minotauros), Nido de Escorpiones (T4), Cueva Abisal (T5 Hidras), Caverna de Quimeras (T6 Quimeras), Cúspide del Dragón (T7 Dragones Negros).
+  - Ramas de mejora duales (Branch A / Branch B) y estadísticas completas.
+  - Estructuras Especiales: Foso de Lucha (*Fighting Pit*), Vórtice de Maná (*Mana Vortex*), Trono del Laberinto (*Labyrinth Throne*).
+- [x] **Templo (Temple)**:
+  - Moradas: Cuartel de Milicia (T1), Campo de Tiro (T2 Ballesteros), Monasterio (T3 Clérigos), Salón de Espadas (T4 Espadachines), Establos Celestiales (T5 Caballeros), Bastión de Grifos (T6 Grifos), Catedral Radiante (T7 Ángeles).
+  - Estructuras Especiales: Altar del Sol Radiante (*Radiant Sun Altar*), Tribunal de la Fe (*Tribunal of Faith*), Baluarte de Luz (*Bulwark of Light*), Faro Sagrado (*Sacred Lighthouse*).
+- [x] **Necrópolis (Necropolis)**:
+  - Moradas: Criptas y Tumbas (T1 Esqueletos), Tumba de Guerreros (T2 Zombis), Perrera de Sabuesos (T3 Sabuesos de la Peste), Pabellón Silencioso (T4 Espíritus), Mansión Intemporal (T5 Liches), Château de los Festines (T6 Vampiros), Guarida de Dragones de Hueso (T7 Dragones de Hueso).
+  - Estructuras Especiales: Intercambio Óseo (*Bone Exchange*), Transformador de No-Muertos (*Undead Transformer*), Pozo de Almas (*Well of Souls*), Serpiente Eterna (*Everserpent - Santuario del Grial*).
+- [x] **Foresta / Arboleda (Sylvan / Grove)**:
+  - Moradas: Cabañas de Faunos (T1 Faunos), Semillero de Lúpulo (T2 Hoplitas), Círculo de Menhires (T3 Ninfas Iriyads), Estanque Floreciente (T4 Aqualotls), Choza de Madetahongo (T5 Herbomantes), Guarida del Trueno (T6 Qilins), Pira (T7 Fénix).
+  - Estructuras Especiales: Santuario de la Arboleda (*Grove Grail Sanctuary*).
+- [x] **Colmena / Enjambre (Hive / Swarm)**:
+  - Moradas: Vivienda Descuidada (T1 Larvas), Guarida de Carroña (T2 Carroñeros), Nido de Papel (T3 Avispas), Zigurat Quitináceo (T4 Mantis), Cúspide (T5 Horrores), Madrigueras de Almas Ardientes (T6 Gusanos de Magma), Torre del Amor (T7 Beelzebub / Rey Libélula).
+  - Estructuras Especiales: Santuario del Enjambre (*Hive Grail Sanctuary*).
+- [x] **Cisma (Schism)**:
+  - Moradas: Rito Menor de Invocación (T1 Cultistas), Aguja de los Cultistas (T2 Shoths), Establos de Aga'Shoth (T3 Jinetes Aga'Shoth), Rito Inquietante de Invocación (T4 Cóncubos), Casa de Cadenas (T5 Árbitros), Mansión Abotagada (T6 Enviados Abisales), Rito Supremo del Vacío (T7 Devoradores Cósmicos / Titanes).
+  - Estructuras Especiales: Santuario del Abismo (*Schism Grail Sanctuary*).
 
 ---
 
@@ -399,6 +436,9 @@ Cada criatura debe contar con los 12 parámetros cuantitativos contrastados:
 | *INC-005* | `/src/data/structures/*.ts` | Edificios cívicos con solo 2 o 3 niveles | Normalizado el patrón canónico de 4 niveles (500 -> 1.000 -> 2.000 -> 4.000 Oro/día) en las 6 facciones | `CORREGIDO` |
 | *INC-006* | `/src/data/structures/*.ts` | Herrería y estructuras únicas faltantes | Incorporada la Herrería canónica y estructuras exclusivas en Templo, Mazmorra, Necrópolis, Arboleda, Colmena y Cisma | `CORREGIDO` |
 | *INC-007* | `/src/components/CombatTactics.tsx` | Mención de Hombres Árbol/Treants y Dragones Esmeralda en Arboleda | Reemplazados por Hoplitas, Iriyads, Aqualotls, Qilins y Fénix canónicos de Jadame | `CORREGIDO` |
+| *INC-008* | `/src/data/townStructuresData.ts` & `/src/data/subskillsRecommendationData.ts` | Discrepancia de estructuras: `getStructuresForFaction` omitía `Foresta` y `Colmena` cayendo en default (Mazmorra / Palacio Bizantino); mención de Palacio Bizantino en subhabilidades genéricas | Añadidos casos `Foresta` y `Colmena` en selector de estructuras y normalizadas las recomendaciones de subhabilidades a términos neutrales de facción | `CORREGIDO` |
+| *INC-009* | `/src/data/structures/*.ts` & `CANON_CONTENT_AUDIT_CHECKLIST.md` | Inconsistencias en el centro cívico: omisión del 3.er nivel y anacronismos de entregas previas | Implementación del sistema cívico canónico de 3 niveles de *Olden Era* en las 6 facciones: Nivel I Town Hall (Asentamiento), Nivel II City Hall con elección de 1 de 3 especializaciones económicas (+1.000 Oro, Ley o Astrología), y Nivel III Metropolis ([Nombre] III, +1.000 Oro, Ley y Astrología adicionales), complementado con Banco (+500 Oro) y Tesorería (+2.000 Oro), Fortificaciones I-III (+50% y +100% crecimiento), Gremio de Magos I-V, Depósitos Alquímicos y moradas T1-T7 con ramas duales | `CORREGIDO` |
+| *INC-010* | `/src/data/structures/*.ts` & `CANON_CONTENT_AUDIT_CHECKLIST.md` | Prerrequisitos de la cadena comercial y de silos: Mercado no requería Taberna, Silo de Recursos omitía el Banco, y Silo Alquímico no requería el Silo de Recursos | Corregidos los prerrequisitos en las 6 facciones: Mercado requiere Taberna; Silo de Recursos requiere Mercado y Banco; Silo Alquímico requiere Silo de Recursos. Normalizada la nomenclatura canónica a "Silo de Recursos (Resource Silo)" y "Silo Alquímico (Alchemic Silo)" | `CORREGIDO` |
 
 ---
 

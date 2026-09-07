@@ -2,206 +2,238 @@ import { TownStructure } from '../../types';
 
 export const DUNGEON_STRUCTURES: TownStructure[] = [
   // =========================================================================
-  // CENTRO CÍVICO & PALACIO DE GOBIERNO (AYUNTAMIENTO / CAPITOLIO) - MULTI-NIVEL (1 a 4)
+  // CENTRO CÍVICO (AYUNTAMIENTO / ALCALDÍA CANÓNICA - 3 NIVELES)
   // =========================================================================
   {
     id: 'dungeon-byzantine-palace',
-    name: 'Palacio Bizantino (Ayuntamiento / Capitolio)',
-    nameEn: 'Byzantine Palace (Town Hall / Capitol)',
+    name: 'Palacio Bizantino (Ayuntamiento / Alcaldía - Niveles I, II y III)',
+    nameEn: 'Byzantine Palace (Town Hall / City Hall - Levels I, II & III)',
     category: 'Cívica y Economía',
     faction: 'Mazmorra',
-    cost: { gold: 5000 },
+    cost: { gold: 2500 },
     prerequisites: [],
     effects: [
-      'Sede señorial de los hechiceros oscuros y señores del inframundo.',
-      'Otorga al reino oro, puntos de ley y puntos de astrología al día. Aumenta el límite de héroes (si lo permite el escenario)',
-      'Se mejora a lo largo de 4 niveles cívicos: Asentamiento (500) -> Alcaldía (1.000) -> Ciudadela Cívica (2.000) -> Capitolio (4.000 Oro/día).'
+      'Sede señorial de los hechiceros oscuros y señores del inframundo estructurada en 3 niveles canónicos de desarrollo.',
+      'Otorga Oro, Puntos de Ley y Puntos de Astrología diarios incrementales, expandiendo la administración de la ciudad y el límite de héroes activos.',
+      'Al ascender a Nivel II permite elegir una mejora económica especializada (+1.000 Oro, +1.000 Ley o +1.000 Astrología), y el Nivel III (Palacio Bizantino III) consolida la metrópolis con la máxima producción cívica del reino.'
     ],
-    strategicTip: 'Mejora a Nivel II en el Día 2 para acelerar el desarrollo económico hacia Minotauros y Dragones Negros.',
-    timingRecommendation: 'Día 2-3 (Nivel II) / Semana 2 (Nivel III) / Semana 3 (Capitolio).',
+    strategicTip: 'Construir el Nivel II en Día 2-3 y ascender a Palacio Bizantino III en Semana 2 para sostener los altos costes de Minotauros y Dragones Negros.',
+    timingRecommendation: 'Día 1 (Nivel I) / Día 2-3 (Nivel II) / Semana 2 (Nivel III).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Asentamiento Subterráneo (Ayuntamiento)',
-        nameEn: 'Byzantine Settlement (Town Hall)',
-        cost: { gold: 5000 },
+        name: 'Nivel I: Asentamiento de Alvar (Town Hall)',
+        nameEn: 'Alvar Settlement (Town Hall)',
+        cost: { gold: 2500 },
         prerequisites: [],
-        effects: ['Otorga al reino 500 de oro, puntos de ley y puntos de astrología al día.', '+1 al límite de héroes.'],
-        bonusIncome: '+500 Oro, Puntos de ley, Puntos de astrología / día',
-        strategicTip: 'Asentamiento subterráneo inicial básico.'
+        effects: [
+          'Genera 1.000 de Oro, Puntos de Ley y Puntos de Astrología diarios.',
+          'Permite reclutar y gobernar la ciudad.'
+        ],
+        bonusIncome: '+1.000 Oro, Puntos de Ley, Puntos de Astrología / día',
+        strategicTip: 'Base cívica inicial de la Mazmorra.'
       },
       {
         level: 2,
-        name: 'Nivel II: Palacio Bizantino II (Alcaldía)',
+        name: 'Nivel II: Palacio Bizantino II (City Hall)',
         nameEn: 'Byzantine Palace II (City Hall)',
         cost: { gold: 2500, wood: 5, ore: 5 },
-        prerequisites: ['Palacio Bizantino (Ayuntamiento / Capitolio)'],
-        effects: ['Otorga al reino 1.000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora económica de nivel 1.'],
-        bonusIncome: '+1.000 Oro, Puntos de ley, Puntos de astrología / día',
-        strategicTip: 'Construir el Día 2 o 3 para estabilizar las finanzas de la Mazmorra.'
+        prerequisites: ['Mercado (Marketplace)'],
+        effects: [
+          'Otorga 1.000 de Oro, Puntos de Ley y Puntos de Astrología diarios.',
+          'Permite al jugador seleccionar una de las 3 mejoras económicas de Nivel 2 (+1.000 Oro/día, +1.000 Puntos de Ley/día, o +1.000 Puntos de Astrología/día).'
+        ],
+        bonusIncome: '+1.000 Oro, Puntos de Ley, Puntos de Astrología / día (+ mejora a elección)',
+        strategicTip: 'Construir en los primeros turnos para estabilizar las finanzas de la Mazmorra.'
       },
       {
         level: 3,
-        name: 'Nivel III: Palacio Bizantino III (Ciudadela Cívica)',
-        nameEn: 'Byzantine Palace III (Metropolis Hall)',
+        name: 'Nivel III: Palacio Bizantino III (Metropolis)',
+        nameEn: 'Byzantine Palace III (Metropolis)',
         cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Nivel II: Palacio Bizantino II (Alcaldía)'],
-        effects: ['Otorga al reino 2.000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora de nivel 2.'],
-        bonusIncome: '+2.000 Oro, Puntos de ley, Puntos de astrología / día',
-        strategicTip: 'Prioridad al inicio de la Semana 2 para sostener los costes de moradas altas.'
-      },
-      {
-        level: 4,
-        name: 'Nivel IV: Gran Capitolio de las Profundidades (Capitolio)',
-        nameEn: 'Grand Underworld Capitol',
-        cost: { gold: 10000, wood: 15, ore: 15 },
-        prerequisites: ['Nivel III: Palacio Bizantino III (Ciudadela Cívica)', 'Fortificaciones II (Ciudadela Militar)'],
+        prerequisites: ['Nivel II: Palacio Bizantino II (City Hall)'],
         effects: [
-          'Estructura suprema cívica de la Mazmorra. Solo se puede edificar 1 Capitolio por reino/jugador.',
-          'Otorga al reino 4.000 de oro al día, además de bonificación masiva de puntos de ley y astrología.'
+          'Máxima cúspide del centro cívico de la Mazmorra en Olden Era.',
+          'Otorga 1.000 de Oro, Puntos de Ley y Puntos de Astrología adicionales diarios para el reino.',
+          'Consolida la administración metropolitana y el potencial económico completo de la ciudad subterránea.'
         ],
-        bonusIncome: '+4.000 Oro, Puntos de ley supremos, Puntos de astrología / día',
-        strategicTip: 'Garantiza la solvencia económica para reclutar Dragones Negros y comprar hechizos de Nivel 5 cada semana.'
+        bonusIncome: '+1.000 Oro, Puntos de Ley, Puntos de Astrología / día adicionales',
+        strategicTip: 'Edificar en Semana 2 para garantizar un flujo continuo de oro y puntos cívicos para leyes avanzadas.'
       }
     ]
   },
 
   // =========================================================================
-  // FORTIFICACIONES (FUERTE / CIUDADELA MILITAR / CASTILLO) - MULTI-NIVEL
+  // BANCO Y TESORERÍA (ECONOMÍA SUPREMA DE OLDEN ERA)
+  // =========================================================================
+  {
+    id: 'dungeon-bank',
+    name: 'Banco (Bank)',
+    nameEn: 'Bank',
+    category: 'Cívica y Economía',
+    faction: 'Mazmorra',
+    cost: { gold: 2000, wood: 5, ore: 5 },
+    prerequisites: ['Mercado (Marketplace)', 'Palacio Bizantino (Ayuntamiento / Alcaldía)'],
+    effects: [
+      'Institución financiera que expande el flujo monetario de la Mazmorra.',
+      'Genera +500 de Oro diario adicional y es prerrequisito indispensable para edificar la Tesorería.'
+    ],
+    strategicTip: 'Paso obligatorio para desbloquear la Tesorería y duplicar los ingresos pasivos.',
+    timingRecommendation: 'Semana 1 (Día 5-6).',
+  },
+  {
+    id: 'dungeon-treasury',
+    name: 'Tesorería (Treasury)',
+    nameEn: 'Treasury',
+    category: 'Cívica y Economía',
+    faction: 'Mazmorra',
+    cost: { gold: 5000, wood: 10, ore: 10 },
+    prerequisites: ['Banco (Bank)', 'Mercado (Marketplace)', 'Fortificaciones (Fortifications)'],
+    effects: [
+      'Estructura económica suprema de Olden Era (equivalente canónico al Capitolio de la saga).',
+      'Genera +2.000 de Oro diario adicional de forma permanente para el reino.',
+      'Requiere haber consolidado el Banco, el Mercado y las Fortificaciones.'
+    ],
+    strategicTip: 'Garantiza la solvencia económica para reclutar Dragones Negros y comprar hechizos en el Observatorio Mágico cada semana.',
+    timingRecommendation: 'Semana 2.',
+  },
+
+  // =========================================================================
+  // FORTIFICACIONES (NIVELES I, II Y III)
   // =========================================================================
   {
     id: 'dungeon-fortifications',
-    name: 'Fortificaciones',
+    name: 'Fortificaciones (Fortifications)',
     nameEn: 'Fortifications',
     category: 'Fortificaciones',
     faction: 'Mazmorra',
-    cost: { gold: 2500, wood: 0, ore: 5 },
+    cost: { gold: 2500, ore: 5 },
     prerequisites: [],
     effects: [
-      'Proporciona una muralla durante los asedios.',
-      'Permite al constructor elegir mejoras defensivas.',
-      'Al mejorarse aumenta el crecimiento de tropas.'
+      'Proporciona murallas protectoras durante los asedios.',
+      'Permite al constructor elegir mejoras defensivas (trampas, almenas y aspilleras).',
+      'Al ascender a Niveles II y III incrementa masivamente el crecimiento de tropas (+50% y +100%).'
     ],
-    strategicTip: 'Mejorar a Ciudadela en el Día 7 de la Semana 1 para aumentar la producción de tropas del primer reset semanal.',
-    timingRecommendation: 'Fortificaciones (Día 1) / Fortificaciones II (Día 7) / Fortificaciones III (Semana 2).',
+    strategicTip: 'Mejorar a Nivel II en el Día 7 de la Semana 1 para aumentar la producción de tropas del primer reset semanal.',
+    timingRecommendation: 'Fortificaciones I (Día 1) / Fortificaciones II (Día 7) / Fortificaciones III (Semana 2).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Fortificaciones',
-        nameEn: 'Underground Fort',
-        cost: { gold: 2500, wood: 0, ore: 5 },
+        name: 'Nivel I: Fortificaciones (Fortifications)',
+        nameEn: 'Fortifications I',
+        cost: { gold: 2500, ore: 5 },
         prerequisites: [],
-        effects: ['Proporciona una muralla durante los asedios.', 'Permite al constructor elegir una mejora defensiva de nivel 1.'],
-        defenseBonus: 'Refuerzo de murallas, trampas o más salidas',
-        growthBonus: '',
-        strategicTip: 'Construir el Día 1 si no se inicia con él.'
+        effects: [
+          'Proporciona una muralla defensiva durante los asedios.',
+          'Permite elegir una mejora defensiva de nivel 1.'
+        ],
+        defenseBonus: 'Muralla perimetral de piedra',
+        strategicTip: 'Construir el Día 1 si la ciudad no inicia fortificada.'
       },
       {
         level: 2,
-        name: 'Nivel II: Fortificaciones II',
-        nameEn: 'Underworld Citadel',
+        name: 'Nivel II: Fortificaciones II (Citadel)',
+        nameEn: 'Fortifications II',
         cost: { gold: 2500, ore: 10 },
-        prerequisites: ['Nivel I: Fortificaciones'],
+        prerequisites: ['Nivel I: Fortificaciones (Fortifications)'],
         effects: [
-          'Añade dos torres a las almenas que disparan a los atacantes durante los asedios.',
-          'Permite al constructor elegir una mejora defensiva de nivel 2.',
-          'Aumenta la producción semanal de todas las criaturas de la Mazmorra en un +50% adicional.'
+          'Añade dos torres a las almenas que disparan automáticamente a los atacantes durante los asedios.',
+          'Aumenta la producción semanal de todas las criaturas de la Mazmorra en un +50%.'
         ],
-        defenseBonus: '2 Torres Defensivas',
-        growthBonus: '+50% Crecimiento semanal de tropas',
-        strategicTip: 'Construir el Día 7 de la Semana 1.'
+        defenseBonus: '2 Torres de disparo',
+        growthBonus: '+50% Crecimiento semanal de criaturas',
+        strategicTip: 'Construir el Día 7 de la Semana 1 sin falta.'
       },
       {
         level: 3,
-        name: 'Nivel III: Fortificaciones III',
-        nameEn: 'Shadow Castle',
-        cost: { gold: 5000, wood: 0, ore: 15 },
-        prerequisites: ['Nivel II: Fortificaciones II'],
+        name: 'Nivel III: Fortificaciones III (Castle)',
+        nameEn: 'Fortifications III',
+        cost: { gold: 5000, ore: 15 },
+        prerequisites: ['Nivel II: Fortificaciones II (Citadel)'],
         effects: [
-          'Añade una gran torre más a las almenas que dispara a los atacantes durante los asedios y se asienta junto a la muralla.',
-          'Permite al constructor elegir una mejora defensiva de nivel 3.',
-          'Duplica el crecimiento de todas las criaturas de la ciudad (+100% total).'
+          'Añade una gran torre central a las almenas con alcance total y mayor cadencia de disparo.',
+          'Duplica el crecimiento semanal de todas las criaturas de la ciudad (+100% total).'
         ],
-        defenseBonus: '1 Torre Defensiva',
-        growthBonus: '+100% Crecimiento semanal de tropas (Duplica producción)',
+        defenseBonus: 'Torre Central Mayor + foso subterráneo',
+        growthBonus: '+100% Crecimiento semanal de criaturas (duplica producción)',
         strategicTip: 'Esencial para duplicar la producción de Hidras y Dragones Negros.'
       }
     ]
   },
 
   // =========================================================================
-  // COFRADÍA DE MAGOS DE LA MAZMORRA - MULTI-NIVEL (1 a 5)
+  // GREMIO DE MAGOS (MAGE GUILD I A V) & CONEXIÓN AL OBSERVATORIO MÁGICO
   // =========================================================================
   {
     id: 'dungeon-mage-guild',
-    name: 'Cofradía de Magos del Inframundo (Mage Guild)',
+    name: 'Gremio de Magos (Mage Guild)',
     nameEn: 'Mage Guild',
     category: 'Magia & Cofradía',
     faction: 'Mazmorra',
     cost: { gold: 2000, wood: 5, ore: 5 },
     prerequisites: [],
     effects: [
-      'Gremio arcano subterráneo consagrado a la magia de Sombras, Fuego, Tierra y Destrucción Pura.',
-      'Enseña hechizos de implosión, meteoros y bolas de fuego a lo largo de 5 niveles.',
-      'Recarga el maná del héroe visitante al 100%.'
+      'Gremio arcano subterráneo interconectado con la red del Observatorio Mágico (Celestial Observatory).',
+      'Desbloquea hechizos aleatorios de Tiers 1 a 5 en el Observatorio Mágico del reino.',
+      'Cualquier héroe que visite la ciudad con Gremio de Magos aprende todos los hechizos desbloqueados y recarga su maná al 100%.'
     ],
-    strategicTip: 'El Nivel 1 es requisito para Voces Silenciadas (Medusas); el Nivel 2 es requisito para el Palacio de las Cavernas (Dragones Negros).',
-    timingRecommendation: 'Nivel 1 (Semana 1) / Nivel 2 (Día 5-6).',
+    strategicTip: 'Construir Nivel 1 en Semana 1 para desbloquear hechizos y como requisito para moradas medias; Nivel 2 es requisito para el Palacio de las Cavernas.',
+    timingRecommendation: 'Nivel 1 (Semana 1) / Nivel 2 (Día 5-6) / Niveles 3-5 (Semanas 2-4).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel 1: Cámara de Conjuros Oscuros',
+        name: 'Gremio de Magos Nivel 1',
         nameEn: 'Mage Guild Level 1',
         cost: { gold: 2000, wood: 5, ore: 5 },
         prerequisites: [],
-        effects: ['Enseña 5 hechizos de Nivel 1 (Flecha Mágica, Maldición, Piel de Piedra, etc.).', 'Otorga Libro de Hechizos.'],
-        strategicTip: 'Requisito para Voces Silenciadas y Ciudadela Cívica.'
+        effects: ['Desbloquea hechizos de Nivel 1 en el Observatorio Mágico.', 'Otorga Libro de Hechizos y recarga maná al 100%.'],
+        strategicTip: 'Requisito para Voces Silenciadas (Tier 5).'
       },
       {
         level: 2,
-        name: 'Nivel 2: Círculo de Hechiceros Ctónicos',
+        name: 'Gremio de Magos Nivel 2',
         nameEn: 'Mage Guild Level 2',
         cost: { gold: 1000, wood: 5, ore: 5, gems: 4 },
-        prerequisites: ['Nivel 1: Cámara de Conjuros Oscuros'],
-        effects: ['Enseña 4 hechizos de Nivel 2 (Rayo Relámpago, Celeridad, Bola de Fuego, etc.).', 'Requisito para Dragones Negros (Tier 7).'],
+        prerequisites: ['Gremio de Magos Nivel 1'],
+        effects: ['Desbloquea hechizos de Nivel 2 en el Observatorio Mágico.', 'Requisito para el Palacio de las Cavernas (Dragones Negros).'],
         strategicTip: 'Construir antes del Día 6 para Tier 7 Rush.'
       },
       {
         level: 3,
-        name: 'Nivel 3: Sanctum de la Tierra Profunda',
+        name: 'Gremio de Magos Nivel 3',
         nameEn: 'Mage Guild Level 3',
         cost: { gold: 1000, wood: 5, ore: 5, gems: 6 },
-        prerequisites: ['Nivel 2: Círculo de Hechiceros Ctónicos'],
-        effects: ['Enseña 3 hechizos de Nivel 3 (Lluvia de Meteoros, Animar Muertos, Escudo Ígneo).'],
-        strategicTip: 'La Lluvia de Meteoros es devastadora en manos de hechiceros de Mazmorra.'
+        prerequisites: ['Gremio de Magos Nivel 2'],
+        effects: ['Desbloquea hechizos de Nivel 3 de las 5 escuelas canónicas en el Observatorio Mágico.'],
+        strategicTip: 'Acceso a hechizos destructivos de área.'
       },
       {
         level: 4,
-        name: 'Nivel 4: Cónclave de la Magia Negra',
+        name: 'Gremio de Magos Nivel 4',
         nameEn: 'Mage Guild Level 4',
         cost: { gold: 1000, wood: 5, ore: 5, gems: 8 },
-        prerequisites: ['Nivel 3: Sanctum de la Tierra Profunda'],
-        effects: ['Enseña 2 hechizos de Nivel 4 (Cadena de Relámpagos, Puerta Dimensional Menor).'],
-        strategicTip: 'Cadena de Relámpagos y hechizos de asedio.'
+        prerequisites: ['Gremio de Magos Nivel 3'],
+        effects: ['Desbloquea hechizos mayores de Nivel 4 en el Observatorio Mágico.'],
+        strategicTip: 'Hechizos tácticos decisivos de late game.'
       },
       {
         level: 5,
-        name: 'Nivel 5: Abismo del Armagedón',
+        name: 'Gremio de Magos Nivel 5',
         nameEn: 'Mage Guild Level 5',
         cost: { gold: 1000, wood: 5, ore: 5, gems: 10 },
-        prerequisites: ['Nivel 4: Cónclave de la Magia Negra'],
-        effects: ['Enseña 2 hechizos de Nivel 5 de máxima aniquilación (Armagedón, Implosión Pura).'],
-        strategicTip: 'La combinación definitiva: Lanzar Armagedón con Dragones Negros inmunes a la magia.'
+        prerequisites: ['Gremio de Magos Nivel 4'],
+        effects: ['Desbloquea hechizos supremos de Nivel 5 de máxima devastación.'],
+        strategicTip: 'Magia de aniquilación absoluta combinada con la inmunidad mágica de los Dragones Negros.'
       }
     ]
   },
 
   // =========================================================================
-  // SERVICIOS CÍVICOS & ECONOMÍA
+  // SERVICIOS CÍVICOS, COMERCIO Y DEPÓSITOS
   // =========================================================================
   {
     id: 'dungeon-tavern',
-    name: 'Taberna de los Gremios Clandestinos (Tavern)',
+    name: 'Taberna (Tavern)',
     nameEn: 'Tavern',
     category: 'Cívica y Economía',
     faction: 'Mazmorra',
@@ -209,62 +241,76 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
     prerequisites: [],
     effects: [
       'Aumenta la moral de la guarnición en +1.',
-      'Permite contratar nuevos señores supremos (Overlords) y brujos de las profundidades.',
-      'Desbloquea la red clandestina de espionaje.'
+      'Permite reclutar héroes adicionales (Overlords y Brujos) para explorar y recolectar en el mapa.',
+      'Permite escuchar rumores de taberna e informes de inteligencia.'
     ],
     strategicTip: 'Construir el Día 1 para reclutar un segundo héroe recolector inmediatamente.',
     timingRecommendation: 'Día 1.',
   },
   {
     id: 'dungeon-marketplace',
-    name: 'Mercado Negro Subterráneo (Marketplace)',
+    name: 'Mercado (Marketplace)',
     nameEn: 'Marketplace',
     category: 'Cívica y Economía',
     faction: 'Mazmorra',
     cost: { gold: 500, wood: 5 },
-    prerequisites: [],
+    prerequisites: ['Taberna (Tavern)'],
     effects: [
-      'Permite intercambiar recursos y oro en el mercado clandestino.',
-      'Mejora las tasas de intercambio conforme se controlan más ciudades.',
-      'Permite canjear madera y mineral por Gemas y Oro.'
+      'Permite intercambiar recursos y oro en el mercado subterráneo.',
+      'Las tasas de intercambio mejoran conforme el jugador controla más Mercados en su reino.',
+      'Permite canjear madera y mineral sobrante por Gemas raras.'
     ],
     strategicTip: 'Construir en Semana 1 para canjear recursos por Gemas para el Palacio de las Cavernas.',
     timingRecommendation: 'Semana 1 (Día 3-5).',
   },
   {
-    id: 'dungeon-alchemical-depot',
-    name: 'Depósito Alquímico de Gemas (Alchemic Depot)',
-    nameEn: 'Alchemic Depot',
+    id: 'dungeon-artifact-merchant',
+    name: 'Comerciante de Artefactos (Artifact Merchant)',
+    nameEn: 'Artifact Merchant',
     category: 'Cívica y Economía',
     faction: 'Mazmorra',
-    cost: { gold: 0, gems: 3, crystal: 3, mercury: 3 },
-    prerequisites: ['Mercado Negro Subterráneo (Marketplace)'],
+    cost: { gold: 2000, wood: 5, ore: 5 },
+    prerequisites: ['Mercado (Marketplace)'],
     effects: [
-      'Genera +1 Gema diaria de forma pasiva (recurso raro principal de la Mazmorra).',
-      'Asegura el suministro continuo de gemas para la Cofradía de Magos y Dragones Negros.'
+      'Establece una tienda permanente de artefactos mágicos en la ciudad.',
+      'Permite comprar y vender artefactos de distintos tiers para equipar a los comandantes de la Mazmorra.'
     ],
-    strategicTip: 'Construir en cuanto se tengan 3 de cada recurso raro secundario.',
+    strategicTip: 'Permite convertir oro excedente en artefactos de poder o vender objetos secundarios para financiar tropas.',
     timingRecommendation: 'Semana 2.',
   },
   {
-    id: 'dungeon-blacksmith',
-    name: 'Herrería Subterránea (Blacksmith)',
-    nameEn: 'Blacksmith',
+    id: 'dungeon-resource-silo',
+    name: 'Silo de Recursos (Resource Silo)',
+    nameEn: 'Resource Silo',
     category: 'Cívica y Economía',
     faction: 'Mazmorra',
-    cost: { gold: 1000, wood: 5 },
-    prerequisites: [],
+    cost: { gold: 0, crystal: 3, mercury: 3 },
+    prerequisites: ['Mercado (Marketplace)', 'Banco (Bank)'],
     effects: [
-      'Permite adquirir la Balista de Repetición (Ballista) subterránea para el héroe por 2.500 de oro.',
-      'La balista dispara proyectiles de acero oscuro que ignoran un 20% de la armadura enemiga y escala con la habilidad de Artillería.',
-      'Repara máquinas de asedio dañadas tras cada batalla.'
+      'Genera +1 Gema diaria de forma pasiva (recurso raro principal de la Mazmorra).',
+      'Asegura el suministro continuo de gemas para la Cofradía de Magos y los Dragones Negros.'
     ],
-    strategicTip: 'La Balista de la Mazmorra acelera la limpieza de tropas neutrales de rango medio sin arriesgar tropas vivas.',
-    timingRecommendation: 'Día 2-4.',
+    strategicTip: 'Requiere Mercado y Banco. Construir en cuanto se tengan 3 de cada recurso raro secundario para asegurar gemas continuas.',
+    timingRecommendation: 'Semana 2.',
+  },
+  {
+    id: 'dungeon-alchemical-silo',
+    name: 'Silo Alquímico (Alchemic Silo)',
+    nameEn: 'Alchemic Silo',
+    category: 'Cívica y Economía',
+    faction: 'Mazmorra',
+    cost: { gold: 2000, ore: 5, gems: 2 },
+    prerequisites: ['Silo de Recursos (Resource Silo)'],
+    effects: [
+      'Produce Polvo Alquímico (Alchemical Dust) diariamente.',
+      'El Polvo Alquímico es el recurso canónico esencial de Olden Era necesario para mejorar moradas de criaturas y ascender hechizos en el Observatorio Mágico.'
+    ],
+    strategicTip: 'Requiere el Silo de Recursos. Crucial para desbloquear las mejoras maestras de criaturas sin depender exclusivamente de depósitos en el mapa.',
+    timingRecommendation: 'Semana 2.',
   },
 
   // =========================================================================
-  // MORADAS DE CRIATURAS (TIER 1 A 7) CON MEJORAS Y DOBLE RAMA
+  // MORADAS DE CRIATURAS (TIER 1 A 7) CANÓNICAS DE OLDEN ERA
   // =========================================================================
   {
     id: 'dungeon-warren',
@@ -273,103 +319,112 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
     category: 'Moradas de Criaturas',
     faction: 'Mazmorra',
     tier: 1,
-    cost: { gold: 1250, ore: 5 },
+    dwellingTier: 1,
+    cost: { gold: 500, ore: 5 },
     dwellingUpgradeCost: { gold: 1000, ore: 5 },
-    prerequisites: ['Fortificaciones I (Fuerte)'],
+    prerequisites: ['Fortificaciones (Fortifications)'],
     unitRecruitedBase: 'Troglodita (Troglodyte)',
-    unitRecruited: 'Troglodita / Troglodita Infernal',
+    unitRecruited: 'Troglodita / Troglodita Ciego / Troglodita Feroz',
     unitUpgrades: {
-      branchA: 'Troglodita Ciego (Inmunidad total a ceguera, mirada petrificante y control mental)',
-      branchB: 'Troglodita Feroz (Garras venenosas con daño adicional a unidades aturdidas)',
+      branchA: 'Troglodita Ciego (Inmunidad a ceguera, mirada petrificante y control mental)',
+      branchB: 'Troglodita Feroz (Mayor ataque y frenesí subterráneo ofensivo)',
       branchADetails: {
-        unitName: 'Troglodita Ciego (Infernal Troglodyte)',
+        unitName: 'Troglodita Ciego',
+        nameEn: 'Infernal Troglodyte',
         role: 'Infantería Inmune a Efectos Oculares',
-        keyAbilities: ['Ceguera Absoluta (Inmune a Cegar, Mirada de Medusa y Control Mental)', 'Sentido de Eco'],
+        keyAbilities: ['Ceguera Absoluta (Inmune a Cegar y Mirada Petrificante)', 'Sentido de Eco'],
         statsBonus: '+2 Defensa, +3 Vida'
       },
       branchBDetails: {
-        unitName: 'Troglodita Feroz (Feral Troglodyte)',
+        unitName: 'Troglodita Feroz',
+        nameEn: 'Feral Troglodyte',
         role: 'Asaltante Ofensivo Rápido',
-        keyAbilities: ['Garras Venenosas (Daño extra contra unidades con estados negativos)', 'Frenesí Subterráneo'],
+        keyAbilities: ['Frenesí Subterráneo', 'Garras Afiladas'],
         statsBonus: '+3 Ataque, +1 Iniciativa'
       }
     },
     effects: [
-      'Recluta tropas de Tier 1 inmunes a efectos de ceguera.',
-      'Producción base: 14 unidades por semana (+50% con Ciudadela, +100% con Castillo).'
+      'Recluta tropas de Tier 1 de la Mazmorra.',
+      'Producción base: 14 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Perfectos para enfrentarse a criaturas con habilidades de control ocular como Medusas o Gorgonas.',
-    timingRecommendation: 'Día 1.',
+    strategicTip: 'Unidades baratas e inmunes a ceguera ideales para absorber contraataques enemigos tempranos.',
+    timingRecommendation: 'Día 1-2.',
   },
   {
-    id: 'dungeon-safehouse',
-    name: 'Piso Franco (Safehouse)',
-    nameEn: 'Safehouse',
+    id: 'dungeon-safe-house',
+    name: 'Piso Franco (Safe House)',
+    nameEn: 'Safe House',
     category: 'Moradas de Criaturas',
     faction: 'Mazmorra',
     tier: 2,
-    cost: { gold: 1750, wood: 5, ore: 5 },
-    dwellingUpgradeCost: { gold: 1250, wood: 5 },
+    dwellingTier: 2,
+    cost: { gold: 1000, wood: 5 },
+    dwellingUpgradeCost: { gold: 1000, wood: 5 },
     prerequisites: ['Madriguera (Warren)'],
     unitRecruitedBase: 'Acechador (Stalker)',
-    unitRecruited: 'Acechador / Asesino de las Sombras',
+    unitRecruited: 'Acechador / Sombra Subterránea / Asesino Oscuro',
     unitUpgrades: {
-      branchA: 'Asesino de las Sombras (Invisibilidad en el primer turno y ataque crítico por la espalda)',
-      branchB: 'Tirador Venenoso (Ataque a distancia con proyectiles de veneno paralizante)',
+      branchA: 'Sombra Subterránea (Sigilo e invisibilidad inicial en el campo de batalla)',
+      branchB: 'Asesino Oscuro (Ataques venenosos que ignoran un porcentaje de armadura)',
       branchADetails: {
-        unitName: 'Asesino de las Sombras (Shadow Assassin)',
-        role: 'Asesino Sigiloso de Flanqueo',
-        keyAbilities: ['Invisibilidad Táctica (Invisible hasta atacar)', 'Puñalada Trapera (+50% daño si golpea por la espalda)'],
-        statsBonus: '+4 Ataque, +2 Iniciativa'
+        unitName: 'Sombra Subterránea',
+        nameEn: 'Underground Shade',
+        role: 'Emboscador Sigiloso',
+        keyAbilities: ['Invisibilidad Temporal', 'Primer Golpe Sorpresa'],
+        statsBonus: '+2 Ataque, +2 Velocidad'
       },
       branchBDetails: {
-        unitName: 'Tirador de Sombras (Shadow Sniper)',
-        role: 'Tirador Envenenador a Distancia',
-        keyAbilities: ['Dardos Envenenados (Aplica veneno de daño continuo)', 'Disparo sin penalización a rango medio'],
-        statsBonus: '+3 Ataque a Distancia, +2 Defensa'
+        unitName: 'Asesino Oscuro',
+        nameEn: 'Dark Assassin',
+        role: 'Flanqueador Venenoso',
+        keyAbilities: ['Veneno Debilitante', 'Disparo de Ballesta Sigilosa'],
+        statsBonus: '+3 Ataque, +1 Iniciativa'
       }
     },
     effects: [
-      'Recluta tropas de Tier 2 letales con capacidades de sigilo y veneno.',
-      'Producción base: 9 unidades por semana.'
+      'Recluta unidades de sigilo y escaramuza de Tier 2.',
+      'Producción base: 9 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Aprovecha su invisibilidad para rodear a los tiradores rivales y eliminarlos en un turno.',
-    timingRecommendation: 'Día 2.',
+    strategicTip: 'Esenciales para eliminar tiradores enemigos en combates tácticos sin recibir represalias.',
+    timingRecommendation: 'Día 2-3.',
   },
   {
-    id: 'dungeon-amphitheatre',
-    name: 'Anfiteatro (Amphitheatre)',
-    nameEn: 'Amphitheatre',
+    id: 'dungeon-amphitheater',
+    name: 'Anfiteatro (Amphitheater)',
+    nameEn: 'Amphitheater',
     category: 'Moradas de Criaturas',
     faction: 'Mazmorra',
     tier: 3,
-    cost: { gold: 1000, ore: 5, gems: 2, crystal: 2, mercury: 2 },
-    dwellingUpgradeCost: { gold: 1500, gems: 2 },
-    prerequisites: ['Piso Franco (Safehouse)'],
-    unitRecruitedBase: 'Arpía (Harpy)',
-    unitRecruited: 'Arpía / Bruja Arpía',
+    dwellingTier: 3,
+    cost: { gold: 1500, ore: 5 },
+    dwellingUpgradeCost: { gold: 1500, ore: 5 },
+    prerequisites: ['Piso Franco (Safe House)'],
+    unitRecruitedBase: 'Medusa',
+    unitRecruited: 'Medusa / Medusa Petrificadora / Medusa Reina',
     unitUpgrades: {
-      branchA: 'Bruja Arpía (Ataque y regreso inmediato a la casilla de inicio sin contraataque)',
-      branchB: 'Arpía Maliciosa (Grito ensordecedor que reduce la iniciativa y el ataque enemigo)',
+      branchA: 'Medusa Petrificadora (Mirada petrificante de rango que paraliza a la víctima)',
+      branchB: 'Medusa Reina (Tiradora de flechas venenosas con combate cuerpo a cuerpo sin penalización)',
       branchADetails: {
-        unitName: 'Bruja Arpía (Harpy Hag)',
-        role: 'Voladora Intocable de Ataque y Regreso',
-        keyAbilities: ['Ataque y Regreso (Vuela, golpea y vuelve a su casilla original)', 'Sin Contraataque Enemigo'],
-        statsBonus: '+3 Ataque, +2 Velocidad'
+        unitName: 'Medusa Petrificadora',
+        nameEn: 'Petrifying Medusa',
+        role: 'Controladora de Masas',
+        keyAbilities: ['Mirada Petrificante (20% prob. de petrificar al objetivo)', 'Sin penalización de combate cerrado'],
+        statsBonus: '+3 Defensa, +5 Vida'
       },
       branchBDetails: {
-        unitName: 'Arpía Chillona (Screeching Harpy)',
-        role: 'Hostigadora de Control de Iniciativa',
-        keyAbilities: ['Grito Aterrador (-20% Iniciativa al objetivo)', 'Ataque Rápido'],
-        statsBonus: '+2 Velocidad, +3 Iniciativa, +4 Vida'
+        unitName: 'Medusa Reina',
+        nameEn: 'Medusa Queen',
+        role: 'Tiradora Pesada Letal',
+        keyAbilities: ['Disparo Venenoso Perforante', 'Munición Expandida'],
+        statsBonus: '+4 Ataque, +8 Disparos'
       }
     },
     effects: [
-      'Recluta unidades voladoras de Tier 3 con la mejor movilidad táctica del juego.',
-      'Producción base: 8 unidades por semana.'
+      'Recluta tropas tiradoras y de control de Tier 3.',
+      'Producción base: 6 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'La Bruja Arpía puede debilitar a cualquier unidad enemiga cuerpo a cuerpo sin sufrir una sola baja.',
-    timingRecommendation: 'Día 3.',
+    strategicTip: 'La petrificación neutraliza colosos enemigos durante rondas enteras permitiendo concentrar daño.',
+    timingRecommendation: 'Día 3-4.',
   },
   {
     id: 'dungeon-labyrinth',
@@ -378,33 +433,36 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
     category: 'Moradas de Criaturas',
     faction: 'Mazmorra',
     tier: 4,
-    cost: { gold: 4000, wood: 5, ore: 10 },
-    dwellingUpgradeCost: { gold: 2000, ore: 5 },
-    prerequisites: ['Anfiteatro (Amphitheatre)'],
+    dwellingTier: 4,
+    cost: { gold: 2500, ore: 10, gems: 2 },
+    dwellingUpgradeCost: { gold: 2000, ore: 5, gems: 2 },
+    prerequisites: ['Anfiteatro (Amphitheater)'],
     unitRecruitedBase: 'Minotauro (Minotaur)',
-    unitRecruited: 'Minotauro / Rey Minotauro',
+    unitRecruited: 'Minotauro / Minotauro Gladiador / Minotauro del Laberinto',
     unitUpgrades: {
-      branchA: 'Rey Minotauro (Moral siempre positiva que nunca baja de +1 y doble hachazo demoledor)',
-      branchB: 'Minotauro Gladiador (Bloqueo de escudo y contragolpe con daño aumentado)',
+      branchA: 'Minotauro Gladiador (Moral indomable permanente y contragolpe devastador)',
+      branchB: 'Minotauro del Laberinto (Ataque en hendidura de hacha que golpea a tres casillas colindantes)',
       branchADetails: {
-        unitName: 'Rey Minotauro (Minotaur King)',
-        role: 'Infantería Pesada de Moral Inquebrantable',
-        keyAbilities: ['Moral Suprema (Moral siempre positiva en mínimo +1)', 'Doble Hachazo Brutal', 'Fuerza Inmisericorde'],
+        unitName: 'Minotauro Gladiador',
+        nameEn: 'Gladiator Minotaur',
+        role: 'Infantería Pesada Inquebrantable',
+        keyAbilities: ['Moral Indomable (Nunca sufre moral negativa)', 'Contragolpe Feroz (+25% daño de contragolpe)'],
         statsBonus: '+4 Ataque, +3 Defensa, +10 Vida'
       },
       branchBDetails: {
-        unitName: 'Gladiador de Laberinto (Labyrinth Gladiator)',
-        role: 'Tanque Ofensivo de Represalia Devastadora',
-        keyAbilities: ['Contragolpe Feroz (+30% daño en contraataque)', 'Escudo Pesado (-20% daño recibido)'],
-        statsBonus: '+5 Defensa, +12 Vida'
+        unitName: 'Minotauro del Laberinto',
+        nameEn: 'Labyrinth Minotaur',
+        role: 'Destructor de Área',
+        keyAbilities: ['Hendidura de Hacha (Daña objetivos adyacentes)', 'Rompemuros'],
+        statsBonus: '+5 Ataque, +1 Iniciativa'
       }
     },
     effects: [
-      'Recluta la infantería pesada más consistente y letal de Tier 4.',
-      'Producción base: 5 unidades por semana.'
+      'Recluta la infantería pesada más consistente de la Mazmorra (Tier 4).',
+      'Producción base: 4 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Su moral siempre positiva garantiza turnos dobles frecuentes y nunca sufre penalizadores de moral.',
-    timingRecommendation: 'Día 4.',
+    strategicTip: 'Eje del ejército en combates de media partida; su moral positiva permanente garantiza ataques continuados.',
+    timingRecommendation: 'Día 4-5 de la Semana 1.',
   },
   {
     id: 'dungeon-stilled-voices',
@@ -413,33 +471,36 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
     category: 'Moradas de Criaturas',
     faction: 'Mazmorra',
     tier: 5,
-    cost: { gold: 2250, wood: 5, gems: 3, crystal: 3, mercury: 3 },
-    dwellingUpgradeCost: { gold: 2500, gems: 4 },
-    prerequisites: ['Laberinto (Labyrinth)', 'Cofradía de Magos Nivel 1 (Mage Guild Level 1)'],
-    unitRecruitedBase: 'Medusa (Medusa)',
-    unitRecruited: 'Medusa / Reina Medusa',
+    dwellingTier: 5,
+    cost: { gold: 3500, ore: 10, gems: 4 },
+    dwellingUpgradeCost: { gold: 3000, ore: 5, gems: 3 },
+    prerequisites: ['Laberinto (Labyrinth)', 'Gremio de Magos (Mage Guild)'],
+    unitRecruitedBase: 'Susurrador / Estrigoi (Whisperer / Strigoi)',
+    unitRecruited: 'Susurrador / Estrigoi Sombrío / Espectro Ctónico',
     unitUpgrades: {
-      branchA: 'Reina Medusa (Mirada petrificante en cuerpo a cuerpo y disparos ilimitados sin penalización a corta distancia)',
-      branchB: 'Medusa Hechicera (Flechas mágicas que lanzan maldiciones y agotan el maná enemigo)',
+      branchA: 'Estrigoi Sombrío (Drenaje vampírico de vida y regeneración en combate)',
+      branchB: 'Espectro Ctónico (Aura de silencio que anula conjuros enemigos en casillas colindantes)',
       branchADetails: {
-        unitName: 'Reina Medusa (Medusa Queen)',
-        role: 'Tiradora y Petrificadora en Combate Cercano',
-        keyAbilities: ['Mirada Petrificante (25% prob. de petrificar en cuerpo a cuerpo por 3 turnos)', 'Sin penalización en combate cercano', 'Munición Ilimitada'],
-        statsBonus: '+4 Ataque, +3 Defensa, +10 Vida'
+        unitName: 'Estrigoi Sombrío',
+        nameEn: 'Shadow Strigoi',
+        role: 'Hostigador Vampírico',
+        keyAbilities: ['Drenaje de Sangre', 'Vuelo Espectral'],
+        statsBonus: '+4 Ataque, +15 Vida'
       },
       branchBDetails: {
-        unitName: 'Medusa Arcana (Arcane Gorgon Queen)',
-        role: 'Tiradora Maldita y Drenadora',
-        keyAbilities: ['Flechas Malditas (Aplica Lentitud o Debilidad)', 'Drena 2 Maná por impacto a distancia'],
-        statsBonus: '+3 Ataque a Distancia, +2 Poder Mágico'
+        unitName: 'Espectro Ctónico',
+        nameEn: 'Chthonic Wraith',
+        role: 'Anti-Hechicero',
+        keyAbilities: ['Aura de Silencio Arcano', 'Evasión de Ataques Físicos'],
+        statsBonus: '+3 Defensa, +2 Iniciativa'
       }
     },
     effects: [
-      'Recluta tiradoras híbridas de Tier 5 temibles a cualquier distancia.',
-      'Producción base: 4 unidades por semana.'
+      'Recluta criaturas espectrales voladoras de Tier 5.',
+      'Producción base: 3 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Si los enemigos se acercan a atacarla cuerpo a cuerpo, la petrificación los dejará congelados 3 turnos.',
-    timingRecommendation: 'Día 5.',
+    strategicTip: 'Excelente movilidad para anular la hechicería enemiga y flanquear defensas.',
+    timingRecommendation: 'Día 6 o inicio de Semana 2.',
   },
   {
     id: 'dungeon-chthonic-home',
@@ -448,152 +509,110 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
     category: 'Moradas de Criaturas',
     faction: 'Mazmorra',
     tier: 6,
-    cost: { gold: 4000, wood: 10, ore: 5, gems: 10 },
-    dwellingUpgradeCost: { gold: 3500, gems: 5 },
+    dwellingTier: 6,
+    cost: { gold: 5000, ore: 15, gems: 6 },
+    dwellingUpgradeCost: { gold: 4000, ore: 10, gems: 4 },
     prerequisites: ['Voces Silenciadas (Stilled Voices)'],
     unitRecruitedBase: 'Hidra (Hydra)',
-    unitRecruited: 'Hidra / Hidra del Caos',
+    unitRecruited: 'Hidra / Hidra del Caos / Hidra de las Profundidades',
     unitUpgrades: {
-      branchA: 'Hidra del Caos (Ataque a todos los enemigos adyacentes a la vez sin recibir contraataque)',
-      branchB: 'Hidra de Magma (Regeneración masiva al recibir daño de fuego y aliento de lava en cono)',
+      branchA: 'Hidra del Caos (Ataque a todos los enemigos circundantes sin recibir contragolpe)',
+      branchB: 'Hidra de las Profundidades (Regeneración de cabezas y daño corrosivo por turno)',
       branchADetails: {
-        unitName: 'Hidra del Caos (Chaos Hydra)',
-        role: 'Coloso de Área Múltiple Sin Represalia',
-        keyAbilities: ['Ataque a Todos los Adyacentes (Golpea a todas las casillas circundantes)', 'Sin Contraataque Enemigo'],
-        statsBonus: '+4 Ataque, +4 Defensa, +30 Vida'
+        unitName: 'Hidra del Caos',
+        nameEn: 'Chaos Hydra',
+        role: 'Picadora Multicabezas de Melé',
+        keyAbilities: ['Ataque a Todos los Enemigos Adyacentes', 'Sin Contragolpe Enemigo'],
+        statsBonus: '+5 Ataque, +3 Defensa, +25 Vida'
       },
       branchBDetails: {
-        unitName: 'Hidra de Magma (Magma Hydra)',
-        role: 'Tanque Volcánico Regenerativo',
-        keyAbilities: ['Aliento de Lava en Cono (Daña a 3 casillas frontales)', 'Inmunidad al Fuego y Regenera con Hechizos Ígneos'],
-        statsBonus: '+5 Ataque, +40 Vida'
+        unitName: 'Hidra de las Profundidades',
+        nameEn: 'Deep Hydra',
+        role: 'Tanque Regenerativo',
+        keyAbilities: ['Regeneración de Cabezas (+20 HP/ronda)', 'Mordedura Ácida'],
+        statsBonus: '+6 Defensa, +40 Vida'
       }
     },
     effects: [
-      'Recluta monstruos gigantes de múltiples cabezas de Tier 6.',
-      'Producción base: 2 unidades por semana.'
+      'Recluta los monstruos multicabezas de asedio de Tier 6.',
+      'Producción base: 2 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Teletranspórtala al centro del ejército enemigo con magia para que sus múltiples cabezas destruyan varios stacks de un solo golpe.',
-    timingRecommendation: 'Día 6.',
+    strategicTip: 'Teletransportar a la Hidra en medio de tres pilas enemigas causa un destrozo masivo sin recibir represalias.',
+    timingRecommendation: 'Semana 2.',
   },
   {
-    id: 'dungeon-cavern-palace',
-    name: 'Palacio de las Cavernas (Cavern Palace)',
-    nameEn: 'Cavern Palace',
+    id: 'dungeon-cave-palace',
+    name: 'Palacio de las Cavernas (Cave Palace)',
+    nameEn: 'Cave Palace',
     category: 'Moradas de Criaturas',
     faction: 'Mazmorra',
     tier: 7,
-    cost: { gold: 15000, wood: 10, ore: 10, gems: 15 },
-    dwellingUpgradeCost: { gold: 10000, gems: 10 },
-    prerequisites: ['Hogar Ctónico (Chthonic Home)', 'Cofradía de Magos Nivel 2 (Mage Guild Level 2)'],
+    dwellingTier: 7,
+    cost: { gold: 10000, ore: 20, gems: 10 },
+    dwellingUpgradeCost: { gold: 8000, ore: 15, gems: 8 },
+    prerequisites: ['Hogar Ctónico (Chthonic Home)', 'Gremio de Magos (Mage Guild)'],
     unitRecruitedBase: 'Dragón Rojo (Red Dragon)',
-    unitRecruited: 'Dragón Rojo / Dragón Negro',
+    unitRecruited: 'Dragón Rojo / Dragón Negro / Dragón de las Sombras',
     unitUpgrades: {
-      branchA: 'Dragón Negro (Inmunidad total al 100% de la magia del juego y aliento de fuego abrasador de 2 casillas)',
-      branchB: 'Dragón de las Sombras (Aura de oscuridad que potencia los hechizos de Sombras del héroe y vuelo veloz)',
+      branchA: 'Dragón Negro (Inmunidad total a toda la magia y aliento ígneo de 2 hexágonos)',
+      branchB: 'Dragón de las Sombras (Aura de daño oscuro amplificada y reducción de defensa enemiga)',
       branchADetails: {
-        unitName: 'Dragón Negro (Black Dragon)',
-        role: 'Coloso Aéreo Supremo con Inmunidad Mágica Total',
-        keyAbilities: ['Inmunidad Mágica Absoluta (100% inmune a todos los hechizos positivos y negativos)', 'Aliento de Fuego (Daña 2 casillas en línea)', 'Vuelo Veloz'],
-        statsBonus: '+6 Ataque, +6 Defensa, +60 Vida, +3 Velocidad'
+        unitName: 'Dragón Negro',
+        nameEn: 'Black Dragon',
+        role: 'Coloso Aéreo Supremo e Inmune a la Magia',
+        keyAbilities: ['Inmunidad Mágica Total', 'Aliento de Fuego (Atraviesa 2 hexágonos)'],
+        statsBonus: '+10 Ataque, +10 Defensa, +100 Vida'
       },
       branchBDetails: {
-        unitName: 'Dragón de las Sombras (Shadow Dragon)',
-        role: 'Coloso Aéreo y Canalizador de Destrucción',
-        keyAbilities: ['Aliento Corrosivo de Sombras (Reduce defensa en un 30%)', 'Aura de Hechicería Oscura (+25% daño de magia de Sombras)', 'Inmunidad a Hechizos de Nivel 1 a 4'],
-        statsBonus: '+8 Ataque, +4 Velocidad, +50 Vida'
+        unitName: 'Dragón de las Sombras',
+        nameEn: 'Shadow Dragon',
+        role: 'Destructor Arcano de Sombras',
+        keyAbilities: ['Aliento de Sombras Corrosivo', 'Aura de Desesperación (-2 Moral enemiga)'],
+        statsBonus: '+12 Ataque, +3 Iniciativa, +80 Vida'
       }
     },
     effects: [
-      'Recluta las criaturas legendarias colosales de Tier 7 de la Mazmorra.',
-      'Producción base: 1 unidad por semana (+1 con Castillo).'
+      'Recluta los legendarios Dragones de Tier 7 de la Mazmorra.',
+      'Producción base: 1 unidad por semana (+1 con Fortificaciones III).'
     ],
-    strategicTip: 'La estrategia reina "Armageddon + Dragones Negros" te permite borrar del mapa a cualquier ejército enemigo sin recibir ni un solo rasguño.',
-    timingRecommendation: 'Semana 1 (Día 7) o Semana 2 (Día 1).',
+    strategicTip: 'El Dragón Negro inmune a la magia permite la táctica clásica definitiva: lanzar hechizos destructivos de área sin dañar a tu vanguardia.',
+    timingRecommendation: 'Final de Semana 1 (Tier 7 Rush) o inicio de Semana 2.',
   },
 
   // =========================================================================
-  // ESTRUCTURAS ESPECIALES DE FACCIÓN (MAZMORRA)
+  // ESTRUCTURAS ESPECIALES DE FACCIÓN (MAZMORRA) CONFIRMADAS DE OLDEN ERA
   // =========================================================================
   {
-    id: 'dungeon-mana-vortex',
-    name: 'Vórtice de Maná (Mana Vortex)',
-    nameEn: 'Mana Vortex',
-    category: 'Estructuras Especiales de Facción',
-    faction: 'Mazmorra',
-    isFactionUnique: true,
-    cost: { gold: 2500, wood: 5, ore: 5, gems: 3 },
-    prerequisites: ['Cofradía de Magos Nivel 1 (Mage Guild Level 1)'],
-    effects: [
-      'Duplica los puntos de Maná máximos del primer héroe aliado que visite la ciudad cada semana (ej: de 100 pasa a 200 de maná).',
-      'El maná duplicado dura hasta que se consuma en batalla.'
-    ],
-    strategicTip: 'Visita el Vórtice de Maná cada Día 1 con tu héroe principal para lanzar hechizos de alto nivel sin límite.',
-    timingRecommendation: 'Semana 2.',
-  },
-  {
-    id: 'dungeon-battle-academy',
-    name: 'Academia de Batalla Subterránea (Battle Academy)',
-    nameEn: 'Battle Academy',
-    category: 'Estructuras Especiales de Facción',
-    faction: 'Mazmorra',
-    isFactionUnique: true,
-    cost: { gold: 2500, wood: 5, ore: 10 },
-    prerequisites: ['Laberinto (Labyrinth)'],
-    effects: [
-      'Otorga +1 Ataque y +1 Defensa permanente al primer héroe que la visite cada semana.',
-      'Aumenta la fuerza de combate de Minotauros y Trogloditas en un +5%.'
-    ],
-    strategicTip: 'Visítala semanalmente para acumular estadísticas ofensivas monstruosas.',
-    timingRecommendation: 'Semana 2.',
-  },
-  {
-    id: 'dungeon-altar-of-sacrifice',
-    name: 'Altar de Sacrificios del Abismo (Altar of Sacrifice)',
-    nameEn: 'Altar of Sacrifice',
-    category: 'Estructuras Especiales de Facción',
-    faction: 'Mazmorra',
-    isFactionUnique: true,
-    cost: { gold: 3000, ore: 5, gems: 4 },
-    prerequisites: ['Mercado Negro Subterráneo (Marketplace)', 'Cofradía de Magos Nivel 1 (Mage Guild Level 1)'],
-    effects: [
-      'Permite sacrificar criaturas o artefactos no deseados para transmutarlos en experiencia directa para el héroe o en Gemas raras.',
-      'Otorga +1 a la Suerte a todos los ejércitos de la Mazmorra que partan de la ciudad durante 3 días.'
-    ],
-    strategicTip: 'Convierte artefactos de bajo impacto o tropas neutrales de relleno en experiencia decisiva para subir de nivel a tus Brujos.',
-    timingRecommendation: 'Semana 2-3.',
-  },
-  {
-    id: 'dungeon-minotaur-labyrinth',
-    name: 'Laberinto de los Minotauros (Minotaur Labyrinth)',
-    nameEn: 'Minotaur Labyrinth',
+    id: 'dungeon-gymnasium',
+    name: 'Gimnasio (Gymnasium)',
+    nameEn: 'Gymnasium',
     category: 'Estructuras Especiales de Facción',
     faction: 'Mazmorra',
     isFactionUnique: true,
     cost: { gold: 2500, ore: 10, gems: 2 },
-    prerequisites: ['Laberinto (Labyrinth)'],
+    prerequisites: ['Palacio Bizantino (Ayuntamiento / Alcaldía)'],
     effects: [
-      'Aumenta la producción semanal de Minotauros en +4 unidades adicionales por semana.',
-      'Garantiza que la Moral de los Minotauros nunca descienda por debajo de +1 (inmunes a moral negativa) e incrementa su contragolpe en un +15%.'
+      'Estructura de entrenamiento físico y marcial para los héroes de la Mazmorra.',
+      'Otorga a cualquier héroe aliado que visite la ciudad una bonificación permanente de estadísticas físicas (Ataque y Defensa) o experiencia táctica.'
     ],
-    strategicTip: 'Estructura clave para masificar Minotauros en mid game, convirtiéndolos en la infantería pesada más letal del subsuelo.',
+    strategicTip: 'Visitar obligatoriamente con el héroe principal y comandantes de apoyo para acumular poder marcial continuo.',
     timingRecommendation: 'Semana 2.',
   },
   {
-    id: 'dungeon-lyceum',
-    name: 'Liceo de las Sombras (Lyceum - Santo Grial)',
-    nameEn: 'Lyceum',
+    id: 'dungeon-grail-sanctuary',
+    name: 'Santuario del Grial de la Mazmorra (Grail Sanctuary)',
+    nameEn: 'Grail Sanctuary',
     category: 'Estructuras Especiales de Facción',
     faction: 'Mazmorra',
     isFactionUnique: true,
-    cost: { gold: 5000, wood: 5, ore: 10, gems: 5 },
-    prerequisites: ['Descubrimiento del Santo Grial', 'Palacio de las Cavernas (Cavern Palace)'],
+    cost: { gold: 0 },
+    prerequisites: ['Descubrimiento del Santo Grial (Mirage)'],
     effects: [
-      'Estructura Suprema del Grial de la Mazmorra.',
-      'Genera +5.000 de Oro diario adicional y +50% al crecimiento de todas las criaturas de la ciudad.',
-      'Aumenta el daño de todos los hechizos de Tierra y Fuego en un +25% y restaura +15 puntos de Maná tras ganar cualquier combate.'
+      'Estructura suprema del Santo Grial para la Mazmorra (construida portando el Grial recuperado del Espejismo en el mapa).',
+      'Genera +5.000 de Oro diario para el reino.',
+      'Aumenta el crecimiento de todas las criaturas de la ciudad en un +100% adicional.'
     ],
-    strategicTip: 'Ideal para potenciar Implosión, Lluvia de Meteoros y Armagedón tras descubrir el Grial.',
-    timingRecommendation: 'Al descubrir el Grial.',
+    strategicTip: 'Construir en la ciudad con mayor desarrollo de moradas de dragones e hidras para duplicar la masa de tropas legendarias.',
+    timingRecommendation: 'Al derrotar el Espejismo (Mirage).',
   },
 ];

@@ -81,7 +81,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
       recommendedName: 'Más grande que la vida',
       why: 'Las formaciones neutrales ven tu ejército un 25% más poderoso (50% con Arte de batalla), disparando las probabilidades de que huyan o se unan a ti.',
       alternativeChoice: 'Héroe del pueblo',
-      alternativeCondition: '+50% de poder de persuasión con criaturas de tu propia facción (Mazmorra: Trogloditas, Medusas, Minotauros).',
+      alternativeCondition: '+50% de poder de persuasión con criaturas alineadas con tu propia facción.',
     },
     expert: {
       recommendedName: 'Arte de negociar',
@@ -94,9 +94,9 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
   'economia': {
     advanced: {
       recommendedName: 'Recaudador de impuestos',
-      why: '+250 de oro diario (+500 si tienes Logística). Permite construir la Ciudadela, Castillo y Palacio bizantino días antes.',
+      why: '+250 de oro diario (+500 si tienes Logística). Permite erigir la Ciudadela, Castillo y Sede Municipal / Capitolio días antes.',
       alternativeChoice: 'Contrabandista',
-      alternativeCondition: '+1 recurso raro al día (Gemas para Mazmorra), crucial en mapas con escasez de minas de gemas.',
+      alternativeCondition: '+1 recurso raro diario según la necesidad de tu facción (Gemas, Mercurio o Cristales), crucial ante escasez de minas.',
     },
     expert: {
       recommendedName: 'Anticuario',

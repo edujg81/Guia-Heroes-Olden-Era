@@ -22,8 +22,10 @@ export function getStructuresForFaction(factionName: string): TownStructure[] {
       return TEMPLE_STRUCTURES;
     case 'Necrópolis':
       return NECROPOLIS_STRUCTURES;
+    case 'Foresta':
     case 'Arboleda':
       return GROVE_STRUCTURES;
+    case 'Colmena':
     case 'Enjambre':
       return HIVE_STRUCTURES;
     case 'Cisma':
