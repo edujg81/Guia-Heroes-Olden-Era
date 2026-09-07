@@ -236,12 +236,32 @@ export const FactionLawsTree: React.FC<FactionLawsTreeProps> = ({
     const currentLevel = lawLevels[law.id] || 0;
     if (currentLevel > 0) return { available: true };
 
-    // Check prerequisite law if any
+    // Check prerequisite law if any (single or array)
     if (law.prerequisiteLawId) {
       const prereqLevel = lawLevels[law.prerequisiteLawId] || 0;
       if (prereqLevel === 0) {
         const prereqLaw = factionLaws.find(l => l.id === law.prerequisiteLawId);
         return { available: false, reason: `Requiere: ${prereqLaw ? prereqLaw.name : 'Ley previa'}` };
+      }
+    }
+
+    if (law.prerequisiteLaws && law.prerequisiteLaws.length > 0) {
+      for (const pId of law.prerequisiteLaws) {
+        const prereqLevel = lawLevels[pId] || 0;
+        if (prereqLevel === 0) {
+          const prereqLaw = factionLaws.find(l => l.id === pId);
+          return { available: false, reason: `Requiere: ${prereqLaw ? prereqLaw.name : 'Ley previa'}` };
+        }
+      }
+    }
+
+    // Check incompatible laws
+    if (law.incompatibleLaws && law.incompatibleLaws.length > 0) {
+      for (const incompId of law.incompatibleLaws) {
+        if ((lawLevels[incompId] || 0) > 0) {
+          const incompLaw = factionLaws.find(l => l.id === incompId);
+          return { available: false, reason: `Incompatible con: ${incompLaw ? incompLaw.name : incompId}` };
+        }
       }
     }
 

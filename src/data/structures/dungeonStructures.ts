@@ -2,12 +2,12 @@ import { TownStructure } from '../../types';
 
 export const DUNGEON_STRUCTURES: TownStructure[] = [
   // =========================================================================
-  // CENTRO CÍVICO & PALACIO DE GOBIERNO (PALACIO BIZANTINO) - MULTI-NIVEL
+  // CENTRO CÍVICO & PALACIO DE GOBIERNO (AYUNTAMIENTO / CAPITOLIO) - MULTI-NIVEL (1 a 4)
   // =========================================================================
   {
     id: 'dungeon-byzantine-palace',
-    name: 'Palacio Bizantino',
-    nameEn: 'Byzantine Palace',
+    name: 'Palacio Bizantino (Ayuntamiento / Capitolio)',
+    nameEn: 'Byzantine Palace (Town Hall / Capitol)',
     category: 'Cívica y Economía',
     faction: 'Mazmorra',
     cost: { gold: 5000 },
@@ -15,15 +15,15 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
     effects: [
       'Sede señorial de los hechiceros oscuros y señores del inframundo.',
       'Otorga al reino oro, puntos de ley y puntos de astrología al día. Aumenta el límite de héroes (si lo permite el escenario)',
-      'Se mejora a lo largo de 3 niveles cívicos (Palacio Bizantino -> Palacio Bizantino II -> Palacio Bizantino III).'
+      'Se mejora a lo largo de 4 niveles cívicos: Asentamiento (500) -> Alcaldía (1.000) -> Ciudadela Cívica (2.000) -> Capitolio (4.000 Oro/día).'
     ],
-    strategicTip: 'Mejora a Nivel II (Palacio Bizantino II) en el Día 2 para acelerar el desarrollo hacia Minotauros y Dragones Negros.',
-    timingRecommendation: 'Día 2-4 (Nivel II) / Semana 2 (Nivel III).',
+    strategicTip: 'Mejora a Nivel II en el Día 2 para acelerar el desarrollo económico hacia Minotauros y Dragones Negros.',
+    timingRecommendation: 'Día 2-3 (Nivel II) / Semana 2 (Nivel III) / Semana 3 (Capitolio).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Palacio Bizantino',
-        nameEn: 'Byzantine Palace',
+        name: 'Nivel I: Asentamiento Subterráneo (Ayuntamiento)',
+        nameEn: 'Byzantine Settlement (Town Hall)',
         cost: { gold: 5000 },
         prerequisites: [],
         effects: ['Otorga al reino 500 de oro, puntos de ley y puntos de astrología al día.', '+1 al límite de héroes.'],
@@ -32,23 +32,36 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
       },
       {
         level: 2,
-        name: 'Nivel II: Palacio Bizantino II',
-        nameEn: 'Byzantine Palace II',
+        name: 'Nivel II: Palacio Bizantino II (Alcaldía)',
+        nameEn: 'Byzantine Palace II (City Hall)',
         cost: { gold: 2500, wood: 5, ore: 5 },
-        prerequisites: ['Palacio Bizantino'],
-        effects: ['Otorga al reino 750 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora económica de nivel 1.'],
-        bonusIncome: '+750 Oro, Puntos de ley, Puntos de astrología / día',
+        prerequisites: ['Palacio Bizantino (Ayuntamiento / Capitolio)'],
+        effects: ['Otorga al reino 1.000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora económica de nivel 1.'],
+        bonusIncome: '+1.000 Oro, Puntos de ley, Puntos de astrología / día',
         strategicTip: 'Construir el Día 2 o 3 para estabilizar las finanzas de la Mazmorra.'
       },
       {
         level: 3,
-        name: 'Nivel III: Palacio Bizantino III',
-        nameEn: 'Byzantine Palace III',
+        name: 'Nivel III: Palacio Bizantino III (Ciudadela Cívica)',
+        nameEn: 'Byzantine Palace III (Metropolis Hall)',
         cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Palacio Bizantino II'],
-        effects: ['Otorga al reino 1000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora de nivel 2.'],
-        bonusIncome: '+1000 Oro, Puntos de ley, Puntos de astrología / día',
-        strategicTip: 'Prioridad máxima al inicio de la Semana 2.'
+        prerequisites: ['Nivel II: Palacio Bizantino II (Alcaldía)'],
+        effects: ['Otorga al reino 2.000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora de nivel 2.'],
+        bonusIncome: '+2.000 Oro, Puntos de ley, Puntos de astrología / día',
+        strategicTip: 'Prioridad al inicio de la Semana 2 para sostener los costes de moradas altas.'
+      },
+      {
+        level: 4,
+        name: 'Nivel IV: Gran Capitolio de las Profundidades (Capitolio)',
+        nameEn: 'Grand Underworld Capitol',
+        cost: { gold: 10000, wood: 15, ore: 15 },
+        prerequisites: ['Nivel III: Palacio Bizantino III (Ciudadela Cívica)', 'Fortificaciones II (Ciudadela Militar)'],
+        effects: [
+          'Estructura suprema cívica de la Mazmorra. Solo se puede edificar 1 Capitolio por reino/jugador.',
+          'Otorga al reino 4.000 de oro al día, además de bonificación masiva de puntos de ley y astrología.'
+        ],
+        bonusIncome: '+4.000 Oro, Puntos de ley supremos, Puntos de astrología / día',
+        strategicTip: 'Garantiza la solvencia económica para reclutar Dragones Negros y comprar hechizos de Nivel 5 cada semana.'
       }
     ]
   },
@@ -232,6 +245,22 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
     ],
     strategicTip: 'Construir en cuanto se tengan 3 de cada recurso raro secundario.',
     timingRecommendation: 'Semana 2.',
+  },
+  {
+    id: 'dungeon-blacksmith',
+    name: 'Herrería Subterránea (Blacksmith)',
+    nameEn: 'Blacksmith',
+    category: 'Cívica y Economía',
+    faction: 'Mazmorra',
+    cost: { gold: 1000, wood: 5 },
+    prerequisites: [],
+    effects: [
+      'Permite adquirir la Balista de Repetición (Ballista) subterránea para el héroe por 2.500 de oro.',
+      'La balista dispara proyectiles de acero oscuro que ignoran un 20% de la armadura enemiga y escala con la habilidad de Artillería.',
+      'Repara máquinas de asedio dañadas tras cada batalla.'
+    ],
+    strategicTip: 'La Balista de la Mazmorra acelera la limpieza de tropas neutrales de rango medio sin arriesgar tropas vivas.',
+    timingRecommendation: 'Día 2-4.',
   },
 
   // =========================================================================
@@ -516,6 +545,38 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
       'Aumenta la fuerza de combate de Minotauros y Trogloditas en un +5%.'
     ],
     strategicTip: 'Visítala semanalmente para acumular estadísticas ofensivas monstruosas.',
+    timingRecommendation: 'Semana 2.',
+  },
+  {
+    id: 'dungeon-altar-of-sacrifice',
+    name: 'Altar de Sacrificios del Abismo (Altar of Sacrifice)',
+    nameEn: 'Altar of Sacrifice',
+    category: 'Estructuras Especiales de Facción',
+    faction: 'Mazmorra',
+    isFactionUnique: true,
+    cost: { gold: 3000, ore: 5, gems: 4 },
+    prerequisites: ['Mercado Negro Subterráneo (Marketplace)', 'Cofradía de Magos Nivel 1 (Mage Guild Level 1)'],
+    effects: [
+      'Permite sacrificar criaturas o artefactos no deseados para transmutarlos en experiencia directa para el héroe o en Gemas raras.',
+      'Otorga +1 a la Suerte a todos los ejércitos de la Mazmorra que partan de la ciudad durante 3 días.'
+    ],
+    strategicTip: 'Convierte artefactos de bajo impacto o tropas neutrales de relleno en experiencia decisiva para subir de nivel a tus Brujos.',
+    timingRecommendation: 'Semana 2-3.',
+  },
+  {
+    id: 'dungeon-minotaur-labyrinth',
+    name: 'Laberinto de los Minotauros (Minotaur Labyrinth)',
+    nameEn: 'Minotaur Labyrinth',
+    category: 'Estructuras Especiales de Facción',
+    faction: 'Mazmorra',
+    isFactionUnique: true,
+    cost: { gold: 2500, ore: 10, gems: 2 },
+    prerequisites: ['Laberinto (Labyrinth)'],
+    effects: [
+      'Aumenta la producción semanal de Minotauros en +4 unidades adicionales por semana.',
+      'Garantiza que la Moral de los Minotauros nunca descienda por debajo de +1 (inmunes a moral negativa) e incrementa su contragolpe en un +15%.'
+    ],
+    strategicTip: 'Estructura clave para masificar Minotauros en mid game, convirtiéndolos en la infantería pesada más letal del subsuelo.',
     timingRecommendation: 'Semana 2.',
   },
   {

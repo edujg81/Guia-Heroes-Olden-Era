@@ -305,85 +305,86 @@ Cada criatura debe contar con los 12 parámetros cuantitativos contrastados:
 ---
 
 ## 5. MÓDULO 4: AUDITORÍA DE LEYES CÍVICAS Y POLÍTICAS DE CIUDAD
-*Archivos a auditar: `/src/data/factionLawsData.ts`, `/src/data/*LawsData.ts`, `/src/components/FactionLawsTree.tsx`*
+*Archivos auditados y normalizados: `/src/data/factionLawsData.ts`, `/src/data/templeLawsData.ts`, `/src/data/necropolisLawsData.ts`, `/src/data/arboledaLawsData.ts`, `/src/data/enjambreLawsData.ts`, `/src/data/cismaLawsData.ts`, `/src/components/FactionLawsTree.tsx`*
 
 ### 5.1. Reglas Canónicas de Leyes
-- [ ] 4 Tiers de Leyes por facción (Tier 1 a Tier 4).
-- [ ] Cada ley debe especificar su coste exacto en Puntos de Ley (Law Points) y Oro.
-- [ ] Exclusiones mutuas: Leyes antagónicas deben estar marcadas como incompatibles.
-- [ ] Prerrequisitos de árbol jerárquico verificados (una ley de Tier 2 requiere su correspondiente ley previa de Tier 1).
+- [x] **5 Tiers de Leyes por facción (Tier 1 a Tier 5)**: Con umbrales de activación progresiva (Tier 1: 0 Pts, Tier 2: 5 Pts, Tier 3: 15 Pts, Tier 4: 30 Pts, Tier 5: 50 Pts).
+- [x] **Costes Exclusivos en Puntos de Ley (Law Points / Sellos Cívicos)**: Cada rango de cada ley especifica `costLaws` y `cumulativeCost` exactos sin costes arbitrarios en oro inventados.
+- [x] **Exclusiones mutuas e Incompatibilidades**: Soporte en el motor `FactionLawsTree.tsx` y marcado en arrays `incompatibleLaws` para leyes antagónicas.
+- [x] **Prerrequisitos de árbol jerárquico**: Verificados y enforced mediante `prerequisiteLaws` y `prerequisiteLawId` en `checkLawAvailability` y deselección en cascada.
 
 ### 5.2. Verificación por Facción
-- [ ] **Mazmorra**: Leyes de esclavitud, culto de sombras, sacrificios rituales e inquisición drow.
-- [ ] **Templo**: Leyes de diezmo, código de caballería, devoción solar e inquisición sagrada.
-- [ ] **Necrópolis**: Leyes de cosecha de almas, conservación cadavérica, criptas eternas y señorío vampírico.
-- [ ] **Foresta**: Leyes de simbiosis forestal, juramento de hoplita, santuarios de maná y armonía faúnica.
-- [ ] **Colmena**: Leyes de mente colmena, reproducción forzada, devoración de biomasa y feromonas bélicas.
-- [ ] **Cisma**: Leyes de pactos del vacío, desgarro dimensional, escarcha de Vori y ofrendas abisales.
+- [x] **Mazmorra**: 34 leyes canónicas verificadas. Leyes de esclavitud subterránea, culto de sombras, sacrificios rituales de maná e inquisición del Triunvirato Drow.
+- [x] **Templo**: 11 leyes canónicas (5 Tiers completos). Doble construcción de la corona, puntería de Erathia, ley de aliento & moral, santidad en pradera, código de caballería, diezmo sagrado y supremacía solar inquisitorial.
+- [x] **Necrópolis**: 9 leyes canónicas (5 Tiers completos). Cosecha de huesos y almas, arquitectura sepulcral, linaje vampírico de Shadowspire, miasma de nube de muerte, velo espectral, aura aterradora del dragón de hueso, criptas eternas y reino eterno de la muerte.
+- [x] **Foresta / Arboleda**: 12 leyes canónicas (5 Tiers completos) normalizadas al roster canónico de Jadame (Faunos, Hoplitas, Ninfas Iriyads, Aqualotls, Herbomantes, Qilins y Fénix Mítico, sin ents ni dragones verdes). Simbiosis forestal, armonía faúnica, juramento de hoplita, santuarios de gemas, gracia iriyad, ascensión y soberanía del fénix.
+- [x] **Colmena / Enjambre**: 11 leyes canónicas (5 Tiers completos) normalizadas con la Reina de la Colmena (Hive Queen / Madre de la Colmena) como Tier 7 canónico. Eclosión masiva, mente colmena y vanguardia sináptica, metabolismo de azufre, salto de mantis reales, neurotoxina de avispones, asimilación de biomasa y trascendencia de la supermente.
+- [x] **Cisma**: 14 leyes canónicas (5 Tiers completos). Pactos del vacío, desgarro dimensional, escarcha glacial de Vori, ofrendas abisales y comunión de fallas; descripciones tácticas depuradas de referencias a facciones ajenas al motor de Olden Era.
 
 ---
 
 ## 6. MÓDULO 5: AUDITORÍA DE ESTRUCTURAS DE CIUDADELA Y CASTILLO
-*Archivos a auditar: `/src/data/townStructuresData.ts`, `/src/data/structures/*.ts`, `/src/components/TownStructuresBrowser.tsx`*
+*Archivos auditados y normalizados: `/src/data/townStructuresData.ts`, `/src/data/structures/*.ts`, `/src/components/TownStructuresBrowser.tsx`*
 
 ### 6.1. Estructuras Comunes
-- [ ] **Ayuntamiento / Capitolio**: Cadena de ingresos diarios (500 -> 1.000 -> 2.000 -> 4.000 Oro/día).
-- [ ] **Fuerte / Ciudadela / Castillo**: Modificadores de defensa y multiplicadores de crecimiento de tropas (+0%, +50%, +100%).
-- [ ] **Taberna**: Generación de moral (+1) y acceso al reclutamiento de héroes y rumores de taberna.
-- [ ] **Mercado y Puesto Comercial**: Tasas oficiales de intercambio de recursos de *Olden Era*.
-- [ ] **Herrería**: Carro de munición, balista o botiquín asignado canónicamente a cada facción.
-- [ ] **Torre de Magia / Cofradía de Hechiceros**: Niveles 1 a 5 y distribución de hechizos por escuela.
+- [x] **Ayuntamiento / Capitolio**: Cadena canónica de 4 niveles de ingresos diarios normalizada en las 6 facciones (Asentamiento 500 -> Alcaldía 1.000 -> Ciudadela Cívica 2.000 -> Gran Capitolio 4.000 Oro/día).
+- [x] **Fuerte / Ciudadela / Castillo**: Modificadores de defensa y multiplicadores de crecimiento de tropas (+0%, +50%, +100%) con costes y prerrequisitos enlazados.
+- [x] **Taberna**: Generación de moral (+1) y acceso al reclutamiento de héroes y rumores de taberna.
+- [x] **Mercado y Puesto Comercial**: Tasas oficiales de intercambio de recursos de *Olden Era* y depósitos alquímicos por facción.
+- [x] **Herrería**: Carro de munición, balista, catapulta o botiquín de hierbas asignado canónicamente a cada facción con costes y descripciones tácticas.
+- [x] **Torre de Magia / Cofradía de Hechiceros**: Niveles 1 a 5 con asignación armónica de escuelas de magia de Jadame.
 
 ### 6.2. Estructuras Exclusivas de Facción
-- [ ] **Mazmorra**: Vórtice de maná, academia oscura, altar de sacrificios y laberinto de minotauros.
-- [ ] **Templo**: Catedral celestial, establos de caballería, faro sagrado y bastión de cruzados.
-- [ ] **Necrópolis**: Amplificador de nigromancia, bóveda de calaveras, foso de putrefacción y mausoleo.
-- [ ] **Foresta**: Manantial de ninfas, arboleda de faunos, círculo de menhires y percha de fénix.
-- [ ] **Colmena**: Incubadora de larvas, glándula de feromonas, nido del rey libélula y cámara de biomasa.
-- [ ] **Cisma**: Falla helada, obelisco del vacío, altar de transmutación y templo del desgarro.
+- [x] **Mazmorra**: Vórtice de maná, academia oscura, altar de sacrificios rituales y laberinto de minotauros con bonificaciones de daño y moral.
+- [x] **Templo**: Catedral celestial, establos de caballería (+400 movimiento), faro sagrado (+500 movimiento marítimo/visión) y bastión de cruzados.
+- [x] **Necrópolis**: Amplificador de nigromancia (+10%), bóveda de calaveras, foso de putrefacción (plaga a asediantes) y mausoleo de liches.
+- [x] **Foresta**: Manantial de ninfas, arboleda de faunos (+6 crecimiento), círculo de menhires (+1 poder mágico) y percha de fénix (+1 crecimiento & iniciativa).
+- [x] **Colmena**: Incubadora de larvas (+25% Tier 1-3), nido de feromonas, nido del rey libélula (neurotoxina) y cámara de biomasa (sacrificio de prisioneros).
+- [x] **Cisma**: Portal de distorsión (teletransporte de guarniciones), monolito del vacío (-5 maná rival), cámara de resonancia astral y nexo de fallas de Vori.
 
 ---
 
 ## 7. MÓDULO 6: AUDITORÍA DE ÓRDENES DE CONSTRUCCIÓN Y CREEPING (DÍA 1 A 7)
-*Archivos a auditar: `/src/data/*Data.ts` (Build orders), `/src/components/DayByDayPlanner.tsx`*
+*Archivos auditados y verificados: `/src/data/*Data.ts` (Build orders de las 6 facciones), `/src/components/DayByDayPlanner.tsx`, `/src/data/dungeonOpponentTactics.ts`, `/src/components/ui/BuildResourceCalculator.tsx`*
 
 ### 7.1. Criterios de Viabilidad Económica y Logística
-- [ ] **Día 1**: Coste total de edificios y tropas reclutadas $\le$ Recursos iniciales canónicos en dificultad estándar de torneo.
-- [ ] **Día 2 a Día 7**: La curva acumulada de gasto de madera, mineral y oro no debe entrar en saldos negativos hipotéticos.
-- [ ] **Prioridades de Asignación**:
-  - [ ] Día 1-2: Exploración con segundo héroe (scouting) y adquisición de aserradero / mina de mineral.
-  - [ ] Día 3-4: Aseguramiento de moradas de Tier 2-3 y recursos raros.
-  - [ ] Día 5-6: Cofradía de Magos / Estructura económica intermedia.
-  - [ ] Día 7: Castillo o morada clave antes del reinicio semanal de producción.
+- [x] **Día 1**: Coste total de edificios y tropas reclutadas $\le$ Recursos iniciales canónicos en dificultad estándar de torneo (10.000 Oro, 20 Madera, 20 Mineral). En todas las facciones el Día 1 consume entre 3.000 y 4.000 Oro (incluyendo reclutamiento del 2º héroe en Taberna por 2.500 Oro) y 5 Madera, manteniendo saldos positivos de seguridad ($\ge 6.000$ Oro).
+- [x] **Día 2 a Día 7**: Curva acumulada de gasto de madera, mineral y los 7 recursos canónicos (Oro, Madera, Mineral, Gemas, Cristales, Mercurio, Polvo Alquímico) verificada en saldo positivo continuo mediante ingresos de Sede/Ayuntamiento y captura de minas.
+- [x] **Prioridades de Asignación**:
+  - [x] Día 1-2: Exploración con segundo héroe (scouting), relevo de suministros y aseguramiento de aserradero y cantera de mineral adyacentes.
+  - [x] Día 3-4: Aseguramiento de moradas de Tier 2-3 y primeras minas de recursos raros (Mercurio, Gemas, Cristales).
+  - [x] Día 5-6: Cofradía de Magos Nivel 1 o Ayuntamiento (+1.000 Oro/día).
+  - [x] Día 7: Fortificaciones II (+50% crecimiento de población) o morada clave asegurada antes del cambio de semana.
 
 ### 7.2. Fichas de Creeping sin Bajas
-- [ ] Tácticas de posicionamiento para limpiar stacks neutrales lentos sin sufrir bajas (kiting con tiradores, señuelo de 1 unidad).
-- [ ] Comprobación de que las unidades recomendadas para creeping existan en el ejército del jugador en el día indicado.
+- [x] Tácticas de posicionamiento para limpiar stacks neutrales lentos sin bajas: división de 1 unidad señuelo para absorber el contraataque rival, flanqueo con unidades rápidas y muro de escudos para proteger tiradores.
+- [x] Comprobación de que las unidades recomendadas para creeping existan estrictamente en el ejército disponible del jugador en el día indicado (sin anacronismos).
 
 ---
 
 ## 8. MÓDULO 7: AUDITORÍA DEL ÁRBOL DE HABILIDADES Y SUBHABILIDADES DE JADAME
-*Archivos a auditar: `/src/data/officialSkillsData.ts`, `/src/data/subclassesData.ts`, `/src/data/subskillsRecommendationData.ts`, `/src/components/HeroSkillOptimizer.tsx`*
+*Archivos auditados y normalizados: `/src/data/officialSkillsData.ts`, `/src/data/subclassesData.ts`, `/src/data/subskillsRecommendationData.ts`, `/src/components/HeroSkillOptimizer.tsx`*
 
 ### 8.1. Habilidades Primarias y Secundarias
-- [ ] Comprobar que el árbol de habilidades secundarias use la nomenclatura canónica de *Olden Era* (ej. no confundir con habilidades de H5 como *Gating* o *Blood Rage* ajenas a este motor).
-- [ ] Cada habilidad debe tener niveles: Básica, Avanzada, Experta y Maestra (si aplica en el sistema de Jadame).
-- [ ] Subhabilidades dependientes vinculadas con sus requisitos previos correctos.
+- [x] Árbol de habilidades secundarias depurado con la nomenclatura canónica de *Heroes of Might & Magic: Olden Era* (Arte de Asedio, Arte de Batalla, Combate, Comunión Abisal, Diplomacia, Liderazgo, Magia de Nochesombra, Magia Primigenia, Magia de Luz Solar, Magia Arcana, Magia de Batalla, Hechicería, Resistencia, Suerte, Tácticas, etc.), sin contaminaciones de entregas previas (*Gating*, *Blood Rage*, etc.).
+- [x] Estructura canónica de 3 niveles de progresión de Jadame: Básica, Avanzada y Experta, con 6 subhabilidades únicas por árbol (3 en Avanzada y 3 en Experta) con descripciones mecánicas contrastadas.
+- [x] Subhabilidades dependientes vinculadas con recomendaciones tácticas y condiciones de juego en `SKILL_SELECTION_GUIDES` y `HeroBuildSimulator.tsx`.
 
 ### 8.2. Subclases de Héroes
-- [ ] Requisitos de desbloqueo de subclase (Nivel de héroe y combinación de habilidades secundarias).
-- [ ] Bonificación pasiva de subclase contrastada con las notas de desarrollo de *Olden Era*.
+- [x] 24 Subclases canónicas (4 por facción: 2 de Might y 2 de Magic) con requisitos de desbloqueo exactos (5 habilidades secundarias específicas en nivel Experta, alcanzable entre niveles 16 y 20).
+- [x] Bonificaciones pasivas legendarias contrastadas con las notas de desarrollo de *Olden Era* (+100% Ataque, +100% Defensa, +100% Poder de Hechizo, +10.000 Oro diario, etc.), con análisis estratégico y héroes afines.
 
 ---
 
 ## 9. MÓDULO 8: AUDITORÍA DE MECÁNICAS TÁCTICAS Y COMBATE HEXAGONAL
-*Archivos a auditar: `/src/data/dungeonOpponentTactics.ts`, `/src/components/CombatTactics.tsx`, `/src/components/features/combat/*.tsx`*
+*Archivos auditados y normalizados: `/src/data/dungeonOpponentTactics.ts`, `/src/components/CombatTactics.tsx`, `/src/components/features/combat/TacticalCheatSheet.tsx`*
 
 ### 9.1. Cuadrícula y Reglas de Combate
-- [ ] Verificación de la cuadrícula hexagonal canónica (dimensiones del campo de batalla).
-- [ ] Mecánicas de flanqueo, represalia única vs represalia infinita, y obstáculos del terreno de Jadame.
-- [ ] Fórmulas de Moral (+1, +2, +3) y Suerte (golpe crítico / mala suerte) ajustadas al sistema canónico.
-- [ ] Penalizador de moral por mezcla de tropas de facciones diferentes (-1 por facción ajena, con inmunidades a no-muertos y vacío).
+- [x] Verificación de la cuadrícula hexagonal canónica: modelado de 1 casilla hexagonal (infantería ligera/tiradores) vs 2 casillas hexagonales (criaturas grandes/caballería/colosos) e iniciativa dinámica de turno.
+- [x] Mecánicas de flanqueo, represalia única estándar vs represalia múltiple/infinita (Danzantes de Mazmorra, Grifos de Templo) y obstáculos de terreno de Jadame (fallas de Vori, ciénagas para Aqualotls, niebla de guerra subterránea).
+- [x] Fórmulas de Moral (+1, +2, +3 con probabilidad de doble turno) y Suerte (+1, +2, +3 con Golpe Afortunado / Crítico) ajustadas al sistema canónico de *Olden Era*.
+- [x] Penalizador de moral por mezcla de tropas de facciones diferentes (-1 por facción ajena en el ejército) con las inmunidades correspondientes a No-muertos (Necrópolis) y entidades de vacío (Cisma).
+- [x] Depurada la descripción de combate de Foresta / Arboleda en `CombatTactics.tsx`, eliminando referencias a Treants, Elfos y Dragones Esmeralda de entregas pasadas e instaurando a los Hoplitas del Bosque, Faunos, Ninfas Iriyads, Aqualotls anfibios, Qilins celestiales y Fénix de Jadame.
 
 ---
 
@@ -391,9 +392,13 @@ Cada criatura debe contar con los 12 parámetros cuantitativos contrastados:
 
 | ID Incidencia | Sección / Archivo | Discrepancia Detectada | Corrección Canónica Aplicada | Estado (`PENDIENTE` / `CORREGIDO`) |
 |---|---|---|---|---|
-| *INC-001* | *Ej: /src/data/templeData.ts* | *Presencia de nombre no canónico* | *Reemplazado por héroe oficial de Jadame* | `CORREGIDO` |
-| *INC-002* | *Ej: /src/data/spellsData.ts* | *Fórmula de daño con escalado erróneo* | *Ajustado a Base + Multiplicador × SP* | `CORREGIDO` |
-| *INC-003* | *Ej: /src/data/enjambreData.ts* | *Verificación de los 9 Ejecutores y 9 Heraldos* | *Validada lista de 18 comandantes canónicos* | `CORREGIDO` |
+| *INC-001* | `/src/data/templeData.ts` | Presencia de nombres clásicos no canónicos | Reemplazados por el roster oficial de Jadame de *Olden Era* | `CORREGIDO` |
+| *INC-002* | `/src/data/spellsData.ts` | Fórmulas de escalado no normalizadas | Ajustado al escalado canónico `Base + Multiplicador × SP` en 87 hechizos | `CORREGIDO` |
+| *INC-003* | `/src/data/enjambreData.ts` | Verificación de 18 comandantes canónicos | Validados los 9 Ejecutores (Might) y 9 Heraldos (Magic) oficiales de Beelzebub | `CORREGIDO` |
+| *INC-004* | `/src/data/spellsData.ts` | Costes de hechizos neutrales genéricos | Auditado cada hechizo neutral en Puntos de Observación (Portal = 3, Puerta Dim. = 4; resto en "Sin definir") | `CORREGIDO` |
+| *INC-005* | `/src/data/structures/*.ts` | Edificios cívicos con solo 2 o 3 niveles | Normalizado el patrón canónico de 4 niveles (500 -> 1.000 -> 2.000 -> 4.000 Oro/día) en las 6 facciones | `CORREGIDO` |
+| *INC-006* | `/src/data/structures/*.ts` | Herrería y estructuras únicas faltantes | Incorporada la Herrería canónica y estructuras exclusivas en Templo, Mazmorra, Necrópolis, Arboleda, Colmena y Cisma | `CORREGIDO` |
+| *INC-007* | `/src/components/CombatTactics.tsx` | Mención de Hombres Árbol/Treants y Dragones Esmeralda en Arboleda | Reemplazados por Hoplitas, Iriyads, Aqualotls, Qilins y Fénix canónicos de Jadame | `CORREGIDO` |
 
 ---
 

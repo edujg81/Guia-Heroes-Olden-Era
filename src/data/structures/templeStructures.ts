@@ -2,12 +2,12 @@ import { TownStructure } from '../../types';
 
 export const TEMPLE_STRUCTURES: TownStructure[] = [
   // =========================================================================
-  // CENTRO CÍVICO & PALACIO DE GOBIERNO (TEMPLO SOLAR) - MULTI-NIVEL (1 a 3)
+  // CENTRO CÍVICO & PALACIO DE GOBIERNO (AYUNTAMIENTO / CAPITOLIO) - MULTI-NIVEL (1 a 4)
   // =========================================================================
   {
     id: 'temple-solar-temple',
-    name: 'Templo Solar',
-    nameEn: 'Solar Temple',
+    name: 'Templo Solar (Ayuntamiento / Capitolio)',
+    nameEn: 'Solar Temple (Town Hall / Capitol)',
     category: 'Cívica y Economía',
     faction: 'Templo',
     cost: { gold: 5000 },
@@ -15,15 +15,15 @@ export const TEMPLE_STRUCTURES: TownStructure[] = [
     effects: [
       'Sede principal de gobierno y centro ceremonial de la fe de la Luz.',
       'Otorga al reino oro, puntos de ley y puntos de astrología al día. Aumenta el límite de héroes (si lo permite el escenario)',
-      'Se mejora a lo largo de 3 niveles cívicos (Templo Solar -> Templo Solar II -> Templo Solar III).'
+      'Se mejora a lo largo de 4 niveles cívicos: Asentamiento (500) -> Alcaldía (1.000) -> Ciudadela Cívica (2.000) -> Capitolio (4.000 Oro/día).'
     ],
-    strategicTip: 'Mejora a Nivel II (Templo Solar II) en el Día 2 para acelerar el flujo de oro hacia las moradas.',
-    timingRecommendation: 'Día 2-4 (Nivel II) / Semana 2 (Nivel III).',
+    strategicTip: 'Mejora a Nivel II en el Día 2 para acelerar el flujo de oro hacia las moradas de caballería y ángeles.',
+    timingRecommendation: 'Día 2-3 (Nivel II) / Semana 2 (Nivel III) / Semana 3 (Capitolio).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Templo Solar',
-        nameEn: 'Solar Temple',
+        name: 'Nivel I: Asentamiento Solar (Ayuntamiento)',
+        nameEn: 'Solar Settlement (Town Hall)',
         cost: { gold: 5000 },
         prerequisites: [],
         effects: ['Otorga al reino 500 de oro, puntos de ley y puntos de astrología al día.', '+1 al límite de héroes.'],
@@ -32,23 +32,36 @@ export const TEMPLE_STRUCTURES: TownStructure[] = [
       },
       {
         level: 2,
-        name: 'Nivel II: Templo Solar II',
-        nameEn: 'Solar Temple II',
+        name: 'Nivel II: Templo Solar II (Alcaldía)',
+        nameEn: 'Solar Temple II (City Hall)',
         cost: { gold: 2500, wood: 5, ore: 5 },
-        prerequisites: ['Templo Solar'],
-        effects: ['Otorga al reino 750 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora económica de nivel 1.'],
-        bonusIncome: '+750 Oro, Puntos de ley, Puntos de astrología / día',
-        strategicTip: 'Construir el Día 2 o 3 para estabilizar las finanzas.'
+        prerequisites: ['Templo Solar (Ayuntamiento / Capitolio)'],
+        effects: ['Otorga al reino 1.000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora económica de nivel 1.'],
+        bonusIncome: '+1.000 Oro, Puntos de ley, Puntos de astrología / día',
+        strategicTip: 'Construir el Día 2 o 3 para estabilizar las finanzas del Templo.'
       },
       {
         level: 3,
-        name: 'Nivel III: Templo Solar III',
-        nameEn: 'Solar Temple III',
+        name: 'Nivel III: Templo Solar III (Ciudadela Cívica)',
+        nameEn: 'Solar Temple III (Metropolis Hall)',
         cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Templo Solar II'],
-        effects: ['Otorga al reino 1000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora de nivel 2.'],
-        bonusIncome: '+1000 Oro, Puntos de ley, Puntos de astrología / día',
-        strategicTip: 'Prioridad máxima al inicio de la Semana 2.'
+        prerequisites: ['Nivel II: Templo Solar II (Alcaldía)'],
+        effects: ['Otorga al reino 2.000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora de nivel 2.'],
+        bonusIncome: '+2.000 Oro, Puntos de ley, Puntos de astrología / día',
+        strategicTip: 'Prioridad al inicio de la Semana 2 para sostener el reclutamiento de Ángeles.'
+      },
+      {
+        level: 4,
+        name: 'Nivel IV: Gran Capitolio de la Luz (Capitolio)',
+        nameEn: 'Grand Radiant Capitol',
+        cost: { gold: 10000, wood: 15, ore: 15 },
+        prerequisites: ['Nivel III: Templo Solar III (Ciudadela Cívica)', 'Fortificaciones II (Ciudadela Militar)'],
+        effects: [
+          'Estructura suprema cívica del Templo. Solo se puede edificar 1 Capitolio por reino/jugador.',
+          'Otorga al reino 4.000 de oro al día, además de bonificación masiva de puntos de ley y astrología.'
+        ],
+        bonusIncome: '+4.000 Oro, Puntos de ley supremos, Puntos de astrología / día',
+        strategicTip: 'Garantiza la solvencia económica para el reclutamiento continuado de Arcángeles.'
       }
     ]
   },
@@ -232,6 +245,22 @@ export const TEMPLE_STRUCTURES: TownStructure[] = [
     ],
     strategicTip: 'Construir tan pronto tengas 3 de cada recurso raro secundario para asegurar gemas continuas.',
     timingRecommendation: 'Semana 2.',
+  },
+  {
+    id: 'temple-blacksmith',
+    name: 'Herrería Sagrada (Blacksmith)',
+    nameEn: 'Blacksmith',
+    category: 'Cívica y Economía',
+    faction: 'Templo',
+    cost: { gold: 1000, wood: 5 },
+    prerequisites: [],
+    effects: [
+      'Permite adquirir la Tienda de Primeros Auxilios / Botiquín Sagrado (First Aid Tent) y la Balista Bendecida para el héroe por 2.500 de oro.',
+      'El Botiquín cura 50-100 PV por turno a la unidad aliada más dañada e incluso puede resucitar miembros caídos con la habilidad de Primeros Auxilios.',
+      'Aumenta la durabilidad de las armaduras del ejército del Templo en un +1 Defensa.'
+    ],
+    strategicTip: 'Esencial para aperturas de creeping con Paladines y Cruzados, garantizando 0 bajas mediante curación continua.',
+    timingRecommendation: 'Día 2-4.',
   },
 
   // =========================================================================
@@ -516,6 +545,56 @@ export const TEMPLE_STRUCTURES: TownStructure[] = [
       'Reduce en un -10% el coste de reclutamiento en oro de infantes y arqueros.'
     ],
     strategicTip: 'Acelera la masa de tropas baratas para sostener múltiples frentes de asedio.',
+    timingRecommendation: 'Semana 2.',
+  },
+  {
+    id: 'temple-stables',
+    name: 'Establos de Caballería (Stables)',
+    nameEn: 'Stables',
+    category: 'Estructuras Especiales de Facción',
+    faction: 'Templo',
+    isFactionUnique: true,
+    cost: { gold: 2000, wood: 10 },
+    prerequisites: ['Barracones (Barracks)'],
+    effects: [
+      'Otorga +400 puntos de movimiento terrestre durante toda la semana a cualquier héroe aliado que visite la ciudad.',
+      'Aumenta la producción semanal de Caballeros y Justicieros (Tier 6) en +2 unidades.',
+      'Otorga +1 a la Velocidad en combate a todas las unidades montadas del Templo.'
+    ],
+    strategicTip: 'Crucial para mantener la ventaja logística y de exploración sobre el rival en mapas de gran escala.',
+    timingRecommendation: 'Día 4-6.',
+  },
+  {
+    id: 'temple-lighthouse',
+    name: 'Faro Sagrado (Sacred Lighthouse)',
+    nameEn: 'Sacred Lighthouse',
+    category: 'Estructuras Especiales de Facción',
+    faction: 'Templo',
+    isFactionUnique: true,
+    cost: { gold: 2000, wood: 10, ore: 10 },
+    prerequisites: [],
+    effects: [
+      'Aumenta la velocidad de movimiento de todos los barcos y transporte naval aliado en +500 puntos.',
+      'Dispersa la niebla de guerra en un radio ampliado de +3 casillas alrededor de toda la costa de la provincia.',
+      'Otorga +1 a la Moral a los ejércitos en combate cerca de cuerpos de agua.'
+    ],
+    strategicTip: 'Estructura determinante en mapas de islas o con rutas marítimas clave en Jadame.',
+    timingRecommendation: 'Situacional (Mapas con agua).',
+  },
+  {
+    id: 'temple-bastion-of-the-righteous',
+    name: 'Bastión de Cruzados (Bastion of Crusaders)',
+    nameEn: 'Bastion of Crusaders',
+    category: 'Estructuras Especiales de Facción',
+    faction: 'Templo',
+    isFactionUnique: true,
+    cost: { gold: 2500, ore: 10, gems: 2 },
+    prerequisites: ['Barracones (Barracks)', 'Fortificaciones II (Ciudadela Militar)'],
+    effects: [
+      'Aumenta el crecimiento semanal de Espadachines, Cruzados y Paladines (Tier 5) en +4 unidades.',
+      'Otorga a los Cruzados y Paladines un +15% de armadura frente a proyectiles enemigos y +1 Defensa general.'
+    ],
+    strategicTip: 'Convierte a los Cruzados en un bloque de choque casi indestructible frente a facciones con tiradores.',
     timingRecommendation: 'Semana 2.',
   },
   {

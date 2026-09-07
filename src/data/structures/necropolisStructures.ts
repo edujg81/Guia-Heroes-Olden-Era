@@ -2,12 +2,12 @@ import { TownStructure } from '../../types';
 
 export const NECROPOLIS_STRUCTURES: TownStructure[] = [
   // =========================================================================
-  // CENTRO CÍVICO & PALACIO DE GOBIERNO (ROSTRO ETERNO) - MULTI-NIVEL (1 a 3)
+  // CENTRO CÍVICO & PALACIO DE GOBIERNO (AYUNTAMIENTO / CAPITOLIO) - MULTI-NIVEL (1 a 4)
   // =========================================================================
   {
     id: 'necropolis-eternal-visage',
-    name: 'Rostro Eterno',
-    nameEn: 'Eternal Visage',
+    name: 'Rostro Eterno (Ayuntamiento / Capitolio)',
+    nameEn: 'Eternal Visage (Town Hall / Capitol)',
     category: 'Cívica y Economía',
     faction: 'Necrópolis',
     cost: { gold: 5000 },
@@ -15,15 +15,15 @@ export const NECROPOLIS_STRUCTURES: TownStructure[] = [
     effects: [
       'Sede principal de la corona no-muerta y centro de canalización nigromántica.',
       'Otorga al reino oro, puntos de ley y puntos de astrología al día. Aumenta el límite de héroes (si lo permite el escenario)',
-      'Se mejora a lo largo de 3 niveles cívicos (Rostro Eterno -> Rostro Eterno II -> Rostro Eterno III).'
+      'Se mejora a lo largo de 4 niveles cívicos: Asentamiento (500) -> Alcaldía (1.000) -> Ciudadela Cívica (2.000) -> Capitolio (4.000 Oro/día).'
     ],
-    strategicTip: 'Mejora a Nivel II (Rostro Eterno II) en el Día 2 para acumular oro para las moradas de nigromancia.',
-    timingRecommendation: 'Día 2-4 (Nivel II) / Semana 2 (Nivel III).',
+    strategicTip: 'Mejora a Nivel II en el Día 2 para acumular oro para las moradas y el reclutamiento masivo de esqueletos.',
+    timingRecommendation: 'Día 2-3 (Nivel II) / Semana 2 (Nivel III) / Semana 3 (Capitolio).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Rostro Eterno',
-        nameEn: 'Eternal Visage',
+        name: 'Nivel I: Asentamiento Tétrico (Ayuntamiento)',
+        nameEn: 'Gloomy Settlement (Town Hall)',
         cost: { gold: 5000 },
         prerequisites: [],
         effects: ['Otorga al reino 500 de oro, puntos de ley y puntos de astrología al día.', '+1 al límite de héroes.'],
@@ -32,23 +32,36 @@ export const NECROPOLIS_STRUCTURES: TownStructure[] = [
       },
       {
         level: 2,
-        name: 'Nivel II: Rostro Eterno II',
-        nameEn: 'Eternal Visage II',
+        name: 'Nivel II: Rostro Eterno II (Alcaldía)',
+        nameEn: 'Eternal Visage II (City Hall)',
         cost: { gold: 2500, wood: 5, ore: 5 },
-        prerequisites: ['Rostro Eterno'],
-        effects: ['Otorga al reino 750 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora económica de nivel 1.'],
-        bonusIncome: '+750 Oro, Puntos de ley, Puntos de astrología / día',
+        prerequisites: ['Rostro Eterno (Ayuntamiento / Capitolio)'],
+        effects: ['Otorga al reino 1.000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora económica de nivel 1.'],
+        bonusIncome: '+1.000 Oro, Puntos de ley, Puntos de astrología / día',
         strategicTip: 'Construir el Día 2 o 3 para acelerar la compra de tropas.'
       },
       {
         level: 3,
-        name: 'Nivel III: Rostro Eterno III',
-        nameEn: 'Eternal Visage III',
+        name: 'Nivel III: Rostro Eterno III (Ciudadela Cívica)',
+        nameEn: 'Eternal Visage III (Metropolis Hall)',
         cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Rostro Eterno II'],
-        effects: ['Otorga al reino 1000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora de nivel 2.'],
-        bonusIncome: '+1000 Oro, Puntos de ley, Puntos de astrología / día',
-        strategicTip: 'Prioridad al inicio de la Semana 2.'
+        prerequisites: ['Nivel II: Rostro Eterno II (Alcaldía)'],
+        effects: ['Otorga al reino 2.000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora de nivel 2.'],
+        bonusIncome: '+2.000 Oro, Puntos de ley, Puntos de astrología / día',
+        strategicTip: 'Prioridad al inicio de la Semana 2 para sostener los costes de Liches y Caballeros del Terror.'
+      },
+      {
+        level: 4,
+        name: 'Nivel IV: Gran Capitolio de la Cripta Suprema (Capitolio)',
+        nameEn: 'Grand Supreme Crypt Capitol',
+        cost: { gold: 10000, wood: 15, ore: 15 },
+        prerequisites: ['Nivel III: Rostro Eterno III (Ciudadela Cívica)', 'Fortificaciones II (Ciudadela Militar)'],
+        effects: [
+          'Estructura suprema cívica de la Necrópolis. Solo se puede edificar 1 Capitolio por reino/jugador.',
+          'Otorga al reino 4.000 de oro al día, además de bonificación masiva de puntos de ley y astrología.'
+        ],
+        bonusIncome: '+4.000 Oro, Puntos de ley supremos, Puntos de astrología / día',
+        strategicTip: 'Financia las mejoras masivas y las legiones de Liches y Vampiros en el mid-late game.'
       }
     ]
   },
@@ -232,6 +245,22 @@ export const NECROPOLIS_STRUCTURES: TownStructure[] = [
     ],
     strategicTip: 'Construir en cuanto se tengan 3 de cada recurso raro secundario.',
     timingRecommendation: 'Semana 2.',
+  },
+  {
+    id: 'necropolis-blacksmith',
+    name: 'Herrería Cadavérica (Blacksmith)',
+    nameEn: 'Blacksmith',
+    category: 'Cívica y Economía',
+    faction: 'Necrópolis',
+    cost: { gold: 1000, wood: 5 },
+    prerequisites: [],
+    effects: [
+      'Permite adquirir el Carro de Munición Maldito (Ammo Cart) y la Catapulta de Huesos para el héroe por 2.500 de oro.',
+      'El Carro de Munición otorga disparos infinitos a los Arqueros Esqueleto y Liches, suprimiendo la limitación de munición en asedios largos.',
+      'Aumenta la resistencia de las tropas de huesos frente a armas punzantes.'
+    ],
+    strategicTip: 'Crucial si se opta por la rama de Arqueros Esqueleto o Liches para ametrallar impunemente a los atacantes en asedios.',
+    timingRecommendation: 'Día 2-4.',
   },
 
   // =========================================================================
@@ -517,6 +546,38 @@ export const NECROPOLIS_STRUCTURES: TownStructure[] = [
     ],
     strategicTip: 'Recluta tropas neutrales no deseadas en el mapa y transfórmalas en hordas de esqueletos homogéneas.',
     timingRecommendation: 'Semana 2.',
+  },
+  {
+    id: 'necropolis-skull-vault',
+    name: 'Bóveda de Calaveras (Vault of Skulls)',
+    nameEn: 'Vault of Skulls',
+    category: 'Estructuras Especiales de Facción',
+    faction: 'Necrópolis',
+    isFactionUnique: true,
+    cost: { gold: 2500, ore: 10, mercury: 2 },
+    prerequisites: ['Cofradía de Magos Nivel 1 (Mage Guild Level 1)'],
+    effects: [
+      'Almacena la esencia espiritual de las victorias en combate: otorga +10% de daño a todos los no-muertos tras 3 combates victoriosos.',
+      'Restaura +10 de Maná al héroe nigromante al regresar victorioso a la ciudad.'
+    ],
+    strategicTip: 'Edificar antes de salir a limpiar campamentos neutrales para acumular la bonificación de daño cadavérico.',
+    timingRecommendation: 'Semana 2.',
+  },
+  {
+    id: 'necropolis-putrefaction-pit',
+    name: 'Foso de Putrefacción (Pit of Rot)',
+    nameEn: 'Pit of Rot',
+    category: 'Estructuras Especiales de Facción',
+    faction: 'Necrópolis',
+    isFactionUnique: true,
+    cost: { gold: 2000, ore: 5, mercury: 3 },
+    prerequisites: ['Fortificaciones I (Fuerte)'],
+    effects: [
+      'Drena la vitalidad y coraje de los atacantes durante los asedios a la ciudad: reduce la Moral enemiga en -2.',
+      'Aplica el efecto Plaga Putrefacta (-10% vida cada turno) a cualquier enemigo vivo que cruce el foso de la muralla.'
+    ],
+    strategicTip: 'Hace que sitiar una ciudad Necrópolis sea un suicidio táctico para ejércitos vivos basados en moral alta.',
+    timingRecommendation: 'Semana 2-3.',
   },
   {
     id: 'necropolis-shroud-of-darkness',

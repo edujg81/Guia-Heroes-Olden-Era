@@ -84,10 +84,10 @@ export const CombatTactics: React.FC<CombatTacticsProps> = ({
                 <div className="absolute top-0 left-0 w-1 h-full bg-emerald-500"></div>
                 <div className="flex items-center gap-2 text-emerald-300 font-bold text-xs uppercase tracking-wider font-mono">
                   <Trees className="w-4 h-4 text-emerald-400" />
-                  <span>1. Doble Disparo Silvano</span>
+                  <span>1. Falange de Hoplitas & Agilidad Faúnica</span>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Protege a los Cazadores Elfos y Cazadores del Viento. Su doble disparo y rango absoluto aniquilan las unidades prioritarias antes del choque.
+                  Coloca a los Hoplitas del Bosque en primera línea con formación de Muro de Escudos para absorber contragolpes. Despliega a los Faunos en los flancos para hostigar con su gran agilidad y música inspiradora.
                 </p>
               </div>
 
@@ -95,10 +95,10 @@ export const CombatTactics: React.FC<CombatTacticsProps> = ({
                 <div className="absolute top-0 left-0 w-1 h-full bg-teal-500"></div>
                 <div className="flex items-center gap-2 text-teal-300 font-bold text-xs uppercase tracking-wider font-mono">
                   <Shield className="w-4 h-4 text-teal-400" />
-                  <span>2. Enredo de Hombres Árbol</span>
+                  <span>2. Enredo de Iriyads & Aqualotls Anfibios</span>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Los Treants enraízan a cualquier atacante, inmovilizando a caballeros y bestias enemigas mientras la retaguardia silvana las acribilla.
+                  Las Ninfas Iriyads atacan volando sin recibir represalia y aplican esporas de enredo, mientras los Aqualotls anfibios dominan ciénagas y aguas con aliento gélido que congela casillas y ralentiza al enemigo.
                 </p>
               </div>
 
@@ -106,10 +106,10 @@ export const CombatTactics: React.FC<CombatTacticsProps> = ({
                 <div className="absolute top-0 left-0 w-1 h-full bg-lime-500"></div>
                 <div className="flex items-center gap-2 text-lime-300 font-bold text-xs uppercase tracking-wider font-mono">
                   <Sparkles className="w-4 h-4 text-lime-400" />
-                  <span>3. Dragones Esmeralda & Veneno</span>
+                  <span>3. Fénix de Jadame & Qilins Celestiales</span>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Su aliento ácido penetra 2 casillas consecutivas y reduce la armadura rival a la mitad. Ideales para flanquear y arrasar tiradores.
+                  Los Qilins ejecutan el Salto Místico otorgando aura de fortuna a los aliados. El Fénix de Jadame domina el campo con iniciativa extrema y renace de sus cenizas si es destruido en combate.
                 </p>
               </div>
             </>

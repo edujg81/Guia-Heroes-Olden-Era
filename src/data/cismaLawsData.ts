@@ -228,7 +228,7 @@ export const CISMA_FACTION_LAWS: FactionLaw[] = [
         costLaws: 4,
         cumulativeCost: 4,
         effect: 'Reduce todo el daño de fuego y magia elemental recibido por el ejército del Cisma en un 30%.',
-        tacticalImpact: 'Anula la ventaja de hechiceros de Infierno, Dungeon o Conflux.',
+        tacticalImpact: 'Anula la ventaja de hechiceros elementales de Mazmorra, Foresta o Templo.',
         recommendedUnlockTime: 'Día 11-12 (Semana 2)',
       },
     ],

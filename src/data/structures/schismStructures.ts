@@ -2,12 +2,12 @@ import { TownStructure } from '../../types';
 
 export const SCHISM_STRUCTURES: TownStructure[] = [
   // =========================================================================
-  // CENTRO CÍVICO & PALACIO DE GOBIERNO (REMANENTE ABISAL) - MULTI-NIVEL (1 a 3)
+  // CENTRO CÍVICO & PALACIO DE GOBIERNO (AYUNTAMIENTO / CAPITOLIO) - MULTI-NIVEL (1 a 4)
   // =========================================================================
   {
     id: 'schism-abyssal-remnant',
-    name: 'Remanente Abisal',
-    nameEn: 'Abyssal Remnant',
+    name: 'Remanente Abisal (Ayuntamiento / Capitolio)',
+    nameEn: 'Abyssal Remnant (Town Hall / Capitol)',
     category: 'Cívica y Economía',
     faction: 'Cisma',
     cost: { gold: 5000 },
@@ -15,15 +15,15 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
     effects: [
       'Núcleo de energía de la falla interdimensional y trono de los señores cósmicos.',
       'Otorga al reino oro, puntos de ley y puntos de astrología al día. Aumenta el límite de héroes (si lo permite el escenario)',
-      'Se mejora a lo largo de 3 niveles cívicos (Remanente Abisal -> Remanente Abisal II -> Remanente Abisal III).'
+      'Se mejora a lo largo de 4 niveles cívicos: Asentamiento (500) -> Alcaldía (1.000) -> Ciudadela Cívica (2.000) -> Capitolio (4.000 Oro/día).'
     ],
-    strategicTip: 'Mejora a Nivel II (Remanente Abisal II) en el Día 2 para acelerar los ritos de invocación cósmica.',
-    timingRecommendation: 'Día 2-4 (Nivel II) / Semana 2 (Nivel III).',
+    strategicTip: 'Mejora a Nivel II en el Día 2 para acelerar los ritos de invocación cósmica y sostener a los Shoths.',
+    timingRecommendation: 'Día 2-3 (Nivel II) / Semana 2 (Nivel III) / Semana 3 (Capitolio).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Remanente Abisal',
-        nameEn: 'Abyssal Remnant',
+        name: 'Nivel I: Asentamiento del Vacío (Ayuntamiento)',
+        nameEn: 'Void Settlement (Town Hall)',
         cost: { gold: 5000 },
         prerequisites: [],
         effects: ['Otorga al reino 500 de oro, puntos de ley y puntos de astrología al día.', '+1 al límite de héroes.'],
@@ -32,23 +32,36 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
       },
       {
         level: 2,
-        name: 'Nivel II: Remanente Abisal II',
-        nameEn: 'Abyssal Remnant II',
+        name: 'Nivel II: Remanente Abisal II (Alcaldía)',
+        nameEn: 'Abyssal Remnant II (City Hall)',
         cost: { gold: 2500, wood: 5, ore: 5 },
-        prerequisites: ['Remanente Abisal'],
-        effects: ['Otorga al reino 750 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora económica de nivel 1.'],
-        bonusIncome: '+750 Oro, Puntos de ley, Puntos de astrología / día',
+        prerequisites: ['Remanente Abisal (Ayuntamiento / Capitolio)'],
+        effects: ['Otorga al reino 1.000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora económica de nivel 1.'],
+        bonusIncome: '+1.000 Oro, Puntos de ley, Puntos de astrología / día',
         strategicTip: 'Construir el Día 2 o 3 para financiar los ritos.'
       },
       {
         level: 3,
-        name: 'Nivel III: Remanente Abisal III',
-        nameEn: 'Abyssal Remnant III',
+        name: 'Nivel III: Remanente Abisal III (Ciudadela Cívica)',
+        nameEn: 'Abyssal Remnant III (Metropolis Hall)',
         cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Remanente Abisal II'],
-        effects: ['Otorga al reino 1000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora de nivel 2.'],
-        bonusIncome: '+1000 Oro, Puntos de ley, Puntos de astrología / día',
-        strategicTip: 'Prioridad al inicio de la Semana 2.'
+        prerequisites: ['Nivel II: Remanente Abisal II (Alcaldía)'],
+        effects: ['Otorga al reino 2.000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora de nivel 2.'],
+        bonusIncome: '+2.000 Oro, Puntos de ley, Puntos de astrología / día',
+        strategicTip: 'Prioridad al inicio de la Semana 2 para sostener los altos costes de mantenimiento abisal.'
+      },
+      {
+        level: 4,
+        name: 'Nivel IV: Gran Capitolio del Vacío Eterno (Capitolio)',
+        nameEn: 'Grand Eternal Void Capitol',
+        cost: { gold: 10000, wood: 15, ore: 15 },
+        prerequisites: ['Nivel III: Remanente Abisal III (Ciudadela Cívica)', 'Fortificaciones II (Ciudadela Militar)'],
+        effects: [
+          'Estructura suprema cívica del Cisma. Solo se puede edificar 1 Capitolio por reino/jugador.',
+          'Otorga al reino 4.000 de oro al día, además de bonificación masiva de puntos de ley y astrología.'
+        ],
+        bonusIncome: '+4.000 Oro, Puntos de ley supremos, Puntos de astrología / día',
+        strategicTip: 'Financia las legiones abisales, Concubos y Heraldos del Vacío.'
       }
     ]
   },
@@ -232,6 +245,22 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
     ],
     strategicTip: 'Construir en Semana 2 para garantizar mercurio constante.',
     timingRecommendation: 'Semana 2.',
+  },
+  {
+    id: 'schism-blacksmith',
+    name: 'Fragua del Vacío y Herrería Abisal (Blacksmith)',
+    nameEn: 'Blacksmith',
+    category: 'Cívica y Economía',
+    faction: 'Cisma',
+    cost: { gold: 1000, ore: 5 },
+    prerequisites: [],
+    effects: [
+      'Permite adquirir el Cañón de Distorsión y el Sifón de Almas para el héroe por 2.500 de oro.',
+      'El Cañón de Distorsión dispara proyectiles de energía entrópica que ignoran un 50% de la defensa física de los muros.',
+      'El Sifón de Almas drena maná del lanzador enemigo y lo recarga en la reserva del héroe del Cisma.'
+    ],
+    strategicTip: 'Ideal para asediar fortificaciones y ganar la guerra de desgaste de maná contra héroes hechiceros enemigos.',
+    timingRecommendation: 'Día 2-4.',
   },
 
   // =========================================================================
@@ -517,6 +546,70 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
     ],
     strategicTip: 'Sube de nivel a tu héroe principal de forma inmediata sacrificando objetos prescindibles.',
     timingRecommendation: 'Semana 2.',
+  },
+  {
+    id: 'schism-warp-portal',
+    name: 'Portal de Distorsión (Warp Portal)',
+    nameEn: 'Warp Portal',
+    category: 'Estructuras Especiales de Facción',
+    faction: 'Cisma',
+    isFactionUnique: true,
+    cost: { gold: 2500, ore: 5, mercury: 3 },
+    prerequisites: ['Rito de Sangre Helada de Vori (Vori Blood Rite)'],
+    effects: [
+      'Permite teletransportar instantáneamente unidades entre ciudades aliadas del Cisma que posean un Portal de Distorsión.',
+      'Reduce la pérdida de puntos de movimiento por terrenos difíciles en un 50%.'
+    ],
+    strategicTip: 'Concentra tropas de múltiples castillos en la línea de frente en un solo turno.',
+    timingRecommendation: 'Semana 2.',
+  },
+  {
+    id: 'schism-void-monolith',
+    name: 'Monolito del Vacío (Void Monolith)',
+    nameEn: 'Void Monolith',
+    category: 'Estructuras Especiales de Facción',
+    faction: 'Cisma',
+    isFactionUnique: true,
+    cost: { gold: 2000, ore: 10, mercury: 2 },
+    prerequisites: ['Cofradía de Magos Nivel 1 (Mage Guild Level 1)'],
+    effects: [
+      'Otorga +10% de resistencia mágica a todas las tropas de la facción Cisma.',
+      'Drena 5 puntos de maná del héroe enemigo al comienzo de cada ronda de combate.'
+    ],
+    strategicTip: 'Desactiva combos mágicos rivales en batallas prolongadas.',
+    timingRecommendation: 'Semana 2.',
+  },
+  {
+    id: 'schism-astral-chamber',
+    name: 'Cámara de Resonancia Astral (Astral Resonance Chamber)',
+    nameEn: 'Astral Resonance Chamber',
+    category: 'Estructuras Especiales de Facción',
+    faction: 'Cisma',
+    isFactionUnique: true,
+    cost: { gold: 2500, wood: 5, mercury: 4 },
+    prerequisites: ['Monolito de la Falla Cósmica (Rift Monolith)'],
+    effects: [
+      'Aumenta la probabilidad de impacto crítico de hechizos astrales y de distorsión en un +25%.',
+      'Otorga +1 de Conocimiento a los héroes del Cisma tras cada victoria en combate contra héroes enemigos.'
+    ],
+    strategicTip: 'Convierte los hechizos de área en aniquiladores de tropas enemigas en late-game.',
+    timingRecommendation: 'Semana 2-3.',
+  },
+  {
+    id: 'schism-rift-nexus',
+    name: 'Nexo de Fallas de Vori (Rift Nexus)',
+    nameEn: 'Rift Nexus',
+    category: 'Estructuras Especiales de Facción',
+    faction: 'Cisma',
+    isFactionUnique: true,
+    cost: { gold: 3000, ore: 10, mercury: 5 },
+    prerequisites: ['Rito Siniestro de Invocación (Sinister Summoning Rite)'],
+    effects: [
+      'Incrementa el crecimiento semanal de todas las criaturas de Tier 5 a 7 en un +20%.',
+      'Convoca automáticamente una pila de Shoths menores para defender la ciudad durante cualquier asedio.'
+    ],
+    strategicTip: 'La defensa de base perfecta para evitar que héroes secundarios enemigos capturen tus ciudades del Cisma desprotegidas.',
+    timingRecommendation: 'Semana 3.',
   },
   {
     id: 'schism-abyss-firmament',

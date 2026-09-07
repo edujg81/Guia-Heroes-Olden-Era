@@ -2,12 +2,12 @@ import { TownStructure } from '../../types';
 
 export const HIVE_STRUCTURES: TownStructure[] = [
   // =========================================================================
-  // CENTRO CÍVICO & PALACIO DE GOBIERNO (CORAZÓN DEL APIARIO) - MULTI-NIVEL (1 a 3)
+  // CENTRO CÍVICO & PALACIO DE GOBIERNO (AYUNTAMIENTO / CAPITOLIO) - MULTI-NIVEL (1 a 4)
   // =========================================================================
   {
     id: 'hive-apiarys-heart',
-    name: 'Corazón del Apiario',
-    nameEn: 'Apiary\'s Heart',
+    name: 'Corazón del Apiario (Ayuntamiento / Capitolio)',
+    nameEn: 'Apiary\'s Heart (Town Hall / Capitol)',
     category: 'Cívica y Economía',
     faction: 'Enjambre',
     cost: { gold: 5000 },
@@ -15,15 +15,15 @@ export const HIVE_STRUCTURES: TownStructure[] = [
     effects: [
       'Cámara central de la mente enjambrada y depósito de miel biológica y recursos.',
       'Otorga al reino oro, puntos de ley y puntos de astrología al día. Aumenta el límite de héroes (si lo permite el escenario)',
-      'Se mejora a lo largo de 3 niveles cívicos (Corazón del Apiario -> Corazón del Apiario II -> Corazón del Apiario III).'
+      'Se mejora a lo largo de 4 niveles cívicos: Asentamiento (500) -> Alcaldía (1.000) -> Ciudadela Cívica (2.000) -> Capitolio (4.000 Oro/día).'
     ],
-    strategicTip: 'Mejora a Nivel II (Corazón del Apiario II) en el Día 2 para acelerar la eclosión de zánganos y larvas.',
-    timingRecommendation: 'Día 2-4 (Nivel II) / Semana 2 (Nivel III).',
+    strategicTip: 'Mejora a Nivel II en el Día 2 para acelerar la eclosión de zánganos, larvas y mantis reales.',
+    timingRecommendation: 'Día 2-3 (Nivel II) / Semana 2 (Nivel III) / Semana 3 (Capitolio).',
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Corazón del Apiario',
-        nameEn: 'Apiary\'s Heart',
+        name: 'Nivel I: Asentamiento del Enjambre (Ayuntamiento)',
+        nameEn: 'Swarm Settlement (Town Hall)',
         cost: { gold: 5000 },
         prerequisites: [],
         effects: ['Otorga al reino 500 de oro, puntos de ley y puntos de astrología al día.', '+1 al límite de héroes.'],
@@ -32,23 +32,36 @@ export const HIVE_STRUCTURES: TownStructure[] = [
       },
       {
         level: 2,
-        name: 'Nivel II: Corazón del Apiario II',
-        nameEn: 'Apiary\'s Heart II',
+        name: 'Nivel II: Corazón del Apiario II (Alcaldía)',
+        nameEn: 'Apiary\'s Heart II (City Hall)',
         cost: { gold: 2500, wood: 5, ore: 5 },
-        prerequisites: ['Corazón del Apiario'],
-        effects: ['Otorga al reino 750 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora económica de nivel 1.'],
-        bonusIncome: '+750 Oro, Puntos de ley, Puntos de astrología / día',
-        strategicTip: 'Construir el Día 2 o 3 para expandir la colonia.'
+        prerequisites: ['Corazón del Apiario (Ayuntamiento / Capitolio)'],
+        effects: ['Otorga al reino 1.000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora económica de nivel 1.'],
+        bonusIncome: '+1.000 Oro, Puntos de ley, Puntos de astrología / día',
+        strategicTip: 'Construir el Día 2 o 3 para expandir la colonia y alimentar la producción.'
       },
       {
         level: 3,
-        name: 'Nivel III: Corazón del Apiario III',
-        nameEn: 'Apiary\'s Heart III',
+        name: 'Nivel III: Corazón del Apiario III (Ciudadela Cívica)',
+        nameEn: 'Apiary\'s Heart III (Metropolis Hall)',
         cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Corazón del Apiario II'],
-        effects: ['Otorga al reino 1000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora de nivel 2.'],
-        bonusIncome: '+1000 Oro, Puntos de ley, Puntos de astrología / día',
-        strategicTip: 'Prioridad al inicio de la Semana 2.'
+        prerequisites: ['Nivel II: Corazón del Apiario II (Alcaldía)'],
+        effects: ['Otorga al reino 2.000 de oro, puntos de ley y puntos de astrología al día.', 'Permite al propietario elegir una mejora de nivel 2.'],
+        bonusIncome: '+2.000 Oro, Puntos de ley, Puntos de astrología / día',
+        strategicTip: 'Prioridad al inicio de la Semana 2 para sostener los costes de eclosión masiva.'
+      },
+      {
+        level: 4,
+        name: 'Nivel IV: Gran Capitolio de la Supermente (Capitolio)',
+        nameEn: 'Grand Overmind Capitol',
+        cost: { gold: 10000, wood: 15, ore: 15 },
+        prerequisites: ['Nivel III: Corazón del Apiario III (Ciudadela Cívica)', 'Fortificaciones II (Ciudadela Militar)'],
+        effects: [
+          'Estructura suprema cívica de la Colmena. Solo se puede edificar 1 Capitolio por reino/jugador.',
+          'Otorga al reino 4.000 de oro al día, además de bonificación masiva de puntos de ley y astrología.'
+        ],
+        bonusIncome: '+4.000 Oro, Puntos de ley supremos, Puntos de astrología / día',
+        strategicTip: 'Financia las oleadas incesantes y la compra de Reinas de la Colmena.'
       }
     ]
   },
@@ -232,6 +245,22 @@ export const HIVE_STRUCTURES: TownStructure[] = [
     ],
     strategicTip: 'Construir en Semana 2 para garantizar cristales constantes.',
     timingRecommendation: 'Semana 2.',
+  },
+  {
+    id: 'hive-blacksmith',
+    name: 'Forja Quitinácea (Blacksmith)',
+    nameEn: 'Blacksmith',
+    category: 'Cívica y Economía',
+    faction: 'Enjambre',
+    cost: { gold: 1000, wood: 5 },
+    prerequisites: [],
+    effects: [
+      'Permite adquirir el Aguijón Biológico / Proyector de Larvas para el héroe por 2.500 de oro.',
+      'El proyector dispara larvas corrosivas vivas que reducen la armadura del objetivo en un -15% y aplican veneno en cada impacto.',
+      'Aumenta la penetración de aguijones de todas las tropas insectoides.'
+    ],
+    strategicTip: 'La artillería biológica descompone defensas pesadas y ablanda murallas antes de la carga de las mantis.',
+    timingRecommendation: 'Día 2-4.',
   },
 
   // =========================================================================
@@ -517,6 +546,38 @@ export const HIVE_STRUCTURES: TownStructure[] = [
     ],
     strategicTip: 'Garantiza el primer turno en batallas territoriales clave.',
     timingRecommendation: 'Semana 2.',
+  },
+  {
+    id: 'hive-dragonfly-nest',
+    name: 'Nido del Rey Libélula (Dragonfly King\'s Aerie)',
+    nameEn: 'Dragonfly King\'s Aerie',
+    category: 'Estructuras Especiales de Facción',
+    faction: 'Enjambre',
+    isFactionUnique: true,
+    cost: { gold: 2500, wood: 10, crystal: 2 },
+    prerequisites: ['Nido de Papel (Paper Nest)'],
+    effects: [
+      'Otorga +2 a la Velocidad y vuelo sin penalizaciones a las Avispas Gigantes y zánganos voladores.',
+      'Inocula neurotoxinas en los aguijones de las unidades voladoras (30% prob. de ralentizar e inmovilizar al objetivo durante 1 turno).'
+    ],
+    strategicTip: 'Permite a tus voladores cruzar el campo de batalla entero en el turno 1 e inutilizar tiradores enemigos.',
+    timingRecommendation: 'Semana 2.',
+  },
+  {
+    id: 'hive-biomass-chamber',
+    name: 'Cámara de Digestión de Biomasa (Biomass Chamber)',
+    nameEn: 'Biomass Chamber',
+    category: 'Estructuras Especiales de Facción',
+    faction: 'Enjambre',
+    isFactionUnique: true,
+    cost: { gold: 2000, ore: 5, crystal: 3 },
+    prerequisites: ['Corazón del Apiario (Ayuntamiento / Capitolio)'],
+    effects: [
+      'Permite descomponer pilas de prisioneros o tropas no insectoides en biomasa pura.',
+      'Aumenta el crecimiento de la morada de mayor nivel construida en un +25% durante las siguientes dos semanas tras el sacrificio biológico.'
+    ],
+    strategicTip: 'Convierte tropas neutrales capturadas inútiles en biomasa para clonar Mantis y Reinas de la Colmena.',
+    timingRecommendation: 'Semana 2-3.',
   },
   {
     id: 'hive-shrine-of-return',
