@@ -1172,7 +1172,7 @@ export const NECROPOLIS_COMBAT_TACTICS: TacticalScenario[] = [
     recommendationHuman: 'Usa a los Caballeros del Terror (Rama A) para flanquear y aplicar Golpe Mortal (duplica el daño y aplica Maldición) sobre la unidad reina del rival.',
     recommendedSpell: 'Maldición Masiva / Lentitud Necrótica',
     triumvirateStance: 'Postura Necrótica: Miasma Putrefacto (+Poder Mágico y Daño de Área)',
-    recommendedHeroes: ['Artorius Veritas (Hechicería & Maná)', 'Baluarte', 'Milossa la Dorada'],
+    recommendedHeroes: ['Maestro Klastor (Hechicería & Saqueatumbas)', 'Baluarte', 'Milossa la Dorada'],
     recommendedUnits: ['Liche Pestilente (Rama A - Nube de Área)', 'Caballero del Terror (Rama A - Golpe Mortal)', 'Espectro de la Cripta'],
     turnByTurnLoop: [
       'Turno 1: La vanguardia enemiga choca contra tus Zombis y Esqueletos.',

@@ -22,8 +22,8 @@ export const TEMPLE_56_DAY_BUILD_STEPS: BuildStep[] = [
     buildingTierLevel: 'Infraestructura Cívica',
     cost: { gold: 500, wood: 5 },
     heroActions: [
-      'Recluta inmediatamente a un segundo héroe de Templo en la Taberna (idealmente un Clérigo o un explorador con Logística/Exploración).',
-      'Transfiere todas las tropas del héroe secundario a tu comandante principal (Lord Edgar, Sir Galahad o Valentina).',
+      'Recluta inmediatamente a un segundo héroe de Templo en la Taberna (idealmente un Clérigo o un explorador con Logística/Exploración como Leon Dedos Pegajosos).',
+      'Transfiere todas las tropas del héroe secundario a tu comandante principal (Lord Edgar, Viejo Lord Mandall o Kestrel).',
       'El héroe principal limpia pilas errantes débiles (Tier 1-2) en los caminos adyacentes para recoger montones de oro, madera y mineral.',
       'El héroe secundario actúa como recolector (scout), recogiendo cofres de experiencia y recursos libres sin perder puntos de movimiento del principal.'
     ],
@@ -639,7 +639,7 @@ export const TEMPLE_UNITS: UnitInfo[] = [
         abilities: ['Disparo Perforante (Piercing Shot: el objetivo recibe +25% daño hasta fin de ronda)', 'Doble Salva'],
         strengths: 'Amplifica el daño que todo tu ejército inflige sobre el objetivo designado.',
         tacticalUsage: 'Dispara primero al objetivo de mayor salud antes de atacarlo con Caballería o Grifos.',
-        idealMatchup: 'Minotauros, Caballeros del Terror, Treants',
+        idealMatchup: 'Minotauros, Caballeros del Terror, Herbomantes',
         synergyLaws: ['Disciplina del Templo', 'Puntería de Élite'],
       },
       branchB: {
@@ -1480,7 +1480,7 @@ export const TEMPLE_COMBAT_TACTICS: TacticalScenario[] = [
     recommendationHuman: 'Aplica Brillo Interior con las Tejedoras de Luz sobre los Tiradores en Turno 1 y descarga Disparo Perforante con ignorado de distancia.',
     recommendedSpell: 'Bendición (Magia de Luz) / Escudo Divino',
     triumvirateStance: 'Postura Sagrada: Muro de Fe (+Defensa & Moral +2)',
-    recommendedHeroes: ['Lord Edgar', 'Valentina'],
+    recommendedHeroes: ['Lord Edgar', 'Kestrel'],
     recommendedUnits: ['Égida del Sol (Rama B)', 'Tiradores de Élite (Rama A)', 'Tejedoras de Luz (Rama A)'],
     turnByTurnLoop: [
       'Turno 1: Tejedora de Luz lanza Brillo Interior en Tiradores -> Tiradores aplican Disparo Perforante a la criatura más rápida.',
@@ -1499,7 +1499,7 @@ export const TEMPLE_COMBAT_TACTICS: TacticalScenario[] = [
     recommendationHuman: 'Lanza a los Grifos Reales al centro de los tiradores rivales; su contraataque ilimitado y vuelo directo diezmará a cualquiera que intente golpearlos.',
     recommendedSpell: 'Oración Solar / Celeridad Sagrada',
     triumvirateStance: 'Postura Sagrada: Carga de la Luz (+Ataque a la Carga & Velocidad)',
-    recommendedHeroes: ['Sir Galahad', 'Lord Edgar'],
+    recommendedHeroes: ['Keandra (La Justadora)', 'Lord Edgar'],
     recommendedUnits: ['Caballería de Lanza Solar (Rama A)', 'Grifos Reales (Rama A)', 'Justiciero Sagrado (Rama B)'],
     turnByTurnLoop: [
       'Turno 1: Grifos Reales vuelan sobre los tiradores rivales anulando su disparo.',
@@ -1518,7 +1518,7 @@ export const TEMPLE_COMBAT_TACTICS: TacticalScenario[] = [
     recommendationHuman: 'Despliega la subclase Gran Inquisidor para limitar al héroe rival a 1 solo lanzamiento por batalla y drena su maná con Inquisidores.',
     recommendedSpell: 'Silencio Sagrado / Desvanecer Oscuridad',
     triumvirateStance: 'Postura Sagrada: Resistencia de la Fe (+6 Def / Resistencia Mágica)',
-    recommendedHeroes: ['Inquisitor Alistair', 'Valentina'],
+    recommendedHeroes: ['Avis el Hereje (El Inquisidor)', 'Lia la Desatada'],
     recommendedUnits: ['Excomulgadores (Rama B - Silencio)', 'Hierofantes (Rama A - Purga)', 'Apoteosis'],
     turnByTurnLoop: [
       'Turno 1: Excomulgador dispara y aplica Sello de Silencio -> Hierofante purga maldiciones de la primera fila.',
@@ -1536,7 +1536,7 @@ export const TEMPLE_COMBAT_TACTICS: TacticalScenario[] = [
     recommendationHuman: 'Reserva la habilidad de Resurrección del Arcángel para la penúltima ronda, reviviendo al 100% de tus Caballeros o Grifos caídos antes de que termine el combate.',
     recommendedSpell: 'Intervención Divina / Martillo Celestial',
     triumvirateStance: 'Postura Sagrada: Gracia de los Cielos (+Moral +3 & Golpe Máximo)',
-    recommendedHeroes: ['Lord Edgar', 'Sir Galahad', 'Valentina'],
+    recommendedHeroes: ['Lord Edgar', 'Viejo Lord Mandall (Archivero Bélico)', 'Aeos la Exaltada'],
     recommendedUnits: ['Arcángeles (Rama A - Resurrección)', 'Caballería de Lanza Solar', 'Tiradores de Élite'],
     turnByTurnLoop: [
       'Turno 1: Arcángeles vuelan al corazón del ejército enemigo aplicando daño constante.',

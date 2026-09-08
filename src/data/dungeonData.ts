@@ -1758,7 +1758,7 @@ export const DUNGEON_UNITS: UnitInfo[] = [
           shots: 8,
           weeklyGrowth: 3,
         },
-        combatStance: 'Postura de Gorgona: Libera un pulso frontal de petrificación que puede congelar a múltiples tropas en un cono de 3 casillas.',
+        combatStance: 'Postura Petrificante: Libera un pulso frontal de petrificación que puede congelar a múltiples tropas en un cono de 3 casillas.',
         abilities: [
           'Petrificación Certera: El primer ataque cuerpo a cuerpo petrifica al atacante con 100% de probabilidad garantizada',
           'Aura de Serpientes: Todos los enemigos a 2 casillas sufren -3 de Velocidad y -4 de Iniciativa',
@@ -2167,7 +2167,7 @@ export const TACTICAL_SCENARIOS: TacticalScenario[] = [
     id: 'anti-magic-titans-duel',
     title: 'Duelo vs Ejércitos de Alta Resistencia Mágica o Colosos Pesados',
     category: 'Duelo Anti-Magia / Colosos',
-    situation: 'Te enfrentas a ejércitos con alta protección mágica o armaduras blindadas (Celestiales de Temple, Dragones Esmeralda de Sylvan, Colosos del Enjambre/Hive o Dragones de Hueso de Necrópolis) donde el daño directo de hechizos elementales es ineficiente.',
+    situation: 'Te enfrentas a ejércitos con alta protección mágica o armaduras blindadas (Celestiales de Temple, Qilins Celestiales de Arboleda, Colosos del Enjambre/Hive o Dragones de Hueso de Necrópolis) donde el daño directo de hechizos elementales es ineficiente.',
     recommendationAI: 'Despliega la combinación de Rama B: Dragón de Ceniza (aliento de cenizas sofocantes que reduce el ataque enemigo en 25%), Hidra Ctónica (ácido corrosivo que destruye 4 puntos de armadura por golpe acumulable) y Bailarinas Áureas (contraataque infinito).',
     recommendationHuman: 'Los rivales humanos intentarán desgastarte con proyectiles pesados. Usa la Postura de Nube Cenicienta del Dragón de Ceniza para proteger a tus tropas contra proyectiles mientras la Hidra Ctónica funde sus defensas blindadas.',
     recommendedSpell: 'Maldición Debilitante + Aceleración / Golpe Heroico',
@@ -2210,7 +2210,7 @@ export const TACTICAL_SCENARIOS: TacticalScenario[] = [
     recommendationHuman: 'Contra humanos que posean artefactos de antimagia o colgantes de resistencia, usa el Aliento Ígneo devastador de 2 casillas con Odio Titánico (+50% daño a Tier 7) para incinerar sus formaciones y remata con Rayo Desintegrador en Turno 2.',
     recommendedSpell: 'Apocalipsis / Armageddon (Nivel 5) + Rayo Desintegrador',
     triumvirateStance: 'Postura de Poder Mágico (+6/+8 SP)',
-    recommendedHeroes: ['Zakron el Grande (Brujo S+)', 'Typhona (Brujo S+)', 'Kelarr (Erudito con SP masivo)'],
+    recommendedHeroes: ['Zakron el Grande (Brujo S+)', 'Typhona (Brujo S+)', 'Motley (Maestro Arcano)'],
     recommendedUnits: ['Dragón Negro (Rama A - Inmunidad Nv 1-5)', 'Hidra Infernal (Respaldo)'],
     turnByTurnLoop: [
       'Turno 1: Activa Postura Mágica del Triunvirato (+6 a +8 Poder Mágico).',

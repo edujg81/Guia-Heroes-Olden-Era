@@ -664,7 +664,7 @@ export const ENJAMBRE_UNITS: UnitInfo[] = [
     tier: 6,
     name: 'Reina Menor (Broodmother)',
     upgradeName: 'Reina del Enjambre (Rama A - Engendradora Masiva)',
-    altUpgradeName: 'Matriarca Tiranida (Rama B - Feromonas de Furia)',
+    altUpgradeName: 'Matriarca del Enjambre (Rama B - Feromonas de Furia)',
     dwelling: 'Cámara de la Reina Menor (Broodmother Chamber)',
     role: 'Engendrador Táctico / Invocación Continua & Auras de Colmena',
     speed: 6,
@@ -709,8 +709,8 @@ export const ENJAMBRE_UNITS: UnitInfo[] = [
       branchB: {
         id: 'branch_b',
         branchLabel: 'Rama B',
-        name: 'Matriarca Tiranida',
-        nameEn: 'Tyranid Matriarch',
+        name: 'Matriarca del Enjambre',
+        nameEn: 'Swarm Matriarch',
         subtitle: 'Reina guerrera con feromonas de frenesí asesino',
         dwellingName: 'Cámara de Reinas de Élite',
         cost: { gold: 1450, sulfur: 3 },
@@ -724,7 +724,7 @@ export const ENJAMBRE_UNITS: UnitInfo[] = [
       },
     },
     comparison: {
-      summary: 'Reina del Enjambre (Rama A) engendra Zánganos y Avispas cada turno, mientras que Matriarca Tiranida (Rama B) potencia el ataque e iniciativa de toda la colmena.',
+      summary: 'Reina del Enjambre (Rama A) engendra Zánganos y Avispas cada turno, mientras que Matriarca del Enjambre (Rama B) potencia el ataque e iniciativa de toda la colmena.',
       whenToPickA: 'Elige Rama A para batallas de desgaste y control numérico.',
       whenToPickB: 'Elige Rama B para potenciar un asalto relámpago con Mantis y Leviatanes.',
       synergyHeroA: 'Pauper (Festín de Carroña)',

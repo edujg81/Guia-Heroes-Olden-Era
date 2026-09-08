@@ -12,7 +12,7 @@ export const CISMA_56_DAY_BUILD_STEPS: BuildStep[] = [
     building: 'Consejo del Cisma (Schism Council / Town Hall)',
     cost: { gold: 500, wood: 5 },
     heroActions: [
-      'Recluta a Sister Keiri o un Invocador secundario para explorar los valles helados de Vori.',
+      'Recluta a Hermana Keiri o un Invocador secundario para explorar los valles helados de Vori.',
       'Transfiere todo el contingente de Ra\'Shoths al héroe principal para iniciar el creeping con Rito de Invocación.',
     ],
     combatTactic: 'Aprovecha la pasiva de Ra\'Shoth y su habilidad Rito de Invocación para reanimar cadáveres caídos como tropas permanentes.',
@@ -1155,14 +1155,14 @@ export const CISMA_COMBAT_TACTICS: TacticalScenario[] = [
     title: 'Creeping Temprano con 0 Bajas: Rito de Ra\'Shoths & Agarre Umbrío',
     category: 'Limpieza Temprana (Creeping)',
     situation: 'Días 1-7: Limpieza rápida de campamentos neutrales densos custodiados por criaturas cuerpo a cuerpo para banderear minas de Mercurio y Aserraderos sin pérdidas.',
-    recommendationAI: 'Despliega a los Ra\'Shoths Feroz en vanguardia para aplicar Golpe de Barrido (Cleave) a grupos compactos de la IA. Lanza Agarre Umbrío con Sister Keiri en Turno 1; cada cadáver enemigo activa el Rito de Invocación generando Ra\'Shoths adicionales permanentes.',
+    recommendationAI: 'Despliega a los Ra\'Shoths Feroz en vanguardia para aplicar Golpe de Barrido (Cleave) a grupos compactos de la IA. Lanza Agarre Umbrío con Hermana Keiri en Turno 1; cada cadáver enemigo activa el Rito de Invocación generando Ra\'Shoths adicionales permanentes.',
     recommendationHuman: 'Contra rivales que usen tropas rápidas de acoso, divide a los Ra\'Shoths Punzantes en 2 pilas para aplicar Aguijón Gélido (-2 Iniciativa enemiga) y evitar que alcancen a tus Cultistas.',
     recommendedSpell: 'Agarre Umbrío / Distorsión de Falla',
     triumvirateStance: 'Postura Arcana: Comunión Abisal (+Poder Mágico y Descuento de Maná)',
-    recommendedHeroes: ['Sister Keiri (Creeping & Invocación)', 'Dhüvri (Alquimia & Mercurio)'],
+    recommendedHeroes: ['Hermana Keiri (Creeping & Invocación)', 'Dhüvri (Alquimia & Mercurio)'],
     recommendedUnits: ['Ra\'Shoth Feroz (Rama B - Cleave)', 'Ra\'Shoth Punzante (Rama A - Aguijón Gélido)', 'Cultista Vinculador (Rama A)'],
     turnByTurnLoop: [
-      'Turno 1: Sister Keiri lanza Agarre Umbrío sobre la pila neutral más densa, reduciendo sus efectivos a la mitad.',
+      'Turno 1: Hermana Keiri lanza Agarre Umbrío sobre la pila neutral más densa, reduciendo sus efectivos a la mitad.',
       'Turno 1: Ra\'Shoth Feroz carga y desata Golpe de Barrido golpeando a 3 casillas adyacentes a la vez.',
       'Turno 2: El Rito de Invocación reanima tropas caídas convirtiéndolas en nuevos Ra\'Shoths que se incorporan a tu ejército.',
       'Turno 2: Cultistas Vinculadores sellan a los supervivientes con Atadura Planar impidiéndoles devolver el golpe.',
@@ -1178,7 +1178,7 @@ export const CISMA_COMBAT_TACTICS: TacticalScenario[] = [
     recommendationHuman: 'Usa a las Hechiceras/Embaucadoras (Rama B) para aplicar Hipnosis Sombría sobre la unidad con mayor pegada del rival humano, forzando fuego amigo masivo en sus propias filas.',
     recommendedSpell: 'Vórtice de Escarcha / Drenaje de Vacío',
     triumvirateStance: 'Postura Arcana: Supresión de Falla (+Resistencia Mágica y Drenaje de Maná)',
-    recommendedHeroes: ['Vaelor the Heretic (Ataduras)', 'Nihil (Anti-Magia)'],
+    recommendedHeroes: ['Grellekh el Traidor (Ataduras)', 'Nihil (Anti-Magia)'],
     recommendedUnits: ['Señora de las Cadenas (Rama A - Bloqueo)', 'Cultista Devoto (Rama B - Resistencia)', 'Hechicera (Rama B - Hipnosis)'],
     turnByTurnLoop: [
       'Turno 1: Cultistas Vinculadores lanzan Atadura Planar inmovilizando a la caballería enemiga por 2 rondas.',
@@ -1197,7 +1197,7 @@ export const CISMA_COMBAT_TACTICS: TacticalScenario[] = [
     recommendationHuman: 'Si el humano intenta trabar a tus tropas con contraataques pesados, usa Jinetes Domadores Aga\'Shoth (Rama A) con ataque sin contragolpe y aura de velocidad de manada.',
     recommendedSpell: 'Singularidad de Vacío / Congelación Profunda',
     triumvirateStance: 'Postura Arcana: Furia Glacial (+Iniciativa y Congelación)',
-    recommendedHeroes: ['Kaelen Vori (Jinetes Aga\'Shoth)', 'Blackhorn (Magia de Escarcha)'],
+    recommendedHeroes: ['Mara Mat\'ha (Jinetes Aga\'Shoth)', 'Cuerno Negro (Magia de Escarcha)'],
     recommendedUnits: ['Aga\'Shoth Matha (Rama B - Aliento Gélido)', 'Aga\'Shoth Domador (Rama A - Sin Contragolpe)', 'Gran Shoth Innombrable'],
     turnByTurnLoop: [
       'Turno 1: Jinetes Domadores usan su aura de velocidad (+2 a la manada) para posicionarse en el flanco débil rival.',
@@ -1216,7 +1216,7 @@ export const CISMA_COMBAT_TACTICS: TacticalScenario[] = [
     recommendationHuman: 'Despliega Grandes Shoths Innombrables (Rama A) para lanzar Fragmentos de Hielo Negro desde el aire y ejecutar Doble Golpe en melé sin penalización de asedio.',
     recommendedSpell: 'Paso Sombrío / Manto de Vacío',
     triumvirateStance: 'Postura Arcana: Vuelo del Terror (+Velocidad Aérea y Supresión de Moral)',
-    recommendedHeroes: ['The Eye Collective (Grandes Shoths)', 'Sister Keiri'],
+    recommendedHeroes: ['La Mirada Colectiva (Grandes Shoths)', 'Hermana Keiri'],
     recommendedUnits: ['Gran Shoth Innombrable (Rama A - Doble Golpe)', 'Gran Shoth Impensable (Rama B - Terror)', 'Árbitro de la Grieta'],
     turnByTurnLoop: [
       'Turno 1: Los Grandes Shoths vuelan sobre las murallas y se posan directamente sobre los tiradores enemigos.',
@@ -1235,7 +1235,7 @@ export const CISMA_COMBAT_TACTICS: TacticalScenario[] = [
     recommendationHuman: 'Si tropas enemigas de choque se aproximan a tus Árbitros, usa "Comando: Miedo" para repelerlos 3 casillas hacia atrás y desata Tormenta de Vómito de daño puro en área 3x3.',
     recommendedSpell: 'Singularidad de Vacío / Vórtice de Escarcha',
     triumvirateStance: 'Postura Arcana: Mirada del Vacío (+Daño a Distancia Máxima & Alcance)',
-    recommendedHeroes: ['Sister Keiri', 'Blackhorn', 'Malakor'],
+    recommendedHeroes: ['Hermana Keiri', 'Cuerno Negro', 'Reina de Hielo Hel\'Ghat'],
     recommendedUnits: ['Árbitro de la Grieta (Rama A - Disparo Paradójico)', 'Árbitro Hinchado (Rama B - 155 HP & Explosión)', 'Señora de las Cadenas'],
     turnByTurnLoop: [
       'Turno 1: Los Árbitros de la Grieta disparan a la criatura enemiga más lejana con Disparo Paradójico (+100% de daño a rango máximo).',
@@ -1254,7 +1254,7 @@ export const CISMA_COMBAT_TACTICS: TacticalScenario[] = [
     recommendationHuman: 'Contra rivales humanos con estrategias de tempo o buffs, usa Verdugos Abisales (Rama B) para infligir 60 de daño fijo garantizado y activar "Supresión Total de Turnos" impidiendo que sus tropas de élite respondan.',
     recommendedSpell: 'Cataclismo Dimensional / Tormenta del Abismo (Nivel 5)',
     triumvirateStance: 'Postura Arcana: Voluntad del Abismo (+Iniciativa Máxima & Inmunidad Absoluta)',
-    recommendedHeroes: ['Sister Keiri (Soberana Abisal)', 'Dhüvri (Maestro Alquímico)', 'Blackhorn (Hielo Primigenio)'],
+    recommendedHeroes: ['Hermana Keiri (Soberana Abisal)', 'Dhüvri (Maestro Alquímico)', 'Cuerno Negro (Hielo Primigenio)'],
     recommendedUnits: ['Supervisor Abisal (Rama A - Momento de Demencia & Inmunidad 100%)', 'Verdugo Abisal (Rama B - 60 Daño & Supresión)', 'Árbitro de la Grieta'],
     turnByTurnLoop: [
       'Turno 1: Supervisor Abisal inicia el combate con Voluntad del Abismo (Turno Doble garantizado en Ronda 1).',

@@ -160,7 +160,7 @@ export const FACTION_SPELL_COMBOS: Record<CanonicalFactionKey, FactionSpellCombo
         { spellId: 'spell-blessing', spellName: 'Bendición Divina Magistral (N4)', level: 'Nivel 4', manaCost: 7 },
       ],
       beneficiaryUnits: ['Caballeros Templarios', 'Paladines', 'Arcángeles', 'Cruzados Justicieros'],
-      recommendedHeroes: ['Valerius', 'Adelaide', 'Seraphina', 'Celeste'],
+      recommendedHeroes: ['Lord Edgar', 'Viejo Lord Mandall', 'Keandra'],
       executionSteps: [
         'Turno 1: Lanza Aceleración Magistral N4 (+4 Velocidad y +20% Iniciativa a todo el ejército).',
         'Los Caballeros Templarios y Arcángeles cruzan la totalidad de la cuadrícula hexagonal en su primer movimiento.',
@@ -181,7 +181,7 @@ export const FACTION_SPELL_COMBOS: Record<CanonicalFactionKey, FactionSpellCombo
         { spellId: 'spell-holy-shield', spellName: 'Escudo Sagrado Magistral (N4)', level: 'Nivel 4', manaCost: 10 },
       ],
       beneficiaryUnits: ['Arcángeles', 'Paladines', 'Escuderos Pesados', 'Inquisidores'],
-      recommendedHeroes: ['Seraphina', 'Valerius', 'Aurelius'],
+      recommendedHeroes: ['Aeos la Exaltada', 'Julius', 'Lord Edgar'],
       executionSteps: [
         'Forma un perímetro defensivo compacto alrededor de los Inquisidores y Sacerdotes.',
         'Aplica Escudo Sagrado Magistral N4 (-40% daño físico a todo el ejército).',
@@ -202,7 +202,7 @@ export const FACTION_SPELL_COMBOS: Record<CanonicalFactionKey, FactionSpellCombo
         { spellId: 'spell-dispel', spellName: 'Disipación Universal (N4)', level: 'Nivel 4', manaCost: 6 },
       ],
       beneficiaryUnits: ['Cruzados', 'Lanceros Sagrados', 'Tiradores de Élite'],
-      recommendedHeroes: ['Adelaide', 'Lucian'],
+      recommendedHeroes: ['Anastasia la Dócil', 'Clarissa', 'Avis el Hereje'],
       executionSteps: [
         'Enfrentamiento directo contra Necrópolis o Mazmorra que intente ralentizar o maldecir tu vanguardia.',
         'Lanza Purga Solar Masiva N4 para inmunizar a todo el ejército contra Maldición de Sombras y Ceguera durante 3 rondas completas.',
@@ -224,7 +224,7 @@ export const FACTION_SPELL_COMBOS: Record<CanonicalFactionKey, FactionSpellCombo
         { spellId: 'spell-shadow-curse', spellName: 'Maldición Tenebrosa (N4)', level: 'Nivel 4', manaCost: 10 },
       ],
       beneficiaryUnits: ['Señores Vampiros', 'Caballeros de la Muerte', 'Segadores de Almas'],
-      recommendedHeroes: ['Mortis', 'Vesper', 'Naadir'],
+      recommendedHeroes: ['Maestro Klastor', 'Adahn', 'Rey de reyes'],
       executionSteps: [
         'Turno 1: Lanza Maldición Tenebrosa Magistral N4; todo el ejército rival pierde -8 de Ataque y su daño se fija en el mínimo menos 35%.',
         'Turno 2: Lanza Teletransporte Magistral N4 soltando la pila de Señores Vampiros en la casilla óptima adyacente a 3 escuadras de arqueros enemigos.',
@@ -245,7 +245,7 @@ export const FACTION_SPELL_COMBOS: Record<CanonicalFactionKey, FactionSpellCombo
         { spellId: 'spell-fatal-decay', spellName: 'Decadencia Fatal / Peste (N4)', level: 'Nivel 4', manaCost: 9 },
       ],
       beneficiaryUnits: ['Espectros', 'Liches', 'Esqueletos Arqueros'],
-      recommendedHeroes: ['Vesper', 'Sarix'],
+      recommendedHeroes: ['Ethric', 'Milossa la Dorada', 'Baluarte'],
       executionSteps: [
         'Identifica la unidad más peligrosa del rival (pila gigante de Tier 6 o 7).',
         'Aplica Ceguera N4 (inmovilizada 5 rondas y sin contraataque al romperse).',
@@ -266,7 +266,7 @@ export const FACTION_SPELL_COMBOS: Record<CanonicalFactionKey, FactionSpellCombo
         { spellId: 'spell-despair', spellName: 'Desesperación Masiva (N4)', level: 'Nivel 4', manaCost: 8 },
       ],
       beneficiaryUnits: ['Esqueletos Guerreros', 'Caballeros del Terror', 'Señores de los Vampiros'],
-      recommendedHeroes: ['Baluarte', 'Adahn'],
+      recommendedHeroes: ['Baluarte', 'Adahn', 'Maestro Klastor'],
       executionSteps: [
         'Lanza Desesperación Masiva N4 (-4 Moral y -4 Suerte al rival) para congelar sus turnos por baja moral.',
         'Usa tus falanges de Esqueletos y Sabuesos para absorber el daño de asalto.',
@@ -289,7 +289,7 @@ export const FACTION_SPELL_COMBOS: Record<CanonicalFactionKey, FactionSpellCombo
         { spellId: 'spell-early-start', spellName: 'Comienzo Temprano Magistral (N4)', level: 'Nivel 4', manaCost: 8 },
       ],
       beneficiaryUnits: ['Dragones Negros', 'Dragones Rojos'],
-      recommendedHeroes: ['Zakron', 'Malakor', 'Jedda'],
+      recommendedHeroes: ['Zakron el Grande', 'Motley', 'Typhona'],
       executionSteps: [
         'Despliega únicamente a tus Dragones Negros (o protégelos en primera línea con Postura Mágica del Triunvirato).',
         'Turno 1: Comienzo Temprano asegura la iniciativa absoluta del héroe antes de que cualquier unidad enemiga mueva.',
@@ -310,7 +310,7 @@ export const FACTION_SPELL_COMBOS: Record<CanonicalFactionKey, FactionSpellCombo
         { spellId: 'spell-teleport', spellName: 'Salto Dimensional Bélico / Teleport (N4)', level: 'Nivel 4', manaCost: 12 },
       ],
       beneficiaryUnits: ['Hidras Infernales', 'Minotauros Furiosos'],
-      recommendedHeroes: ['Zakron', 'Thalor'],
+      recommendedHeroes: ['Zakron el Grande', 'Kelarr, hijo de Navarr', 'Hermana Deira'],
       executionSteps: [
         'Turno 1: Lanza Lentitud Masiva N4 (-4 Velocidad y -25% Iniciativa a TODO el ejército rival).',
         'El enemigo queda clavado en su zona de despliegue sin poder avanzar ni reaccionar.',
@@ -331,7 +331,7 @@ export const FACTION_SPELL_COMBOS: Record<CanonicalFactionKey, FactionSpellCombo
         { spellId: 'spell-arcane-bolt', spellName: 'Rayo Arcano (N2-N3)', level: 'Nivel 3', manaCost: 4 },
       ],
       beneficiaryUnits: ['Medusas Tenebrosas', 'Asesinos de la Sombra', 'Trogloditas'],
-      recommendedHeroes: ['Zakron', 'Alis'],
+      recommendedHeroes: ['Zakron el Grande', 'Devir, hijo de Devir', 'Enatee'],
       executionSteps: [
         'Identifica la mina de oro o cristal custodiada por neutrales lentos cuerpo a cuerpo (Ogros, Zombis, Gólems).',
         'Turno 1: Aplica Lentitud N2 al grupo más adelantado (reduce velocidad en -3 e iniciativa en -10%).',
@@ -354,7 +354,7 @@ export const FACTION_SPELL_COMBOS: Record<CanonicalFactionKey, FactionSpellCombo
         { spellId: 'spell-blessing', spellName: 'Bendición Divina Magistral (N4)', level: 'Nivel 4', manaCost: 7 },
       ],
       beneficiaryUnits: ['Faunos Arqueros', 'Herbomantes', 'Iriyads de Enredadera'],
-      recommendedHeroes: ['Thorne', 'Vatawna', 'Kelarr'],
+      recommendedHeroes: ['Eith', 'Vatawna', 'Anciano Tss\'kish'],
       executionSteps: [
         'Turno 1: Lanza Lentitud Masiva N4; reduce la velocidad del ejército enemigo en -4 casillas.',
         'Las Iriyads de Enredadera clavan al suelo a las unidades más veloces enemigas con su habilidad innata de enredo.',
@@ -375,7 +375,7 @@ export const FACTION_SPELL_COMBOS: Record<CanonicalFactionKey, FactionSpellCombo
         { spellId: 'spell-cure', spellName: 'Aguas Vivificantes / Sanación Oleada (N4)', level: 'Nivel 4', manaCost: 7 },
       ],
       beneficiaryUnits: ['Hoplitas del Alba', 'Aqualotls Polares', 'Murmuramantes'],
-      recommendedHeroes: ['Faleor', 'Thorne', 'Aeliniel'],
+      recommendedHeroes: ['Faleor', 'Gorel Punta de Lanza', 'Aeliniel'],
       executionSteps: [
         'Despliega a los Hoplitas en formación de falange defensiva protegiendo el centro del tablero.',
         'Lanza Piel de Diamante N4 (+8 Defensa y -15% de reducción de daño plano a todo el ejército).',
@@ -396,7 +396,7 @@ export const FACTION_SPELL_COMBOS: Record<CanonicalFactionKey, FactionSpellCombo
         { spellId: 'spell-implosion', spellName: 'Implosión Singularidad (N4)', level: 'Nivel 4', manaCost: 25 },
       ],
       beneficiaryUnits: ['Qilins del Trueno', 'Fénix Solar', 'Fénix de Energía'],
-      recommendedHeroes: ['Kelarr', 'Halon', 'Vatawna'],
+      recommendedHeroes: ['Halon', 'Vatawna', 'El juglar'],
       executionSteps: [
         'Turno 1: Lanza Aceleración Masiva N4 (+4 Velocidad y +20% Iniciativa).',
         'Los Qilins cruzan el campo dejando Sendero Celestial y descargan rayos en cadena sobre la retaguardia enemiga.',
@@ -483,7 +483,7 @@ export const FACTION_SPELL_COMBOS: Record<CanonicalFactionKey, FactionSpellCombo
         { spellId: 'spell-early-start', spellName: 'Celeridad Temporal Magistral (N4)', level: 'Nivel 4', manaCost: 8 },
       ],
       beneficiaryUnits: ['Enviados Abisales', 'Supervisores Abisales', 'Jinetes Aga\'Shoth'],
-      recommendedHeroes: ['Sister Keiri', 'Kyros', 'Malakor'],
+      recommendedHeroes: ['Hermana Keiri', 'Cuerno Negro', 'Nihil'],
       executionSteps: [
         'Turno 1: Lanza Celeridad Temporal N4; todo tu ejército del Cisma recibe +50% de iniciativa y +2 Velocidad.',
         'Lanza Teletransporte Magistral N4 enviando a tus Enviados Abisales directamente a la retaguardia enemiga.',
@@ -504,7 +504,7 @@ export const FACTION_SPELL_COMBOS: Record<CanonicalFactionKey, FactionSpellCombo
         { spellId: 'spell-energize', spellName: 'Foco Arcano Ilimitado / Energizar (N4)', level: 'Nivel 4', manaCost: 9 },
       ],
       beneficiaryUnits: ['Árbitros de la Grieta', 'Concubos', 'Señoras de las Cadenas'],
-      recommendedHeroes: ['Sister Keiri', 'Nihil', 'Oron'],
+      recommendedHeroes: ['Hermana Keiri', 'La Mirada Colectiva', 'Mara Mat\'ha'],
       executionSteps: [
         'Turno 1: Descarga Tempestad en Cadena N4 golpeando a hasta 7 escuadras enemigas con un daño colosal de 450 + 105×Poder.',
         'Los Concubos encadenan y seducen a la tropa más peligrosa del rival forzándola a atacar a sus propios aliados.',
@@ -525,11 +525,11 @@ export const FACTION_SPELL_COMBOS: Record<CanonicalFactionKey, FactionSpellCombo
         { spellId: 'spell-dispel', spellName: 'Disipación Universal Masiva (N4)', level: 'Nivel 4', manaCost: 6 },
       ],
       beneficiaryUnits: ['Árbitros de la Grieta', 'Enviados Abisales', 'Grandes Shoths'],
-      recommendedHeroes: ['Sister Keiri', 'Blackhorn', 'Kyros'],
+      recommendedHeroes: ['Hermana Keiri', 'Cuerno Negro', 'Dhüvri'],
       executionSteps: [
         'Lanza Réplicas Espejo Supremas N4 sobre tus Enviados Abisales o Árbitros (crea 2 copias con 100% de ataque que absorben 3 impactos).',
         'Si el enemigo intenta lanzar mejoras o bendiciones para igualar la potencia, usa Disipación Universal Masiva por 6 Maná.',
-        'Los cadáveres caídos en el combate son consumidos por el Rito del Abismo de Sister Keiri, generando invocaciones permanentes para el ejército.',
+        'Los cadáveres caídos en el combate son consumidos por el Rito del Abismo de Hermana Keiri, generando invocaciones permanentes para el ejército.',
       ],
       competitiveAdvantage: 'Multiplica la presencia en mesa y convierte cada baja enemiga en refuerzos permanentes de alto tier tras la batalla.',
     },
@@ -850,7 +850,7 @@ export const FACTION_SPELL_PRIORITIES: Record<CanonicalFactionKey, Record<string
     'spell-arcane-bolt': {
       priority: 'Imprescindible (P1)',
       synergyTip: 'En Nivel 4 causa Distorsión de Realidad, haciendo que el próximo ataque enemigo tenga 50% de fallar.',
-      keyUnitsBenefited: ['Sister Keiri', 'Héroes del Cisma'],
+      keyUnitsBenefited: ['Hermana Keiri', 'Héroes del Cisma'],
     },
     'spell-teleport': {
       priority: 'Imprescindible (P1)',
@@ -870,7 +870,7 @@ export const FACTION_SPELL_PRIORITIES: Record<CanonicalFactionKey, Record<string
     'spell-mana-drain': {
       priority: 'Muy Alta (P2)',
       synergyTip: 'Drena el maná del héroe rival antes de que lance sus conjuros y otorga lanzamiento gratuito.',
-      keyUnitsBenefited: ['Sister Keiri', 'Héroes del Vacío'],
+      keyUnitsBenefited: ['Hermana Keiri', 'Héroes del Vacío'],
     },
     'spell-dispel': {
       priority: 'Imprescindible (P1)',

@@ -105,7 +105,7 @@ export const CISMA_FACTION_LAWS: FactionLaw[] = [
         costLaws: 2,
         cumulativeCost: 2,
         effect: 'Aumenta el Poder Mágico en +2 al lanzar conjuros de Escarcha de Vori y reduce su coste de maná en -1.',
-        tacticalImpact: 'Sister Keiri y hechiceros limpian campamentos neutrales con costes mínimos de maná.',
+        tacticalImpact: 'Hermana Keiri y hechiceros limpian campamentos neutrales con costes mínimos de maná.',
         recommendedUnlockTime: 'Día 3-4 (Semana 1)',
       },
     ],

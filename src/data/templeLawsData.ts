@@ -66,7 +66,7 @@ export const TEMPLE_FACTION_LAWS: FactionLaw[] = [
     ],
     prerequisiteLaws: [],
     incompatibleLaws: [],
-    recommendedForHeroes: ['Lord Edgar', 'Sir Galahad', 'Valentina'],
+    recommendedForHeroes: ['Lord Edgar', 'Viejo Lord Mandall', 'Clarissa'],
     tags: ['Economía', 'Construcción', 'Rush Tier 7'],
   },
   {
@@ -101,7 +101,7 @@ export const TEMPLE_FACTION_LAWS: FactionLaw[] = [
     ],
     prerequisiteLaws: [],
     incompatibleLaws: [],
-    recommendedForHeroes: ['Sir Galahad', 'Lord Edgar'],
+    recommendedForHeroes: ['Kestrel', 'Lord Edgar'],
     tags: ['Tiradores', 'Daño Físico', 'Tier 1'],
   },
   {
@@ -136,7 +136,7 @@ export const TEMPLE_FACTION_LAWS: FactionLaw[] = [
     ],
     prerequisiteLaws: [],
     incompatibleLaws: [],
-    recommendedForHeroes: ['Sir Galahad', 'Aeos'],
+    recommendedForHeroes: ['Viejo Lord Mandall', 'Aeos la Exaltada'],
     tags: ['Moral', 'Ofensiva'],
   },
 
@@ -175,7 +175,7 @@ export const TEMPLE_FACTION_LAWS: FactionLaw[] = [
     ],
     prerequisiteLaws: [],
     incompatibleLaws: [],
-    recommendedForHeroes: ['Valentina', 'Lord Edgar'],
+    recommendedForHeroes: ['Anastasia la Dócil', 'Lord Edgar'],
     tags: ['Inmunidad', 'Terreno Nativo'],
   },
   {
@@ -210,7 +210,7 @@ export const TEMPLE_FACTION_LAWS: FactionLaw[] = [
     ],
     prerequisiteLaws: ['law-temple-t1-double-build'],
     incompatibleLaws: [],
-    recommendedForHeroes: ['Lord Edgar', 'Sister Rebecca'],
+    recommendedForHeroes: ['Lord Edgar', 'Clarissa'],
     tags: ['Economía', 'Crecimiento'],
   },
   {
@@ -231,13 +231,13 @@ export const TEMPLE_FACTION_LAWS: FactionLaw[] = [
         costLaws: 3,
         cumulativeCost: 3,
         effect: 'Los Grifos ganan +1 Velocidad en combate y su habilidad Grito Valeroso activa un bono de moral inmediata al resto del ejército.',
-        tacticalImpact: 'Sinergia brutal con Sir Galahad.',
+        tacticalImpact: 'Sinergia brutal con Viejo Lord Mandall y Lord Edgar.',
         recommendedUnlockTime: 'Semana 2',
       },
     ],
     prerequisiteLaws: ['law-temple-t1-encouragement'],
     incompatibleLaws: [],
-    recommendedForHeroes: ['Sir Galahad'],
+    recommendedForHeroes: ['Viejo Lord Mandall', 'Lord Edgar'],
     tags: ['Grifos', 'Velocidad'],
   },
 
@@ -262,7 +262,7 @@ export const TEMPLE_FACTION_LAWS: FactionLaw[] = [
         costLaws: 4,
         cumulativeCost: 4,
         effect: 'Permite a los héroes de Templo aprender cualquier hechizo de cualquier nivel sin importar las restricciones normales de escuela.',
-        tacticalImpact: 'Permite a comandantes físicos como Sir Galahad o Lord Edgar aprender hechizos de alto nivel de apoyo.',
+        tacticalImpact: 'Permite a comandantes físicos como Viejo Lord Mandall o Lord Edgar aprender hechizos de alto nivel de apoyo.',
         recommendedUnlockTime: 'Días 13-16 (Semana 2-3)',
       },
       {
@@ -276,7 +276,7 @@ export const TEMPLE_FACTION_LAWS: FactionLaw[] = [
     ],
     prerequisiteLaws: [],
     incompatibleLaws: [],
-    recommendedForHeroes: ['Valentina', 'Inquisitor Alistair', 'Sir Galahad'],
+    recommendedForHeroes: ['Anastasia la Dócil', 'Avis el Hereje', 'Julius'],
     tags: ['Magia', 'Grimorio Universal'],
   },
   {
@@ -311,7 +311,7 @@ export const TEMPLE_FACTION_LAWS: FactionLaw[] = [
     ],
     prerequisiteLaws: [],
     incompatibleLaws: [],
-    recommendedForHeroes: ['Valentina', 'Sir Galahad'],
+    recommendedForHeroes: ['Zenith', 'Viejo Lord Mandall'],
     tags: ['Ángeles', 'Resurrección'],
   },
 
@@ -342,7 +342,7 @@ export const TEMPLE_FACTION_LAWS: FactionLaw[] = [
     ],
     prerequisiteLaws: ['law-temple-t2-erathian-discipline'],
     incompatibleLaws: [],
-    recommendedForHeroes: ['Sir Galahad', 'Lord Edgar'],
+    recommendedForHeroes: ['Keandra', 'Lord Edgar'],
     tags: ['Caballería', 'Carga', 'Militar'],
   },
   {
@@ -369,7 +369,7 @@ export const TEMPLE_FACTION_LAWS: FactionLaw[] = [
     ],
     prerequisiteLaws: ['law-temple-t1-double-build'],
     incompatibleLaws: [],
-    recommendedForHeroes: ['Sister Rebecca', 'Valentina'],
+    recommendedForHeroes: ['Clarissa', 'Anastasia la Dócil'],
     tags: ['Diezmo', 'Oro', 'Economía'],
   },
 
@@ -401,7 +401,7 @@ export const TEMPLE_FACTION_LAWS: FactionLaw[] = [
     ],
     prerequisiteLaws: ['law-temple-t4-chivalric-code'],
     incompatibleLaws: [],
-    recommendedForHeroes: ['Valentina', 'Sir Galahad'],
+    recommendedForHeroes: ['Aeos la Exaltada', 'Viejo Lord Mandall'],
     tags: ['Tier 5', 'Ultimate', 'Luz Divina'],
   },
 ];
