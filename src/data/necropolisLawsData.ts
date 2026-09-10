@@ -3,9 +3,9 @@ import { FactionLaw, FactionLawPreset } from '../types';
 export const NECROPOLIS_LAW_PRESETS: FactionLawPreset[] = [
   {
     id: 'preset-necropolis-rush-vampires',
-    name: 'Rush a Tier 7: Señores de los Vampiros & Cosecha Nigromántica',
+    name: 'Rush a Tier 7: Dragones de Hueso & Cosecha Nigromántica',
     archetype: 'Competitivo / Meta Rush',
-    description: 'Enfoque diseñado para maximizar la recolección de Mineral y Mercurio y erigir el Palacio de los Vampiros de Shadowspire en el Día 14 exacto.',
+    description: 'Enfoque diseñado para maximizar la recolección de Mineral y Mercurio y erigir el Château de los Festines en el Día 14 exacto.',
     totalCost: 50,
     steps: [
       { stepNumber: 1, lawId: 'law-necropolis-t1-bone-harvest', level: 1, dayWindow: 'Día 1-3', notes: '+15% de esqueletos adicionales levantados tras cada batalla.' },
@@ -210,7 +210,7 @@ export const NECROPOLIS_FACTION_LAWS: FactionLaw[] = [
     ],
     prerequisiteLaws: ['law-necropolis-t2-vampiric-bloodline'],
     incompatibleLaws: [],
-    tags: ['Vampiros', 'Drenaje', 'Tier 7'],
+    tags: ['Vampiros', 'Drenaje', 'Tier 5'],
   },
   {
     id: 'law-necropolis-t3-wraith-spectral-shroud',

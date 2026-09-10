@@ -66,7 +66,7 @@ export const ARBOLEDA_FACTION_LAWS: FactionLaw[] = [
     ],
     prerequisiteLaws: [],
     incompatibleLaws: [],
-    recommendedForHeroes: ['Aura', 'Silvanus'],
+    recommendedForHeroes: ['Eith', 'Vatawna'],
     tags: ['Economía', 'Madera', 'Rush Tier 7'],
   },
   {
@@ -101,7 +101,7 @@ export const ARBOLEDA_FACTION_LAWS: FactionLaw[] = [
     ],
     prerequisiteLaws: [],
     incompatibleLaws: [],
-    recommendedForHeroes: ['Pan', 'Lyra'],
+    recommendedForHeroes: ['Colajengibre', 'Gorel Punta de Lanza'],
     tags: ['Faunos', 'Iniciativa', 'Militar'],
   },
   {

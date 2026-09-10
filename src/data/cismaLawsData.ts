@@ -208,13 +208,13 @@ export const CISMA_FACTION_LAWS: FactionLaw[] = [
   },
 
   // =======================================================================
-  // TIER 3 (10 PUNTOS REQUERIDOS)
+  // TIER 3 (15 PUNTOS REQUERIDOS)
   // =======================================================================
   {
     id: 'law-cisma-t3-cold-shoulder',
     priorityOrder: 8,
     tier: 3,
-    tierMinPoints: 10,
+    tierMinPoints: 15,
     name: 'Indiferencia Glacial (Cold Shoulder)',
     nameEn: 'Cold Shoulder',
     category: 'Magia',
@@ -237,7 +237,7 @@ export const CISMA_FACTION_LAWS: FactionLaw[] = [
     id: 'law-cisma-t3-the-abyss-stares-back',
     priorityOrder: 9,
     tier: 3,
-    tierMinPoints: 10,
+    tierMinPoints: 15,
     name: 'El Abismo Devuelve la Mirada (The Abyss Stares Back)',
     nameEn: 'The Abyss Stares Back',
     category: 'Militar',
@@ -260,7 +260,7 @@ export const CISMA_FACTION_LAWS: FactionLaw[] = [
     id: 'law-cisma-t3-elite-grand-shoths',
     priorityOrder: 10,
     tier: 3,
-    tierMinPoints: 10,
+    tierMinPoints: 15,
     name: 'Grandes Shoths de Élite: Mirada Doble (Elite Grand Shoths)',
     nameEn: 'Elite Grand Shoths',
     category: 'Militar',
@@ -281,13 +281,13 @@ export const CISMA_FACTION_LAWS: FactionLaw[] = [
   },
 
   // =======================================================================
-  // TIER 4 (15 PUNTOS REQUERIDOS)
+  // TIER 4 (30 PUNTOS REQUERIDOS)
   // =======================================================================
   {
     id: 'law-cisma-t4-absolute-zero',
     priorityOrder: 11,
     tier: 4,
-    tierMinPoints: 15,
+    tierMinPoints: 30,
     name: 'Cero Absoluto (Absolute Zero)',
     nameEn: 'Absolute Zero',
     category: 'Magia',
@@ -310,7 +310,7 @@ export const CISMA_FACTION_LAWS: FactionLaw[] = [
     id: 'law-cisma-t4-elite-arbitrators',
     priorityOrder: 12,
     tier: 4,
-    tierMinPoints: 15,
+    tierMinPoints: 30,
     name: 'Árbitros de Élite: Disparos del Vacío Infinito (Elite Arbitrators)',
     nameEn: 'Elite Arbitrators',
     category: 'Militar',
@@ -331,13 +331,13 @@ export const CISMA_FACTION_LAWS: FactionLaw[] = [
   },
 
   // =======================================================================
-  // TIER 5 (20 PUNTOS REQUERIDOS)
+  // TIER 5 (50 PUNTOS REQUERIDOS)
   // =======================================================================
   {
     id: 'law-cisma-t5-elite-abyssal-envoys',
     priorityOrder: 13,
     tier: 5,
-    tierMinPoints: 20,
+    tierMinPoints: 50,
     name: 'Enviados Abisales de Élite: Voluntad del Fin (Elite Abyssal Envoys)',
     nameEn: 'Elite Abyssal Envoys',
     category: 'Militar',
@@ -360,7 +360,7 @@ export const CISMA_FACTION_LAWS: FactionLaw[] = [
     id: 'law-cisma-t5-firmaments-call',
     priorityOrder: 14,
     tier: 5,
-    tierMinPoints: 20,
+    tierMinPoints: 50,
     name: 'Llamada del Firmamento (Firmament\'s Call)',
     nameEn: 'Firmament\'s Call',
     category: 'Victoria',

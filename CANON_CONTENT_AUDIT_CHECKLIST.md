@@ -347,6 +347,25 @@ Cada criatura debe contar con los 12 parámetros cuantitativos contrastados:
 - [x] **Colmena / Enjambre**: 11 leyes canónicas (5 Tiers completos) normalizadas con la Reina de la Colmena (Hive Queen / Madre de la Colmena) como Tier 7 canónico. Eclosión masiva, mente colmena y vanguardia sináptica, metabolismo de azufre, salto de mantis reales, neurotoxina de avispones, asimilación de biomasa y trascendencia de la supermente.
 - [x] **Cisma**: 14 leyes canónicas (5 Tiers completos). Pactos del vacío, desgarro dimensional, escarcha glacial de Vori, ofrendas abisales y comunión de fallas; descripciones tácticas depuradas de referencias a facciones ajenas al motor de Olden Era.
 
+### 5.3. Directrices Canónicas de Auditoría Permanente para Leyes de Facción y Políticas de Ciudad
+Toda auditoría o adición en el sistema de leyes cívicas debe contrastar obligatoriamente los siguientes 6 principios canónicos:
+1. **Estructura Estricta de 5 Tiers**: Cada árbol de leyes se divide sin excepción en 5 Tiers con los umbrales cuantitativos universales de activación progresiva:
+   - **Tier 1**: `tierMinPoints: 0` (Disponible desde el Día 1).
+   - **Tier 2**: `tierMinPoints: 5` (Requiere un mínimo de 5 Sellos invertidos en el árbol).
+   - **Tier 3**: `tierMinPoints: 15` (Requiere un mínimo de 15 Sellos invertidos en el árbol).
+   - **Tier 4**: `tierMinPoints: 30` (Requiere un mínimo de 30 Sellos invertidos en el árbol).
+   - **Tier 5**: `tierMinPoints: 50` (Cúspide de metagame / Ley Suprema; requiere 50 Sellos invertidos).
+   *Queda prohibido cualquier umbral arbitrario (ej. 10, 20) que rompa la curva de progresión matemática.*
+2. **Moneda Exclusiva: Sellos Cívicos (Law Points)**: Cada nivel y rango debe contar con `costLaws` (generalmente 2 a 6 puntos) y `cumulativeCost` consistentes. No se admiten costes inventados en oro para decretar leyes en el compendio.
+3. **Pureza de Roster en `recommendedForHeroes`**: Los héroes sugeridos para cada ley deben pertenecer estrictamente a los 18 comandantes oficiales de la facción correspondiente en Jadame. Prohibición total de nombres mitológicos inventados (como Pan, Silvanus, Lyra, Aura) o héroes clásicos de sagas previas.
+4. **Coherencia de Criaturas y Tiers en Efectos y Tags**: Los efectos, descripciones de bonificación y tags de cada ley deben reflejar fielmente el tier canónico de cada criatura (ej. Vampiros son Tier 5, Dragón de Hueso / Señor del Festín es Tier 7; Fénix es Tier 7 de Foresta; Reina de la Colmena es Tier 7 de Colmena).
+5. **Alineación con el Modelo Municipal de 3 Niveles**: Las referencias a fuentes de puntos de ley por edificios municipales deben coincidir con la arquitectura oficial de *Olden Era*: Town Hall (Asentamiento), City Hall II (con especialización), y Metropolis III (sin anacronismos como "Capitolio").
+6. **Validación Mecánica en el Motor UI (`FactionLawsTree.tsx`)**: La función `checkLawAvailability` debe auditar y verificar simultáneamente:
+   - Cumplimiento del umbral `pointsSpent >= (law.tierMinPoints || 0)`.
+   - Prerrequisitos directos (`prerequisiteLawId` o `prerequisiteLaws`).
+   - Incompatibilidades mutuas (`incompatibleLaws`).
+   - Deselección en cascada de ramas dependientes al retirar una ley previa.
+
 ---
 
 ## 6. MÓDULO 5: AUDITORÍA DE ESTRUCTURAS DE CIUDADELA Y CASTILLO
@@ -476,6 +495,11 @@ Cada criatura debe contar con los 12 parámetros cuantitativos contrastados:
 | *INC-021* | `/src/data/factionSpellData.ts` | Unidades y criaturas anacrónicas o no canónicas en perfiles, combos y prioridades de hechizos de Colmena ("Mantis Voraces", "Avispas Asesinas", "Zánganos", "Escarabajos Acorazados", "Colosos Quitinosos") y Foresta ("Murmuramantes") | Sincronizados todos los combos, perfiles y prioridades con las criaturas oficiales de Jadame en *Olden Era*: Avispones Cazadores, Langostas Carroñeras, Escorpiones de Azufre, Saqueadores Desgarradores, Waurms de Magma, Reinas de la Colmena y Herbomantes | `CORREGIDO` |
 | *INC-022* | `/src/components/SpellGrimoire.tsx` | Acoplamiento anómalo de datos: `SpellGrimoire.tsx` importaba `RECOMMENDED_SPELLS` desde `/src/data/dungeonData.ts` en lugar del repositorio central de hechizos | Desacoplado de Mazmorra: ahora importa `OFFICIAL_SPELLS_DATA as RECOMMENDED_SPELLS` directamente desde `/src/data/spellsData.ts`, asegurando una fuente de verdad única e inmutable para el grimorio | `CORREGIDO` |
 | *INC-023* | `CANON_CONTENT_AUDIT_CHECKLIST.md` | Ausencia de sección formal con directrices de auditoría permanente para la sección de Grimorio & Hechizos | Incorporada la subsección canónica `4.5. Directrices Canónicas de Auditoría Permanente para Grimorio y Hechizos` con las reglas de 5 escuelas, progresión alquímica, Puntos de Observación para neutrales, fórmulas de escalado `[Base + Multiplicador × SP]` y pureza de sinergias | `CORREGIDO` |
+| *INC-024* | `/src/data/cismaLawsData.ts` | Umbrales de activación de Tiers desalineados en leyes de Cisma: Tier 3 con 10 Pts (en lugar de 15), Tier 4 con 15 Pts (en lugar de 30) y Tier 5 con 20 Pts (en lugar de 50) | Corregidos y normalizados los umbrales de activación al estándar canónico oficial de 5 tiers de *Olden Era*: Tier 1 (0 Pts), Tier 2 (5 Pts), Tier 3 (15 Pts), Tier 4 (30 Pts) y Tier 5 (50 Pts) | `CORREGIDO` |
+| *INC-025* | `/src/data/arboledaLawsData.ts` | Héroes no canónicos ("Aura", "Silvanus", "Pan", "Lyra") de inspiración mitológica clásica en el atributo `recommendedForHeroes` de leyes de Arboleda | Reemplazados por los héroes oficiales del roster de Jadame de *Olden Era*: Eith y Vatawna (Simbiosis Forestal), y Colajengibre y Gorel Punta de Lanza (Armonía Faúnica) | `CORREGIDO` |
+| *INC-026* | `/src/data/necropolisLawsData.ts` & `/src/data/factionLawsData.ts` | Discrepancia en preset de Necrópolis al tratar a Vampiros como "Tier 7" ("Palacio de los Vampiros") y presencia de "Capitolio" en fuentes de puntos de ley municipales | Ajustado preset a "Rush a Tier 7: Dragones de Hueso" con morada Château de los Festines, tag de Vampiros a Tier 5, y normalizada la fuente municipal al modelo canónico de 3 niveles (Town Hall, City Hall II, Metropolis III) | `CORREGIDO` |
+| *INC-027* | `/src/components/FactionLawsTree.tsx` | La función `checkLawAvailability` no verificaba el umbral de puntos mínimos de tier (`tierMinPoints`), permitiendo seleccionar leyes de tiers superiores sin inversión previa | Incorporada la verificación estricta de `tierMinPoints`: bloquea la activación de leyes de Tiers 2 (5 pts), 3 (15 pts), 4 (30 pts) y 5 (50 pts) si el gasto acumulado en el árbol es inferior al umbral | `CORREGIDO` |
+| *INC-028* | `CANON_CONTENT_AUDIT_CHECKLIST.md` | Ausencia de sección formal con directrices de auditoría permanente para Leyes de Facción y Políticas de Ciudad | Creada la subsección canónica `5.3. Directrices Canónicas de Auditoría Permanente para Leyes de Facción y Políticas de Ciudad` con las 6 reglas obligatorias de tiers, sellos cívicos, integridad de rosters y validación mecánica en UI | `CORREGIDO` |
 
 ---
 

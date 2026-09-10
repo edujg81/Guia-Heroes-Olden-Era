@@ -5,9 +5,9 @@ export const MAX_FACTION_LAW_POINTS = 50;  // Presupuesto canónico para 50 Sell
 
 export const LAW_POINT_SOURCES = [
   { 
-    source: 'Estructuras Municipales (Sede, Ayuntamiento, Palacio y Capitolio)', 
-    points: 4, 
-    detail: '+1 punto por nivel municipal erigido + generación pasiva diaria acumulativa de Puntos de Ley.' 
+    source: 'Estructuras Municipales (Town Hall / Asentamiento, City Hall II, Metropolis III)', 
+    points: 3, 
+    detail: '+1 punto por nivel municipal erigido (Niveles I, II y III) + generación pasiva diaria acumulativa de Puntos de Ley.' 
   },
   { 
     source: 'Victorias en Combate & Experiencia Heroica (EXP)', 

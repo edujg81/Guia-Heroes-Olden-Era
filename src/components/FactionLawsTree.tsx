@@ -236,6 +236,16 @@ export const FactionLawsTree: React.FC<FactionLawsTreeProps> = ({
     const currentLevel = lawLevels[law.id] || 0;
     if (currentLevel > 0) return { available: true };
 
+    // Check tier minimum points requirement (Tier 1: 0, Tier 2: 5, Tier 3: 15, Tier 4: 30, Tier 5: 50)
+    if (law.tierMinPoints && law.tierMinPoints > 0) {
+      if (pointsSpent < law.tierMinPoints) {
+        return { 
+          available: false, 
+          reason: `Requiere ${law.tierMinPoints} Sellos invertidos en el árbol (actual: ${pointsSpent})` 
+        };
+      }
+    }
+
     // Check prerequisite law if any (single or array)
     if (law.prerequisiteLawId) {
       const prereqLevel = lawLevels[law.prerequisiteLawId] || 0;
