@@ -1662,14 +1662,14 @@ export const DUNGEON_UNITS: UnitInfo[] = [
   },
 
   // -------------------------------------------------------------------------
-  // TIER 5: MEDUSA (Voces quietas / Stilled Voices)
+  // TIER 5: MEDUSA (Voces Silenciadas / Stilled Voices)
   // -------------------------------------------------------------------------
   {
     tier: 5,
     name: 'Medusa',
     upgradeName: 'Bruja Medusa (Rama A)',
     altUpgradeName: 'Emperatriz Medusa (Rama B)',
-    dwelling: 'Voces quietas (Stilled Voices)',
+    dwelling: 'Voces Silenciadas (Stilled Voices)',
     role: 'Tiradora / Control de Masas con Petrificación',
     speed: 7,
     combatStance: 'Mirada Petrificante: Probabilidad de convertir en piedra al objetivo durante 2 turnos.',
@@ -1688,7 +1688,7 @@ export const DUNGEON_UNITS: UnitInfo[] = [
         name: 'Medusa',
         nameEn: 'Medusa',
         subtitle: 'Tiradora arcana con veneno y mirada pétrea',
-        dwellingName: 'Voces quietas (Stilled Voices)',
+        dwellingName: 'Voces Silenciadas (Stilled Voices)',
         cost: { gold: 550 },
         stats: {
           hp: 40,
@@ -1717,7 +1717,7 @@ export const DUNGEON_UNITS: UnitInfo[] = [
         name: 'Bruja Medusa',
         nameEn: 'Medusa Witch',
         subtitle: 'Rama A: Proyectil Venenoso & Francotirador Pétreo',
-        dwellingName: 'Voces quietas Mejoradas A (Witch Chamber)',
+        dwellingName: 'Voces Silenciadas Mejoradas A (Witch Chamber)',
         cost: { gold: 800, gems: 1 },
         stats: {
           hp: 50,
@@ -1746,7 +1746,7 @@ export const DUNGEON_UNITS: UnitInfo[] = [
         name: 'Emperatriz Medusa',
         nameEn: 'Medusa Empress',
         subtitle: 'Rama B: Aura de Ralentización & Petrificación Garantizada',
-        dwellingName: 'Voces quietas Mejoradas B (Empress Court)',
+        dwellingName: 'Voces Silenciadas Mejoradas B (Empress Court)',
         cost: { gold: 820, mercury: 1 },
         stats: {
           hp: 58,
@@ -1780,14 +1780,14 @@ export const DUNGEON_UNITS: UnitInfo[] = [
   },
 
   // -------------------------------------------------------------------------
-  // TIER 6: HIDRA (Hogar ctónico / Chthonic Home)
+  // TIER 6: HIDRA (Hogar Ctónico / Chthonic Home)
   // -------------------------------------------------------------------------
   {
     tier: 6,
     name: 'Hidra',
     upgradeName: 'Hidra Abisal (Rama A)',
     altUpgradeName: 'Hidra Ctónica (Rama B)',
-    dwelling: 'Hogar ctónico (Chthonic Home)',
+    dwelling: 'Hogar Ctónico (Chthonic Home)',
     role: 'Control de área / Ataque 360º sin represalia',
     speed: 6,
     combatStance: 'Mordisco Múltiple: Golpea a todas las unidades enemigas adyacentes simultáneamente.',
@@ -1806,7 +1806,7 @@ export const DUNGEON_UNITS: UnitInfo[] = [
         name: 'Hidra',
         nameEn: 'Hydra',
         subtitle: 'Monstruosidad de múltiples cabezas y ataque circular',
-        dwellingName: 'Hogar ctónico (Chthonic Home)',
+        dwellingName: 'Hogar Ctónico (Chthonic Home)',
         cost: { gold: 950, gems: 1 },
         stats: {
           hp: 90,
@@ -1833,7 +1833,7 @@ export const DUNGEON_UNITS: UnitInfo[] = [
         name: 'Hidra Abisal / Infernal',
         nameEn: 'Abyssal Hydra',
         subtitle: 'Rama A: Succión de Vida & Regeneración Ctónica',
-        dwellingName: 'Hogar ctónico Mejorado A (Abyssal Lair)',
+        dwellingName: 'Hogar Ctónico Mejorado A (Abyssal Lair)',
         cost: { gold: 1450, gems: 2, alchemicalDust: 10 },
         stats: {
           hp: 125,
@@ -1861,7 +1861,7 @@ export const DUNGEON_UNITS: UnitInfo[] = [
         name: 'Hidra Ctónica / del Caos',
         nameEn: 'Chthonic Hydra',
         subtitle: 'Rama B: Ácido Corrosivo Permanente & Aturdimiento',
-        dwellingName: 'Hogar ctónico Mejorado B (Chthonic Trench)',
+        dwellingName: 'Hogar Ctónico Mejorado B (Chthonic Trench)',
         cost: { gold: 1500, gems: 2, alchemicalDust: 10 },
         stats: {
           hp: 140,
@@ -1894,14 +1894,14 @@ export const DUNGEON_UNITS: UnitInfo[] = [
   },
 
   // -------------------------------------------------------------------------
-  // TIER 7: Dragón de Cueva (Palacio de cueva / Cave Palace)
+  // TIER 7: Dragón de Cueva (Palacio de las Cavernas / Cave Palace)
   // -------------------------------------------------------------------------
   {
     tier: 7,
     name: 'Dragón de Cueva',
     upgradeName: 'Dragón Negro (Rama A)',
     altUpgradeName: 'Dragón de Ceniza (Rama B)',
-    dwelling: 'Palacio de cueva (Cave Palace)',
+    dwelling: 'Palacio de las Cavernas (Cave Palace)',
     role: 'Ápice supremo / Inmunidad a magia de Nivel 5 & Aliento de Cenizas',
     speed: 15,
     combatStance: 'Aliento Ígneo / Aliento de Cenizas: Ráfaga de 2 casillas en línea recta con daño catastrófico.',
@@ -1920,7 +1920,7 @@ export const DUNGEON_UNITS: UnitInfo[] = [
         name: 'Dragón de Cueva',
         nameEn: 'Cave Dragon',
         subtitle: 'Apex depredador alado del submundo',
-        dwellingName: 'Palacio de cueva (Cave Palace)',
+        dwellingName: 'Palacio de las Cavernas (Cave Palace)',
         cost: { gold: 3200, gems: 2 },
         stats: {
           hp: 220,
@@ -1948,7 +1948,7 @@ export const DUNGEON_UNITS: UnitInfo[] = [
         name: 'Dragón Negro',
         nameEn: 'Black Dragon',
         subtitle: 'Rama A: Inmunidad Mágica Total (Nv 1-5) & Drago-Armageddon',
-        dwellingName: 'Palacio de cueva Mejorado A (Black Dragon Roost)',
+        dwellingName: 'Palacio de las Cavernas Mejorado A (Black Dragon Roost)',
         cost: { gold: 4800, gems: 4, alchemicalDust: 25 },
         stats: {
           hp: 300,
@@ -1977,7 +1977,7 @@ export const DUNGEON_UNITS: UnitInfo[] = [
         name: 'Dragón de Ceniza',
         nameEn: 'Ashen Dragon',
         subtitle: 'Rama B: Aliento de Cenizas Sofocantes & Nube Debilitante',
-        dwellingName: 'Palacio de cueva Mejorado B (Ashen Dragon Roost)',
+        dwellingName: 'Palacio de las Cavernas Mejorado B (Ashen Dragon Roost)',
         cost: { gold: 4900, gems: 4, alchemicalDust: 25 },
         stats: {
           hp: 330,

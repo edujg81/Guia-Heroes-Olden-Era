@@ -302,7 +302,31 @@ Cada criatura debe contar con los 12 parámetros cuantitativos contrastados:
 ### 4.4. Combos Tácticos y Prioridades por Facción
 - [x] Prioridad meta (`Imprescindible (P1)`, `Muy Alta (P2)`, `Alta (P3)`, `Media / Situacional (P4)`) contrastada para las 6 facciones oficiales en `FACTION_SPELL_PRIORITIES`.
 - [x] Combos tácticos (`FACTION_SPELL_COMBOS`) auditados: 18 sinergias exhaustivas (3 por facción) con unidades beneficiarias canónicas, tiempos de ejecución y secuencia de turnos verificados.
+- [x] Purgados todos los términos fantasma o desajustes de unidades en Colmena ("Mantis Voraces", "Avispas Asesinas", "Escarabajos Acorazados", "Colosos Quitinosos") y Foresta ("Murmuramantes"), sustituyéndolos por sus contrapartes oficiales de *Olden Era* (Avispones Cazadores, Langostas Carroñeras, Escorpiones de Azufre, Saqueadores Desgarradores, Waurms de Magma, Reinas de la Colmena y Herbomantes).
 - [x] Selector de Sigilos de Escuelas (`SpellSchoolSigilSelector.tsx`) y Codex Medieval actualizados para conteo y filtrado en tiempo real sin desajustes.
+
+### 4.5. Directrices Canónicas de Auditoría Permanente para Grimorio y Hechizos (Protocolo Obligatorio)
+> 📜 **DIRECTRICES DE AUDITORÍA PERMANENTE - GRIMORIO & ESCUELAS DE MAGIA**:
+> 1. **Pureza de Escuelas (5 Escuelas Oficiales)**: Únicamente existen 5 escuelas canónicas en Jadame: Magia de Luz (*Daylight*), Magia Nochesombra (*Nightshade*), Magia Primigenia (*Primal*), Magia Arcana (*Arcane*) y Magia Neutral / Aventura (*Universal*). Queda prohibida la reintroducción de escuelas de *Heroes III/IV/V* (Fuego/Tierra/Agua/Aire como escuelas independientes, Destrucción, Caos o Conjuración).
+> 2. **Progresión Alquímica Estándar (Escuelas de Facción)**:
+>    - **Nivel 1 (Base)**: 0 Polvo Alquímico (*Dust*), 0 Oro adicional.
+>    - **Nivel 2 (Avanzado)**: 25 Polvo + 1.000 Oro.
+>    - **Nivel 3 (Experto)**: 25 Polvo + 1.500 Oro + 2 Recursos Raros específicos.
+>    - **Nivel 4 (Magistral)**: 25 Polvo + 2.000 Oro + 4 Recursos Raros específicos + Bono cualitativo de impacto táctico.
+> 3. **Fórmula de Desbloqueo de Cofradía / Observatorio de Facción**:
+>    - Coste: $\text{Tier} \times (2\text{ Cristales} + 2\text{ Gemas} + 2\text{ Mercurio}) + \text{Oro}$ (Tier 1 a 5).
+> 4. **Hechizos Neutrales / Aventura (Observatorio del Reino)**:
+>    - Coste en Oro, Polvo y Recursos: **Estrictamente 0 Oro, 0 Polvo, 0 Recursos Raros**.
+>    - Desbloqueo y mejora exclusivamente mediante **Puntos de Observación**.
+>    - *Portal a la Ciudad*: 3 Puntos (N1) + 1 Punto por nivel (N2: 4, N3: 5, N4: 6).
+>    - *Puerta Dimensional*: 4 Puntos (N1) + 1 Punto por nivel (N2: 5, N3: 6, N4: 7).
+>    - Los 9 hechizos neutrales restantes deben mantenerse marcados como *"Sin definir (Pendiente de confirmación oficial)"*, prohibiéndose costes imputados o arbitrarios.
+> 5. **Normalización de Fórmulas de Escalado**:
+>    - Todo efecto numérico dependiente del héroe debe declararse con la sintaxis parseable canónica: `[Valor Base + Multiplicador × Poder Mágico]`.
+> 6. **Flujo de Datos y Desacoplamiento de Componentes**:
+>    - Componentes de interfaz (`SpellGrimoire.tsx`, etc.) deben consumir datos mágicos exclusivamente desde la fuente canónica central (`/src/data/spellsData.ts`), quedando prohibido el acoplamiento a ficheros de facción específicos como `dungeonData.ts`.
+> 7. **Sinergias y Combos de Facción**:
+>    - Todo combo o prioridad en `factionSpellData.ts` debe referenciar exclusivamente los 18 héroes canónicos de la facción y su matriz de unidades oficiales verificada.
 
 ---
 
@@ -360,20 +384,20 @@ Cada criatura debe contar con los 12 parámetros cuantitativos contrastados:
 
 ### 6.2. Moradas de Criaturas de Tier 1 a Tier 7 y Estructuras Exclusivas Canónicas
 - [x] **Mazmorra (Dungeon)**:
-  - Moradas: Cueva de Trogloditas (T1), Salón de Sombras (T2 Danzantes), Laberinto (T3 Minotauros), Nido de Escorpiones (T4), Cueva Abisal (T5 Hidras), Caverna de Quimeras (T6 Quimeras), Cúspide del Dragón (T7 Dragones Negros).
-  - Ramas de mejora duales (Branch A / Branch B) y estadísticas completas.
-  - Estructuras Especiales: Foso de Lucha (*Fighting Pit*), Vórtice de Maná (*Mana Vortex*), Trono del Laberinto (*Labyrinth Throne*).
+  - Moradas: Cubil (T1 Trogloditas), Refugio (T2 Infiltradores), Anfiteatro (T3 Bailarinas de Ónice), Laberinto (T4 Minotauros), Voces Silenciadas (T5 Medusas), Hogar Ctónico (T6 Hidras), Palacio de las Cavernas (T7 Dragones de Cueva).
+  - Ramas de mejora duales (Branch A / Branch B) y estadísticas completas estrictamente alineadas entre `dungeonData.ts` y `dungeonStructures.ts`.
+  - Estructuras Especiales: Gimnasio (*Gymnasium*), Santuario del Grial de la Mazmorra (*Grail Sanctuary*).
 - [x] **Templo (Temple)**:
   - Moradas: Cuartel de Milicia (T1), Campo de Tiro (T2 Ballesteros), Monasterio (T3 Clérigos), Salón de Espadas (T4 Espadachines), Establos Celestiales (T5 Caballeros), Bastión de Grifos (T6 Grifos), Catedral Radiante (T7 Ángeles).
   - Estructuras Especiales: Altar del Sol Radiante (*Radiant Sun Altar*), Tribunal de la Fe (*Tribunal of Faith*), Baluarte de Luz (*Bulwark of Light*), Faro Sagrado (*Sacred Lighthouse*).
 - [x] **Necrópolis (Necropolis)**:
-  - Moradas: Criptas y Tumbas (T1 Esqueletos), Tumba de Guerreros (T2 Zombis), Perrera de Sabuesos (T3 Sabuesos de la Peste), Pabellón Silencioso (T4 Espíritus), Mansión Intemporal (T5 Liches), Château de los Festines (T6 Vampiros), Guarida de Dragones de Hueso (T7 Dragones de Hueso).
+  - Moradas: Criptas y Tumbas (T1 Esqueletos), Pabellón Silencioso (T2 Apariciones), Perrera de Sabuesos (T3 Sabuesos No-Muertos), Cámara de los Saqueatumbas (T4 Saqueatumbas), Mansión Intemporal (T5 Liches), Tumba de Guerreros (T6 Caballeros del Terror), Château de los Festines (T7 Vampiros).
   - Estructuras Especiales: Intercambio Óseo (*Bone Exchange*), Transformador de No-Muertos (*Undead Transformer*), Pozo de Almas (*Well of Souls*), Serpiente Eterna (*Everserpent - Santuario del Grial*).
 - [x] **Foresta / Arboleda (Sylvan / Grove)**:
   - Moradas: Cabañas de Faunos (T1 Faunos), Semillero de Lúpulo (T2 Hoplitas), Círculo de Menhires (T3 Ninfas Iriyads), Estanque Floreciente (T4 Aqualotls), Choza de Madetahongo (T5 Herbomantes), Guarida del Trueno (T6 Qilins), Pira (T7 Fénix).
   - Estructuras Especiales: Santuario de la Arboleda (*Grove Grail Sanctuary*).
 - [x] **Colmena / Enjambre (Hive / Swarm)**:
-  - Moradas: Vivienda Descuidada (T1 Larvas), Guarida de Carroña (T2 Carroñeros), Nido de Papel (T3 Avispas), Zigurat Quitináceo (T4 Mantis), Cúspide (T5 Horrores), Madrigueras de Almas Ardientes (T6 Gusanos de Magma), Torre del Amor (T7 Beelzebub / Rey Libélula).
+  - Moradas: Vivienda Descuidada (T1 Parásitos), Guarida de Carroña (T2 Langostas), Nido de Papel (T3 Avispones), Zigurat Quitináceo (T4 Escorpiones), Cúspide (T5 Saqueadores / Reavers), Madrigueras de Almas Ardientes (T6 Waurms), Torre del Amor (T7 Reinas de la Colmena).
   - Estructuras Especiales: Santuario del Enjambre (*Hive Grail Sanctuary*).
 - [x] **Cisma (Schism)**:
   - Moradas: Rito Menor de Invocación (T1 Cultistas), Aguja de los Cultistas (T2 Shoths), Establos de Aga'Shoth (T3 Jinetes Aga'Shoth), Rito Inquietante de Invocación (T4 Cóncubos), Casa de Cadenas (T5 Árbitros), Mansión Abotagada (T6 Enviados Abisales), Rito Supremo del Vacío (T7 Devoradores Cósmicos / Titanes).
@@ -446,6 +470,12 @@ Cada criatura debe contar con los 12 parámetros cuantitativos contrastados:
 | *INC-015* | `/src/data/templeData.ts` & `/src/data/templeLawsData.ts` | Héroes no canónicos ("Sir Ronald", "Walter", "Valentina") dispersos en el orden de construcción y en 12 leyes cívicas de Templo | Reemplazados por los 18 héroes canónicos de Templo de Jadame: Viejo Lord Mandall, Kestrel, Keandra, John Johnson, Leon Dedos Pegajosos, Ister, Aeos la Exaltada, Lord Edgar, Avis el Hereje, Julius, Zenith, Elias el Alegre, Pip, Clarissa, Anastasia la Dócil, Vesper, Lia la Desatada, Nadir | `CORREGIDO` |
 | *INC-016* | `/src/data/factionSpellData.ts` | Héroes recomendados en combos de hechizos de Templo, Necrópolis, Mazmorra, Arboleda y Cisma con nombres especulativos (Valerius, Adelaide, Seraphina, Celeste, Aurelius, Lucian, Mortis, Naadir, Sarix, Malakor, Jedda, Thalor, Alis, Thorne, Kelarr, Sister Keiri, Kyros, Oron, Blackhorn) | Sustituidos en los 18 combos por los héroes oficiales canónicos correspondientes a cada escuela y facción de Jadame (Lord Edgar, Aeos, Anastasia, Klastor, Ethric, Baluarte, Zakron, Motley, Deira, Devir, Eith, Gorel, Tss'kish, Keiri, Cuerno Negro, Nihil, Mara Mat'ha, Dhüvri) | `CORREGIDO` |
 | *INC-017* | `/src/data/cismaData.ts`, `/src/data/cismaLawsData.ts`, `/src/data/dungeonData.ts` | Restos de terminología no castellana ("Sister Keiri" en acciones de héroe y sinergias) y denominación ambigua "Postura de Gorgona" en Emperatriz Medusa | Normalizado a "Hermana Keiri" en la totalidad del repositorio y renombrado a "Postura Petrificante" para evitar cualquier confusión con la criatura clásica de Fortaleza | `CORREGIDO` |
+| *INC-018* | `/src/data/necropolisData.ts` & `/src/data/structures/necropolisStructures.ts` | Inconsistencias de correspondencia en nombres de moradas entre `necropolisData.ts` y el árbol estructural `necropolisStructures.ts` | Homogeneizados los campos `dwelling` y `dwellingName` de los 7 tiers de Necrópolis al árbol canónico de *Olden Era*: Criptas y Tumbas (T1), Pabellón Silencioso (T2), Perrera de Sabuesos (T3), Cámara de los Saqueatumbas (T4), Mansión Intemporal (T5), Tumba de Guerreros (T6) y Château de los Festines (T7) | `CORREGIDO` |
+| *INC-019* | `/src/data/enjambreData.ts` & `/src/data/structures/hiveStructures.ts` | Desajuste en la matriz de unidades y moradas de Colmena (Hive) frente al canon de *Olden Era* registrado en `th.gl` y `hiveStructures.ts` | Sincronizadas las 7 moradas y la matriz de criaturas con el canon oficial: T1 Parásitos (Vivienda Descuidada), T2 Langostas (Guarida de Carroña), T3 Avispones (Nido de Papel), T4 Escorpiones (Zigurat Quitináceo), T5 Saqueadores / Reavers (Cúspide), T6 Waurms (Madrigueras de Almas Ardientes), T7 Reinas de la Colmena (Torre del Amor) | `CORREGIDO` |
+| *INC-020* | `/src/data/dungeonData.ts` & `/src/data/structures/dungeonStructures.ts` | Discrepancias en nombres de moradas y estructuras de Mazmorra (Dungeon) frente al canon oficial de *Olden Era*: "Cueva de Trogloditas" en vez de "Cubil", "Salón de Sombras" en vez de "Refugio", "Anfiteatro" con costes desfasados, "Voces quietas", "Hogar ctónico" y "Palacio de cueva" | Auditadas y sincronizadas todas las moradas T1-T7 ("Cubil", "Refugio", "Anfiteatro", "Laberinto", "Voces Silenciadas", "Hogar Ctónico", "Palacio de las Cavernas"), costes exactos, estadísticas y estructuras especiales (Gimnasio) en ambos ficheros | `CORREGIDO` |
+| *INC-021* | `/src/data/factionSpellData.ts` | Unidades y criaturas anacrónicas o no canónicas en perfiles, combos y prioridades de hechizos de Colmena ("Mantis Voraces", "Avispas Asesinas", "Zánganos", "Escarabajos Acorazados", "Colosos Quitinosos") y Foresta ("Murmuramantes") | Sincronizados todos los combos, perfiles y prioridades con las criaturas oficiales de Jadame en *Olden Era*: Avispones Cazadores, Langostas Carroñeras, Escorpiones de Azufre, Saqueadores Desgarradores, Waurms de Magma, Reinas de la Colmena y Herbomantes | `CORREGIDO` |
+| *INC-022* | `/src/components/SpellGrimoire.tsx` | Acoplamiento anómalo de datos: `SpellGrimoire.tsx` importaba `RECOMMENDED_SPELLS` desde `/src/data/dungeonData.ts` en lugar del repositorio central de hechizos | Desacoplado de Mazmorra: ahora importa `OFFICIAL_SPELLS_DATA as RECOMMENDED_SPELLS` directamente desde `/src/data/spellsData.ts`, asegurando una fuente de verdad única e inmutable para el grimorio | `CORREGIDO` |
+| *INC-023* | `CANON_CONTENT_AUDIT_CHECKLIST.md` | Ausencia de sección formal con directrices de auditoría permanente para la sección de Grimorio & Hechizos | Incorporada la subsección canónica `4.5. Directrices Canónicas de Auditoría Permanente para Grimorio y Hechizos` con las reglas de 5 escuelas, progresión alquímica, Puntos de Observación para neutrales, fórmulas de escalado `[Base + Multiplicador × SP]` y pureza de sinergias | `CORREGIDO` |
 
 ---
 

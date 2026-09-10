@@ -187,7 +187,7 @@ export const GROVE_STRUCTURES: TownStructure[] = [
         cost: { gold: 2000, wood: 5, ore: 5 },
         prerequisites: [],
         effects: ['Desbloquea hechizos de Nivel 1 en el Observatorio Mágico.', 'Otorga Libro de Hechizos y recarga maná al 100%.'],
-        strategicTip: 'Requisito para Choza de Madetahongo (Tier 5).'
+        strategicTip: 'Requisito para Choza de Maderahongo (Tier 5).'
       },
       {
         level: 2,
@@ -324,23 +324,23 @@ export const GROVE_STRUCTURES: TownStructure[] = [
     dwellingUpgradeCost: { gold: 1000, wood: 5 },
     prerequisites: ['Fortificaciones (Fortifications)'],
     unitRecruitedBase: 'Fauno (Faun)',
-    unitRecruited: 'Fauno / Sátiro / Fauno Corredor',
+    unitRecruited: 'Fauno / Arquero Fauno / Guerrero Fauno',
     unitUpgrades: {
-      branchA: 'Sátiro (Música cautivadora que duerme o confunde a los atacantes)',
-      branchB: 'Fauno Corredor (Velocidad sobresaliente y salto sobre obstáculos en bosque)',
+      branchA: 'Arquero Fauno (Disparo a distancia con proyectiles impregnados de savia)',
+      branchB: 'Guerrero Fauno (Embestida caprina de choque y cimitarras gemelas)',
       branchADetails: {
-        unitName: 'Sátiro',
-        nameEn: 'Satyr',
-        role: 'Infantería Ligera de Encanto',
-        keyAbilities: ['Flauta Encantada (Prob. de dormir a enemigo colindante)', 'Agilidad del Bosque'],
-        statsBonus: '+2 Defensa, +3 Vida'
+        unitName: 'Arquero Fauno',
+        nameEn: 'Faun Archer',
+        role: 'Tirador Ligero de Espinas',
+        keyAbilities: ['Tirador', 'Disparo de Espinas', 'Paso Ligero'],
+        statsBonus: '+2 Ataque, +1 Defensa, +2 Vida'
       },
       branchBDetails: {
-        unitName: 'Fauno Corredor',
-        nameEn: 'Swift Faun',
-        role: 'Asaltante Veloz',
-        keyAbilities: ['Zancada de Bosque (Sin coste de terreno)', 'Ataque de Cuerno'],
-        statsBonus: '+3 Ataque, +2 Velocidad'
+        unitName: 'Guerrero Fauno',
+        nameEn: 'Faun Warrior',
+        role: 'Asaltante de Choque',
+        keyAbilities: ['Embestida (+20% daño si recorre >3 hexágonos)', 'Contraataque Feroz'],
+        statsBonus: '+3 Ataque, +2 Defensa, +5 Vida, +1 Velocidad'
       }
     },
     effects: [
@@ -361,24 +361,24 @@ export const GROVE_STRUCTURES: TownStructure[] = [
     cost: { gold: 1000, wood: 5 },
     dwellingUpgradeCost: { gold: 1000, wood: 5 },
     prerequisites: ['Cabañas de Faunos (Faun Huts)'],
-    unitRecruitedBase: 'Hoplita (Hoplite)',
-    unitRecruited: 'Hoplita / Falangista del Bosque / Hoplita Acorazado',
+    unitRecruitedBase: 'Hoplita (Hoplet)',
+    unitRecruited: 'Hoplita / Hoplita del Alba / Hoplita del Ocaso',
     unitUpgrades: {
-      branchA: 'Falangista del Bosque (Formación de falange con bonus masivo de defensa en grupo)',
-      branchB: 'Hoplita Acorazado (Escudo pesado y golpe de pica que empuja a los rivales)',
+      branchA: 'Hoplita del Alba (Escudo radiante con reducción del 35% de daño de proyectiles)',
+      branchB: 'Hoplita del Ocaso (Lanza envenenada con daño residual y doble contragolpe)',
       branchADetails: {
-        unitName: 'Falangista del Bosque',
-        nameEn: 'Forest Phalangist',
-        role: 'Infantería de Falange',
-        keyAbilities: ['Muralla de Picas (+ Defensa por aliados adyacentes)', 'Parada de Carga'],
-        statsBonus: '+4 Defensa, +5 Vida'
+        unitName: 'Hoplita del Alba',
+        nameEn: 'Dawn Hoplet',
+        role: 'Infantería de Falange Radiante',
+        keyAbilities: ['Resistencia a Proyectiles 35%', 'Falange Mejorada', 'Aura de Esperanza'],
+        statsBonus: '+2 Ataque, +3 Defensa, +6 Vida'
       },
       branchBDetails: {
-        unitName: 'Hoplita Acorazado',
-        nameEn: 'Armored Hoplite',
-        role: 'Defensor de Choque',
-        keyAbilities: ['Golpe de Escudo (Empuja 1 casilla)', 'Armadura Reforzada'],
-        statsBonus: '+3 Ataque, +2 Defensa'
+        unitName: 'Hoplita del Ocaso',
+        nameEn: 'Dusk Hoplet',
+        role: 'Infantería Venenosa de Contragolpe',
+        keyAbilities: ['Veneno de Ocaso', 'Doble Contragolpe', 'Penetración de Armadura'],
+        statsBonus: '+4 Ataque, +1 Defensa, +4 Vida, +1 Velocidad'
       }
     },
     effects: [
@@ -399,24 +399,24 @@ export const GROVE_STRUCTURES: TownStructure[] = [
     cost: { gold: 1500, ore: 5 },
     dwellingUpgradeCost: { gold: 1500, ore: 5, crystal: 2 },
     prerequisites: ['Semillero de Lúpulo (Hop Patch)'],
-    unitRecruitedBase: 'Ninfa Iriyad (Iriyad Nymph)',
-    unitRecruited: 'Ninfa Iriyad / Iriyad de Enredadera / Iriyad de Cristal',
+    unitRecruitedBase: 'Iriyad de Enredadera (Vine Iriyad)',
+    unitRecruited: 'Iriyad de Enredadera / Iriyad Fúngica / Iriyad de Cristal',
     unitUpgrades: {
-      branchA: 'Iriyad de Enredadera (Ataque a distancia con zarcillos que inmovilizan a la víctima)',
-      branchB: 'Iriyad de Cristal (Proyectil prismático que refleja daño mágico hacia el atacante)',
+      branchA: 'Iriyad Fúngica (Esporas debilitadoras que reducen ataque y velocidad)',
+      branchB: 'Iriyad de Cristal (Esquirlas prismáticas perforantes que ignoran 30% de armadura)',
       branchADetails: {
-        unitName: 'Iriyad de Enredadera',
-        nameEn: 'Vine Iriyad',
-        role: 'Tiradora Inmovilizadora',
-        keyAbilities: ['Raíces Atrapadoras (Inmoviliza 1 turno)', 'Afinidad Primigenia'],
-        statsBonus: '+3 Ataque, +2 Defensa, +8 Vida'
+        unitName: 'Iriyad Fúngica',
+        nameEn: 'Fungal Iriyad',
+        role: 'Hostigadora de Esporas y Debilitamiento',
+        keyAbilities: ['Esporas Debilitadoras (-3 Ataque y Velocidad)', 'Enraizamiento 50%', 'Regeneración Fúngica'],
+        statsBonus: '+2 Ataque, +2 Defensa, +6 Vida'
       },
       branchBDetails: {
         unitName: 'Iriyad de Cristal',
         nameEn: 'Crystal Iriyad',
-        role: 'Artillera Prismática',
-        keyAbilities: ['Disparo Refractario', 'Resistencia Mágica (+25%)'],
-        statsBonus: '+4 Ataque, +1 Iniciativa'
+        role: 'Hostigadora Perforante de Cristal',
+        keyAbilities: ['Perforación de Armadura 30%', 'Resistencia Mágica 25%', 'Velocidad 8'],
+        statsBonus: '+4 Ataque, +1 Defensa, +4 Vida, +1 Velocidad'
       }
     },
     effects: [
@@ -438,23 +438,23 @@ export const GROVE_STRUCTURES: TownStructure[] = [
     dwellingUpgradeCost: { gold: 2000, wood: 5, crystal: 2 },
     prerequisites: ['Círculo de Menhires (Menhir Circle)'],
     unitRecruitedBase: 'Aqualotl',
-    unitRecruited: 'Aqualotl / Aqualotl de las Mareas / Aqualotl Místico',
+    unitRecruited: 'Aqualotl / Aqualotl Polar / Aqualotl Abisal',
     unitUpgrades: {
-      branchA: 'Aqualotl de las Mareas (Ola de agua que empuja y ralentiza a las filas enemigas)',
-      branchB: 'Aqualotl Místico (Regeneración anfibia pasiva y resistencia a la magia de agua y frío)',
+      branchA: 'Aqualotl Polar (Aliento glacial que congela y ralentiza a los enemigos a la mitad de velocidad)',
+      branchB: 'Aqualotl Abisal (Mordisco corrosivo que destruye el 40% de la armadura enemiga)',
       branchADetails: {
-        unitName: 'Aqualotl de las Mareas',
-        nameEn: 'Tide Aqualotl',
-        role: 'Hostigador Acuático de Empuje',
-        keyAbilities: ['Ola de Empuje', 'Movilidad de Agua (Sin coste en ciénagas/charcos)'],
-        statsBonus: '+3 Ataque, +4 Defensa, +12 Vida'
+        unitName: 'Aqualotl Polar',
+        nameEn: 'Polar Aqualotl',
+        role: 'Controlador Gélido Anfibio',
+        keyAbilities: ['Aliento Glacial (Ralentiza 50%)', 'Inmunidad a Agua/Frío', 'Armadura Escarchada'],
+        statsBonus: '+2 Ataque, +2 Defensa, +10 Vida'
       },
       branchBDetails: {
-        unitName: 'Aqualotl Místico',
-        nameEn: 'Mystic Aqualotl',
-        role: 'Tanque Anfibio Regenerativo',
-        keyAbilities: ['Regeneración Acuática (+15 HP/turno)', 'Inmunidad a Ralentización'],
-        statsBonus: '+4 Ataque, +1 Iniciativa'
+        unitName: 'Aqualotl Abisal',
+        nameEn: 'Abyssal Aqualotl',
+        role: 'Destructor de Armaduras Anfibio',
+        keyAbilities: ['Mordisco Corrosivo (-40% Defensa)', 'Velocidad 8', 'Sin coste en lodo/agua'],
+        statsBonus: '+4 Ataque, +6 Vida, +1 Velocidad'
       }
     },
     effects: [
@@ -466,7 +466,7 @@ export const GROVE_STRUCTURES: TownStructure[] = [
   },
   {
     id: 'grove-shroomwood-shack',
-    name: 'Choza de Madetahongo (Shroomwood Shack)',
+    name: 'Choza de Maderahongo (Shroomwood Shack)',
     nameEn: 'Shroomwood Shack',
     category: 'Moradas de Criaturas',
     faction: 'Arboleda',
@@ -476,23 +476,23 @@ export const GROVE_STRUCTURES: TownStructure[] = [
     dwellingUpgradeCost: { gold: 3000, wood: 5, crystal: 3 },
     prerequisites: ['Estanque Floreciente (Blooming Pond)', 'Gremio de Magos (Mage Guild)'],
     unitRecruitedBase: 'Herbomante (Herbomancer)',
-    unitRecruited: 'Herbomante / Maestro de Hongos / Guardián del Micelio',
+    unitRecruited: 'Herbomante / Esporomante / Murmuramante',
     unitUpgrades: {
-      branchA: 'Maestro de Hongos (Esporas venenosas que debilitan el daño y armadura enemiga)',
-      branchB: 'Guardián del Micelio (Red micelial que cura a todos los aliados colindantes y levanta brotes defensivos)',
+      branchA: 'Esporomante (Disparo a distancia de área 3x3 con esporas cegadoras)',
+      branchB: 'Murmuramante (Aura de regeneración continua y +25% resistencia mágica a aliados)',
       branchADetails: {
-        unitName: 'Maestro de Hongos',
-        nameEn: 'Fungal Master',
-        role: 'Invocador de Esporas Venenosas',
-        keyAbilities: ['Nube de Esporas Tóxicas', 'Debilitamiento Fúngico'],
-        statsBonus: '+4 Ataque, +3 Defensa, +15 Vida'
+        unitName: 'Esporomante',
+        nameEn: 'Sporemancer',
+        role: 'Tirador Mágico de Área',
+        keyAbilities: ['Tirador de Área 3x3', 'Esporas Cegadoras', 'Canalización Arcana'],
+        statsBonus: '+3 Ataque, +2 Defensa, +13 Vida'
       },
       branchBDetails: {
-        unitName: 'Guardián del Micelio',
-        nameEn: 'Mycelium Guardian',
-        role: 'Sanador y Baluarte Botánico',
-        keyAbilities: ['Sanación Micelial de Área', 'Brotes Protectores'],
-        statsBonus: '+5 Defensa, +20 Vida'
+        unitName: 'Murmuramante',
+        nameEn: 'Murmurmancer',
+        role: 'Soporte y Sanador Botánico',
+        keyAbilities: ['Aura de Regeneración', 'Resistencia Mágica 25%', 'Tirador Mágico'],
+        statsBonus: '+2 Ataque, +4 Defensa, +10 Vida, +1 Velocidad'
       }
     },
     effects: [
@@ -512,25 +512,25 @@ export const GROVE_STRUCTURES: TownStructure[] = [
     dwellingTier: 6,
     cost: { gold: 5000, wood: 10, crystal: 6 },
     dwellingUpgradeCost: { gold: 4000, wood: 5, crystal: 4 },
-    prerequisites: ['Choza de Madetahongo (Shroomwood Shack)'],
+    prerequisites: ['Choza de Maderahongo (Shroomwood Shack)'],
     unitRecruitedBase: 'Qilin',
-    unitRecruited: 'Qilin / Qilin de la Tormenta / Qilin Celestial',
+    unitRecruited: 'Qilin / Qilin de la Niebla / Qilin del Trueno',
     unitUpgrades: {
-      branchA: 'Qilin de la Tormenta (Aura eléctrica de relámpagos que electrocuta a enemigos cercanos al atacar)',
-      branchB: 'Qilin Celestial (Aura de pureza cósmica que confiere suerte máxima y velocidad celestial)',
+      branchA: 'Qilin de la Niebla (Manto de brumas con 40% de evasión de proyectiles a aliados adyacentes)',
+      branchB: 'Qilin del Trueno (Descarga eléctrica en cadena que electrocuta a 2 enemigos contiguos)',
       branchADetails: {
-        unitName: 'Qilin de la Tormenta',
-        nameEn: 'Storm Qilin',
-        role: 'Bestia Eléctrica de Choque',
-        keyAbilities: ['Paso de Trueno (Daña a objetivos al cruzar)', 'Descarga Eléctrica'],
-        statsBonus: '+6 Ataque, +4 Defensa, +30 Vida'
+        unitName: 'Qilin de la Niebla',
+        nameEn: 'Mist Qilin',
+        role: 'Bestia Mística de Cobertura y Niebla',
+        keyAbilities: ['Manto de Brumas 40%', 'Paso Etéreo', 'Sin contragolpe en primer ataque'],
+        statsBonus: '+2 Ataque, +3 Defensa, +30 Vida, +1 Velocidad'
       },
       branchBDetails: {
-        unitName: 'Qilin Celestial',
-        nameEn: 'Celestial Qilin',
-        role: 'Heraldo de la Fortuna Primigenia',
-        keyAbilities: ['Aura de Suerte Celestial (+1 a todo el ejército)', 'Carga Ligera'],
-        statsBonus: '+7 Ataque, +3 Iniciativa, +2 Velocidad'
+        unitName: 'Qilin del Trueno',
+        nameEn: 'Thunder Qilin',
+        role: 'Bestia Eléctrica de Choque en Cadena',
+        keyAbilities: ['Ataque en Cadena Eléctrico', 'Aturdimiento 25%', 'Velocidad 10'],
+        statsBonus: '+4 Ataque, +2 Defensa, +25 Vida, +1 Velocidad, +2 Iniciativa'
       }
     },
     effects: [
@@ -552,23 +552,23 @@ export const GROVE_STRUCTURES: TownStructure[] = [
     dwellingUpgradeCost: { gold: 8000, wood: 10, crystal: 8 },
     prerequisites: ['Guarida del Trueno (Thunder Lair)', 'Gremio de Magos (Mage Guild)'],
     unitRecruitedBase: 'Fénix (Phoenix)',
-    unitRecruited: 'Fénix / Fénix Mítico / Fénix Primigenio',
+    unitRecruited: 'Fénix / Fénix de Energía / Fénix Solar',
     unitUpgrades: {
-      branchA: 'Fénix Mítico (Iniciativa suprema, aliento de fuego atravesador y renacimiento de cenizas)',
-      branchB: 'Fénix Primigenio (Explosión de fuego solar al morir que calcina a todos los enemigos circundantes)',
+      branchA: 'Fénix de Energía (Velocidad 15, renacimiento al 50% y daño de éter)',
+      branchB: 'Fénix Solar (Aura curativa solar que regenera aliados un 20% del daño infligido)',
       branchADetails: {
-        unitName: 'Fénix Mítico',
-        nameEn: 'Mythic Phoenix',
-        role: 'Coloso Aéreo de Máxima Iniciativa y Renacimiento',
-        keyAbilities: ['Iniciativa Extrema (Turno 1 garantizado)', 'Renacer de las Cenizas', 'Aliento de Fuego'],
-        statsBonus: '+10 Ataque, +8 Defensa, +90 Vida'
+        unitName: 'Fénix de Energía',
+        nameEn: 'Energy Phoenix',
+        role: 'Coloso Aéreo de Máxima Iniciativa y Éter',
+        keyAbilities: ['Vuelo Supremo (Velocidad 15)', 'Renacimiento 50%', 'Explosión de Éter'],
+        statsBonus: '+5 Ataque, +4 Defensa, +60 Vida, +2 Iniciativa, +1 Velocidad'
       },
       branchBDetails: {
-        unitName: 'Fénix Primigenio',
-        nameEn: 'Primal Phoenix',
-        role: 'Bomba Voladora de Fuego Solar',
-        keyAbilities: ['Nova de Incineración Mortal', 'Alas de Fuego Solar'],
-        statsBonus: '+12 Ataque, +3 Iniciativa, +80 Vida'
+        unitName: 'Fénix Solar',
+        nameEn: 'Dawn Phoenix',
+        role: 'Coloso Aéreo Sagrado de Curación en Área',
+        keyAbilities: ['Vuelo', 'Aura Curativa Solar (20% daño infligido)', 'Renacimiento 40%'],
+        statsBonus: '+3 Ataque, +7 Defensa, +80 Vida, +1 Iniciativa'
       }
     },
     effects: [

@@ -323,31 +323,31 @@ export const HIVE_STRUCTURES: TownStructure[] = [
     cost: { gold: 500, wood: 5 },
     dwellingUpgradeCost: { gold: 1000, wood: 5 },
     prerequisites: ['Fortificaciones (Fortifications)'],
-    unitRecruitedBase: 'Larva (Grub)',
-    unitRecruited: 'Larva / Zángano / Larva Ácida',
+    unitRecruitedBase: 'Parásito (Parasite)',
+    unitRecruited: 'Parásito / Parásito Guardián / Parásito Devastador',
     unitUpgrades: {
-      branchA: 'Zángano (Obrero veloz con aguijón debilitante)',
-      branchB: 'Larva Ácida (Explosión ácida al morir que corroe a los atacantes)',
+      branchA: 'Parásito Guardián (Alcance largo sin sufrir represalia y bonificación contra tiers superiores)',
+      branchB: 'Parásito Devastador (Asalto voraz con daño aumentado y derribo)',
       branchADetails: {
-        unitName: 'Zángano',
-        nameEn: 'Swarm Drone',
-        role: 'Infantería Ligera Rápida',
-        keyAbilities: ['Picadura Rápida', 'Movilidad de Colonia'],
-        statsBonus: '+2 Ataque, +2 Velocidad'
+        unitName: 'Parásito Guardián',
+        nameEn: 'Warden Parasite',
+        role: 'Infantería de Alcance Largo',
+        keyAbilities: ['Alcance Largo (Sin represalia)', 'Derribar al Fuerte (+3% daño por dif. Tier)'],
+        statsBonus: '+2 Ataque, +2 Iniciativa'
       },
       branchBDetails: {
-        unitName: 'Larva Ácida',
-        nameEn: 'Acid Grub',
-        role: 'Bomba Biológica',
-        keyAbilities: ['Estallido Ácido (Daña al morir)', 'Baba Ralentizadora'],
-        statsBonus: '+3 Ataque, +3 Vida'
+        unitName: 'Parásito Devastador',
+        nameEn: 'Ravager Parasite',
+        role: 'Infantería de Asalto Furioso',
+        keyAbilities: ['Asalto Desgarrador', 'Derribar al Fuerte (+3% daño por dif. Tier)'],
+        statsBonus: '+3 Ataque, +2 Vida'
       }
     },
     effects: [
-      'Recluta las larvas e insectos básicos de Tier 1 de la Colmena.',
+      'Recluta los parásitos invasores de Tier 1 de la Colmena.',
       'Producción base: 15 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Unidades muy económicas para absorber represalias y explorar el frente.',
+    strategicTip: 'Unidades muy económicas dotadas de ataque a 2 casillas sin recibir contraataque.',
     timingRecommendation: 'Día 1-2.',
   },
   {
@@ -361,31 +361,31 @@ export const HIVE_STRUCTURES: TownStructure[] = [
     cost: { gold: 1000, ore: 5 },
     dwellingUpgradeCost: { gold: 1000, ore: 5 },
     prerequisites: ['Vivienda Descuidada (Neglected Housing)'],
-    unitRecruitedBase: 'Carroñero (Scavenger)',
-    unitRecruited: 'Carroñero / Escarabajo Devorador / Carroñero Acorazado',
+    unitRecruitedBase: 'Langosta (Locust)',
+    unitRecruited: 'Langosta / Langosta Crecida / Langosta Cosechadora',
     unitUpgrades: {
-      branchA: 'Escarabajo Devorador (Devora restos de caídos para sanar vida en combate)',
-      branchB: 'Carroñero Acorazado (Caparazón grueso que reduce daño frontal y rechaza proyectiles)',
+      branchA: 'Langosta Crecida (Dron reforzado con esencia demoníaca y doble ataque)',
+      branchB: 'Langosta Cosechadora (Devora cadáveres con Cosechar para ganar bonificaciones temporales)',
       branchADetails: {
-        unitName: 'Escarabajo Devorador',
-        nameEn: 'Devourer Beetle',
-        role: 'Carroñero Regenerativo',
-        keyAbilities: ['Consumir Cadáver (+HP en combate)', 'Mandíbulas Trituradoras'],
-        statsBonus: '+3 Ataque, +8 Vida'
+        unitName: 'Langosta Crecida',
+        nameEn: 'Overgrown Locust',
+        role: 'Infantería Ligera de Ataque Doble',
+        keyAbilities: ['Ataque Doble', 'Contragolpe Preventivo'],
+        statsBonus: '+3 Ataque, +4 Vida'
       },
       branchBDetails: {
-        unitName: 'Carroñero Acorazado',
-        nameEn: 'Armored Scavenger',
-        role: 'Tanque Quitinoso',
-        keyAbilities: ['Caparazón Reforzado (-20% daño recibido)', 'Cuerpo Pesado'],
-        statsBonus: '+4 Defensa, +10 Vida'
+        unitName: 'Langosta Cosechadora',
+        nameEn: 'Harvester Locust',
+        role: 'Carroñero Cosechador',
+        keyAbilities: ['Cosechar Cadáver (+Ataque y +HP)', 'Ataque Doble'],
+        statsBonus: '+2 Ataque, +2 Defensa, +6 Vida'
       }
     },
     effects: [
-      'Recluta los escarabajos carroñeros de Tier 2.',
+      'Recluta las voraces langostas de Tier 2 del Enjambre.',
       'Producción base: 8 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Tanques económicos ideales para avanzar en primera línea protegiendo a los tiradores.',
+    strategicTip: 'El ataque doble de las langostas las convierte en una de las mejores unidades ofensivas de apertura.',
     timingRecommendation: 'Día 2-3.',
   },
   {
@@ -399,28 +399,28 @@ export const HIVE_STRUCTURES: TownStructure[] = [
     cost: { gold: 1500, wood: 5 },
     dwellingUpgradeCost: { gold: 1500, wood: 5 },
     prerequisites: ['Guarida de Carroña (Carrion Lair)'],
-    unitRecruitedBase: 'Avispa (Wasp)',
-    unitRecruited: 'Avispa / Aguijoneador Gigante / Avispa Voraz',
+    unitRecruitedBase: 'Avispón (Hornet)',
+    unitRecruited: 'Avispón / Cantor / Aguijoneador',
     unitUpgrades: {
-      branchA: 'Aguijoneador Gigante (Vuelo rápido con neurotoxina que paraliza durante 1 turno)',
-      branchB: 'Avispa Voraz (Ataque y retirada sin contraataque enemiga y velocidad supersónica)',
+      branchA: 'Cantor (Zumbido melódico que debilita la resistencia enemiga y acelera al enjambre)',
+      branchB: 'Aguijoneador (Aguijonazo penetrante a gran velocidad contra tiradores)',
       branchADetails: {
-        unitName: 'Aguijoneador Gigante',
-        nameEn: 'Giant Stinger',
-        role: 'Volador Neurotóxico',
-        keyAbilities: ['Aguijón Paralizante (25% prob. de parálisis)', 'Vuelo Rápido'],
+        unitName: 'Cantor',
+        nameEn: 'Chanter',
+        role: 'Volador de Apoyo Sónico',
+        keyAbilities: ['Zumbido Hipnótico', 'Vuelo Rápido'],
         statsBonus: '+3 Ataque, +2 Iniciativa'
       },
       branchBDetails: {
-        unitName: 'Avispa Voraz',
-        nameEn: 'Voracious Wasp',
-        role: 'Hostigador Aéreo',
-        keyAbilities: ['Golpear y Escapar (Sin contragolpe)', 'Ataque en Picado'],
+        unitName: 'Aguijoneador',
+        nameEn: 'Stinger',
+        role: 'Hostigador Aéreo Penetrante',
+        keyAbilities: ['Aguijón Perforante', 'Vuelo Rápido'],
         statsBonus: '+4 Ataque, +2 Velocidad'
       }
     },
     effects: [
-      'Recluta las avispas y aguijoneadores voladores de Tier 3.',
+      'Recluta los avispones y cantores voladores de Tier 3.',
       'Producción base: 6 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
     strategicTip: 'Cruzan el mapa entero en turno 1 para anular tiradores enemigos antes de que disparen.',
@@ -437,31 +437,31 @@ export const HIVE_STRUCTURES: TownStructure[] = [
     cost: { gold: 2500, ore: 5, sulfur: 2 },
     dwellingUpgradeCost: { gold: 2000, ore: 5, sulfur: 2 },
     prerequisites: ['Nido de Papel (Paper Nest)', 'Gremio de Magos (Mage Guild)'],
-    unitRecruitedBase: 'Mantis (Mantis)',
-    unitRecruited: 'Mantis / Mirmidón Asesino / Mantis Segadora',
+    unitRecruitedBase: 'Escorpión (Scorpion)',
+    unitRecruited: 'Escorpión / Escorpión Volcánico / Escorpión Espeleano',
     unitUpgrades: {
-      branchA: 'Mirmidón Asesino (Ataque doble con cuchillas quitinosas y salto acrobático)',
-      branchB: 'Mantis Segadora (Ataque de barrido que corta a dos objetivos adyacentes ignorando armadura)',
+      branchA: 'Escorpión Volcánico (Caparazón ígneo con pinzas ardientes y veneno sulfúrico)',
+      branchB: 'Escorpión Espeleano (Coraza de roca subterránea y aguijón petrificante)',
       branchADetails: {
-        unitName: 'Mirmidón Asesino',
-        nameEn: 'Myrmidon Assassin',
-        role: 'Infantería de Ataque Doble',
-        keyAbilities: ['Ataque Doble', 'Salto Acrobático (Ignora obstáculos)'],
-        statsBonus: '+4 Ataque, +3 Defensa, +12 Vida'
+        unitName: 'Escorpión Volcánico',
+        nameEn: 'Volcanic Scorpion',
+        role: 'Tanque Ofensivo Ígneo',
+        keyAbilities: ['Veneno Ígneo', 'Tenazas Trituradoras'],
+        statsBonus: '+4 Ataque, +10 Vida'
       },
       branchBDetails: {
-        unitName: 'Mantis Segadora',
-        nameEn: 'Reaper Mantis',
-        role: 'Asesino Perforador de Armadura',
-        keyAbilities: ['Corte Perforante (Ignora 30% defensa)', 'Barrido Doble'],
-        statsBonus: '+5 Ataque, +2 Iniciativa'
+        unitName: 'Escorpión Espeleano',
+        nameEn: 'Spelaean Scorpion',
+        role: 'Tanque Subterráneo Acorazado',
+        keyAbilities: ['Caparazón Espeleano', 'Aguijón Paralizante'],
+        statsBonus: '+5 Defensa, +14 Vida'
       }
     },
     effects: [
-      'Recluta los feroces luchadores de melé de Tier 4.',
+      'Recluta los escorpiones de combate de Tier 4.',
       'Producción base: 4 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'El ataque doble de los Mirmidones multiplica exponencialmente el beneficio de bendiciones y furia.',
+    strategicTip: 'Tanques colosales que resisten daño masivo y envenenan a las líneas de vanguardia.',
     timingRecommendation: 'Día 4-5.',
   },
   {
@@ -475,31 +475,31 @@ export const HIVE_STRUCTURES: TownStructure[] = [
     cost: { gold: 3500, wood: 5, sulfur: 4 },
     dwellingUpgradeCost: { gold: 3000, wood: 5, sulfur: 3 },
     prerequisites: ['Zigurat Quitináceo (Chitinous Ziggurat)'],
-    unitRecruitedBase: 'Horror / Madre de la Colmena (Hive Horror)',
-    unitRecruited: 'Horror / Madre del Enjambre / Horror Psíquico',
+    unitRecruitedBase: 'Saqueador (Reaver)',
+    unitRecruited: 'Saqueador / Saqueador Amenazante / Saqueador Maníaco',
     unitUpgrades: {
-      branchA: 'Madre del Enjambre (Eclosiona larvas aliadas cada ronda de combate)',
-      branchB: 'Horror Psíquico (Ataque mental a distancia que desorienta y drena maná)',
+      branchA: 'Saqueador Amenazante (Depredador ápice con ataque veloz que aterroriza a criaturas inferiores)',
+      branchB: 'Saqueador Maníaco (Furia sanguinaria incontrolable con daño devastador a tiers iguales o superiores)',
       branchADetails: {
-        unitName: 'Madre del Enjambre',
-        nameEn: 'Swarm Mother',
-        role: 'Generadora de Tropas en Combate',
-        keyAbilities: ['Eclosión de Larvas en Combate', 'Aura de Maternidad Feromonal'],
-        statsBonus: '+4 Defensa, +20 Vida'
+        unitName: 'Saqueador Amenazante',
+        nameEn: 'Menacing Reaver',
+        role: 'Depredador Ápice Asesino',
+        keyAbilities: ['Depredador Ápice (+Daño a Tiers iguales o superiores)', 'Asalto Rápido (Sin contragolpe)'],
+        statsBonus: '+5 Ataque, +2 Iniciativa'
       },
       branchBDetails: {
-        unitName: 'Horror Psíquico',
-        nameEn: 'Psychic Horror',
-        role: 'Tirador Mental',
-        keyAbilities: ['Proyección Mental de Área', 'Drenaje de Concentración Arcano'],
-        statsBonus: '+5 Ataque, +2 Iniciativa'
+        unitName: 'Saqueador Maníaco',
+        nameEn: 'Maniacal Reaver',
+        role: 'Berserker Quitináceo',
+        keyAbilities: ['Furia Maníaca', 'Depredador Ápice'],
+        statsBonus: '+7 Ataque, +10 Vida'
       }
     },
     effects: [
-      'Recluta las matriarcas biológicas y terrores de Tier 5.',
+      'Recluta los feroces saqueadores predadores de Tier 5.',
       'Producción base: 3 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'La invocación continua de larvas abruma la economía de acción enemiga en combates prolongados.',
+    strategicTip: 'Su habilidad Depredador Ápice los hace mortíferos contra campeones enemigos de Tier 5, 6 y 7.',
     timingRecommendation: 'Día 6 o inicio de Semana 2.',
   },
   {
@@ -513,31 +513,31 @@ export const HIVE_STRUCTURES: TownStructure[] = [
     cost: { gold: 5000, ore: 10, sulfur: 6 },
     dwellingUpgradeCost: { gold: 4000, ore: 5, sulfur: 4 },
     prerequisites: ['Cúspide (Apex)'],
-    unitRecruitedBase: 'Gusano de Magma (Magma Worm)',
-    unitRecruited: 'Gusano de Magma / Coloso de Fuego Subterráneo / Excavador Ígneo',
+    unitRecruitedBase: 'Waurm (Waurm)',
+    unitRecruited: 'Waurm / Devorador / Piroboro',
     unitUpgrades: {
-      branchA: 'Coloso de Fuego Subterráneo (Erupción ígnea en línea que calcina casillas)',
-      branchB: 'Excavador Ígneo (Túnel subterráneo que reaparece tras las líneas enemigas causando terremoto)',
+      branchA: 'Devorador (Coloso subterráneo que engulle unidades enemigas y causa sismos)',
+      branchB: 'Piroboro (Único tirador a distancia del Enjambre; exhala proyectiles ígneos con daño de área)',
       branchADetails: {
-        unitName: 'Coloso de Fuego Subterráneo',
-        nameEn: 'Subterranean Fire Colossus',
-        role: 'Artillero Ígneo Pesado',
-        keyAbilities: ['Erupción de Magma (Daña en línea recta)', 'Inmunidad al Fuego'],
-        statsBonus: '+6 Ataque, +4 Defensa, +30 Vida'
+        unitName: 'Devorador',
+        nameEn: 'Devourer',
+        role: 'Coloso Subterráneo de Melé',
+        keyAbilities: ['Fauces Devoradoras', 'Túnel Sísmico'],
+        statsBonus: '+6 Ataque, +5 Defensa, +35 Vida'
       },
       branchBDetails: {
-        unitName: 'Excavador Ígneo',
-        nameEn: 'Igneous Burrower',
-        role: 'Emboscador Terrestre',
-        keyAbilities: ['Túnel Sísmico (Reaparición instantánea)', 'Ola de Calor'],
-        statsBonus: '+7 Ataque, +2 Iniciativa'
+        unitName: 'Piroboro',
+        nameEn: 'Pyroboros',
+        role: 'Artillero Ígneo de Área',
+        keyAbilities: ['Disparo Ígneo de Área', 'Fuego Cáustico'],
+        statsBonus: '+7 Ataque, +25 Vida, Disparos a Distancia'
       }
     },
     effects: [
-      'Recluta los gusanos gigantes de magma de Tier 6.',
+      'Recluta los gusanos waurms de Tier 6 del Enjambre.',
       'Producción base: 2 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Pueden excavar por debajo de las murallas de la ciudad enemiga en asedios para destruir tiradores protegidos.',
+    strategicTip: 'El Piroboro es la única unidad de artillería de proyectiles a distancia del Enjambre, indispensable en asedios.',
     timingRecommendation: 'Semana 2.',
   },
   {
@@ -551,31 +551,31 @@ export const HIVE_STRUCTURES: TownStructure[] = [
     cost: { gold: 10000, ore: 15, sulfur: 10 },
     dwellingUpgradeCost: { gold: 8000, ore: 10, sulfur: 8 },
     prerequisites: ['Madrigueras de Almas Ardientes (Burning Soul Burrows)', 'Gremio de Magos (Mage Guild)'],
-    unitRecruitedBase: 'Rey Libélula / Beelzebub (Dragonfly King / Beelzebub)',
-    unitRecruited: 'Beelzebub / Rey Libélula / Abominación del Enjambre',
+    unitRecruitedBase: 'Reina de la Colmena (Hive Queen)',
+    unitRecruited: 'Reina de la Colmena / Madre de la Colmena / Cazadora de la Colmena',
     unitUpgrades: {
-      branchA: 'Rey Libélula (Vuelo hipersónico, aura de frenesí para todos los insectos y veneno mortal)',
-      branchB: 'Abominación del Enjambre (Coloso demoníaco que devora tropas caídas y emite aura de descomposición)',
+      branchA: 'Madre de la Colmena (Matriarca colosal que engendra parásitos en combate y emite aura protectora)',
+      branchB: 'Cazadora de la Colmena (Monarca predadora de vuelo veloz con aguijón aniquilador y aura de frenesí)',
       branchADetails: {
-        unitName: 'Rey Libélula',
-        nameEn: 'Dragonfly King',
-        role: 'Monarca Aéreo del Enjambre',
-        keyAbilities: ['Frenesí de la Colmena (+2 Ataque a todos los insectos)', 'Aguijón de la Extinción'],
-        statsBonus: '+10 Ataque, +8 Defensa, +90 Vida'
+        unitName: 'Madre de la Colmena',
+        nameEn: 'Hive Mother',
+        role: 'Generadora y Protectora de Colonia',
+        keyAbilities: ['Eclosión en Batalla', 'Aura de la Madre (+Defensa a insectos)'],
+        statsBonus: '+8 Defensa, +120 Vida'
       },
       branchBDetails: {
-        unitName: 'Abominación del Enjambre',
-        nameEn: 'Swarm Abomination',
-        role: 'Monstruo Demoniaco Colosal',
-        keyAbilities: ['Aura de Podredumbre', 'Devorador de Vida'],
-        statsBonus: '+12 Ataque, +4 Defensa, +110 Vida'
+        unitName: 'Cazadora de la Colmena',
+        nameEn: 'Hive Huntress',
+        role: 'Monarca Asesina Alada',
+        keyAbilities: ['Vuelo Veloz', 'Aguijón Aniquilador', 'Aura de Frenesí (+Ataque a insectos)'],
+        statsBonus: '+12 Ataque, +4 Velocidad, +100 Vida'
       }
     },
     effects: [
-      'Recluta los monarcas y abominaciones de Tier 7 del Enjambre.',
+      'Recluta las soberanas reinas de Tier 7 de la Colmena.',
       'Producción base: 1 unidad por semana (+1 con Fortificaciones III).'
     ],
-    strategicTip: 'El Rey Libélula eleva la efectividad de todo el ejército insectoide gracias a su aura de frenesí global.',
+    strategicTip: 'La Madre de la Colmena engendra refuerzos continuos mientras la Cazadora erradica las amenazas aéreas enemigas.',
     timingRecommendation: 'Final de Semana 1 o inicio de Semana 2.',
   },
 

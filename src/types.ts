@@ -338,7 +338,7 @@ export interface HeroSkill {
 export interface TacticalScenario {
   id: string;
   title: string;
-  category?: 'Limpieza Temprana (Creeping)' | 'Defensa & Contrarush' | 'Asedio & Rompemurallas' | 'Duelo Anti-Magia / Colosos' | 'Control de Masas (Nightshade)' | 'Late Game Drago-Armageddon';
+  category?: 'Limpieza Temprana (Creeping)' | 'Defensa & Contrarush' | 'Asedio & Rompemurallas' | 'Asedio & Ruptura de Vanguardia' | 'Duelo Anti-Magia / Colosos' | 'Late Game Choque de Colosos' | 'Control de Masas (Nightshade)' | 'Late Game Drago-Armageddon' | string;
   situation: string;
   recommendationAI: string;
   recommendationHuman: string;

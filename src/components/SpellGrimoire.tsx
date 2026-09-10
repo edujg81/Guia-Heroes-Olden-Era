@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { RECOMMENDED_SPELLS } from '../data/dungeonData';
+import { OFFICIAL_SPELLS_DATA as RECOMMENDED_SPELLS } from '../data/spellsData';
 import { RecommendedSpell, SpellLevelInfo } from '../types';
 import { useStickyState } from '../utils/useStickyState';
 import { FactionId, FACTIONS_METADATA, getFactionTheme } from '../data/factionDataProvider';

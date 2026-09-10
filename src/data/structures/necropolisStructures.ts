@@ -324,10 +324,10 @@ export const NECROPOLIS_STRUCTURES: TownStructure[] = [
     dwellingUpgradeCost: { gold: 1000, ore: 5 },
     prerequisites: ['Fortificaciones (Fortifications)'],
     unitRecruitedBase: 'Esqueleto (Skeleton)',
-    unitRecruited: 'Esqueleto / Guerrero Esqueleto / Esqueleto Centinela',
+    unitRecruited: 'Esqueleto / Guerrero Esqueleto / Arquero Esqueleto',
     unitUpgrades: {
       branchA: 'Guerrero Esqueleto (Escudo óseo con reducción de daño físico y de proyectiles)',
-      branchB: 'Esqueleto Centinela (Lanza que ataca a distancia de 2 casillas con contragolpe)',
+      branchB: 'Arquero Esqueleto (Tirador no-muerto a distancia con flechas de hueso)',
       branchADetails: {
         unitName: 'Guerrero Esqueleto',
         nameEn: 'Skeleton Warrior',
@@ -336,24 +336,24 @@ export const NECROPOLIS_STRUCTURES: TownStructure[] = [
         statsBonus: '+3 Defensa, +3 Vida'
       },
       branchBDetails: {
-        unitName: 'Esqueleto Centinela',
-        nameEn: 'Skeleton Sentinel',
-        role: 'Lancero de Alcance',
-        keyAbilities: ['Ataque a 2 Casillas', 'Sin Contragolpe'],
-        statsBonus: '+3 Ataque, +1 Iniciativa'
+        unitName: 'Arquero Esqueleto',
+        nameEn: 'Skeleton Archer',
+        role: 'Tirador Óseo',
+        keyAbilities: ['Tirador a Distancia (18 virotes)', 'Sin penalización melé'],
+        statsBonus: '+2 Ataque, +1 Iniciativa'
       }
     },
     effects: [
       'Recluta la masa de tropas óseas de Tier 1 de la Necrópolis.',
-      'Producción base: 15 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
+      'Producción base: 20 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
     strategicTip: 'Constituyen el núcleo numérico del ejército gracias a la acumulación pasiva de la Nigromancia.',
     timingRecommendation: 'Día 1-2.',
   },
   {
-    id: 'necropolis-tomb-of-warriors',
-    name: 'Tumba de Guerreros (Tomb of Warriors)',
-    nameEn: 'Tomb of Warriors',
+    id: 'necropolis-quiet-pavilion',
+    name: 'Pabellón Silencioso (Quiet Pavilion)',
+    nameEn: 'Quiet Pavilion',
     category: 'Moradas de Criaturas',
     faction: 'Necrópolis',
     tier: 2,
@@ -361,31 +361,31 @@ export const NECROPOLIS_STRUCTURES: TownStructure[] = [
     cost: { gold: 1000, ore: 5 },
     dwellingUpgradeCost: { gold: 1000, ore: 5 },
     prerequisites: ['Criptas y Tumbas (Crypts and Graves)'],
-    unitRecruitedBase: 'Zombi (Zombie)',
-    unitRecruited: 'Zombi / Zombi Putrefacto / Momia Decadente',
+    unitRecruitedBase: 'Aparición (Wight)',
+    unitRecruited: 'Aparición / Espectro / Fantasma',
     unitUpgrades: {
-      branchA: 'Zombi Putrefacto (Transmite peste que reduce ataque y defensa de los enemigos)',
-      branchB: 'Momia Decadente (Maldice al golpear aumentando el daño que recibe el objetivo)',
+      branchA: 'Espectro (Drena 4 de maná al héroe enemigo por asalto e impone silencio)',
+      branchB: 'Fantasma (Forma etérea con 35% de evasión física y regeneración continua)',
       branchADetails: {
-        unitName: 'Zombi Putrefacto',
-        nameEn: 'Rotten Zombie',
-        role: 'Tanque Infeccioso',
-        keyAbilities: ['Nube de Peste (-2 Ataque/Defensa al enemigo colindante)', 'Cuerpo Resistente'],
-        statsBonus: '+3 Defensa, +12 Vida'
+        unitName: 'Espectro',
+        nameEn: 'Wraith',
+        role: 'Saboteador de Maná Volador',
+        keyAbilities: ['Vórtice de Maná (Drena 4 Maná)', 'Silencio Mágico', 'Vuelo Incorpóreo'],
+        statsBonus: '+2 Ataque, +2 Defensa, +6 Vida, +2 Iniciativa'
       },
       branchBDetails: {
-        unitName: 'Momia Decadente',
-        nameEn: 'Decaying Mummy',
-        role: 'Hostigador Maldito',
-        keyAbilities: ['Maldición de la Tumba (30% prob. de maldecir al impacto)', 'Resistencia Mágica'],
-        statsBonus: '+4 Ataque, +8 Vida'
+        unitName: 'Fantasma',
+        nameEn: 'Phantasm',
+        role: 'Hostigador Etéreo Resiliente',
+        keyAbilities: ['Forma Etérea (35% evasión física)', 'Regeneración Pasiva', 'Vuelo'],
+        statsBonus: '+1 Ataque, +2 Defensa, +4 Vida, +1 Iniciativa'
       }
     },
     effects: [
-      'Recluta los tanques lentos y resistentes de Tier 2.',
-      'Producción base: 8 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
+      'Recluta las unidades aéreas rápidas de Tier 2 de la Necrópolis.',
+      'Producción base: 12 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Absorben enormes cantidades de daño y bloquean el paso en cuellos de botella.',
+    strategicTip: 'Esenciales para trabar tiradores enemigos en Turno 1 y drenar el maná de los hechiceros rivales.',
     timingRecommendation: 'Día 2-3.',
   },
   {
@@ -398,38 +398,38 @@ export const NECROPOLIS_STRUCTURES: TownStructure[] = [
     dwellingTier: 3,
     cost: { gold: 1500, wood: 5 },
     dwellingUpgradeCost: { gold: 1500, wood: 5 },
-    prerequisites: ['Tumba de Guerreros (Tomb of Warriors)'],
-    unitRecruitedBase: 'Sabueso de la Peste (Plague Hound)',
-    unitRecruited: 'Sabueso de la Peste / Necrosabueso / Bestia Cadavérica',
+    prerequisites: ['Pabellón Silencioso (Quiet Pavilion)'],
+    unitRecruitedBase: 'Sabueso No-Muerto (Undead Pet)',
+    unitRecruited: 'Sabueso No-Muerto / Barghest / Armadillo Óseo',
     unitUpgrades: {
-      branchA: 'Necrosabueso (Carga rápida que ignora contraataques y ataca a dos objetivos colindantes)',
-      branchB: 'Bestia Cadavérica (Aura de miedo que reduce la moral y velocidad del rival)',
+      branchA: 'Barghest (Aullido aterrador que reduce la moral rival en -1 y desgarro crítico)',
+      branchB: 'Armadillo Óseo (Caparazón espinoso acorazado que refleja un 30% del daño cuerpo a cuerpo)',
       branchADetails: {
-        unitName: 'Necrosabueso',
-        nameEn: 'Necro Hound',
-        role: 'Hostigador Rápido Sin Contragolpe',
-        keyAbilities: ['Sin Contragolpe', 'Mordedura Doble'],
-        statsBonus: '+3 Ataque, +2 Velocidad'
+        unitName: 'Barghest',
+        nameEn: 'Barghest',
+        role: 'Hostigador Rápido y Desmoralizador',
+        keyAbilities: ['Aullido del Averno (-1 Moral enemiga)', 'Desgarro Crítico (+25% daño)'],
+        statsBonus: '+3 Ataque, +2 Defensa, +8 Vida, +2 Iniciativa'
       },
       branchBDetails: {
-        unitName: 'Bestia Cadavérica',
-        nameEn: 'Corpse Beast',
-        role: 'Cazador Desmoralizador',
-        keyAbilities: ['Aullido Terrorífico (-1 Moral enemiga)', 'Salto de Falla'],
-        statsBonus: '+4 Ataque, +1 Iniciativa'
+        unitName: 'Armadillo Óseo',
+        nameEn: 'Bone Armadillo',
+        role: 'Tanque Reflectante Acorazado',
+        keyAbilities: ['Caparazón Espinoso (30% daño reflejado)', 'Defensa Acorazada'],
+        statsBonus: '+1 Ataque, +6 Defensa, +13 Vida'
       }
     },
     effects: [
-      'Recluta las bestias rápidas de Tier 3.',
-      'Producción base: 6 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
+      'Recluta las bestias ágiles de vanguardia de Tier 3.',
+      'Producción base: 9 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Aporta la velocidad y agilidad de la que carecen los zombis y esqueletos en los primeros turnos.',
+    strategicTip: 'Aportan velocidad extrema de flanqueo para abalanzarse sobre tiradores rezagados.',
     timingRecommendation: 'Día 3-4.',
   },
   {
-    id: 'necropolis-quiet-pavilion',
-    name: 'Pabellón Silencioso (Quiet Pavilion)',
-    nameEn: 'Quiet Pavilion',
+    id: 'necropolis-graverobber-den',
+    name: 'Cámara de los Saqueatumbas (Graverobber Den)',
+    nameEn: 'Graverobber Den',
     category: 'Moradas de Criaturas',
     faction: 'Necrópolis',
     tier: 4,
@@ -437,31 +437,31 @@ export const NECROPOLIS_STRUCTURES: TownStructure[] = [
     cost: { gold: 2500, ore: 5, mercury: 2 },
     dwellingUpgradeCost: { gold: 2000, ore: 5, mercury: 2 },
     prerequisites: ['Perrera de Sabuesos (Kennel)', 'Gremio de Magos (Mage Guild)'],
-    unitRecruitedBase: 'Espíritu (Spirit)',
-    unitRecruited: 'Espíritu / Banshee Aulladora / Espectro del Velo',
+    unitRecruitedBase: 'Saqueatumbas (Graverobber)',
+    unitRecruited: 'Saqueatumbas / Mercader de la Muerte / Amo de la Jauría',
     unitUpgrades: {
-      branchA: 'Banshee Aulladora (Aullido gemebundo que daña a todos los enemigos circundantes e infunde pánico)',
-      branchB: 'Espectro del Velo (Cuerpo incorpóreo con 50% de probabilidad de ignorar daño físico)',
+      branchA: 'Mercader de la Muerte (Disparo que inflige Maldición y reduce a la mitad el daño del objetivo)',
+      branchB: 'Amo de la Jauría (Invoca una escuadra adicional de Sabuesos No-Muertos al inicio de la batalla)',
       branchADetails: {
-        unitName: 'Banshee Aulladora',
-        nameEn: 'Wailing Banshee',
-        role: 'Controladora Sónica',
-        keyAbilities: ['Aullido del Lamento (Dañador en área cónica)', 'Vuelo Incorpóreo'],
-        statsBonus: '+3 Ataque, +3 Defensa, +10 Vida'
+        unitName: 'Mercader de la Muerte',
+        nameEn: 'Merchant of Death',
+        role: 'Tirador Maldiciente',
+        keyAbilities: ['Tiro Maldito (Maldición y Debilitamiento)', 'Sin penalización melé'],
+        statsBonus: '+3 Ataque, +2 Defensa, +10 Vida, +2 Iniciativa'
       },
       branchBDetails: {
-        unitName: 'Espectro del Velo',
-        nameEn: 'Veil Wraith',
-        role: 'Incorpóreo Elusivo',
-        keyAbilities: ['Incorpóreo (50% esquiva física)', 'Drenaje de Maná en combate'],
-        statsBonus: '+4 Ataque, +2 Iniciativa'
+        unitName: 'Amo de la Jauría',
+        nameEn: 'Kennel Master',
+        role: 'Invocador de Refuerzos',
+        keyAbilities: ['Llamada de Jauría (Invoca Sabuesos extra)', 'Aura Bestial'],
+        statsBonus: '+2 Ataque, +3 Defensa, +8 Vida, +1 Iniciativa'
       }
     },
     effects: [
-      'Recluta las criaturas incorpóreas voladoras de Tier 4.',
-      'Producción base: 4 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
+      'Recluta los tiradores de apoyo nigromántico de Tier 4.',
+      'Producción base: 6 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Su capacidad de atravesar murallas y obstáculos las hace ideales en asedios.',
+    strategicTip: 'Su capacidad de excavar huesos e invocar refuerzos o maldecir objetivos pesados estabiliza la retaguardia.',
     timingRecommendation: 'Día 4-5.',
   },
   {
@@ -474,33 +474,71 @@ export const NECROPOLIS_STRUCTURES: TownStructure[] = [
     dwellingTier: 5,
     cost: { gold: 3500, wood: 5, mercury: 4 },
     dwellingUpgradeCost: { gold: 3000, wood: 5, mercury: 3 },
-    prerequisites: ['Pabellón Silencioso (Quiet Pavilion)'],
+    prerequisites: ['Cámara de los Saqueatumbas (Graverobber Den)'],
     unitRecruitedBase: 'Liche (Lich)',
-    unitRecruited: 'Liche / Archiliche / Liche Maestro de Sombras',
+    unitRecruited: 'Liche / Liche Pestilente / Liche Sanguíneo',
     unitUpgrades: {
-      branchA: 'Archiliche (Nube mortal de área que daña a objetivos vivos sin afectar a los no-muertos)',
-      branchB: 'Liche Maestro de Sombras (Rayo de muerte concentrado que resucita esqueletos de los caídos)',
+      branchA: 'Liche Pestilente (Nube de muerte persistente de 3x3 que crea miasma tóxico)',
+      branchB: 'Liche Sanguíneo (Transfiere 40% del daño para sanar y reanimar tropas no-muertas aliadas)',
       branchADetails: {
-        unitName: 'Archiliche',
-        nameEn: 'Archlich',
-        role: 'Tirador Arcano de Área',
-        keyAbilities: ['Nube Mortal de 7 Hexágonos (No daña a no-muertos)', 'Sin penalización cuerpo a cuerpo'],
-        statsBonus: '+4 Ataque, +3 Defensa, +15 Vida'
+        unitName: 'Liche Pestilente',
+        nameEn: 'Pestilent Lich',
+        role: 'Artillero de Miasma en Área',
+        keyAbilities: ['Miasma Mortal (Área venenosa continua)', 'Sin penalización melé'],
+        statsBonus: '+3 Ataque, +3 Defensa, +15 Vida, +2 Iniciativa'
       },
       branchBDetails: {
-        unitName: 'Liche Maestro de Sombras',
-        nameEn: 'Shadowmaster Lich',
-        role: 'Invocador y Artillero Oscuro',
-        keyAbilities: ['Levantar Cadáver en Combate', 'Rayo de Sombra'],
-        statsBonus: '+5 Ataque, +2 Iniciativa'
+        unitName: 'Liche Sanguíneo',
+        nameEn: 'Sanguine Lich',
+        role: 'Sanador y Reanimador Arcano',
+        keyAbilities: ['Drenaje Colectivo (Cura no-muertos aliados)', 'Tirador Mágico'],
+        statsBonus: '+2 Ataque, +4 Defensa, +12 Vida, +1 Iniciativa'
       }
     },
     effects: [
       'Recluta los tiradores arcanos supremos de Tier 5 de la Necrópolis.',
-      'Producción base: 3 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
+      'Producción base: 4 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'La nube mortal del Archiliche es la herramienta más destructiva para limpiar grandes grupos de tropas vivas enemigas sin dañar a tus no-muertos colindantes.',
+    strategicTip: 'La nube de muerte no daña a tus tropas no-muertas, permitiendo disparar al corazón del combate cerrado.',
     timingRecommendation: 'Día 6 o inicio de Semana 2.',
+  },
+  {
+    id: 'necropolis-tomb-of-warriors',
+    name: 'Tumba de Guerreros (Tomb of Warriors)',
+    nameEn: 'Tomb of Warriors',
+    category: 'Moradas de Criaturas',
+    faction: 'Necrópolis',
+    tier: 6,
+    dwellingTier: 6,
+    cost: { gold: 6000, ore: 10, mercury: 4 },
+    dwellingUpgradeCost: { gold: 5000, ore: 8, mercury: 3 },
+    prerequisites: ['Mansión Intemporal (Timeless Mansion)'],
+    unitRecruitedBase: 'Caballero del Terror (Dread Knight)',
+    unitRecruited: 'Caballero del Terror / Avatar de la Guerra / Segador Hueco',
+    unitUpgrades: {
+      branchA: 'Avatar de la Guerra (30% Golpe Mortal con 2.5x daño y +3 Ataque por cada enemigo caído)',
+      branchB: 'Segador Hueco (Mirada de Muerte que elimina tropas extra y reduce la moral rival en -2)',
+      branchADetails: {
+        unitName: 'Avatar de la Guerra',
+        nameEn: 'Avatar of War',
+        role: 'Infantería Pesada de Ruptura Letal',
+        keyAbilities: ['Golpe Mortal 2.5x', 'Furia Acumulativa (+3 Ataque/baja)', 'Armadura Pesada'],
+        statsBonus: '+3 Ataque, +3 Defensa, +30 Vida, +1 Iniciativa'
+      },
+      branchBDetails: {
+        unitName: 'Segador Hueco',
+        nameEn: 'Hollow Reaper',
+        role: 'Cosechador y Desmoralizador Supremo',
+        keyAbilities: ['Mirada de Muerte (Death Stare)', 'Presencia Aterradora (-2 Moral)', 'Velocidad 9'],
+        statsBonus: '+2 Ataque, +2 Defensa, +25 Vida, +1 Velocidad, +2 Iniciativa'
+      }
+    },
+    effects: [
+      'Recluta la infantería pesada de choque de Tier 6 de la Necrópolis.',
+      'Producción base: 2 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
+    ],
+    strategicTip: 'Su capacidad de desencadenar golpes mortales y reducir drásticamente la moral enemiga decanta combates decisivos.',
+    timingRecommendation: 'Día 7 o inicio de Semana 2.',
   },
   {
     id: 'necropolis-chateau-of-feasts',
@@ -508,75 +546,37 @@ export const NECROPOLIS_STRUCTURES: TownStructure[] = [
     nameEn: 'Chateau of Feasts',
     category: 'Moradas de Criaturas',
     faction: 'Necrópolis',
-    tier: 6,
-    dwellingTier: 6,
-    cost: { gold: 5000, wood: 10, mercury: 6 },
-    dwellingUpgradeCost: { gold: 4000, wood: 5, mercury: 4 },
-    prerequisites: ['Mansión Intemporal (Timeless Mansion)'],
-    unitRecruitedBase: 'Vampiro (Vampire)',
-    unitRecruited: 'Vampiro / Señor Vampiro / Conde de las Sombras',
-    unitUpgrades: {
-      branchA: 'Señor Vampiro (Drenaje vampírico total que regenera vida y resucita miembros caídos de la pila)',
-      branchB: 'Conde de las Sombras (Teletransporte como murciélago y ataque crítico con desangramiento)',
-      branchADetails: {
-        unitName: 'Señor Vampiro',
-        nameEn: 'Vampire Lord',
-        role: 'Infantería Voladora Autoregenerativa',
-        keyAbilities: ['Drenaje de Vida (Resucita miembros caídos)', 'Sin Contragolpe Enemigo', 'Forma de Murciélago'],
-        statsBonus: '+6 Ataque, +4 Defensa, +25 Vida'
-      },
-      branchBDetails: {
-        unitName: 'Conde de las Sombras',
-        nameEn: 'Shadow Count',
-        role: 'Asesino Teletransportador',
-        keyAbilities: ['Paso Sombrío Instantáneo', 'Desangrado Letal', 'Sin Contragolpe'],
-        statsBonus: '+7 Ataque, +2 Velocidad'
-      }
-    },
-    effects: [
-      'Recluta los señores no-muertos de Tier 6.',
-      'Producción base: 2 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
-    ],
-    strategicTip: 'Una pila de Señores Vampiros bien posicionada es virtualmente inmortal contra tropas vivas si no se les aplica control o magia concentrada.',
-    timingRecommendation: 'Semana 2.',
-  },
-  {
-    id: 'necropolis-bone-dragon-lair',
-    name: 'Guarida de Dragones de Hueso (Bone Dragon Lair)',
-    nameEn: 'Bone Dragon Lair',
-    category: 'Moradas de Criaturas',
-    faction: 'Necrópolis',
     tier: 7,
     dwellingTier: 7,
-    cost: { gold: 10000, ore: 15, mercury: 10 },
-    dwellingUpgradeCost: { gold: 8000, ore: 10, mercury: 8 },
-    prerequisites: ['Château de los Festines (Chateau of Feasts)', 'Gremio de Magos (Mage Guild)'],
-    unitRecruitedBase: 'Dragón de Hueso (Bone Dragon)',
-    unitRecruited: 'Dragón de Hueso / Dragón Fantasmal / Coloso de Sombras',
+    cost: { gold: 12500, wood: 10, mercury: 10 },
+    dwellingUpgradeCost: { gold: 10000, wood: 8, mercury: 8 },
+    prerequisites: ['Tumba de Guerreros (Tomb of Warriors)', 'Gremio de Magos (Mage Guild)'],
+    unitRecruitedBase: 'Vampiro (Vampire)',
+    unitRecruited: 'Vampiro / Señor de los Vampiros / Erudito Vampiro',
     unitUpgrades: {
-      branchA: 'Dragón Fantasmal (Aliento envejecedor que reduce a la mitad la vida del objetivo y aura de pánico)',
-      branchB: 'Coloso de Sombras (Resistencia masiva al daño físico y drenaje de almas en combate)',
+      branchA: 'Señor de los Vampiros (Drenaje de sangre total al 100% que resucita miembros caídos sin sufrir contragolpe)',
+      branchB: 'Erudito Vampiro (Explosión cadavérica mágica y robo de maná)',
       branchADetails: {
-        unitName: 'Dragón Fantasmal',
-        nameEn: 'Ghost Dragon',
-        role: 'Coloso Aéreo Decadente',
-        keyAbilities: ['Aliento Envejecedor (-50% Vida máxima al objetivo)', 'Aura de Tristeza (-1 Moral enemiga)'],
-        statsBonus: '+10 Ataque, +8 Defensa, +90 Vida'
+        unitName: 'Señor de los Vampiros',
+        nameEn: 'Vampire Lord',
+        role: 'Coloso Supremo Autoregenerativo',
+        keyAbilities: ['Drenaje de Sangre 100% (Resurrección de pila)', 'Sin Contragolpe Enemigo', 'Vuelo'],
+        statsBonus: '+4 Ataque, +4 Defensa, +70 Vida, +1 Velocidad, +2 Iniciativa'
       },
       branchBDetails: {
-        unitName: 'Coloso de Sombras',
-        nameEn: 'Shadow Colossus',
-        role: 'Titán Óseo de la Falla',
-        keyAbilities: ['Cuerpo de Hueso Fortificado (-20% daño recibido)', 'Golpe Demoledor'],
-        statsBonus: '+12 Ataque, +4 Defensa, +110 Vida'
+        unitName: 'Erudito Vampiro',
+        nameEn: 'Vampire Scholar',
+        role: 'Coloso Táctico y Lanzahechizos',
+        keyAbilities: ['Explosión Cadavérica', 'Drenaje Arcano', 'Sin Contragolpe'],
+        statsBonus: '+6 Ataque, +2 Defensa, +60 Vida, +3 Iniciativa'
       }
     },
     effects: [
-      'Recluta los colosos no-muertos de Tier 7 de la Necrópolis.',
+      'Recluta los colosos supremos de Tier 7 de la Necrópolis de Olden Era.',
       'Producción base: 1 unidad por semana (+1 con Fortificaciones III).'
     ],
-    strategicTip: 'El efecto de envejecimiento puede partir a la mitad las pilas de Tier 7 enemigas, decantando la balanza en el primer asalto.',
-    timingRecommendation: 'Final de Semana 1 o inicio de Semana 2.',
+    strategicTip: 'Su drenaje de vida y ausencia de contragolpe rival los vuelve virtualmente inmortales contra tropas vivas.',
+    timingRecommendation: 'Semana 2.',
   },
 
   // =========================================================================
