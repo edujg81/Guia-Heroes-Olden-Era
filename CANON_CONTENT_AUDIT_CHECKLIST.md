@@ -89,7 +89,7 @@ El estado de cada tarea se gestiona mediante cajas de verificación:
 - [x] **9 Caballeros de la Muerte (Might)**:
   - [x] Baluarte (El Bastión Inquebrantable) - Bono masivo de resistencia y defensa frontal.
   - [x] Rey de reyes (El Conquistador de los Condenados) - Golpe Heroico necrótico y merma de moral.
-  - [x] Onkos (El Heraldo de la Pestilencia) - 3 pilas de Zombis y reducción de daño frontal.
+  - [x] Onkos (El Director del Teatro Macabro) - Especialista en Esqueletos (crecimiento, velocidad, iniciativa y escalado por nivel).
   - [x] Tarius (El Señor del Heraldo del Destino) - Nigromancia Avanzada inicial.
   - [x] Marl (El Tejedur de la Telaraña Funesta) - Tácticas y ataduras de telaraña debilitantes.
   - [x] Laura (La Bruja de la Noche Guerrera) - Magia de batalla marcial oscura.
@@ -98,9 +98,9 @@ El estado de cada tarea se gestiona mediante cajas de verificación:
   - [x] Zam (El Alquimista Solitario) - Mercurio diario (+1) y +25% recolección en mapa.
 - [x] **9 Nigromantes (Magic)**:
   - [x] Artorius Veritas (El Cronista de la Noche Mística) - Hechicería y maná inagotable.
-  - [x] Funerella (El Prodigio del Saber Fúnebre) - Sabiduría y Percepción con subida rápida de nivel.
+  - [x] Funerella (La Dama de la Reanimación Eterna) - Nigromancia Avanzada inicial y escalado de cosecha cadavérica.
   - [x] Lord Rufus (El Administrador del Sepulcro) - Economía de oro y templos funerarios.
-  - [x] Oona Tejesombras (La Matriarca de las Sombras Aracne) - Tejesombras iniciales y Resistencia.
+  - [x] Oona Tejesombras (La Dama de la Nochesombra) - Maestría de Nochesombra (+1 nivel por década, doble lanzamiento y bloqueo al rival).
   - [x] Maestro Klastor (El Embalsamador Mayor) - Saqueatumbas iniciales y cosecha cadavérica.
   - [x] Milossa la Dorada (La Dama del Éter Funesto) - Magia de Nochesombra y maldición debilitadora.
   - [x] Adahn (El Conjurador de Espectros) - Espectros iniciales, Taumaturgia y drenaje de maná.
@@ -180,6 +180,33 @@ El estado de cada tarea se gestiona mediante cajas de verificación:
   - [x] Dhüvri (La Suma Tejedora de la Comunión) - Comunión Abisal Avanzada (+25% estadísticas a invocaciones).
 - [x] **Subclases Cisma**: Imparable (Inmunidad total a CC + Arremetida +2 mov), Sin límites (+35% mov mapa & teletransporte táctico), Insondable (Brechas de vacío letales), Insensible (-50% daño mágico & reflejo de maldiciones).
 
+### 2.2. Directrices Canónicas de Auditoría Permanente para Héroes y Habilidades
+
+Para preservar la pureza canónica del roster en cualquier iteración, se establecen los siguientes mandatos de auditoría continua:
+
+1. **Paridad Canónica Estricta de 18 Comandantes por Facción**:
+   - Cada una de las 6 facciones de Jadame debe contar con exactamente **18 héroes únicos** (9 de la clase de Might y 9 de la clase de Magic), totalizando 108 héroes en la base de datos global.
+   - **Templo**: 9 Caballeros (Might: *Viejo Lord Mandall, Kestrel, Keandra, John Johnson, Leon Dedos Pegajosos, Ister, Aeos la Exaltada, Lord Edgar, Avis el Hereje*) y 9 Clérigos (Magic: *Julius, Zenith, Elias el Alegre, Pip, Clarissa, Anastasia la Dócil, Vesper, Lia la Desatada, Nadir*).
+   - **Necrópolis**: 9 Caballeros de la Muerte (Might: *Baluarte, Rey de reyes, Onkos, Tarius, Marl, Laura, Kel'Ghul, Natalida, Zam*) y 9 Nigromantes (Magic: *Artorius Veritas, Funerella, Lord Rufus, Oona Tejesombras, Maestro Klastor, Milossa la Dorada, Adahn, Ethric, Mag*).
+   - **Mazmorra**: 9 Señores Supremos (Might: *Devir hijo de Devir, Gleard el Gris, Tellaris el Traicionado, Hermana Deira, Morwenna, Vane, Kaelis, Sorsha de las Cavernas, Balthazar*) y 9 Brujos (Magic: *Zakron el Grande, Enatee, Typhona Madre de hidras, Motley el Bufón, Xyron, Malakai, Zanna la Vidente, Alyssa, Vokial el Oculto*).
+   - **Foresta / Arboleda**: 9 Guardianes (Might: *Eith, Gorel Punta de Lanza, Anciano Tss'kish, Colajengibre, Caelan, Thorne, Bran, Sylva, Kael*) y 9 Druidas (Magic: *Vatawna, Glacia, Aeliniel, Moira, Faelar, Nerida, Orion, Tara, Zephyr*).
+   - **Colmena / Enjambre**: 9 Ejecutores (Might: *Abigor, Curson, Zoran, Niev, Nor, Goldentongue, Lo, Pauper, Zixx*) y 9 Heraldos (Magic: *Khariseth, Mila, Groo, Bathym, Oriax, Fleu, Leira, Tavi, Xirr*).
+   - **Cisma**: 9 Campeones de la Falla (Might: *Cuerno Negro, Nihil, Mara Mat'ha, Krell, Vael, Xaron, Gorg, Tharn, Mor*) y 9 Enviados del Vacío (Magic: *La Mirada Colectiva, Tölketh, Ulkuth, Ra'Davok, Hermana Keiri, Dhüvri, Elyon, Sael, Kaelen*).
+
+2. **Prohibición Absoluta de Personajes Clásicos Ajenos (Anti-Alucinación)**:
+   - Queda estrictamente vetada la importación de personajes clásicos de Erathia, Enroth o Ashan (*Sandro, Gelu, Crag Hack, Solmyr, Christian, Mephala, Isra, Deemer, Gunnar, Catherine, Roland, Sir Mullich*, etc.), salvo confirmación explícita oficial en *Olden Era*.
+
+3. **Autenticidad de los Ejércitos Iniciales**:
+   - El ejército inicial de cada héroe debe estar compuesto **exclusivamente por unidades de su facción de origen** y acordes a su especialidad.
+   - Prohibido incluir unidades no pertenecientes a la facción (ej: tropas de Templo en Necrópolis) o unidades inexistentes/anacrónicas en la facción de *Olden Era* (ej: Zombis o Momias en Necrópolis; Faunos en Templo).
+
+4. **Escalado y Modelado de Especialidades**:
+   - Cada héroe debe poseer una especialidad única con descripción temática, fórmula de escalado numérico por nivel y tipificación de rol competitivo (`S+`, `S`, `A`, `B`).
+
+5. **Estructura Tridimensional de Habilidades y 4 Subclases de Élite**:
+   - Cada árbol de habilidades secundarias debe respetar los rangos canónicos: Básica, Avanzada y Experta, con 6 subhabilidades únicas (3 en Avanzada y 3 en Experta).
+   - Cada facción cuenta con exactamente 4 subclases de prestigio (2 para Might y 2 para Magic) cuyo prerrequisito inmutable es alcanzar 5 habilidades secundarias en rango Experta.
+
 ---
 
 ## 3. MÓDULO 2: AUDITORÍA DE UNIDADES Y MATRIZ DE CRIATURAS
@@ -202,54 +229,77 @@ Cada criatura debe contar con los 12 parámetros cuantitativos contrastados:
 
 ### 3.2. Lista de Comprobación por Facción
 
-#### A. Mazmorra (7 Tiers × 2 Versiones)
-- [x] Tier 1: Criatura Base / Criatura Mejorada (Stats, habilidades, costes).
-- [x] Tier 2: Criatura Base / Criatura Mejorada (Stats, habilidades, costes).
-- [x] Tier 3: Minotauros / Minotauros Mejorados (Mecánica de moral y represalia).
-- [x] Tier 4: Criatura Base / Criatura Mejorada (Stats, habilidades, costes).
-- [x] Tier 5: Hidras de Jadame (Ataque multi-hexagonal sin represalia).
-- [x] Tier 6: Criatura Base / Criatura Mejorada (Stats, habilidades, costes).
-- [x] Tier 7: Dragones Negros / Rojos (Inmunidad mágica canónica de Olden Era).
+#### A. Mazmorra (7 Tiers × Ramas Duales de Mejora)
+- [x] Tier 1: Troglodita / Troglodita Infernal (Rama A) / Troglodita Tóxico (Rama B) - Cubil.
+- [x] Tier 2: Infiltrador / Infiltrador Astuto (Rama A) / Infiltrador Sombrío (Rama B) - Refugio.
+- [x] Tier 3: Bailarina de Ónice / Bailarina de Jaspe (Rama A) / Bailarina Áurea (Rama B) - Anfiteatro.
+- [x] Tier 4: Minotauro / Señor Minotauro (Rama A) / Vanguardia Minotauro (Rama B) - Laberinto (Moral Implacable).
+- [x] Tier 5: Medusa / Bruja Medusa (Rama A) / Emperatriz Medusa (Rama B) - Voces Silenciadas (Mirada Petrificante y proyectiles).
+- [x] Tier 6: Hidra / Hidra Abisal (Rama A - Vampirismo) / Hidra Ctónica (Rama B - Ácido de Armadura) - Hogar Ctónico (Ataque multi-hexagonal 360º sin represalia).
+- [x] Tier 7: Dragón de Cueva / Dragón Negro (Rama A - Inmunidad Mágica Canónica Nivel 1-5) / Dragón de Ceniza (Rama B - Nube Cenicienta) - Palacio de las Cavernas.
 
-#### B. Templo (7 Tiers × 2 Versiones)
-- [x] Tier 1: Milicia / Lanceros (Mecánicas defensivas y coste).
-- [x] Tier 2: Ballesteros / Arqueros Celestiales (Disparo a distancia y alcance).
-- [x] Tier 3: Clérigos / Sanadores (Habilidades de bendición y curación en combate).
-- [x] Tier 4: Espadachines / Cruzados (Doble golpe y bonificaciones).
-- [x] Tier 5: Caballeros / Paladines (Bonificación por carga de distancia recorrida).
-- [x] Tier 6: Criatura Base / Criatura Mejorada (Stats, habilidades, costes).
-- [x] Tier 7: Ángeles / Arcángeles (Resurrección, iniciativa y daño máximo constante).
+#### B. Templo (7 Tiers × Ramas Duales de Mejora)
+- [x] Tier 1: Ballestero / Tirador Certero (Rama A) / Halconero (Rama B) - Campo de Tiro.
+- [x] Tier 2: Espadachín / Égida del Sol (Rama A) / Capitán de la Guardia (Rama B) - Barracones (Muro de Escudos y contragolpes).
+- [x] Tier 3: Grifo / Grifo Guardián (Rama A) / Grifo de Templo (Rama B) - Torre de los Grifos (Contragolpe ilimitado).
+- [x] Tier 4: Tejedora de Luz / Heraldo del Sol (Rama A) / Hierofante (Rama B) - Capilla Radiante (Bendiciones y ceguera luminosa).
+- [x] Tier 5: Caballería / Caballería de Lanza Solar (Rama A) / Caballería Noble (Rama B) - Cuadras (Bonificación por carga proporcional a distancia).
+- [x] Tier 6: Inquisidor / Excomulgador (Rama A) / Madre Superiora (Rama B) - Tribunal Sagrado (Proyectiles sagrados y purga de magia oscura).
+- [x] Tier 7: Ángel / Arcángel (Rama A - Resurrección y Daño Máximo) / Apoteosis (Rama B - Furia Celestial) - Portal Celestial.
 
-#### C. Necrópolis (7 Tiers × 2 Versiones)
-- [x] Tier 1: Esqueletos / Guerreros Esqueleto (Resistencia a perforación/flechas).
-- [x] Tier 2: Zombis / Putrefactos (Transmisión de plaga y ralentización).
-- [x] Tier 3: Espectros / Apariciones (Drenaje de maná pasivo en combate).
-- [x] Tier 4: Vampiros / Señores Vampiro (Regeneración por drenaje de sangre sin represalia).
-- [x] Tier 5: Lichs / Maestros Lich (Nube de muerte con daño de área a no-muertos).
-- [x] Tier 6: Caballeros Negros / Señores del Terror (Golpe mortal y maldición).
-- [x] Tier 7: Dragones de Hueso / Dragones Fantasma (Reducción de moral enemiga y envejecimiento).
+#### C. Necrópolis (7 Tiers × Ramas Duales de Mejora)
+- [x] Tier 1: Esqueleto / Guerrero Esqueleto (Rama A) / Arquero Esqueleto (Rama B) - Criptas y Tumbas (Resistencia a proyectiles y levantamiento por Nigromancia).
+- [x] Tier 2: Aparición / Espectro (Rama A) / Fantasma (Rama B) - Pabellón Silencioso (Incorpóreo y drenaje pasivo de maná).
+- [x] Tier 3: Sabueso No-Muerto / Bargeist (Rama A) / Sabueso Acorazado (Rama B) - Perrera de Sabuesos (Alta velocidad de flanqueo e iniciativa temprana).
+- [x] Tier 4: Saqueatumbas / Mercader de la Muerte (Rama A) / Maestro de Perreras (Rama B) - Cámara de los Saqueatumbas (Recolección cadavérica y soporte de primera línea).
+- [x] Tier 5: Liche / Liche Pestilente (Rama A - Nube de Muerte en área) / Liche Sanguíneo (Rama B) - Mansión Intemporal (Fuego amigo inmune sobre no-muertos).
+- [x] Tier 6: Caballero del Terror / Avatar de la Guerra (Rama A - Golpe Mortal y Maldición) / Segador Hueco (Rama B) - Tumba de Guerreros.
+- [x] Tier 7: Vampiro / Señor de los Vampiros (Rama A - Drenaje de Vida 100% sin represalia) / Vampiro Erudito (Rama B) - Château de los Festines (Coloso supremo de Tier 7 de Olden Era, sustituyendo los anacronismos de Dragones de Hueso y Zombis de entregas previas).
 
-#### D. Foresta / Arboleda (7 Tiers × 2 Versiones)
-- [x] **Restricción de Lore**: Prohibida la inclusión de Ents / Dendroides y Unicornios clásicos.
-- [x] Tier 1: Faunos / Sátiros (Música de agilidad e iniciativa).
-- [x] Tier 2: Hoplitas del Bosque (Muro de escudos y apoyo a tiradores).
-- [x] Tier 3: Ninfas Iriyads (Movimiento volador sin represalia).
-- [x] Tier 4: Aqualotls anfibios (Movimiento en agua/ciénaga y regeneración).
-- [x] Tier 5: Herbomantes / Druidas del Roble (Lanzamiento de enredos y magia natural).
-- [x] Tier 6: Qilins Celestiales (Salto místico y aura de fortuna).
-- [x] Tier 7: Fénix de Jadame (Renacimiento de cenizas e iniciativa extrema).
+#### D. Foresta / Arboleda (7 Tiers × Ramas Duales de Mejora)
+- [x] **Restricción de Lore Canónico**: Prohibida la inclusión de Ents / Dendroides y Unicornios clásicos.
+- [x] Tier 1: Faunos / Sátiros (Rama A) / Arqueros Faunos (Rama B) - Cabañas de Faunos (Paso Silvano y agilidad).
+- [x] Tier 2: Hoplitas del Bosque / Centuriones Silvanos (Rama A) / Falangistas (Rama B) - Pabellón de Hoplitas (Muro de lanzas protector para tiradores).
+- [x] Tier 3: Ninfas Iriyads / Iriyads Celestiales (Rama A) / Náyades de Jade (Rama B) - Arboleda de Ninfas (Movimiento volador sin contragolpe).
+- [x] Tier 4: Aqualotls anfibios / Aqualotls Polares (Rama A - Congelación) / Aqualotls Abisales (Rama B - Mordisco Corrosivo) - Estanque Floreciente.
+- [x] Tier 5: Herbomantes / Druidas del Roble (Rama A) / Sabios del Bosque (Rama B) - Círculo de Herbomantes (Lanzamiento de raíces y magia natural).
+- [x] Tier 6: Qilins Celestiales / Grandes Qilins (Rama A) / Qilins de la Suerte (Rama B) - Cúspide de Jade (Salto místico y aura de fortuna).
+- [x] Tier 7: Fénix de Jadame / Fénix Radiantes (Rama A - Renacimiento de Cenizas e Iniciativa Extrema) / Aves de Fuego (Rama B) - Nido Solar.
 
-#### E. Colmena / Enjambre (7 Tiers × 2 Versiones)
-- [x] Tier 1 a Tier 7: Horda de Beelzebub e insectoides demoníacos de Jadame.
-- [x] Mecánicas de enjambre (Swarm): Bonificaciones por acumulación de unidades adyacentes.
-- [x] Inoculación de parásitos y generación de larvas en cadáveres durante el combate.
-- [x] Costes en recursos de cada morada contrastados con la economía del juego.
+#### E. Colmena / Enjambre (7 Tiers × Ramas Duales de Mejora)
+- [x] Tier 1: Parásitos / Larvas Asesinas (Rama A) / Parásitos Inoculadores (Rama B) - Vivienda Descuidada.
+- [x] Tier 2: Langostas / Langostas Voraces (Rama A) / Langostas Carroñeras (Rama B) - Guarida de Carroña.
+- [x] Tier 3: Avispones / Avispones Cazadores (Rama A) / Avispones Zumbadores (Rama B) - Nido de Papel (Hostigamiento veloz).
+- [x] Tier 4: Escorpiones / Escorpiones de Azufre (Rama A) / Escorpiones Quitináceos (Rama B) - Zigurat Quitináceo (Aguijonazo venenoso).
+- [x] Tier 5: Saqueadores / Reavers / Desgarradores (Rama A) / Saqueadores Élite (Rama B) - Cúspide (Corte lacerante en carrera).
+- [x] Tier 6: Waurms / Waurms de Magma (Rama A) / Gusanos de Ceniza (Rama B) - Madrigueras de Almas Ardientes (Túnel subterráneo y erupción ígnea).
+- [x] Tier 7: Reinas de la Colmena / Beelzebub / Rey Libélula - Torre del Amor (Monarcas absolutos del enjambre con multiplicación de larvas).
+- [x] Mecánicas de enjambre (Swarm): Bonificaciones por concentración y proliferación de crías.
 
-#### F. Cisma (7 Tiers × 2 Versiones)
-- [x] **Restricción de Lore**: Prohibidos enanos oscuros y constructos mecánicos de vapor.
-- [x] Roster canónico: Moradores de fallas de Vori, Ra'Shoths, Shoths, Jinetes Aga'Shoth, Concubos y Árbitros Abisales.
-- [x] Habilidades de corrupción de maná, teletransporte por fallas dimensionales y escudos de hielo negro.
-- [x] Estadísticas y costes verificados con la versión oficial.
+#### F. Cisma (7 Tiers × Ramas Duales de Mejora)
+- [x] **Restricción de Lore Canónico**: Prohibidos enanos oscuros, autómatas y constructos mecánicos de vapor.
+- [x] Tier 1: Cultores / Siervos de la Grieta (Rama A) / Acólitos del Frío (Rama B) - Cripta de los Herejes.
+- [x] Tier 2: Ra'Shoths / Ra'Shoths Glaciales (Rama A) / Ra'Shoths Profundos (Rama B) - Falla Helada (Aura de escarcha de Vori).
+- [x] Tier 3: Shoths / Shoths del Vacío (Rama A) / Shoths Etéreos (Rama B) - Brecha Umbría (Distorsión de proyectiles).
+- [x] Tier 4: Jinetes Aga'Shoth / Cazadores de la Fisura (Rama A) / Jinetes del Hielo Negro (Rama B) - Corceles de Falla (Carga con teletransporte de fase).
+- [x] Tier 5: Concubos / Súcubos del Vacío (Rama A) / Seductores de Sombras (Rama B) - Altar de la Comunión (Seducción, drenaje vital y confusión).
+- [x] Tier 6: Árbitros Abisales / Jueces de la Grieta (Rama A) / Inquisidores del Vacío (Rama B) - Cámara de los Ritos (Veredicto de anulación mágica).
+- [x] Tier 7: Enviados Abisales / Colosos de Vori (Rama A - Deformación Espacial) / Titanes de la Grieta (Rama B) - Vórtice del Abismo.
+
+### 3.3. Directrices Canónicas de Auditoría Permanente para Unidades y Criaturas
+
+Para garantizar la integridad canónica del compendio de unidades en cualquier desarrollo futuro, se establecen los siguientes mandatos obligatorios:
+
+1. **Estructura Piramidal Canónica de 7 Tiers con Ramas Duales**:
+   - Cada facción dispone exactamente de 7 escalones (Tier 1 a Tier 7). Cada tier cuenta con una unidad Base y dos opciones de mejora alternativas (Rama A y Rama B), sumando 21 perfiles de combate por facción (126 perfiles en el universo de Jadame).
+2. **Correspondencia Estricta Morada-Criatura (1:1)**:
+   - La morada (`dwelling` y `dwellingName`) de cada criatura debe coincidir con precisión milimétrica con la estructura registrada en `/src/data/structures/*Structures.ts`.
+3. **Erradicación Total de Anacronismos y Rosters de Terceros**:
+   - Ninguna facción puede contener criaturas heredadas de entregas previas ajenas al diseño canónico de *Olden Era* (ejemplos prohibidos: Zombis o Dragones de Hueso en Necrópolis; Treants/Ents o Unicornios en Foresta; Enanos oscuros o autómatas en Cisma).
+4. **Los 12 Parámetros Cuantitativos Obligatorios**:
+   - Cada ficha debe poblar de manera explícita y coherente: `hp`, `attack`, `defense`, `damage` (rango mínimo-máximo), `speed`, `initiative`, `weeklyGrowth`, `cost` (oro y recursos raros: gemas, cristales, mercurio), `combatStance`, `abilities`, `strengths`, `tacticalUsage`, `idealMatchup` y `synergyLaws`.
+5. **Consistencia de Sinergias y Matchups Cruzados**:
+   - En las descripciones de `idealMatchup`, tácticas y combos, todas las criaturas citadas deben existir dentro del roster canónico de *Olden Era*.
 
 ---
 
@@ -497,9 +547,14 @@ Toda auditoría o adición en el sistema de leyes cívicas debe contrastar oblig
 | *INC-023* | `CANON_CONTENT_AUDIT_CHECKLIST.md` | Ausencia de sección formal con directrices de auditoría permanente para la sección de Grimorio & Hechizos | Incorporada la subsección canónica `4.5. Directrices Canónicas de Auditoría Permanente para Grimorio y Hechizos` con las reglas de 5 escuelas, progresión alquímica, Puntos de Observación para neutrales, fórmulas de escalado `[Base + Multiplicador × SP]` y pureza de sinergias | `CORREGIDO` |
 | *INC-024* | `/src/data/cismaLawsData.ts` | Umbrales de activación de Tiers desalineados en leyes de Cisma: Tier 3 con 10 Pts (en lugar de 15), Tier 4 con 15 Pts (en lugar de 30) y Tier 5 con 20 Pts (en lugar de 50) | Corregidos y normalizados los umbrales de activación al estándar canónico oficial de 5 tiers de *Olden Era*: Tier 1 (0 Pts), Tier 2 (5 Pts), Tier 3 (15 Pts), Tier 4 (30 Pts) y Tier 5 (50 Pts) | `CORREGIDO` |
 | *INC-025* | `/src/data/arboledaLawsData.ts` | Héroes no canónicos ("Aura", "Silvanus", "Pan", "Lyra") de inspiración mitológica clásica en el atributo `recommendedForHeroes` de leyes de Arboleda | Reemplazados por los héroes oficiales del roster de Jadame de *Olden Era*: Eith y Vatawna (Simbiosis Forestal), y Colajengibre y Gorel Punta de Lanza (Armonía Faúnica) | `CORREGIDO` |
-| *INC-026* | `/src/data/necropolisLawsData.ts` & `/src/data/factionLawsData.ts` | Discrepancia en preset de Necrópolis al tratar a Vampiros como "Tier 7" ("Palacio de los Vampiros") y presencia de "Capitolio" en fuentes de puntos de ley municipales | Ajustado preset a "Rush a Tier 7: Dragones de Hueso" con morada Château de los Festines, tag de Vampiros a Tier 5, y normalizada la fuente municipal al modelo canónico de 3 niveles (Town Hall, City Hall II, Metropolis III) | `CORREGIDO` |
+| *INC-026* | `/src/data/necropolisLawsData.ts` & `/src/data/factionLawsData.ts` | Discrepancia en nomenclatura de morada de Vampiros ("Palacio de los Vampiros") y presencia de "Capitolio" en fuentes de puntos de ley municipales | Corregida morada a Château de los Festines para los Vampiros de Tier 7, y normalizada la fuente municipal al modelo canónico de 3 niveles (Town Hall, City Hall II, Metropolis III) | `CORREGIDO` |
 | *INC-027* | `/src/components/FactionLawsTree.tsx` | La función `checkLawAvailability` no verificaba el umbral de puntos mínimos de tier (`tierMinPoints`), permitiendo seleccionar leyes de tiers superiores sin inversión previa | Incorporada la verificación estricta de `tierMinPoints`: bloquea la activación de leyes de Tiers 2 (5 pts), 3 (15 pts), 4 (30 pts) y 5 (50 pts) si el gasto acumulado en el árbol es inferior al umbral | `CORREGIDO` |
 | *INC-028* | `CANON_CONTENT_AUDIT_CHECKLIST.md` | Ausencia de sección formal con directrices de auditoría permanente para Leyes de Facción y Políticas de Ciudad | Creada la subsección canónica `5.3. Directrices Canónicas de Auditoría Permanente para Leyes de Facción y Políticas de Ciudad` con las 6 reglas obligatorias de tiers, sellos cívicos, integridad de rosters y validación mecánica en UI | `CORREGIDO` |
+| *INC-029* | `/src/data/necropolisData.ts`, `/src/data/subclassesData.ts`, `/src/data/templeData.ts`, `/src/data/dungeonData.ts`, `/src/data/arboledaData.ts`, `/src/data/factionSpellData.ts` | Remanentes de criaturas anacrónicas de Heroes III en Necrópolis ("Zombis", "Momias", "Dragones de Hueso" y "Dragones Esmeralda") en tropas iniciales, tácticas y matchups | Depurados todos los ficheros: ratificado el roster canónico de Necrópolis en *Olden Era* con Vampiros en Tier 7 (Château de los Festines), Sabuesos No-Muertos en Tier 3, y purgadas todas las referencias tácticas y sinergias cruzadas | `CORREGIDO` |
+| *INC-030* | `/src/data/necropolisData.ts` | Especialidades y ejércitos iniciales desfasados en héroes de Necrópolis: Onkos con ejército de Zombis, Funerella desalineada, y Oona Tejesombras con asignaciones genéricas | Reconfigurados los 18 héroes de Necrópolis al canon estricto: Onkos como Director del Teatro Macabro especializado en Esqueletos, Funerella con Nigromancia Avanzada, Oona con Maestría de Nochesombra, y ejércitos iniciales compuestos solo por tropas canónicas (Esqueletos, Apariciones, Sabuesos No-Muertos) | `CORREGIDO` |
+| *INC-031* | `/src/data/necropolisLawsData.ts` | Presencia de la ley "Aura Aterradora del Dragón de Hueso" en Tier 4 de leyes de Necrópolis, desfasada con el roster oficial de *Olden Era* | Reemplazada por la ley canónica "Soberanía del Château de los Festines" (Tier 4, 30 Pts) que potencia a los Vampiros y Señores de los Vampiros (Tier 7) con +25% daño, 100% drenaje y -2 de Moral enemiga | `CORREGIDO` |
+| *INC-032* | `CANON_CONTENT_AUDIT_CHECKLIST.md` | Sección 3.2 de unidades desactualizada con listas genéricas y anacronismos de entregas previas | Sincronizados exhaustivamente los 7 tiers con sus moradas canónicas de Jadame y ramas duales de mejora (A y B) para las 6 facciones (Mazmorra, Templo, Necrópolis, Foresta/Arboleda, Colmena/Enjambre y Cisma) | `CORREGIDO` |
+| *INC-033* | `CANON_CONTENT_AUDIT_CHECKLIST.md` | Ausencia de directrices de auditoría permanente para las secciones de "Héroes & Habilidades" y "Unidades & Criaturas" | Incorporadas formalmente la subsección `2.2. Directrices Canónicas de Auditoría Permanente para Héroes y Habilidades` y la subsección `3.3. Directrices Canónicas de Auditoría Permanente para Unidades y Criaturas` | `CORREGIDO` |
 
 ---
 

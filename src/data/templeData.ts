@@ -858,7 +858,7 @@ export const TEMPLE_UNITS: UnitInfo[] = [
         abilities: ['Destello Cegador (Ciega al objetivo atacado 1 turno)', 'Brillo Interior Mejorado (+4 Atq/Def)'],
         strengths: 'Aporta control de masas (ceguera) además de sus buffs.',
         tacticalUsage: 'Inutilizar a la unidad más peligrosa enemiga con Destello Cegador.',
-        idealMatchup: 'Hidras, Minotauros, Dragones de Hueso',
+        idealMatchup: 'Hidras, Minotauros, Vampiros de Tier 7',
         synergyLaws: ['Cegado Sagrado', 'Leyes de Purificación'],
       },
       branchB: {

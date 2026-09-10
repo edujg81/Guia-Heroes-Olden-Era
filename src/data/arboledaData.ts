@@ -344,7 +344,7 @@ export const ARBOLEDA_UNITS: UnitInfo[] = [
         abilities: ['Paso Silvano', 'Resistencia a fatiga'],
         strengths: 'Excelente para limpiar neutrales en día 1-3.',
         tacticalUsage: 'Muévelos rápido para rodear o rematar pilas enemigas.',
-        idealMatchup: 'Infantería lenta neutral (Zombis, Enanos, Trogloditas).',
+        idealMatchup: 'Infantería lenta neutral (Trogloditas, Esqueletos, Guardias).',
         synergyLaws: ['Ley Silvana: Brisa Primaveral'],
       },
       branchA: {
@@ -589,7 +589,7 @@ export const ARBOLEDA_UNITS: UnitInfo[] = [
         abilities: ['Mordisco Corrosivo', 'Velocidad 8', 'Sin penalización por fango'],
         strengths: 'Daño demoledor contra criaturas pesadas.',
         tacticalUsage: 'Ataca al coloso o tanque rival para romper su armadura.',
-        idealMatchup: 'Zombis Putrefactos, Colosos del Vacío, Escudos Pesados.',
+        idealMatchup: 'Caballeros del Terror, Colosos del Vacío, Escudos Pesados.',
         synergyLaws: ['Ley Silvana: Fosa Abisal'],
       },
     },

@@ -320,7 +320,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     recommendedHeroes: ['Rey de reyes', 'Baluarte', 'Zam'],
     tacticalTier: 'Tier S+',
     strategicAnalysis: 'Inhabilita la sincronización del ejército enemigo mediante pérdidas constantes de turno.',
-    synergyNotes: 'Potencia los ataques de los Segadores de Almas y Dragones de Hueso.',
+    synergyNotes: 'Potencia los ataques de los Segadores de Almas y Vampiros del Château.',
   },
   {
     id: 'subclass-soul-weaver',

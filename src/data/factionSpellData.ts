@@ -679,7 +679,7 @@ export const FACTION_SPELL_PRIORITIES: Record<CanonicalFactionKey, Record<string
     },
     'spell-haste': {
       priority: 'Media (P3)',
-      synergyTip: 'Útil para dar movilidad a Zombis y Momias, aunque Necrópolis prioriza debuffs.',
+      synergyTip: 'Útil para dar movilidad a Esqueletos y Caballeros del Terror, aunque Necrópolis prioriza debuffs de Nochesombra.',
     },
   },
   Mazmorra: {

@@ -3,7 +3,7 @@ import { FactionLaw, FactionLawPreset } from '../types';
 export const NECROPOLIS_LAW_PRESETS: FactionLawPreset[] = [
   {
     id: 'preset-necropolis-rush-vampires',
-    name: 'Rush a Tier 7: Dragones de Hueso & Cosecha Nigromántica',
+    name: 'Rush a Tier 7: Vampiros del Château & Cosecha Nigromántica',
     archetype: 'Competitivo / Meta Rush',
     description: 'Enfoque diseñado para maximizar la recolección de Mineral y Mercurio y erigir el Château de los Festines en el Día 14 exacto.',
     totalCost: 50,
@@ -25,7 +25,7 @@ export const NECROPOLIS_LAW_PRESETS: FactionLawPreset[] = [
       { stepNumber: 1, lawId: 'law-necropolis-t1-bone-harvest', level: 2, dayWindow: 'Semana 1', notes: 'Cosecha masiva de esqueletos en fase temprana.' },
       { stepNumber: 2, lawId: 'law-necropolis-t2-death-cloud-amplification', level: 2, dayWindow: 'Semana 2', notes: 'Aura de reducción de estadísticas y daño en combate.' },
       { stepNumber: 3, lawId: 'law-necropolis-t3-wraith-spectral-shroud', level: 1, dayWindow: 'Semana 3', notes: 'Incorporeidad y drenaje de maná de las Apariciones.' },
-      { stepNumber: 4, lawId: 'law-necropolis-t4-bone-dragon-dread', level: 1, dayWindow: 'Semana 4', notes: 'Aura de Envejecimiento y Terror de los Dragones de Hueso.' },
+      { stepNumber: 4, lawId: 'law-necropolis-t4-vampiric-lordship', level: 1, dayWindow: 'Semana 4', notes: 'Soberanía del Château de los Festines y terror vampírico.' },
     ],
   },
 ];
@@ -210,7 +210,7 @@ export const NECROPOLIS_FACTION_LAWS: FactionLaw[] = [
     ],
     prerequisiteLaws: ['law-necropolis-t2-vampiric-bloodline'],
     incompatibleLaws: [],
-    tags: ['Vampiros', 'Drenaje', 'Tier 5'],
+    tags: ['Vampiros', 'Drenaje', 'Tier 7'],
   },
   {
     id: 'law-necropolis-t3-wraith-spectral-shroud',
@@ -243,12 +243,12 @@ export const NECROPOLIS_FACTION_LAWS: FactionLaw[] = [
   // TIER 4 (30 PUNTOS REQUERIDOS)
   // =======================================================================
   {
-    id: 'law-necropolis-t4-bone-dragon-dread',
+    id: 'law-necropolis-t4-vampiric-lordship',
     priorityOrder: 7,
     tier: 4,
     tierMinPoints: 30,
-    name: 'Aura Aterradora del Dragón de Hueso',
-    nameEn: 'Bone Dragon Dread Aura',
+    name: 'Soberanía del Château de los Festines',
+    nameEn: 'Château of Feasts Sovereignty',
     category: 'Militar',
     branch: 'Militar',
     branchType: 'Militar',
@@ -259,14 +259,14 @@ export const NECROPOLIS_FACTION_LAWS: FactionLaw[] = [
         level: 1,
         costLaws: 5,
         cumulativeCost: 5,
-        effect: 'El aliento de los Dragones de Hueso provoca Envejecimiento (reduce PS máximos del objetivo en un 50%) y reduce la Moral de todo el ejército enemigo en -2 permanente.',
-        tacticalImpact: 'Desintegra la cohesión del rival haciendo que sus tropas congelen turnos por pánico.',
+        effect: 'Los Vampiros y Señores de los Vampiros (Tier 7) aumentan su daño en un 25%, regeneran un 100% de la vida máxima de la pila al drenar sangre y reducen la Moral de todo el ejército enemigo en -2 permanente por presencia aterradora.',
+        tacticalImpact: 'Convierte a los Vampiros en colosos virtualmente inmortales que anulan turnos del rival por desmoralización.',
         recommendedUnlockTime: 'Semana 4-5',
       },
     ],
     prerequisiteLaws: ['law-necropolis-t3-vampire-supremacy'],
     incompatibleLaws: [],
-    tags: ['Dragón de Hueso', 'Moral', 'Envejecimiento'],
+    tags: ['Vampiros', 'Moral', 'Tier 7', 'Drenaje'],
   },
   {
     id: 'law-necropolis-t4-eternal-crypts',
