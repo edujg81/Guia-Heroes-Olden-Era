@@ -90,7 +90,7 @@ export const TEMPLE_STRUCTURES: TownStructure[] = [
     cost: { gold: 5000, wood: 10, ore: 10 },
     prerequisites: ['Banco (Bank)', 'Mercado (Marketplace)', 'Fortificaciones (Fortifications)'],
     effects: [
-      'Estructura económica suprema de Olden Era (equivalente canónico al Capitolio).',
+      'Estructura económica suprema de Olden Era (Tesorería / Bonificación Financiera de +2.000 Oro/día).',
       'Genera +2.000 de Oro diario adicional de forma permanente para el reino.',
       'Requiere haber consolidado el Banco, el Mercado y las Fortificaciones.'
     ],
@@ -313,79 +313,79 @@ export const TEMPLE_STRUCTURES: TownStructure[] = [
   // MORADAS DE CRIATURAS (TIER 1 A 7) CANÓNICAS DE OLDEN ERA
   // =========================================================================
   {
-    id: 'temple-garrison',
-    name: 'Guarnición (Garrison)',
-    nameEn: 'Garrison',
+    id: 'temple-crossbowman-range',
+    name: 'Campo de Tiro de Ballesteros (Crossbowman Range)',
+    nameEn: 'Crossbowman Range',
     category: 'Moradas de Criaturas',
     faction: 'Templo',
     tier: 1,
     dwellingTier: 1,
-    cost: { gold: 500, ore: 5 },
-    dwellingUpgradeCost: { gold: 1000, ore: 5 },
+    cost: { gold: 500, wood: 5 },
+    dwellingUpgradeCost: { gold: 1000, wood: 5 },
     prerequisites: ['Fortificaciones (Fortifications)'],
-    unitRecruitedBase: 'Guardia (Guard)',
-    unitRecruited: 'Guardia / Espadachín / Alabardero Real',
+    unitRecruitedBase: 'Ballestero (Crossbowman)',
+    unitRecruited: 'Ballestero / Tirador Certero / Halconero',
     unitUpgrades: {
-      branchA: 'Espadachín (Armadura pesada y formación de escudo con reducción de daño a distancia)',
-      branchB: 'Alabardero Real (Mayor alcance de ataque y bonificación de daño contra caballería)',
+      branchA: 'Tirador Certero (Mayor cadencia y perforación de armadura a distancia)',
+      branchB: 'Halconero (Hostigamiento con rapaz adiestrado y anulación de penalización por distancia)',
       branchADetails: {
-        unitName: 'Espadachín',
-        nameEn: 'Swordsman',
-        role: 'Línea de Escudo Defensiva',
-        keyAbilities: ['Muro de Escudos (-25% daño de proyectiles)', 'Guardia Férrea'],
-        statsBonus: '+3 Defensa, +4 Vida'
+        unitName: 'Tirador Certero',
+        nameEn: 'Marksman',
+        role: 'Tirador de Perforación',
+        keyAbilities: ['Disparo Doble', 'Perforación de Armadura'],
+        statsBonus: '+3 Ataque, +2 Iniciativa'
       },
       branchBDetails: {
-        unitName: 'Alabardero Real',
-        nameEn: 'Royal Halberdier',
-        role: 'Infantería Anticarro',
-        keyAbilities: ['Pica contra Carga (Doble daño frente a unidades grandes/rápidas)', 'Alcance de Lanza'],
-        statsBonus: '+3 Ataque, +1 Iniciativa'
+        unitName: 'Halconero',
+        nameEn: 'Falconer',
+        role: 'Tirador de Reconocimiento y Hostigamiento',
+        keyAbilities: ['Ataque de Halcón', 'Sin penalización por distancia'],
+        statsBonus: '+2 Ataque, +2 Defensa, +1 Velocidad'
       }
     },
     effects: [
-      'Recluta la infantería básica de Tier 1 del Templo.',
+      'Recluta los tiradores básicos de Tier 1 del Templo.',
       'Producción base: 14 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Infantería barata y muy resistente cuando se activa el muro de escudos.',
+    strategicTip: 'Núcleo fundamental de daño a distancia temprano para el creeping sin bajas en los Días 1 a 4.',
     timingRecommendation: 'Día 1-2.',
   },
   {
-    id: 'temple-mews',
-    name: 'Halconera (Mews)',
-    nameEn: 'Mews',
+    id: 'temple-infantry-barracks',
+    name: 'Barracones de Infantería (Infantry Barracks)',
+    nameEn: 'Infantry Barracks',
     category: 'Moradas de Criaturas',
     faction: 'Templo',
     tier: 2,
     dwellingTier: 2,
-    cost: { gold: 1000, wood: 5 },
-    dwellingUpgradeCost: { gold: 1000, wood: 5 },
-    prerequisites: ['Guarnición (Garrison)'],
-    unitRecruitedBase: 'Sabueso de Caza (War Hound)',
-    unitRecruited: 'Sabueso de Caza / Sabueso de Guerra / Vigilante Alado',
+    cost: { gold: 1000, ore: 5 },
+    dwellingUpgradeCost: { gold: 1000, ore: 5 },
+    prerequisites: ['Campo de Tiro de Ballesteros (Crossbowman Range)'],
+    unitRecruitedBase: 'Espadachín (Swordsman)',
+    unitRecruited: 'Espadachín / Égida del Sol / Capitán de la Guardia',
     unitUpgrades: {
-      branchA: 'Sabueso de Guerra (Carga rápida que desgarra armadura enemiga)',
-      branchB: 'Vigilante Alado (Acompañante rapaz con iniciativa ultra alta y visión ampliada)',
+      branchA: 'Égida del Sol (Muro de escudos bendito con reducción de daño a distancia)',
+      branchB: 'Capitán de la Guardia (Aura de disciplina que incrementa la moral e iniciativa de tropas adyacentes)',
       branchADetails: {
-        unitName: 'Sabueso de Guerra',
-        nameEn: 'War Hound',
-        role: 'Hostigador Rápido',
-        keyAbilities: ['Desgarre de Armadura', 'Carga Veloz (+2 casillas en primer turno)'],
-        statsBonus: '+3 Ataque, +2 Velocidad'
+        unitName: 'Égida del Sol',
+        nameEn: 'Sun Aegis',
+        role: 'Línea de Escudo Defensiva',
+        keyAbilities: ['Muro de Escudos (-30% daño de proyectiles)', 'Guardia Radiante'],
+        statsBonus: '+4 Defensa, +6 Vida'
       },
       branchBDetails: {
-        unitName: 'Vigilante Alado',
-        nameEn: 'Winged Watcher',
-        role: 'Explorador y Anulador de Iniciativa',
-        keyAbilities: ['Hostigamiento Aéreo', 'Ataque y Retirada'],
-        statsBonus: '+2 Defensa, +3 Iniciativa'
+        unitName: 'Capitán de la Guardia',
+        nameEn: 'Guard Captain',
+        role: 'Infantería Ofensiva de Mando',
+        keyAbilities: ['Aura de Disciplina (+1 Moral a adyacentes)', 'Contragolpe Firme'],
+        statsBonus: '+3 Ataque, +2 Iniciativa'
       }
     },
     effects: [
-      'Recluta las bestias y exploradores de Tier 2.',
+      'Recluta la infantería acorazada de Tier 2 del Templo.',
       'Producción base: 9 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Unidades veloces para trabar tiradores enemigos en el primer asalto.',
+    strategicTip: 'Infantería barata y resistente para proteger a los ballesteros y resistir cargas enemigas.',
     timingRecommendation: 'Día 2-3.',
   },
   {
@@ -398,22 +398,22 @@ export const TEMPLE_STRUCTURES: TownStructure[] = [
     dwellingTier: 3,
     cost: { gold: 1500, ore: 5 },
     dwellingUpgradeCost: { gold: 1500, ore: 5 },
-    prerequisites: ['Halconera (Mews)'],
+    prerequisites: ['Barracones de Infantería (Infantry Barracks)'],
     unitRecruitedBase: 'Grifo (Griffin)',
-    unitRecruited: 'Grifo / Grifo Real / Grifo Sagrado',
+    unitRecruited: 'Grifo / Grifo Guardián / Grifo de Templo',
     unitUpgrades: {
-      branchA: 'Grifo Real (Contragolpes infinitos y picado aéreo)',
-      branchB: 'Grifo Sagrado (Aura sagrada que protege a tropas aliadas adyacentes de proyectiles)',
+      branchA: 'Grifo Guardián (Contragolpes infinitos y picado aéreo)',
+      branchB: 'Grifo de Templo (Aura sagrada que mitiga proyectiles contra tropas aliadas adyacentes)',
       branchADetails: {
-        unitName: 'Grifo Real',
-        nameEn: 'Royal Griffin',
+        unitName: 'Grifo Guardián',
+        nameEn: 'Guardian Griffin',
         role: 'Volador de Contragolpe Total',
         keyAbilities: ['Contragolpes Ilimitados', 'Picado en Vuelo'],
         statsBonus: '+3 Ataque, +2 Defensa, +8 Vida'
       },
       branchBDetails: {
-        unitName: 'Grifo Sagrado',
-        nameEn: 'Sacred Griffin',
+        unitName: 'Grifo de Templo',
+        nameEn: 'Temple Griffin',
         role: 'Guardián Aéreo de la Luz',
         keyAbilities: ['Escudo de Plumas Radiantes', 'Inmunidad a Miedo'],
         statsBonus: '+4 Defensa, +1 Moral'
@@ -423,46 +423,8 @@ export const TEMPLE_STRUCTURES: TownStructure[] = [
       'Recluta los voladores pesados de Tier 3.',
       'Producción base: 6 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'El Grifo Real con contragolpes ilimitados es letal cuando se lanza contra grupos masivos de tropas débiles.',
+    strategicTip: 'El Grifo Guardián con contragolpes ilimitados es letal cuando se lanza contra grupos masivos de tropas débiles.',
     timingRecommendation: 'Día 3-4.',
-  },
-  {
-    id: 'temple-threshold-basilica',
-    name: 'Basílica del Umbral (Threshold Basilica)',
-    nameEn: 'Threshold Basilica',
-    category: 'Moradas de Criaturas',
-    faction: 'Templo',
-    tier: 4,
-    dwellingTier: 4,
-    cost: { gold: 2500, wood: 5, ore: 5 },
-    dwellingUpgradeCost: { gold: 2000, wood: 5, crystal: 2 },
-    prerequisites: ['Nido de Grifos (Griffin Rookery)', 'Gremio de Magos (Mage Guild)'],
-    unitRecruitedBase: 'Inquisidor (Inquisitor)',
-    unitRecruited: 'Inquisidor / Gran Inquisidor / Purificador de la Luz',
-    unitUpgrades: {
-      branchA: 'Gran Inquisidor (Tirador sagrado sin penalización de melé que disipa magia negativa)',
-      branchB: 'Purificador de la Luz (Lanza proyectiles de fuego celestial con daño en área de cruz)',
-      branchADetails: {
-        unitName: 'Gran Inquisidor',
-        nameEn: 'Grand Inquisitor',
-        role: 'Tirador Mágico de Soporte',
-        keyAbilities: ['Sin penalización cuerpo a cuerpo', 'Disipar Maldiciones en aliados'],
-        statsBonus: '+3 Ataque, +4 Defensa, +12 Vida'
-      },
-      branchBDetails: {
-        unitName: 'Purificador de la Luz',
-        nameEn: 'Light Purifier',
-        role: 'Artillero Celestial de Área',
-        keyAbilities: ['Fuego Sagrado en Cruz (Daña en área)', 'Daño adicional contra No-Muertos (+50%)'],
-        statsBonus: '+5 Ataque, +1 Iniciativa'
-      }
-    },
-    effects: [
-      'Recluta los tiradores sagrados de Tier 4 del Templo.',
-      'Producción base: 4 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
-    ],
-    strategicTip: 'Núcleo de daño a distancia del Templo; letal contra criaturas de la Necrópolis y el Cisma.',
-    timingRecommendation: 'Día 4-5.',
   },
   {
     id: 'temple-sundrop-chapel',
@@ -470,37 +432,37 @@ export const TEMPLE_STRUCTURES: TownStructure[] = [
     nameEn: 'Sundrop Chapel',
     category: 'Moradas de Criaturas',
     faction: 'Templo',
-    tier: 5,
-    dwellingTier: 5,
-    cost: { gold: 3500, ore: 5, crystal: 4 },
-    dwellingUpgradeCost: { gold: 3000, ore: 5, crystal: 3 },
-    prerequisites: ['Basílica del Umbral (Threshold Basilica)'],
-    unitRecruitedBase: 'Tejedor de Luz (Lightweaver)',
-    unitRecruited: 'Tejedor de Luz / Clérigo Solar / Canalizador Radiante',
+    tier: 4,
+    dwellingTier: 4,
+    cost: { gold: 2500, wood: 5, ore: 5, crystal: 2 },
+    dwellingUpgradeCost: { gold: 2000, wood: 5, crystal: 3 },
+    prerequisites: ['Nido de Grifos (Griffin Rookery)', 'Gremio de Magos (Mage Guild)'],
+    unitRecruitedBase: 'Tejedora de Luz (Lightweaver)',
+    unitRecruited: 'Tejedora de Luz / Heraldo del Sol / Hierofante',
     unitUpgrades: {
-      branchA: 'Clérigo Solar (Lanza bendiciones y cura a aliados caídos cada ronda)',
-      branchB: 'Canalizador Radiante (Haz solar continuo que ciega y daña en línea recta)',
+      branchA: 'Heraldo del Sol (Canaliza destellos cegadores y proyectiles radiantes de alta potencia)',
+      branchB: 'Hierofante (Lanza bendiciones solares y cura a aliados caídos cada ronda)',
       branchADetails: {
-        unitName: 'Clérigo Solar',
-        nameEn: 'Solar Cleric',
-        role: 'Sanador y Buffer Sagrado',
-        keyAbilities: ['Rayo Sanador Divino', 'Aura de Bendición Permanente'],
-        statsBonus: '+4 Defensa, +15 Vida'
+        unitName: 'Heraldo del Sol',
+        nameEn: 'Sun Herald',
+        role: 'Canalizador Radiante Ofensivo',
+        keyAbilities: ['Destello Solar Cegador', 'Disparo de Luz Sagrada'],
+        statsBonus: '+4 Ataque, +2 Iniciativa'
       },
       branchBDetails: {
-        unitName: 'Canalizador Radiante',
-        nameEn: 'Radiant Channeler',
-        role: 'Ofensivo de Haz Solar',
-        keyAbilities: ['Haz de Luz Penetrante', 'Destello Cegador (Prob. de cegar objetivo)'],
-        statsBonus: '+5 Ataque, +2 Iniciativa'
+        unitName: 'Hierofante',
+        nameEn: 'Hierophant',
+        role: 'Sanador y Buffer Sagrado',
+        keyAbilities: ['Rayo Sanador Divino', 'Aura de Bendición Permanente'],
+        statsBonus: '+3 Defensa, +15 Vida'
       }
     },
     effects: [
-      'Recluta los hechiceros y sacerdotes solares de Tier 5.',
-      'Producción base: 3 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
+      'Recluta las magas y sanadoras solares de Tier 4 del Templo.',
+      'Producción base: 4 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
     strategicTip: 'Mantiene vivo al ejército mediante sanación pasiva y desactiva colosos rivales con ceguera.',
-    timingRecommendation: 'Día 6 o inicio de Semana 2.',
+    timingRecommendation: 'Día 5-6.',
   },
   {
     id: 'temple-hippodrome',
@@ -508,36 +470,74 @@ export const TEMPLE_STRUCTURES: TownStructure[] = [
     nameEn: 'Hippodrome',
     category: 'Moradas de Criaturas',
     faction: 'Templo',
-    tier: 6,
-    dwellingTier: 6,
-    cost: { gold: 5000, wood: 10, ore: 10 },
-    dwellingUpgradeCost: { gold: 4000, wood: 5, crystal: 4 },
+    tier: 5,
+    dwellingTier: 5,
+    cost: { gold: 3500, wood: 10, ore: 5 },
+    dwellingUpgradeCost: { gold: 3000, wood: 5, ore: 5 },
     prerequisites: ['Capilla de la Gota Solar (Sundrop Chapel)'],
-    unitRecruitedBase: 'Caballero (Knight)',
-    unitRecruited: 'Caballero / Caballero del Templo / Justiciero Sagrado',
+    unitRecruitedBase: 'Caballería (Cavalry)',
+    unitRecruited: 'Caballería / Caballería de Lanza Solar / Caballería Noble',
     unitUpgrades: {
-      branchA: 'Caballero del Templo (Carga de caballería que escala con la distancia recorrida)',
-      branchB: 'Justiciero Sagrado (Aura de venganza: inflige daño sagrado de represalia al recibir impactos)',
+      branchA: 'Caballería de Lanza Solar (Carga de caballería que escala con la distancia recorrida)',
+      branchB: 'Caballería Noble (Aura de mando caballeresco que reduce el daño recibido durante la carga)',
       branchADetails: {
-        unitName: 'Caballero del Templo',
-        nameEn: 'Temple Knight',
+        unitName: 'Caballería de Lanza Solar',
+        nameEn: 'Sunlance Cavalry',
         role: 'Caballería Pesada de Choque',
         keyAbilities: ['Carga de Lanza Devastadora (+5% daño por casilla recorrida)', 'Pisotón Ecuestre'],
-        statsBonus: '+6 Ataque, +4 Defensa, +25 Vida'
+        statsBonus: '+6 Ataque, +4 Defensa, +20 Vida'
       },
       branchBDetails: {
-        unitName: 'Justiciero Sagrado',
-        nameEn: 'Holy Justiciar',
-        role: 'Vindicador Acorazado',
-        keyAbilities: ['Retribución Radiante (Daño reflejado)', 'Inmunidad a Ralentización'],
-        statsBonus: '+7 Ataque, +2 Velocidad'
+        unitName: 'Caballería Noble',
+        nameEn: 'Noble Cavalry',
+        role: 'Caballería Acorazada de Ruptura',
+        keyAbilities: ['Armadura de Jinete (-20% daño en carrera)', 'Inmunidad a Ralentización'],
+        statsBonus: '+5 Ataque, +5 Defensa, +25 Vida'
       }
     },
     effects: [
-      'Recluta la caballería de choque de élite de Tier 6.',
-      'Producción base: 2 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
+      'Recluta la caballería de choque de Tier 5 del Templo.',
+      'Producción base: 3 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
     strategicTip: 'Cruza el campo de batalla de lado a lado en un turno; maximiza la distancia recorrida para multiplicar el daño de carga.',
+    timingRecommendation: 'Final de Semana 1 o inicio de Semana 2.',
+  },
+  {
+    id: 'temple-threshold-basilica',
+    name: 'Basílica del Umbral (Threshold Basilica)',
+    nameEn: 'Threshold Basilica',
+    category: 'Moradas de Criaturas',
+    faction: 'Templo',
+    tier: 6,
+    dwellingTier: 6,
+    cost: { gold: 5000, wood: 5, ore: 10, crystal: 4 },
+    dwellingUpgradeCost: { gold: 4000, wood: 5, crystal: 4 },
+    prerequisites: ['Hipódromo (Hippodrome)', 'Gremio de Magos (Mage Guild)'],
+    unitRecruitedBase: 'Inquisidor (Inquisitor)',
+    unitRecruited: 'Inquisidor / Excomulgador / Madre Superiora',
+    unitUpgrades: {
+      branchA: 'Excomulgador (Tirador sagrado sin penalización de melé que purga bendiciones enemigas y magia oscura)',
+      branchB: 'Madre Superiora (Lanza fuegos celestiales en cruz y potencia la resistencia mágica aliada)',
+      branchADetails: {
+        unitName: 'Excomulgador',
+        nameEn: 'Excommunicator',
+        role: 'Inquisidor Purificador de Magia Oscura',
+        keyAbilities: ['Sin penalización cuerpo a cuerpo', 'Purga Sagrada (+50% daño vs No-Muertos/Vacío)'],
+        statsBonus: '+6 Ataque, +4 Defensa, +30 Vida'
+      },
+      branchBDetails: {
+        unitName: 'Madre Superiora',
+        nameEn: 'Mother Superior',
+        role: 'Artillera Celestial de Área',
+        keyAbilities: ['Fuego Sagrado en Cruz (Daño en área)', 'Aura de Fe Implacable'],
+        statsBonus: '+5 Ataque, +6 Defensa, +35 Vida'
+      }
+    },
+    effects: [
+      'Recluta los inquisidores sagrados de Tier 6 del Templo.',
+      'Producción base: 2 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
+    ],
+    strategicTip: 'Núcleo de daño a distancia y disipación mágica de Tier 6; letal contra criaturas de la Necrópolis y el Cisma.',
     timingRecommendation: 'Semana 2.',
   },
   {
@@ -550,12 +550,12 @@ export const TEMPLE_STRUCTURES: TownStructure[] = [
     dwellingTier: 7,
     cost: { gold: 10000, ore: 15, crystal: 10 },
     dwellingUpgradeCost: { gold: 8000, ore: 10, crystal: 8 },
-    prerequisites: ['Hipódromo (Hippodrome)', 'Gremio de Magos (Mage Guild)'],
+    prerequisites: ['Basílica del Umbral (Threshold Basilica)', 'Gremio de Magos Nivel 2'],
     unitRecruitedBase: 'Ángel (Angel)',
-    unitRecruited: 'Ángel / Arcángel / Serafín de la Aurora',
+    unitRecruited: 'Ángel / Arcángel / Apoteosis',
     unitUpgrades: {
       branchA: 'Arcángel (Resurrección de tropas caídas una vez por combate y máxima moral)',
-      branchB: 'Serafín de la Aurora (Espada de fuego divino que inflige daño sagrado verdadero y vuelo supersónico)',
+      branchB: 'Apoteosis (Espada sagrada de daño puro que desintegra defensas y desata tormentas radiantes)',
       branchADetails: {
         unitName: 'Arcángel',
         nameEn: 'Archangel',
@@ -564,10 +564,10 @@ export const TEMPLE_STRUCTURES: TownStructure[] = [
         statsBonus: '+10 Ataque, +10 Defensa, +100 Vida'
       },
       branchBDetails: {
-        unitName: 'Serafín de la Aurora',
-        nameEn: 'Dawn Seraph',
-        role: 'Aniquilador Radiante',
-        keyAbilities: ['Daño Sagrado Puro (Ignora 50% de defensa)', 'Llama de Purificación', 'Velocidad Celestial'],
+        unitName: 'Apoteosis',
+        nameEn: 'Apotheosis',
+        role: 'Aniquilador Radiante de Luz Pura',
+        keyAbilities: ['Daño Sagrado Puro (Ignora 50% de defensa)', 'Furia Celestial', 'Velocidad Divina'],
         statsBonus: '+12 Ataque, +4 Iniciativa, +80 Vida'
       }
     },
@@ -575,7 +575,7 @@ export const TEMPLE_STRUCTURES: TownStructure[] = [
       'Recluta los Ángeles supremos de Tier 7 del Templo.',
       'Producción base: 1 unidad por semana (+1 con Fortificaciones III).'
     ],
-    strategicTip: 'El Arcángel puede revivir Justicieros o Cruzados caídos en el combate final, evitando pérdidas irremplazables.',
+    strategicTip: 'El Arcángel puede revivir Caballeros o Inquisidores caídos en el combate final, evitando pérdidas irremplazables.',
     timingRecommendation: 'Final de Semana 1 o inicio de Semana 2.',
   },
 

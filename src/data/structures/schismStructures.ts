@@ -90,7 +90,7 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
     cost: { gold: 5000, wood: 10, ore: 10 },
     prerequisites: ['Banco (Bank)', 'Mercado (Marketplace)', 'Fortificaciones (Fortifications)'],
     effects: [
-      'Estructura económica suprema de Olden Era (equivalente canónico al Capitolio).',
+      'Estructura económica suprema de Olden Era (Tesorería / Bonificación Financiera de +2.000 Oro/día).',
       'Genera +2.000 de Oro diario adicional de forma permanente para el reino.',
       'Requiere haber consolidado el Banco, el Mercado y las Fortificaciones.'
     ],
@@ -323,31 +323,31 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
     cost: { gold: 500, ore: 5 },
     dwellingUpgradeCost: { gold: 1000, ore: 5 },
     prerequisites: ['Fortificaciones (Fortifications)'],
-    unitRecruitedBase: 'Cultista / Engendro (Cultist)',
-    unitRecruited: 'Cultista / Engendro del Vacío / Acólito del Cisma',
+    unitRecruitedBase: 'Ra\'Shoth (Ra\'Shoth)',
+    unitRecruited: 'Ra\'Shoth / Ra\'Shoth Punzante / Ra\'Shoth Feroz',
     unitUpgrades: {
-      branchA: 'Engendro del Vacío (Ataque con energía astral y resistencia a daño físico)',
-      branchB: 'Acólito del Cisma (Canaliza maná para los hechiceros aliados al inicio de la ronda)',
+      branchA: 'Ra\'Shoth Punzante (Espinas de hielo astral que infligen daño de penetración y ralentización)',
+      branchB: 'Ra\'Shoth Feroz (Ataque frenético con doble mordisco en combate cerrado)',
       branchADetails: {
-        unitName: 'Engendro del Vacío',
-        nameEn: 'Void Spawn',
-        role: 'Infantería Ligera Astral',
-        keyAbilities: ['Ataque Astral', 'Resistencia al Daño Físico (-15%)'],
-        statsBonus: '+2 Ataque, +3 Vida'
+        unitName: 'Ra\'Shoth Punzante',
+        nameEn: 'Barbed Ra\'Shoth',
+        role: 'Hostigador de Escarcha',
+        keyAbilities: ['Espinas de Falla', 'Ralentización Glacial'],
+        statsBonus: '+2 Ataque, +1 Velocidad'
       },
       branchBDetails: {
-        unitName: 'Acólito del Cisma',
-        nameEn: 'Schism Acolyte',
-        role: 'Canalizador de Maná',
-        keyAbilities: ['Tributo de Maná (+3 Maná al héroe al iniciar combate)', 'Daga de Sacrificio'],
-        statsBonus: '+2 Defensa, +1 Iniciativa'
+        unitName: 'Ra\'Shoth Feroz',
+        nameEn: 'Fierce Ra\'Shoth',
+        role: 'Infantería Ligera de Asalto',
+        keyAbilities: ['Frenesí de Grieta', 'Mordisco Doble'],
+        statsBonus: '+3 Ataque, +4 Vida'
       }
     },
     effects: [
-      'Recluta los cultistas y engendros de Tier 1 del Cisma.',
+      'Recluta los Ra\'Shoth de Tier 1 del Cisma.',
       'Producción base: 14 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Unidades muy versátiles con la capacidad de recargar maná del héroe en combate.',
+    strategicTip: 'Infantería de choque barata con daño de frío ideal para el creeping inicial de Semana 1.',
     timingRecommendation: 'Día 1-2.',
   },
   {
@@ -358,34 +358,34 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
     faction: 'Cisma',
     tier: 2,
     dwellingTier: 2,
-    cost: { gold: 1000, ore: 5 },
-    dwellingUpgradeCost: { gold: 1000, ore: 5 },
+    cost: { gold: 1000, wood: 5 },
+    dwellingUpgradeCost: { gold: 1000, wood: 5 },
     prerequisites: ['Rito Menor de Invocación (Lesser Summoning Rite)'],
-    unitRecruitedBase: 'Shoth (Shoth)',
-    unitRecruited: 'Shoth / Ra\'Shoth / Shoth Glacial',
+    unitRecruitedBase: 'Cultista (Cultist)',
+    unitRecruited: 'Cultista / Vinculador / Devoto',
     unitUpgrades: {
-      branchA: 'Ra\'Shoth (Disparo de proyectiles fríos perforantes con daño aumentado)',
-      branchB: 'Shoth Glacial (Ralentiza a los objetivos impactados reduciendo su velocidad e iniciativa)',
+      branchA: 'Vinculador (Lanza proyectiles oscuros a distancia y vincula el daño recibido a tropas enemigas)',
+      branchB: 'Devoto (Canaliza maná pasivo para el héroe y bendice los ritos de invocación permanente)',
       branchADetails: {
-        unitName: 'Ra\'Shoth',
-        nameEn: 'Ra\'Shoth',
-        role: 'Tirador de Falla',
-        keyAbilities: ['Disparo Perforante', 'Sin Penalización de Rango'],
-        statsBonus: '+3 Ataque, +4 Vida'
+        unitName: 'Vinculador',
+        nameEn: 'Binder',
+        role: 'Tirador Astral y Vinculador de Daño',
+        keyAbilities: ['Disparo del Vacío', 'Vínculo de Dolor'],
+        statsBonus: '+3 Ataque, +2 Iniciativa'
       },
       branchBDetails: {
-        unitName: 'Shoth Glacial',
-        nameEn: 'Glacial Shoth',
-        role: 'Tirador de Ralentización',
-        keyAbilities: ['Impacto Helado (Reduce -2 Velocidad)', 'Resistencia al Frío'],
-        statsBonus: '+2 Ataque, +2 Iniciativa'
+        unitName: 'Devoto',
+        nameEn: 'Devotee',
+        role: 'Soporte y Batería de Maná',
+        keyAbilities: ['Canalización de Maná (+3 Maná por turno)', 'Rito de Entrega'],
+        statsBonus: '+3 Defensa, +5 Vida'
       }
     },
     effects: [
-      'Recluta los tiradores de hielo y vacío de Tier 2.',
-      'Producción base: 8 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
+      'Recluta los cultistas y acólitos de Tier 2 del Cisma.',
+      'Producción base: 9 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Ralentizar tropas pesadas enemigas desde el turno 1 facilita eliminarlas antes de que alcancen tus líneas.',
+    strategicTip: 'Proporciona la primera fuente de ataque a distancia y combustible de maná para los héroes invocadores.',
     timingRecommendation: 'Día 2-3.',
   },
   {
@@ -400,30 +400,30 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
     dwellingUpgradeCost: { gold: 1500, wood: 5, mercury: 2 },
     prerequisites: ['Aguja de los Cultistas (Cultist Spire)'],
     unitRecruitedBase: 'Jinete Aga\'Shoth (Aga\'Shoth Rider)',
-    unitRecruited: 'Jinete Aga\'Shoth / Incursor del Vacío / Jinete de las Fallas',
+    unitRecruited: 'Jinete Aga\'Shoth / Domador Aga\'Shoth / Aga\'Shoth Matha',
     unitUpgrades: {
-      branchA: 'Incursor del Vacío (Carga a través de fallas espaciales ignorando obstáculos)',
-      branchB: 'Jinete de las Fallas (Ataque con cuchillas astrales que inflige daño a 2 casillas en línea)',
+      branchA: 'Domador Aga\'Shoth (Carga rápida que derriba defensas y genera miedo en unidades vivas)',
+      branchB: 'Aga\'Shoth Matha (Salto dimensional a través de fallas espaciales ignorando obstáculos de terreno)',
       branchADetails: {
-        unitName: 'Incursor del Vacío',
-        nameEn: 'Void Raider',
-        role: 'Caballería Dimensional Ligera',
-        keyAbilities: ['Salto de Falla (Ignora obstáculos de terreno)', 'Carga Astral'],
-        statsBonus: '+3 Ataque, +2 Velocidad'
+        unitName: 'Domador Aga\'Shoth',
+        nameEn: 'Aga\'Shoth Tamer',
+        role: 'Caballería Pesada de Ruptura',
+        keyAbilities: ['Carga Devastadora', 'Aura de Pánico'],
+        statsBonus: '+4 Ataque, +2 Defensa, +10 Vida'
       },
       branchBDetails: {
-        unitName: 'Jinete de las Fallas',
-        nameEn: 'Rift Rider',
-        role: 'Asaltante de Línea',
-        keyAbilities: ['Corte Dimensional (Daña a 2 hexágonos)', 'Evasión Parcial'],
-        statsBonus: '+4 Ataque, +1 Iniciativa'
+        unitName: 'Aga\'Shoth Matha',
+        nameEn: 'Aga\'Shoth Matha',
+        role: 'Caballería Dimensional de Flanqueo',
+        keyAbilities: ['Paso Dimensional (Teletransporte de carga)', 'Corte de Falla'],
+        statsBonus: '+3 Ataque, +2 Velocidad, +2 Iniciativa'
       }
     },
     effects: [
-      'Recluta los jinetes rápidos de Tier 3.',
+      'Recluta los jinetes monstruosos de Tier 3.',
       'Producción base: 6 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Su capacidad de saltar obstáculos les permite flanquear las murallas en asedios fácilmente.',
+    strategicTip: 'Su alta velocidad y capacidad de carga dimensional les permite anular tiradores enemigos en el primer asalto.',
     timingRecommendation: 'Día 3-4.',
   },
   {
@@ -437,36 +437,36 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
     cost: { gold: 2500, ore: 5, mercury: 2 },
     dwellingUpgradeCost: { gold: 2000, ore: 5, mercury: 2 },
     prerequisites: ['Establos de Aga\'Shoth (Aga\'Shoth Stables)', 'Gremio de Magos (Mage Guild)'],
-    unitRecruitedBase: 'Cóncubo (Concubus)',
-    unitRecruited: 'Cóncubo / Seductor del Abismo / Clamador del Vacío',
+    unitRecruitedBase: 'Gran Shoth (Great Shoth)',
+    unitRecruited: 'Gran Shoth / Shoth Innombrable / Shoth Impensable',
     unitUpgrades: {
-      branchA: 'Seductor del Abismo (Control mental que obliga a un objetivo enemigo a atacar a sus aliados)',
-      branchB: 'Clamador del Vacío (Grito cósmico que silencia la magia del objetivo durante 2 rondas)',
+      branchA: 'Shoth Innombrable (Tentáculos cósmicos que atacan a múltiples casillas y desgarran armaduras)',
+      branchB: 'Shoth Impensable (Aura de horror que reduce la moral del enemigo e inflige daño psíquico continuo)',
       branchADetails: {
-        unitName: 'Seductor del Abismo',
-        nameEn: 'Abyssal Seducer',
-        role: 'Controlador de Mentes',
-        keyAbilities: ['Fascinación (Controla pila enemiga 1 turno)', 'Vuelo Elusivo'],
-        statsBonus: '+3 Defensa, +12 Vida'
+        unitName: 'Shoth Innombrable',
+        nameEn: 'Unnameable Shoth',
+        role: 'Coloso de Asalto Multi-Tentáculo',
+        keyAbilities: ['Ataque de Azote Múltiple', 'Desgarro de Armadura (-3 Def)'],
+        statsBonus: '+5 Ataque, +3 Defensa, +18 Vida'
       },
       branchBDetails: {
-        unitName: 'Clamador del Vacío',
-        nameEn: 'Void Caller',
-        role: 'Anti-Hechicero',
-        keyAbilities: ['Silencio Cósmico', 'Descarga de Falla'],
-        statsBonus: '+4 Ataque, +2 Iniciativa'
+        unitName: 'Shoth Impensable',
+        nameEn: 'Unthinkable Shoth',
+        role: 'Hostigador Mental y Debuffer',
+        keyAbilities: ['Horror del Vacío (-2 Moral)', 'Distorsión de Proyectiles'],
+        statsBonus: '+4 Ataque, +5 Defensa, +20 Vida'
       }
     },
     effects: [
-      'Recluta los manipuladores y controladores cósmicos de Tier 4.',
+      'Recluta los horrores Shoth de Tier 4 del Cisma.',
       'Producción base: 4 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'El control mental sobre tropas pesadas enemigas puede cambiar por completo una batalla en el primer turno.',
+    strategicTip: 'Núcleo de control de masas y resistencia de primera línea del Cisma.',
     timingRecommendation: 'Día 4-5.',
   },
   {
     id: 'schism-house-of-chains',
-    name: 'Casa de Cadenas (House of Chains)',
+    name: 'Casa de las Cadenas (House of Chains)',
     nameEn: 'House of Chains',
     category: 'Moradas de Criaturas',
     faction: 'Cisma',
@@ -475,36 +475,36 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
     cost: { gold: 3500, ore: 10, mercury: 4 },
     dwellingUpgradeCost: { gold: 3000, ore: 5, mercury: 3 },
     prerequisites: ['Rito Inquietante de Invocación (Disturbing Summoning Rite)'],
-    unitRecruitedBase: 'Árbitro / Verdugo (Arbiter)',
-    unitRecruited: 'Árbitro / Verdugo Abisal / Carcelero del Vacío',
+    unitRecruitedBase: 'Concubo (Concubus)',
+    unitRecruited: 'Concubo / Señora de las Cadenas / Hechicera',
     unitUpgrades: {
-      branchA: 'Verdugo Abisal (Cadenas astrales que arrastran a los enemigos hacia él y los atan)',
-      branchB: 'Carcelero del Vacío (Aura de supresión de contragolpes y golpe demoledor de maza)',
+      branchA: 'Señora de las Cadenas (Cadenas astrales que inmovilizan y arrastran a las tropas enemigas)',
+      branchB: 'Hechicera (Fascinación hipnótica que anula contragolpes y drena energía vital)',
       branchADetails: {
-        unitName: 'Verdugo Abisal',
-        nameEn: 'Abyssal Executioner',
-        role: 'Controlador de Arrastre Pesado',
-        keyAbilities: ['Cadenas del Abismo (Arrastra objetivo)', 'Ejecución (Daño extra a unidades con baja vida)'],
-        statsBonus: '+5 Ataque, +3 Defensa, +18 Vida'
+        unitName: 'Señora de las Cadenas',
+        nameEn: 'Mistress of Chains',
+        role: 'Controladora de Arrastre y Prisión',
+        keyAbilities: ['Cadenas del Abismo (Inmoviliza objetivo)', 'Latigazo de Vacío'],
+        statsBonus: '+5 Ataque, +3 Defensa, +22 Vida'
       },
       branchBDetails: {
-        unitName: 'Carcelero del Vacío',
-        nameEn: 'Void Jailer',
-        role: 'Baluarte de Contención',
-        keyAbilities: ['Supresión de Represalias', 'Grilletes Astrales'],
-        statsBonus: '+4 Ataque, +5 Defensa, +25 Vida'
+        unitName: 'Hechicera',
+        nameEn: 'Sorceress',
+        role: 'Hechicera Manipuladora y Drenadora',
+        keyAbilities: ['Seducción y Fascinación', 'Drenaje Vital (Cura al golpear)'],
+        statsBonus: '+4 Ataque, +4 Defensa, +2 Iniciativa'
       }
     },
     effects: [
-      'Recluta los verdugos acorazados de Tier 5 del Cisma.',
+      'Recluta los Concubos y hechiceras de Tier 5 del Cisma.',
       'Producción base: 3 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Arrastrar tiradores o líderes frágiles fuera de su posición protegida rompe las tácticas de tortuga rivales.',
+    strategicTip: 'Inmovilizar o seducir a las tropas más peligrosas del oponente desbarata por completo su formación.',
     timingRecommendation: 'Día 6 o inicio de Semana 2.',
   },
   {
     id: 'schism-bloated-mansion',
-    name: 'Mansión Abotagada (Bloated Mansion)',
+    name: 'Mansión Hinchada (Bloated Mansion)',
     nameEn: 'Bloated Mansion',
     category: 'Moradas de Criaturas',
     faction: 'Cisma',
@@ -512,70 +512,70 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
     dwellingTier: 6,
     cost: { gold: 5000, ore: 10, mercury: 6 },
     dwellingUpgradeCost: { gold: 4000, ore: 5, mercury: 4 },
-    prerequisites: ['Casa de Cadenas (House of Chains)'],
-    unitRecruitedBase: 'Enviado Abisal (Abyssal Envoy)',
-    unitRecruited: 'Enviado Abisal / Heraldo de las Fallas / Horror de Vori',
+    prerequisites: ['Casa de las Cadenas (House of Chains)'],
+    unitRecruitedBase: 'Árbitro (Arbiter)',
+    unitRecruited: 'Árbitro / Árbitro de la Grieta / Árbitro Hinchado',
     unitUpgrades: {
-      branchA: 'Heraldo de las Fallas (Distorsiona el espacio absorbiendo el daño recibido para reflejarlo en área)',
-      branchB: 'Horror de Vori (Niebla helada del abismo que paraliza a los atacantes colindantes)',
+      branchA: 'Árbitro de la Grieta (Veredicto de anulación mágica que disipa todas las ventajas del enemigo)',
+      branchB: 'Árbitro Hinchado (Baluarte abotagado que absorbe y refleja el daño recibido en un estallido astral)',
       branchADetails: {
-        unitName: 'Heraldo de las Fallas',
-        nameEn: 'Rift Herald',
-        role: 'Tanque Dimensional Reflejante',
-        keyAbilities: ['Reflejo de Distorsión (Refleja 25% daño recibido)', 'Golpe Dimensional'],
-        statsBonus: '+6 Ataque, +5 Defensa, +35 Vida'
+        unitName: 'Árbitro de la Grieta',
+        nameEn: 'Rift Arbiter',
+        role: 'Juez Purificador Anti-Magia',
+        keyAbilities: ['Veredicto Silenciador', 'Disipación de Falla'],
+        statsBonus: '+6 Ataque, +6 Defensa, +35 Vida'
       },
       branchBDetails: {
-        unitName: 'Horror de Vori',
-        nameEn: 'Horror of Vori',
-        role: 'Paralizador Gélido',
-        keyAbilities: ['Frío del Vacío (Prob. de congelar al atacar)', 'Aura de Desolación'],
-        statsBonus: '+7 Ataque, +2 Iniciativa'
+        unitName: 'Árbitro Hinchado',
+        nameEn: 'Bloated Arbiter',
+        role: 'Tanque Colosal de Reflejo de Daño',
+        keyAbilities: ['Masa Desbordante', 'Estallido Retaliatorio (Refleja 30% del daño)'],
+        statsBonus: '+4 Ataque, +8 Defensa, +50 Vida'
       }
     },
     effects: [
-      'Recluta los colosos abisales de Tier 6.',
+      'Recluta los temibles Árbitros de Tier 6 del Cisma.',
       'Producción base: 2 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Extremadamente resistentes; su reflejo de daño desanima a los rivales de atacarlos con sus tropas más fuertes.',
+    strategicTip: 'Colosos defensivos impenetrables que anulan la magia rival y castigan a quien ose atacarlos cuerpo a cuerpo.',
     timingRecommendation: 'Semana 2.',
   },
   {
-    id: 'schism-supreme-void-rite',
-    name: 'Rito Supremo del Vacío (Supreme Void Rite)',
-    nameEn: 'Supreme Void Rite',
+    id: 'schism-sanctum-of-the-deep',
+    name: 'Santuario del Abismo (Sanctum of the Deep)',
+    nameEn: 'Sanctum of the Deep',
     category: 'Moradas de Criaturas',
     faction: 'Cisma',
     tier: 7,
     dwellingTier: 7,
     cost: { gold: 10000, ore: 15, mercury: 10 },
     dwellingUpgradeCost: { gold: 8000, ore: 10, mercury: 8 },
-    prerequisites: ['Mansión Abotagada (Bloated Mansion)', 'Gremio de Magos (Mage Guild)'],
-    unitRecruitedBase: 'Devorador Cósmico (Cosmic Devourer)',
-    unitRecruited: 'Devorador Cósmico / Titán del Vacío / Señor de la Ruina',
+    prerequisites: ['Mansión Hinchada (Bloated Mansion)', 'Gremio de Magos Nivel 2'],
+    unitRecruitedBase: 'Enviado Abisal (Abyssal Envoy)',
+    unitRecruited: 'Enviado Abisal / Supervisor Abisal / Verdugo Abisal',
     unitUpgrades: {
-      branchA: 'Titán del Vacío (Colapso gravitatorio que atrae a todos los enemigos de la provincia y devora su esencia)',
-      branchB: 'Señor de la Ruina (Desintegra una porción fija de cada pila enemiga ignorando armadura y defensas mágicas)',
+      branchA: 'Supervisor Abisal (Deformación espacial que abre fallas abisales para teletransportar aliados y dañar enemigos)',
+      branchB: 'Verdugo Abisal (Golpe de aniquilación pura que desintegra defensas y ejecuta inmediatamente a unidades debilitadas)',
       branchADetails: {
-        unitName: 'Titán del Vacío',
-        nameEn: 'Void Titan',
-        role: 'Coloso Gravitatorio Supremo',
-        keyAbilities: ['Vórtice Gravitatorio', 'Inmunidad a Control Mental y Parálisis'],
+        unitName: 'Supervisor Abisal',
+        nameEn: 'Abyssal Overseer',
+        role: 'Manipulador Dimensional Supremo',
+        keyAbilities: ['Deformación de Vori', 'Apertura de Falla Permanente', 'Inmunidad a Control'],
         statsBonus: '+10 Ataque, +10 Defensa, +100 Vida'
       },
       branchBDetails: {
-        unitName: 'Señor de la Ruina',
-        nameEn: 'Lord of Ruin',
-        role: 'Desintegrador Arcano Cósmico',
-        keyAbilities: ['Toque de Desintegración (Ignora defensas)', 'Aura de Entropía'],
-        statsBonus: '+12 Ataque, +3 Iniciativa, +90 Vida'
+        unitName: 'Verdugo Abisal',
+        nameEn: 'Abyssal Executioner',
+        role: 'Aniquilador de Desintegración Pura',
+        keyAbilities: ['Golpe de Juicio Cósmico (Ignora 50% de defensa)', 'Ejecución Inmediata', 'Velocidad Astral'],
+        statsBonus: '+12 Ataque, +4 Iniciativa, +90 Vida'
       }
     },
     effects: [
-      'Recluta los Titanes y Devoradores Cósmicos de Tier 7 del Cisma.',
+      'Recluta los Enviados Abisales supremos de Tier 7 del Cisma.',
       'Producción base: 1 unidad por semana (+1 con Fortificaciones III).'
     ],
-    strategicTip: 'La cúspide del poder del Cisma: sus ataques ignoran barreras convencionales y desintegran las tropas más blindadas del oponente.',
+    strategicTip: 'El coloso supremo del Cisma en Olden Era: domina el espacio hexagonal con fallas dimensionales y desintegra las tropas blindadas del rival.',
     timingRecommendation: 'Final de Semana 1 o inicio de Semana 2.',
   },
 

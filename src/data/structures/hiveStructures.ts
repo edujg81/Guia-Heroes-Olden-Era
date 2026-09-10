@@ -90,7 +90,7 @@ export const HIVE_STRUCTURES: TownStructure[] = [
     cost: { gold: 5000, wood: 10, ore: 10 },
     prerequisites: ['Banco (Bank)', 'Mercado (Marketplace)', 'Fortificaciones (Fortifications)'],
     effects: [
-      'Estructura económica suprema de Olden Era (equivalente canónico al Capitolio).',
+      'Estructura económica suprema de Olden Era (Tesorería / Bonificación Financiera de +2.000 Oro/día).',
       'Genera +2.000 de Oro diario adicional de forma permanente para el reino.',
       'Requiere haber consolidado el Banco, el Mercado y las Fortificaciones.'
     ],
@@ -305,7 +305,7 @@ export const HIVE_STRUCTURES: TownStructure[] = [
       'Produce Polvo Alquímico (Alchemical Dust) diariamente.',
       'El Polvo Alquímico es el recurso canónico esencial de Olden Era necesario para ascender moradas a niveles magistrales y potenciar hechizos en el Observatorio Mágico.'
     ],
-    strategicTip: 'Requiere el Silo de Recursos. Crucial para desbloquear las mejoras maestras de Mantis y Gusanos de Magma.',
+    strategicTip: 'Requiere el Silo de Recursos. Crucial para desbloquear las mejoras maestras de Saqueadores y Waurms.',
     timingRecommendation: 'Semana 2.',
   },
 

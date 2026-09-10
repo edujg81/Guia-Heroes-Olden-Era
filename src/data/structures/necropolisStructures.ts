@@ -90,7 +90,7 @@ export const NECROPOLIS_STRUCTURES: TownStructure[] = [
     cost: { gold: 5000, wood: 10, ore: 10 },
     prerequisites: ['Banco (Bank)', 'Mercado (Marketplace)', 'Fortificaciones (Fortifications)'],
     effects: [
-      'Estructura económica suprema de Olden Era (equivalente canónico al Capitolio).',
+      'Estructura económica suprema de Olden Era (Tesorería / Bonificación Financiera de +2.000 Oro/día).',
       'Genera +2.000 de Oro diario adicional de forma permanente para el reino.',
       'Requiere haber consolidado el Banco, el Mercado y las Fortificaciones.'
     ],

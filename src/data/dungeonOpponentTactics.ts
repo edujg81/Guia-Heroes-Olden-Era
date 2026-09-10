@@ -24,9 +24,9 @@ export const DAY_OPPONENT_TACTICS: Record<number, DayOpponentTactic> = {
   },
   3: {
     pvpFocusTag: 'Defensa de Mineros',
-    pveFocusTag: 'Maximizar Daño Danzantes',
-    humanPvP: 'Si un explorador humano intenta robar recursos sueltos, embóscalo con la alta velocidad de movimiento de los Danzantes.',
-    aiPvE: 'Los Danzantes de Jaspe tienen contraataque devastador; atráelos hacia tropas lentas de la IA que se agrupen sin apoyo.',
+    pveFocusTag: 'Maximizar Daño Infiltradores',
+    humanPvP: 'Si un explorador humano intenta robar recursos sueltos, embóscalo con la alta velocidad de movimiento de los Infiltradores.',
+    aiPvE: 'Los Infiltradores Sombríos tienen contraataque letal y salto sigiloso; úsalos para eliminar tropas lentas de la IA que se agrupen sin apoyo.',
   },
   4: {
     pvpFocusTag: 'Disuasión Temprana',
@@ -56,7 +56,7 @@ export const DAY_OPPONENT_TACTICS: Record<number, DayOpponentTactic> = {
     pvpFocusTag: 'Hechizo de Interrupción',
     pveFocusTag: 'Lentitud a Monstruos',
     humanPvP: 'Aprende Lentitud o Rayo Arcano en Cofradía I. Un rival humano con tropas rápidas queda completamente inutilizado con Lentitud en Turno 1.',
-    aiPvE: 'Lanza Lentitud sobre criaturas cuerpo a cuerpo neutrales; tus Medusas y Danzantes las liquidarán antes de que crucen la mitad del campo.',
+    aiPvE: 'Lanza Lentitud sobre criaturas cuerpo a cuerpo neutrales; tus Medusas e Infiltradores las liquidarán antes de que crucen la mitad del campo.',
   },
   9: {
     pvpFocusTag: 'Protección de Rutas',
@@ -67,8 +67,8 @@ export const DAY_OPPONENT_TACTICS: Record<number, DayOpponentTactic> = {
   10: {
     pvpFocusTag: 'Ventaja Económica Neta',
     pveFocusTag: 'Bola de Nieve Económica',
-    humanPvP: 'Con el Capitolio en Día 10 generas 4.000g/día. Ningún rival humano puede igualar este ritmo de ingresos en Semana 2.',
-    aiPvE: 'Invierte el oro masivo del Capitolio en comprar todas las tropas disponibles sin dejar reservas ociosas.',
+    humanPvP: 'Con el Palacio Bizantino III (Metropolis III) en Día 10 generas 4.000g/día. Ningún rival humano puede igualar este ritmo de ingresos en Semana 2.',
+    aiPvE: 'Invierte el oro masivo de la Metropolis III en comprar todas las tropas disponibles sin dejar reservas ociosas.',
   },
   11: {
     pvpFocusTag: 'Ceguera vs Tiradores',
@@ -103,7 +103,7 @@ export const DAY_OPPONENT_TACTICS: Record<number, DayOpponentTactic> = {
   16: {
     pvpFocusTag: 'Capitalización de Intereses',
     pveFocusTag: 'Riqueza Acumulada',
-    humanPvP: 'La Tesorería genera intereses semanales sobre el oro no gastado. Si el humano no ataca, tu economía crecerá exponencialmente más rápido.',
+    humanPvP: 'La Tesorería genera +2.000 de oro diario fijo para el reino. Si el humano no ataca, tu economía crecerá a un ritmo imparable.',
     aiPvE: 'Mantén un colchón de oro al final de la semana para disparar el retorno financiero del lunes.',
   },
   17: {

@@ -50,7 +50,7 @@ export const CombatTactics: React.FC<CombatTacticsProps> = ({
                   <span>1. Muro de Fe (Falange & Luz)</span>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Coloca a los Soldados y Cruzados en primera línea. Absorben el choque frontal con su alta defensa y protección a distancia mientras los Arqueros castigan al enemigo.
+                  Coloca a los Espadachines y Égidas del Sol en primera línea. Absorben el choque frontal con su Muro de Escudos y mitigación de proyectiles mientras los Ballesteros castigan al enemigo sin represalia.
                 </p>
               </div>
 
@@ -61,7 +61,7 @@ export const CombatTactics: React.FC<CombatTacticsProps> = ({
                   <span>2. Carga Devastadora</span>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Los Caballeros y Justicieros multiplican su daño por cada casilla recorrida en línea recta. Mantén despejadas las líneas de carga para un golpe letal en Turno 1 o 2.
+                  La Caballería y Caballería de Lanza Solar multiplican su daño por cada casilla recorrida en línea recta. Mantén despejadas las líneas de carga para un golpe letal en Turno 1 o 2.
                 </p>
               </div>
 
@@ -72,7 +72,7 @@ export const CombatTactics: React.FC<CombatTacticsProps> = ({
                   <span>3. Ángeles & Resurrección</span>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Los Arcángeles dominan el combate con vuelo total, daño máximo constante y habilidad de Resurrección activa para revivir tropas caídas antes de que termine el asalto.
+                  Los Arcángeles y la Apoteosis dominan el combate con vuelo total, daño sagrado puro y habilidad de Resurrección activa para revivir tropas caídas antes de que termine el asalto.
                 </p>
               </div>
             </>
@@ -158,10 +158,10 @@ export const CombatTactics: React.FC<CombatTacticsProps> = ({
                 <div className="absolute top-0 left-0 w-1 h-full bg-orange-500"></div>
                 <div className="flex items-center gap-2 text-orange-300 font-bold text-xs uppercase tracking-wider font-mono">
                   <Bug className="w-4 h-4 text-orange-400" />
-                  <span>1. Manada Quinosa & Frenesí</span>
+                  <span>1. Horda Parásita & Cosecha</span>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Rodea al enemigo con múltiples pilas de Larvas y Escarabajos. Cada unidad adyacente multiplica exponencialmente el daño de manada.
+                  Rodea al enemigo con enjambres de Parásitos y Langostas. Los Parásitos atacan a 2 casillas sin sufrir contragolpe mientras las Langostas Cosechadoras devoran cadáveres para potenciarse.
                 </p>
               </div>
 
@@ -169,10 +169,10 @@ export const CombatTactics: React.FC<CombatTacticsProps> = ({
                 <div className="absolute top-0 left-0 w-1 h-full bg-amber-500"></div>
                 <div className="flex items-center gap-2 text-amber-300 font-bold text-xs uppercase tracking-wider font-mono">
                   <Flame className="w-4 h-4 text-amber-400" />
-                  <span>2. Salto de Asedio de Mantis</span>
+                  <span>2. Avispones & Saqueadores Ápice</span>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Las Mantis Voraces saltan por encima de murallas y obstáculos trabando tiradores enemigos en Turno 1 con doble ataque letal.
+                  Los Avispones vuelan a gran velocidad para trabar tiradores enemigos en Turno 1, mientras los Saqueadores desatan Depredador Ápice infligiendo daño masivo contra colosos y tiers superiores.
                 </p>
               </div>
 
@@ -180,10 +180,10 @@ export const CombatTactics: React.FC<CombatTacticsProps> = ({
                 <div className="absolute top-0 left-0 w-1 h-full bg-red-500"></div>
                 <div className="flex items-center gap-2 text-red-300 font-bold text-xs uppercase tracking-wider font-mono">
                   <Sparkles className="w-4 h-4 text-red-400" />
-                  <span>3. Devoración de Leviatanes</span>
+                  <span>3. Waurms & Reina de la Colmena</span>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  El Leviatán Devorador engulle unidades colosales enemigas al instante y desata la Pisada Sísmica en área 3x3 curándose por completo.
+                  Los Waurms subterráneos devoran enemigos de un solo bocado o disparan proyectiles de fuego cáustico con Piroboro, mientras la Reina de la Colmena eclosiona parásitos en mitad del combate.
                 </p>
               </div>
             </>
@@ -232,10 +232,10 @@ export const CombatTactics: React.FC<CombatTacticsProps> = ({
                 <div className="absolute top-0 left-0 w-1 h-full bg-purple-500"></div>
                 <div className="flex items-center gap-2 text-purple-300 font-bold text-xs uppercase tracking-wider font-mono">
                   <Zap className="w-4 h-4 text-yellow-400" />
-                  <span>1. Cebo de 1-Troglodita & Danzantes</span>
+                  <span>1. Cebo de 1-Troglodita & Minotauros</span>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Separa tus Trogloditas en pilas de 1 soldado para absorber contragolpes sin sufrir ceguera, permitiendo que tus Danzantes de Jaspe y Áureos desaten doble golpe y contragolpe infinito.
+                  Separa tus Trogloditas en pilas de 1 soldado para absorber contragolpes sin sufrir ceguera, permitiendo que tus Infiltradores y Minotauros Acorazados golpeen con doble hacha y moral implacable sin represalia.
                 </p>
               </div>
 

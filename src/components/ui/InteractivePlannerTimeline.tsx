@@ -42,7 +42,7 @@ export const InteractivePlannerTimeline: React.FC<InteractivePlannerTimelineProp
     },
     {
       id: 3,
-      name: 'Fase 3: Expansión & Capitolio',
+      name: 'Fase 3: Expansión & Metropolis III',
       range: 'Días 15-28 (S3-S4)',
       desc: 'Leyes cívicas, 2º héroe y control de minas',
       days: [15, 28],
@@ -65,7 +65,7 @@ export const InteractivePlannerTimeline: React.FC<InteractivePlannerTimelineProp
     { day: 4, label: 'D4: Tiers 1-3', icon: '🛡️', tip: 'Unidades tempranas aseguradas' },
     { day: 7, label: 'D7: Ciudadela', icon: '🏰', tip: 'Crecimiento semanal S1' },
     { day: 14, label: 'D14: Rush T7', icon: '⚡', tip: 'Tier 7 / Castillo edificado' },
-    { day: 21, label: 'D21: Capitolio', icon: '💰', tip: 'Economía +4.000 Oro/día' },
+    { day: 21, label: 'D21: Metropolis III', icon: '💰', tip: 'Economía +4.000 Oro/día' },
     { day: 28, label: 'D28: Fin Mes 1', icon: '🔮', tip: 'Revisión general de ejército' },
     { day: 42, label: 'D42: Asedios', icon: '⚔️', tip: 'Captura de fortalezas rivales' },
     { day: 56, label: 'D56: Victoria', icon: '👑', tip: 'Encuentro final late-game' },

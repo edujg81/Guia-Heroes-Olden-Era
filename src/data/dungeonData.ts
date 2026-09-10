@@ -263,25 +263,25 @@ export const FULL_56_DAY_BUILD_STEPS: BuildStep[] = [
     day: 9,
     month: 1,
     week: 2,
-    title: 'Día 9: Banco (Estructura Financiera - Prerrequisito de Capitolio)',
+    title: 'Día 9: Banco (Estructura Financiera - Prerrequisito de Metropolis III)',
     building: 'Banco (Estructura Financiera de Mazmorra)',
     buildingTierLevel: 'Estructura Económica • Coste: 2.500 Oro, 5 Madera, 5 Mineral • Prerrequisito: Palacio bizantino II cumplido (Día 2)',
     cost: { gold: 2500, wood: 5, ore: 5 },
     lawProgress: 'Promulga la Ley P4: "Red de Extracción Subterránea" (+2 Mineral, +1 Gema/día)',
     heroActions: [
-      'El Héroe Principal asalta criptas y campamentos de dificultad media para acumular el oro necesario para el Capitolio.',
+      'El Héroe Principal asalta criptas y campamentos de dificultad media para acumular el oro necesario para la Metropolis III.',
       'El Héroe Secundario asegura depósitos de gemas y madera.',
     ],
     combatTactic: 'Los Minotauros absorben el impacto inicial mientras los Bailarinas de Ónice y los Infiltradores liquidan a los tiradores.',
-    criticalTip: 'El Banco es el prerrequisito obligatorio e insustituible para erigir el Palacio bizantino III (Capitolio) al día siguiente.',
+    criticalTip: 'El Banco es el prerrequisito obligatorio e insustituible para erigir el Palacio bizantino III (Metropolis III) al día siguiente.',
     priority: 'Crítica',
   },
   {
     day: 10,
     month: 1,
     week: 2,
-    title: 'Día 10: Palacio bizantino III (¡Capitolio de Mazmorra - 4.000 Oro/día & Elección de Especialización!)',
-    building: 'Palacio bizantino III (Palacio Supremo / Capitolio - 4.000 Oro/día)',
+    title: 'Día 10: Palacio bizantino III (¡Metropolis III de Mazmorra - 4.000 Oro/día & Elección de Especialización!)',
+    building: 'Palacio bizantino III (Palacio Supremo / Metropolis III - 4.000 Oro/día)',
     buildingTierLevel: 'Mejora de Sede Nivel III • Coste: 5.000 Oro, 10 Madera, 10 Mineral • Prerrequisitos: Palacio bizantino II y Banco cumplidos',
     buildingChoice: {
       type: 'Especialización de Edificio',
@@ -289,7 +289,7 @@ export const FULL_56_DAY_BUILD_STEPS: BuildStep[] = [
       options: [
         {
           title: '+1.000 al ingreso de Oro',
-          effect: '+1.000 Oro/día adicional (Ingresos totales del Capitolio: 5.000 Oro/día). Garantiza la compra masiva sin fricción de tropas Tier 6 (Hidras) y Tier 7 (Dragones).',
+          effect: '+1.000 Oro/día adicional (Ingresos totales de la Metropolis III: 5.000 Oro/día). Garantiza la compra masiva sin fricción de tropas Tier 6 (Hidras) y Tier 7 (Dragones).',
           isRecommended: true,
         },
         {
@@ -308,11 +308,11 @@ export const FULL_56_DAY_BUILD_STEPS: BuildStep[] = [
     cost: { gold: 5000, wood: 10, ore: 10 },
     lawProgress: 'Ingresos base fijados en 4.000 Oro/día (+1.000 con la opción de Oro seleccionada)',
     heroActions: [
-      'El Capitolio entra en funcionamiento generando 4.000–5.000 de oro diarios a partir de hoy según la rama elegida.',
+      'La Metropolis III entra en funcionamiento generando 4.000–5.000 de oro diarios a partir de hoy según la rama elegida.',
       'El Héroe Principal limpia zonas ricas en gemas y mineral en el mapa subterráneo.',
     ],
     combatTactic: 'Tus ingresos alcanzan el cénit económico. Tendrás solvencia total para comprar todas las moradas de Tiers 5, 6 y 7 sin sufrir cuellos de botella de oro.',
-    criticalTip: '¡GRAN HITO ECONÓMICO! Erigir el Capitolio en el Día 10 y seleccionar su rama especializada garantiza los recursos para costear Hogar ctónico, Castillo y Palacio de cueva.',
+    criticalTip: '¡GRAN HITO ECONÓMICO! Erigir la Metropolis III en el Día 10 y seleccionar su rama especializada garantiza los recursos para costear Hogar ctónico, Castillo y Palacio de cueva.',
     priority: 'Crítica',
   },
   {
@@ -346,7 +346,7 @@ export const FULL_56_DAY_BUILD_STEPS: BuildStep[] = [
       'Canjea madera, mineral o polvo excedente en el Mercado para garantizar tener 20 Gemas para el Palacio de cueva (Día 14).',
       'El Héroe Principal asegura minas y depósitos de gemas en el mapa subterráneo.',
     ],
-    combatTactic: 'El Mercado te permite balancear tus reservas y asegurar el stock de 20 Gemas sin frenar el flujo de oro del Capitolio.',
+    combatTactic: 'El Mercado te permite balancear tus reservas y asegurar el stock de 20 Gemas sin frenar el flujo de oro de la Metropolis III.',
     criticalTip: 'Al construir el Mercado el Día 12 en vez de moradas caras, proteges los 17.500 de Oro y 20 Gemas indispensables para el Palacio de cueva el Día 14.',
     priority: 'Crítica',
   },
@@ -406,7 +406,7 @@ export const FULL_56_DAY_BUILD_STEPS: BuildStep[] = [
       'El Héroe Principal parte con Dragones de las Cavernas a quebrar las defensas y puestos fortificados neutrales.',
     ],
     combatTactic: 'Tu ejército cuenta ahora con Dragones de las Cavernas (180 HP, vuelo, aliento de 2 casillas). Arrolla cualquier defensa neutral.',
-    criticalTip: 'Erigir Hogar ctónico en el Día 15 con la economía boyante del Capitolio te permite completar la alineación completa de moradas (T1 a T7).',
+    criticalTip: 'Erigir Hogar ctónico en el Día 15 con la economía boyante de la Metropolis III te permite completar la alineación completa de moradas (T1 a T7).',
     priority: 'Crítica',
   },
   {
@@ -864,7 +864,7 @@ export const FULL_56_DAY_BUILD_STEPS: BuildStep[] = [
       'Captura el castillo intacto y añade sus ingresos a tus arcas.',
     ],
     combatTactic: 'Los Dragones Negros resisten el fuego de las torres de asedio y destruyen la balista enemiga en Turno 1.',
-    criticalTip: 'Capturar ciudades enemigas antes de que construyan Capitolio ahoga su economía.',
+    criticalTip: 'Capturar ciudades enemigas antes de que alcancen Metropolis III ahoga su economía.',
     priority: 'Alta',
   },
   {

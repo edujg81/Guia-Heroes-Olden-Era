@@ -455,7 +455,7 @@ export const FactionLawsTree: React.FC<FactionLawsTreeProps> = ({
       {
         type: 'Ciudad' as const,
         title: 'Rama de Ciudad & Facción (Economía, Crecimiento y Gobernanza)',
-        description: `Multiplica el crecimiento semanal de criaturas, bonifica la producción de recursos e ingresos del Capitolio y optimiza el avance territorial de ${meta.name}.`,
+        description: `Multiplica el crecimiento semanal de criaturas, bonifica la producción de recursos e ingresos de la Metropolis III y optimiza el avance territorial de ${meta.name}.`,
         icon: Landmark,
         colorTheme: 'emerald',
       },
@@ -610,7 +610,7 @@ export const FactionLawsTree: React.FC<FactionLawsTreeProps> = ({
                   3. Generación Diaria & Fuentes
                 </div>
                 <p className={`text-[11px] ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>
-                  Los puntos se acumulan pasivamente cada día a través de los edificios municipales (Sede, Ayuntamiento, Palacio y Capitolio) y por la experiencia (EXP) que ganan los héroes en cada combate victorioso.
+                  Los puntos se acumulan pasivamente cada día a través de los edificios municipales (Town Hall I, City Hall II y Metropolis III) y por la experiencia (EXP) que ganan los héroes en cada combate victorioso.
                 </p>
               </div>
             </div>

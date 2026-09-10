@@ -210,8 +210,8 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     ],
     recommendedHeroes: ['Octavia', 'Mreowa', 'Gorel Punta de Lanza', 'Colajengibre'],
     tacticalTier: 'Tier S+',
-    strategicAnalysis: 'Multiplica el daño crítico de todas las tropas élficas y acelera la activación de habilidades activas de facción.',
-    synergyNotes: 'Sinergia extrema con tiradores silvanos, unicornios y dríadas.',
+    strategicAnalysis: 'Multiplica el daño crítico de todas las tropas de la Arboleda y acelera la activación de habilidades activas de facción.',
+    synergyNotes: 'Sinergia extrema con faunos arqueros, ninfas iriyad, herbomantes y qilins celestiales.',
   },
   {
     id: 'subclass-wellspring-of-vigor',
