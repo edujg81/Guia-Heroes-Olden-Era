@@ -1,24 +1,22 @@
 import { DungeonHero } from '../../types';
-
-// Import all faction heroes lists
-import dungeonHeroes from './dungeon/heroes';
-import templeHeroes from './temple/heroes';
-import groveHeroes from './grove/heroes';
-import necropolisHeroes from './necropolis/heroes';
-import hiveHeroes from './hive/heroes';
-import schismHeroes from './schism/heroes';
+import { DUNGEON_HEROES } from '../dungeonData';
+import { TEMPLE_HEROES } from '../templeData';
+import { ARBOLEDA_HEROES } from '../arboledaData';
+import { NECROPOLIS_HEROES } from '../necropolisData';
+import { ENJAMBRE_HEROES } from '../enjambreData';
+import { CISMA_HEROES } from '../cismaData';
 
 export type FactionIdentifier = 'Mazmorra' | 'Templo' | 'Foresta' | 'Arboleda' | 'Necrópolis' | 'Colmena' | 'Enjambre' | 'Cisma';
 
 export const FACTION_HEROES_REGISTRY: Record<string, DungeonHero[]> = {
-  Mazmorra: dungeonHeroes,
-  Templo: templeHeroes,
-  Foresta: groveHeroes,
-  Arboleda: groveHeroes,
-  Necrópolis: necropolisHeroes,
-  Colmena: hiveHeroes,
-  Enjambre: hiveHeroes,
-  Cisma: schismHeroes,
+  Mazmorra: DUNGEON_HEROES,
+  Templo: TEMPLE_HEROES,
+  Foresta: ARBOLEDA_HEROES,
+  Arboleda: ARBOLEDA_HEROES,
+  Necrópolis: NECROPOLIS_HEROES,
+  Colmena: ENJAMBRE_HEROES,
+  Enjambre: ENJAMBRE_HEROES,
+  Cisma: CISMA_HEROES,
 };
 
 /**

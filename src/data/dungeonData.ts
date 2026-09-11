@@ -239,7 +239,7 @@ export const FULL_56_DAY_BUILD_STEPS: BuildStep[] = [
   },
 
   // -----------------------------------------------------------------------
-  // MES 1 • SEMANA 2 (DÍAS 8 AL 14): RECLUTAMIENTO T1-T5 (+50%), BANCO, CAPITOLIO DÍA 10, COFRADÍA II, HOGAR CTÓNICO (T6) Y MERCADO
+  // MES 1 • SEMANA 2 (DÍAS 8 AL 14): RECLUTAMIENTO T1-T5 (+50%), BANCO, PALACIO BIZANTINO III (METROPOLIS) DÍA 10, COFRADÍA II, HOGAR CTÓNICO (T6) Y MERCADO
   // -----------------------------------------------------------------------
   {
     day: 8,
