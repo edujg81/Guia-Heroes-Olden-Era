@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ResourceBadgeProps {
-  type: 'gold' | 'wood' | 'ore' | 'sulfur' | 'mercury' | 'gems' | 'crystal' | 'mana' | 'lawPoints';
+  type: 'gold' | 'wood' | 'ore' | 'mercury' | 'gems' | 'crystal' | 'mana' | 'lawPoints';
   amount: number | string;
   className?: string;
   size?: 'sm' | 'md' | 'lg';
@@ -16,15 +16,13 @@ export const ResourceBadge: React.FC<ResourceBadgeProps> = ({
   const getResourceConfig = () => {
     switch (type) {
       case 'gold':
-        return { label: 'Oro', icon: '🪙', color: 'bg-amber-500/10 text-amber-400 border-amber-500/30' };
+        return { label: 'Oro', icon: '🪙', color: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30' };
       case 'wood':
-        return { label: 'Madera', icon: '🪵', color: 'bg-amber-800/10 text-amber-600 border-amber-700/30' };
+        return { label: 'Madera', icon: '🪵', color: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' };
       case 'ore':
         return { label: 'Mineral', icon: '⛏️', color: 'bg-slate-500/10 text-slate-300 border-slate-500/30' };
-      case 'sulfur':
-        return { label: 'Azufre', icon: '🧪', color: 'bg-yellow-500/10 text-yellow-300 border-yellow-500/30' };
       case 'mercury':
-        return { label: 'Mercurio', icon: '💧', color: 'bg-red-500/10 text-red-400 border-red-500/30' };
+        return { label: 'Mercurio', icon: '🧪', color: 'bg-red-500/10 text-red-400 border-red-500/30' };
       case 'gems':
         return { label: 'Gemas', icon: '💎', color: 'bg-cyan-500/10 text-cyan-300 border-cyan-500/30' };
       case 'crystal':

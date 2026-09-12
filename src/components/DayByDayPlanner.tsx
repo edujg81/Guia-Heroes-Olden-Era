@@ -25,6 +25,10 @@ import {
   X,
   Check,
   Flag,
+  Coins,
+  Trees,
+  Shield,
+  Gem,
 } from 'lucide-react';
 
 interface DayByDayPlannerProps {
@@ -33,6 +37,55 @@ interface DayByDayPlannerProps {
   selectedDay?: number;
   onSelectDay?: (day: number) => void;
 }
+
+// Canonical resource styling strictly aligned with BuildResourceCalculator.tsx (Cost Calculator)
+export const RESOURCE_CALC_STYLES = {
+  gold: { label: 'Oro', text: 'text-yellow-400', badge: 'bg-yellow-950/50 border-yellow-900/50 text-yellow-400' },
+  wood: { label: 'Madera', text: 'text-emerald-400', badge: 'bg-emerald-950/40 border-emerald-900/50 text-emerald-400' },
+  ore: { label: 'Mineral', text: 'text-slate-300', badge: 'bg-slate-900/60 border-slate-700 text-slate-300' },
+  gems: { label: 'Gemas', text: 'text-cyan-300', badge: 'bg-cyan-950/50 border-cyan-900/50 text-cyan-300' },
+  crystal: { label: 'Cristal', text: 'text-purple-300', badge: 'bg-purple-950/50 border-purple-900/50 text-purple-300' },
+  mercury: { label: 'Mercurio', text: 'text-red-300', badge: 'bg-red-950/50 border-red-900/50 text-red-300' },
+  alchemicalDust: { label: 'Polvo', text: 'text-blue-300', badge: 'bg-blue-950/50 border-blue-900/50 text-blue-300' },
+} as const;
+
+type PrimaryResourceKey = 'gems' | 'crystal' | 'mercury';
+
+interface PrimaryResourceConfig {
+  key: PrimaryResourceKey;
+  label: string;
+  colorClass: string;
+}
+
+const FACTION_PRIMARY_RESOURCES: Record<FactionId, PrimaryResourceConfig[]> = {
+  Mazmorra: [
+    { key: 'gems', label: 'Gemas', colorClass: RESOURCE_CALC_STYLES.gems.text },
+  ],
+  Templo: [
+    { key: 'gems', label: 'Gemas', colorClass: RESOURCE_CALC_STYLES.gems.text },
+    { key: 'crystal', label: 'Cristal', colorClass: RESOURCE_CALC_STYLES.crystal.text },
+  ],
+  Foresta: [
+    { key: 'gems', label: 'Gemas', colorClass: RESOURCE_CALC_STYLES.gems.text },
+    { key: 'crystal', label: 'Cristal', colorClass: RESOURCE_CALC_STYLES.crystal.text },
+  ],
+  Arboleda: [
+    { key: 'gems', label: 'Gemas', colorClass: RESOURCE_CALC_STYLES.gems.text },
+    { key: 'crystal', label: 'Cristal', colorClass: RESOURCE_CALC_STYLES.crystal.text },
+  ],
+  Necrópolis: [
+    { key: 'mercury', label: 'Mercurio', colorClass: RESOURCE_CALC_STYLES.mercury.text },
+  ],
+  Cisma: [
+    { key: 'mercury', label: 'Mercurio', colorClass: RESOURCE_CALC_STYLES.mercury.text },
+  ],
+  Colmena: [
+    { key: 'crystal', label: 'Cristal', colorClass: RESOURCE_CALC_STYLES.crystal.text },
+  ],
+  Enjambre: [
+    { key: 'crystal', label: 'Cristal', colorClass: RESOURCE_CALC_STYLES.crystal.text },
+  ],
+};
 
 export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({ 
   selectedFaction = 'Mazmorra',
@@ -134,133 +187,139 @@ export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({
       )}
 
       {/* Top Controls Bar: Month / Week / Opponent Filters */}
-      <div className={`bg-black/50 border ${theme.borderSubtle} rounded-2xl p-4 sm:p-5 shadow-[0_0_30px_rgba(0,0,0,0.5)] backdrop-blur-md transition-colors duration-300`}>
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+      <div className={`bg-black/50 border ${theme.borderSubtle} rounded-2xl p-3 sm:p-4 shadow-[0_0_30px_rgba(0,0,0,0.5)] backdrop-blur-md transition-colors duration-300`}>
+        {/* Título de la Sección & Controles Rápidos */}
+        <div className="flex items-center justify-between gap-3 flex-wrap">
           <div>
-            <div className="flex items-center gap-2 mb-1 flex-wrap">
-              <span className={`${theme.bgBadge} ${theme.textAccent} text-[11px] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded border ${theme.borderSubtle} flex items-center gap-1.5 font-mono`}>
-                <Sparkles className="w-3 h-3 text-yellow-400" />
-                Campaña 56 Días ({meta.name})
-              </span>
-              <span className="text-xs text-slate-400 font-mono">
-                {completedCount} / {allSteps.length} Pasos Realizados
-              </span>
-              <button
-                onClick={() => setShowResetConfirm(true)}
-                title="Reiniciar casillas marcadas para nueva partida"
-                className={`text-[11px] font-mono flex items-center gap-1.5 transition-all px-2.5 py-0.5 rounded border cursor-pointer ${
-                  completedCount > 0
-                    ? `${theme.textAccent} hover:text-red-200 ${theme.bgBadge} ${theme.borderSubtle} hover:bg-red-950/60 hover:border-red-600`
-                    : 'text-slate-500 bg-black/40 border-slate-800 hover:text-slate-300'
-                }`}
-              >
-                <RotateCcw className="w-3 h-3" style={{ color: theme.hexPrimary }} />
-                <span>Reiniciar</span>
-              </button>
-            </div>
-            <h2 className="text-lg sm:text-xl font-serif text-white uppercase tracking-wide">
-              Cronograma de Construcción & Acciones Diarias (<span className={theme.textAccent}>{meta.name}</span>)
+            <h2 className="text-base sm:text-lg md:text-xl font-serif text-white uppercase tracking-wide flex items-center gap-2">
+              <span>Cronograma de Construcción & Acciones</span>
+              <span className={`text-sm sm:text-base ${theme.textAccent} font-mono font-bold`}>({meta.name})</span>
             </h2>
-            {selectedFaction === 'Templo' && (
-              <div className="mt-1.5 flex items-center gap-2 text-[11px] font-mono bg-amber-950/70 text-amber-300 border border-amber-600/60 px-2.5 py-1 rounded-lg">
-                <Sparkles className="w-3.5 h-3.5 text-yellow-400 shrink-0" />
-                <span>
-                  <strong>Hito Clave Templo:</strong> Tiers 1, 2 y 3 asegurados en Semana 1 (Día 4) • <strong>Rush a Tier 7 (Ángeles)</strong> completado en el <strong>Día 14</strong> exacto.
-                </span>
-              </div>
-            )}
-            {meta.status === 'desarrollo' && (
-              <div className="mt-1.5 flex items-center gap-2 text-[11px] font-mono bg-indigo-950/70 text-indigo-300 border border-indigo-600/60 px-2.5 py-1 rounded-lg">
-                <AlertTriangle className="w-3.5 h-3.5 text-yellow-400 shrink-0" />
-                <span>
-                  <strong>Facción en Desarrollo:</strong> Árboles y datos detallados de {meta.name} en proceso de confirmación por Unfrozen. Mostrando arquitectura base.
-                </span>
-              </div>
-            )}
           </div>
 
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 w-full lg:w-auto">
-            {/* Month Filter */}
-            <div className={`flex items-center gap-1.5 sm:gap-2 bg-black/60 px-2.5 sm:px-3 py-1.5 rounded-xl border ${theme.borderSubtle} shrink-0`}>
-              <Calendar className="w-4 h-4 shrink-0" style={{ color: theme.hexPrimary }} />
-              <div className="flex gap-1">
-                {(['all', 1, 2] as const).map((m) => (
-                  <button
-                    key={m}
-                    onClick={() => {
-                      setSelectedMonth(m);
-                      setSelectedWeek('all');
-                    }}
-                    className={`px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs rounded-md font-semibold transition-all uppercase tracking-wider cursor-pointer font-mono whitespace-nowrap ${
-                      selectedMonth === m
-                        ? theme.pillActive
-                        : 'bg-black/40 text-slate-400 hover:text-slate-200 border border-slate-800'
-                    }`}
-                  >
-                    {m === 'all' ? '2 Meses' : `Mes ${m}`}
-                  </button>
-                ))}
-              </div>
-            </div>
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className={`${theme.bgBadge} ${theme.textAccent} text-[11px] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded border ${theme.borderSubtle} flex items-center gap-1.5 font-mono`}>
+              <Sparkles className="w-3 h-3 text-yellow-400" />
+              56 Días
+            </span>
+            <span className="text-xs text-slate-400 font-mono">
+              {completedCount} / {allSteps.length} Pasos Realizados
+            </span>
+            <button
+              onClick={() => setShowResetConfirm(true)}
+              title="Reiniciar casillas marcadas para nueva partida"
+              className={`text-[11px] font-mono flex items-center gap-1.5 transition-all px-2 py-0.5 rounded border cursor-pointer ${
+                completedCount > 0
+                  ? `${theme.textAccent} hover:text-red-200 ${theme.bgBadge} ${theme.borderSubtle} hover:bg-red-950/60 hover:border-red-600`
+                  : 'text-slate-500 bg-black/40 border-slate-800 hover:text-slate-300'
+              }`}
+            >
+              <RotateCcw className="w-3 h-3" style={{ color: theme.hexPrimary }} />
+              <span>Reiniciar</span>
+            </button>
+          </div>
+        </div>
 
-            {/* Week Selector */}
-            <div className={`flex items-center gap-1 bg-black/60 px-2 sm:px-2.5 py-1.5 rounded-xl border ${theme.borderSubtle} shrink-0`}>
-              <span className="text-[10px] text-slate-400 uppercase font-mono">Sem:</span>
-              <div className="flex gap-1">
+        {/* Hitos o avisos específicos de facción */}
+        {selectedFaction === 'Templo' && (
+          <div className="mt-2 flex items-center gap-2 text-[11px] font-mono bg-amber-950/70 text-amber-300 border border-amber-600/60 px-2.5 py-1 rounded-lg">
+            <Sparkles className="w-3.5 h-3.5 text-yellow-400 shrink-0" />
+            <span>
+              <strong>Hito Clave Templo:</strong> Tiers 1, 2 y 3 asegurados en Semana 1 (Día 4) • <strong>Rush a Tier 7 (Ángeles)</strong> completado en el <strong>Día 14</strong> exacto.
+            </span>
+          </div>
+        )}
+        {meta.status === 'desarrollo' && (
+          <div className="mt-2 flex items-center gap-2 text-[11px] font-mono bg-indigo-950/70 text-indigo-300 border border-indigo-600/60 px-2.5 py-1 rounded-lg">
+            <AlertTriangle className="w-3.5 h-3.5 text-yellow-400 shrink-0" />
+            <span>
+              <strong>Facción en Desarrollo:</strong> Árboles y datos detallados de {meta.name} en proceso de confirmación por Unfrozen. Mostrando arquitectura base.
+            </span>
+          </div>
+        )}
+
+        {/* Filtros Situados Directamente Debajo del Título (Sin necesidad de scroll) */}
+        <div className={`mt-2.5 pt-2 border-t ${theme.borderSubtle} flex items-center flex-wrap gap-2 sm:gap-2.5`}>
+          {/* Month Filter */}
+          <div className={`flex items-center gap-1.5 bg-black/60 px-2.5 py-1 rounded-xl border ${theme.borderSubtle}`}>
+            <Calendar className="w-3.5 h-3.5 shrink-0" style={{ color: theme.hexPrimary }} />
+            <div className="flex gap-1">
+              {(['all', 1, 2] as const).map((m) => (
                 <button
-                  onClick={() => setSelectedWeek('all')}
-                  className={`px-1.5 sm:px-2 py-0.5 text-[11px] sm:text-xs rounded font-semibold font-mono cursor-pointer ${
-                    selectedWeek === 'all'
+                  key={m}
+                  onClick={() => {
+                    setSelectedMonth(m);
+                    setSelectedWeek('all');
+                  }}
+                  className={`px-2 py-0.5 text-[11px] rounded-md font-semibold transition-all uppercase tracking-wider cursor-pointer font-mono whitespace-nowrap ${
+                    selectedMonth === m
                       ? theme.pillActive
-                      : 'bg-black/40 text-slate-400 hover:text-slate-200'
+                      : 'bg-black/40 text-slate-400 hover:text-slate-200 border border-slate-800'
                   }`}
                 >
-                  Todas
+                  {m === 'all' ? '2 Meses' : `Mes ${m}`}
                 </button>
-                {[1, 2, 3, 4, 5, 6, 7, 8].map((wk) => {
-                  if (selectedMonth === 1 && wk > 4) return null;
-                  if (selectedMonth === 2 && wk <= 4) return null;
-                  return (
-                    <button
-                      key={wk}
-                      onClick={() => setSelectedWeek(wk)}
-                      className={`px-1.5 sm:px-2 py-0.5 text-[11px] sm:text-xs rounded font-semibold font-mono cursor-pointer ${
-                        selectedWeek === wk
-                          ? theme.pillActive
-                          : 'bg-black/40 text-slate-400 hover:text-slate-200'
-                      }`}
-                    >
-                      S{wk}
-                    </button>
-                  );
-                })}
-              </div>
+              ))}
             </div>
+          </div>
 
-            {/* Rival Filter: Ambos / Humano / IA */}
-            <div className={`flex items-center gap-1.5 bg-black/60 px-2.5 sm:px-3 py-1.5 rounded-xl border ${theme.borderSubtle} shrink-0`}>
-              <Filter className="w-4 h-4 shrink-0" style={{ color: theme.hexPrimary }} />
-              <div className="flex gap-1">
-                {(['all', 'human', 'ai'] as const).map((mode) => (
+          {/* Week Selector */}
+          <div className={`flex items-center gap-1 bg-black/60 px-2 py-1 rounded-xl border ${theme.borderSubtle} flex-wrap`}>
+            <span className="text-[10px] text-slate-400 uppercase font-mono pl-0.5">Sem:</span>
+            <div className="flex gap-1 flex-wrap">
+              <button
+                onClick={() => setSelectedWeek('all')}
+                className={`px-1.5 py-0.5 text-[11px] rounded font-semibold font-mono cursor-pointer ${
+                  selectedWeek === 'all'
+                    ? theme.pillActive
+                    : 'bg-black/40 text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                Todas
+              </button>
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((wk) => {
+                if (selectedMonth === 1 && wk > 4) return null;
+                if (selectedMonth === 2 && wk <= 4) return null;
+                return (
                   <button
-                    key={mode}
-                    onClick={() => setOpponentMode(mode)}
-                    className={`px-2.5 py-1 text-[11px] sm:text-xs rounded-md font-semibold transition-all uppercase tracking-wider cursor-pointer font-mono whitespace-nowrap flex items-center gap-1 ${
-                      opponentMode === mode
-                        ? mode === 'human'
-                          ? 'bg-red-700 text-white shadow-[0_0_12px_rgba(239,68,68,0.6)] border border-red-400'
-                          : mode === 'ai'
-                          ? 'bg-cyan-700 text-white shadow-[0_0_12px_rgba(6,182,212,0.6)] border border-cyan-400'
-                          : theme.pillActive
-                        : 'bg-black/40 text-slate-400 hover:text-slate-200 border border-slate-800'
+                    key={wk}
+                    onClick={() => setSelectedWeek(wk)}
+                    className={`px-1.5 py-0.5 text-[11px] rounded font-semibold font-mono cursor-pointer ${
+                      selectedWeek === wk
+                        ? theme.pillActive
+                        : 'bg-black/40 text-slate-400 hover:text-slate-200'
                     }`}
                   >
-                    {mode === 'all' && '⚖️ Ambos'}
-                    {mode === 'human' && '⚔️ Humano'}
-                    {mode === 'ai' && '🤖 IA'}
+                    S{wk}
                   </button>
-                ))}
-              </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Rival Filter: Ambos / Humano / IA */}
+          <div className={`flex items-center gap-1.5 bg-black/60 px-2.5 py-1 rounded-xl border ${theme.borderSubtle}`}>
+            <Filter className="w-3.5 h-3.5 shrink-0" style={{ color: theme.hexPrimary }} />
+            <div className="flex gap-1">
+              {(['all', 'human', 'ai'] as const).map((mode) => (
+                <button
+                  key={mode}
+                  onClick={() => setOpponentMode(mode)}
+                  className={`px-2 py-0.5 text-[11px] rounded-md font-semibold transition-all uppercase tracking-wider cursor-pointer font-mono whitespace-nowrap flex items-center gap-1 ${
+                    opponentMode === mode
+                      ? mode === 'human'
+                        ? 'bg-red-700 text-white shadow-[0_0_12px_rgba(239,68,68,0.6)] border border-red-400'
+                        : mode === 'ai'
+                        ? 'bg-cyan-700 text-white shadow-[0_0_12px_rgba(6,182,212,0.6)] border border-cyan-400'
+                        : theme.pillActive
+                      : 'bg-black/40 text-slate-400 hover:text-slate-200 border border-slate-800'
+                  }`}
+                >
+                  {mode === 'all' && '⚖️ Ambos'}
+                  {mode === 'human' && '⚔️ Humano'}
+                  {mode === 'ai' && '🤖 IA'}
+                </button>
+              ))}
             </div>
           </div>
         </div>
@@ -387,13 +446,24 @@ export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({
                     </div>
                   </div>
 
-                  <div className="text-right shrink-0">
-                    <span className="text-xs font-mono font-bold text-yellow-500 block">
+                  <div className="text-right shrink-0 font-mono">
+                    <span className="text-xs font-bold text-yellow-400 block">
                       {step.cost.gold.toLocaleString()} G
                     </span>
-                    {step.cost.gems && (
-                      <span className={`text-[10px] font-mono ${theme.textAccent} block`}>
-                        {step.cost.gems} Gemas
+                    {/* Mostrar exclusivamente los recursos principales de la facción activa (sin madera ni mineral) */}
+                    {FACTION_PRIMARY_RESOURCES[selectedFaction]?.map((res) => {
+                      const amount = step.cost[res.key];
+                      if (!amount) return null;
+                      return (
+                        <span key={res.key} className={`text-[10px] font-semibold ${res.colorClass} block`}>
+                          {amount} {res.label}
+                        </span>
+                      );
+                    })}
+                    {/* Polvo Alquímico (si aplica) */}
+                    {!!step.cost.alchemicalDust && (
+                      <span className={`text-[10px] font-semibold ${RESOURCE_CALC_STYLES.alchemicalDust.text} block`}>
+                        {step.cost.alchemicalDust} Polvo
                       </span>
                     )}
                   </div>
@@ -553,42 +623,44 @@ export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({
             {/* Cost breakdown */}
             <div className="mt-3.5 flex flex-wrap items-center gap-2 text-xs">
               <span className="text-slate-400 font-semibold font-mono text-[11px]">Coste:</span>
-              <span className="bg-black/60 px-2 py-0.5 rounded border border-yellow-800/40 font-mono text-yellow-400 font-bold">
+              <span className={`px-2.5 py-1 rounded-lg border font-mono font-bold flex items-center gap-1.5 shadow-sm ${RESOURCE_CALC_STYLES.gold.badge}`}>
+                <Coins className="w-3.5 h-3.5 text-yellow-400" />
                 {currentStep.cost.gold.toLocaleString()} Oro
               </span>
-              {currentStep.cost.wood && (
-                <span className="bg-black/60 px-2 py-0.5 rounded border border-amber-900/40 font-mono text-amber-300">
+              {!!currentStep.cost.wood && (
+                <span className={`px-2.5 py-1 rounded-lg border font-mono font-bold flex items-center gap-1.5 shadow-sm ${RESOURCE_CALC_STYLES.wood.badge}`}>
+                  <Trees className="w-3.5 h-3.5 text-emerald-400" />
                   {currentStep.cost.wood} Madera
                 </span>
               )}
-              {currentStep.cost.ore && (
-                <span className="bg-black/60 px-2 py-0.5 rounded border border-slate-700 font-mono text-slate-300">
+              {!!currentStep.cost.ore && (
+                <span className={`px-2.5 py-1 rounded-lg border font-mono font-bold flex items-center gap-1.5 shadow-sm ${RESOURCE_CALC_STYLES.ore.badge}`}>
+                  <Shield className="w-3.5 h-3.5 text-slate-400" />
                   {currentStep.cost.ore} Mineral
                 </span>
               )}
-              {currentStep.cost.gems && (
-                <span className={`bg-black/60 px-2 py-0.5 rounded border ${theme.borderSubtle} font-mono ${theme.textAccent} font-bold`}>
+              {!!currentStep.cost.gems && (
+                <span className={`px-2.5 py-1 rounded-lg border font-mono font-bold flex items-center gap-1.5 shadow-sm ${RESOURCE_CALC_STYLES.gems.badge}`}>
+                  <Gem className="w-3.5 h-3.5 text-cyan-400" />
                   {currentStep.cost.gems} Gemas
                 </span>
               )}
-              {currentStep.cost.crystal && (
-                <span className="bg-black/60 px-2 py-0.5 rounded border border-cyan-800/40 font-mono text-cyan-300">
+              {!!currentStep.cost.crystal && (
+                <span className={`px-2.5 py-1 rounded-lg border font-mono font-bold flex items-center gap-1.5 shadow-sm ${RESOURCE_CALC_STYLES.crystal.badge}`}>
+                  <Sparkles className="w-3.5 h-3.5 text-purple-400" />
                   {currentStep.cost.crystal} Cristal
                 </span>
               )}
-              {currentStep.cost.mercury && (
-                <span className="bg-black/60 px-2 py-0.5 rounded border border-rose-800/40 font-mono text-rose-300">
+              {!!currentStep.cost.mercury && (
+                <span className={`px-2.5 py-1 rounded-lg border font-mono font-bold flex items-center gap-1.5 shadow-sm ${RESOURCE_CALC_STYLES.mercury.badge}`}>
+                  <span className="text-xs">🧪</span>
                   {currentStep.cost.mercury} Mercurio
                 </span>
               )}
-              {currentStep.cost.sulfur && (
-                <span className="bg-black/60 px-2 py-0.5 rounded border border-yellow-800/40 font-mono text-yellow-300">
-                  {currentStep.cost.sulfur} Azufre
-                </span>
-              )}
-              {currentStep.cost.alchemicalDust && (
-                <span className="bg-black/60 px-2 py-0.5 rounded border border-pink-800/40 font-mono text-pink-300">
-                  {currentStep.cost.alchemicalDust} Polvo
+              {!!currentStep.cost.alchemicalDust && (
+                <span className={`px-2.5 py-1 rounded-lg border font-mono font-bold flex items-center gap-1.5 shadow-sm ${RESOURCE_CALC_STYLES.alchemicalDust.badge}`}>
+                  <span className="text-xs">✨</span>
+                  {currentStep.cost.alchemicalDust} Polvo Alquímico
                 </span>
               )}
             </div>

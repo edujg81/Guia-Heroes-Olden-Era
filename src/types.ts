@@ -27,7 +27,6 @@ export interface BuildStep {
     gems?: number;
     crystal?: number;
     mercury?: number;
-    sulfur?: number;
     alchemicalDust?: number;
   };
   lawProgress?: string;
@@ -63,7 +62,6 @@ export interface UnitVariant {
     gems?: number;
     crystal?: number;
     mercury?: number;
-    sulfur?: number;
     alchemicalDust?: number;
   };
   stats: UnitStats;
@@ -357,7 +355,6 @@ export interface TownStructureCost {
   gems?: number;
   crystal?: number;
   mercury?: number;
-  sulfur?: number;
   alchemicalDust?: number;
 }
 

@@ -136,7 +136,6 @@ export const TownStructuresBrowser: React.FC<TownStructuresBrowserProps> = ({
       gems: 0,
       crystal: 0,
       mercury: 0,
-      sulfur: 0,
     };
 
     requiredForT7.forEach((s) => {
@@ -146,7 +145,6 @@ export const TownStructuresBrowser: React.FC<TownStructuresBrowserProps> = ({
       total.gems = (total.gems || 0) + (s.cost.gems || 0);
       total.crystal = (total.crystal || 0) + (s.cost.crystal || 0);
       total.mercury = (total.mercury || 0) + (s.cost.mercury || 0);
-      total.sulfur = (total.sulfur || 0) + (s.cost.sulfur || 0);
     });
 
     return {
@@ -178,23 +176,18 @@ export const TownStructuresBrowser: React.FC<TownStructuresBrowserProps> = ({
           </span>
         )}
         {!!cost.gems && (
-          <span className="inline-flex items-center gap-1 bg-sky-950/50 text-sky-300 border border-sky-600/40 px-2 py-0.5 rounded font-semibold">
+          <span className="inline-flex items-center gap-1 bg-cyan-950/50 text-cyan-300 border border-cyan-600/40 px-2 py-0.5 rounded font-semibold">
             💎 {cost.gems} Gemas
           </span>
         )}
         {!!cost.crystal && (
-          <span className="inline-flex items-center gap-1 bg-cyan-950/50 text-cyan-300 border border-cyan-600/40 px-2 py-0.5 rounded font-semibold">
-            🔷 {cost.crystal} Cristal
+          <span className="inline-flex items-center gap-1 bg-purple-950/50 text-purple-300 border border-purple-600/40 px-2 py-0.5 rounded font-semibold">
+            🔮 {cost.crystal} Cristal
           </span>
         )}
         {!!cost.mercury && (
           <span className="inline-flex items-center gap-1 bg-red-950/50 text-red-300 border border-red-600/40 px-2 py-0.5 rounded font-semibold">
             🧪 {cost.mercury} Mercurio
-          </span>
-        )}
-        {!!cost.sulfur && (
-          <span className="inline-flex items-center gap-1 bg-yellow-950/50 text-yellow-300 border border-yellow-600/40 px-2 py-0.5 rounded font-semibold">
-            ⚡ {cost.sulfur} Azufre
           </span>
         )}
       </div>

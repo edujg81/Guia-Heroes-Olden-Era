@@ -9,3 +9,5 @@ export * from './MedievalCard';
 export * from './UnitStatRadarChart';
 export * from './InteractivePlannerTimeline';
 export * from './BuildResourceCalculator';
+export * from './FactionAmbientParticles';
+export * from './ZenCommanderController';

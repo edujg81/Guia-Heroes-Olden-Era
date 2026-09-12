@@ -13,11 +13,13 @@ interface UseKeyboardShortcutsProps {
   onPrevDay: () => void;
   onNextDay: () => void;
   onToggleCompactMode: () => void;
+  onToggleZenMode?: () => void;
   onToggleTheme: () => void;
   onPrevTab: () => void;
   onNextTab: () => void;
   onToggleHelp: () => void;
   onClose: () => void;
+  onCycleFontScale?: () => void;
   isEnabled?: boolean;
 }
 
@@ -35,11 +37,13 @@ export const useKeyboardShortcuts = ({
   onPrevDay,
   onNextDay,
   onToggleCompactMode,
+  onToggleZenMode,
   onToggleTheme,
   onPrevTab,
   onNextTab,
   onToggleHelp,
   onClose,
+  onCycleFontScale,
   isEnabled = true,
 }: UseKeyboardShortcutsProps) => {
   const [lastShortcut, setLastShortcut] = useState<ShortcutEvent | null>(null);
@@ -129,6 +133,19 @@ export const useKeyboardShortcuts = ({
         return;
       }
 
+      // Z or F11: Toggle Zen Commander Immersive Mode
+      if (onToggleZenMode && (key === 'z' || key === 'Z' || key === 'F11')) {
+        event.preventDefault();
+        onToggleZenMode();
+        setLastShortcut({
+          keyLabel: key === 'F11' ? 'F11' : 'Z',
+          description: 'Modo Inmersivo Zen Commander',
+          category: 'view',
+          timestamp: Date.now(),
+        });
+        return;
+      }
+
       // M: Toggle Light/Dark Mode
       if (key === 'm' || key === 'M') {
         event.preventDefault();
@@ -136,6 +153,19 @@ export const useKeyboardShortcuts = ({
         setLastShortcut({
           keyLabel: 'M',
           description: 'Alternar Modo Claro/Oscuro',
+          category: 'view',
+          timestamp: Date.now(),
+        });
+        return;
+      }
+
+      // A: Cycle Typography Font Scale (100% -> 115% -> 130%)
+      if (onCycleFontScale && (key === 'a' || key === 'A')) {
+        event.preventDefault();
+        onCycleFontScale();
+        setLastShortcut({
+          keyLabel: 'A',
+          description: 'Escalar Fuente UI (100%/115%/130%)',
           category: 'view',
           timestamp: Date.now(),
         });
@@ -205,6 +235,7 @@ export const useKeyboardShortcuts = ({
     onPrevDay,
     onNextDay,
     onToggleCompactMode,
+    onToggleZenMode,
     onToggleTheme,
     onPrevTab,
     onNextTab,

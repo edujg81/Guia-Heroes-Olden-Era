@@ -7,7 +7,8 @@ import { SearchBar } from '../../ui/SearchBar';
 import { FilterChipGroup, FilterOption } from '../../ui/FilterChipGroup';
 import { HeroGuideCard } from './HeroGuideCard';
 import { HeroDetailModal } from './HeroDetailModal';
-import { Users, Wand2, Swords, Sparkles, Filter } from 'lucide-react';
+import { HeroComparatorSplitScreen } from './HeroComparatorSplitScreen';
+import { Users, Wand2, Swords, Sparkles, Filter, ArrowRightLeft } from 'lucide-react';
 
 interface HeroGuideViewProps {
   selectedFaction?: FactionId;
@@ -20,10 +21,14 @@ export const HeroGuideView: React.FC<HeroGuideViewProps> = ({
   themeMode = 'dark',
   customHeroesList,
 }) => {
+  const [viewMode, setViewMode] = useState<'roster' | 'comparator'>('roster');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedArchetype, setSelectedArchetype] = useState<'all' | 'Guerrero' | 'Mago'>('all');
   const [selectedRole, setSelectedRole] = useState<string>('all');
   const [inspectedHero, setInspectedHero] = useState<DungeonHero | null>(null);
+
+  const [compareHeroA, setCompareHeroA] = useState<DungeonHero | null>(null);
+  const [compareHeroB, setCompareHeroB] = useState<DungeonHero | null>(null);
 
   const theme = getFactionTheme(selectedFaction, themeMode);
 
@@ -31,6 +36,13 @@ export const HeroGuideView: React.FC<HeroGuideViewProps> = ({
   const heroes: DungeonHero[] = useMemo(() => {
     return customHeroesList || getHeroesByFactionKey(selectedFaction);
   }, [selectedFaction, customHeroesList]);
+
+  const handleStartCompare = (hero: DungeonHero) => {
+    setCompareHeroA(hero);
+    const otherHero = heroes.find((h) => h.id !== hero.id) || null;
+    setCompareHeroB(otherHero);
+    setViewMode('comparator');
+  };
 
   // 2. Filtro reactivo en memoria
   const filteredHeroes = useMemo(() => {
@@ -73,69 +85,126 @@ export const HeroGuideView: React.FC<HeroGuideViewProps> = ({
     <GenericGuideTemplate
       selectedFaction={selectedFaction}
       themeMode={themeMode}
-      title="Guía Canónica de Héroes & Especialistas"
+      title={viewMode === 'comparator' ? 'Comparador Visual de Comandantes (Split-Screen)' : 'Guía Canónica de Héroes & Especialistas'}
       categorySubtitle="Heroes of Might and Magic: Olden Era • Roster & Builds"
-      description="Explora todos los comandantes oficiales de la facción, sus especialidades únicas, crecimientos porcentuales de atributos por nivel, habilidades iniciales recomendadas y estilos tácticos de combate."
+      description={
+        viewMode === 'comparator'
+          ? 'Contrasta 2 héroes lado a lado en tiempo real: simula atributos por nivel, visualiza gráficas diferenciales de barras y audita la sinergia temática de criaturas.'
+          : 'Explora todos los comandantes oficiales de la facción, sus especialidades únicas, crecimientos porcentuales de atributos por nivel, habilidades iniciales recomendadas y estilos tácticos de combate.'
+      }
       filterBar={
         <div className="space-y-3">
-          <div className="flex flex-col sm:flex-row gap-3 items-center justify-between">
-            <SearchBar
-              value={searchTerm}
-              onChange={setSearchTerm}
-              placeholder={`Buscar héroe de ${selectedFaction} por nombre, clase o especialidad...`}
-              themeMode={themeMode}
-            />
-            <FilterChipGroup
-              options={archetypeOptions}
-              selectedValue={selectedArchetype}
-              onChange={setSelectedArchetype}
-              themeMode={themeMode}
-            />
+          {/* Switcher de Modos: Roster vs Comparador */}
+          <div className="flex items-center justify-between gap-3 pb-1 border-b border-slate-800/60">
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setViewMode('roster')}
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+                  viewMode === 'roster'
+                    ? 'bg-amber-600 text-white shadow-md shadow-amber-600/30'
+                    : 'bg-slate-800 text-slate-400 hover:text-white'
+                }`}
+              >
+                <Users className="w-3.5 h-3.5" />
+                <span>Roster Canónico ({heroes.length})</span>
+              </button>
+
+              <button
+                onClick={() => setViewMode('comparator')}
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+                  viewMode === 'comparator'
+                    ? 'bg-amber-600 text-white shadow-md shadow-amber-600/30'
+                    : 'bg-slate-800 text-slate-400 hover:text-white'
+                }`}
+              >
+                <ArrowRightLeft className="w-3.5 h-3.5 text-amber-400" />
+                <span>Comparador Split-Screen</span>
+              </button>
+            </div>
+
+            {viewMode === 'roster' && (
+              <span className="text-[11px] font-mono text-slate-400 hidden sm:inline">
+                Haz clic en <strong>Comparar</strong> en cualquier héroe para abrir el duelo lado a lado.
+              </span>
+            )}
           </div>
+
+          {viewMode === 'roster' && (
+            <div className="flex flex-col sm:flex-row gap-3 items-center justify-between pt-1">
+              <SearchBar
+                value={searchTerm}
+                onChange={setSearchTerm}
+                placeholder={`Buscar héroe de ${selectedFaction} por nombre, clase o especialidad...`}
+                themeMode={themeMode}
+              />
+              <FilterChipGroup
+                options={archetypeOptions}
+                selectedValue={selectedArchetype}
+                onChange={setSelectedArchetype}
+                themeMode={themeMode}
+              />
+            </div>
+          )}
         </div>
       }
       footerNotes={
         <div className="flex items-center gap-2">
           <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
           <span>
-            Mostrando <strong>{filteredHeroes.length}</strong> de {heroes.length} héroes disponibles para la facción <strong>{selectedFaction}</strong>. Los datos se actualizan automáticamente al cambiar de facción.
+            {viewMode === 'comparator'
+              ? 'El comparador simula estadísticas primarias escalando con la tasa de crecimiento canónica de Olden Era.'
+              : `Mostrando ${filteredHeroes.length} de ${heroes.length} héroes disponibles para la facción ${selectedFaction}. Los datos se actualizan automáticamente al cambiar de facción.`}
           </span>
         </div>
       }
     >
-      {/* Grid de Tarjetas de Héroes */}
-      {filteredHeroes.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredHeroes.map((hero) => (
-            <HeroGuideCard
-              key={hero.id}
-              hero={hero}
-              onSelect={() => setInspectedHero(hero)}
-              themeMode={themeMode}
-              themeAccentClass={theme.textAccent}
-            />
-          ))}
-        </div>
+      {viewMode === 'comparator' ? (
+        <HeroComparatorSplitScreen
+          initialHeroA={compareHeroA}
+          initialHeroB={compareHeroB}
+          defaultFaction={selectedFaction}
+          themeMode={themeMode}
+          onBackToRoster={() => setViewMode('roster')}
+        />
       ) : (
-        <div className="text-center py-12 border rounded-2xl border-dashed border-slate-800 text-slate-400">
-          <Users className="w-10 h-10 mx-auto mb-2 opacity-40" />
-          <p className="text-sm font-semibold">No se encontraron héroes que coincidan con la búsqueda.</p>
-          <button
-            onClick={() => {
-              setSearchTerm('');
-              setSelectedArchetype('all');
-            }}
-            className="mt-2 text-xs text-amber-400 hover:underline cursor-pointer"
-          >
-            Restablecer filtros
-          </button>
-        </div>
+        <>
+          {/* Grid de Tarjetas de Héroes */}
+          {filteredHeroes.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {filteredHeroes.map((hero) => (
+                <HeroGuideCard
+                  key={hero.id}
+                  hero={hero}
+                  onSelect={() => setInspectedHero(hero)}
+                  onCompare={handleStartCompare}
+                  themeMode={themeMode}
+                  themeAccentClass={theme.textAccent}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 border rounded-2xl border-dashed border-slate-800 text-slate-400">
+              <Users className="w-10 h-10 mx-auto mb-2 opacity-40" />
+              <p className="text-sm font-semibold">No se encontraron héroes que coincidan con la búsqueda.</p>
+              <button
+                onClick={() => {
+                  setSearchTerm('');
+                  setSelectedArchetype('all');
+                }}
+                className="mt-2 text-xs text-amber-400 hover:underline cursor-pointer"
+              >
+                Restablecer filtros
+              </button>
+            </div>
+          )}
+        </>
       )}
 
       {/* Modal Detallado */}
       <HeroDetailModal
         hero={inspectedHero}
         onClose={() => setInspectedHero(null)}
+        onCompare={handleStartCompare}
         themeMode={themeMode}
         themeAccentClass={theme.textAccent}
       />

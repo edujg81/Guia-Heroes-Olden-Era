@@ -4,4 +4,3 @@ export { SpellScalingDataTable } from './SpellScalingDataTable';
 export { SpellVersusComparator } from './SpellVersusComparator';
 export { RunicGlyphAura } from './RunicGlyphAura';
 export { SmartSpellHoverCard } from './SmartSpellHoverCard';
-export { MedievalCodexPage } from './MedievalCodexPage';

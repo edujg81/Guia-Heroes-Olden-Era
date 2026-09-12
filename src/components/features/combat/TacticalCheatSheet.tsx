@@ -363,11 +363,11 @@ export const TacticalCheatSheet: React.FC<TacticalCheatSheetProps> = ({
                         <div className="flex items-center gap-1.5 text-[10px] font-mono text-yellow-400 font-bold">
                           <Coins className="w-3 h-3" />
                           <span>{step.cost.gold.toLocaleString()} Oro</span>
-                          {step.cost.wood && <span className="text-amber-300">+{step.cost.wood}M</span>}
+                          {step.cost.wood && <span className="text-emerald-400">+{step.cost.wood}M</span>}
                           {step.cost.ore && <span className="text-slate-300">+{step.cost.ore}P</span>}
-                          {step.cost.crystal && <span className="text-red-300">+{step.cost.crystal}C</span>}
-                          {step.cost.mercury && <span className="text-purple-300">+{step.cost.mercury}Hg</span>}
                           {step.cost.gems && <span className="text-cyan-300">+{step.cost.gems}G</span>}
+                          {step.cost.crystal && <span className="text-purple-300">+{step.cost.crystal}C</span>}
+                          {step.cost.mercury && <span className="text-red-300">+{step.cost.mercury}Hg</span>}
                         </div>
                       </div>
 

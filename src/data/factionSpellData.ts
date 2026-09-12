@@ -439,10 +439,10 @@ export const FACTION_SPELL_COMBOS: Record<CanonicalFactionKey, FactionSpellCombo
         { spellId: 'spell-thick-hide', spellName: 'Piel de Diamante Masiva (N4)', level: 'Nivel 4', manaCost: 7 },
         { spellId: 'spell-slow', spellName: 'Lentitud Masiva (N4)', level: 'Nivel 4', manaCost: 10 },
       ],
-      beneficiaryUnits: ['Escorpiones de Azufre', 'Reinas de la Colmena', 'Waurms de Magma'],
+      beneficiaryUnits: ['Escorpiones Volcánicos', 'Reinas de la Colmena', 'Waurms de Magma'],
       recommendedHeroes: ['Tavi', 'Khariseth', 'Bathym'],
       executionSteps: [
-        'Despliega a los Escorpiones de Azufre y Saqueadores en formación de arco protector alrededor de las Reinas de la Colmena.',
+        'Despliega a los Escorpiones Volcánicos y Saqueadores en formación de arco protector alrededor de las Reinas de la Colmena.',
         'Lanza Piel de Diamante N4 para elevar la armadura de los Escorpiones a niveles casi inexpugnables.',
         'Lanza Lentitud Masiva para frenar a las tropas enemigas mientras las Reinas y Waurms desatan su poder destructivo turno tras turno.',
         'El volumen numérico y la resistencia del enjambre se multiplican mientras los Escorpiones absorben todo el daño rival.',
@@ -806,8 +806,8 @@ export const FACTION_SPELL_PRIORITIES: Record<CanonicalFactionKey, Record<string
     },
     'spell-thick-hide': {
       priority: 'Muy Alta (P2)',
-      synergyTip: 'Convierte a los Escorpiones de Azufre y Saqueadores en tanques absorbentes de daño de primera línea.',
-      keyUnitsBenefited: ['Escorpiones de Azufre', 'Saqueadores Desgarradores'],
+      synergyTip: 'Convierte a los Escorpiones Volcánicos y Saqueadores en tanques absorbentes de daño de primera línea.',
+      keyUnitsBenefited: ['Escorpiones Volcánicos', 'Saqueadores Desgarradores'],
     },
     'spell-slow': {
       priority: 'Muy Alta (P2)',

@@ -52,9 +52,11 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
       title: 'Vistas y Herramientas Competitivas',
       icon: Layout,
       shortcuts: [
+        { key: 'Z', label: 'Modo Inmersivo Zen Commander', desc: 'Oculta la interfaz para maximizar el área al 100% de la pantalla y activa partículas ambientales' },
         { key: 'C / T', label: 'Ficha Táctica / Modo Compacto', desc: 'Activa la vista condensada de segunda pantalla (Día 1-7 + Iniciativa)' },
         { key: 'Q / E', label: 'Pestaña Anterior / Siguiente', desc: 'Navega secuencialmente entre los módulos de la guía' },
         { key: 'M', label: 'Modo Claro / Oscuro', desc: 'Alterna instantáneamente entre paleta medieval diurna y nocturna' },
+        { key: 'A', label: 'Escalado de Fuente UI', desc: 'Alterna en tiempo real entre tamaños de tipografía (100% → 115% → 130%) para televisores o pantallas lejanas' },
       ],
     },
     {

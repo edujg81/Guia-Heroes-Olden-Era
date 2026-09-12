@@ -193,7 +193,7 @@ export const HIVE_STRUCTURES: TownStructure[] = [
         level: 2,
         name: 'Gremio de Magos Nivel 2',
         nameEn: 'Mage Guild Level 2',
-        cost: { gold: 1000, wood: 5, ore: 5, sulfur: 4 },
+        cost: { gold: 1000, wood: 5, ore: 5, crystal: 4 },
         prerequisites: ['Gremio de Magos Nivel 1'],
         effects: ['Desbloquea hechizos de Nivel 2 en el Observatorio Mágico.'],
         strategicTip: 'Acceso a nieblas ácidas y venenos masivos.'
@@ -202,7 +202,7 @@ export const HIVE_STRUCTURES: TownStructure[] = [
         level: 3,
         name: 'Gremio de Magos Nivel 3',
         nameEn: 'Mage Guild Level 3',
-        cost: { gold: 1000, wood: 5, ore: 5, sulfur: 6 },
+        cost: { gold: 1000, wood: 5, ore: 5, crystal: 6 },
         prerequisites: ['Gremio de Magos Nivel 2'],
         effects: ['Desbloquea hechizos de Nivel 3 de las escuelas canónicas en el Observatorio Mágico.'],
         strategicTip: 'Aumenta el control táctico en asedios.'
@@ -211,7 +211,7 @@ export const HIVE_STRUCTURES: TownStructure[] = [
         level: 4,
         name: 'Gremio de Magos Nivel 4',
         nameEn: 'Mage Guild Level 4',
-        cost: { gold: 1000, wood: 5, ore: 5, sulfur: 8 },
+        cost: { gold: 1000, wood: 5, ore: 5, crystal: 8 },
         prerequisites: ['Gremio de Magos Nivel 3'],
         effects: ['Desbloquea hechizos mayores de Nivel 4 en el Observatorio Mágico.'],
         strategicTip: 'Ondas biológicas devastadoras e inmunidad temporal a daño.'
@@ -220,7 +220,7 @@ export const HIVE_STRUCTURES: TownStructure[] = [
         level: 5,
         name: 'Gremio de Magos Nivel 5',
         nameEn: 'Mage Guild Level 5',
-        cost: { gold: 1000, wood: 5, ore: 5, sulfur: 10 },
+        cost: { gold: 1000, wood: 5, ore: 5, crystal: 10 },
         prerequisites: ['Gremio de Magos Nivel 4'],
         effects: ['Desbloquea hechizos supremos de Nivel 5 del Enjambre.'],
         strategicTip: 'Plagas supremas de aniquilación y renacimiento masivo.'
@@ -258,7 +258,7 @@ export const HIVE_STRUCTURES: TownStructure[] = [
     effects: [
       'Permite intercambiar recursos y oro en el mercado de la colmena.',
       'Las tasas de intercambio mejoran conforme el jugador controla más Mercados en su reino.',
-      'Permite canjear excedentes por Azufre o Cristales.'
+      'Permite canjear excedentes por Cristales o Gemas.'
     ],
     strategicTip: 'Construir en Semana 1 para financiar las moradas de Gusanos de Magma y la Torre del Amor.',
     timingRecommendation: 'Semana 1 (Día 3-5).',
@@ -287,10 +287,10 @@ export const HIVE_STRUCTURES: TownStructure[] = [
     cost: { gold: 0, gems: 3, crystal: 3 },
     prerequisites: ['Mercado (Marketplace)', 'Banco (Bank)'],
     effects: [
-      'Genera +1 Azufre diario de forma pasiva (recurso raro principal del Enjambre).',
-      'Asegura el suministro continuo de azufre para la Torre del Amor y el Gremio de Magos.'
+      'Genera +1 Cristal diario de forma pasiva (recurso raro principal del Enjambre en Olden Era).',
+      'Asegura el suministro continuo de cristal para la Torre del Amor y el Gremio de Magos.'
     ],
-    strategicTip: 'Requiere Mercado y Banco. Construir en cuanto se tengan 3 de cada recurso raro secundario para estabilizar la economía de azufre.',
+    strategicTip: 'Requiere Mercado y Banco. Construir en cuanto se tengan 3 de cada recurso raro secundario para estabilizar la economía de cristal.',
     timingRecommendation: 'Semana 2.',
   },
   {
@@ -299,7 +299,7 @@ export const HIVE_STRUCTURES: TownStructure[] = [
     nameEn: 'Alchemic Silo',
     category: 'Cívica y Economía',
     faction: 'Enjambre',
-    cost: { gold: 2000, ore: 5, sulfur: 2 },
+    cost: { gold: 2000, ore: 5, crystal: 2 },
     prerequisites: ['Silo de Recursos (Resource Silo)'],
     effects: [
       'Produce Polvo Alquímico (Alchemical Dust) diariamente.',
@@ -434,13 +434,13 @@ export const HIVE_STRUCTURES: TownStructure[] = [
     faction: 'Enjambre',
     tier: 4,
     dwellingTier: 4,
-    cost: { gold: 2500, ore: 5, sulfur: 2 },
-    dwellingUpgradeCost: { gold: 2000, ore: 5, sulfur: 2 },
+    cost: { gold: 2500, ore: 5, crystal: 2 },
+    dwellingUpgradeCost: { gold: 2000, ore: 5, crystal: 2 },
     prerequisites: ['Nido de Papel (Paper Nest)', 'Gremio de Magos (Mage Guild)'],
     unitRecruitedBase: 'Escorpión (Scorpion)',
     unitRecruited: 'Escorpión / Escorpión Volcánico / Escorpión Espeleano',
     unitUpgrades: {
-      branchA: 'Escorpión Volcánico (Caparazón ígneo con pinzas ardientes y veneno sulfúrico)',
+      branchA: 'Escorpión Volcánico (Caparazón ígneo con pinzas ardientes y veneno cáustico)',
       branchB: 'Escorpión Espeleano (Coraza de roca subterránea y aguijón petrificante)',
       branchADetails: {
         unitName: 'Escorpión Volcánico',
@@ -472,8 +472,8 @@ export const HIVE_STRUCTURES: TownStructure[] = [
     faction: 'Enjambre',
     tier: 5,
     dwellingTier: 5,
-    cost: { gold: 3500, wood: 5, sulfur: 4 },
-    dwellingUpgradeCost: { gold: 3000, wood: 5, sulfur: 3 },
+    cost: { gold: 3500, wood: 5, crystal: 4 },
+    dwellingUpgradeCost: { gold: 3000, wood: 5, crystal: 3 },
     prerequisites: ['Zigurat Quitináceo (Chitinous Ziggurat)'],
     unitRecruitedBase: 'Saqueador (Reaver)',
     unitRecruited: 'Saqueador / Saqueador Amenazante / Saqueador Maníaco',
@@ -510,8 +510,8 @@ export const HIVE_STRUCTURES: TownStructure[] = [
     faction: 'Enjambre',
     tier: 6,
     dwellingTier: 6,
-    cost: { gold: 5000, ore: 10, sulfur: 6 },
-    dwellingUpgradeCost: { gold: 4000, ore: 5, sulfur: 4 },
+    cost: { gold: 5000, ore: 10, crystal: 6 },
+    dwellingUpgradeCost: { gold: 4000, ore: 5, crystal: 4 },
     prerequisites: ['Cúspide (Apex)'],
     unitRecruitedBase: 'Waurm (Waurm)',
     unitRecruited: 'Waurm / Devorador / Piroboro',
@@ -548,8 +548,8 @@ export const HIVE_STRUCTURES: TownStructure[] = [
     faction: 'Enjambre',
     tier: 7,
     dwellingTier: 7,
-    cost: { gold: 10000, ore: 15, sulfur: 10 },
-    dwellingUpgradeCost: { gold: 8000, ore: 10, sulfur: 8 },
+    cost: { gold: 10000, ore: 15, crystal: 10 },
+    dwellingUpgradeCost: { gold: 8000, ore: 10, crystal: 8 },
     prerequisites: ['Madrigueras de Almas Ardientes (Burning Soul Burrows)', 'Gremio de Magos (Mage Guild)'],
     unitRecruitedBase: 'Reina de la Colmena (Hive Queen)',
     unitRecruited: 'Reina de la Colmena / Madre de la Colmena / Cazadora de la Colmena',

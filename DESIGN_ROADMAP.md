@@ -52,7 +52,7 @@ Este documento registra las mejoras de diseño, identidad visual y experiencia d
 
 ---
 
-### 6. Pizarra Táctica Hexagonal Interactiva (Visualizador de Campo de Batalla) ⏳ [PENDIENTE]
+### 6. Pizarra Táctica Hexagonal Interactiva (Visualizador de Campo de Batalla) ⏸️ [EN SUSPENSO]
 - [ ] **Tablero Hexagonal SVG Reactivo**: Malla hexagonal de 11x15 casillas renderizada en SVG vectorial con Tailwind CSS, adaptada al tamaño del viewport con `ResizeObserver`.
 - [ ] **Líneas de Visión y Conos de Disparo**: Indicadores visuales de medio daño por distancia, obstrucciones de obstáculos medievales y cobertura de murallas/fosos.
 - [ ] **Rango de Amenaza y Radio de Movimiento de Criaturas**: Resaltado dinámico en hexágonos accesibles según la velocidad de la unidad seleccionada y hexágonos en zona de ataque con cálculo de contraataque disponible.
@@ -60,28 +60,28 @@ Este documento registra las mejoras de diseño, identidad visual y experiencia d
 
 ---
 
-### 7. Modo Streamer & Overlay Táctico Broadcast (OBS / Segunda Pantalla) ⏳ [PENDIENTE]
+### 7. Modo Streamer & Overlay Táctico Broadcast (OBS / Segunda Pantalla) ⏸️ [EN SUSPENSO]
 - [ ] **Vista 'Clean Broadcast' para Directos de Twitch/YouTube**: Modo de visualización minimalista con fondo transparente (`chroma-key` verde o fondo alfa) para embeber estadísticas del héroe y build order en OBS Studio.
 - [ ] **Widget de Comparación de Daño Instantáneo (Pip-in-Pip)**: Ventana flotante PIP en esquina que muestra el cálculo de daño de un ataque o hechizo sobre el objetivo fijado.
 - [ ] **Modo Compacto Ultrawide (21:9)**: Distribución bento-grid de 4 columnas optimizada para monitores ultrapanorámicos de jugadores competitivos sin espacios en blanco desaprovechados.
 
 ---
 
-### 8. Grimorio & Códice Ilustrado con Microanimaciones Rúnicas ✅ [COMPLETADA]
-- [x] **Efecto de Paso de Página Medieval con CSS Moderno**: Transición de códice antiguo con sombra proyectada cónica (`codexPageFlipNext` / `codexPageFlipPrev`), lomo cosido en piel (`codex-spine-crease`), cantoneras doradas filigranadas y textura de pergamino desgastado (`MedievalCodexPage.tsx`) con botón conmutador de modo códice/clásico y navegación de folios con números romanos.
+### 8. Grimorio Ilustrado con Microanimaciones Rúnicas y Tooltips Inteligentes ✅ [COMPLETADO / EFECTO PÁGINA DESHECHO]
+- [x] **Efecto de Paso de Página Medieval**: [DESHECHO / ELIMINADO] Efecto de paso de página 3D y texturas de códice antiguo deshechos a petición del usuario. Se preserva una visualización limpia, directa, sin fricción de navegación y con máxima velocidad de renderizado.
 - [x] **Glifos y Partículas Rúnicas Tailwind**: Componente `RunicGlyphAura.tsx` con aceleración GPU (`transform-gpu`) que proyecta un halo de energía y 4 glifos rúnicos flotantes animados (`runeFloatA-D`, `runicRingSpin`) ajustados cromáticamente al elemento mágico canónico de Jadame (Luz, Sombras, Arcana, Primigenia, Neutro) activados en hechizos de Tier 4 y nivel Magistral.
 - [x] **Tooltips Holográficos Inteligentes (Smart Floating Cards)**: Componente `SmartSpellHoverCard.tsx` montado en portal (`createPortal`) con detección de colisión en viewport de 4 ejes (*boundary-aware*), efecto holográfico translúcido con desenfoque de fondo, cálculo reactivo en vivo de escalado de daño/curación de 0 a 30 Poder Mágico (SP), desglose de costes de maná y polvo alquímico, y sinergias canónicas de facción. Integrado en las tarjetas del Grimorio, en la Tabla de Escalado y en el Comparador Versus.
 
 ---
 
-### 9. Sistema de Impresión y Exportación a PDF de Hojas de Campaña ⏳ [PENDIENTE]
+### 9. Sistema de Impresión y Exportación a PDF de Hojas de Campaña ⏸️ [EN SUSPENSO]
 - [ ] **Hoja de Ruta Imprimible en Blanco y Negro de Alto Contraste**: Estilos `@media print` dedicados para imprimir el plan de los primeros 14 días en papel A4 sin gastar tinta, con casillas de verificación manuales.
 - [ ] **Tarjeta de Ficha de Torneo Exportable en PNG**: Generación de captura gráfica vectorial de la build de héroe y ejército para compartir en redes sociales, Discord o foros competitivos.
 
 ---
 
-### 10. Visualizador de Ciudad y Castillo Isométrico/2.5D (Interactive Town View Model) ⏳ [PENDIENTE]
-- [ ] **Esquema de Silueta de Castillo Interactivo**: Representación gráfica vectorial de la ciudad de la facción activa con ranuras interactivas para cada edificio (Ayuntamiento, Capitolio, Fuertes, Cofradía de Magos, Moradas de Tier 1 a 7 y Estructuras de Facción Únicas).
+### 10. Visualizador de Ciudad y Castillo Isométrico/2.5D (Interactive Town View Model) ⏸️ [EN SUSPENSO]
+- [ ] **Esquema de Silueta de Castillo Interactivo**: Representación gráfica vectorial de la ciudad de la facción activa con ranuras interactivas para cada edificio (Ayuntamiento, Metropolis, Fuertes, Cofradía de Magos, Moradas de Tier 1 a 7 y Estructuras de Facción Únicas).
 - [ ] **Estados Visuales de Construcción**:
   - *No construido*: Silueta esquemática tenue con bordes discontinuos y coste en tooltip.
   - *En construcción / Disponible*: Efecto de andamio medieval iluminado con el color de acento de la facción.
@@ -90,29 +90,30 @@ Este documento registra las mejoras de diseño, identidad visual y experiencia d
 
 ---
 
-### 11. Comparador Visual de Héroes Lado a Lado (Dual Commander Split-Screen) ⏳ [PENDIENTE]
-- [ ] **Vista Dividida de 2 Columnas para Comandantes**: Interfaz para contrastar 2 héroes simultáneamente (ej. Main de Combate vs Héroe de Farmeo, o tu Héroe principal vs el Héroe del rival).
-- [ ] **Gráfica Diferencial de Barras Superpuestas**: Visualización directa de las diferencias numéricas en Ataque, Defensa, Poder Mágico, Conocimiento, Moral y Suerte con indicadores de ventaja (+/-).
-- [ ] **Matriz de Sinergia de Criaturas con Auras Temáticas**: Cuadrícula que resalta qué tropas del ejército se benefician de las especialidades pasivas de cada comandante.
+### 11. Comparador Visual de Héroes Lado a Lado (Dual Commander Split-Screen) ✅ [COMPLETADO]
+- [x] **Vista Dividida de 2 Columnas para Comandantes**: Interfaz para contrastar 2 héroes simultáneamente (ej. Main de Combate vs Héroe de Farmeo, o tu Héroe principal vs el Héroe del rival).
+- [x] **Gráfica Diferencial de Barras Superpuestas**: Visualización directa de las diferencias numéricas en Ataque, Defensa, Poder Mágico, Conocimiento, Moral y Suerte con indicadores de ventaja (+/-) y simulador dinámico de nivel (1 a 30).
+- [x] **Matriz de Sinergia de Criaturas con Auras Temáticas**: Cuadrícula que resalta qué tropas del ejército se benefician de las especialidades pasivas de cada comandante (🌟 Directa, 🛡️ Apertura Día 1, 🔮 Mágica, ⚔️ Choque).
+- [x] **Veredicto Táctico Competitivo y Emparejamientos Rápidos**: Pestaña dedicada con análisis de curvas de poder (Día 1-7, Semanas 2-3, Choque Late Game) y comparativa de builds óptimas de habilidades.
 
 ---
 
-### 12. Barra de Iniciativa y Secuencia de Turnos de Combate (Combat Turn Ribbon) ⏳ [PENDIENTE]
+### 12. Barra de Iniciativa y Secuencia de Turnos de Combate (Combat Turn Ribbon) ⏸️ [EN SUSPENSO]
 - [ ] **Franja Horizontal de Secuencia de Iniciativa**: Barra superior inspirada en los combates tácticos por turnos que lista cronológicamente el orden en que atacarán las 14 unidades (7 aliadas y 7 enemigas).
 - [ ] **Animación de Desplazamiento por Efectos de Estado**: Reordenación visual dinámica en vivo al simular hechizos de Aceleración (*Haste*), Lentitud (*Slow*), Moral alta o efectos de aturdimiento.
 - [ ] **Indicador del Turno Activo con Borde Pulsante**: Enfoque luminoso sobre el icono de la unidad que tiene la iniciativa con datos flotantes de velocidad y alcance.
 
 ---
 
-### 13. Modo Inmersivo 'Zen Commander' a Pantalla Completa ⏳ [PENDIENTE]
-- [ ] **Ocultación Dinámica de Interfaz con 1 Clic (Atajo 'Z' o 'F11')**: Minimizado automático del encabezado superior, selector de pestañas y pie de página para maximizar el área útil al 100% de la pantalla durante torneos o partidas en directo.
-- [ ] **Fondo Ambiental Dinámico con Partículas Suaves CSS**: Partículas atenuadas de baja carga gráfica temáticas por facción (ascuas volcánicas para Mazmorra, plumas de luz para Templo, niebla espectral para Necrópolis, hojas doradas para Foresta, zumbido de esporas para Colmena y cristales de hielo/vacío para Cisma).
-- [ ] **Mini-Controlador Flotante Desplegable**: Botón discreto en esquina para cambiar rápidamente de día o facción sin abandonar el modo inmersivo.
+### 13. Modo Inmersivo 'Zen Commander' a Pantalla Completa ✅ [COMPLETADO]
+- [x] **Ocultación Dinámica de Interfaz con 1 Clic (Atajo 'Z' o 'F11')**: Minimizado automático del encabezado superior, selector de pestañas y pie de página para maximizar el área útil al 100% de la pantalla durante torneos o partidas en directo.
+- [x] **Fondo Ambiental Dinámico con Partículas Suaves CSS**: Partículas atenuadas de baja carga gráfica temáticas por facción (ascuas volcánicas para Mazmorra, plumas de luz para Templo, niebla espectral para Necrópolis, hojas doradas para Foresta, zumbido de esporas para Colmena y cristales de hielo/vacío para Cisma).
+- [x] **Mini-Controlador Flotante Desplegable**: Botón discreto en esquina para cambiar rápidamente de día o facción sin abandonar el modo inmersivo.
 
 ---
 
-### 14. Sistema de Paletas de Accesibilidad WCAG AAA y Filtros de Daltonismo ⏳ [PENDIENTE]
-- [ ] **Modos de Alto Contraste para Daltonismo**: Modos preconfigurados para Protanopía, Deuteranopía y Tritanopía en las estadísticas de criaturas, barras de salud y árboles de habilidades.
-- [ ] **Indicadores Geométricos de Estado Universales**: Sustitución de la dependencia exclusiva en color rojo/verde por símbolos medievales estandarizados (triángulos para aumento, rombos para neutral, círculos para penalización).
-- [ ] **Selector de Tamaño de Tipografía Dinámico (Escalado de Fuente UI)**: Ajuste en tiempo real de escala de texto (100%, 115%, 130%) para optimizar la legibilidad en pantallas lejanas o televisiones de salón.
+### 14. Sistema de Paletas de Accesibilidad WCAG AAA y Filtros de Daltonismo ⏳ [PARCIALMENTE COMPLETADO]
+- [EN SUSPENSO] **Modos de Alto Contraste para Daltonismo**: Modos preconfigurados para Protanopía, Deuteranopía y Tritanopía en las estadísticas de criaturas, barras de salud y árboles de habilidades.
+- [EN SUSPENSO] **Indicadores Geométricos de Estado Universales**: Sustitución de la dependencia exclusiva en color rojo/verde por símbolos medievales estandarizados (triángulos para aumento, rombos para neutral, círculos para penalización).
+- [x] **Selector de Tamaño de Tipografía Dinámico (Escalado de Fuente UI)**: Ajuste en tiempo real de escala de texto (100%, 115%, 130%) para optimizar la legibilidad en pantallas lejanas o televisiones de salón. Soporte mediante botón en cabecera, mini-controlador Zen y tecla de acceso rápido 'A'.
 

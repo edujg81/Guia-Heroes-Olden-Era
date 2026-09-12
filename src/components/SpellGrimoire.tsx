@@ -21,7 +21,6 @@ import {
   SpellSchoolSigilSelector,
   SpellScalingDataTable,
   SpellVersusComparator,
-  MedievalCodexPage,
   RunicGlyphAura,
   SmartSpellHoverCard,
 } from './features/spells';
@@ -98,7 +97,6 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
   const [showMechanicsGuide, setShowMechanicsGuide] = useStickyState<boolean>(true, 'spells_show_mechanics_guide');
   const [showFactionProfile, setShowFactionProfile] = useStickyState<boolean>(true, 'spells_show_faction_profile');
   const [expandAllLevels, setExpandAllLevels] = useStickyState<boolean>(false, 'spells_expand_all_levels');
-  const [codexMode, setCodexMode] = useStickyState<boolean>(true, 'spells_codex_mode');
   const [activeSpellLevels, setActiveSpellLevels] = useState<Record<string, number>>({});
 
   const toggleSpellLearned = (id: string, e: React.MouseEvent) => {
@@ -594,14 +592,6 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
 
       {/* CANONICAL GRIMOIRE VIEW */}
       {spellsViewMode === 'grimoire' && (
-        <MedievalCodexPage
-          selectedSchool={selectedSchool}
-          onSelectSchool={setSelectedSchool}
-          activeFaction={activeFaction}
-          themeMode={themeMode}
-          codexMode={codexMode}
-          onToggleCodexMode={() => setCodexMode(!codexMode)}
-        >
         <div className="space-y-6">
 
       {/* Mechanics & Upgrade Cost System Guide */}
@@ -1469,7 +1459,6 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
         })}
         </div>
         </div>
-        </MedievalCodexPage>
       )}
     </div>
   );

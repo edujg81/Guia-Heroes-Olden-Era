@@ -13,11 +13,13 @@ import {
   Clock,
   Compass,
   CheckCircle2,
+  ArrowRightLeft,
 } from 'lucide-react';
 
 interface HeroDetailModalProps {
   hero: DungeonHero | null;
   onClose: () => void;
+  onCompare?: (hero: DungeonHero) => void;
   themeMode?: 'dark' | 'light';
   themeAccentClass?: string;
 }
@@ -25,6 +27,7 @@ interface HeroDetailModalProps {
 export const HeroDetailModal: React.FC<HeroDetailModalProps> = ({
   hero,
   onClose,
+  onCompare,
   themeMode = 'dark',
   themeAccentClass = 'text-amber-400',
 }) => {
@@ -152,7 +155,20 @@ export const HeroDetailModal: React.FC<HeroDetailModalProps> = ({
         </div>
 
         {/* Footer Actions */}
-        <div className="mt-6 pt-4 border-t border-slate-800 flex justify-end">
+        <div className="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between gap-3">
+          {onCompare ? (
+            <button
+              onClick={() => {
+                onCompare(hero);
+                onClose();
+              }}
+              className="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5 shadow-lg shadow-amber-600/20"
+            >
+              <ArrowRightLeft className="w-3.5 h-3.5" />
+              <span>Comparar en Pantalla Dividida</span>
+            </button>
+          ) : <div />}
+
           <button
             onClick={onClose}
             className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition-colors cursor-pointer"

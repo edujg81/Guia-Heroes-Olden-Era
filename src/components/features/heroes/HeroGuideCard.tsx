@@ -1,12 +1,13 @@
 import React from 'react';
 import { DungeonHero } from '../../../types';
 import { TierBadge } from '../../ui/TierBadge';
-import { Swords, Wand2, Shield, Flame, BookOpen, CheckCircle2, ChevronRight, Zap } from 'lucide-react';
+import { Swords, Wand2, Shield, Flame, BookOpen, CheckCircle2, ChevronRight, Zap, ArrowRightLeft } from 'lucide-react';
 
 interface HeroGuideCardProps {
   hero: DungeonHero;
   isSelected?: boolean;
   onSelect?: () => void;
+  onCompare?: (hero: DungeonHero) => void;
   themeMode?: 'dark' | 'light';
   themeAccentClass?: string;
   isCompact?: boolean;
@@ -16,6 +17,7 @@ export const HeroGuideCard: React.FC<HeroGuideCardProps> = ({
   hero,
   isSelected = false,
   onSelect,
+  onCompare,
   themeMode = 'dark',
   themeAccentClass = 'text-amber-400',
   isCompact = false,
@@ -135,9 +137,24 @@ export const HeroGuideCard: React.FC<HeroGuideCardProps> = ({
       {/* Role & Recommendation Footer */}
       <div className="mt-3 pt-2.5 border-t border-slate-800/60 flex items-center justify-between text-[11px] font-mono text-slate-400">
         <span>Rol: <strong className="text-slate-200 font-sans">{hero.role}</strong></span>
-        <span className="flex items-center gap-1 text-slate-500">
-          Detalles <ChevronRight className="w-3 h-3" />
-        </span>
+        <div className="flex items-center gap-2.5">
+          {onCompare && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onCompare(hero);
+              }}
+              className="flex items-center gap-1 text-amber-400/90 hover:text-amber-300 hover:underline cursor-pointer"
+              title="Comparar este héroe lado a lado"
+            >
+              <ArrowRightLeft className="w-3 h-3" />
+              <span>Comparar</span>
+            </button>
+          )}
+          <span className="flex items-center gap-1 text-slate-500">
+            Detalles <ChevronRight className="w-3 h-3" />
+          </span>
+        </div>
       </div>
     </div>
   );

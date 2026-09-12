@@ -1,2 +1,0 @@
-// Structures feature components
-export {};
