@@ -202,11 +202,6 @@ export const SubclassesBrowser: React.FC<SubclassesBrowserProps> = ({
                         }`}>
                           {sub.name}
                         </span>
-                        <span className={`text-[10px] font-mono ${
-                          themeMode === 'light' ? 'text-slate-500' : 'text-slate-400'
-                        }`}>
-                          ({sub.nameEn})
-                        </span>
                       </div>
 
                       <div className="flex items-center gap-1.5 flex-wrap">
@@ -283,11 +278,6 @@ export const SubclassesBrowser: React.FC<SubclassesBrowserProps> = ({
                   themeMode === 'light' ? 'text-slate-900' : 'text-white'
                 }`}>
                   {activeSubclass.name}
-                  <span className={`text-sm font-mono font-normal ml-2 ${
-                    themeMode === 'light' ? 'text-slate-500' : 'text-slate-400'
-                  }`}>
-                    ({activeSubclass.nameEn})
-                  </span>
                 </h3>
               </div>
 
@@ -369,9 +359,6 @@ export const SubclassesBrowser: React.FC<SubclassesBrowserProps> = ({
                         <div className={`text-xs font-bold ${
                           themeMode === 'light' ? 'text-slate-900' : 'text-white'
                         }`}>{req.name}</div>
-                        <div className={`text-[10px] font-mono ${
-                          themeMode === 'light' ? 'text-slate-500' : 'text-slate-400'
-                        }`}>{req.nameEn}</div>
                       </div>
                     </div>
 

@@ -149,7 +149,6 @@ export const SpellVersusComparator: React.FC<SpellVersusComparatorProps> = ({
                   <h4 className="text-base font-serif font-bold text-slate-900 dark:text-white group-hover:text-amber-400 transition-colors flex items-center gap-1">
                     <span>{spellA.name}</span>
                     <Sparkles className="w-3.5 h-3.5 text-amber-500 opacity-60 group-hover:opacity-100" />
-                    <span className="text-xs font-normal text-slate-400 italic">({spellA.nameEn})</span>
                   </h4>
                 </div>
               </SmartSpellHoverCard>
@@ -228,7 +227,6 @@ export const SpellVersusComparator: React.FC<SpellVersusComparatorProps> = ({
                   <h4 className="text-base font-serif font-bold text-slate-900 dark:text-white group-hover:text-amber-400 transition-colors flex items-center gap-1">
                     <span>{spellB.name}</span>
                     <Sparkles className="w-3.5 h-3.5 text-amber-500 opacity-60 group-hover:opacity-100" />
-                    <span className="text-xs font-normal text-slate-400 italic">({spellB.nameEn})</span>
                   </h4>
                 </div>
               </SmartSpellHoverCard>

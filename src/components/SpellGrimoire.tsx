@@ -1050,9 +1050,6 @@ export const SpellGrimoire: React.FC<SpellGrimoireProps> = ({
                         themeMode === 'light' ? 'text-slate-900 hover:text-purple-700' : 'text-white'
                       }`}>
                         <span>{spell.name}</span>
-                        <span className={`text-xs font-sans font-normal italic ${
-                          themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'
-                        }`}>({spell.nameEn})</span>
                         {spell.masterfulName && (
                           <span className={`text-[10px] font-mono px-2 py-0.5 rounded border ${
                             themeMode === 'light'

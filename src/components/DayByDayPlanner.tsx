@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BuildStep } from '../types';
 import { FactionId, getBuildStepsForFaction, FACTIONS_METADATA, getFactionTheme } from '../data/factionDataProvider';
 import { getOpponentTacticForDay } from '../data/dungeonOpponentTactics';
 import { WaxSealBadge } from './ui/WaxSealBadge';
@@ -29,6 +30,8 @@ import {
   Trees,
   Shield,
   Gem,
+  Lock,
+  Castle,
 } from 'lucide-react';
 
 interface DayByDayPlannerProps {
@@ -49,43 +52,27 @@ export const RESOURCE_CALC_STYLES = {
   alchemicalDust: { label: 'Polvo', text: 'text-blue-300', badge: 'bg-blue-950/50 border-blue-900/50 text-blue-300' },
 } as const;
 
-type PrimaryResourceKey = 'gems' | 'crystal' | 'mercury';
-
-interface PrimaryResourceConfig {
-  key: PrimaryResourceKey;
-  label: string;
-  colorClass: string;
+/**
+ * Sanitiza cualquier texto de edificio o título para garantizar que se muestre
+ * exclusivamente en castellano, eliminando cualquier nombre o sufijo residual en inglés.
+ */
+export function cleanSpanishName(text: string): string {
+  if (!text) return '';
+  return text
+    .replace(/\s*\((?:Marksman|Austringer|Swordsman|Crusader|Zealot|Griffins|Angels|Treasury|Capitol|Mage\s*Guild|Fort|Citadel|Artifact\s*Merchant|Resource\s*Silo|Town\s*Hall|City\s*Hall)\)/gi, '')
+    .replace(/\s*\([A-Za-z0-9\s/'’\-_&+]+\)/g, (match) => {
+      if (/^\s*\((?:Opción|Alternativa|Día|Nivel|Tier|\+\d|\d+|Oro|Gemas|Cristal|Mercurio|Capital|Monumento|Segunda|Tercera|Fuerte|Ciudadela|Fortificaciones)/i.test(match)) {
+        return match;
+      }
+      if (/(?:Treasury|Capitol|Mage|Guild|Fort|Citadel|Merchant|Silo|Branch|Marksman|Swordsman|Swarm|Hive|Temple)/i.test(match)) {
+        return '';
+      }
+      return match;
+    })
+    .replace(/\b(Treasury|Capitol|Mage Guild|Fort|Citadel|Artifact Merchant|Resource Silo|Marksman|Austringer|Swordsman|Crusader|Zealot|Griffins|Angels|Town Hall|City Hall)\b/gi, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
 }
-
-const FACTION_PRIMARY_RESOURCES: Record<FactionId, PrimaryResourceConfig[]> = {
-  Mazmorra: [
-    { key: 'gems', label: 'Gemas', colorClass: RESOURCE_CALC_STYLES.gems.text },
-  ],
-  Templo: [
-    { key: 'gems', label: 'Gemas', colorClass: RESOURCE_CALC_STYLES.gems.text },
-    { key: 'crystal', label: 'Cristal', colorClass: RESOURCE_CALC_STYLES.crystal.text },
-  ],
-  Foresta: [
-    { key: 'gems', label: 'Gemas', colorClass: RESOURCE_CALC_STYLES.gems.text },
-    { key: 'crystal', label: 'Cristal', colorClass: RESOURCE_CALC_STYLES.crystal.text },
-  ],
-  Arboleda: [
-    { key: 'gems', label: 'Gemas', colorClass: RESOURCE_CALC_STYLES.gems.text },
-    { key: 'crystal', label: 'Cristal', colorClass: RESOURCE_CALC_STYLES.crystal.text },
-  ],
-  Necrópolis: [
-    { key: 'mercury', label: 'Mercurio', colorClass: RESOURCE_CALC_STYLES.mercury.text },
-  ],
-  Cisma: [
-    { key: 'mercury', label: 'Mercurio', colorClass: RESOURCE_CALC_STYLES.mercury.text },
-  ],
-  Colmena: [
-    { key: 'crystal', label: 'Cristal', colorClass: RESOURCE_CALC_STYLES.crystal.text },
-  ],
-  Enjambre: [
-    { key: 'crystal', label: 'Cristal', colorClass: RESOURCE_CALC_STYLES.crystal.text },
-  ],
-};
 
 export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({ 
   selectedFaction = 'Mazmorra',
@@ -95,10 +82,12 @@ export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({
 }) => {
   const [completedDays, setCompletedDays] = useStickyState<Record<number, boolean>>({}, `planner_completed_days_${selectedFaction}`);
   const [internalSelectedDay, setInternalSelectedDay] = useStickyState<number>(1, `planner_selected_day_${selectedFaction}`);
+  const [selectedCityScope, setSelectedCityScope] = useStickyState<'all' | 'Ciudad Principal' | 'Ciudad Secundaria' | 'Tercera Ciudad'>('all', 'planner_selected_city_scope');
   const [selectedMonth, setSelectedMonth] = useStickyState<1 | 2 | 'all'>('all', 'planner_selected_month');
   const [selectedWeek, setSelectedWeek] = useStickyState<number | 'all'>('all', 'planner_selected_week');
   const [opponentMode, setOpponentMode] = useStickyState<'all' | 'human' | 'ai'>('all', 'planner_opponent_mode');
   const [showResetConfirm, setShowResetConfirm] = useState<boolean>(false);
+  const [prereqNotice, setPrereqNotice] = useState<{ day: number; message: string } | null>(null);
 
   const selectedDay = externalSelectedDay !== undefined ? externalSelectedDay : internalSelectedDay;
   const setSelectedDay = (day: number) => {
@@ -111,6 +100,10 @@ export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({
   const theme = getFactionTheme(selectedFaction, themeMode);
 
   const filteredSteps = allSteps.filter((step) => {
+    // City Scope filter
+    if (selectedCityScope !== 'all' && step.cityScope !== selectedCityScope) {
+      return false;
+    }
     // Month filter
     if (selectedMonth !== 'all' && step.month !== selectedMonth) {
       return false;
@@ -122,12 +115,176 @@ export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({
     return true;
   });
 
+  /**
+   * Valida exclusivamente si una estructura cumple sus prerrequisitos estructurales canónicos
+   * (p. ej., Fortificaciones II requiere Fortificaciones I, Tesorería requiere Banco,
+   * Silo Alquímico requiere Silo de Recursos, Cofradía Nivel 2 requiere Cofradía Nivel 1).
+   * Solo bloquea si falta erigir el requisito previo directo, sin exigir días intermedios no vinculados.
+   */
+  const checkPrerequisites = (day: number): { canComplete: boolean; missingDay?: number; missingBuilding?: string; reason?: string } => {
+    const step = allSteps.find((s) => s.day === day);
+    if (!step) return { canComplete: true };
+
+    const building = step.building.toLowerCase();
+    const city = step.cityScope || 'Ciudad Principal';
+
+    // Función auxiliar para buscar pasos en la misma ciudad
+    const findStepInCity = (predicate: (s: BuildStep) => boolean): BuildStep | undefined => {
+      return allSteps.find((s) => s.day < day && (s.cityScope || 'Ciudad Principal') === city && predicate(s));
+    };
+
+    let prereqStep: BuildStep | undefined;
+
+    // 1. Fortificaciones III requiere Fortificaciones II
+    if (building.includes('fortificaciones iii') || building.includes('fortificaciones 3')) {
+      prereqStep = findStepInCity((s) => {
+        const b = s.building.toLowerCase();
+        return b.includes('fortificaciones ii') || b.includes('fortificaciones 2') || b.includes('ciudadela');
+      });
+    }
+    // 2. Fortificaciones II requiere Fortificaciones I
+    else if (building.includes('fortificaciones ii') || building.includes('fortificaciones 2') || building.includes('ciudadela')) {
+      prereqStep = findStepInCity((s) => {
+        const b = s.building.toLowerCase();
+        return (b.includes('fortificaciones') || b.includes('fuerte')) && !b.includes('ii') && !b.includes('iii') && !b.includes('2') && !b.includes('3');
+      });
+    }
+    // 3. Tesorería requiere Banco
+    else if (building.includes('tesorería') || building.includes('tesoreria')) {
+      prereqStep = findStepInCity((s) => s.building.toLowerCase().includes('banco'));
+    }
+    // 4. Silo Alquímico requiere Silo de Recursos
+    else if (building.includes('alquímico') || building.includes('alquimico')) {
+      prereqStep = findStepInCity((s) => s.building.toLowerCase().includes('silo de recursos'));
+    }
+    // 5. Banco requiere Mercado
+    else if (building.includes('banco')) {
+      prereqStep = findStepInCity((s) => s.building.toLowerCase().includes('mercado'));
+    }
+    // 6. Comerciante de Artefactos requiere Mercado
+    else if (building.includes('artefactos')) {
+      prereqStep = findStepInCity((s) => s.building.toLowerCase().includes('mercado'));
+    }
+    // 7. Edificio de Facción Nivel II (Templo Solar II / Rostro Eterno II / Palacio bizantino II / Palacio de la foresta II / Corazón del colmenar II / Remanente abisal II) requiere Nivel I en esa ciudad
+    else if (
+      building.includes('templo solar ii') ||
+      building.includes('rostro eterno ii') ||
+      building.includes('palacio bizantino ii') ||
+      building.includes('palacio de la foresta ii') ||
+      building.includes('corazón del colmenar ii') ||
+      building.includes('corazon del colmenar ii') ||
+      building.includes('remanente abisal ii')
+    ) {
+      prereqStep = findStepInCity((s) => {
+        const b = s.building.toLowerCase();
+        return (
+          (b.includes('templo solar') ||
+           b.includes('rostro eterno') ||
+           b.includes('palacio bizantino') ||
+           b.includes('palacio de la foresta') ||
+           b.includes('corazón del colmenar') ||
+           b.includes('corazon del colmenar') ||
+           b.includes('remanente abisal')) &&
+          !b.includes('ii') &&
+          !b.includes('iii')
+        );
+      });
+    }
+    // 8. Edificio de Facción Nivel III requiere Nivel II
+    else if (
+      building.includes('templo solar iii') ||
+      building.includes('rostro eterno iii') ||
+      building.includes('palacio bizantino iii') ||
+      building.includes('palacio de la foresta iii') ||
+      building.includes('corazón del colmenar iii') ||
+      building.includes('corazon del colmenar iii') ||
+      building.includes('remanente abisal iii')
+    ) {
+      prereqStep = findStepInCity((s) => {
+        const b = s.building.toLowerCase();
+        return (
+          (b.includes('templo solar ii') ||
+           b.includes('rostro eterno ii') ||
+           b.includes('palacio bizantino ii') ||
+           b.includes('palacio de la foresta ii') ||
+           b.includes('corazón del colmenar ii') ||
+           b.includes('corazon del colmenar ii') ||
+           b.includes('remanente abisal ii')) &&
+          !b.includes('iii')
+        );
+      });
+    }
+    // 9. Cofradía / Gremio de Magos Nivel 2 a 5
+    else if (building.includes('cofradía de magos nivel 2') || building.includes('cofradia de magos nivel 2') || building.includes('cofradía de magos ii') || building.includes('gremio de magos nivel 2')) {
+      prereqStep = findStepInCity((s) => {
+        const b = s.building.toLowerCase();
+        return (b.includes('magos') || b.includes('cofradía') || b.includes('gremio')) && (b.includes('nivel 1') || b.includes('grado 1') || b.includes('cofradía de magos (nivel 1'));
+      });
+    } else if (building.includes('magos nivel 3') || building.includes('magos iii')) {
+      prereqStep = findStepInCity((s) => s.building.toLowerCase().includes('magos nivel 2') || s.building.toLowerCase().includes('magos ii'));
+    } else if (building.includes('magos nivel 4') || building.includes('magos iv')) {
+      prereqStep = findStepInCity((s) => s.building.toLowerCase().includes('magos nivel 3') || s.building.toLowerCase().includes('magos iii'));
+    } else if (building.includes('magos nivel 5') || building.includes('magos v')) {
+      prereqStep = findStepInCity((s) => s.building.toLowerCase().includes('magos nivel 4') || s.building.toLowerCase().includes('magos iv'));
+    }
+    // 10. Mejora de morada (Mejorada / Rama A / Rama B / II) requiere la morada base
+    else if (building.includes('mejorad') || building.includes('mejora') || building.includes('rama a') || building.includes('rama b')) {
+      const tierMatch = step.buildingTierLevel?.match(/tier\s*(\d)/i) || building.match(/tier\s*(\d)/i);
+      if (tierMatch) {
+        const tier = tierMatch[1];
+        prereqStep = findStepInCity((s) => {
+          const b = s.building.toLowerCase();
+          const t = s.buildingTierLevel?.toLowerCase() || '';
+          return (t.includes(`tier ${tier}`) || b.includes(`tier ${tier}`)) && !b.includes('mejorad') && !b.includes('rama');
+        });
+      }
+    }
+
+    // Si tiene un prerrequisito estructural y aún no está marcado como hecho
+    if (prereqStep && !completedDays[prereqStep.day]) {
+      const prereqName = cleanSpanishName(prereqStep.building);
+      return {
+        canComplete: false,
+        missingDay: prereqStep.day,
+        missingBuilding: prereqName,
+        reason: `Requiere haber construido previamente: ${prereqName} (Día ${prereqStep.day}).`,
+      };
+    }
+
+    return { canComplete: true };
+  };
+
   const toggleDayCompleted = (day: number, e: React.MouseEvent) => {
     e.stopPropagation();
+
+    // Si ya está completado, desmarcarlo
+    if (completedDays[day]) {
+      setCompletedDays((prev) => {
+        const next = { ...prev };
+        delete next[day];
+        return next;
+      });
+      setPrereqNotice(null);
+      return;
+    }
+
+    // Comprobar únicamente si falta el prerrequisito estructural
+    const status = checkPrerequisites(day);
+    if (!status.canComplete) {
+      setPrereqNotice({
+        day,
+        message: status.reason || 'No se cumplen los prerrequisitos de construcción para este día.',
+      });
+      setSelectedDay(day);
+      return;
+    }
+
+    // Prerrequisitos cumplidos: marcar como hecho
     setCompletedDays((prev) => ({
       ...prev,
-      [day]: !prev[day],
+      [day]: true,
     }));
+    setPrereqNotice(null);
   };
 
   const handleResetAllProgress = () => {
@@ -322,6 +479,31 @@ export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({
               ))}
             </div>
           </div>
+
+          {/* Filtro de Ámbito de Ciudad: 1ª, 2ª o 3ª Ciudad */}
+          <div className={`flex items-center gap-1.5 bg-black/60 px-2.5 py-1 rounded-xl border ${theme.borderSubtle}`}>
+            <Castle className="w-3.5 h-3.5 shrink-0" style={{ color: theme.hexPrimary }} />
+            <div className="flex gap-1 flex-wrap">
+              {([
+                { id: 'all', label: 'Todas las Urbes' },
+                { id: 'Ciudad Principal', label: '1ª Capital' },
+                { id: 'Ciudad Secundaria', label: '2ª Ciudad' },
+                { id: 'Tercera Ciudad', label: '3ª Ciudad' },
+              ] as const).map((city) => (
+                <button
+                  key={city.id}
+                  onClick={() => setSelectedCityScope(city.id)}
+                  className={`px-2 py-0.5 text-[11px] rounded-md font-semibold transition-all uppercase tracking-wider cursor-pointer font-mono whitespace-nowrap ${
+                    selectedCityScope === city.id
+                      ? theme.pillActive
+                      : 'bg-black/40 text-slate-400 hover:text-slate-200 border border-slate-800'
+                  }`}
+                >
+                  {city.label}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Dynamic Opponent Mode Banner */}
@@ -397,20 +579,58 @@ export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
                     <button
-                      onClick={(e) => toggleDayCompleted(step.day, e)}
-                      className={`${theme.textAccent} hover:brightness-125 transition-colors p-1 shrink-0 cursor-pointer`}
-                      aria-label="Toggle completado"
+                      onClick={(e) => {
+                        if (!isCompleted && !checkPrerequisites(step.day).canComplete) {
+                          e.stopPropagation();
+                          const prereq = checkPrerequisites(step.day);
+                          setPrereqNotice({
+                            day: step.day,
+                            message: prereq.reason || `No se cumplen los prerrequisitos para el Día ${step.day}.`,
+                          });
+                          setSelectedDay(step.day);
+                          return;
+                        }
+                        toggleDayCompleted(step.day, e);
+                      }}
+                      disabled={!isCompleted && !checkPrerequisites(step.day).canComplete}
+                      className={`${
+                        !isCompleted && !checkPrerequisites(step.day).canComplete
+                          ? 'cursor-not-allowed opacity-50'
+                          : `${theme.textAccent} hover:brightness-125 cursor-pointer`
+                      } transition-colors p-1 shrink-0`}
+                      aria-label={
+                        isCompleted
+                          ? 'Día completado (haz clic para desmarcar)'
+                          : checkPrerequisites(step.day).canComplete
+                          ? 'Marcar día como completado'
+                          : `Bloqueado: ${checkPrerequisites(step.day).reason}`
+                      }
+                      title={
+                        isCompleted
+                          ? 'Completado (haz clic para desmarcar)'
+                          : checkPrerequisites(step.day).canComplete
+                          ? 'Marcar como hecho'
+                          : `Bloqueado: ${checkPrerequisites(step.day).reason}`
+                      }
                     >
                       {isCompleted ? (
                         <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                      ) : !checkPrerequisites(step.day).canComplete ? (
+                        <div className="relative flex items-center justify-center w-5 h-5">
+                          <Circle className="w-5 h-5 text-slate-700" />
+                          <Lock className="w-2.5 h-2.5 text-amber-500 absolute" />
+                        </div>
                       ) : (
-                        <Circle className="w-5 h-5 text-slate-600" />
+                        <Circle className="w-5 h-5 text-slate-600 hover:text-slate-400" />
                       )}
                     </button>
-                    <div>
-                      <div className="flex items-center gap-1.5 flex-wrap mb-0.5">
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-1.5 flex-wrap mb-1">
                         <span className={`text-[10px] font-mono font-bold uppercase tracking-wider px-1.5 py-0.5 rounded ${theme.bgBadge} border ${theme.borderSubtle} ${theme.textAccent}`}>
                           M{step.month} • S{step.week} • D{step.day}
+                        </span>
+                        <span className="text-[9px] font-mono font-semibold px-2 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-800/40">
+                          {step.cityScope} • {step.cityName}
                         </span>
                         <WaxSealBadge label={step.priority} size="sm" />
 
@@ -441,29 +661,29 @@ export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({
                         )}
                       </div>
                       <h4 className={`text-sm font-semibold tracking-wide ${isSelected ? 'text-white font-bold' : 'text-slate-200'}`}>
-                        {step.building}
+                        {cleanSpanishName(step.building)}
                       </h4>
                     </div>
                   </div>
 
-                  <div className="text-right shrink-0 font-mono">
+                  {/* Coste diario original sin recuadros ni iconos */}
+                  <div className="text-right shrink-0 font-mono space-y-0.5">
                     <span className="text-xs font-bold text-yellow-400 block">
-                      {step.cost.gold.toLocaleString()} G
+                      {(step.cost.gold ?? 0).toLocaleString()} Oro
                     </span>
-                    {/* Mostrar exclusivamente los recursos principales de la facción activa (sin madera ni mineral) */}
-                    {FACTION_PRIMARY_RESOURCES[selectedFaction]?.map((res) => {
-                      const amount = step.cost[res.key];
-                      if (!amount) return null;
-                      return (
-                        <span key={res.key} className={`text-[10px] font-semibold ${res.colorClass} block`}>
-                          {amount} {res.label}
-                        </span>
-                      );
-                    })}
-                    {/* Polvo Alquímico (si aplica) */}
-                    {!!step.cost.alchemicalDust && (
-                      <span className={`text-[10px] font-semibold ${RESOURCE_CALC_STYLES.alchemicalDust.text} block`}>
-                        {step.cost.alchemicalDust} Polvo
+                    {!!step.cost.gems && (
+                      <span className="text-[10px] font-semibold text-cyan-300 block">
+                        {step.cost.gems} Gemas
+                      </span>
+                    )}
+                    {!!step.cost.crystal && (
+                      <span className="text-[10px] font-semibold text-purple-300 block">
+                        {step.cost.crystal} Cristal
+                      </span>
+                    )}
+                    {!!step.cost.mercury && (
+                      <span className="text-[10px] font-semibold text-red-300 block">
+                        {step.cost.mercury} Mercurio
                       </span>
                     )}
                   </div>
@@ -478,10 +698,11 @@ export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({
           <div className={`bg-black/75 border-2 ${theme.border} rounded-2xl p-5 sm:p-6 shadow-[0_4px_25px_rgba(0,0,0,0.6)] lg:sticky lg:top-20 backdrop-blur-md relative`}>
             <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3.5 border-b ${theme.borderSubtle}`}>
               <div>
-                <span className={`text-[10px] font-mono ${theme.textAccent} uppercase tracking-widest block font-bold`}>
-                  Mes {currentStep.month} • Semana {currentStep.week} • Día {currentStep.day} de 56
+                <span className={`text-[10px] font-mono ${theme.textAccent} uppercase tracking-widest block font-bold mb-0.5`}>
+                  Mes {currentStep.month} • Semana {currentStep.week} • Día {currentStep.day} de 56 • {currentStep.cityScope} ({currentStep.cityName})
                 </span>
-                <h3 className="text-lg font-serif text-white font-bold">{currentStep.building}</h3>
+                <h3 className="text-lg font-serif text-white font-bold">{cleanSpanishName(currentStep.title)}</h3>
+                <p className="text-xs text-slate-300 mt-0.5">{cleanSpanishName(currentStep.building)} ({cleanSpanishName(currentStep.buildingTierLevel)})</p>
               </div>
               <div className="flex items-center gap-2 shrink-0">
                 {currentStep.sourceUrl && (
@@ -496,23 +717,55 @@ export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({
                     <span>Ficha Oficial</span>
                   </a>
                 )}
-                <button
-                  onClick={(e) => toggleDayCompleted(currentStep.day, e)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold font-mono transition-all flex items-center gap-1.5 cursor-pointer ${
-                    completedDays[currentStep.day]
-                      ? 'bg-emerald-950 text-emerald-300 border border-emerald-700/60'
-                      : `${theme.bgBadge} ${theme.textAccent} border ${theme.border} hover:brightness-125`
-                  }`}
-                >
-                  {completedDays[currentStep.day] ? '✓ Hecho' : 'Marcar Hecho'}
-                </button>
+                {completedDays[currentStep.day] ? (
+                  <button
+                    onClick={(e) => toggleDayCompleted(currentStep.day, e)}
+                    className="px-3 py-1.5 rounded-lg text-xs font-bold font-mono transition-all flex items-center gap-1.5 cursor-pointer bg-emerald-950 text-emerald-300 border border-emerald-700/60 hover:bg-emerald-900 shadow-sm"
+                    title="Haz clic para desmarcar este día y dependientes"
+                  >
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>✓ Hecho</span>
+                  </button>
+                ) : checkPrerequisites(currentStep.day).canComplete ? (
+                  <button
+                    onClick={(e) => toggleDayCompleted(currentStep.day, e)}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold font-mono transition-all flex items-center gap-1.5 cursor-pointer ${theme.bgBadge} ${theme.textAccent} border ${theme.border} hover:brightness-125 shadow-sm`}
+                  >
+                    <Circle className="w-3.5 h-3.5" />
+                    <span>Marcar Hecho</span>
+                  </button>
+                ) : (
+                  <button
+                    disabled
+                    className="px-3 py-1.5 rounded-lg text-xs font-bold font-mono transition-all flex items-center gap-1.5 opacity-60 cursor-not-allowed bg-slate-900/90 text-slate-400 border border-slate-700 shadow-sm"
+                    title={checkPrerequisites(currentStep.day).reason}
+                  >
+                    <Lock className="w-3.5 h-3.5 text-amber-400" />
+                    <span>Prerrequisitos pendientes</span>
+                  </button>
+                )}
               </div>
             </div>
 
             {/* Building Tier or Level Info */}
             {currentStep.buildingTierLevel && (
               <div className={`mt-3 text-xs ${theme.textAccent} font-mono ${theme.bgBadge} px-3 py-1.5 rounded-lg border ${theme.borderSubtle}`}>
-                🏛️ <strong>Estructura:</strong> {currentStep.buildingTierLevel}
+                🏛️ <strong>Estructura:</strong> {cleanSpanishName(currentStep.buildingTierLevel)}
+              </div>
+            )}
+
+            {/* Bloque de aviso si los prerrequisitos están pendientes */}
+            {!completedDays[currentStep.day] && !checkPrerequisites(currentStep.day).canComplete && (
+              <div className="mt-3 bg-amber-950/40 border border-amber-800/60 rounded-xl p-3 text-xs text-amber-200 flex items-start gap-2.5 shadow-sm">
+                <Lock className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-bold font-mono uppercase tracking-wider text-amber-300 block mb-0.5">
+                    Construcción Bloqueada por Prerrequisitos
+                  </span>
+                  <p className="text-slate-200 leading-relaxed">
+                    {checkPrerequisites(currentStep.day).reason}
+                  </p>
+                </div>
               </div>
             )}
 
@@ -620,12 +873,12 @@ export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({
               </div>
             )}
 
-            {/* Cost breakdown */}
+            {/* Cost breakdown - Desglose completo de todos los recursos requeridos */}
             <div className="mt-3.5 flex flex-wrap items-center gap-2 text-xs">
-              <span className="text-slate-400 font-semibold font-mono text-[11px]">Coste:</span>
+              <span className="text-slate-400 font-semibold font-mono text-[11px]">Coste de Construcción:</span>
               <span className={`px-2.5 py-1 rounded-lg border font-mono font-bold flex items-center gap-1.5 shadow-sm ${RESOURCE_CALC_STYLES.gold.badge}`}>
                 <Coins className="w-3.5 h-3.5 text-yellow-400" />
-                {currentStep.cost.gold.toLocaleString()} Oro
+                {(currentStep.cost.gold ?? 0).toLocaleString()} Oro
               </span>
               {!!currentStep.cost.wood && (
                 <span className={`px-2.5 py-1 rounded-lg border font-mono font-bold flex items-center gap-1.5 shadow-sm ${RESOURCE_CALC_STYLES.wood.badge}`}>
@@ -635,7 +888,7 @@ export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({
               )}
               {!!currentStep.cost.ore && (
                 <span className={`px-2.5 py-1 rounded-lg border font-mono font-bold flex items-center gap-1.5 shadow-sm ${RESOURCE_CALC_STYLES.ore.badge}`}>
-                  <Shield className="w-3.5 h-3.5 text-slate-400" />
+                  <Shield className="w-3.5 h-3.5 text-slate-300" />
                   {currentStep.cost.ore} Mineral
                 </span>
               )}
@@ -660,7 +913,7 @@ export const DayByDayPlanner: React.FC<DayByDayPlannerProps> = ({
               {!!currentStep.cost.alchemicalDust && (
                 <span className={`px-2.5 py-1 rounded-lg border font-mono font-bold flex items-center gap-1.5 shadow-sm ${RESOURCE_CALC_STYLES.alchemicalDust.badge}`}>
                   <span className="text-xs">✨</span>
-                  {currentStep.cost.alchemicalDust} Polvo Alquímico
+                  {currentStep.cost.alchemicalDust} Polvo
                 </span>
               )}
             </div>

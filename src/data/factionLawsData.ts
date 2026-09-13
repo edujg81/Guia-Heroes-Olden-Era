@@ -15,7 +15,7 @@ export const LAW_POINT_SOURCES = [
     detail: 'Los héroes ganan Puntos de Ley proporcionales a la EXP base de cada batalla ganada en el mapa.' 
   },
   { 
-    source: 'Conquista de Ciudades, Castillos y Asentamientos', 
+    source: 'Conquista de Ciudades, Ciudades y Asentamientos', 
     points: 20, 
     detail: '+2 a +4 Sellos de Ley por cada plaza fuerte enemiga o neutral anexada a tu dominio.' 
   },
@@ -864,7 +864,7 @@ export const FACTION_LAWS: FactionLaw[] = [
     recommendedUnlockTime: 'Día 25 (Semana 4) - Para acumular Hidras de choque',
     effect: 'Aumenta el crecimiento semanal en +1 Hidra adicional (Tier 6) por semana en la capital de Mazmorra.',
     tacticalImpact: 'Permite acumular una masa crítica de Hidras capaz de resistir y barrer asedios simultáneos.',
-    synergy: 'Sinergia con Castillo fortificado y Reclutamiento.',
+    synergy: 'Sinergia con Fortificaciones de Nivel III y Reclutamiento.',
   },
   {
     id: 'law-t4-alchemists-code-2',

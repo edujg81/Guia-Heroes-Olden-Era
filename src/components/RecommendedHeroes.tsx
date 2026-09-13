@@ -1237,11 +1237,6 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                                     }`}>
                                       {sub.name}
                                     </span>
-                                    <span className={`text-[10px] font-mono ${
-                                      themeMode === 'light' ? 'text-slate-500' : 'text-slate-400'
-                                    }`}>
-                                      ({sub.nameEn})
-                                    </span>
                                   </div>
                                   <span className={`text-[10px] font-mono font-bold block mt-0.5 ${
                                     themeMode === 'light' ? 'text-amber-900' : 'text-yellow-400'
@@ -1314,7 +1309,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                                           }`}>
                                             {rIdx + 1}
                                           </span>
-                                          <span className="truncate">{req.name} ({req.nameEn})</span>
+                                          <span className="truncate">{req.name}</span>
                                         </div>
                                         <span className="text-[9px] shrink-0 font-semibold">
                                           {isPresent ? '✓ Incluida' : 'Opcional'}

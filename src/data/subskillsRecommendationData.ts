@@ -94,7 +94,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
   'economia': {
     advanced: {
       recommendedName: 'Recaudador de impuestos',
-      why: '+250 de oro diario (+500 si tienes Logística). Permite erigir la Ciudadela, Castillo y Sede Municipal / Metropolis III días antes.',
+      why: '+250 de oro diario (+500 si tienes Logística). Permite erigir la Fortificaciones II, Fortificaciones III y Sede Municipal / Metropolis III días antes.',
       alternativeChoice: 'Contrabandista',
       alternativeCondition: '+1 recurso raro diario según la necesidad de tu facción (Gemas, Mercurio o Cristales), crucial ante escasez de minas.',
     },
@@ -871,7 +871,7 @@ export const HERO_SUBSKILL_CHOICES: Record<string, HeroSubskillChoice[]> = {
     {
       skillName: 'Economía (Experta)',
       advancedSubskill: 'Recaudador de impuestos',
-      advancedReason: '+250 a +500 de oro diario (duplicado con Logística) para financiar la Ciudadela, Castillo y Palacio.',
+      advancedReason: '+250 a +500 de oro diario (duplicado con Logística) para financiar la Ciudadela, Fortificaciones III y Palacio.',
       expertSubskill: 'Anticuario',
       expertReason: 'Compra artefactos con un 25% de descuento y vende los sobrantes por un +25% de oro.',
     },

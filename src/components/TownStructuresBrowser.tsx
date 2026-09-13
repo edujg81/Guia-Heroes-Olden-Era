@@ -398,7 +398,7 @@ export const TownStructuresBrowser: React.FC<TownStructuresBrowserProps> = ({
                   {selectedStructure.name}
                 </h3>
                 <p className="text-xs font-mono text-slate-400">
-                  {selectedStructure.nameEn} • Facción: <strong className={theme.textAccent}>{selectedStructure.faction}</strong>
+                  Facción: <strong className={theme.textAccent}>{selectedStructure.faction}</strong>
                 </p>
               </div>
 
@@ -459,11 +459,6 @@ export const TownStructuresBrowser: React.FC<TownStructuresBrowserProps> = ({
                           <h5 className="text-sm font-serif font-bold text-white">
                             {activeLevel.name}
                           </h5>
-                          {activeLevel.nameEn && (
-                            <span className="text-[10px] font-mono text-slate-400 block">
-                              {activeLevel.nameEn}
-                            </span>
-                          )}
                         </div>
                         {activeLevel.bonusIncome && (
                           <span className="bg-amber-950/80 text-amber-300 border border-amber-600/60 text-xs font-bold px-2 py-0.5 rounded font-mono shrink-0">

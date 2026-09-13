@@ -117,7 +117,7 @@ export const FactionRunicTransition: React.FC<FactionRunicTransitionProps> = ({
           </div>
 
           <h3 className="text-base font-serif font-bold tracking-tight text-white dark:text-white truncate">
-            {meta.name} <span className="text-xs font-sans font-normal text-slate-400">({meta.nameEn})</span>
+            {meta.name}
           </h3>
 
           <p className="text-xs font-mono text-slate-300 flex items-center gap-1.5 truncate">

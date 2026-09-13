@@ -1029,7 +1029,7 @@ export const FactionLawsTree: React.FC<FactionLawsTreeProps> = ({
                           </div>
 
                           <h4 className={`text-base font-serif font-bold tracking-wide ${themeMode === 'light' ? 'text-slate-900' : 'text-white'}`}>
-                            {law.name} <span className={`text-xs font-mono font-normal ${themeMode === 'light' ? 'text-slate-600' : theme.textAccent}`}>({law.nameEn})</span>
+                            {law.name}
                           </h4>
 
                           {/* Recommended Unlock Time in Calendar */}
@@ -1226,12 +1226,9 @@ export const FactionLawsTree: React.FC<FactionLawsTreeProps> = ({
                           </div>
                         </div>
 
-                        <h4 className={`text-sm font-serif font-bold tracking-wide mb-0.5 leading-snug ${themeMode === 'light' ? 'text-slate-900' : 'text-white'}`}>
+                        <h4 className={`text-sm font-serif font-bold tracking-wide mb-1.5 leading-snug ${themeMode === 'light' ? 'text-slate-900' : 'text-white'}`}>
                           {law.name}
                         </h4>
-                        <div className={`text-[11px] font-mono mb-2 ${themeMode === 'light' ? 'text-purple-900 font-semibold' : theme.textAccent}`}>
-                          {law.nameEn}
-                        </div>
 
                         {/* Level selector if multi-level */}
                         {law.maxLevel > 1 && (
@@ -1408,12 +1405,9 @@ export const FactionLawsTree: React.FC<FactionLawsTreeProps> = ({
                             </div>
                           </div>
 
-                          <h4 className={`text-sm font-serif font-bold tracking-wide mb-0.5 leading-snug ${themeMode === 'light' ? 'text-slate-900' : 'text-white'}`}>
+                          <h4 className={`text-sm font-serif font-bold tracking-wide mb-1.5 leading-snug ${themeMode === 'light' ? 'text-slate-900' : 'text-white'}`}>
                             {law.name}
                           </h4>
-                          <div className={`text-[11px] font-mono mb-2 ${themeMode === 'light' ? 'text-purple-900 font-semibold' : theme.textAccent}`}>
-                            {law.nameEn}
-                          </div>
 
                           {/* Level selector if multi-level */}
                           {law.maxLevel > 1 && (
@@ -1586,9 +1580,6 @@ export const FactionLawsTree: React.FC<FactionLawsTreeProps> = ({
                     <h3 className={`text-base font-serif font-bold tracking-wide ${themeMode === 'light' ? 'text-slate-900' : 'text-white'}`}>
                       {law.name}
                     </h3>
-                    <div className={`text-xs font-mono ${themeMode === 'light' ? 'text-purple-900 font-semibold' : theme.textAccent}`}>
-                      {law.nameEn}
-                    </div>
                   </div>
 
                   {/* Level selector if multi-level */}

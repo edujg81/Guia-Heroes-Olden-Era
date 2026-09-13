@@ -283,13 +283,13 @@ export const SpellScalingDataTable: React.FC<SpellScalingDataTableProps> = ({
                               <span>{s.name}</span>
                               <Sparkles className="w-3 h-3 text-amber-500 opacity-60 group-hover:opacity-100" />
                             </div>
-                            <div className="text-[10px] text-slate-400 font-sans italic">{s.nameEn} • {s.school}</div>
+                            <div className="text-[10px] text-slate-400 font-sans italic">{s.school}</div>
                           </div>
                         </SmartSpellHoverCard>
                       ) : (
                         <div>
                           <div className="font-bold text-xs sm:text-sm font-serif">{s.name}</div>
-                          <div className="text-[10px] text-slate-400 font-sans italic">{s.nameEn} • {s.school}</div>
+                          <div className="text-[10px] text-slate-400 font-sans italic">{s.school}</div>
                         </div>
                       )}
                     </div>

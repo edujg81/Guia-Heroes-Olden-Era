@@ -22,8 +22,8 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Asentamiento del Vacío (Town Hall)',
-        nameEn: 'Void Settlement (Town Hall)',
+        name: 'Nivel I: Asentamiento del Vacío',
+        nameEn: 'Void Settlement',
         cost: { gold: 2500 },
         prerequisites: [],
         effects: [
@@ -35,10 +35,10 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
       },
       {
         level: 2,
-        name: 'Nivel II: Remanente Abisal II (City Hall)',
-        nameEn: 'Abyssal Remnant II (City Hall)',
+        name: 'Nivel II: Remanente Abisal II',
+        nameEn: 'Abyssal Remnant II',
         cost: { gold: 2500, wood: 5, ore: 5 },
-        prerequisites: ['Mercado (Marketplace)'],
+        prerequisites: ['Mercado'],
         effects: [
           'Otorga 1.000 de Oro, Puntos de Ley y Puntos de Astrología diarios.',
           'Permite al propietario elegir una de las 3 mejoras económicas de Nivel 2 (+1.000 Oro/día, +1.000 Puntos de Ley/día, o +1.000 Puntos de Astrología/día).'
@@ -48,10 +48,10 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
       },
       {
         level: 3,
-        name: 'Nivel III: Remanente Abisal III (Metropolis)',
-        nameEn: 'Abyssal Remnant III (Metropolis)',
+        name: 'Nivel III: Remanente Abisal III',
+        nameEn: 'Abyssal Remnant III',
         cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Nivel II: Remanente Abisal II (City Hall)'],
+        prerequisites: ['Nivel II: Remanente Abisal II'],
         effects: [
           'Máxima manifestación cívica y dimensional del Cisma en Olden Era.',
           'Otorga 1.000 de Oro, Puntos de Ley y Puntos de Astrología diarios adicionales para el reino.',
@@ -68,12 +68,12 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
   // =========================================================================
   {
     id: 'schism-bank',
-    name: 'Banco (Bank)',
+    name: 'Banco',
     nameEn: 'Bank',
     category: 'Cívica y Economía',
     faction: 'Cisma',
     cost: { gold: 2000, wood: 5, ore: 5 },
-    prerequisites: ['Mercado (Marketplace)', 'Remanente Abisal (Ayuntamiento / Alcaldía)'],
+    prerequisites: ['Mercado', 'Remanente Abisal (Ayuntamiento / Alcaldía)'],
     effects: [
       'Cámara de condensación de tesoros astrales y tributos del vacío.',
       'Genera +500 de Oro diario adicional y es prerrequisito indispensable para edificar la Tesorería.'
@@ -88,7 +88,7 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
     category: 'Cívica y Economía',
     faction: 'Cisma',
     cost: { gold: 5000, wood: 10, ore: 10 },
-    prerequisites: ['Banco (Bank)', 'Mercado (Marketplace)', 'Fortificaciones (Fortifications)'],
+    prerequisites: ['Banco', 'Mercado', 'Fortificaciones'],
     effects: [
       'Estructura económica suprema de Olden Era (Tesorería / Bonificación Financiera de +2.000 Oro/día).',
       'Genera +2.000 de Oro diario adicional de forma permanente para el reino.',
@@ -103,7 +103,7 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
   // =========================================================================
   {
     id: 'schism-fortifications',
-    name: 'Fortificaciones (Fortifications)',
+    name: 'Fortificaciones',
     nameEn: 'Fortifications',
     category: 'Fortificaciones',
     faction: 'Cisma',
@@ -119,7 +119,7 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Fortificaciones (Fortifications)',
+        name: 'Nivel I: Fortificaciones',
         nameEn: 'Fortifications I',
         cost: { gold: 2500, ore: 5 },
         prerequisites: [],
@@ -132,10 +132,10 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
       },
       {
         level: 2,
-        name: 'Nivel II: Fortificaciones II (Citadel)',
+        name: 'Nivel II: Fortificaciones II',
         nameEn: 'Fortifications II',
         cost: { gold: 2500, ore: 10 },
-        prerequisites: ['Nivel I: Fortificaciones (Fortifications)'],
+        prerequisites: ['Nivel I: Fortificaciones'],
         effects: [
           'Añade dos torres a las almenas que disparan descargas del vacío a los atacantes durante los asedios.',
           'Aumenta la producción semanal de todas las criaturas del Cisma en un +50%.'
@@ -146,10 +146,10 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
       },
       {
         level: 3,
-        name: 'Nivel III: Fortificaciones III (Castle)',
+        name: 'Nivel III: Fortificaciones III',
         nameEn: 'Fortifications III',
         cost: { gold: 5000, ore: 15 },
-        prerequisites: ['Nivel II: Fortificaciones II (Citadel)'],
+        prerequisites: ['Nivel II: Fortificaciones II'],
         effects: [
           'Añade una gran torre central a las almenas con alcance total.',
           'Duplica el crecimiento semanal de todas las criaturas de la ciudad (+100% total).'
@@ -166,7 +166,7 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
   // =========================================================================
   {
     id: 'schism-mage-guild',
-    name: 'Gremio de Magos (Mage Guild)',
+    name: 'Gremio de Magos',
     nameEn: 'Mage Guild',
     category: 'Magia & Cofradía',
     faction: 'Cisma',
@@ -233,7 +233,7 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
   // =========================================================================
   {
     id: 'schism-tavern',
-    name: 'Taberna (Tavern)',
+    name: 'Taberna',
     nameEn: 'Tavern',
     category: 'Cívica y Economía',
     faction: 'Cisma',
@@ -249,12 +249,12 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
   },
   {
     id: 'schism-marketplace',
-    name: 'Mercado (Marketplace)',
+    name: 'Mercado',
     nameEn: 'Marketplace',
     category: 'Cívica y Economía',
     faction: 'Cisma',
     cost: { gold: 500, wood: 5 },
-    prerequisites: ['Taberna (Tavern)'],
+    prerequisites: ['Taberna'],
     effects: [
       'Permite intercambiar recursos y oro en el mercado del Cisma.',
       'Las tasas de intercambio mejoran conforme el jugador controla más Mercados en su reino.',
@@ -270,7 +270,7 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
     category: 'Cívica y Economía',
     faction: 'Cisma',
     cost: { gold: 2000, wood: 5, ore: 5 },
-    prerequisites: ['Mercado (Marketplace)'],
+    prerequisites: ['Mercado'],
     effects: [
       'Establece una tienda permanente de reliquias del vacío y artefactos arcanos en la ciudad.',
       'Permite comprar y vender artefactos de distintos tiers para equipar a los hechiceros del Cisma.'
@@ -280,12 +280,12 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
   },
   {
     id: 'schism-resource-silo',
-    name: 'Silo de Recursos (Resource Silo)',
+    name: 'Silo de Recursos',
     nameEn: 'Resource Silo',
     category: 'Cívica y Economía',
     faction: 'Cisma',
     cost: { gold: 0, gems: 3, crystal: 3 },
-    prerequisites: ['Mercado (Marketplace)', 'Banco (Bank)'],
+    prerequisites: ['Mercado', 'Banco'],
     effects: [
       'Genera +1 Mercurio diario de forma pasiva (recurso raro principal del Cisma).',
       'Asegura el suministro continuo de mercurio para la Mansión Abotagada y el Gremio de Magos.'
@@ -300,7 +300,7 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
     category: 'Cívica y Economía',
     faction: 'Cisma',
     cost: { gold: 2000, ore: 5, mercury: 2 },
-    prerequisites: ['Silo de Recursos (Resource Silo)'],
+    prerequisites: ['Silo de Recursos'],
     effects: [
       'Produce Polvo Alquímico (Alchemical Dust) diariamente.',
       'El Polvo Alquímico es el recurso canónico esencial de Olden Era necesario para ascender moradas a niveles magistrales y potenciar hechizos en el Observatorio Mágico.'
@@ -322,7 +322,7 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
     dwellingTier: 1,
     cost: { gold: 500, ore: 5 },
     dwellingUpgradeCost: { gold: 1000, ore: 5 },
-    prerequisites: ['Fortificaciones (Fortifications)'],
+    prerequisites: ['Fortificaciones'],
     unitRecruitedBase: 'Ra\'Shoth (Ra\'Shoth)',
     unitRecruited: 'Ra\'Shoth / Ra\'Shoth Punzante / Ra\'Shoth Feroz',
     unitUpgrades: {
@@ -436,7 +436,7 @@ export const SCHISM_STRUCTURES: TownStructure[] = [
     dwellingTier: 4,
     cost: { gold: 2500, ore: 5, mercury: 2 },
     dwellingUpgradeCost: { gold: 2000, ore: 5, mercury: 2 },
-    prerequisites: ['Establos de Aga\'Shoth (Aga\'Shoth Stables)', 'Gremio de Magos (Mage Guild)'],
+    prerequisites: ['Establos de Aga\'Shoth (Aga\'Shoth Stables)', 'Gremio de Magos'],
     unitRecruitedBase: 'Gran Shoth (Great Shoth)',
     unitRecruited: 'Gran Shoth / Shoth Innombrable / Shoth Impensable',
     unitUpgrades: {

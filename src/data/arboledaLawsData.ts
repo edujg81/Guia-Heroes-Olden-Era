@@ -60,7 +60,7 @@ export const ARBOLEDA_FACTION_LAWS: FactionLaw[] = [
         costLaws: 3,
         cumulativeCost: 5,
         effect: 'Genera +4 de Madera al día y reduce el coste de oro de los aserraderos y mejoras de ciudadela en un 20%.',
-        tacticalImpact: 'Asegura los recursos para el Santuario de Herbomantes y el Castillo de la Foresta.',
+        tacticalImpact: 'Asegura los recursos para el Santuario de Herbomantes y el Fortificaciones de la Foresta.',
         recommendedUnlockTime: 'Día 4-5 (Semana 1)',
       },
     ],

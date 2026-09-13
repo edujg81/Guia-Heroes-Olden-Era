@@ -93,7 +93,7 @@ export const NECROPOLIS_FACTION_LAWS: FactionLaw[] = [
         level: 2,
         costLaws: 3,
         cumulativeCost: 5,
-        effect: 'Reduce los costes de construcción del Castillo y Cofradía de Magos de Necrópolis en un 25%.',
+        effect: 'Reduce los costes de construcción del Fortificaciones y Cofradía de Magos de Necrópolis en un 25%.',
         tacticalImpact: 'Acelera el desarrollo hacia los Liches y Vampiros en Semana 2.',
         recommendedUnlockTime: 'Día 6-7 (Semana 1)',
       },

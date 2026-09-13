@@ -19,6 +19,8 @@ export interface BuildStep {
   title: string;
   building: string;
   buildingTierLevel?: string;
+  cityScope?: 'Ciudad Principal' | 'Ciudad Secundaria' | 'Tercera Ciudad';
+  cityName?: string;
   buildingChoice?: BuildingChoice;
   cost: {
     gold: number;

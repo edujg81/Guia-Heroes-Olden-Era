@@ -394,7 +394,7 @@ export const UnitMatrix: React.FC<UnitMatrixProps> = ({
                     }`}>{variant.name}</h3>
                     <div className={`text-[11px] font-mono ${
                       themeMode === 'light' ? 'text-slate-500' : 'text-slate-400'
-                    }`}>{variant.nameEn} • {variant.dwellingName}</div>
+                    }`}>{variant.dwellingName}</div>
                   </div>
                   <div className="text-right font-mono">
                     <div className={`text-xs font-bold ${
@@ -600,7 +600,7 @@ export const UnitMatrix: React.FC<UnitMatrixProps> = ({
                 <div className={`text-xs font-mono ${
                   themeMode === 'light' ? 'text-slate-500' : 'text-slate-400'
                 }`}>
-                  {currentVariant.nameEn} • <em>{currentVariant.subtitle}</em>
+                  <em>{currentVariant.subtitle}</em>
                 </div>
               </div>
             </div>

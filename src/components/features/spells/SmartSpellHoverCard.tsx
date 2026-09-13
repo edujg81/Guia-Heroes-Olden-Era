@@ -172,7 +172,6 @@ export const SmartSpellHoverCard: React.FC<SmartSpellHoverCardProps> = ({
                 </div>
                 <h4 className="font-serif font-bold text-sm tracking-wide text-white flex items-center gap-1.5">
                   <span>{spell.name}</span>
-                  <span className="text-[11px] font-sans font-normal opacity-60">({spell.nameEn})</span>
                 </h4>
               </div>
 

@@ -22,8 +22,8 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Asentamiento de Alvar (Town Hall)',
-        nameEn: 'Alvar Settlement (Town Hall)',
+        name: 'Nivel I: Asentamiento de Alvar',
+        nameEn: 'Alvar Settlement',
         cost: { gold: 2500 },
         prerequisites: [],
         effects: [
@@ -35,10 +35,10 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
       },
       {
         level: 2,
-        name: 'Nivel II: Palacio Bizantino II (City Hall)',
-        nameEn: 'Byzantine Palace II (City Hall)',
+        name: 'Nivel II: Palacio Bizantino II',
+        nameEn: 'Byzantine Palace II',
         cost: { gold: 2500, wood: 5, ore: 5 },
-        prerequisites: ['Mercado (Marketplace)'],
+        prerequisites: ['Mercado'],
         effects: [
           'Otorga 1.000 de Oro, Puntos de Ley y Puntos de Astrología diarios.',
           'Permite al jugador seleccionar una de las 3 mejoras económicas de Nivel 2 (+1.000 Oro/día, +1.000 Puntos de Ley/día, o +1.000 Puntos de Astrología/día).'
@@ -48,10 +48,10 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
       },
       {
         level: 3,
-        name: 'Nivel III: Palacio Bizantino III (Metropolis)',
-        nameEn: 'Byzantine Palace III (Metropolis)',
+        name: 'Nivel III: Palacio Bizantino III',
+        nameEn: 'Byzantine Palace III',
         cost: { gold: 5000, wood: 10, ore: 10 },
-        prerequisites: ['Nivel II: Palacio Bizantino II (City Hall)'],
+        prerequisites: ['Nivel II: Palacio Bizantino II'],
         effects: [
           'Máxima cúspide del centro cívico de la Mazmorra en Olden Era.',
           'Otorga 1.000 de Oro, Puntos de Ley y Puntos de Astrología adicionales diarios para el reino.',
@@ -68,12 +68,12 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
   // =========================================================================
   {
     id: 'dungeon-bank',
-    name: 'Banco (Bank)',
+    name: 'Banco',
     nameEn: 'Bank',
     category: 'Cívica y Economía',
     faction: 'Mazmorra',
     cost: { gold: 2000, wood: 5, ore: 5 },
-    prerequisites: ['Mercado (Marketplace)', 'Palacio Bizantino (Ayuntamiento / Alcaldía)'],
+    prerequisites: ['Mercado', 'Palacio Bizantino (Ayuntamiento / Alcaldía)'],
     effects: [
       'Institución financiera que expande el flujo monetario de la Mazmorra.',
       'Genera +500 de Oro diario adicional y es prerrequisito indispensable para edificar la Tesorería.'
@@ -88,7 +88,7 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
     category: 'Cívica y Economía',
     faction: 'Mazmorra',
     cost: { gold: 5000, wood: 10, ore: 10 },
-    prerequisites: ['Banco (Bank)', 'Mercado (Marketplace)', 'Fortificaciones (Fortifications)'],
+    prerequisites: ['Banco', 'Mercado', 'Fortificaciones'],
     effects: [
       'Estructura económica suprema de Olden Era (Tesorería / Bonificación Financiera de +2.000 Oro/día).',
       'Genera +2.000 de Oro diario adicional de forma permanente para el reino.',
@@ -103,7 +103,7 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
   // =========================================================================
   {
     id: 'dungeon-fortifications',
-    name: 'Fortificaciones (Fortifications)',
+    name: 'Fortificaciones',
     nameEn: 'Fortifications',
     category: 'Fortificaciones',
     faction: 'Mazmorra',
@@ -119,7 +119,7 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
     upgradeLevels: [
       {
         level: 1,
-        name: 'Nivel I: Fortificaciones (Fortifications)',
+        name: 'Nivel I: Fortificaciones',
         nameEn: 'Fortifications I',
         cost: { gold: 2500, ore: 5 },
         prerequisites: [],
@@ -132,10 +132,10 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
       },
       {
         level: 2,
-        name: 'Nivel II: Fortificaciones II (Citadel)',
+        name: 'Nivel II: Fortificaciones II',
         nameEn: 'Fortifications II',
         cost: { gold: 2500, ore: 10 },
-        prerequisites: ['Nivel I: Fortificaciones (Fortifications)'],
+        prerequisites: ['Nivel I: Fortificaciones'],
         effects: [
           'Añade dos torres a las almenas que disparan automáticamente a los atacantes durante los asedios.',
           'Aumenta la producción semanal de todas las criaturas de la Mazmorra en un +50%.'
@@ -146,10 +146,10 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
       },
       {
         level: 3,
-        name: 'Nivel III: Fortificaciones III (Castle)',
+        name: 'Nivel III: Fortificaciones III',
         nameEn: 'Fortifications III',
         cost: { gold: 5000, ore: 15 },
-        prerequisites: ['Nivel II: Fortificaciones II (Citadel)'],
+        prerequisites: ['Nivel II: Fortificaciones II'],
         effects: [
           'Añade una gran torre central a las almenas con alcance total y mayor cadencia de disparo.',
           'Duplica el crecimiento semanal de todas las criaturas de la ciudad (+100% total).'
@@ -166,7 +166,7 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
   // =========================================================================
   {
     id: 'dungeon-mage-guild',
-    name: 'Gremio de Magos (Mage Guild)',
+    name: 'Gremio de Magos',
     nameEn: 'Mage Guild',
     category: 'Magia & Cofradía',
     faction: 'Mazmorra',
@@ -233,7 +233,7 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
   // =========================================================================
   {
     id: 'dungeon-tavern',
-    name: 'Taberna (Tavern)',
+    name: 'Taberna',
     nameEn: 'Tavern',
     category: 'Cívica y Economía',
     faction: 'Mazmorra',
@@ -249,12 +249,12 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
   },
   {
     id: 'dungeon-marketplace',
-    name: 'Mercado (Marketplace)',
+    name: 'Mercado',
     nameEn: 'Marketplace',
     category: 'Cívica y Economía',
     faction: 'Mazmorra',
     cost: { gold: 500, wood: 5 },
-    prerequisites: ['Taberna (Tavern)'],
+    prerequisites: ['Taberna'],
     effects: [
       'Permite intercambiar recursos y oro en el mercado subterráneo.',
       'Las tasas de intercambio mejoran conforme el jugador controla más Mercados en su reino.',
@@ -270,7 +270,7 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
     category: 'Cívica y Economía',
     faction: 'Mazmorra',
     cost: { gold: 2000, wood: 5, ore: 5 },
-    prerequisites: ['Mercado (Marketplace)'],
+    prerequisites: ['Mercado'],
     effects: [
       'Establece una tienda permanente de artefactos mágicos en la ciudad.',
       'Permite comprar y vender artefactos de distintos tiers para equipar a los comandantes de la Mazmorra.'
@@ -280,12 +280,12 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
   },
   {
     id: 'dungeon-resource-silo',
-    name: 'Silo de Recursos (Resource Silo)',
+    name: 'Silo de Recursos',
     nameEn: 'Resource Silo',
     category: 'Cívica y Economía',
     faction: 'Mazmorra',
     cost: { gold: 0, crystal: 3, mercury: 3 },
-    prerequisites: ['Mercado (Marketplace)', 'Banco (Bank)'],
+    prerequisites: ['Mercado', 'Banco'],
     effects: [
       'Genera +1 Gema diaria de forma pasiva (recurso raro principal de la Mazmorra).',
       'Asegura el suministro continuo de gemas para la Cofradía de Magos y los Dragones Negros.'
@@ -300,7 +300,7 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
     category: 'Cívica y Economía',
     faction: 'Mazmorra',
     cost: { gold: 2000, ore: 5, gems: 2 },
-    prerequisites: ['Silo de Recursos (Resource Silo)'],
+    prerequisites: ['Silo de Recursos'],
     effects: [
       'Produce Polvo Alquímico (Alchemical Dust) diariamente.',
       'El Polvo Alquímico es el recurso canónico esencial de Olden Era necesario para mejorar moradas de criaturas y ascender hechizos en el Observatorio Mágico.'
@@ -322,7 +322,7 @@ export const DUNGEON_STRUCTURES: TownStructure[] = [
     dwellingTier: 1,
     cost: { gold: 500, ore: 5 },
     dwellingUpgradeCost: { gold: 1000, ore: 5 },
-    prerequisites: ['Fortificaciones (Fortifications)'],
+    prerequisites: ['Fortificaciones'],
     unitRecruitedBase: 'Troglodita (Troglodyte)',
     unitRecruited: 'Troglodita / Troglodita Infernal / Troglodita Tóxico',
     unitUpgrades: {
