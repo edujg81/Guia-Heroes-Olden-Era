@@ -102,7 +102,7 @@ export const TEMPLE_FACTION_LAWS: FactionLaw[] = [
     prerequisiteLaws: [],
     incompatibleLaws: [],
     recommendedForHeroes: ['Kestrel', 'Lord Edgar'],
-    tags: ['Tiradores', 'Daño Físico', 'Tier 1'],
+    tags: ['Tiradores', 'Daño Físico', 'Tier 2'],
   },
   {
     id: 'law-temple-t1-encouragement',

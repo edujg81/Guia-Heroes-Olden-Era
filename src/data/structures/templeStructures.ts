@@ -313,79 +313,79 @@ export const TEMPLE_STRUCTURES: TownStructure[] = [
   // MORADAS DE CRIATURAS (TIER 1 A 7) CANÓNICAS DE OLDEN ERA
   // =========================================================================
   {
-    id: 'temple-crossbowman-range',
-    name: 'Campo de Tiro de Ballesteros (Crossbowman Range)',
-    nameEn: 'Crossbowman Range',
-    category: 'Moradas de Criaturas',
-    faction: 'Templo',
-    tier: 1,
-    dwellingTier: 1,
-    cost: { gold: 500, wood: 5 },
-    dwellingUpgradeCost: { gold: 1000, wood: 5 },
-    prerequisites: ['Fortificaciones'],
-    unitRecruitedBase: 'Ballestero (Crossbowman)',
-    unitRecruited: 'Ballestero / Tirador Certero / Halconero',
-    unitUpgrades: {
-      branchA: 'Tirador Certero (Mayor cadencia y perforación de armadura a distancia)',
-      branchB: 'Halconero (Hostigamiento con rapaz adiestrado y anulación de penalización por distancia)',
-      branchADetails: {
-        unitName: 'Tirador Certero',
-        nameEn: 'Marksman',
-        role: 'Tirador de Perforación',
-        keyAbilities: ['Disparo Doble', 'Perforación de Armadura'],
-        statsBonus: '+3 Ataque, +2 Iniciativa'
-      },
-      branchBDetails: {
-        unitName: 'Halconero',
-        nameEn: 'Falconer',
-        role: 'Tirador de Reconocimiento y Hostigamiento',
-        keyAbilities: ['Ataque de Halcón', 'Sin penalización por distancia'],
-        statsBonus: '+2 Ataque, +2 Defensa, +1 Velocidad'
-      }
-    },
-    effects: [
-      'Recluta los tiradores básicos de Tier 1 del Templo.',
-      'Producción base: 14 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
-    ],
-    strategicTip: 'Núcleo fundamental de daño a distancia temprano para el creeping sin bajas en los Días 1 a 4.',
-    timingRecommendation: 'Día 1-2.',
-  },
-  {
     id: 'temple-infantry-barracks',
     name: 'Barracones de Infantería (Infantry Barracks)',
     nameEn: 'Infantry Barracks',
     category: 'Moradas de Criaturas',
     faction: 'Templo',
-    tier: 2,
-    dwellingTier: 2,
-    cost: { gold: 1000, ore: 5 },
+    tier: 1,
+    dwellingTier: 1,
+    cost: { gold: 500, ore: 5 },
     dwellingUpgradeCost: { gold: 1000, ore: 5 },
-    prerequisites: ['Campo de Tiro de Ballesteros (Crossbowman Range)'],
+    prerequisites: ['Fortificaciones'],
     unitRecruitedBase: 'Espadachín (Swordsman)',
-    unitRecruited: 'Espadachín / Égida del Sol / Capitán de la Guardia',
+    unitRecruited: 'Espadachín / Capitán de la Guardia / Égida del Sol',
     unitUpgrades: {
-      branchA: 'Égida del Sol (Muro de escudos bendito con reducción de daño a distancia)',
-      branchB: 'Capitán de la Guardia (Aura de disciplina que incrementa la moral e iniciativa de tropas adyacentes)',
+      branchA: 'Capitán de la Guardia (Aura de disciplina que incrementa la moral e iniciativa de tropas adyacentes)',
+      branchB: 'Égida del Sol (Muro de escudos bendito con reducción de daño a distancia)',
       branchADetails: {
-        unitName: 'Égida del Sol',
-        nameEn: 'Sun Aegis',
-        role: 'Línea de Escudo Defensiva',
-        keyAbilities: ['Muro de Escudos (-30% daño de proyectiles)', 'Guardia Radiante'],
-        statsBonus: '+4 Defensa, +6 Vida'
-      },
-      branchBDetails: {
         unitName: 'Capitán de la Guardia',
         nameEn: 'Guard Captain',
         role: 'Infantería Ofensiva de Mando',
         keyAbilities: ['Aura de Disciplina (+1 Moral a adyacentes)', 'Contragolpe Firme'],
-        statsBonus: '+3 Ataque, +2 Iniciativa'
+        statsBonus: '+2 Ataque, +1 Defensa, +1 Velocidad'
+      },
+      branchBDetails: {
+        unitName: 'Égida del Sol',
+        nameEn: 'Sun Aegis',
+        role: 'Línea de Escudo Defensiva',
+        keyAbilities: ['Muro de Escudos (-40% daño de proyectiles)', 'Guardia Radiante'],
+        statsBonus: '+3 Defensa, +6 Vida'
       }
     },
     effects: [
-      'Recluta la infantería acorazada de Tier 2 del Templo.',
-      'Producción base: 9 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
+      'Recluta la infantería básica de Tier 1 del Templo.',
+      'Producción base: 18 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
     ],
-    strategicTip: 'Infantería barata y resistente para proteger a los ballesteros y resistir cargas enemigas.',
+    strategicTip: 'Infantería barata y resistente con -30% de daño recibido de proyectiles para absorber ataques enemigos.',
+    timingRecommendation: 'Día 1-2.',
+  },
+  {
+    id: 'temple-crossbowman-range',
+    name: 'Campo de Tiro de Ballesteros (Crossbowman Range)',
+    nameEn: 'Crossbowman Range',
+    category: 'Moradas de Criaturas',
+    faction: 'Templo',
+    tier: 2,
+    dwellingTier: 2,
+    cost: { gold: 1000, wood: 5 },
+    dwellingUpgradeCost: { gold: 1000, wood: 5 },
+    prerequisites: ['Barracones de Infantería (Infantry Barracks)'],
+    unitRecruitedBase: 'Ballestero (Crossbowman)',
+    unitRecruited: 'Ballestero / Tirador / Halconero',
+    unitUpgrades: {
+      branchA: 'Tirador (Disparo perforante que aumenta el daño recibido por el objetivo)',
+      branchB: 'Halconero (Hostigamiento con rapaz adiestrado y anulación de penalización por distancia)',
+      branchADetails: {
+        unitName: 'Tirador',
+        nameEn: 'Marksman',
+        role: 'Tirador de Perforación',
+        keyAbilities: ['Disparo Perforante (+25% daño recibido)', 'Doble Salva'],
+        statsBonus: '+2 Ataque, +1 Defensa, +3 Vida'
+      },
+      branchBDetails: {
+        unitName: 'Halconero',
+        nameEn: 'Austringer',
+        role: 'Tirador de Reconocimiento y Hostigamiento',
+        keyAbilities: ['Ojo de Halcón (Sin penalización por distancia)', 'Hostigamiento de Halcón'],
+        statsBonus: '+3 Ataque, +1 Defensa, +2 Vida'
+      }
+    },
+    effects: [
+      'Recluta los tiradores de Tier 2 del Templo.',
+      'Producción base: 14 unidades por semana (+50% con Fortificaciones II, +100% con Fortificaciones III).'
+    ],
+    strategicTip: 'Núcleo fundamental de daño a distancia temprano para el creeping sin bajas en los Días 1 a 4.',
     timingRecommendation: 'Día 2-3.',
   },
   {
