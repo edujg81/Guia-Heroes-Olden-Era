@@ -39,6 +39,10 @@ export interface BuildStep {
   sourceUrl?: string;
 }
 
+export type UnitClassType = 'Viviente' | 'No muerto' | 'Criatura mágica' | 'Encarnación' | 'Engendro de la Colmena' | 'Dragón' | 'Constructo';
+export type UnitMovementType = 'Terrestre' | 'Volador' | 'Traslación';
+export type UnitAttackType = 'Melé' | 'A distancia' | 'Largo alcance';
+
 export interface UnitStats {
   hp: number;
   attack: number;
@@ -47,6 +51,7 @@ export interface UnitStats {
   speed: number;
   initiative: number;
   shots?: number;
+  attackType?: UnitAttackType;
   weeklyGrowth: number;
 }
 
@@ -57,6 +62,10 @@ export interface UnitVariant {
   nameEn: string;
   subtitle: string;
   dwellingName: string;
+  unitClass?: UnitClassType;
+  movementType?: UnitMovementType;
+  attackType?: UnitAttackType;
+  squadValue?: number;
   cost: {
     gold: number;
     ore?: number;
@@ -88,6 +97,10 @@ export interface UnitInfo {
   name: string;
   upgradeName: string;
   altUpgradeName?: string;
+  unitClass?: UnitClassType;
+  movementType?: UnitMovementType;
+  attackType?: UnitAttackType;
+  squadValue?: number;
   dwelling: string;
   role: string;
   speed: number;

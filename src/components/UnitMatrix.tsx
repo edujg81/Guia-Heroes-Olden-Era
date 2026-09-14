@@ -156,6 +156,22 @@ export const UnitMatrix: React.FC<UnitMatrixProps> = ({
                 }`}>
                   {unit.dwelling}
                 </div>
+                <div className="flex items-center gap-1 mt-1 text-[9px] font-mono">
+                  <span className={`px-1 py-0.2 rounded border ${
+                    themeMode === 'light' ? 'bg-slate-100 border-slate-300 text-slate-700' : 'bg-white/10 border-white/10 text-slate-300'
+                  }`}>
+                    {unit.unitClass}
+                  </span>
+                  <span className={`px-1 py-0.2 rounded border ${
+                    unit.attackType === 'A distancia'
+                      ? (themeMode === 'light' ? 'bg-blue-50 border-blue-200 text-blue-800 font-semibold' : 'bg-blue-950/60 border-blue-700/60 text-blue-300')
+                      : unit.attackType === 'Largo alcance'
+                      ? (themeMode === 'light' ? 'bg-amber-50 border-amber-200 text-amber-800 font-semibold' : 'bg-amber-950/60 border-amber-700/60 text-amber-300')
+                      : (themeMode === 'light' ? 'bg-slate-50 border-slate-200 text-slate-600' : 'bg-white/5 border-white/10 text-slate-400')
+                  }`}>
+                    {unit.attackType}
+                  </span>
+                </div>
               </div>
             </button>
           );
@@ -395,6 +411,34 @@ export const UnitMatrix: React.FC<UnitMatrixProps> = ({
                     <div className={`text-[11px] font-mono ${
                       themeMode === 'light' ? 'text-slate-500' : 'text-slate-400'
                     }`}>{variant.dwellingName}</div>
+                    <div className="flex flex-wrap items-center gap-1.5 mt-1.5 text-[10px] font-mono">
+                      <span className={`px-1.5 py-0.5 rounded border ${
+                        themeMode === 'light' ? 'bg-slate-100 border-slate-300 text-slate-800' : 'bg-white/10 border-white/10 text-slate-200'
+                      }`}>
+                        {variant.unitClass}
+                      </span>
+                      <span className={`px-1.5 py-0.5 rounded border ${
+                        themeMode === 'light' ? 'bg-slate-100 border-slate-300 text-slate-800' : 'bg-white/10 border-white/10 text-slate-200'
+                      }`}>
+                        {variant.movementType}
+                      </span>
+                      <span className={`px-1.5 py-0.5 rounded border font-semibold ${
+                        variant.attackType === 'A distancia'
+                          ? (themeMode === 'light' ? 'bg-blue-50 border-blue-200 text-blue-800' : 'bg-blue-950/60 border-blue-700/60 text-blue-300')
+                          : variant.attackType === 'Largo alcance'
+                          ? (themeMode === 'light' ? 'bg-amber-50 border-amber-200 text-amber-800' : 'bg-amber-950/60 border-amber-700/60 text-amber-300')
+                          : (themeMode === 'light' ? 'bg-slate-50 border-slate-200 text-slate-600' : 'bg-white/5 border-white/10 text-slate-400')
+                      }`}>
+                        {variant.attackType}
+                      </span>
+                      {variant.squadValue ? (
+                        <span className={`px-1.5 py-0.5 rounded border ${
+                          themeMode === 'light' ? 'bg-amber-50 border-amber-200 text-amber-900 font-bold' : 'bg-yellow-950/40 border-yellow-700/50 text-yellow-300'
+                        }`}>
+                          Valor: {variant.squadValue}
+                        </span>
+                      ) : null}
+                    </div>
                   </div>
                   <div className="text-right font-mono">
                     <div className={`text-xs font-bold ${
@@ -586,6 +630,25 @@ export const UnitMatrix: React.FC<UnitMatrixProps> = ({
                   }`}>
                     {currentVariant.branchLabel}
                   </span>
+                  <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border uppercase ${
+                    themeMode === 'light' ? 'bg-slate-100 border-slate-300 text-slate-800' : 'bg-white/10 border-white/10 text-slate-200'
+                  }`}>
+                    {currentVariant.unitClass || selectedUnit.unitClass}
+                  </span>
+                  <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border uppercase ${
+                    themeMode === 'light' ? 'bg-slate-100 border-slate-300 text-slate-800' : 'bg-white/10 border-white/10 text-slate-200'
+                  }`}>
+                    {currentVariant.movementType || selectedUnit.movementType}
+                  </span>
+                  <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border uppercase ${
+                    (currentVariant.attackType || selectedUnit.attackType) === 'A distancia'
+                      ? (themeMode === 'light' ? 'bg-blue-100 text-blue-900 border-blue-300' : 'bg-blue-950 text-blue-300 border-blue-700')
+                      : (currentVariant.attackType || selectedUnit.attackType) === 'Largo alcance'
+                      ? (themeMode === 'light' ? 'bg-amber-100 text-amber-900 border-amber-300' : 'bg-amber-950 text-amber-300 border-amber-700')
+                      : (themeMode === 'light' ? 'bg-slate-100 text-slate-700 border-slate-300' : 'bg-slate-800 text-slate-300 border-slate-700')
+                  }`}>
+                    {currentVariant.attackType || selectedUnit.attackType}
+                  </span>
                   <span className={`text-xs font-mono ${
                     themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'
                   }`}>
@@ -616,7 +679,7 @@ export const UnitMatrix: React.FC<UnitMatrixProps> = ({
               }`}>
                 Coste de Reclutamiento
               </div>
-              <div className="flex items-center sm:justify-end gap-2 font-mono">
+              <div className="flex items-center sm:justify-end gap-2 font-mono flex-wrap">
                 <span className={`text-sm font-bold flex items-center gap-1 ${
                   themeMode === 'light' ? 'text-amber-900' : 'text-yellow-400'
                 }`}>
@@ -627,6 +690,20 @@ export const UnitMatrix: React.FC<UnitMatrixProps> = ({
                     themeMode === 'light' ? 'text-emerald-800' : 'text-emerald-400'
                   }`}>
                     <Gem className="w-3 h-3" /> +{currentVariant.cost.gems} Gemas
+                  </span>
+                )}
+                {currentVariant.cost.crystal && (
+                  <span className={`text-xs font-bold flex items-center gap-1 ${
+                    themeMode === 'light' ? 'text-blue-800' : 'text-blue-400'
+                  }`}>
+                    <Sparkles className="w-3 h-3" /> +{currentVariant.cost.crystal} Cristal
+                  </span>
+                )}
+                {currentVariant.cost.mercury && (
+                  <span className={`text-xs font-bold flex items-center gap-1 ${
+                    themeMode === 'light' ? 'text-red-800' : 'text-red-400'
+                  }`}>
+                    <Flame className="w-3 h-3" /> +{currentVariant.cost.mercury} Mercurio
                   </span>
                 )}
                 {currentVariant.cost.alchemicalDust && (
@@ -642,11 +719,16 @@ export const UnitMatrix: React.FC<UnitMatrixProps> = ({
               }`}>
                 Crecimiento: <strong className={themeMode === 'light' ? 'text-slate-900' : 'text-white'}>{currentVariant.stats.weeklyGrowth}/semana</strong>
               </div>
+              <div className={`text-[10px] font-mono ${
+                themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'
+              }`}>
+                Valor de Escuadrón (IA): <strong className={themeMode === 'light' ? 'text-amber-900 font-bold' : 'text-yellow-400'}>{currentVariant.squadValue || selectedUnit.squadValue}</strong>
+              </div>
             </div>
           </div>
 
           {/* Core Numerical Stats Ribbon */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
             <div className={`border p-3 rounded-xl ${
               themeMode === 'light' ? 'bg-slate-50 border-slate-200' : 'bg-black/50 border-white/10'
             }`}>
@@ -700,7 +782,7 @@ export const UnitMatrix: React.FC<UnitMatrixProps> = ({
               <div className={`text-lg font-bold font-mono mt-1 ${
                 themeMode === 'light' ? 'text-cyan-900' : 'text-cyan-300'
               }`}>{currentVariant.stats.speed}</div>
-              <div className="text-[10px] text-slate-500 font-mono">Casillas por turno</div>
+              <div className="text-[10px] text-slate-500 font-mono">{currentVariant.movementType || selectedUnit.movementType}</div>
             </div>
 
             <div className={`border p-3 rounded-xl ${
@@ -728,10 +810,28 @@ export const UnitMatrix: React.FC<UnitMatrixProps> = ({
               <div className={`text-lg font-bold font-mono mt-1 ${
                 themeMode === 'light' ? 'text-blue-900' : 'text-blue-300'
               }`}>
-                {currentVariant.stats.shots ? `${currentVariant.stats.shots} Tiros` : 'Melé'}
+                {currentVariant.attackType || selectedUnit.attackType}
               </div>
               <div className="text-[10px] text-slate-500 font-mono">
-                {currentVariant.stats.shots ? 'Ataque a Distancia' : 'Cuerpo a Cuerpo'}
+                {currentVariant.stats.shots ? `${currentVariant.stats.shots} proyectiles` : (currentVariant.attackType === 'Largo alcance' ? 'Alcance 2 hex' : 'Cuerpo a cuerpo')}
+              </div>
+            </div>
+
+            <div className={`border p-3 rounded-xl ${
+              themeMode === 'light' ? 'bg-slate-50 border-slate-200' : 'bg-black/50 border-white/10'
+            }`}>
+              <div className={`text-[10px] font-mono flex items-center gap-1 ${
+                themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'
+              }`}>
+                <Crown className="w-3 h-3 text-amber-600 dark:text-yellow-400" /> Clase & Valor IA
+              </div>
+              <div className={`text-sm font-bold font-mono mt-1 truncate ${
+                themeMode === 'light' ? 'text-slate-900' : 'text-white'
+              }`}>
+                {currentVariant.unitClass || selectedUnit.unitClass}
+              </div>
+              <div className="text-[10px] text-slate-500 font-mono">
+                Valor IA: {currentVariant.squadValue || selectedUnit.squadValue}
               </div>
             </div>
           </div>
