@@ -1283,7 +1283,7 @@ export const FactionLawsTree: React.FC<FactionLawsTreeProps> = ({
                       {/* Bottom Status */}
                       <div className={`mt-3 pt-2.5 border-t flex items-center justify-between text-[10px] ${themeMode === 'light' ? 'border-slate-200' : theme.borderSubtle}`}>
                         <span className={`font-mono truncate max-w-[140px] ${themeMode === 'light' ? 'text-slate-600' : theme.textAccent}`}>
-                          {law.recommendedUnlockTime.split('-')[0]}
+                          {(rankData?.recommendedUnlockTime || law.recommendedUnlockTime || `Tier ${law.tier}`).split('-')[0].trim()}
                         </span>
                         <div className="flex items-center gap-1 font-mono font-bold">
                           {isEnacted ? (
@@ -1454,7 +1454,7 @@ export const FactionLawsTree: React.FC<FactionLawsTreeProps> = ({
 
                         <div className={`mt-3 pt-2.5 border-t flex items-center justify-between text-[10px] ${themeMode === 'light' ? 'border-slate-200' : theme.borderSubtle}`}>
                           <span className={`font-mono truncate max-w-[140px] ${themeMode === 'light' ? 'text-slate-600' : theme.textAccent}`}>
-                            {law.recommendedUnlockTime.split('-')[0]}
+                            {(rankData?.recommendedUnlockTime || law.recommendedUnlockTime || `Tier ${law.tier}`).split('-')[0].trim()}
                           </span>
                           <div className="flex items-center gap-1 font-mono font-bold">
                             {isEnacted ? (
@@ -1616,7 +1616,7 @@ export const FactionLawsTree: React.FC<FactionLawsTreeProps> = ({
                       : `bg-black/40 ${theme.borderSubtle} text-amber-300/90`
                   }`}>
                     <Zap className={`w-3.5 h-3.5 ${themeMode === 'light' ? 'text-amber-700' : 'text-yellow-400'} shrink-0`} />
-                    <span><strong>Momento sugerido:</strong> {law.recommendedUnlockTime}</span>
+                    <span><strong>Momento sugerido:</strong> {rankData?.recommendedUnlockTime || law.recommendedUnlockTime || `Tier ${law.tier} - Nivel ${currentLevel}`}</span>
                   </div>
 
                   {/* Law Effect */}

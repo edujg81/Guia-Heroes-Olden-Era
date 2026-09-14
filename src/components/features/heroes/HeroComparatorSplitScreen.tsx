@@ -200,11 +200,11 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
       };
     }
 
-    const heroText = `${hero.name} ${hero.specialtyName} ${hero.specialtyEffect} ${hero.synergyCombo} ${hero.tacticalPlaystyle}`.toLowerCase();
-    const unitText = `${unit.name} ${unit.upgradeName} ${unit.dwelling}`.toLowerCase();
+    const heroText = `${hero.name || ''} ${hero.specialtyName || ''} ${hero.specialtyEffect || ''} ${hero.synergyCombo || ''} ${hero.tacticalPlaystyle || ''}`.toLowerCase();
+    const unitText = `${unit.name || ''} ${unit.upgradeName || ''} ${unit.dwelling || ''}`.toLowerCase();
 
     // 1. Sinergia Directa Especialista
-    const directKeywords = unit.name.toLowerCase().split(' ').concat(unit.dwelling.toLowerCase().split(' '));
+    const directKeywords = (unit.name || '').toLowerCase().split(' ').concat((unit.dwelling || '').toLowerCase().split(' '));
     const isDirect = directKeywords.some((kw) => kw.length > 3 && heroText.includes(kw));
 
     if (isDirect) {
@@ -216,7 +216,7 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
     }
 
     // 2. Sinergia de Ejército Inicial (Creeping Temprano Día 1-7)
-    if (hero.initialArmy.toLowerCase().includes(unit.name.toLowerCase())) {
+    if ((hero.initialArmy || '').toLowerCase().includes((unit.name || '').toLowerCase())) {
       return {
         level: 'starter' as const,
         badge: '🛡️ Tropa de Choque Día 1',

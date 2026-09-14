@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FactionId, getUnitsForFaction, FACTIONS_METADATA, getFactionTheme } from '../data/factionDataProvider';
 import { UnitVariant } from '../types';
 import { useStickyState } from '../utils/useStickyState';
-import { UnitStatRadarChart } from './ui/UnitStatRadarChart';
+import { UnitStatRadarChart, parseAverageDamage } from './ui/UnitStatRadarChart';
 import {
   Shield,
   Eye,
@@ -480,10 +480,13 @@ export const UnitMatrix: React.FC<UnitMatrixProps> = ({
                       ? 'bg-slate-50 border-slate-200'
                       : 'bg-black/50 border-white/5'
                   }`}>
-                    <div className={`text-[10px] ${themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'}`}>Daño</div>
+                    <div className={`text-[10px] ${themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'}`}>Daño (Medio)</div>
                     <div className={`text-sm font-bold ${
                       themeMode === 'light' ? 'text-purple-900' : theme.textAccent
                     }`}>{variant.stats.damage}</div>
+                    <div className="text-[9px] text-slate-500 font-mono">
+                      Med: {parseAverageDamage(variant.stats.damage)}
+                    </div>
                   </div>
                   <div className={`p-2 rounded-lg border ${
                     themeMode === 'light'
@@ -496,17 +499,27 @@ export const UnitMatrix: React.FC<UnitMatrixProps> = ({
                     }`}>
                       {variant.stats.speed} / {variant.stats.initiative}
                     </div>
+                    <div className="text-[9px] text-slate-500 font-mono">
+                      {variant.movementType || selectedUnit.movementType}
+                    </div>
                   </div>
                   <div className={`p-2 rounded-lg border ${
                     themeMode === 'light'
                       ? 'bg-slate-50 border-slate-200'
                       : 'bg-black/50 border-white/5'
                   }`}>
-                    <div className={`text-[10px] ${themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'}`}>{variant.stats.shots ? 'Disparos' : 'Alcance'}</div>
-                    <div className={`text-sm font-bold ${
-                      themeMode === 'light' ? 'text-emerald-900' : 'text-emerald-300'
+                    <div className={`text-[10px] ${themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'}`}>Tipo Ataque</div>
+                    <div className={`text-xs sm:text-sm font-bold truncate ${
+                      (variant.attackType || (variant.stats.shots ? 'A distancia' : 'Melé')) === 'A distancia'
+                        ? (themeMode === 'light' ? 'text-blue-800' : 'text-blue-400')
+                        : (variant.attackType || 'Melé') === 'Largo alcance'
+                        ? (themeMode === 'light' ? 'text-amber-800' : 'text-amber-400')
+                        : (themeMode === 'light' ? 'text-emerald-900' : 'text-emerald-300')
                     }`}>
-                      {variant.stats.shots ? `${variant.stats.shots}` : 'Melé'}
+                      {variant.attackType || (variant.stats.shots ? 'A distancia' : 'Melé')}
+                    </div>
+                    <div className="text-[9px] text-slate-500 font-mono">
+                      {variant.stats.shots ? `${variant.stats.shots} tiros` : (variant.attackType === 'Largo alcance' ? '2 hex' : '1 hex')}
                     </div>
                   </div>
                   <div className={`p-2 rounded-lg border ${

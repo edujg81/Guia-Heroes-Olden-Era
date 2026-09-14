@@ -520,7 +520,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                     <span className={`text-[10px] shrink-0 font-mono ${
                       themeMode === 'light' ? 'text-slate-500' : 'text-slate-400'
                     }`}>
-                      {hero.initialArmy.split(',')[0]}
+                      {(hero.initialArmy || '').split(',')[0]}
                     </span>
                   </div>
                 </div>

@@ -113,11 +113,13 @@ export const TownStructuresBrowser: React.FC<TownStructuresBrowserProps> = ({
   // Find structures that require the currently selected structure
   const unlockedBySelected = useMemo(() => {
     if (!selectedStructure) return [];
+    const baseName = (selectedStructure.name || '').split('(')[0].trim().toLowerCase();
+    const englishName = (selectedStructure.nameEn || '').toLowerCase();
     return factionStructures.filter((s) =>
-      s.prerequisites.some((p) =>
-        p.toLowerCase().includes(selectedStructure.name.split('(')[0].trim().toLowerCase()) ||
-        p.toLowerCase().includes(selectedStructure.nameEn.toLowerCase())
-      )
+      s.prerequisites.some((p) => {
+        const pLower = (p || '').toLowerCase();
+        return (baseName && pLower.includes(baseName)) || (englishName && pLower.includes(englishName));
+      })
     );
   }, [selectedStructure, factionStructures]);
 
