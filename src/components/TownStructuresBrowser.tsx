@@ -438,7 +438,7 @@ export const TownStructuresBrowser: React.FC<TownStructuresBrowserProps> = ({
                             Nivel {lvl.level}
                           </span>
                           <span className="text-xs font-semibold truncate block">
-                            {lvl.name.split(':')[1]?.trim() || lvl.name}
+                            {(lvl.name || '').split(':')[1]?.trim() || lvl.name || `Nivel ${lvl.level}`}
                           </span>
                           {lvl.bonusIncome && (
                             <span className="text-[10px] text-amber-300 font-mono block mt-0.5">
