@@ -4,6 +4,8 @@ import { UnitVariant } from '../types';
 import { useStickyState } from '../utils/useStickyState';
 import { UnitStatRadarChart, parseAverageDamage } from './ui/UnitStatRadarChart';
 import { CrossUnitComparator } from './features/units/CrossUnitComparator';
+import { UnitImage } from './ui/UnitImage';
+import { FactionImage } from './ui/FactionImage';
 import {
   isAbilityExclusiveToBranch,
   parseAbility,
@@ -89,11 +91,16 @@ export const UnitMatrix: React.FC<UnitMatrixProps> = ({
             }`}>
               Bestiario & Unidades de Guerra • Heroes of Might and Magic: Olden Era
             </div>
-            <h2 className={`text-xl sm:text-2xl font-serif uppercase tracking-wide font-bold ${
-              themeMode === 'light' ? 'text-slate-900' : 'text-white'
-            }`}>
-              Matriz de Criaturas y Ramas ({meta.name})
-            </h2>
+            <div className="flex items-center gap-3">
+              <FactionImage faction={selectedFaction} size="lg" />
+              <div>
+                <h2 className={`text-xl sm:text-2xl font-serif uppercase tracking-wide font-bold ${
+                  themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                }`}>
+                  Matriz de Criaturas y Ramas ({meta.name})
+                </h2>
+              </div>
+            </div>
             <p className={`text-xs sm:text-sm mt-1 max-w-3xl leading-relaxed ${
               themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
             }`}>
@@ -199,9 +206,13 @@ export const UnitMatrix: React.FC<UnitMatrixProps> = ({
                 }`}>
                   T{unit.tier}
                 </span>
-                <span className={isSelected ? (themeMode === 'light' ? 'text-purple-800' : 'text-yellow-400') : (themeMode === 'light' ? 'text-slate-600' : theme.textAccent)}>
-                  {getIcon(unit.iconName)}
-                </span>
+                <UnitImage
+                  name={unit.name}
+                  nameEn={unit.variants.base.nameEn}
+                  size="sm"
+                  fallbackIcon={getIcon(unit.iconName)}
+                  className="w-7 h-7"
+                />
               </div>
               <div className="mt-2">
                 <div className={`text-xs font-bold truncate uppercase font-sans tracking-wide ${
@@ -273,7 +284,7 @@ export const UnitMatrix: React.FC<UnitMatrixProps> = ({
                 : `${theme.bgBadge} ${theme.borderSubtle} ${theme.textAccent} hover:brightness-125`
             }`}
           >
-            <Sparkles className={`w-3.5 h-3.5 ${themeMode === 'light' ? 'text-amber-500' : 'text-yellow-400'}`} />
+            <UnitImage name={selectedUnit.variants.branchA.name} nameEn={selectedUnit.variants.branchA.nameEn} size="xs" className="w-4 h-4 rounded" />
             <span>⚡ Rama A: {selectedUnit.variants.branchA.name}</span>
           </button>
 
@@ -291,7 +302,7 @@ export const UnitMatrix: React.FC<UnitMatrixProps> = ({
                 : 'bg-emerald-950/40 border-emerald-900/60 text-emerald-300 hover:bg-emerald-900/30 hover:text-white'
             }`}
           >
-            <ArrowRightLeft className={`w-3.5 h-3.5 ${themeMode === 'light' ? 'text-emerald-700' : 'text-emerald-400'}`} />
+            <UnitImage name={selectedUnit.variants.branchB.name} nameEn={selectedUnit.variants.branchB.nameEn} size="xs" className="w-4 h-4 rounded" />
             <span>✦ Rama B: {selectedUnit.variants.branchB.name}</span>
           </button>
         </div>
@@ -500,27 +511,37 @@ export const UnitMatrix: React.FC<UnitMatrixProps> = ({
                   themeMode === 'light' ? 'border-slate-200' : 'border-white/10'
                 }`}>
                   <div>
-                    <span className={`text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${
-                      color === 'faction'
-                        ? themeMode === 'light'
-                          ? 'bg-purple-100 text-purple-900 border-purple-200'
-                          : `${theme.bgBadge} ${theme.textAccent} ${theme.borderSubtle}`
-                        : color === 'emerald'
-                        ? themeMode === 'light'
-                          ? 'bg-emerald-100 text-emerald-900 border-emerald-200'
-                          : 'bg-emerald-900/60 text-emerald-200 border-emerald-600'
-                        : themeMode === 'light'
-                        ? 'bg-slate-100 text-slate-700 border-slate-300'
-                        : 'bg-slate-800 text-slate-300 border-slate-700'
-                    }`}>
-                      {badge}
-                    </span>
-                    <h3 className={`text-base font-serif uppercase mt-1.5 font-bold ${
-                      themeMode === 'light' ? 'text-slate-900' : 'text-white'
-                    }`}>{variant.name}</h3>
-                    <div className={`text-[11px] font-mono ${
-                      themeMode === 'light' ? 'text-slate-500' : 'text-slate-400'
-                    }`}>{variant.dwellingName}</div>
+                    <div className="flex items-start gap-3">
+                      <UnitImage
+                        name={variant.name}
+                        nameEn={variant.nameEn}
+                        size="md"
+                        className="w-11 h-11 rounded-xl"
+                      />
+                      <div>
+                        <span className={`text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${
+                          color === 'faction'
+                            ? themeMode === 'light'
+                              ? 'bg-purple-100 text-purple-900 border-purple-200'
+                              : `${theme.bgBadge} ${theme.textAccent} ${theme.borderSubtle}`
+                            : color === 'emerald'
+                            ? themeMode === 'light'
+                              ? 'bg-emerald-100 text-emerald-900 border-emerald-200'
+                              : 'bg-emerald-900/60 text-emerald-200 border-emerald-600'
+                            : themeMode === 'light'
+                            ? 'bg-slate-100 text-slate-700 border-slate-300'
+                            : 'bg-slate-800 text-slate-300 border-slate-700'
+                        }`}>
+                          {badge}
+                        </span>
+                        <h3 className={`text-base font-serif uppercase mt-1.5 font-bold ${
+                          themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                        }`}>{variant.name}</h3>
+                        <div className={`text-[11px] font-mono ${
+                          themeMode === 'light' ? 'text-slate-500' : 'text-slate-400'
+                        }`}>{variant.dwellingName}</div>
+                      </div>
+                    </div>
                     <div className="flex flex-wrap items-center gap-1.5 mt-1.5 text-[10px] font-mono">
                       <span className={`px-1.5 py-0.5 rounded border ${
                         themeMode === 'light' ? 'bg-slate-100 border-slate-300 text-slate-800' : 'bg-white/10 border-white/10 text-slate-200'
@@ -820,7 +841,7 @@ export const UnitMatrix: React.FC<UnitMatrixProps> = ({
             themeMode === 'light' ? 'border-slate-200' : 'border-white/10'
           }`}>
             <div className="flex items-center gap-3.5">
-              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center border shadow-lg ${
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center border shadow-lg overflow-hidden shrink-0 ${
                 selectedBranch === 'branch_b'
                   ? themeMode === 'light'
                     ? 'bg-emerald-100 border-emerald-300 text-emerald-900 shadow-sm'
@@ -833,7 +854,13 @@ export const UnitMatrix: React.FC<UnitMatrixProps> = ({
                   ? 'bg-slate-100 border-slate-300 text-slate-800'
                   : 'bg-slate-900 border-slate-700 text-slate-300'
               }`}>
-                {getIcon(selectedUnit.iconName)}
+                <UnitImage
+                  name={currentVariant.name}
+                  nameEn={currentVariant.nameEn}
+                  size="lg"
+                  fallbackIcon={getIcon(selectedUnit.iconName)}
+                  className="w-full h-full object-contain p-1"
+                />
               </div>
               <div>
                 <div className="flex flex-wrap items-center gap-2">

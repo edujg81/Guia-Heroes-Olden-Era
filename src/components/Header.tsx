@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Shield, Sparkles, Flame, Eye, Coins, Castle, Scroll, BookOpen, ChevronDown, ChevronUp, Check, Flag, Sun, Moon, Zap, Keyboard, Maximize2 } from 'lucide-react';
 import { FactionId, FACTIONS_METADATA, getFactionTheme } from '../data/factionDataProvider';
+import { FactionImage } from './ui/FactionImage';
 
 interface HeaderProps {
   activeTab: string;
@@ -60,6 +61,7 @@ export const Header: React.FC<HeaderProps> = ({
         <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3 pb-2 border-b ${theme.borderSubtle}`}>
           {/* Izquierda: Título */}
           <div className="flex items-center gap-2 min-w-0">
+            <FactionImage faction={selectedFaction} size="sm" className="w-6 h-6" />
             <h1 className="text-sm sm:text-lg md:text-xl font-serif text-white uppercase italic truncate">
               Guía de Conquista: <span className={`${theme.textAccent} font-bold`}>{selectedFaction}</span>
             </h1>
@@ -74,7 +76,7 @@ export const Header: React.FC<HeaderProps> = ({
                 className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-xs font-mono font-bold transition-all border cursor-pointer ${theme.bgBadge} ${theme.border} ${theme.textAccent} hover:brightness-125 shadow-sm`}
                 title="Cambiar Facción de Jadame"
               >
-                <Flag className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                <FactionImage faction={selectedFaction} size="xs" className="w-3.5 h-3.5" />
                 <span>{selectedFaction}</span>
                 <ChevronDown className="w-3 h-3" />
               </button>
@@ -101,7 +103,8 @@ export const Header: React.FC<HeaderProps> = ({
                         }`}
                       >
                         <div>
-                          <div className="flex items-center gap-1.5">
+                          <div className="flex items-center gap-2">
+                            <FactionImage faction={fId} size="xs" className="w-4 h-4" />
                             <span className="font-semibold">{meta.name}</span>
                             <span
                               className="text-[9px] px-1.5 py-0.2 rounded font-sans font-bold"

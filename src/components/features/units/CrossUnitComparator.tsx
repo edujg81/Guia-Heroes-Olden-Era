@@ -8,6 +8,8 @@ import {
 } from '../../../data/factionDataProvider';
 import { MultiUnitRadarChart, MultiUnitSlot } from '../../ui/MultiUnitRadarChart';
 import { parseAverageDamage } from '../../ui/UnitStatRadarChart';
+import { UnitImage } from '../../ui/UnitImage';
+import { FactionImage } from '../../ui/FactionImage';
 import {
   isAbilityExclusiveToBranch,
   parseAbility,
@@ -72,9 +74,9 @@ const PRESETS = [
   },
   {
     title: '🏹 Duelo de Tiradores (Rango & Proyectiles)',
-    desc: 'Ballestero vs Bailarina de Jaspe vs Liche Pestilente',
+    desc: 'Ballestero vs Infiltrado Astuto vs Liche Pestilente',
     unit1: { factionId: 'Templo' as FactionId, tier: 2, variantKey: 'branchB' as const },
-    unit2: { factionId: 'Mazmorra' as FactionId, tier: 3, variantKey: 'branchA' as const },
+    unit2: { factionId: 'Mazmorra' as FactionId, tier: 2, variantKey: 'branchA' as const },
     unit3: { factionId: 'Necrópolis' as FactionId, tier: 5, variantKey: 'branchA' as const },
   },
   {
@@ -94,7 +96,7 @@ const PRESETS = [
   {
     title: '💀 Pesadilla de la Cripta vs Mazmorra',
     desc: 'Señor Vampiro vs Hidra Ctónica',
-    unit1: { factionId: 'Necrópolis' as FactionId, tier: 7, variantKey: 'branchA' as const },
+    unit1: { factionId: 'Necrópolis' as FactionId, tier: 6, variantKey: 'branchA' as const },
     unit2: { factionId: 'Mazmorra' as FactionId, tier: 6, variantKey: 'branchA' as const },
     unit3: undefined,
   },
@@ -433,25 +435,48 @@ export const CrossUnitComparator: React.FC<CrossUnitComparatorProps> = ({
 
         {/* Selected Variant Summary Pill */}
         <div
-          className={`p-2.5 rounded-xl border text-xs font-mono flex items-center justify-between gap-2 ${
+          className={`p-2.5 rounded-xl border text-xs font-mono flex items-center justify-between gap-2.5 ${
             isDark ? 'bg-black/40 border-white/5' : 'bg-slate-50 border-slate-200'
           }`}
         >
-          <div className="truncate">
-            <div className="font-bold truncate" style={{ color }}>
-              {slot.variantKey === 'base'
-                ? currentUnit.variants.base.name
-                : slot.variantKey === 'branchB'
-                ? currentUnit.variants.branchB.name
-                : currentUnit.variants.branchA.name}
-            </div>
-            <div className="text-[10px] text-slate-400 truncate">
-              {currentUnit.dwelling} • {currentUnit.attackType || 'Melé'}
+          <div className="flex items-center gap-2.5 truncate">
+            <UnitImage
+              name={
+                slot.variantKey === 'base'
+                  ? currentUnit.variants.base.name
+                  : slot.variantKey === 'branchB'
+                  ? currentUnit.variants.branchB.name
+                  : currentUnit.variants.branchA.name
+              }
+              nameEn={
+                slot.variantKey === 'base'
+                  ? currentUnit.variants.base.nameEn
+                  : slot.variantKey === 'branchB'
+                  ? currentUnit.variants.branchB.nameEn
+                  : currentUnit.variants.branchA.nameEn
+              }
+              size="sm"
+              className="w-9 h-9 rounded-lg"
+            />
+            <div className="truncate">
+              <div className="font-bold truncate" style={{ color }}>
+                {slot.variantKey === 'base'
+                  ? currentUnit.variants.base.name
+                  : slot.variantKey === 'branchB'
+                  ? currentUnit.variants.branchB.name
+                  : currentUnit.variants.branchA.name}
+              </div>
+              <div className="text-[10px] text-slate-400 truncate">
+                {currentUnit.dwelling} • {currentUnit.attackType || 'Melé'}
+              </div>
             </div>
           </div>
-          <span className="text-[10px] px-1.5 py-0.5 rounded border border-slate-600 text-slate-300 shrink-0">
-            T{currentUnit.tier}
-          </span>
+          <div className="flex items-center gap-1.5 shrink-0">
+            <FactionImage faction={slot.factionId} size="xs" />
+            <span className="text-[10px] px-1.5 py-0.5 rounded border border-slate-600 text-slate-300">
+              T{currentUnit.tier}
+            </span>
+          </div>
         </div>
       </div>
     );
@@ -584,8 +609,12 @@ export const CrossUnitComparator: React.FC<CrossUnitComparatorProps> = ({
               Evaluación de primer golpe por Iniciativa, modificador de Daño (Atq vs Def) y represalia.
             </p>
           </div>
-          <div className="text-xs font-mono font-bold text-slate-400">
-            {resolvedSlot1.variant.name} vs {resolvedSlot2.variant.name}
+          <div className="flex items-center gap-2 text-xs font-mono font-bold text-slate-300">
+            <UnitImage name={resolvedSlot1.variant.name} nameEn={resolvedSlot1.variant.nameEn} size="xs" className="w-5 h-5 rounded" />
+            <span>{resolvedSlot1.variant.name}</span>
+            <span className="text-amber-400">vs</span>
+            <UnitImage name={resolvedSlot2.variant.name} nameEn={resolvedSlot2.variant.nameEn} size="xs" className="w-5 h-5 rounded" />
+            <span>{resolvedSlot2.variant.name}</span>
           </div>
         </div>
 
@@ -707,17 +736,22 @@ export const CrossUnitComparator: React.FC<CrossUnitComparatorProps> = ({
                 <th className="p-3 font-bold uppercase text-[10px] tracking-wider w-1/4">Atributo / Métrica</th>
                 {activeSlots.map((slot) => (
                   <th key={slot.id} className="p-3 font-bold uppercase text-[10px] tracking-wider">
-                    <div className="flex items-center gap-1.5">
-                      <span
-                        className="w-2.5 h-2.5 rounded-full inline-block shrink-0"
-                        style={{ backgroundColor: slot.color }}
+                    <div className="flex items-center gap-2">
+                      <UnitImage
+                        name={slot.variant.name}
+                        nameEn={slot.variant.nameEn}
+                        size="sm"
+                        className="w-7 h-7 rounded-md"
                       />
-                      <span className="truncate" style={{ color: slot.color }}>
-                        {slot.variant.name}
-                      </span>
-                    </div>
-                    <div className="text-[9px] text-slate-500 normal-case font-normal">
-                      T{slot.tier} • {slot.factionName} • {slot.variantLabel}
+                      <div className="truncate">
+                        <div className="truncate" style={{ color: slot.color }}>
+                          {slot.variant.name}
+                        </div>
+                        <div className="text-[9px] text-slate-500 normal-case font-normal flex items-center gap-1 mt-0.5">
+                          <FactionImage faction={slot.factionId} size="xs" className="w-3 h-3" />
+                          <span>T{slot.tier} • {slot.variantLabel}</span>
+                        </div>
+                      </div>
                     </div>
                   </th>
                 ))}
