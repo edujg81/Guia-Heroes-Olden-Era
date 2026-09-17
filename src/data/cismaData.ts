@@ -2043,6 +2043,7 @@ export const CISMA_HEROES: DungeonHero[] = [
   {
     id: 'hero-nihil',
     name: 'Nihil',
+    faction: 'Cisma',
     title: 'El Negador de la Grieta',
     heroClass: 'Juramentado',
     heroType: 'Guerrero',
@@ -2062,6 +2063,7 @@ export const CISMA_HEROES: DungeonHero[] = [
   {
     id: 'hero-cuerno-negro',
     name: 'Cuerno Negro',
+    faction: 'Cisma',
     title: 'El Tejedor de Magia y Guerra',
     heroClass: 'Juramentado',
     heroType: 'Guerrero',
@@ -2081,6 +2083,7 @@ export const CISMA_HEROES: DungeonHero[] = [
   {
     id: 'hero-matastala-la-blanca',
     name: 'Matastala la Blanca',
+    faction: 'Cisma',
     title: 'La Estratega del Tablero Abisal',
     heroClass: 'Juramentado',
     heroType: 'Guerrero',
@@ -2100,6 +2103,7 @@ export const CISMA_HEROES: DungeonHero[] = [
   {
     id: 'hero-janhei',
     name: 'Jänhei',
+    faction: 'Cisma',
     title: 'El Filibustero de los Pasajes Sombríos',
     heroClass: 'Juramentado',
     heroType: 'Guerrero',
@@ -2118,6 +2122,7 @@ export const CISMA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-mara-matha',
+    faction: 'Cisma',
     name: 'Mara Mat\'ha',
     title: 'La Señora de los Corceles Abisales',
     heroClass: 'Juramentado',
@@ -2137,6 +2142,7 @@ export const CISMA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-el-doncel-de-hierro',
+    faction: 'Cisma',
     name: 'El Doncel de Hierro',
     title: 'El Encadenador de las Almas Sometidas',
     heroClass: 'Juramentado',
@@ -2156,6 +2162,7 @@ export const CISMA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-walkha',
+    faction: 'Cisma',
     name: 'Wal\'kha',
     title: 'El Tejedur de la Trama Primigenia',
     heroClass: 'Juramentado',
@@ -2175,6 +2182,7 @@ export const CISMA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-urgo-el-cambiante',
+    faction: 'Cisma',
     name: 'Urgo el Cambiante',
     title: 'El Señor de las Formas Mutables',
     heroClass: 'Juramentado',
@@ -2194,6 +2202,7 @@ export const CISMA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-martir-tho',
+    faction: 'Cisma',
     name: 'Mártir Tho',
     title: 'El Alquimista de los Brebajes Prohibidos',
     heroClass: 'Juramentado',
@@ -2213,6 +2222,7 @@ export const CISMA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-grellekh-el-traidor',
+    faction: 'Cisma',
     name: 'Grellekh el Traidor',
     title: 'El Señor de la Ruptura y la Ofensiva',
     heroClass: 'Portavoz de la Grieta',
@@ -2232,6 +2242,7 @@ export const CISMA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-reina-de-hielo-helghat',
+    faction: 'Cisma',
     name: 'Reina de Hielo Hel\'Ghat',
     title: 'La Soberana del Frío Imperecedero',
     heroClass: 'Portavoz de la Grieta',
@@ -2251,6 +2262,7 @@ export const CISMA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-kwinri',
+    faction: 'Cisma',
     name: 'Kwinri',
     title: 'El Invocador de las Mareas Menores',
     heroClass: 'Portavoz de la Grieta',
@@ -2270,6 +2282,7 @@ export const CISMA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-la-mirada-colectiva',
+    faction: 'Cisma',
     name: 'La Mirada Colectiva',
     title: 'El Ojo de las Legiones de la Grieta',
     heroClass: 'Portavoz de la Grieta',
@@ -2289,6 +2302,7 @@ export const CISMA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-tolketh',
+    faction: 'Cisma',
     name: 'Tölketh',
     title: 'El Señor del Tiempo y la Gravedad Estelar',
     heroClass: 'Portavoz de la Grieta',
@@ -2308,6 +2322,7 @@ export const CISMA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-ulkuth',
+    faction: 'Cisma',
     name: 'Ulkuth',
     title: 'El Rastreador de los Confines de la Grieta',
     heroClass: 'Portavoz de la Grieta',
@@ -2327,6 +2342,7 @@ export const CISMA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-radavok',
+    faction: 'Cisma',
     name: 'Ra\'Davok',
     title: 'El Bastión Arcano de la Falla',
     heroClass: 'Portavoz de la Grieta',
@@ -2346,6 +2362,7 @@ export const CISMA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-hermana-keiri',
+    faction: 'Cisma',
     name: 'Hermana Keiri',
     title: 'La Guardiana de la Luna y las Sombras Abisales',
     heroClass: 'Portavoz de la Grieta',
@@ -2365,6 +2382,7 @@ export const CISMA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-dhuvri',
+    faction: 'Cisma',
     name: 'Dhüvri',
     title: 'La Suma Tejedora de la Comunión Abisal',
     heroClass: 'Portavoz de la Grieta',

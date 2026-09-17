@@ -2082,6 +2082,7 @@ export const TEMPLE_HEROES: DungeonHero[] = [
   {
     id: 'hero-viejo-lord-mandall',
     name: 'Viejo Lord Mandall',
+    faction: 'Templo',
     title: 'El Archivero Bélico de la Corona',
     heroClass: 'Caballero',
     heroType: 'Guerrero',
@@ -2101,6 +2102,7 @@ export const TEMPLE_HEROES: DungeonHero[] = [
   {
     id: 'hero-kestrel',
     name: 'Kestrel',
+    faction: 'Templo',
     title: 'La Comandante de Tiradores',
     heroClass: 'Caballero',
     heroType: 'Guerrero',
@@ -2120,6 +2122,7 @@ export const TEMPLE_HEROES: DungeonHero[] = [
   {
     id: 'hero-keandra',
     name: 'Keandra',
+    faction: 'Templo',
     title: 'La Justadora de la Corona',
     heroClass: 'Caballero',
     heroType: 'Guerrero',
@@ -2139,6 +2142,7 @@ export const TEMPLE_HEROES: DungeonHero[] = [
   {
     id: 'hero-john-johnson',
     name: 'John Johnson',
+    faction: 'Templo',
     title: 'La Sal de la Tierra',
     heroClass: 'Caballero',
     heroType: 'Guerrero',
@@ -2157,7 +2161,8 @@ export const TEMPLE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-leon-manospegajosas',
-    name: 'Leon Dedos Pegajosos',
+    name: 'Leon Dedos Pegajosas',
+    faction: 'Templo',
     title: 'El Redimido del Bosque',
     heroClass: 'Caballero',
     heroType: 'Guerrero',
@@ -2176,6 +2181,7 @@ export const TEMPLE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-ister',
+    faction: 'Templo',
     name: 'Ister',
     title: 'El Comandante de la Guardia',
     heroClass: 'Caballero',
@@ -2195,6 +2201,7 @@ export const TEMPLE_HEROES: DungeonHero[] = [
   },
   {
     id: 'aeos-exaltada',
+    faction: 'Templo',
     name: 'Aeos la Exaltada',
     title: 'La Bendecida por el Sol',
     heroClass: 'Caballero',
@@ -2214,6 +2221,7 @@ export const TEMPLE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-lord-edgar',
+    faction: 'Templo',
     name: 'Lord Edgar',
     title: 'El Baluarte Inflexible del Templo',
     heroClass: 'Caballero',
@@ -2233,6 +2241,7 @@ export const TEMPLE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-el-hereje-avis',
+    faction: 'Templo',
     name: 'Avis el Hereje',
     title: 'El Inquisidor Cismático de la Purga',
     heroClass: 'Caballero',
@@ -2252,6 +2261,7 @@ export const TEMPLE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-aeos-exaltada',
+    faction: 'Templo',
     name: 'Aeos la Exaltada',
     title: 'La Bendecida por el Sol',
     heroClass: 'Caballero',
@@ -2271,6 +2281,7 @@ export const TEMPLE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-julius',
+    faction: 'Templo',
     name: 'Julius',
     title: 'El Custodio de la Resistencia Arcana',
     heroClass: 'Clérigo',
@@ -2290,6 +2301,7 @@ export const TEMPLE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-zenith',
+    faction: 'Templo',
     name: 'Zenith',
     title: 'La Dama de la Luz Celestial y Tejedoras',
     heroClass: 'Clérigo',
@@ -2309,6 +2321,7 @@ export const TEMPLE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-merry-elias',
+    faction: 'Templo',
     name: 'Elias el Alegre',
     title: 'El Heraldo de las Bendiciones Solares',
     heroClass: 'Clérigo',
@@ -2328,6 +2341,7 @@ export const TEMPLE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-pip',
+    faction: 'Templo',
     name: 'Pip',
     title: 'El Prodigio del Saber Feudal',
     heroClass: 'Clérigo',
@@ -2347,6 +2361,7 @@ export const TEMPLE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-clarissa',
+    faction: 'Templo',
     name: 'Clarissa',
     title: 'La Dama de la Prosperidad',
     heroClass: 'Clérigo',
@@ -2366,6 +2381,7 @@ export const TEMPLE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-anastasia-la-mansa',
+    faction: 'Templo',
     name: 'Anastasia la Dócil',
     title: 'La Servidora del Toque Sagrado',
     heroClass: 'Clérigo',
@@ -2385,6 +2401,7 @@ export const TEMPLE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-vesper',
+    faction: 'Templo',
     name: 'Vesper',
     title: 'El Erudito de la Luz Diurna',
     heroClass: 'Clérigo',
@@ -2404,6 +2421,7 @@ export const TEMPLE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-lia-desatada',
+    faction: 'Templo',
     name: 'Lia la Desatada',
     title: 'La Inquisidora de la Purga Mágica',
     heroClass: 'Clérigo',
@@ -2423,6 +2441,7 @@ export const TEMPLE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-nadir',
+    faction: 'Templo',
     name: 'Nadir',
     title: 'El Ojo de la Noche Sagrada',
     heroClass: 'Clérigo',

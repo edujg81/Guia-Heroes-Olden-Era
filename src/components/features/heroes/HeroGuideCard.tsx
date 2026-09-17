@@ -2,6 +2,8 @@ import React from 'react';
 import { DungeonHero } from '../../../types';
 import { TierBadge } from '../../ui/TierBadge';
 import { Swords, Wand2, Shield, Flame, BookOpen, CheckCircle2, ChevronRight, Zap, ArrowRightLeft } from 'lucide-react';
+import { getHeroPortrait } from '../../../data/heroAssetsData';
+import { HeroImage } from '../../ui/HeroImage';
 
 interface HeroGuideCardProps {
   hero: DungeonHero;
@@ -39,26 +41,37 @@ export const HeroGuideCard: React.FC<HeroGuideCardProps> = ({
     >
       {/* Header: Name, Title & Archetype Badge */}
       <div className="flex items-start justify-between gap-3 mb-3">
-        <div>
-          <div className="flex items-center gap-2">
-            <span
-              className={`p-1.5 rounded-lg border text-xs ${
-                isMage
-                  ? 'bg-blue-500/10 text-blue-400 border-blue-500/30'
-                  : 'bg-rose-500/10 text-rose-400 border-rose-500/30'
-              }`}
-            >
-              {isMage ? <Wand2 className="w-3.5 h-3.5" /> : <Swords className="w-3.5 h-3.5" />}
-            </span>
-            <h3
-              className={`font-serif font-bold text-base sm:text-lg ${
-                themeMode === 'light' ? 'text-slate-900' : 'text-white'
-              }`}
-            >
-              {hero.name}
-            </h3>
+        <div className="flex items-start gap-3">
+          {/* Hero Portrait */}
+          <HeroImage
+            heroId={hero.id}
+            heroName={hero.name}
+            faction={hero.faction}
+            alt={`Retrato de ${hero.name}`}
+            size="lg"
+            className="rounded-xl border-2 border-slate-700 shadow-lg bg-slate-800"
+          />
+          <div>
+            <div className="flex items-center gap-2">
+              <span
+                className={`p-1.5 rounded-lg border text-xs ${
+                  isMage
+                    ? 'bg-blue-500/10 text-blue-400 border-blue-500/30'
+                    : 'bg-rose-500/10 text-rose-400 border-rose-500/30'
+                }`}
+              >
+                {isMage ? <Wand2 className="w-3.5 h-3.5" /> : <Swords className="w-3.5 h-3.5" />}
+              </span>
+              <h3
+                className={`font-serif font-bold text-base sm:text-lg ${
+                  themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                }`}
+              >
+                {hero.name}
+              </h3>
+            </div>
+            <p className="text-[11px] text-slate-400 font-mono mt-0.5">{hero.title}</p>
           </div>
-          <p className="text-[11px] text-slate-400 font-mono mt-0.5">{hero.title}</p>
         </div>
 
         <div className="flex flex-col items-end gap-1 shrink-0">

@@ -15,6 +15,8 @@ import {
   CheckCircle2,
   ArrowRightLeft,
 } from 'lucide-react';
+import { getHeroPortrait } from '../../../data/heroAssetsData';
+import { HeroImage } from '../../ui/HeroImage';
 
 interface HeroDetailModalProps {
   hero: DungeonHero | null;
@@ -54,14 +56,15 @@ export const HeroDetailModal: React.FC<HeroDetailModalProps> = ({
 
         {/* Hero Header */}
         <div className="flex items-start gap-4 mb-6">
-          <div
-            className={`p-3.5 rounded-2xl border ${
-              isMage
-                ? 'bg-blue-500/10 text-blue-400 border-blue-500/30'
-                : 'bg-rose-500/10 text-rose-400 border-rose-500/30'
-            }`}
-          >
-            {isMage ? <Wand2 className="w-8 h-8" /> : <Swords className="w-8 h-8" />}
+          <div className="w-20 shrink-0">
+            <HeroImage
+              heroId={hero.id}
+              heroName={hero.name}
+              faction={hero.faction}
+              alt={`Retrato de ${hero.name}`}
+              size="xl"
+              className="rounded-xl border-2 border-slate-700 shadow-md bg-slate-800"
+            />
           </div>
 
           <div>

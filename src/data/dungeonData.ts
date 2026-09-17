@@ -2366,6 +2366,7 @@ export const DUNGEON_HEROES: DungeonHero[] = [
   {
     id: 'hero-enatee',
     name: 'Enatee',
+    faction: 'Mazmorra',
     title: 'La Soberana de la Mirada de Piedra',
     heroClass: 'Adalid',
     heroType: 'Guerrero',
@@ -2394,6 +2395,7 @@ export const DUNGEON_HEROES: DungeonHero[] = [
   {
     id: 'hero-devir',
     name: 'Devir, hijo de Devir',
+    faction: 'Mazmorra',
     title: 'El Caudillo de los Laberintos de Minotauros',
     heroClass: 'Adalid',
     heroType: 'Guerrero',
@@ -2422,6 +2424,7 @@ export const DUNGEON_HEROES: DungeonHero[] = [
   {
     id: 'hero-tellaris',
     name: 'Tellaris el Traicionado',
+    faction: 'Mazmorra',
     title: 'La Capitana Renegada de la Guardia de Alvar',
     heroClass: 'Adalid',
     heroType: 'Guerrero',
@@ -2449,6 +2452,7 @@ export const DUNGEON_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-kieran',
+    faction: 'Mazmorra',
     name: 'Kieran',
     title: 'El Patriarca del Pueblo Ciego',
     heroClass: 'Adalid',
@@ -2477,6 +2481,7 @@ export const DUNGEON_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-mouaren',
+    faction: 'Mazmorra',
     name: 'Mouaren',
     title: 'El Maestro de la Traslación Sombría',
     heroClass: 'Adalid',
@@ -2505,6 +2510,7 @@ export const DUNGEON_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-creta',
+    faction: 'Mazmorra',
     name: 'Creta, hija de Navarr',
     title: 'La Minotauro Prospectora de las Cavernas de Alvar',
     heroClass: 'Adalid',
@@ -2533,6 +2539,7 @@ export const DUNGEON_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-rhea',
+    faction: 'Mazmorra',
     name: 'Rhea',
     title: 'La Dama de la Suerte Sombría',
     heroClass: 'Adalid',
@@ -2561,6 +2568,7 @@ export const DUNGEON_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-aguijon',
+    faction: 'Mazmorra',
     name: 'Aguijón',
     title: 'La Ejecutora del Golpe venenoso',
     heroClass: 'Adalid',
@@ -2589,6 +2597,7 @@ export const DUNGEON_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-gleard',
+    faction: 'Mazmorra',
     name: 'Gleard el Gris',
     title: 'El Bastión de Piel de Hierro de las Cavernas',
     heroClass: 'Adalid',
@@ -2621,6 +2630,7 @@ export const DUNGEON_HEROES: DungeonHero[] = [
   // =======================================================================
   {
     id: 'hero-zakron',
+    faction: 'Mazmorra',
     name: 'Zakron el Grande',
     title: 'El Gran Señor de la Hechicería Destructiva',
     heroClass: 'Brujo',
@@ -2649,6 +2659,7 @@ export const DUNGEON_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-typhona',
+    faction: 'Mazmorra',
     name: 'Typhona',
     title: 'La Criadora de Hidras Abisales',
     heroClass: 'Brujo',
@@ -2677,6 +2688,7 @@ export const DUNGEON_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-motley',
+    faction: 'Mazmorra',
     name: 'Motley',
     title: 'La Maestra de la Danza Macabra',
     heroClass: 'Brujo',
@@ -2705,6 +2717,7 @@ export const DUNGEON_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-lodos',
+    faction: 'Mazmorra',
     name: 'Lodos',
     title: 'El Maestro de la Magia Nochesombra',
     heroClass: 'Brujo',
@@ -2733,6 +2746,7 @@ export const DUNGEON_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-deira',
+    faction: 'Mazmorra',
     name: 'Hermana Deira',
     title: 'La Sacerdotisa de la Flor Negra de Alvar',
     heroClass: 'Brujo',
@@ -2761,6 +2775,7 @@ export const DUNGEON_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-kelarr',
+    faction: 'Mazmorra',
     name: 'Kelarr, hijo de Navarr',
     title: 'El Erudito de los Laberintos Profundos',
     heroClass: 'Brujo',
@@ -2789,6 +2804,7 @@ export const DUNGEON_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-sunny',
+    faction: 'Mazmorra',
     name: 'Rauktol el Soleado',
     title: 'El Vidente Troglodita de la Luz Sagrada',
     heroClass: 'Brujo',
@@ -2817,6 +2833,7 @@ export const DUNGEON_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-ylwari',
+    faction: 'Mazmorra',
     name: 'Ylwari',
     title: 'La Diplomática de las Profundidades',
     heroClass: 'Brujo',
@@ -2845,6 +2862,7 @@ export const DUNGEON_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-glastor',
+    faction: 'Mazmorra',
     name: 'Glastor',
     title: 'El Señor Acaudalado de Alvar',
     heroClass: 'Brujo',

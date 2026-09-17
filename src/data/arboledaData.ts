@@ -2052,6 +2052,7 @@ export const ARBOLEDA_HEROES: DungeonHero[] = [
   {
     id: 'hero-eith',
     name: 'Eith',
+    faction: 'Arboleda',
     title: 'El Explorador del Manto Esmeralda',
     heroClass: 'Guardián',
     heroType: 'Guerrero',
@@ -2071,6 +2072,7 @@ export const ARBOLEDA_HEROES: DungeonHero[] = [
   {
     id: 'hero-gorel-punta-de-lanza',
     name: 'Gorel Punta de Lanza',
+    faction: 'Arboleda',
     title: 'El Cazador y Tirador Silvano',
     heroClass: 'Guardián',
     heroType: 'Guerrero',
@@ -2090,6 +2092,7 @@ export const ARBOLEDA_HEROES: DungeonHero[] = [
   {
     id: 'hero-colajengibre',
     name: 'Colajengibre',
+    faction: 'Arboleda',
     title: 'El Patriarca de los Faunos Danzantes',
     heroClass: 'Guardián',
     heroType: 'Guerrero',
@@ -2109,6 +2112,7 @@ export const ARBOLEDA_HEROES: DungeonHero[] = [
   {
     id: 'hero-viejo-peregrino',
     name: 'Viejo Peregrino',
+    faction: 'Arboleda',
     title: 'El Sabio de la Adaptación Silvestre',
     heroClass: 'Guardián',
     heroType: 'Guerrero',
@@ -2128,6 +2132,7 @@ export const ARBOLEDA_HEROES: DungeonHero[] = [
   {
     id: 'hero-octavia',
     name: 'Octavia',
+    faction: 'Arboleda',
     title: 'La Dama de la Fortuna del Bosque',
     heroClass: 'Guardián',
     heroType: 'Guerrero',
@@ -2146,6 +2151,7 @@ export const ARBOLEDA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-mreowa',
+    faction: 'Arboleda',
     name: 'Mreowa',
     title: 'La Cazadora de los Reflejos Centelleantes',
     heroClass: 'Guardián',
@@ -2165,6 +2171,7 @@ export const ARBOLEDA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-faleor',
+    faction: 'Arboleda',
     name: 'Faleor',
     title: 'El Guardián del Vínculo Primordial',
     heroClass: 'Guardián',
@@ -2184,6 +2191,7 @@ export const ARBOLEDA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-seductora-sha',
+    faction: 'Arboleda',
     name: 'Seductora Sh\'a',
     title: 'La Diplomática del Bosque Encantado',
     heroClass: 'Guardián',
@@ -2203,6 +2211,7 @@ export const ARBOLEDA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-tia-daliar',
+    faction: 'Arboleda',
     name: 'Tía Daliar',
     title: 'La Erudita de los Secretos Silvanos',
     heroClass: 'Guardián',
@@ -2222,6 +2231,7 @@ export const ARBOLEDA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-vatawna',
+    faction: 'Arboleda',
     name: 'Vatawna',
     title: 'La Voz de las Tormentas Primordiales',
     heroClass: 'Druida',
@@ -2241,6 +2251,7 @@ export const ARBOLEDA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-anciano-tsskish',
+    faction: 'Arboleda',
     name: 'Anciano Tss\'kish',
     title: 'El Anciano de la Corteza Inquebrantable',
     heroClass: 'Druida',
@@ -2260,6 +2271,7 @@ export const ARBOLEDA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-aeliniel',
+    faction: 'Arboleda',
     name: 'Aeliniel',
     title: 'La Tejedora del Fuego Primigenio',
     heroClass: 'Druida',
@@ -2279,6 +2291,7 @@ export const ARBOLEDA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-glacia',
+    faction: 'Arboleda',
     name: 'Glacia',
     title: 'La Dama de la Escarcha y el Hielo',
     heroClass: 'Druida',
@@ -2298,6 +2311,7 @@ export const ARBOLEDA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-vim',
+    faction: 'Arboleda',
     name: 'Vim',
     title: 'El Señor de la Roca y la Tierra',
     heroClass: 'Druida',
@@ -2317,6 +2331,7 @@ export const ARBOLEDA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-halon',
+    faction: 'Arboleda',
     name: 'Halon',
     title: 'El Invocador del Trueno y el Rayo',
     heroClass: 'Druida',
@@ -2336,6 +2351,7 @@ export const ARBOLEDA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-echolily',
+    faction: 'Arboleda',
     name: 'Echolily',
     title: 'La Ilusionista de los Murmullos Duplicados',
     heroClass: 'Druida',
@@ -2355,6 +2371,7 @@ export const ARBOLEDA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-suli',
+    faction: 'Arboleda',
     name: 'Suli',
     title: 'La Guardiana Nativa del Bosque Murmullo',
     heroClass: 'Druida',
@@ -2374,6 +2391,7 @@ export const ARBOLEDA_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-el-juglar',
+    faction: 'Arboleda',
     name: 'El juglar',
     title: 'El Músico Errante de las Selvas de Jade',
     heroClass: 'Druida',

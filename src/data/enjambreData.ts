@@ -2046,6 +2046,7 @@ export const ENJAMBRE_HEROES: DungeonHero[] = [
   {
     id: 'hero-abigor-enjambre',
     name: 'Abigor',
+    faction: 'Enjambre',
     title: 'El Duque de la Batalla',
     heroClass: 'Ejecutor',
     heroType: 'Guerrero',
@@ -2072,6 +2073,7 @@ export const ENJAMBRE_HEROES: DungeonHero[] = [
   {
     id: 'hero-curson-enjambre',
     name: 'Curson',
+    faction: 'Enjambre',
     title: 'El Duque de la Furia',
     heroClass: 'Ejecutor',
     heroType: 'Guerrero',
@@ -2097,6 +2099,7 @@ export const ENJAMBRE_HEROES: DungeonHero[] = [
   {
     id: 'hero-zoran-enjambre',
     name: 'Zoran',
+    faction: 'Enjambre',
     title: 'El Soberano de los Waurms',
     heroClass: 'Ejecutor',
     heroType: 'Guerrero',
@@ -2121,6 +2124,7 @@ export const ENJAMBRE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-niev-enjambre',
+    faction: 'Enjambre',
     name: 'Niev',
     title: 'La Emisaria de la Nube Ácida',
     heroClass: 'Ejecutor',
@@ -2146,6 +2150,7 @@ export const ENJAMBRE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-nor-enjambre',
+    faction: 'Enjambre',
     name: 'Nor',
     title: 'El Caparazón Inquebrantable',
     heroClass: 'Ejecutor',
@@ -2171,6 +2176,7 @@ export const ENJAMBRE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-goldentongue-enjambre',
+    faction: 'Enjambre',
     name: 'Goldentongue',
     title: 'El Mercader de Biomasa',
     heroClass: 'Ejecutor',
@@ -2196,6 +2202,7 @@ export const ENJAMBRE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-lo-enjambre',
+    faction: 'Enjambre',
     name: 'Lo',
     title: 'La Voz de las Langostas',
     heroClass: 'Ejecutor',
@@ -2221,6 +2228,7 @@ export const ENJAMBRE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-pauper-enjambre',
+    faction: 'Enjambre',
     name: 'Pauper',
     title: 'El Señor de la Celeridad',
     heroClass: 'Ejecutor',
@@ -2246,6 +2254,7 @@ export const ENJAMBRE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-zixx-enjambre',
+    faction: 'Enjambre',
     name: 'Zixx',
     title: 'El Comandante del Enjambre',
     heroClass: 'Ejecutor',
@@ -2275,6 +2284,7 @@ export const ENJAMBRE_HEROES: DungeonHero[] = [
   // =======================================================================
   {
     id: 'hero-khariseth-enjambre',
+    faction: 'Enjambre',
     name: 'Khariseth',
     title: 'El Tejedor Primigenio',
     heroClass: 'Heraldo',
@@ -2300,6 +2310,7 @@ export const ENJAMBRE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-mila-enjambre',
+    faction: 'Enjambre',
     name: 'Mila',
     title: 'La Cantora del Zumbido',
     heroClass: 'Heraldo',
@@ -2325,6 +2336,7 @@ export const ENJAMBRE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-groo-enjambre',
+    faction: 'Enjambre',
     name: 'Groo',
     title: 'El Hijo de Todas las Madres',
     heroClass: 'Heraldo',
@@ -2350,6 +2362,7 @@ export const ENJAMBRE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-bathym-enjambre',
+    faction: 'Enjambre',
     name: 'Bathym',
     title: 'El Duque de las Joyas',
     heroClass: 'Heraldo',
@@ -2375,6 +2388,7 @@ export const ENJAMBRE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-oriax-enjambre',
+    faction: 'Enjambre',
     name: 'Oriax',
     title: 'El Saltador del Abismo',
     heroClass: 'Heraldo',
@@ -2400,6 +2414,7 @@ export const ENJAMBRE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-fleu-enjambre',
+    faction: 'Enjambre',
     name: 'Fleu',
     title: 'El Emisario del Viento',
     heroClass: 'Heraldo',
@@ -2425,6 +2440,7 @@ export const ENJAMBRE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-leira-enjambre',
+    faction: 'Enjambre',
     name: 'Leira',
     title: 'La Reina de los Avispones',
     heroClass: 'Heraldo',
@@ -2450,6 +2466,7 @@ export const ENJAMBRE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-tavi-enjambre',
+    faction: 'Enjambre',
     name: 'Tavi',
     title: 'La Madre del Enjambre de Parásitos',
     heroClass: 'Heraldo',
@@ -2475,6 +2492,7 @@ export const ENJAMBRE_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-xirr-enjambre',
+    faction: 'Enjambre',
     name: 'Xirr',
     title: 'El Disipador Arcano',
     heroClass: 'Heraldo',

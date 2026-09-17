@@ -7,6 +7,7 @@ import { SpellGrimoire } from './components/SpellGrimoire';
 import { CombatTactics } from './components/CombatTactics';
 import { UnitMatrix } from './components/UnitMatrix';
 import { HeroSkillOptimizer } from './components/HeroSkillOptimizer';
+import { HeroGuideView } from './components/features/heroes/HeroGuideView';
 import { FactionBackgroundPattern } from './components/ui/FactionBackgroundPattern';
 import { FactionAmbientParticles } from './components/ui/FactionAmbientParticles';
 import { ZenCommanderController } from './components/ui/ZenCommanderController';
@@ -282,6 +283,7 @@ export default function App() {
           <UnitMatrix selectedFaction={selectedFaction} themeMode={themeMode} />
         </div>
         <div className={activeTab === 'hero-skills' ? 'block' : 'hidden'}>
+          <HeroGuideView selectedFaction={selectedFaction} themeMode={themeMode} />
           <HeroSkillOptimizer selectedFaction={selectedFaction} themeMode={themeMode} />
         </div>
       </main>

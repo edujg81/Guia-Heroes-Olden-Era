@@ -2020,6 +2020,7 @@ export const NECROPOLIS_HEROES: DungeonHero[] = [
   {
     id: 'hero-baluarte',
     name: 'Baluarte',
+    faction: 'Necrópolis',
     title: 'El Bastión Inquebrantable',
     heroClass: 'Caballero de la muerte',
     heroType: 'Guerrero',
@@ -2039,6 +2040,7 @@ export const NECROPOLIS_HEROES: DungeonHero[] = [
   {
     id: 'hero-rey-de-reyes',
     name: 'Rey de reyes',
+    faction: 'Necrópolis',
     title: 'El Conquistador de los Condenados',
     heroClass: 'Caballero de la muerte',
     heroType: 'Guerrero',
@@ -2058,6 +2060,7 @@ export const NECROPOLIS_HEROES: DungeonHero[] = [
   {
     id: 'hero-onkos',
     name: 'Onkos',
+    faction: 'Necrópolis',
     title: 'El Director del Teatro Macabro',
     heroClass: 'Caballero de la muerte',
     heroType: 'Guerrero',
@@ -2077,6 +2080,7 @@ export const NECROPOLIS_HEROES: DungeonHero[] = [
   {
     id: 'hero-tarius',
     name: 'Tarius',
+    faction: 'Necrópolis',
     title: 'El Señor del Heraldo del Destino',
     heroClass: 'Caballero de la muerte',
     heroType: 'Guerrero',
@@ -2095,6 +2099,7 @@ export const NECROPOLIS_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-marl',
+    faction: 'Necrópolis',
     name: 'Marl',
     title: 'El Tejedur de la Telaraña Funesta',
     heroClass: 'Caballero de la muerte',
@@ -2114,6 +2119,7 @@ export const NECROPOLIS_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-laura',
+    faction: 'Necrópolis',
     name: 'Laura',
     title: 'La Bruja de la Noche Guerrera',
     heroClass: 'Caballero de la muerte',
@@ -2133,6 +2139,7 @@ export const NECROPOLIS_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-kel-ghul',
+    faction: 'Necrópolis',
     name: 'Kel\'Ghul',
     title: 'El Señor de las Criptas Profundas',
     heroClass: 'Caballero de la muerte',
@@ -2152,6 +2159,7 @@ export const NECROPOLIS_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-natalida',
+    faction: 'Necrópolis',
     name: 'Natalida',
     title: 'La Vigía de los Mausoleos',
     heroClass: 'Caballero de la muerte',
@@ -2171,6 +2179,7 @@ export const NECROPOLIS_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-artorius-veritas',
+    faction: 'Necrópolis',
     name: 'Artorius Veritas',
     title: 'El Cronista de la Noche Mística',
     heroClass: 'Nigromante',
@@ -2190,6 +2199,7 @@ export const NECROPOLIS_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-funerella',
+    faction: 'Necrópolis',
     name: 'Funerella',
     title: 'La Dama de la Reanimación Eterna',
     heroClass: 'Nigromante',
@@ -2209,6 +2219,7 @@ export const NECROPOLIS_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-lord-rufus',
+    faction: 'Necrópolis',
     name: 'Lord Rufus',
     title: 'El Administrador del Sepulcro Dorado',
     heroClass: 'Nigromante',
@@ -2228,6 +2239,7 @@ export const NECROPOLIS_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-oona-tejesombras',
+    faction: 'Necrópolis',
     name: 'Oona Tejesombras',
     title: 'La Dama de la Nochesombra',
     heroClass: 'Nigromante',
@@ -2247,6 +2259,7 @@ export const NECROPOLIS_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-maestro-klastor',
+    faction: 'Necrópolis',
     name: 'Maestro Klastor',
     title: 'El Embalsamador Mayor',
     heroClass: 'Nigromante',
@@ -2266,6 +2279,7 @@ export const NECROPOLIS_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-milossa-la-dorada',
+    faction: 'Necrópolis',
     name: 'Milossa la Dorada',
     title: 'La Dama del Éter Funesto',
     heroClass: 'Nigromante',
@@ -2285,6 +2299,7 @@ export const NECROPOLIS_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-adahn',
+    faction: 'Necrópolis',
     name: 'Adahn',
     title: 'El Conjurador de Espectros',
     heroClass: 'Nigromante',
@@ -2304,6 +2319,7 @@ export const NECROPOLIS_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-zam',
+    faction: 'Necrópolis',
     name: 'Zam',
     title: 'El Alquimista Solitario',
     heroClass: 'Caballero de la muerte',
@@ -2323,6 +2339,7 @@ export const NECROPOLIS_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-ethric',
+    faction: 'Necrópolis',
     name: 'Ethric',
     title: 'El Archimago de la No-Muerte',
     heroClass: 'Nigromante',
@@ -2342,6 +2359,7 @@ export const NECROPOLIS_HEROES: DungeonHero[] = [
   },
   {
     id: 'hero-mag',
+    faction: 'Necrópolis',
     name: 'Mag',
     title: 'El Canalizador del Vacío Arcano',
     heroClass: 'Nigromante',

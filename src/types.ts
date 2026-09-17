@@ -337,6 +337,7 @@ export interface DungeonHero {
   recommendedSubskillPicks?: HeroSubskillChoice[];
   synergyCombo: string;
   day1Action: string;
+  faction?: string;
 }
 
 export interface HeroSkill {
