@@ -237,6 +237,7 @@ export interface RecommendedSpell {
 export interface OfficialSubSkill {
   name: string;
   tierLevel: 'Avanzado' | 'Experto';
+  type?: string;
   effect: string;
   isRecommendedMeta?: boolean;
   recommendedTag?: string; // e.g. "⭐ Elección Meta", "⚔️ Ideal Físico", "🔮 Ideal Mágico", "🛡️ Defensa & Control", "🏹 Tropas a Distancia"

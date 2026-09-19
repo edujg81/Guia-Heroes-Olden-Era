@@ -80,7 +80,7 @@ export interface ApiBuilding {
   effects: string[] | null;
   requirements: ApiRequirement[] | null;
   requirementsLabel: string;
-  recruitableUnits: string[] | null;
+  recruitableUnits: { unitId: string; unitName: string; iconPath: string }[] | null;
   recruitableUnitsLabel: string;
   upgradeOptions: ApiUpgradeOption[] | null;
   upgradesLabel: string;
@@ -129,7 +129,7 @@ export interface ApiMapObjectVariant {
   customGuardValue: number | null;
   guards: ApiGuard[];
   rewards: ApiMapObjectRewards;
-  rewardApplyType: string;
+  rewardApplyType: string | null;
   rewardOptions: any[] | null;
 }
 
@@ -147,7 +147,7 @@ export interface ApiMapObjectRewards {
   artifactPools: any[];
   spellPools: any[];
   units: any[];
-  experience: null;
+  experience: number | null;
   cursePools: any[] | null;
 }
 

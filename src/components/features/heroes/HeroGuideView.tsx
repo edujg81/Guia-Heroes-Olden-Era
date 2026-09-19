@@ -161,7 +161,7 @@ export const HeroGuideView: React.FC<HeroGuideViewProps> = ({
               <FilterChipGroup
                 options={archetypeOptions}
                 selectedValue={selectedArchetype}
-                onChange={setSelectedArchetype}
+                onChange={(v) => setSelectedArchetype(v as 'all' | 'Guerrero' | 'Mago')}
                 themeMode={themeMode}
               />
             </div>

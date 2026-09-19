@@ -113,13 +113,15 @@ export const FactionLawsTree: React.FC<FactionLawsTreeProps> = ({
       id: 'fallback',
       name: 'Preset Estándar',
       nameEn: 'Standard Preset',
+      description: '',
       tag: 'Equilibrado',
       strategyFocus: 'Desarrollo equilibrado de la facción.',
       enactedLawIds: [],
       sequenceSteps: [],
       steps: [],
-      totalCost: 50
-    };
+      totalCost: 50,
+      lawLevels: {},
+    } as FactionLawPreset;
   }, [activePresetId, factionLawPresets]);
 
   // Map of law ID -> first selection step index (1-based) in current active preset
