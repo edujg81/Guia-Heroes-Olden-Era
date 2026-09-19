@@ -8,7 +8,8 @@ import { FilterChipGroup, FilterOption } from '../../ui/FilterChipGroup';
 import { HeroGuideCard } from './HeroGuideCard';
 import { HeroDetailModal } from './HeroDetailModal';
 import { HeroComparatorSplitScreen } from './HeroComparatorSplitScreen';
-import { Users, Wand2, Swords, Sparkles, Filter, ArrowRightLeft } from 'lucide-react';
+import { HeroBuildSimulator } from '../../HeroBuildSimulator';
+import { Users, Wand2, Swords, Sparkles, Filter, ArrowRightLeft, GitBranch } from 'lucide-react';
 
 interface HeroGuideViewProps {
   selectedFaction?: FactionId;
@@ -21,7 +22,7 @@ export const HeroGuideView: React.FC<HeroGuideViewProps> = ({
   themeMode = 'dark',
   customHeroesList,
 }) => {
-  const [viewMode, setViewMode] = useState<'roster' | 'comparator'>('roster');
+  const [viewMode, setViewMode] = useState<'roster' | 'comparator' | 'simulator'>('roster');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedArchetype, setSelectedArchetype] = useState<'all' | 'Guerrero' | 'Mago'>('all');
   const [selectedRole, setSelectedRole] = useState<string>('all');
@@ -85,16 +86,24 @@ export const HeroGuideView: React.FC<HeroGuideViewProps> = ({
     <GenericGuideTemplate
       selectedFaction={selectedFaction}
       themeMode={themeMode}
-      title={viewMode === 'comparator' ? 'Comparador Visual de Comandantes (Split-Screen)' : 'Guía Canónica de Héroes & Especialistas'}
+      title={
+        viewMode === 'comparator'
+          ? 'Comparador Visual de Comandantes (Split-Screen)'
+          : viewMode === 'simulator'
+          ? 'Simulador de Builds de Comandante'
+          : 'Guía Canónica de Héroes & Especialistas'
+      }
       categorySubtitle="Heroes of Might and Magic: Olden Era • Roster & Builds"
       description={
         viewMode === 'comparator'
           ? 'Contrasta 2 héroes lado a lado en tiempo real: simula atributos por nivel, visualiza gráficas diferenciales de barras y audita la sinergia temática de criaturas.'
+          : viewMode === 'simulator'
+          ? 'Construye y compara árboles de habilidades para cada comandante, desde el nivel 1 hasta el 25.'
           : 'Explora todos los comandantes oficiales de la facción, sus especialidades únicas, crecimientos porcentuales de atributos por nivel, habilidades iniciales recomendadas y estilos tácticos de combate.'
       }
       filterBar={
         <div className="space-y-3">
-          {/* Switcher de Modos: Roster vs Comparador */}
+          {/* Switcher de Modos: Roster, Comparador y Simulador */}
           <div className="flex items-center justify-between gap-3 pb-1 border-b border-slate-800/60">
             <div className="flex items-center gap-2">
               <button
@@ -106,7 +115,7 @@ export const HeroGuideView: React.FC<HeroGuideViewProps> = ({
                 }`}
               >
                 <Users className="w-3.5 h-3.5" />
-                <span>Roster Canónico ({heroes.length})</span>
+                <span>Héroes de Facción ({heroes.length})</span>
               </button>
 
               <button
@@ -118,7 +127,19 @@ export const HeroGuideView: React.FC<HeroGuideViewProps> = ({
                 }`}
               >
                 <ArrowRightLeft className="w-3.5 h-3.5 text-amber-400" />
-                <span>Comparador Split-Screen</span>
+                <span>Comparador de Héroes</span>
+              </button>
+
+              <button
+                onClick={() => setViewMode('simulator')}
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+                  viewMode === 'simulator'
+                    ? 'bg-amber-600 text-white shadow-md shadow-amber-600/30'
+                    : 'bg-slate-800 text-slate-400 hover:text-white'
+                }`}
+              >
+                <GitBranch className="w-3.5 h-3.5" />
+                <span>Builds de Habilidades</span>
               </button>
             </div>
 
@@ -153,6 +174,8 @@ export const HeroGuideView: React.FC<HeroGuideViewProps> = ({
           <span>
             {viewMode === 'comparator'
               ? 'El comparador simula estadísticas primarias escalando con la tasa de crecimiento canónica de Olden Era.'
+              : viewMode === 'simulator'
+              ? 'Configura el comandante, el nivel objetivo y la distribución de habilidades para cada facción.'
               : `Mostrando ${filteredHeroes.length} de ${heroes.length} héroes disponibles para la facción ${selectedFaction}. Los datos se actualizan automáticamente al cambiar de facción.`}
           </span>
         </div>
@@ -166,6 +189,15 @@ export const HeroGuideView: React.FC<HeroGuideViewProps> = ({
           themeMode={themeMode}
           onBackToRoster={() => setViewMode('roster')}
         />
+      ) : viewMode === 'simulator' ? (
+        <div className="p-6">
+          <h2 className="text-xl font-serif font-bold mb-4">Simulador de Builds de Comandante</h2>
+          <HeroBuildSimulator
+            selectedFaction={selectedFaction}
+            themeMode={themeMode}
+            initialHeroId={inspectedHero?.id}
+          />
+        </div>
       ) : (
         <>
           {/* Grid de Tarjetas de Héroes */}

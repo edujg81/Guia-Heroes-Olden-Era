@@ -99,7 +99,7 @@ export const HeroSkillOptimizer: React.FC<HeroSkillOptimizerProps> = ({
         <RecommendedHeroes 
           selectedFaction={selectedFaction} 
           themeMode={themeMode} 
-          onOpenSimulator={handleOpenSimulatorForHero} 
+          onOpenSimulator={handleOpenSimulatorForHero}
         />
       </div>
       <div className={activeSubTab === 'simulator' ? 'block' : 'hidden'}>

@@ -1,5 +1,5 @@
-import React from 'react';
-import { DungeonHero } from '../../../types';
+import React, { useState, useMemo } from 'react';
+import { DungeonHero, OfficialSkill, HeroSubskillChoice, SubclassInfo } from '../../../types';
 import { TierBadge } from '../../ui/TierBadge';
 import {
   X,
@@ -14,9 +14,25 @@ import {
   Compass,
   CheckCircle2,
   ArrowRightLeft,
+  Flame,
+  Award,
+  GitBranch,
+  RotateCcw,
+  Copy,
+  Check,
+  Star,
+  Users,
+  Flame as FlameIcon,
+  Award as AwardIcon,
 } from 'lucide-react';
 import { getHeroPortrait } from '../../../data/heroAssetsData';
 import { HeroImage } from '../../ui/HeroImage';
+import { OFFICIAL_SKILLS_DATA } from '../../../data/officialSkillsData';
+import { OFFICIAL_SUBCLASSES } from '../../../data/subclassesData';
+import { HERO_SUBSKILL_CHOICES } from '../../../data/subskillsRecommendationData';
+import { useStickyState } from '../../../utils/useStickyState';
+import { HeroBuildSimulator } from '../../HeroBuildSimulator';
+import type { FactionId } from '../../../data/factionDataProvider';
 
 interface HeroDetailModalProps {
   hero: DungeonHero | null;
@@ -25,6 +41,45 @@ interface HeroDetailModalProps {
   themeMode?: 'dark' | 'light';
   themeAccentClass?: string;
 }
+
+const normalize = (str: string) =>
+  str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim();
+
+const findOfficialSkill = (skillStr: string): OfficialSkill | undefined => {
+  const clean = normalize(skillStr.replace(/\s*\((Experta|Avanzada|Básica)\)/, ''));
+  return OFFICIAL_SKILLS_DATA.find((s) => {
+    const sNorm = normalize(s.name);
+    return sNorm === clean || clean.includes(sNorm) || sNorm.includes(clean);
+  });
+};
+
+const getSubskillChoicesForHero = (hero: DungeonHero): HeroSubskillChoice[] => {
+  if (HERO_SUBSKILL_CHOICES[hero.id]) {
+    return HERO_SUBSKILL_CHOICES[hero.id];
+  }
+  // Dynamic fallback using hero's idealSkillBuild
+  return hero.idealSkillBuild.map((skillStr) => {
+    const clean = skillStr.replace(/\s*\((Experta|Avanzada|Básica)\)/, '').trim();
+    const offSkill = findOfficialSkill(clean);
+    const skillId = offSkill?.id || clean.toLowerCase().replace(/\s+/g, '-');
+
+    // Simple fallback - use first subskills if no guide available
+    const advSub = offSkill?.subskills.advanced[0] || { name: 'Subhabilidad Avanzada' };
+    const expSub = offSkill?.subskills.expert[0] || { name: 'Subhabilidad Experta' };
+
+    return {
+      skillName: skillStr,
+      advancedSubskill: advSub.name,
+      advancedReason: 'Optimiza el rendimiento del héroe en combate.',
+      expertSubskill: expSub.name,
+      expertReason: 'Proporciona la ventaja definitiva en combate tardío.',
+    };
+  });
+};
 
 export const HeroDetailModal: React.FC<HeroDetailModalProps> = ({
   hero,
@@ -36,11 +91,51 @@ export const HeroDetailModal: React.FC<HeroDetailModalProps> = ({
   if (!hero) return null;
 
   const isMage = hero.heroType === 'Mago';
+  const [activeTab, setActiveTab] = useStickyState<'overview' | 'skills' | 'tactics' | 'subclasses' | 'simulator'>('overview', `hero_detail_tab_${hero.id}`);
+  const [inspectedSkill, setInspectedSkill] = useState<OfficialSkill | null>(null);
+  const [showSubskillsDetails, setShowSubskillsDetails] = useStickyState<boolean>(true, 'hero_show_subskills_details');
+
+  // Calculate subclasses progress for this hero's faction and class
+  const factionSubclasses = useMemo(() => {
+    const list = OFFICIAL_SUBCLASSES.filter(
+      (sc) => sc.faction === hero.faction && sc.classType === hero.heroType
+    );
+    return list.map((sc) => {
+      // Check each required skill
+      const reqStatus = sc.requiredSkills.map((req) => {
+        const offSkill = findOfficialSkill(req.name);
+        const alloc = offSkill ? { tier: 'expert' } : undefined; // Simplified - in reality would check hero's ideal build
+        const isExpert = alloc?.tier === 'expert';
+        const currentTier = alloc?.tier || 'none';
+        return {
+          reqName: req.name,
+          offSkillId: offSkill?.id,
+          isExpert,
+          currentTier,
+        };
+      });
+
+      const expertCount = reqStatus.filter((r) => r.isExpert).length;
+      const isUnlocked = expertCount >= 5;
+
+      return {
+        ...sc,
+        reqStatus,
+        expertCount,
+        isUnlocked,
+      };
+    });
+  }, [hero.faction, hero.heroType]);
+
+  // Get skill recommendations for this hero
+  const skillRecommendations = useMemo(() => {
+    return getSubskillChoicesForHero(hero);
+  }, [hero.id]);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
       <div
-        className={`relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl border p-6 shadow-2xl transition-all ${
+        className={`relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl border p-6 shadow-2xl transition-all ${
           themeMode === 'light'
             ? 'bg-white border-slate-300 text-slate-900'
             : 'bg-slate-950 border-slate-800 text-slate-100'
@@ -78,88 +173,93 @@ export const HeroDetailModal: React.FC<HeroDetailModalProps> = ({
           </div>
         </div>
 
-        {/* 2-Column Info Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          {/* Specialty Box */}
-          <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
-            <div className="flex items-center gap-2 text-sm font-bold text-amber-400 mb-2">
-              <Sparkles className="w-4 h-4" />
-              <span>Especialidad: {hero.specialtyName}</span>
-            </div>
-            <p className="text-xs text-slate-300 leading-relaxed">{hero.specialtyEffect}</p>
-          </div>
-
-          {/* Stat Growth Box */}
-          <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
-            <div className="flex items-center gap-2 text-sm font-bold text-slate-200 mb-2">
-              <Zap className="w-4 h-4 text-purple-400" />
-              <span>Crecimiento de Atributos por Nivel</span>
-            </div>
-            <div className="grid grid-cols-4 gap-2 text-center">
-              <div className="p-2 rounded bg-slate-950 border border-slate-800">
-                <div className="text-[10px] text-rose-400 font-mono font-bold">Ataque</div>
-                <div className="text-sm font-mono font-bold">{hero.statGrowth?.attack}%</div>
-              </div>
-              <div className="p-2 rounded bg-slate-950 border border-slate-800">
-                <div className="text-[10px] text-blue-400 font-mono font-bold">Defensa</div>
-                <div className="text-sm font-mono font-bold">{hero.statGrowth?.defense}%</div>
-              </div>
-              <div className="p-2 rounded bg-slate-950 border border-slate-800">
-                <div className="text-[10px] text-purple-400 font-mono font-bold">Poder</div>
-                <div className="text-sm font-mono font-bold">{hero.statGrowth?.spellPower}%</div>
-              </div>
-              <div className="p-2 rounded bg-slate-950 border border-slate-800">
-                <div className="text-[10px] text-amber-400 font-mono font-bold">Conocim.</div>
-                <div className="text-sm font-mono font-bold">{hero.statGrowth?.knowledge}%</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Strategy and Tactical Playstyle */}
-        <div className="space-y-4 text-xs leading-relaxed">
-          <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
-            <div className="flex items-center gap-2 font-bold text-slate-200 mb-1.5">
-              <Target className="w-4 h-4 text-rose-400" />
-              <span>Estilo de Juego Táctico & Despliegue</span>
-            </div>
-            <p className="text-slate-300">{hero.tacticalPlaystyle}</p>
-          </div>
-
-          <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
-            <div className="flex items-center gap-2 font-bold text-slate-200 mb-1.5">
-              <BookOpen className="w-4 h-4 text-blue-400" />
-              <span>Ruta de Habilidades Recomendada (Build Óptima)</span>
-            </div>
-            <div className="flex flex-wrap gap-1.5 mt-2">
-              {hero.idealSkillBuild?.map((skill, i) => (
-                <span
-                  key={i}
-                  className="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 font-mono text-[11px]"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
-            <div className="flex items-center gap-2 font-bold text-slate-200 mb-1.5">
-              <Compass className="w-4 h-4 text-emerald-400" />
-              <span>Sinergia de Facción & Tácticas de Apertura</span>
-            </div>
-            <p className="text-slate-300">{hero.synergyCombo}</p>
-            {hero.day1Action && (
-              <p className="text-slate-400 mt-1.5">
-                <strong className="text-slate-200">Apertura Día 1:</strong> {hero.day1Action}
-              </p>
-            )}
+        {/* Tabs Navigation */}
+        <div className="mb-6 border-b border-slate-700/50">
+          <div className="flex flex-wrap gap-1">
+            <button
+              onClick={() => setActiveTab('overview')}
+              className={`px-4 py-2 rounded-t-lg font-medium transition-all ${
+                activeTab === 'overview'
+                  ? `bg-slate-800/50 text-slate-200 border-b-2 border-amber-400`
+                  : 'hover:bg-slate-700/50 text-slate-400'
+              }`}
+            >
+              <BookOpen className="w-4 h-4 mr-2" /> Ficha
+            </button>
+            <button
+              onClick={() => setActiveTab('skills')}
+              className={`px-4 py-2 rounded-t-lg font-medium transition-all ${
+                activeTab === 'skills'
+                  ? `bg-slate-800/50 text-slate-200 border-b-2 border-amber-400`
+                  : 'hover:bg-slate-700/50 text-slate-400'
+              }`}
+            >
+              <Sparkles className="w-4 h-4 mr-2" /> Habilidades
+            </button>
+            <button
+              onClick={() => setActiveTab('tactics')}
+              className={`px-4 py-2 rounded-t-lg font-medium transition-all ${
+                activeTab === 'tactics'
+                  ? `bg-slate-800/50 text-slate-200 border-b-2 border-amber-400`
+                  : 'hover:bg-slate-700/50 text-slate-400'
+              }`}
+            >
+              <Target className="w-4 h-4 mr-2" /> Tácticas
+            </button>
+            <button
+              onClick={() => setActiveTab('subclasses')}
+              className={`px-4 py-2 rounded-t-lg font-medium transition-all ${
+                activeTab === 'subclasses'
+                  ? `bg-slate-800/50 text-slate-200 border-b-2 border-amber-400`
+                  : 'hover:bg-slate-700/50 text-slate-400'
+              }`}
+            >
+              <Award className="w-4 h-4 mr-2" /> Subclases
+            </button>
+            <button
+              onClick={() => setActiveTab('simulator')}
+              className={`px-4 py-2 rounded-t-lg font-medium transition-all ${
+                activeTab === 'simulator'
+                  ? `bg-slate-800/50 text-slate-200 border-b-2 border-amber-400`
+                  : 'hover:bg-slate-700/50 text-slate-400'
+              }`}
+            >
+              <GitBranch className="w-4 h-4 mr-2" /> Simulador
+            </button>
           </div>
         </div>
+
+        {/* Tab Content */}
+        {activeTab === 'overview' && (
+          <OverviewTab hero={hero} onCompare={onCompare} themeMode={themeMode} themeAccentClass={themeAccentClass} />
+        )}
+        {activeTab === 'skills' && (
+          <SkillsTab hero={hero} skillRecommendations={skillRecommendations} inspectedSkill={inspectedSkill} setInspectedSkill={setInspectedSkill} showSubskillsDetails={showSubskillsDetails} setShowSubskillsDetails={setShowSubskillsDetails} themeMode={themeMode} themeAccentClass={themeAccentClass} />
+        )}
+        {activeTab === 'tactics' && (
+          <TacticsTab hero={hero} themeMode={themeMode} themeAccentClass={themeAccentClass} />
+        )}
+        {activeTab === 'subclasses' && (
+          <SubclassesTab hero={hero} factionSubclasses={factionSubclasses} themeMode={themeMode} themeAccentClass={themeAccentClass} />
+        )}
+        {activeTab === 'simulator' && (
+          <div className="space-y-6">
+            <div className="flex items-center gap-2 mb-3">
+              <GitBranch className="w-4 h-4" />
+              <h3 className="text-lg font-semibold font-serif">Simulador de Build para {hero.name}</h3>
+            </div>
+            
+            <HeroBuildSimulator
+              selectedFaction={hero.faction as FactionId}
+              themeMode={themeMode}
+              initialHeroId={hero.id}
+            />
+          </div>
+        )}
 
         {/* Footer Actions */}
         <div className="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between gap-3">
-          {onCompare ? (
+          {onCompare && activeTab === 'overview' ? (
             <button
               onClick={() => {
                 onCompare(hero);
@@ -179,6 +279,417 @@ export const HeroDetailModal: React.FC<HeroDetailModalProps> = ({
             Cerrar Ficha
           </button>
         </div>
+      </div>
+    </div>
+  );
+};
+
+// Overview Tab Component
+const OverviewTab: React.FC<{
+  hero: DungeonHero;
+  onCompare?: (hero: DungeonHero) => void;
+  themeMode?: 'dark' | 'light';
+  themeAccentClass?: string;
+}> = ({ hero, onCompare, themeMode, themeAccentClass }) => {
+  const isMage = hero.heroType === 'Mago';
+
+  return (
+    <div className="space-y-6">
+      {/* 2-Column Info Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        {/* Specialty Box */}
+        <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+          <div className="flex items-center gap-2 text-sm font-bold text-amber-400 mb-2">
+            <Sparkles className="w-4 h-4" />
+            <span>Especialidad: {hero.specialtyName}</span>
+          </div>
+          <p className="text-xs text-slate-300 leading-relaxed">{hero.specialtyEffect}</p>
+        </div>
+
+        {/* Stat Growth Box */}
+        <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+          <div className="flex items-center gap-2 text-sm font-bold text-slate-200 mb-2">
+            <Zap className="w-4 h-4 text-purple-400" />
+            <span>Crecimiento de Atributos por Nivel</span>
+          </div>
+          <div className="grid grid-cols-4 gap-2 text-center">
+            <div className="p-2 rounded bg-slate-950 border border-slate-800">
+              <div className="text-[10px] text-rose-400 font-mono font-bold">Ataque</div>
+              <div className="text-sm font-mono font-bold">{hero.statGrowth?.attack}%</div>
+            </div>
+            <div className="p-2 rounded bg-slate-950 border border-slate-800">
+              <div className="text-[10px] text-blue-400 font-mono font-bold">Defensa</div>
+              <div className="text-sm font-mono font-bold">{hero.statGrowth?.defense}%</div>
+            </div>
+            <div className="p-2 rounded bg-slate-950 border border-slate-800">
+              <div className="text-[10px] text-purple-400 font-mono font-bold">Poder</div>
+              <div className="text-sm font-mono font-bold">{hero.statGrowth?.spellPower}%</div>
+            </div>
+            <div className="p-2 rounded bg-slate-950 border border-slate-800">
+              <div className="text-[10px] text-amber-400 font-mono font-bold">Conocim.</div>
+              <div className="text-sm font-mono font-bold">{hero.statGrowth?.knowledge}%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Strategy and Tactical Playstyle */}
+      <div className="space-y-4 text-xs leading-relaxed">
+        <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+          <div className="flex items-center gap-2 font-bold text-slate-200 mb-1.5">
+            <Target className="w-4 h-4 text-rose-400" />
+            <span>Estilo de Juego Táctico & Despliegue</span>
+          </div>
+          <p className="text-slate-300">{hero.tacticalPlaystyle}</p>
+        </div>
+
+        <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+          <div className="flex items-center gap-2 font-bold text-slate-200 mb-1.5">
+            <BookOpen className="w-4 h-4 text-blue-400" />
+            <span>Ruta de Habilidades Recomendada (Build Óptima)</span>
+          </div>
+          <div className="flex flex-wrap gap-1.5 mt-2">
+            {hero.idealSkillBuild?.map((skill, i) => (
+              <span
+                key={i}
+                className="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 font-mono text-[11px]"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+          <div className="flex items-center gap-2 font-bold text-slate-200 mb-1.5">
+            <Compass className="w-4 h-4 text-emerald-400" />
+            <span>Sinergia de Facción & Tácticas de Apertura</span>
+          </div>
+          <p className="text-slate-300">{hero.synergyCombo}</p>
+          {hero.day1Action && (
+            <p className="text-slate-400 mt-1.5">
+              <strong className="text-slate-200">Apertura Día 1:</strong> {hero.day1Action}
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Skills Tab Component
+const SkillsTab: React.FC<{
+  hero: DungeonHero;
+  skillRecommendations: HeroSubskillChoice[];
+  inspectedSkill: OfficialSkill | null;
+  setInspectedSkill: (skill: OfficialSkill | null) => void;
+  showSubskillsDetails: boolean;
+  setShowSubskillsDetails: (show: boolean) => void;
+  themeMode?: 'dark' | 'light';
+  themeAccentClass?: string;
+}> = ({ hero, skillRecommendations, inspectedSkill, setInspectedSkill, showSubskillsDetails, setShowSubskillsDetails, themeMode, themeAccentClass }) => {
+  return (
+    <div className="space-y-6">
+      {/* Skill Recommendations */}
+      <div className="space-y-4">
+        <div className="flex items-center gap-2 mb-3">
+          <Sparkles className="w-4 h-4" />
+          <h3 className="text-lg font-semibold font-serif">{hero.name}'s Skill Build Recommendations</h3>
+        </div>
+        
+        {skillRecommendations.map((rec, index) => (
+          <div key={index} className="border rounded-xl p-4 mb-4 transition-all hover:shadow-lg">
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-slate-800/50 rounded-full text-slate-400">
+                {index + 1}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="mb-1">
+                  <h4 className="font-semibold text-slate-200">{rec.skillName}</h4>
+                  <p className="text-xs text-slate-400">{rec.advancedReason}</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2">
+                      <Zap className="w-4 h-4 text-blue-400" />
+                      <span className="font-mono text-sm">Avanzada:</span>
+                    </div>
+                    <button
+                      onClick={() => {
+                        const skill = findOfficialSkill(rec.skillName);
+                        if (skill) setInspectedSkill(skill);
+                      }}
+                      className={`px-3 py-1 rounded text-xs font-mono transition-all ${
+                        showSubskillsDetails
+                          ? 'bg-slate-800/50 text-slate-200'
+                          : 'hover:bg-slate-700/50 text-slate-400'
+                      }`}
+                    >
+                      Ver Subskills
+                    </button>
+                    <span className="text-sm font-mono">{rec.advancedSubskill}</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2">
+                      <Award className="w-4 h-4 text-amber-400" />
+                      <span className="font-mono text-sm">Experta:</span>
+                    </div>
+                    <button
+                      onClick={() => {
+                        const skill = findOfficialSkill(rec.skillName);
+                        if (skill) setInspectedSkill(skill);
+                      }}
+                      className={`px-3 py-1 rounded text-xs font-mono transition-all ${
+                        showSubskillsDetails
+                          ? 'bg-slate-800/50 text-slate-200'
+                          : 'hover:bg-slate-700/50 text-slate-400'
+                      }`}
+                    >
+                      Ver Subskills
+                    </button>
+                    <span className="text-sm font-mono">{rec.expertSubskill}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Subskill Details Modal */}
+      {inspectedSkill && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80">
+          <div className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-2xl border p-6 shadow-2xl bg-slate-950 text-slate-100">
+            <button
+              onClick={() => setInspectedSkill(null)}
+              className="absolute top-4 right-4 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 mb-4">
+                <BookOpen className="w-5 h-5" />
+                <h2 className="text-xl font-serif font-bold">{inspectedSkill.name}</h2>
+              </div>
+              
+              <div className="space-y-3">
+                <div className="border rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Zap className="w-4 h-4 text-blue-400" />
+                    <span className="font-semibold text-slate-200">Básica</span>
+                  </div>
+                  <p className="text-slate-300">{inspectedSkill.upgrades.basic}</p>
+                </div>
+                
+                <div className="border rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Sparkles className="w-4 h-4 text-amber-400" />
+                    <span className="font-semibold text-slate-200">Avanzada</span>
+                  </div>
+                  <p className="text-slate-300">{inspectedSkill.upgrades.advanced}</p>
+                  {showSubskillsDetails && inspectedSkill.subskills.advanced.length > 0 && (
+                    <div className="mt-3 space-y-2">
+                      <div className="flex items-center gap-2 mb-1 text-xs font-mono">
+                        <Sparkles className="w-3 h-3" />
+                        <span>Subskills Avanzadas:</span>
+                      </div>
+                      {inspectedSkill.subskills.advanced.map((sub, idx) => (
+                        <div key={idx} className="flex items-center gap-2">
+                          <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                          <span className="text-slate-300">{sub.name}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                
+                <div className="border rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Award className="w-4 h-4 text-yellow-400" />
+                    <span className="font-semibold text-slate-200">Experta</span>
+                  </div>
+                  <p className="text-slate-300">{inspectedSkill.upgrades.expert}</p>
+                  {showSubskillsDetails && inspectedSkill.subskills.expert.length > 0 && (
+                    <div className="mt-3 space-y-2">
+                      <div className="flex items-center gap-2 mb-1 text-xs font-mono">
+                        <Award className="w-3 h-3 text-yellow-400" />
+                        <span>Subskills Expertas:</span>
+                      </div>
+                      {inspectedSkill.subskills.expert.map((sub, idx) => (
+                        <div key={idx} className="flex items-center gap-2">
+                          <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                          <span className="text-slate-300">{sub.name}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+            
+            <div className="mt-4 pt-3 border-t border-slate-800 flex justify-end">
+              <button
+                onClick={() => setShowSubskillsDetails(!showSubskillsDetails)}
+                className="px-3 py-1 rounded text-xs font-mono transition-all hover:bg-slate-700/50"
+              >
+                {showSubskillsDetails ? 'Ocultar Subskills' : 'Mostrar Subskills'}
+              </button>
+              <button
+                onClick={() => setInspectedSkill(null)}
+                className="ml-3 px-3 py-1 rounded text-xs font-mono bg-slate-800 hover:bg-slate-700 text-slate-200"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// Tactics Tab Component
+const TacticsTab: React.FC<{
+  hero: DungeonHero;
+  themeMode?: 'dark' | 'light';
+  themeAccentClass?: string;
+}> = ({ hero, themeMode, themeAccentClass }) => {
+  return (
+    <div className="space-y-6">
+      <div className="space-y-4">
+        <div className="flex items-center gap-2 mb-3">
+          <Target className="w-4 h-4" />
+          <h3 className="text-lg font-semibold font-serif">Análisis Táctico de {hero.name}</h3>
+        </div>
+        
+        <div className="border rounded-xl p-4">
+          <div className="space-y-3">
+            <div className="flex items-center gap-2 mb-2">
+              <Compass className="w-4 h-4 text-emerald-400" />
+              <span className="font-semibold text-slate-200">Sinergia de Facción</span>
+            </div>
+            <p className="text-slate-300">{hero.synergyCombo}</p>
+          </div>
+          
+          <div className="flex items-center gap-2 mb-2">
+            <Clock className="w-4 h-4 text-blue-400" />
+            <span className="font-semibold text-slate-200">Apertura Día 1</span>
+          </div>
+          {hero.day1Action ? (
+            <p className="text-slate-300">{hero.day1Action}</p>
+          ) : (
+            <p className="text-slate-400 italic">No tiene una acción específica de apertura definida.</p>
+          )}
+          
+          <div className="flex items-center gap-2 mb-2">
+            <Flame className="w-4 h-4 text-rose-400" />
+            <span className="font-semibold text-slate-200">Estilo de Juego</span>
+          </div>
+          <p className="text-slate-300">{hero.tacticalPlaystyle}</p>
+          
+          <div className="flex items-center gap-2 mb-2">
+            <BookOpen className="w-4 h-4 text-blue-400" />
+            <span className="font-semibold text-slate-200">Build Recomendada</span>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {hero.idealSkillBuild?.map((skill, i) => (
+              <span
+                key={i}
+                className="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 font-mono text-[11px]"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Subclasses Tab Component
+const SubclassesTab: React.FC<{
+  hero: DungeonHero;
+  factionSubclasses: any[];
+  themeMode?: 'dark' | 'light';
+  themeAccentClass?: string;
+}> = ({ hero, factionSubclasses, themeMode, themeAccentClass }) => {
+  return (
+    <div className="space-y-6">
+      <div className="space-y-4">
+        <div className="flex items-center gap-2 mb-3">
+          <Award className="w-4 h-4" />
+          <h3 className="text-lg font-semibold font-serif">Progresión de Subclases para {hero.name}</h3>
+        </div>
+        
+        {factionSubclasses.length > 0 ? (
+          <div className="space-y-4">
+            {factionSubclasses.map((subclass, index) => (
+              <div key={subclass.id} className="border rounded-xl p-4 mb-4 transition-all hover:shadow-lg">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-slate-800/50 rounded-full text-slate-400">
+                    {index + 1}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="mb-2">
+                      <h4 className="font-semibold text-slate-200">{subclass.name}</h4>
+                      <p className="text-xs text-slate-400">{subclass.bonusTitle}</p>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2">
+                          <Star className="w-3 h-3" />
+                          <span className="font-mono text-sm">Requisitos:</span>
+                        </div>
+                        <span className="text-sm font-mono">{subclass.expertCount}/5 habilidades a Experto</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2">
+                          {subclass.isUnlocked ? (
+                            <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                          ) : (
+                            <X className="w-3 h-3 text-rose-400" />
+                          )}
+                          <span className="font-mono text-sm">Estado:</span>
+                        </div>
+                        <span className={`font-mono text-sm font-bold ${
+                          subclass.isUnlocked ? 'text-emerald-400' : 'text-rose-400'
+                        }`}>
+                          {subclass.isUnlocked ? 'Desbloqueada' : 'Bloqueada'}
+                        </span>
+                      </div>
+                    </div>
+                    {!subclass.isUnlocked && subclass.reqStatus.length > 0 && (
+                      <div className="mt-3 space-y-2">
+                        <div className="flex items-center gap-2 mb-1 text-xs font-mono">
+                          <BookOpen className="w-3 h-3" />
+                          <span>Detalles de Requisitos:</span>
+                        </div>
+                        {subclass.reqStatus.map((req: { reqName: string; offSkillId?: string; isExpert: boolean; currentTier: string }, idx: number) => (
+                          <div key={idx} className="flex items-center gap-3">
+                            <div className="flex items-center gap-2">
+                              <span className={`text-[10px] font-mono font-bold ${
+                                req.isExpert ? 'text-emerald-400' : 'text-slate-400'
+                              }`}>
+                                {req.reqName}
+                              </span>
+                              <span className="text-xs">({req.currentTier})</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-8">
+            <p className="text-slate-400">No hay subclases disponibles para la combinación de facción y clase de este héroe.</p>
+          </div>
+        )}
       </div>
     </div>
   );

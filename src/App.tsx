@@ -284,7 +284,6 @@ export default function App() {
         </div>
         <div className={activeTab === 'hero-skills' ? 'block' : 'hidden'}>
           <HeroGuideView selectedFaction={selectedFaction} themeMode={themeMode} />
-          <HeroSkillOptimizer selectedFaction={selectedFaction} themeMode={themeMode} />
         </div>
       </main>
 

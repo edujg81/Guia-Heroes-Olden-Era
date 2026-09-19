@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Olden Era Explorer</title>
+    <!-- Prevent flash before CSS loads - respects system theme -->
+    <style>
+      @media (prefers-color-scheme: dark) {
+        html, body { background-color: #242424; color: #e5e5e5; }
+      }
+      @media (prefers-color-scheme: light) {
+        html, body { background-color: #ffffff; color: #0f172a; }
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-Dt9o81b2.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/react-vendor-B2s5HC0k.js">
+    <link rel="modulepreload" crossorigin href="/assets/ui-vendor-DKso1gFN.js">
+    <link rel="modulepreload" crossorigin href="/assets/signalr-vendor-CKp2fB5g.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-CMwQpSem.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
