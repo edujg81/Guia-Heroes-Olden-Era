@@ -3,8 +3,6 @@ import { FactionId } from './factionDataProvider';
 export type CanonicalFactionKey = 'Templo' | 'Necrópolis' | 'Mazmorra' | 'Foresta' | 'Colmena' | 'Cisma';
 
 export function normalizeFactionKey(faction: FactionId): CanonicalFactionKey {
-  if (faction === 'Arboleda') return 'Foresta';
-  if (faction === 'Enjambre') return 'Colmena';
   return faction as CanonicalFactionKey;
 }
 

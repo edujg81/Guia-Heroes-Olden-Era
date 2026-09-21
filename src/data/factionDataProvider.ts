@@ -25,7 +25,7 @@ import { ENJAMBRE_FACTION_LAWS, ENJAMBRE_LAW_PRESETS } from './enjambreLawsData'
 import { CISMA_56_DAY_BUILD_STEPS, CISMA_UNITS, CISMA_HEROES, CISMA_COMBAT_TACTICS } from './cismaData';
 import { CISMA_FACTION_LAWS, CISMA_LAW_PRESETS } from './cismaLawsData';
 
-export type FactionId = 'Mazmorra' | 'Templo' | 'Foresta' | 'Necrópolis' | 'Colmena' | 'Cisma' | 'Arboleda' | 'Enjambre';
+export type FactionId = 'Mazmorra' | 'Templo' | 'Foresta' | 'Necrópolis' | 'Colmena' | 'Cisma';
 
 export interface FactionTheme {
   id: FactionId;
@@ -196,43 +196,6 @@ export const FACTION_THEMES: Record<FactionId, FactionTheme> = {
     runeBorder: 'border-emerald-500/60',
     statGlow: 'shadow-[0_0_10px_rgba(16,185,129,0.6)]',
   },
-  Arboleda: {
-    id: 'Arboleda',
-    name: 'Foresta',
-    themeName: 'Verde Silvano',
-    primary: 'emerald',
-    hexPrimary: '#10b981',
-    gradientBg: 'radial-gradient(circle at 50% 0%, #0d3020 0%, #07170f 55%, #050b07 100%)',
-    glow: 'shadow-[0_0_22px_rgba(16,185,129,0.35)]',
-    glowBorder: 'rgba(16,185,129,0.4)',
-    border: 'border-2 border-emerald-600/70',
-    borderSubtle: 'border-emerald-900/50',
-    borderHover: 'hover:border-emerald-400',
-    bgCard: 'bg-[#0a1811]/90',
-    bgBadge: 'bg-emerald-950/80',
-    bgSubtle: 'bg-emerald-950/40',
-    bgButton: 'bg-emerald-600 hover:bg-emerald-500 text-white font-bold',
-    bgButtonHover: 'hover:bg-emerald-500',
-    primaryButton: 'bg-emerald-600 hover:bg-emerald-500 text-white font-bold border border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.4)]',
-    shadowAccent: 'shadow-[0_0_25px_rgba(16,185,129,0.35)]',
-    textAccent: 'text-emerald-400',
-    textAccentHover: 'hover:text-emerald-300',
-    textMuted: 'text-emerald-300/70',
-    tabActive: 'bg-emerald-900/90 text-white shadow-[0_0_18px_rgba(16,185,129,0.55)] border-2 border-emerald-400 font-bold',
-    pillActive: 'bg-emerald-500 text-slate-950 font-bold shadow-md shadow-emerald-500/50',
-    iconColor: 'text-emerald-400',
-    selectionClass: 'selection:bg-emerald-500 selection:text-slate-950',
-    scrollbarThumbRgba: 'rgba(16, 185, 129, 0.45)',
-    badgeBorder: 'border-emerald-700/60',
-    headerBorder: 'border-emerald-900/70',
-    dropdownBorder: 'border-emerald-700/80',
-    cardBorder: 'border-2 border-emerald-600/60',
-    cardGlowHover: 'hover:shadow-[0_0_22px_rgba(16,185,129,0.4)] hover:border-emerald-400',
-    tacticalPlate: 'bg-[#0e2117]/90 border border-emerald-800/60',
-    heroBannerBg: 'bg-gradient-to-r from-emerald-950/90 via-[#0d2217]/95 to-[#06120b]/95',
-    runeBorder: 'border-emerald-500/60',
-    statGlow: 'shadow-[0_0_10px_rgba(16,185,129,0.6)]',
-  },
   Necrópolis: {
     id: 'Necrópolis',
     name: 'Necrópolis',
@@ -272,43 +235,6 @@ export const FACTION_THEMES: Record<FactionId, FactionTheme> = {
   },
   Colmena: {
     id: 'Colmena',
-    name: 'Colmena',
-    themeName: 'Fuego Colmena',
-    primary: 'orange',
-    hexPrimary: '#ea580c',
-    gradientBg: 'radial-gradient(circle at 50% 0%, #3b1406 0%, #170702 55%, #0a0301 100%)',
-    glow: 'shadow-[0_0_22px_rgba(234,88,12,0.4)]',
-    glowBorder: 'rgba(234,88,12,0.45)',
-    border: 'border-2 border-orange-600/70',
-    borderSubtle: 'border-orange-950/60',
-    borderHover: 'hover:border-orange-400',
-    bgCard: 'bg-[#190b04]/90',
-    bgBadge: 'bg-orange-950/80',
-    bgSubtle: 'bg-orange-950/40',
-    bgButton: 'bg-orange-600 hover:bg-orange-500 text-white font-bold',
-    bgButtonHover: 'hover:bg-orange-500',
-    primaryButton: 'bg-orange-600 hover:bg-orange-500 text-white font-bold border border-orange-400 shadow-[0_0_15px_rgba(234,88,12,0.4)]',
-    shadowAccent: 'shadow-[0_0_25px_rgba(234,88,12,0.4)]',
-    textAccent: 'text-orange-400',
-    textAccentHover: 'hover:text-orange-300',
-    textMuted: 'text-orange-300/70',
-    tabActive: 'bg-orange-900/90 text-white shadow-[0_0_18px_rgba(234,88,12,0.55)] border-2 border-orange-400 font-bold',
-    pillActive: 'bg-orange-500 text-slate-950 font-bold shadow-md shadow-orange-500/50',
-    iconColor: 'text-orange-400',
-    selectionClass: 'selection:bg-orange-500 selection:text-slate-950',
-    scrollbarThumbRgba: 'rgba(234, 88, 12, 0.45)',
-    badgeBorder: 'border-orange-700/60',
-    headerBorder: 'border-orange-900/70',
-    dropdownBorder: 'border-orange-700/80',
-    cardBorder: 'border-2 border-orange-600/60',
-    cardGlowHover: 'hover:shadow-[0_0_22px_rgba(234,88,12,0.45)] hover:border-orange-400',
-    tacticalPlate: 'bg-[#220e06]/90 border border-orange-800/60',
-    heroBannerBg: 'bg-gradient-to-r from-orange-950/90 via-[#240e06]/95 to-[#100502]/95',
-    runeBorder: 'border-orange-500/60',
-    statGlow: 'shadow-[0_0_10px_rgba(234,88,12,0.6)]',
-  },
-  Enjambre: {
-    id: 'Enjambre',
     name: 'Colmena',
     themeName: 'Fuego Colmena',
     primary: 'orange',
@@ -495,43 +421,6 @@ export const FACTION_THEMES_LIGHT: Record<FactionId, FactionTheme> = {
     runeBorder: 'border-emerald-400',
     statGlow: 'shadow-[0_0_8px_rgba(5,150,105,0.4)]',
   },
-  Arboleda: {
-    id: 'Arboleda',
-    name: 'Foresta',
-    themeName: 'Esmeralda Silvana',
-    primary: 'emerald',
-    hexPrimary: '#059669',
-    gradientBg: 'radial-gradient(circle at 50% 0%, #d1fae5 0%, #f0fdf4 50%, #f8fafc 100%)',
-    glow: 'shadow-[0_4px_24px_rgba(5,150,105,0.32)]',
-    glowBorder: 'rgba(5,150,105,0.40)',
-    border: 'border-2 border-emerald-400',
-    borderSubtle: 'border-emerald-200',
-    borderHover: 'hover:border-emerald-500',
-    bgCard: 'bg-emerald-50/90',
-    bgBadge: 'bg-emerald-100',
-    bgSubtle: 'bg-emerald-50',
-    bgButton: 'bg-emerald-600 hover:bg-emerald-500 text-white font-bold',
-    bgButtonHover: 'hover:bg-emerald-500',
-    primaryButton: 'bg-emerald-600 hover:bg-emerald-500 text-white font-bold border border-emerald-400 shadow-[0_2px_12px_rgba(5,150,105,0.3)]',
-    shadowAccent: 'shadow-[0_4px_24px_rgba(5,150,105,0.28)]',
-    textAccent: 'text-emerald-800',
-    textAccentHover: 'hover:text-emerald-950',
-    textMuted: 'text-emerald-800/80',
-    tabActive: 'bg-emerald-700 text-white shadow-[0_4px_16px_rgba(5,150,105,0.40)] border-2 border-emerald-600 font-bold',
-    pillActive: 'bg-emerald-600 text-white font-bold shadow-sm shadow-emerald-600/30',
-    iconColor: 'text-emerald-700',
-    selectionClass: 'selection:bg-emerald-500 selection:text-white',
-    scrollbarThumbRgba: 'rgba(5, 150, 105, 0.45)',
-    badgeBorder: 'border-emerald-300',
-    headerBorder: 'border-emerald-200',
-    dropdownBorder: 'border-emerald-300',
-    cardBorder: 'border-2 border-emerald-300',
-    cardGlowHover: 'hover:shadow-[0_4px_20px_rgba(5,150,105,0.3)] hover:border-emerald-400',
-    tacticalPlate: 'bg-emerald-50/70 border border-emerald-200',
-    heroBannerBg: 'bg-gradient-to-r from-emerald-100/90 via-emerald-50/90 to-white',
-    runeBorder: 'border-emerald-400',
-    statGlow: 'shadow-[0_0_8px_rgba(5,150,105,0.4)]',
-  },
   Necrópolis: {
     id: 'Necrópolis',
     name: 'Necrópolis',
@@ -571,43 +460,6 @@ export const FACTION_THEMES_LIGHT: Record<FactionId, FactionTheme> = {
   },
   Colmena: {
     id: 'Colmena',
-    name: 'Colmena',
-    themeName: 'Ámbar Volcánico',
-    primary: 'orange',
-    hexPrimary: '#ea580c',
-    gradientBg: 'radial-gradient(circle at 50% 0%, #ffedd5 0%, #fff7ed 50%, #f8fafc 100%)',
-    glow: 'shadow-[0_4px_24px_rgba(234,88,12,0.32)]',
-    glowBorder: 'rgba(234,88,12,0.40)',
-    border: 'border-2 border-orange-400',
-    borderSubtle: 'border-orange-200',
-    borderHover: 'hover:border-orange-500',
-    bgCard: 'bg-orange-50/90',
-    bgBadge: 'bg-orange-100',
-    bgSubtle: 'bg-orange-50',
-    bgButton: 'bg-orange-600 hover:bg-orange-500 text-white font-bold',
-    bgButtonHover: 'hover:bg-orange-500',
-    primaryButton: 'bg-orange-600 hover:bg-orange-500 text-white font-bold border border-orange-400 shadow-[0_2px_12px_rgba(234,88,12,0.3)]',
-    shadowAccent: 'shadow-[0_4px_24px_rgba(234,88,12,0.28)]',
-    textAccent: 'text-orange-800',
-    textAccentHover: 'hover:text-orange-950',
-    textMuted: 'text-orange-800/80',
-    tabActive: 'bg-orange-600 text-white shadow-[0_4px_16px_rgba(234,88,12,0.40)] border-2 border-orange-500 font-bold',
-    pillActive: 'bg-orange-600 text-white font-bold shadow-sm shadow-orange-600/30',
-    iconColor: 'text-orange-700',
-    selectionClass: 'selection:bg-orange-500 selection:text-white',
-    scrollbarThumbRgba: 'rgba(234, 88, 12, 0.45)',
-    badgeBorder: 'border-orange-300',
-    headerBorder: 'border-orange-200',
-    dropdownBorder: 'border-orange-300',
-    cardBorder: 'border-2 border-orange-300',
-    cardGlowHover: 'hover:shadow-[0_4px_20px_rgba(234,88,12,0.3)] hover:border-orange-400',
-    tacticalPlate: 'bg-orange-50/70 border border-orange-200',
-    heroBannerBg: 'bg-gradient-to-r from-orange-100/90 via-orange-50/90 to-white',
-    runeBorder: 'border-orange-400',
-    statGlow: 'shadow-[0_0_8px_rgba(234,88,12,0.4)]',
-  },
-  Enjambre: {
-    id: 'Enjambre',
     name: 'Colmena',
     themeName: 'Ámbar Volcánico',
     primary: 'orange',
@@ -745,24 +597,6 @@ export const FACTIONS_METADATA: Record<FactionId, FactionMetadata> = {
     },
     status: 'completo',
   },
-  Arboleda: {
-    id: 'Arboleda',
-    name: 'Foresta',
-    nameEn: 'Sylvan / Foresta',
-    region: 'Bosques Primigenios de Jadame',
-    alignment: 'Naturaleza & Armonía',
-    primaryMechanic: 'Enraizamiento & Comunión Botánica',
-    primaryMechanicDesc: 'Falange de Hoplitas defensivos, control de enredo de Iriyads, ralentización anfibia de Aqualotls, auras celestiales de Qilins y renacimiento de Fénix.',
-    startingGold: '10.000',
-    colorScheme: {
-      primary: 'emerald',
-      border: 'border-emerald-600',
-      bgBadge: 'bg-emerald-950/80',
-      textAccent: 'text-emerald-400',
-      glow: 'shadow-[0_0_20px_rgba(16,185,129,0.3)]',
-    },
-    status: 'completo',
-  },
   Necrópolis: {
     id: 'Necrópolis',
     name: 'Necrópolis',
@@ -783,24 +617,6 @@ export const FACTIONS_METADATA: Record<FactionId, FactionMetadata> = {
   },
   Colmena: {
     id: 'Colmena',
-    name: 'Colmena',
-    nameEn: 'Hive / Colmena',
-    region: 'Nidos Subterráneos de Jadame',
-    alignment: 'Horda Insectoide & Feromonas',
-    primaryMechanic: 'Crecimiento Colosal & Salto de Mantis',
-    primaryMechanicDesc: 'Crecimiento de criaturas masivo, doble pinza de Mantis Voraz y Leviatanes Devoradores de colosos.',
-    startingGold: '10.000',
-    colorScheme: {
-      primary: 'orange',
-      border: 'border-orange-500',
-      bgBadge: 'bg-orange-950/80',
-      textAccent: 'text-orange-400',
-      glow: 'shadow-[0_0_20px_rgba(249,115,22,0.3)]',
-    },
-    status: 'completo',
-  },
-  Enjambre: {
-    id: 'Enjambre',
     name: 'Colmena',
     nameEn: 'Hive / Colmena',
     region: 'Nidos Subterráneos de Jadame',
@@ -846,12 +662,10 @@ export function getBuildStepsForFaction(faction: FactionId | string): BuildStep[
     case 'Templo':
       return TEMPLE_56_DAY_BUILD_STEPS;
     case 'Foresta':
-    case 'Arboleda':
       return ARBOLEDA_56_DAY_BUILD_STEPS;
     case 'Necrópolis':
       return NECROPOLIS_56_DAY_BUILD_STEPS;
     case 'Colmena':
-    case 'Enjambre':
       return ENJAMBRE_56_DAY_BUILD_STEPS;
     case 'Cisma':
       return CISMA_56_DAY_BUILD_STEPS;
@@ -866,12 +680,10 @@ export function getUnitsForFaction(faction: FactionId | string): UnitInfo[] {
     case 'Templo':
       return TEMPLE_UNITS;
     case 'Foresta':
-    case 'Arboleda':
       return ARBOLEDA_UNITS;
     case 'Necrópolis':
       return NECROPOLIS_UNITS;
     case 'Colmena':
-    case 'Enjambre':
       return ENJAMBRE_UNITS;
     case 'Cisma':
       return CISMA_UNITS;
@@ -890,12 +702,10 @@ export function getCombatTacticsForFaction(faction: FactionId | string): Tactica
     case 'Templo':
       return TEMPLE_COMBAT_TACTICS;
     case 'Foresta':
-    case 'Arboleda':
       return ARBOLEDA_COMBAT_TACTICS;
     case 'Necrópolis':
       return NECROPOLIS_COMBAT_TACTICS;
     case 'Colmena':
-    case 'Enjambre':
       return ENJAMBRE_COMBAT_TACTICS;
     case 'Cisma':
       return CISMA_COMBAT_TACTICS;
@@ -910,12 +720,10 @@ export function getFactionLawsForFaction(faction: FactionId | string): FactionLa
     case 'Templo':
       return TEMPLE_FACTION_LAWS;
     case 'Foresta':
-    case 'Arboleda':
       return ARBOLEDA_FACTION_LAWS;
     case 'Necrópolis':
       return NECROPOLIS_FACTION_LAWS;
     case 'Colmena':
-    case 'Enjambre':
       return ENJAMBRE_FACTION_LAWS;
     case 'Cisma':
       return CISMA_FACTION_LAWS;
@@ -930,12 +738,10 @@ export function getFactionLawPresetsForFaction(faction: FactionId | string): Fac
     case 'Templo':
       return TEMPLE_LAW_PRESETS;
     case 'Foresta':
-    case 'Arboleda':
       return ARBOLEDA_LAW_PRESETS;
     case 'Necrópolis':
       return NECROPOLIS_LAW_PRESETS;
     case 'Colmena':
-    case 'Enjambre':
       return ENJAMBRE_LAW_PRESETS;
     case 'Cisma':
       return CISMA_LAW_PRESETS;

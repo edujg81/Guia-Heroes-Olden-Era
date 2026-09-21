@@ -2051,7 +2051,7 @@ export const ARBOLEDA_UNITS: UnitInfo[] = [
 
 export const ARBOLEDA_HEROES_LOCAL: HeroExtension[] = [
   {
-    id: 'hero-eith',
+    id: 'nature_hero_1',
     name: 'Eith',
     title: 'El Explorador del Manto Esmeralda',
     role: 'Secundario & Logística',
@@ -2064,7 +2064,7 @@ export const ARBOLEDA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Levanta la niebla del mapa en todas direcciones para identificar aserraderos y minas de gemas.',
   },
   {
-    id: 'hero-gorel-punta-de-lanza',
+    id: 'nature_hero_2',
     name: 'Gorel Punta de Lanza',
     title: 'El Cazador y Tirador Silvano',
     role: 'Principal Físico',
@@ -2077,7 +2077,7 @@ export const ARBOLEDA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Limpia guardias neutrales medianos el Día 1 con daño físico aplastante.',
   },
   {
-    id: 'hero-colajengibre',
+    id: 'nature_hero_3',
     name: 'Colajengibre',
     title: 'El Patriarca de los Faunos Danzantes',
     role: 'Apertura Rápida Día 1',
@@ -2090,7 +2090,7 @@ export const ARBOLEDA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Conquista todos los aserraderos y minas exteriores el Día 1 gracias a su ejército masivo de Faunos.',
   },
   {
-    id: 'hero-viejo-peregrino',
+    id: 'nature_hero_4',
     name: 'Viejo Peregrino',
     title: 'El Sabio de la Adaptación Silvestre',
     role: 'Principal Físico / Híbrido',
@@ -2103,7 +2103,7 @@ export const ARBOLEDA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Limpia campamentos mixtos aprovechando su versatilidad táctica y resistencia.',
   },
   {
-    id: 'hero-octavia',
+    id: 'nature_hero_5',
     name: 'Octavia',
     title: 'La Dama de la Fortuna del Bosque',
     role: 'Principal Físico',
@@ -2116,7 +2116,7 @@ export const ARBOLEDA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Derrota guardias de tesoros con impactos críticos tempranos de bajo coste.',
   },
   {
-    id: 'hero-mreowa',
+    id: 'nature_hero_6',
     name: 'Mreowa',
     title: 'La Cazadora de los Reflejos Centelleantes',
     role: 'Principal Físico',
@@ -2129,7 +2129,7 @@ export const ARBOLEDA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Elimina pilas neutrales en 1 turno con su Golpe Heroico potenciado.',
   },
   {
-    id: 'hero-faleor',
+    id: 'nature_hero_7',
     name: 'Faleor',
     title: 'El Guardián del Vínculo Primordial',
     role: 'Principal Físico / Vanguardia',
@@ -2142,7 +2142,7 @@ export const ARBOLEDA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Limpia campamentos densos aprovechando la ventaja del Murmullo Avanzado desde el Día 1.',
   },
   {
-    id: 'hero-seductora-sha',
+    id: 'nature_hero_8',
     name: 'Seductora Sh\'a',
     title: 'La Diplomática del Bosque Encantado',
     role: 'Secundario & Reclutamiento',
@@ -2155,7 +2155,7 @@ export const ARBOLEDA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Contacta con criaturas neutrales en los alrededores para sumarlas a sus filas.',
   },
   {
-    id: 'hero-tia-daliar',
+    id: 'nature_hero_9',
     name: 'Tía Daliar',
     title: 'La Erudita de los Secretos Silvanos',
     role: 'Principal Físico / Progresión Rápida',
@@ -2168,7 +2168,7 @@ export const ARBOLEDA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Prioriza combates de experiencia para subir rápidamente de nivel en los primeros turnos.',
   },
   {
-    id: 'hero-vatawna',
+    id: 'nature_hero_10',
     name: 'Vatawna',
     title: 'La Voz de las Tormentas Primordiales',
     role: 'Principal Mágico',
@@ -2181,7 +2181,7 @@ export const ARBOLEDA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Lanza conjuros directos en Día 1 limpiando campamentos pesados sin gastar toda su reserva.',
   },
   {
-    id: 'hero-anciano-tsskish',
+    id: 'nature_hero_11',
     name: 'Anciano Tss\'kish',
     title: 'El Anciano de la Corteza Inquebrantable',
     role: 'Principal Mágico / Herbomancia',
@@ -2194,7 +2194,7 @@ export const ARBOLEDA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Asegura aserraderos y minas complejas en Día 1 gracias al poder de sus Herbomantes iniciales.',
   },
   {
-    id: 'hero-aeliniel',
+    id: 'nature_hero_12',
     name: 'Aeliniel',
     title: 'La Tejedora del Fuego Primigenio',
     role: 'Principal Mágico',
@@ -2207,7 +2207,7 @@ export const ARBOLEDA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Limpia campamentos neutrales con proyectiles mágicos en Turno 1.',
   },
   {
-    id: 'hero-glacia',
+    id: 'nature_hero_13',
     name: 'Glacia',
     title: 'La Dama de la Escarcha y el Hielo',
     role: 'Principal Mágico',
@@ -2220,7 +2220,7 @@ export const ARBOLEDA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Inmoviliza a criaturas neutrales rápidas y las abate a distancia con cero peligro.',
   },
   {
-    id: 'hero-vim',
+    id: 'nature_hero_14',
     name: 'Vim',
     title: 'El Señor de la Roca y la Tierra',
     role: 'Principal Mágico / Daño Contundente',
@@ -2233,7 +2233,7 @@ export const ARBOLEDA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Pulveriza guardias neutrales con alta armadura usando Peñazo en Turno 1.',
   },
   {
-    id: 'hero-halon',
+    id: 'nature_hero_15',
     name: 'Halon',
     title: 'El Invocador del Trueno y el Rayo',
     role: 'Principal Mágico',
@@ -2246,7 +2246,7 @@ export const ARBOLEDA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Borra campamentos neutrales densos de un solo rayo certero.',
   },
   {
-    id: 'hero-echolily',
+    id: 'nature_hero_16',
     name: 'Echolily',
     title: 'La Ilusionista de los Murmullos Duplicados',
     role: 'Principal Mágico / Duplicación',
@@ -2259,7 +2259,7 @@ export const ARBOLEDA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Limpia objetivos neutrales utilizando señuelos ilusorios con 0 bajas.',
   },
   {
-    id: 'hero-suli',
+    id: 'nature_hero_17',
     name: 'Suli',
     title: 'La Guardiana Nativa del Bosque Murmullo',
     role: 'Principal Mágico / Invocación',
@@ -2272,7 +2272,7 @@ export const ARBOLEDA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Invoca un avatar el Día 1 para tanquear y ganar combates sin perder criaturas de la capital.',
   },
   {
-    id: 'hero-el-juglar',
+    id: 'nature_hero_18',
     name: 'El juglar',
     title: 'El Músico Errante de las Selvas de Jade',
     role: 'Principal Mágico / Híbrido',

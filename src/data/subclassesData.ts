@@ -22,7 +22,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: "Balthazar's Bodyguard",
     faction: 'Mazmorra',
     baseClass: 'Señor Supremo (Overlord)',
-    classType: 'Guerrero',
+    classType: 'Poder',
     bonusTitle: '+100% Ataque al Héroe',
     bonusEffect: 'Duplica el atributo de Ataque base del héroe (+100%). Los ataques directos del héroe (Heroic Strike) y la fuerza militar de sus tropas escalan exponencialmente contra la armadura enemiga.',
     requiredSkills: [
@@ -43,7 +43,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: 'Silver-Tongue Envoy',
     faction: 'Mazmorra',
     baseClass: 'Señor Supremo (Overlord)',
-    classType: 'Guerrero',
+    classType: 'Poder',
     bonusTitle: '+100% Defensa al Héroe',
     bonusEffect: 'Duplica el atributo de Defensa base del héroe (+100%). Reduce drásticamente todo el daño físico y de proyectiles sufrido por el ejército, blindando las líneas de choque.',
     requiredSkills: [
@@ -64,7 +64,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: "Amelchia's Heir",
     faction: 'Mazmorra',
     baseClass: 'Brujo (Warlock)',
-    classType: 'Mago',
+    classType: 'Magia',
     bonusTitle: '+100% Poder de Hechizo (Spell Power)',
     bonusEffect: 'Duplica el Poder Mágico base del héroe (+100%). El daño de todos los hechizos directos (Rayo Arcano, Relámpago, Crepúsculo, Armageddon) se duplica, destruyendo tropas de tier alto de un solo lanzamiento.',
     requiredSkills: [
@@ -85,7 +85,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: 'Grand Merchant',
     faction: 'Mazmorra',
     baseClass: 'Brujo (Warlock)',
-    classType: 'Mago',
+    classType: 'Magia',
     bonusTitle: '+10.000 Oro Diario Extra',
     bonusEffect: 'Genera 10.000 piezas de oro adicionales al día para el tesoro del reino. Resuelve cualquier déficit económico y permite comprar artefactos de reliquia y el 100% de los reclutas semanales.',
     requiredSkills: [
@@ -110,7 +110,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: 'Swashbuckler',
     faction: 'Templo',
     baseClass: 'Caballero (Knight)',
-    classType: 'Guerrero',
+    classType: 'Poder',
     bonusTitle: '+200 Daño a Golpe Heroico (Heroic Strike)',
     bonusEffect: 'Añade +200 de daño plano al ataque directo del héroe (Heroic Strike) en cada ronda de combate, permitiendo ejecutar unidades enemigas de nivel medio sin gastar maná.',
     requiredSkills: [
@@ -131,7 +131,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: 'Paragon',
     faction: 'Templo',
     baseClass: 'Caballero (Knight)',
-    classType: 'Guerrero',
+    classType: 'Poder',
     bonusTitle: 'Daño Máximo y Daño Recibido Mínimo en Tropas',
     bonusEffect: 'Garantiza que todas las tropas aliadas inflijan siempre su daño máximo en cada ataque y que sufran siempre el daño mínimo posible al ser atacadas.',
     requiredSkills: [
@@ -152,7 +152,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: 'Grand Inquisitor',
     faction: 'Templo',
     baseClass: 'Clérigo (Cleric)',
-    classType: 'Mago',
+    classType: 'Magia',
     bonusTitle: 'Restricción Mágica Enemiga (1 Hechizo por Batalla)',
     bonusEffect: 'Limita al héroe enemigo a lanzar cada hechizo exactamente una sola vez por combate. Neutraliza estrategias basadas en spam de curación, resurrección o daño directo.',
     requiredSkills: [
@@ -173,7 +173,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: 'Ascendant',
     faction: 'Templo',
     baseClass: 'Clérigo (Cleric)',
-    classType: 'Mago',
+    classType: 'Magia',
     bonusTitle: 'Coste 0 de Maná en Todos los Hechizos',
     bonusEffect: 'Todos los hechizos del héroe tienen un coste de 0 puntos de maná. Permite lanzar los hechizos más costosos de nivel 5 de forma infinita.',
     requiredSkills: [
@@ -198,7 +198,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: "Fortune's Favored",
     faction: 'Foresta',
     baseClass: 'Guardián (Warden)',
-    classType: 'Guerrero',
+    classType: 'Poder',
     bonusTitle: 'Cargas de Concentración Máximas + Golpe Afortunado 100%',
     bonusEffect: 'Genera el máximo de cargas de Concentración (Focus) al inicio de cada ronda y asegura que todas las tropas aliadas acierten siempre con Golpe Afortunado (Lucky Strike).',
     requiredSkills: [
@@ -219,7 +219,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: 'Wellspring of Vigor',
     faction: 'Foresta',
     baseClass: 'Guardián (Warden)',
-    classType: 'Guerrero',
+    classType: 'Poder',
     bonusTitle: 'Ataque Heroico en Área (AoE) + Regeneración',
     bonusEffect: 'El Golpe Heroico del comandante inflige daño de área de efecto a múltiples casillas enemigas adyacentes y cura a las tropas aliadas cercanas.',
     requiredSkills: [
@@ -240,7 +240,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: 'Sky Fury',
     faction: 'Foresta',
     baseClass: 'Druida (Druid)',
-    classType: 'Mago',
+    classType: 'Magia',
     bonusTitle: 'Doble Lanzamiento de Hechizos de la Naturaleza',
     bonusEffect: 'Permite al héroe lanzar un segundo hechizo gratuito de la escuela elemental o de la naturaleza cada ronda si el primero dañó a dos o más unidades.',
     requiredSkills: [
@@ -261,7 +261,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: 'Celestial Envoy',
     faction: 'Foresta',
     baseClass: 'Druida (Druid)',
-    classType: 'Mago',
+    classType: 'Magia',
     bonusTitle: 'Avatar Supremo Inmune & Auras de Protección',
     bonusEffect: 'El avatar convocado por el héroe adquiere inmunidad total a la magia y proyecta un aura de resistencia de +30% a todas las tropas circundantes.',
     requiredSkills: [
@@ -286,7 +286,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: 'Walking Rot',
     faction: 'Necrópolis',
     baseClass: 'Caballero de la Muerte (Death Knight)',
-    classType: 'Guerrero',
+    classType: 'Poder',
     bonusTitle: 'Plaga de Putrefacción & Aura Venenosa Global',
     bonusEffect: 'Todas las unidades enemigas reciben daño de veneno al inicio de su turno e infectan a los aliados adyacentes al perecer.',
     requiredSkills: [
@@ -307,7 +307,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: 'Harbinger of Doom',
     faction: 'Necrópolis',
     baseClass: 'Caballero de la Muerte (Death Knight)',
-    classType: 'Guerrero',
+    classType: 'Poder',
     bonusTitle: 'Moral Negativa Extrema (-3) & Pánico',
     bonusEffect: 'Reduce la moral enemiga en -3 puntos permanentes. Las unidades enemigas con moral negativa tienen 35% de omitir turnos por pánico.',
     requiredSkills: [
@@ -328,7 +328,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: 'Soul Weaver',
     faction: 'Necrópolis',
     baseClass: 'Nigromante (Necromancer)',
-    classType: 'Mago',
+    classType: 'Magia',
     bonusTitle: '+100% Levantamiento de Nigromancia & Espectros',
     bonusEffect: 'Duplica las tropas no-muertas levantadas tras la batalla y convierte el 25% de las bajas de élite enemigas en Espectros de alto rango.',
     requiredSkills: [
@@ -349,7 +349,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: 'Chronomancer',
     faction: 'Necrópolis',
     baseClass: 'Nigromante (Necromancer)',
-    classType: 'Mago',
+    classType: 'Magia',
     bonusTitle: 'Manipulación Temporal & Congelación de Iniciativa',
     bonusEffect: 'Otorga una acción inmediata adicional a la criatura más poderosa aliada en el Turno 1 y reduce la iniciativa de todo el ejército enemigo en 2.',
     requiredSkills: [
@@ -374,7 +374,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: 'Broodmother',
     faction: 'Colmena',
     baseClass: 'Ejecutor (Enforcer)',
-    classType: 'Guerrero',
+    classType: 'Poder',
     bonusTitle: 'Eclosión Automática de Enjambres en Combate',
     bonusEffect: 'Eclosiona 3 enjambres de larvas de combate al inicio de cada ronda, actuando como escudos de carne e interrumpiendo tiradores.',
     requiredSkills: [
@@ -395,7 +395,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: 'Chaos Lord',
     faction: 'Colmena',
     baseClass: 'Ejecutor (Enforcer)',
-    classType: 'Guerrero',
+    classType: 'Poder',
     bonusTitle: 'Frenesí Descontrolado & 100% Penetración de Armadura',
     bonusEffect: 'Los ataques de las unidades de la Colmena ignoran el 100% de la defensa enemiga cuando la unidad enemiga tiene menos del 50% de su salud.',
     requiredSkills: [
@@ -416,7 +416,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: 'Progenitor',
     faction: 'Colmena',
     baseClass: 'Heraldo (Herald)',
-    classType: 'Mago',
+    classType: 'Magia',
     bonusTitle: 'Invocación de Enjambre Titánico & Absorción de Daño',
     bonusEffect: 'Invoca un Enjambre Colosal con salud equivalente al 40% del ejército que redirige todo el daño a distancia hacia sí mismo.',
     requiredSkills: [
@@ -437,7 +437,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: 'Soul Eater',
     faction: 'Colmena',
     baseClass: 'Heraldo (Herald)',
-    classType: 'Mago',
+    classType: 'Magia',
     bonusTitle: 'Drenaje de Maná & Robo de Concentración',
     bonusEffect: 'Cada vez que una criatura enemiga es destruida, el héroe recupera 6 de maná y 1 carga de concentración, drenándolo del héroe rival.',
     requiredSkills: [
@@ -462,7 +462,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: 'Unstoppable',
     faction: 'Cisma',
     baseClass: 'Devastador (Devastator)',
-    classType: 'Guerrero',
+    classType: 'Poder',
     bonusTitle: 'Inmunidad Total a Control de Masas & Arremetida',
     bonusEffect: 'Las unidades de Cisma son completamente inmunes a Ralentización, Ceguera, Parálisis y Desarme, y obtienen +2 de movimiento en combate.',
     requiredSkills: [
@@ -483,7 +483,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: 'Boundless',
     faction: 'Cisma',
     baseClass: 'Devastador (Devastator)',
-    classType: 'Guerrero',
+    classType: 'Poder',
     bonusTitle: 'Movilidad Ilimitada & Salto Abisal',
     bonusEffect: 'Otorga +35% de movimiento en el mapa de aventura y permite a todas las criaturas realizar un teletransporte de combate corto cada 2 rondas.',
     requiredSkills: [
@@ -504,7 +504,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: 'Fathomless',
     faction: 'Cisma',
     baseClass: 'Invocador Abisal (Corruptor)',
-    classType: 'Mago',
+    classType: 'Magia',
     bonusTitle: 'Brechas del Vacío & Colapso Espacial',
     bonusEffect: 'Abre brechas dimensionales en el campo de batalla que dañan a cualquier unidad enemiga que se mueva y potencian los hechizos de vacío un 50%.',
     requiredSkills: [
@@ -525,7 +525,7 @@ export const OFFICIAL_SUBCLASSES: SubclassInfo[] = [
     nameEn: 'Unfeeling',
     faction: 'Cisma',
     baseClass: 'Invocador Abisal (Corruptor)',
-    classType: 'Mago',
+    classType: 'Magia',
     bonusTitle: 'Reducción de Daño 50% & Reflejo de Maldiciones',
     bonusEffect: 'Reduce todo el daño mágico y de área recibido por las tropas aliadas en un 50% y devuelve cualquier maldición al lanzador enemigo.',
     requiredSkills: [

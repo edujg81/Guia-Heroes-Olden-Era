@@ -25,17 +25,17 @@ export const SubclassesBrowser: React.FC<SubclassesBrowserProps> = ({
   const theme = getFactionTheme(themeFaction, themeMode);
 
   const factions = ['Todas', 'Mazmorra', 'Templo', 'Foresta', 'Necrópolis', 'Colmena', 'Cisma'];
-  const classTypes = ['Todos', 'Guerrero', 'Mago'];
+  const classTypes = ['Todos', 'Poder', 'Magia'];
 
   const filteredSubclasses = useMemo(() => {
     return OFFICIAL_SUBCLASSES.filter((sub) => {
       const matchFaction =
         selectedFaction === 'Todas' ||
         sub.faction === selectedFaction ||
-        (selectedFaction === 'Foresta' && sub.faction === 'Arboleda') ||
-        (selectedFaction === 'Arboleda' && sub.faction === 'Foresta') ||
-        (selectedFaction === 'Colmena' && sub.faction === 'Enjambre') ||
-        (selectedFaction === 'Enjambre' && sub.faction === 'Colmena');
+        (selectedFaction === 'Foresta') ||
+        (sub.faction === 'Foresta') ||
+        (selectedFaction === 'Colmena') ||
+        (sub.faction === 'Colmena');
       const matchType = selectedClassType === 'Todos' || sub.classType === selectedClassType;
       return matchFaction && matchType;
     });
