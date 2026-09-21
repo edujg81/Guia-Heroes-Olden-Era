@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { DungeonHero, UnitInfo } from '../../../types';
-import { FactionId, getFactionTheme, getHeroesForFaction, getUnitsForFaction } from '../../../data/factionDataProvider';
+import type { HeroWithExtras, UnitInfo } from '../../../types';
+import { getHeroesByFactionKey } from '../../../data/heroesData';
+import { FactionId, getFactionTheme, getUnitsForFaction, getHeroesForFaction } from '../../../data/factionDataProvider';
 import { TierBadge } from '../../ui/TierBadge';
 import {
   Swords,
@@ -23,8 +24,8 @@ import {
 } from 'lucide-react';
 
 interface HeroComparatorSplitScreenProps {
-  initialHeroA?: DungeonHero | null;
-  initialHeroB?: DungeonHero | null;
+  initialHeroA?: HeroWithExtras | null;
+  initialHeroB?: HeroWithExtras | null;
   defaultFaction?: FactionId;
   themeMode?: 'dark' | 'light';
   onBackToRoster?: () => void;
@@ -50,8 +51,8 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
   const [factionA, setFactionA] = useState<FactionId>(defaultFaction);
   const [factionB, setFactionB] = useState<FactionId>(defaultFaction);
 
-  const heroesA = useMemo(() => getHeroesForFaction(factionA), [factionA]);
-  const heroesB = useMemo(() => getHeroesForFaction(factionB), [factionB]);
+  const heroesA = useMemo(() => getHeroesByFactionKey(factionA), [factionA]);
+  const heroesB = useMemo(() => getHeroesByFactionKey(factionB), [factionB]);
 
   const [selectedHeroIdA, setSelectedHeroIdA] = useState<string>(
     initialHeroA?.id || heroesA[0]?.id || ''
@@ -98,8 +99,8 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
   // Presets rápidos competitivos
   const applyPreset = (presetType: 'warriorVsMage' | 'mainVsFarmeo' | 'rivalFaction' | 'metaTierS') => {
     if (presetType === 'warriorVsMage') {
-      const warrior = heroesA.find((h) => h.heroType === 'Guerrero') || heroesA[0];
-      const mage = heroesA.find((h) => h.heroType === 'Mago') || heroesA[1] || heroesA[0];
+      const warrior = heroesA.find((h) => h.classType === 'might') || heroesA[0];
+      const mage = heroesA.find((h) => h.classType === 'magic') || heroesA[1] || heroesA[0];
       if (warrior && mage) {
         setSelectedHeroIdA(warrior.id);
         setSelectedHeroIdB(mage.id);
@@ -132,7 +133,7 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
   };
 
   // Cálculo de estadísticas dinámicas según el nivel
-  const calculateHeroStats = (hero: DungeonHero | null, level: number) => {
+  const calculateHeroStats = (hero: HeroWithExtras | null, level: number) => {
     if (!hero) {
       return {
         attack: 0,
@@ -147,7 +148,7 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
       };
     }
 
-    const isWarrior = hero.heroType === 'Guerrero';
+    const isWarrior = hero.classType === 'might';
     // Base stats canónicas: Guerreros parten con más Atq/Def, Magos con más Poder/Conocimiento
     const baseAttack = isWarrior ? 2 : 1;
     const baseDefense = isWarrior ? 2 : 1;
@@ -170,8 +171,8 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
     // Estimación de moral y suerte basada en especialidades o roles
     let estimatedMorale = 1;
     let estimatedLuck = 1;
-    if (hero.specialtyEffect.toLowerCase().includes('moral')) estimatedMorale += 2;
-    if (hero.specialtyEffect.toLowerCase().includes('suerte')) estimatedLuck += 2;
+    if (hero.specializationDescription.toLowerCase().includes('moral')) estimatedMorale += 2;
+    if (hero.specializationDescription.toLowerCase().includes('suerte')) estimatedLuck += 2;
     if (isWarrior) estimatedMorale += 1;
 
     return {
@@ -191,7 +192,7 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
   const statsB = useMemo(() => calculateHeroStats(heroB, simulatedLevel), [heroB, simulatedLevel]);
 
   // Análisis de sinergia de unidades con el comandante
-  const evaluateCreatureSynergy = (hero: DungeonHero | null, unit: UnitInfo) => {
+  const evaluateCreatureSynergy = (hero: HeroWithExtras | null, unit: UnitInfo) => {
     if (!hero) {
       return {
         level: 'none' as const,
@@ -200,7 +201,7 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
       };
     }
 
-    const heroText = `${hero.name || ''} ${hero.specialtyName || ''} ${hero.specialtyEffect || ''} ${hero.synergyCombo || ''} ${hero.tacticalPlaystyle || ''}`.toLowerCase();
+    const heroText = `${hero.name || ''} ${hero.specializationName || ''} ${hero.specializationDescription || ''} ${hero.synergyCombo || ''} ${hero.tacticalPlaystyle || ''}`.toLowerCase();
     const unitText = `${unit.name || ''} ${unit.upgradeName || ''} ${unit.dwelling || ''}`.toLowerCase();
 
     // 1. Sinergia Directa Especialista
@@ -211,12 +212,12 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
       return {
         level: 'direct' as const,
         badge: '🌟 Sinergia Directa Especialista',
-        description: `Especialidad "${hero.specialtyName}" confiere bonificaciones acumulativas exclusivas por nivel a esta criatura.`,
+        description: `Especialidad "${hero.specializationName}" confiere bonificaciones acumulativas exclusivas por nivel a esta criatura.`,
       };
     }
 
     // 2. Sinergia de Ejército Inicial (Creeping Temprano Día 1-7)
-    if ((hero.initialArmy || '').toLowerCase().includes((unit.name || '').toLowerCase())) {
+    if ((hero.startingArmy || '').toLowerCase().includes((unit.name || '').toLowerCase())) {
       return {
         level: 'starter' as const,
         badge: '🛡️ Tropa de Choque Día 1',
@@ -225,7 +226,7 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
     }
 
     // 3. Sinergia de Arquetipo
-    if (hero.heroType === 'Mago' && (unit.role.toLowerCase().includes('tirador') || unit.role.toLowerCase().includes('distancia') || unit.role.toLowerCase().includes('coloso') || unit.tier >= 6)) {
+    if (hero.classType === 'magic' && (unit.role.toLowerCase().includes('tirador') || unit.role.toLowerCase().includes('distancia') || unit.role.toLowerCase().includes('coloso') || unit.tier >= 6)) {
       return {
         level: 'tactical' as const,
         badge: '🔮 Sinergia Mágica & Control',
@@ -233,7 +234,7 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
       };
     }
 
-    if (hero.heroType === 'Guerrero' && (unit.role.toLowerCase().includes('choque') || unit.role.toLowerCase().includes('tanque') || unit.role.toLowerCase().includes('vanguardia') || unit.tier <= 4)) {
+    if (hero.classType === 'might' && (unit.role.toLowerCase().includes('choque') || unit.role.toLowerCase().includes('tanque') || unit.role.toLowerCase().includes('vanguardia') || unit.tier <= 4)) {
       return {
         level: 'tactical' as const,
         badge: '⚔️ Sinergia de Choque Frontal',
@@ -398,7 +399,7 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
             >
               {heroesA.map((h) => (
                 <option key={h.id} value={h.id}>
-                  {h.name} — {h.title} ({h.heroType} • {h.tierRank})
+                  {h.name} — {h.title} ({h.classType} • {h.tierRank})
                 </option>
               ))}
             </select>
@@ -410,12 +411,12 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
               <div className="flex items-start gap-3 bg-black/40 p-4 rounded-xl border border-slate-800">
                 <div
                   className={`p-3 rounded-xl border shrink-0 ${
-                    heroA.heroType === 'Mago'
+                    heroA.classType === 'magic'
                       ? 'bg-blue-500/10 text-blue-400 border-blue-500/30'
                       : 'bg-rose-500/10 text-rose-400 border-rose-500/30'
                   }`}
                 >
-                  {heroA.heroType === 'Mago' ? <Wand2 className="w-7 h-7" /> : <Swords className="w-7 h-7" />}
+                  {heroA.classType === 'magic' ? <Wand2 className="w-7 h-7" /> : <Swords className="w-7 h-7" />}
                 </div>
 
                 <div className="min-w-0 flex-1">
@@ -426,10 +427,10 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
                   <p className="text-xs text-slate-400 font-mono">{heroA.title}</p>
                   <div className="flex items-center gap-2 mt-2 flex-wrap">
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
-                      {heroA.heroClass}
+                      {heroA.classDisplay}
                     </span>
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
-                      {heroA.heroType}
+                      {heroA.classType}
                     </span>
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/30">
                       {heroA.role}
@@ -442,9 +443,9 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
               <div className="p-3.5 rounded-xl bg-slate-950/60 border border-amber-900/30 text-xs">
                 <div className="flex items-center gap-1.5 font-bold text-amber-400 mb-1">
                   <Sparkles className="w-4 h-4" />
-                  <span>Especialidad: {heroA.specialtyName}</span>
+                  <span>Especialidad: {heroA.specializationName}</span>
                 </div>
-                <p className="text-[11px] text-slate-300 leading-relaxed">{heroA.specialtyEffect}</p>
+                <p className="text-[11px] text-slate-300 leading-relaxed">{heroA.specializationDescription}</p>
               </div>
 
               {/* Tactical Quick Overview */}
@@ -455,7 +456,7 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
                 </div>
                 <div className="p-2.5 rounded-lg bg-black/40 border border-slate-800">
                   <div className="text-slate-400 text-[10px] uppercase">Ejército Inicial:</div>
-                  <div className="text-slate-200 mt-0.5 line-clamp-2">{heroA.initialArmy}</div>
+                  <div className="text-slate-200 mt-0.5 line-clamp-2">{heroA.startingArmy}</div>
                 </div>
               </div>
             </div>
@@ -495,7 +496,7 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
             >
               {heroesB.map((h) => (
                 <option key={h.id} value={h.id}>
-                  {h.name} — {h.title} ({h.heroType} • {h.tierRank})
+                  {h.name} — {h.title} ({h.classType} • {h.tierRank})
                 </option>
               ))}
             </select>
@@ -507,12 +508,12 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
               <div className="flex items-start gap-3 bg-black/40 p-4 rounded-xl border border-slate-800">
                 <div
                   className={`p-3 rounded-xl border shrink-0 ${
-                    heroB.heroType === 'Mago'
+                    heroB.classType === 'magic'
                       ? 'bg-blue-500/10 text-blue-400 border-blue-500/30'
                       : 'bg-rose-500/10 text-rose-400 border-rose-500/30'
                   }`}
                 >
-                  {heroB.heroType === 'Mago' ? <Wand2 className="w-7 h-7" /> : <Swords className="w-7 h-7" />}
+                  {heroB.classType === 'magic' ? <Wand2 className="w-7 h-7" /> : <Swords className="w-7 h-7" />}
                 </div>
 
                 <div className="min-w-0 flex-1">
@@ -523,10 +524,10 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
                   <p className="text-xs text-slate-400 font-mono">{heroB.title}</p>
                   <div className="flex items-center gap-2 mt-2 flex-wrap">
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
-                      {heroB.heroClass}
+                      {heroB.classDisplay}
                     </span>
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
-                      {heroB.heroType}
+                      {heroB.classType}
                     </span>
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">
                       {heroB.role}
@@ -539,9 +540,9 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
               <div className="p-3.5 rounded-xl bg-slate-950/60 border border-cyan-900/30 text-xs">
                 <div className="flex items-center gap-1.5 font-bold text-cyan-400 mb-1">
                   <Sparkles className="w-4 h-4" />
-                  <span>Especialidad: {heroB.specialtyName}</span>
+                  <span>Especialidad: {heroB.specializationName}</span>
                 </div>
-                <p className="text-[11px] text-slate-300 leading-relaxed">{heroB.specialtyEffect}</p>
+                <p className="text-[11px] text-slate-300 leading-relaxed">{heroB.specializationDescription}</p>
               </div>
 
               {/* Tactical Quick Overview */}
@@ -552,7 +553,7 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
                 </div>
                 <div className="p-2.5 rounded-lg bg-black/40 border border-slate-800">
                   <div className="text-slate-400 text-[10px] uppercase">Ejército Inicial:</div>
-                  <div className="text-slate-200 mt-0.5 line-clamp-2">{heroB.initialArmy}</div>
+                  <div className="text-slate-200 mt-0.5 line-clamp-2">{heroB.startingArmy}</div>
                 </div>
               </div>
             </div>

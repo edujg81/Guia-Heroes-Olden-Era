@@ -63,6 +63,7 @@ function readAllLocalExtensions() {
     abilitiesData: readLocalExtensions('src/data/abilitiesData.ts', ['effect', 'faction', 'creatureType']),
     buildingsData: {},
     mapObjectsData: {},
+    heroesData: readLocalExtensions('src/data/heroesData.ts', ['faction', 'tierRank', 'specialtyName', 'specialtyEffect', 'day1Action']),
   };
 }
 
@@ -255,6 +256,63 @@ async function syncMapObjects(listData) {
   console.log('✓ mapObjectsData.ts escrito con ' + written + ' registros');
 }
 
+async function syncHeroes(listData) {
+  const ext = readAllLocalExtensions().heroesData;
+  const ids = listData.map(d => d.id);
+  console.log('  Consultando detalles de ' + ids.length + ' héroes...');
+  const details = await fetchAllWithConcurrency(ids.map(id => ['/api/heroes', id]), CONCURRENCY);
+
+  let content = "import { ApiHero } from '../types-api';\n\n";
+  content += "export const API_HEROES_DATA: ApiHero[] = [\n";
+
+  let written = 0;
+  for (let i = 0; i < details.length; i++) {
+    const d = details[i];
+    if (!d.ok || !d.data) continue;
+    const item = d.data;
+    const local = ext[item.id] || {};
+
+    content += "  {\n";
+    content += "    id: '" + escapeTS(item.id) + "',\n";
+    content += "    name: '" + escapeTS(item.name) + "',\n";
+    content += "    localizedName: '" + escapeTS(item.localizedName || item.name) + "',\n";
+    content += "    faction: '" + escapeTS(item.faction) + "',\n";
+    content += "    factionDisplay: '" + escapeTS(item.factionDisplay) + "',\n";
+    content += "    classType: '" + escapeTS(item.classType) + "',\n";
+    content += "    classDisplay: '" + escapeTS(item.classDisplay) + "',\n";
+    content += "    iconPath: '" + escapeTS(item.iconPath) + "',\n";
+    content += "    classIcon: '" + escapeTS(item.classIcon || '') + "',\n";
+    content += "    specializationIcon: '" + escapeTS(item.specializationIcon || '') + "',\n";
+    content += "    factionIcon: '" + escapeTS(item.factionIcon || '') + "',\n";
+    content += "    attack: '" + escapeTS(item.attack) + "',\n";
+    content += "    defence: '" + escapeTS(item.defence) + "',\n";
+    content += "    spellPower: '" + escapeTS(item.spellPower) + "',\n";
+    content += "    knowledge: '" + escapeTS(item.knowledge) + "',\n";
+    content += "    specializationName: '" + escapeTS(item.specializationName) + "',\n";
+    content += "    specializationDescription: '" + escapeTS(item.specializationDescription) + "',\n";
+    content += "    startingArmy: " + JSON.stringify(item.startingArmy || []) + ",\n";
+    content += "    startingSkills: " + JSON.stringify(item.startingSkills || []) + ",\n";
+    content += "    startingSpells: " + JSON.stringify(item.startingSpells || []) + ",\n";
+    content += "    description: '" + escapeTS(item.description || '') + "',\n";
+    content += "    motto: '" + escapeTS(item.motto) + "',\n";
+    content += "    statLabels: " + JSON.stringify(item.statLabels || {}) + ",\n";
+    content += "    isOrphan: " + (local.isOrphan ?? false) + ",\n";
+    content += "    prefabPath: " + (local.prefabPath === null ? 'null' : (local.prefabPath ? "'" + escapeTS(local.prefabPath) + "'" : 'null')) + ",\n";
+    content += "    faction: '" + escapeTS(local.faction || '') + "',\n";
+    content += "    tierRank: '" + escapeTS(local.tierRank || '') + "',\n";
+    content += "    specialtyName: '" + escapeTS(local.specialtyName || '') + "',\n";
+    content += "    specialtyEffect: '" + escapeTS(local.specialtyEffect || '') + "',\n";
+    content += "    day1Action: '" + escapeTS(local.day1Action || '') + "',\n";
+    content += "  }" + (i < details.length - 1 ? ',' : '') + "\n";
+    written++;
+  }
+  content += "];\n\n";
+  content += "export const API_HEROES_COUNT = API_HEROES_DATA.length;\n\n";
+  content += "export function getApiHeroById(id: string): ApiHero | undefined {\n  return API_HEROES_DATA.find(h => h.id === id);\n}\n";
+  fs.writeFileSync('src/data/apiHeroesData.ts', content);
+  console.log('✓ apiHeroesData.ts escrito con ' + written + ' registros');
+}
+
 (async () => {
   console.log('=== SINCRONIZACIÓN POR DETALLE DESDE API ===');
 
@@ -263,6 +321,7 @@ async function syncMapObjects(listData) {
     { path: '/api/abilities', writer: syncAbilities },
     { path: '/api/buildings', writer: syncBuildings },
     { path: '/api/map-objects', writer: syncMapObjects },
+    { path: '/api/heroes', writer: syncHeroes },
   ];
 
   for (const ep of endpoints) {

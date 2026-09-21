@@ -4,7 +4,7 @@ import { HERO_SELECTION_GUIDELINES } from '../data/dungeonData';
 import { OFFICIAL_SKILLS_DATA } from '../data/officialSkillsData';
 import { OFFICIAL_SUBCLASSES } from '../data/subclassesData';
 import { HERO_SUBSKILL_CHOICES, SKILL_SELECTION_GUIDES } from '../data/subskillsRecommendationData';
-import { DungeonHero, OfficialSkill, HeroSubskillChoice, SubclassInfo } from '../types';
+import type { HeroWithExtras, OfficialSkill, HeroSubskillChoice, SubclassInfo } from '../types';
 import { WaxSealBadge } from './ui/WaxSealBadge';
 import { useStickyState } from '../utils/useStickyState';
 import {
@@ -184,7 +184,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
     });
   };
 
-  const getSubskillChoicesForHero = (hero: DungeonHero): HeroSubskillChoice[] => {
+  const getSubskillChoicesForHero = (hero: HeroWithExtras): HeroSubskillChoice[] => {
     if (HERO_SUBSKILL_CHOICES[hero.id]) {
       return HERO_SUBSKILL_CHOICES[hero.id];
     }
@@ -216,16 +216,16 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
   const factionClassInfo = FACTION_CLASS_NAMES[selectedFaction] || { guerrero: 'Guerrero', mago: 'Mago' };
 
   const filteredHeroes = heroes.filter((hero) => {
-    const matchesClass = classFilter === 'all' || hero.heroType === classFilter;
+    const matchesClass = classFilter === 'all' || hero.classType === classFilter;
     const matchesRole = roleFilter === 'all' || hero.role.includes(roleFilter);
     const matchesSearch =
       hero.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       hero.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      hero.specialtyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      hero.specializationName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       hero.tacticalPlaystyle.toLowerCase().includes(searchTerm.toLowerCase()) ||
       hero.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      hero.heroClass.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      hero.heroType.toLowerCase().includes(searchTerm.toLowerCase());
+      hero.classDisplay.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      hero.classType.toLowerCase().includes(searchTerm.toLowerCase());
 
     return matchesClass && matchesRole && matchesSearch;
   });
@@ -292,11 +292,11 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
               { id: 'all', label: `Todas (${heroes.length})` },
               {
                 id: 'Guerrero',
-                label: `Guerrero / ${factionClassInfo.guerrero} (${heroes.filter((h) => h.heroType === 'Guerrero').length})`,
+                label: `Guerrero / ${factionClassInfo.guerrero} (${heroes.filter((h) => h.classType === 'might').length})`,
               },
               {
                 id: 'Mago',
-                label: `Mago / ${factionClassInfo.mago} (${heroes.filter((h) => h.heroType === 'Mago').length})`,
+                label: `Mago / ${factionClassInfo.mago} (${heroes.filter((h) => h.classType === 'magic').length})`,
               },
             ].map((c) => (
               <button
@@ -442,7 +442,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                   ? 'bg-blue-100 text-blue-900 border-blue-300'
                   : 'bg-blue-950/80 text-blue-300 border-blue-700/60';
 
-              const classColor = hero.heroType === 'Mago'
+              const classColor = hero.classType === 'magic'
                 ? themeMode === 'light' ? 'text-purple-700 font-bold' : theme.textAccent
                 : themeMode === 'light' ? 'text-teal-700 font-bold' : 'text-teal-400';
 
@@ -465,7 +465,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                       <div className="flex items-center gap-1.5 flex-wrap mb-1">
                         <WaxSealBadge label={hero.tierRank} size="sm" />
                         <span className={`text-[10px] font-mono font-semibold ${classColor}`}>
-                          {hero.heroType} / {hero.heroClass}
+                          {hero.classType === 'magic' ? 'Mago' : 'Guerrero'} / {hero.classDisplay}
                         </span>
                       </div>
                       <h3 className={`text-base font-serif font-bold tracking-wide ${
@@ -515,12 +515,12 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                     <span className={`font-mono text-[11px] truncate font-semibold ${
                       themeMode === 'light' ? 'text-amber-900' : 'text-yellow-400/90'
                     }`}>
-                      ★ {hero.specialtyName}
+                      ★ {hero.specializationName}
                     </span>
                     <span className={`text-[10px] shrink-0 font-mono ${
                       themeMode === 'light' ? 'text-slate-500' : 'text-slate-400'
                     }`}>
-                      {(hero.initialArmy || '').split(',')[0]}
+                      {(hero.startingArmy || '').split(',')[0]}
                     </span>
                   </div>
                 </div>
@@ -547,7 +547,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                       ? 'bg-purple-100 text-purple-900 border-purple-300'
                       : `${theme.bgBadge} ${theme.textAccent} ${theme.borderSubtle}`
                   }`}>
-                    {selectedHero.heroType} / {selectedHero.heroClass}
+                    {selectedHero.classType} / {selectedHero.classDisplay}
                   </span>
                   <span className={`text-[10px] font-bold uppercase px-2.5 py-0.5 rounded border font-mono ${
                     themeMode === 'light'
@@ -647,13 +647,13 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                 <span className={`text-xs font-mono font-bold uppercase tracking-wider ${
                   themeMode === 'light' ? 'text-amber-950' : 'text-yellow-300'
                 }`}>
-                  Especialidad Única: {selectedHero.specialtyName}
+                  Especialidad Única: {selectedHero.specializationName}
                 </span>
               </div>
               <p className={`text-xs leading-relaxed font-sans ${
                 themeMode === 'light' ? 'text-slate-700 font-medium' : 'text-slate-200'
               }`}>
-                {selectedHero.specialtyEffect}
+                {selectedHero.specializationDescription}
               </p>
             </div>
 
@@ -763,7 +763,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                         ? 'bg-amber-50 border-amber-200 text-amber-950'
                         : `text-yellow-300 bg-black/60 border ${theme.borderSubtle}`
                     }`}>
-                      {selectedHero.initialArmy}
+                      {selectedHero.startingArmy}
                     </div>
                   </div>
 
@@ -774,7 +774,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                       Habilidades de Inicio:
                     </span>
                     <div className="flex flex-wrap gap-1.5">
-                      {selectedHero.initialSkills.map((sk, idx) => (
+                      {selectedHero.startingSkills.map((sk, idx) => (
                         <span
                           key={idx}
                           className={`text-[11px] font-mono px-2 py-0.5 rounded border font-semibold ${
@@ -1155,10 +1155,10 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
               <>
                 {/* Dedicated Official Subclasses Section for Selected Hero */}
                 {(() => {
-                  const isMage = selectedHero.heroType === 'Mago';
+                  const isMage = selectedHero.classType === 'magic';
 
                   const matchedSubclasses = OFFICIAL_SUBCLASSES.filter(
-                    (s) => s.faction === selectedFaction && (isMage ? s.classType === 'Mago' : s.classType === 'Guerrero')
+                    (s) => s.faction === selectedFaction && (isMage ? s.classType === 'Magia' : s.classType === 'Poder')
                   );
                   const relevantSubclasses = matchedSubclasses.length > 0
                     ? matchedSubclasses
@@ -1191,7 +1191,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                                   ? 'bg-purple-100 text-purple-900 border-purple-200'
                                   : `${theme.bgBadge} ${theme.textAccent} ${theme.borderSubtle}`
                               }`}>
-                                {selectedHero.heroClass}
+                                {selectedHero.classDisplay}
                               </span>
                             </h4>
                             <p className={`text-[11px] font-sans ${
@@ -1646,7 +1646,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                     themeMode === 'light' ? 'text-purple-950' : theme.textAccent
                   }`}>{selectedHero.name}</div>
                   <div className={`text-[11px] ${themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'}`}>Rol: {selectedHero.role}</div>
-                  <div className={`text-[11px] font-mono ${themeMode === 'light' ? 'text-amber-900 font-semibold' : 'text-yellow-400/90'}`}>Esp: {selectedHero.specialtyName}</div>
+                  <div className={`text-[11px] font-mono ${themeMode === 'light' ? 'text-amber-900 font-semibold' : 'text-yellow-400/90'}`}>Esp: {selectedHero.specializationName}</div>
                   <div className={`text-[11px] ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>Poder Mágico: {selectedHero.statGrowth.spellPower}%</div>
                   <div className={`text-[11px] ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>Ataque Físico: {selectedHero.statGrowth.attack}%</div>
                 </div>
@@ -1660,7 +1660,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                     themeMode === 'light' ? 'text-teal-950' : 'text-teal-300'
                   }`}>{compareHero.name}</div>
                   <div className={`text-[11px] ${themeMode === 'light' ? 'text-slate-600' : 'text-slate-400'}`}>Rol: {compareHero.role}</div>
-                  <div className={`text-[11px] font-mono ${themeMode === 'light' ? 'text-amber-900 font-semibold' : 'text-yellow-400/90'}`}>Esp: {compareHero.specialtyName}</div>
+                  <div className={`text-[11px] font-mono ${themeMode === 'light' ? 'text-amber-900 font-semibold' : 'text-yellow-400/90'}`}>Esp: {compareHero.specializationName}</div>
                   <div className={`text-[11px] ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>Poder Mágico: {compareHero.statGrowth.spellPower}%</div>
                   <div className={`text-[11px] ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>Ataque Físico: {compareHero.statGrowth.attack}%</div>
                 </div>

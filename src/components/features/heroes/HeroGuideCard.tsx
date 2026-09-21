@@ -1,15 +1,15 @@
 import React from 'react';
-import { DungeonHero } from '../../../types';
+import type { HeroWithExtras } from '../../../types';
 import { TierBadge } from '../../ui/TierBadge';
 import { Swords, Wand2, Shield, Flame, BookOpen, CheckCircle2, ChevronRight, Zap, ArrowRightLeft } from 'lucide-react';
-import { getHeroPortrait } from '../../../data/heroAssetsData';
+//import { getHeroPortrait } from '../../../data/heroAssetsData';
 import { HeroImage } from '../../ui/HeroImage';
 
 interface HeroGuideCardProps {
-  hero: DungeonHero;
+  hero: HeroWithExtras;
   isSelected?: boolean;
   onSelect?: () => void;
-  onCompare?: (hero: DungeonHero) => void;
+  onCompare?: (hero: HeroWithExtras) => void;
   themeMode?: 'dark' | 'light';
   themeAccentClass?: string;
   isCompact?: boolean;
@@ -24,7 +24,7 @@ export const HeroGuideCard: React.FC<HeroGuideCardProps> = ({
   themeAccentClass = 'text-amber-400',
   isCompact = false,
 }) => {
-  const isMage = hero.heroType === 'Mago';
+  const isMage = hero.classType === 'magic';
 
   return (
     <div
@@ -47,6 +47,7 @@ export const HeroGuideCard: React.FC<HeroGuideCardProps> = ({
             heroId={hero.id}
             heroName={hero.name}
             faction={hero.faction}
+            iconPath={hero.iconPath}
             alt={`Retrato de ${hero.name}`}
             size="lg"
             className="rounded-xl border-2 border-slate-700 shadow-lg bg-slate-800"
@@ -75,9 +76,9 @@ export const HeroGuideCard: React.FC<HeroGuideCardProps> = ({
         </div>
 
         <div className="flex flex-col items-end gap-1 shrink-0">
-          <TierBadge tier={hero.tierRank.replace('Tier ', '')} size="sm" />
+          <TierBadge tier={hero.tierRank} size="sm" />
           <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700">
-            {hero.heroClass}
+            {hero.classDisplay}
           </span>
         </div>
       </div>
@@ -93,10 +94,10 @@ export const HeroGuideCard: React.FC<HeroGuideCardProps> = ({
         <div className="flex items-center gap-1.5 font-bold mb-1">
           <SparkleIcon className={`w-3.5 h-3.5 ${themeAccentClass}`} />
           <span className={themeMode === 'light' ? 'text-purple-900' : themeAccentClass}>
-            {hero.specialtyName}
+            {hero.specializationName}
           </span>
         </div>
-        <p className="text-[11px] text-slate-400 leading-snug">{hero.specialtyEffect}</p>
+        <p className="text-[11px] text-slate-400 leading-snug">{hero.specializationDescription}</p>
       </div>
 
       {!isCompact && (
@@ -129,18 +130,18 @@ export const HeroGuideCard: React.FC<HeroGuideCardProps> = ({
             </div>
           </div>
 
-          {/* Initial Army & Starting Skills */}
+          {/* Starting Army & Starting Skills */}
           <div className="space-y-1.5 text-[11px] font-sans">
             <div className="flex items-center gap-1.5 text-slate-400">
               <Shield className="w-3 h-3 text-slate-500 shrink-0" />
               <span className="truncate">
-                <strong>Inicio:</strong> {hero.initialArmy}
+                <strong>Inicio:</strong> {hero.startingArmy?.map(u => `${u.unitName} (${u.countInterval})`).join(', ')}
               </span>
             </div>
             <div className="flex items-center gap-1.5 text-slate-400">
               <BookOpen className="w-3 h-3 text-slate-500 shrink-0" />
               <span className="truncate">
-                <strong>Habilidades:</strong> {hero.initialSkills?.join(', ')}
+                <strong>Habilidades:</strong> {hero.startingSkills?.map(s => s.skillName).join(', ')}
               </span>
             </div>
           </div>
@@ -149,6 +150,7 @@ export const HeroGuideCard: React.FC<HeroGuideCardProps> = ({
 
       {/* Role & Recommendation Footer */}
       <div className="mt-3 pt-2.5 border-t border-slate-800/60 flex items-center justify-between text-[11px] font-mono text-slate-400">
+        <span>Clase: <strong className="text-slate-200 font-sans">{hero.classDisplay}</strong></span>
         <span>Rol: <strong className="text-slate-200 font-sans">{hero.role}</strong></span>
         <div className="flex items-center gap-2.5">
           {onCompare && (

@@ -11,7 +11,7 @@ export interface HeroAssetEntry {
   nameEn: string;
 }
 
-export const HERO_ASSETS_CATALOG: HeroAssetEntry[] = [
+/*export const HERO_ASSETS_CATALOG: HeroAssetEntry[] = [
   // Mazmorra (dungeon) - posiciones 1-18
   { hero_id: 'hero-enatee', icon: '/src/assets/icons/heroes/hero_dungeon_1_enatee.png', faction: 'Mazmorra', faction_id: 'dungeon', nameEs: 'Enatee', nameEn: 'Enatee' },
   { hero_id: 'hero-tellaris', icon: '/src/assets/icons/heroes/hero_dungeon_2_talleris_the_betrayed.png', faction: 'Mazmorra', faction_id: 'dungeon', nameEs: 'Tellaris', nameEn: 'Tellaris' },
@@ -131,7 +131,7 @@ export const HERO_ASSETS_CATALOG: HeroAssetEntry[] = [
   { hero_id: 'hero-radavok', icon: '/src/assets/icons/heroes/hero_unfrozen_16_ra_daphokh.png', faction: 'Cisma', faction_id: 'unfrozen', nameEs: 'Radavok', nameEn: 'Radavok' },
   { hero_id: 'hero-hermana-keiri', icon: '/src/assets/icons/heroes/hero_unfrozen_17_sister_keiri.png', faction: 'Cisma', faction_id: 'unfrozen', nameEs: 'Hermana Keiri', nameEn: 'Sister Keiri' },
   { hero_id: 'hero-dhuvri', icon: '/src/assets/icons/heroes/hero_unfrozen_18_dhuvri.png', faction: 'Cisma', faction_id: 'unfrozen', nameEs: 'Dhuvri', nameEn: 'Dhuvri' },
-];
+];*/
 
 // Mapa rapido O(1) por hero_id y por nombre normalizado
 const HERO_NORM_MAP = new Map<string, HeroAssetEntry>();
@@ -145,14 +145,14 @@ function normalizeStr(s: string): string {
     .trim();
 }
 
-HERO_ASSETS_CATALOG.forEach((entry) => {
+/*HERO_ASSETS_CATALOG.forEach((entry) => {
   HERO_NORM_MAP.set(entry.hero_id.toLowerCase(), entry);
   HERO_NORM_MAP.set(normalizeStr(entry.nameEs), entry);
   HERO_NORM_MAP.set(normalizeStr(entry.nameEn), entry);
   if (entry.hero_id.includes('-')) {
     HERO_NORM_MAP.set(entry.hero_id.toLowerCase(), entry);
   }
-});
+});*/
 
 export function getHeroPortrait(nameOrId: string, faction?: string): string | undefined {
   if (!nameOrId) return undefined;

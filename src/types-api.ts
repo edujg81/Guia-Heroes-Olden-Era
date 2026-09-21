@@ -157,6 +157,33 @@ export interface ApiResource {
   amount: number;
 }
 
+// --- HEROES (/api/heroes) ---
+
+export interface ApiHero {
+  id: string;
+  name: string;
+  faction: string;
+  factionDisplay: string;
+  factionIcon: string;
+  classType: string;
+  classDisplay: string;
+  classIcon: string;
+  iconPath: string;
+  attack: string;
+  defence: string;
+  spellPower: string;
+  knowledge: string;
+  specializationName: string;
+  specializationDescription: string;
+  specializationIcon: string;
+  startingArmy: { unitId: string; unitName: string; countInterval: string; icon: string }[];
+  startingSkills: { skillId: string; skillName: string; icon: string }[];
+  startingSpells: { spellId: string; spellName: string; icon: string; isMasterful?: boolean }[];
+  description: string;
+  motto: string;
+  statLabels: Record<string, string>;
+}
+
 // --- FACTION LAWS (/api/faction-laws) ---
 
 export interface ApiFactionLaw {

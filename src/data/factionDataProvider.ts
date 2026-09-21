@@ -1,4 +1,4 @@
-import { BuildStep, UnitInfo, DungeonHero, TacticalScenario, FactionLaw, FactionLawPreset } from '../types';
+import { BuildStep, UnitInfo, HeroWithExtras, TacticalScenario, FactionLaw, FactionLawPreset } from '../types';
 import { getHeroesByFactionKey } from './heroesData';
 
 // Mazmorra (Dungeon)
@@ -881,7 +881,7 @@ export function getUnitsForFaction(faction: FactionId | string): UnitInfo[] {
   }
 }
 
-export function getHeroesForFaction(faction: FactionId | string): DungeonHero[] {
+export function getHeroesForFaction(faction: FactionId | string): HeroWithExtras[] {
   return getHeroesByFactionKey(faction);
 }
 

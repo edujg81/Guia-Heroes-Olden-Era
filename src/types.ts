@@ -294,9 +294,9 @@ export interface SubclassInfo {
   id: string;
   name: string;
   nameEn: string;
-  faction: 'Mazmorra' | 'Templo' | 'Foresta' | 'Necrópolis' | 'Cisma' | 'Colmena' | 'Arboleda' | 'Enjambre';
+  faction: 'Mazmorra' | 'Templo' | 'Foresta' | 'Necrópolis' | 'Cisma' | 'Colmena';
   baseClass: string;
-  classType: 'Guerrero' | 'Mago';
+  classType: 'Poder' | 'Magia';
   bonusTitle: string;
   bonusEffect: string;
   requiredSkills: SubclassRequiredSkill[];
@@ -314,31 +314,25 @@ export interface HeroSubskillChoice {
   expertReason?: string;
 }
 
-export interface DungeonHero {
-  id: string;
-  name: string;
+import type { ApiHero } from './types-api';
+
+export type { ApiHero } from './types-api';
+
+// Tipo unificado de héroe: combina datos de la API con extensiones locales.
+export type HeroWithExtras = ExtrasHero & ApiHero;
+
+export interface ExtrasHero {
+  // Campos locales exclusivos (no vienen de la API)
   title: string;
-  heroClass: 'Brujo (Warlock)' | 'Adalid (Overlord)' | 'Explorador / Apoyo' | string;
-  heroType: 'Guerrero' | 'Mago';
-  role: 'Principal Mágico' | 'Principal Físico' | 'Apertura Rápida Día 1' | 'Secundario & Logística' | string;
-  tierRank: 'Tier S+ (Meta)' | 'Tier S' | 'Tier A (Especialista)' | 'Tier Secundario' | 'Tier S (Anti-Mago)' | string;
-  specialtyName: string;
-  specialtyEffect: string;
-  initialSkills: string[];
-  initialArmy: string;
+  role: string;
+  tierRank: string;
   recommendedStartingTier: string;
-  statGrowth: {
-    attack: number;
-    defense: number;
-    spellPower: number;
-    knowledge: number;
-  };
+  statGrowth: {attack: number, defense: number, spellPower: number, knowledge: number};
   tacticalPlaystyle: string;
   idealSkillBuild: string[];
-  recommendedSubskillPicks?: HeroSubskillChoice[];
   synergyCombo: string;
   day1Action: string;
-  faction?: string;
+  recommendedSubskillPicks?: HeroSubskillChoice[];
 }
 
 export interface HeroSkill {

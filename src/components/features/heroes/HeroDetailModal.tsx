@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { DungeonHero, OfficialSkill, HeroSubskillChoice, SubclassInfo } from '../../../types';
+import type { HeroWithExtras, OfficialSkill, HeroSubskillChoice, SubclassInfo } from '../../../types';
 import { TierBadge } from '../../ui/TierBadge';
 import {
   X,
@@ -25,7 +25,7 @@ import {
   Flame as FlameIcon,
   Award as AwardIcon,
 } from 'lucide-react';
-import { getHeroPortrait } from '../../../data/heroAssetsData';
+//import { getHeroPortrait } from '../../../data/heroAssetsData';
 import { HeroImage } from '../../ui/HeroImage';
 import { OFFICIAL_SKILLS_DATA } from '../../../data/officialSkillsData';
 import { OFFICIAL_SUBCLASSES } from '../../../data/subclassesData';
@@ -35,9 +35,9 @@ import { HeroBuildSimulator } from '../../HeroBuildSimulator';
 import type { FactionId } from '../../../data/factionDataProvider';
 
 interface HeroDetailModalProps {
-  hero: DungeonHero | null;
+  hero: HeroWithExtras | null;
   onClose: () => void;
-  onCompare?: (hero: DungeonHero) => void;
+  onCompare?: (hero: HeroWithExtras) => void;
   themeMode?: 'dark' | 'light';
   themeAccentClass?: string;
 }
@@ -57,7 +57,7 @@ const findOfficialSkill = (skillStr: string): OfficialSkill | undefined => {
   });
 };
 
-const getSubskillChoicesForHero = (hero: DungeonHero): HeroSubskillChoice[] => {
+const getSubskillChoicesForHero = (hero: HeroWithExtras): HeroSubskillChoice[] => {
   if (HERO_SUBSKILL_CHOICES[hero.id]) {
     return HERO_SUBSKILL_CHOICES[hero.id];
   }
@@ -90,7 +90,7 @@ export const HeroDetailModal: React.FC<HeroDetailModalProps> = ({
 }) => {
   if (!hero) return null;
 
-  const isMage = hero.heroType === 'Mago';
+  const isMage = hero.classType === 'magic';
   const [activeTab, setActiveTab] = useStickyState<'overview' | 'skills' | 'tactics' | 'subclasses' | 'simulator'>('overview', `hero_detail_tab_${hero.id}`);
   const [inspectedSkill, setInspectedSkill] = useState<OfficialSkill | null>(null);
   const [showSubskillsDetails, setShowSubskillsDetails] = useStickyState<boolean>(true, 'hero_show_subskills_details');
@@ -98,7 +98,7 @@ export const HeroDetailModal: React.FC<HeroDetailModalProps> = ({
   // Calculate subclasses progress for this hero's faction and class
   const factionSubclasses = useMemo(() => {
     const list = OFFICIAL_SUBCLASSES.filter(
-      (sc) => sc.faction === hero.faction && sc.classType === hero.heroType
+      (sc) => sc.faction === hero.faction && sc.classType === (isMage ? 'Magia' : 'Poder')
     );
     return list.map((sc) => {
       // Check each required skill
@@ -125,7 +125,7 @@ export const HeroDetailModal: React.FC<HeroDetailModalProps> = ({
         isUnlocked,
       };
     });
-  }, [hero.faction, hero.heroType]);
+  }, [hero.faction, isMage]);
 
   // Get skill recommendations for this hero
   const skillRecommendations = useMemo(() => {
@@ -156,6 +156,7 @@ export const HeroDetailModal: React.FC<HeroDetailModalProps> = ({
               heroId={hero.id}
               heroName={hero.name}
               faction={hero.faction}
+              iconPath={hero.iconPath}
               alt={`Retrato de ${hero.name}`}
               size="xl"
               className="rounded-xl border-2 border-slate-700 shadow-md bg-slate-800"
@@ -165,10 +166,10 @@ export const HeroDetailModal: React.FC<HeroDetailModalProps> = ({
           <div>
             <div className="flex items-center gap-2 mb-1">
               <h2 className="text-2xl font-serif font-bold">{hero.name}</h2>
-              <TierBadge tier={hero.tierRank.replace('Tier ', '')} />
+              <TierBadge tier={hero.classDisplay} />
             </div>
             <p className="text-xs font-mono text-slate-400">
-              {hero.title} • <span className="font-semibold text-slate-200">{hero.heroClass}</span> ({hero.heroType})
+              {hero.classDisplay} • <span className="font-semibold text-slate-200">{isMage ? 'Mago' : 'Guerrero'}</span>
             </p>
           </div>
         </div>
@@ -286,12 +287,12 @@ export const HeroDetailModal: React.FC<HeroDetailModalProps> = ({
 
 // Overview Tab Component
 const OverviewTab: React.FC<{
-  hero: DungeonHero;
-  onCompare?: (hero: DungeonHero) => void;
+  hero: HeroWithExtras;
+  onCompare?: (hero: HeroWithExtras) => void;
   themeMode?: 'dark' | 'light';
   themeAccentClass?: string;
 }> = ({ hero, onCompare, themeMode, themeAccentClass }) => {
-  const isMage = hero.heroType === 'Mago';
+  const isMage = hero.classType === 'magic';
 
   return (
     <div className="space-y-6">
@@ -301,34 +302,23 @@ const OverviewTab: React.FC<{
         <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
           <div className="flex items-center gap-2 text-sm font-bold text-amber-400 mb-2">
             <Sparkles className="w-4 h-4" />
-            <span>Especialidad: {hero.specialtyName}</span>
+            <span>Especialidad: {hero.specializationName}</span>
           </div>
-          <p className="text-xs text-slate-300 leading-relaxed">{hero.specialtyEffect}</p>
+          <p className="text-xs text-slate-300 leading-relaxed">{hero.specializationDescription}</p>
         </div>
 
-        {/* Stat Growth Box */}
+        {/* Starting Army Box */}
         <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
           <div className="flex items-center gap-2 text-sm font-bold text-slate-200 mb-2">
-            <Zap className="w-4 h-4 text-purple-400" />
-            <span>Crecimiento de Atributos por Nivel</span>
+            <Shield className="w-4 h-4 text-rose-400" />
+            <span>Ejército Inicial</span>
           </div>
-          <div className="grid grid-cols-4 gap-2 text-center">
-            <div className="p-2 rounded bg-slate-950 border border-slate-800">
-              <div className="text-[10px] text-rose-400 font-mono font-bold">Ataque</div>
-              <div className="text-sm font-mono font-bold">{hero.statGrowth?.attack}%</div>
-            </div>
-            <div className="p-2 rounded bg-slate-950 border border-slate-800">
-              <div className="text-[10px] text-blue-400 font-mono font-bold">Defensa</div>
-              <div className="text-sm font-mono font-bold">{hero.statGrowth?.defense}%</div>
-            </div>
-            <div className="p-2 rounded bg-slate-950 border border-slate-800">
-              <div className="text-[10px] text-purple-400 font-mono font-bold">Poder</div>
-              <div className="text-sm font-mono font-bold">{hero.statGrowth?.spellPower}%</div>
-            </div>
-            <div className="p-2 rounded bg-slate-950 border border-slate-800">
-              <div className="text-[10px] text-amber-400 font-mono font-bold">Conocim.</div>
-              <div className="text-sm font-mono font-bold">{hero.statGrowth?.knowledge}%</div>
-            </div>
+          <div className="flex flex-wrap gap-2">
+            {hero.startingArmy?.map((unit, i) => (
+              <span key={i} className="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 font-mono text-[11px]">
+                {unit.unitName} ({unit.countInterval})
+              </span>
+            ))}
           </div>
         </div>
       </div>
@@ -379,7 +369,7 @@ const OverviewTab: React.FC<{
 
 // Skills Tab Component
 const SkillsTab: React.FC<{
-  hero: DungeonHero;
+  hero: HeroWithExtras;
   skillRecommendations: HeroSubskillChoice[];
   inspectedSkill: OfficialSkill | null;
   setInspectedSkill: (skill: OfficialSkill | null) => void;
@@ -551,7 +541,7 @@ const SkillsTab: React.FC<{
 
 // Tactics Tab Component
 const TacticsTab: React.FC<{
-  hero: DungeonHero;
+  hero: HeroWithExtras;
   themeMode?: 'dark' | 'light';
   themeAccentClass?: string;
 }> = ({ hero, themeMode, themeAccentClass }) => {
@@ -610,7 +600,7 @@ const TacticsTab: React.FC<{
 
 // Subclasses Tab Component
 const SubclassesTab: React.FC<{
-  hero: DungeonHero;
+  hero: HeroWithExtras;
   factionSubclasses: any[];
   themeMode?: 'dark' | 'light';
   themeAccentClass?: string;

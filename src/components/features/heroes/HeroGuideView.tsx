@@ -1,7 +1,19 @@
 import React, { useState, useMemo } from 'react';
-import { DungeonHero } from '../../../types';
+import type { HeroWithExtras } from '../../../types';
 import { FactionId, getFactionTheme } from '../../../data/factionDataProvider';
 import { getHeroesByFactionKey } from '../../../data/heroesData';
+
+// Mapeo de nombres de facción en español a claves de facción de la API
+const spanishToApiFactionMap: Record<FactionId, string> = {
+  'Mazmorra': 'dungeon',
+  'Templo': 'human',
+  'Foresta': 'nature',
+  'Arboleda': 'nature',
+  'Necrópolis': 'necromancer',
+  'Colmena': 'demon',
+  'Enjambre': 'demon',
+  'Cisma': 'unfrozen',
+};
 import { GenericGuideTemplate } from '../../ui/GenericGuideTemplate';
 import { SearchBar } from '../../ui/SearchBar';
 import { FilterChipGroup, FilterOption } from '../../ui/FilterChipGroup';
@@ -14,7 +26,7 @@ import { Users, Wand2, Swords, Sparkles, Filter, ArrowRightLeft, GitBranch } fro
 interface HeroGuideViewProps {
   selectedFaction?: FactionId;
   themeMode?: 'dark' | 'light';
-  customHeroesList?: DungeonHero[];
+  customHeroesList?: HeroWithExtras[];
 }
 
 export const HeroGuideView: React.FC<HeroGuideViewProps> = ({
@@ -26,19 +38,19 @@ export const HeroGuideView: React.FC<HeroGuideViewProps> = ({
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedArchetype, setSelectedArchetype] = useState<'all' | 'Guerrero' | 'Mago'>('all');
   const [selectedRole, setSelectedRole] = useState<string>('all');
-  const [inspectedHero, setInspectedHero] = useState<DungeonHero | null>(null);
+  const [inspectedHero, setInspectedHero] = useState<HeroWithExtras | null>(null);
 
-  const [compareHeroA, setCompareHeroA] = useState<DungeonHero | null>(null);
-  const [compareHeroB, setCompareHeroB] = useState<DungeonHero | null>(null);
+  const [compareHeroA, setCompareHeroA] = useState<HeroWithExtras | null>(null);
+  const [compareHeroB, setCompareHeroB] = useState<HeroWithExtras | null>(null);
 
   const theme = getFactionTheme(selectedFaction, themeMode);
 
   // 1. Carga dinámica de héroes según la facción activa (o lista personalizada)
-  const heroes: DungeonHero[] = useMemo(() => {
+  const heroes: HeroWithExtras[] = useMemo(() => {
     return customHeroesList || getHeroesByFactionKey(selectedFaction);
   }, [selectedFaction, customHeroesList]);
 
-  const handleStartCompare = (hero: DungeonHero) => {
+  const handleStartCompare = (hero: HeroWithExtras) => {
     setCompareHeroA(hero);
     const otherHero = heroes.find((h) => h.id !== hero.id) || null;
     setCompareHeroB(otherHero);
@@ -52,11 +64,11 @@ export const HeroGuideView: React.FC<HeroGuideViewProps> = ({
         searchTerm === '' ||
         h.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         h.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        h.specialtyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        h.heroClass.toLowerCase().includes(searchTerm.toLowerCase());
+        h.specializationName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        h.classDisplay.toLowerCase().includes(searchTerm.toLowerCase());
 
       const matchArchetype =
-        selectedArchetype === 'all' || h.heroType === selectedArchetype;
+        selectedArchetype === 'all' || h.classType === selectedArchetype;
 
       const matchRole =
         selectedRole === 'all' || h.role.toLowerCase().includes(selectedRole.toLowerCase());
@@ -66,18 +78,18 @@ export const HeroGuideView: React.FC<HeroGuideViewProps> = ({
   }, [heroes, searchTerm, selectedArchetype, selectedRole]);
 
   // 3. Opciones de filtros
-  const archetypeOptions: FilterOption<'all' | 'Guerrero' | 'Mago'>[] = [
+  const archetypeOptions: FilterOption<'all' | 'Poder' | 'Magia'>[] = [
     { id: 'all', label: 'Todos', count: heroes.length, icon: <Users className="w-3.5 h-3.5" /> },
     {
-      id: 'Guerrero',
-      label: 'Guerreros',
-      count: heroes.filter((h) => h.heroType === 'Guerrero').length,
+      id: 'Poder',
+      label: 'Poder',
+      count: heroes.filter((h) => h.classType === 'might').length,
       icon: <Swords className="w-3.5 h-3.5" />,
     },
     {
-      id: 'Mago',
-      label: 'Magos',
-      count: heroes.filter((h) => h.heroType === 'Mago').length,
+      id: 'Magia',
+      label: 'Magia',
+      count: heroes.filter((h) => h.classType === 'magic').length,
       icon: <Wand2 className="w-3.5 h-3.5" />,
     },
   ];

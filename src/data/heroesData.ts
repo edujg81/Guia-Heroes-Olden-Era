@@ -1,4 +1,4 @@
-import { DungeonHero } from '../types';
+import { HeroWithExtras } from './heroesDataProvider';
 import { DUNGEON_HEROES } from './dungeonData';
 import { TEMPLE_HEROES } from './templeData';
 import { ARBOLEDA_HEROES } from './arboledaData';
@@ -16,10 +16,10 @@ export interface FactionHeroesCollection {
     warriorClassName: string;
     mageClassName: string;
   };
-  heroes: DungeonHero[];
+  heroes: HeroWithExtras[];
 }
 
-export const ALL_HEROES_BY_FACTION: Record<string, DungeonHero[]> = {
+export const ALL_HEROES_BY_FACTION: Record<string, HeroWithExtras[]> = {
   Mazmorra: DUNGEON_HEROES,
   Templo: TEMPLE_HEROES,
   Foresta: ARBOLEDA_HEROES,
@@ -30,7 +30,7 @@ export const ALL_HEROES_BY_FACTION: Record<string, DungeonHero[]> = {
   Cisma: CISMA_HEROES,
 };
 
-export const ALL_HEROES_FLAT_LIST: DungeonHero[] = [
+export const ALL_HEROES_FLAT_LIST: HeroWithExtras[] = [
   ...DUNGEON_HEROES,
   ...TEMPLE_HEROES,
   ...ARBOLEDA_HEROES,
@@ -39,10 +39,10 @@ export const ALL_HEROES_FLAT_LIST: DungeonHero[] = [
   ...CISMA_HEROES,
 ];
 
-export const getHeroesByFactionKey = (faction: FactionKey | string): DungeonHero[] => {
+export const getHeroesByFactionKey = (faction: FactionKey | string): HeroWithExtras[] => {
   return ALL_HEROES_BY_FACTION[faction as FactionKey] || DUNGEON_HEROES;
 };
 
-export const getHeroById = (heroId: string): DungeonHero | undefined => {
+export const getHeroById = (heroId: string): HeroWithExtras | undefined => {
   return ALL_HEROES_FLAT_LIST.find(hero => hero.id === heroId);
 };

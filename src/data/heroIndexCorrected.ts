@@ -1,6 +1,6 @@
 // Mapeo corregido: id de héroe -> índice real del archivo PNG
 // Basado en archivos reales: hero_[prefix]_[número]_[nombre_normalizado].png
-export const HERO_ASSET_INDEX_MAP_CORRECTED: Record<string, Record<string, number>> = {
+/*export const HERO_ASSET_INDEX_MAP_CORRECTED: Record<string, Record<string, number>> = {
   Mazmorra: {
     'hero-enatee': 1, 'hero-tellaris': 2, 'hero-stinger': 3, 'hero-kieran': 4,
     'hero-mouaren': 5, 'hero-devir': 6, 'hero-creta': 7, 'hero-rhea': 8,
@@ -33,7 +33,7 @@ export const HERO_ASSET_INDEX_MAP_CORRECTED: Record<string, Record<string, numbe
     'hero-lord-rufus': 16, 'hero-funerella': 17, 'hero-milossa-the-golden': 18,
   },
   Enjambre: {
-    'hero-abigor-enjambre': 1, 'hero-curson-enjambre': 2, 'hero-zoran-enjambre': 3,
+    'demon_hero_1': 1, 'demon_hero_2': 2, 'hero-zoran-enjambre': 3,
     'hero-niev-enjambre': 4, 'hero-nor-enjambre': 5, 'hero-xtaviola': 6,
     'hero-x-lo': 7, 'hero-goldentongue': 8, 'hero-eligos-duke-of-battle': 9,
     'hero-fleu': 10, 'hero-x-ramman': 11, 'hero-bathin-duke-of-jewels': 12,
@@ -49,4 +49,4 @@ export const HERO_ASSET_INDEX_MAP_CORRECTED: Record<string, Record<string, numbe
     'hero-ulkuth': 15, 'hero-radavok': 16, 'hero-hermana-keiri': 17,
     'hero-dhuvri': 18,
   },
-};
+};*/

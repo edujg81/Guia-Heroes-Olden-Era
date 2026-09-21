@@ -1,6 +1,6 @@
 // Catalogo explicito de retratos de heroes (estilo unitAssetsData)
 // Cada entrada relaciona hero_id -> archivo PNG exacto
-import { FACTION_PREFIX_MAP } from './heroAssetsPrefixMap';
+/*import { FACTION_PREFIX_MAP } from './heroAssetsPrefixMap';
 
 export interface HeroAssetEntry {
   hero_id: string;
@@ -229,10 +229,12 @@ export function getHeroPortrait(nameOrId: string, faction?: string): string | un
   }
 
   return undefined;
+
+
 }
 
 export function getHeroPortraitFromHero(hero: { id?: string; name?: string; heroClass?: string; heroType?: string; faction?: string }): string | undefined {
   if (!hero) return undefined;
   if (hero.id) return getHeroPortrait(hero.id, hero.faction);
   return getHeroPortrait(hero.name || '', hero.faction);
-}
+}*/

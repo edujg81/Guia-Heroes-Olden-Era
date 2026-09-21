@@ -3,7 +3,7 @@ import { FactionId, getHeroesForFaction, FACTIONS_METADATA, getFactionTheme } fr
 import { OFFICIAL_SKILLS_DATA } from '../data/officialSkillsData';
 import { OFFICIAL_SUBCLASSES } from '../data/subclassesData';
 import { HERO_SUBSKILL_CHOICES } from '../data/subskillsRecommendationData';
-import { DungeonHero, OfficialSkill, SubclassInfo } from '../types';
+import type { HeroWithExtras, OfficialSkill, SubclassInfo } from '../types';
 import { WaxSealBadge } from './ui/WaxSealBadge';
 import { useStickyState } from '../utils/useStickyState';
 import {
@@ -111,9 +111,10 @@ export const HeroBuildSimulator: React.FC<HeroBuildSimulatorProps> = ({
   };
 
   // Get initial 2 basic skills for a hero (Level 1 starting state)
-  const getInitialAllocationsForHero = (hero: DungeonHero): Record<string, AllocatedSkillState> => {
+  const getInitialAllocationsForHero = (hero: HeroWithExtras): Record<string, AllocatedSkillState> => {
     const initialMap: Record<string, AllocatedSkillState> = {};
-    hero.initialSkills.forEach((skillStr) => {
+    hero.startingSkills.forEach((skillObj) => {
+      const skillStr = typeof skillObj === 'string' ? skillObj : (skillObj as any).skillName || '';
       const isExperta = skillStr.includes('(Experta)');
       const isAvanzada = skillStr.includes('(Avanzada)');
       const cleanName = skillStr.replace(/\s*\((Experta|Avanzada|Básica)\)/, '').trim();
@@ -137,7 +138,7 @@ export const HeroBuildSimulator: React.FC<HeroBuildSimulatorProps> = ({
   }, [selectedHeroId]);
 
   // Load Meta Preset for current hero
-  const loadMetaPreset = (hero: DungeonHero) => {
+  const loadMetaPreset = (hero: HeroWithExtras) => {
     const newAllocations: Record<string, AllocatedSkillState> = {};
     const heroChoices = HERO_SUBSKILL_CHOICES[hero.id] || [];
 
@@ -465,7 +466,7 @@ Generado con Compendio Táctico HoMM: Olden Era`;
             >
               {heroes.map((h) => (
                 <option key={h.id} value={h.id}>
-                  {h.name} ({h.heroType} - {h.role})
+                  {h.name} ({h.classType === 'magic' ? 'Magia' : 'Poder'} - {h.role})
                 </option>
               ))}
             </select>
