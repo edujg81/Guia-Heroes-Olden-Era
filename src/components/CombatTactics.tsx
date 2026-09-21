@@ -78,7 +78,7 @@ export const CombatTactics: React.FC<CombatTacticsProps> = ({
             </>
           )}
 
-          {(selectedFaction === 'Foresta' || selectedFaction === 'Arboleda') && (
+          {(selectedFaction === 'Foresta') && (
             <>
               <div className="bg-black/50 border border-emerald-900/40 p-4 rounded-xl space-y-2 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-1 h-full bg-emerald-500"></div>
@@ -152,7 +152,7 @@ export const CombatTactics: React.FC<CombatTacticsProps> = ({
             </>
           )}
 
-          {(selectedFaction === 'Colmena' || selectedFaction === 'Enjambre') && (
+          {(selectedFaction === 'Colmena') && (
             <>
               <div className="bg-black/50 border border-orange-900/40 p-4 rounded-xl space-y-2 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-1 h-full bg-orange-500"></div>

@@ -41,10 +41,8 @@ const FACTION_CLASS_NAMES: Record<FactionId, { guerrero: string; mago: string }>
   Mazmorra: { guerrero: 'Adalid', mago: 'Brujo' },
   Templo: { guerrero: 'Caballero', mago: 'Clérigo' },
   Foresta: { guerrero: 'Guardián', mago: 'Sabio' },
-  Arboleda: { guerrero: 'Guardián', mago: 'Sabio' },
   Necrópolis: { guerrero: 'Caballero de la muerte', mago: 'Nigromante' },
   Colmena: { guerrero: 'Ejecutor', mago: 'Heraldo' },
-  Enjambre: { guerrero: 'Ejecutor', mago: 'Heraldo' },
   Cisma: { guerrero: 'Juramentado', mago: 'Portavoz de la Grieta' },
 };
 
@@ -92,17 +90,6 @@ const FACTION_HERO_HIGHLIGHTS: Record<FactionId, {
     econNames: 'Eith (Exploración de la Selva) & Tía Daliar (Percepción y Sabiduría)',
     econDesc: 'Eith elimina penalizaciones por terreno forestal y amplía el radio de visión. Tía Daliar acelera la obtención de experiencia y niveles desde Semana 1.',
   },
-  Arboleda: {
-    magicTitle: 'Recomendación Meta: Mágicos',
-    magicNames: 'Vatawna, Anciano Tss\'kish & Aeliniel (Tormentas & Enredo)',
-    magicDesc: 'Vatawna desata Tormentas Primordiales y reduce el coste elemental. Anciano Tss\'kish hace inmortales a los Herbomantes con Piel de Roble. Aeliniel hostiga con Hadas y Polen Cegador.',
-    physTitle: 'Recomendación Meta: Físicos',
-    physNames: 'Faleor, Colajengibre & Mreowa (Top Físicos)',
-    physDesc: 'Faleor avanza con Murmullo y huella de velocidad. Colajengibre lidera Faunos con gran iniciativa y sin contraataque. Mreowa potencia a los combatientes silvanos en vanguardia.',
-    econTitle: 'Economía & Soporte Logístico',
-    econNames: 'Eith (Exploración de la Selva) & Tía Daliar (Percepción y Sabiduría)',
-    econDesc: 'Eith elimina penalizaciones por terreno forestal y amplía el radio de visión. Tía Daliar acelera la obtención de experiencia y niveles desde Semana 1.',
-  },
   Necrópolis: {
     magicTitle: 'Recomendación Meta: Mágicos',
     magicNames: 'Ethric, Mag & Artorius Veritas (Maestría de Liches & Arcano Ilimitado)',
@@ -115,17 +102,6 @@ const FACTION_HERO_HIGHLIGHTS: Record<FactionId, {
     econDesc: 'Lord Rufus genera oro diario adicional y abarata edificaciones. Zam provee +1 de Mercurio diario y +25% de recolección en mapa para acelerar el Laboratorio.',
   },
   Colmena: {
-    magicTitle: 'Recomendación Meta: Mágicos (Heraldos)',
-    magicNames: 'Khariseth, Mila & Groo (Tejedor Primigenio & Celeridad)',
-    magicDesc: 'Khariseth escala la Magia Primigenia sin bloquear otras escuelas. Mila otorga Celeridad Magistral reducida. Groo proporciona absorción y regeneración masiva con su Capullo.',
-    physTitle: 'Recomendación Meta: Físicos (Ejecutores)',
-    physNames: 'Abigor, Zoran & Curson (Ajedrecista, Waurms & Furia)',
-    physDesc: 'Abigor expande la fase de tácticas e iniciativa. Zoran convierte a los Waurms en arietes con barrido cónico. Curson encadena eliminaciones consecutivas con Golpe Heroico.',
-    econTitle: 'Economía & Soporte Logístico',
-    econNames: 'Bathym (Duque de las Joyas), Goldentongue & Fleu (Logística)',
-    econDesc: 'Bathym provee +1 Cristal diario y +50% en yacimientos. Goldentongue aporta oro diario y comercio de biomasa. Fleu otorga +400 de movimiento en mapa.',
-  },
-  Enjambre: {
     magicTitle: 'Recomendación Meta: Mágicos (Heraldos)',
     magicNames: 'Khariseth, Mila & Groo (Tejedor Primigenio & Celeridad)',
     magicDesc: 'Khariseth escala la Magia Primigenia sin bloquear otras escuelas. Mila otorga Celeridad Magistral reducida. Groo proporciona absorción y regeneración masiva con su Capullo.',
