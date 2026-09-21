@@ -31,11 +31,7 @@ export const SubclassesBrowser: React.FC<SubclassesBrowserProps> = ({
     return OFFICIAL_SUBCLASSES.filter((sub) => {
       const matchFaction =
         selectedFaction === 'Todas' ||
-        sub.faction === selectedFaction ||
-        (selectedFaction === 'Foresta') ||
-        (sub.faction === 'Foresta') ||
-        (selectedFaction === 'Colmena') ||
-        (sub.faction === 'Colmena');
+        sub.faction === selectedFaction;
       const matchType = selectedClassType === 'Todos' || sub.classType === selectedClassType;
       return matchFaction && matchType;
     });

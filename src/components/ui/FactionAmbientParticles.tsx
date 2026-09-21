@@ -31,8 +31,7 @@ export const FactionAmbientParticles: React.FC<FactionAmbientParticlesProps> = (
   const particles: ParticleConfig[] = useMemo(() => {
     if (!isEnabled) return [];
 
-    const normalizedFaction: FactionId =
-      faction === 'Arboleda' ? 'Foresta' : faction === 'Enjambre' ? 'Colmena' : faction;
+    const normalizedFaction: FactionId = faction;
 
     const count = 18; // Cantidad moderada para 60fps constantes
     const list: ParticleConfig[] = [];

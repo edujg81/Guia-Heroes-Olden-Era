@@ -2,6 +2,7 @@ import React from 'react';
 import type { HeroWithExtras } from '../../../types';
 import { TierBadge } from '../../ui/TierBadge';
 import { Swords, Wand2, Shield, Flame, BookOpen, CheckCircle2, ChevronRight, Zap, ArrowRightLeft } from 'lucide-react';
+import { ResolvedText } from '../../ui/ResolvedText';
 //import { getHeroPortrait } from '../../../data/heroAssetsData';
 import { HeroImage } from '../../ui/HeroImage';
 
@@ -97,7 +98,7 @@ export const HeroGuideCard: React.FC<HeroGuideCardProps> = ({
             {hero.specializationName}
           </span>
         </div>
-        <p className="text-[11px] text-slate-400 leading-snug">{hero.specializationDescription}</p>
+        <p className="text-[11px] text-slate-400 leading-snug"><ResolvedText text={hero.specializationDescription} /></p>
       </div>
 
       {!isCompact && (

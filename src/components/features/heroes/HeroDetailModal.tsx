@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import type { HeroWithExtras, OfficialSkill, HeroSubskillChoice, SubclassInfo } from '../../../types';
 import { TierBadge } from '../../ui/TierBadge';
+import { ResolvedText } from '../../ui/ResolvedText';
 import {
   X,
   Swords,
@@ -304,7 +305,7 @@ const OverviewTab: React.FC<{
             <Sparkles className="w-4 h-4" />
             <span>Especialidad: {hero.specializationName}</span>
           </div>
-          <p className="text-xs text-slate-300 leading-relaxed">{hero.specializationDescription}</p>
+          <p className="text-xs text-slate-300 leading-relaxed"><ResolvedText text={hero.specializationDescription} /></p>
         </div>
 
         {/* Starting Army Box */}

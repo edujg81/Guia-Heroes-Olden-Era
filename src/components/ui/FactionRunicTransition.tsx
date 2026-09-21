@@ -14,9 +14,7 @@ const FACTION_ICONS: Record<FactionId, React.ComponentType<{ className?: string 
   Necrópolis: Skull,
   Colmena: Bug,
   Cisma: Flame,
-  Arboleda: Trees,
-  Enjambre: Bug,
-};
+} as Record<FactionId, React.ComponentType<{ className?: string }>>;
 
 export const FactionRunicTransition: React.FC<FactionRunicTransitionProps> = ({
   selectedFaction,

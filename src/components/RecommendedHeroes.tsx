@@ -6,6 +6,7 @@ import { OFFICIAL_SUBCLASSES } from '../data/subclassesData';
 import { HERO_SUBSKILL_CHOICES, SKILL_SELECTION_GUIDES } from '../data/subskillsRecommendationData';
 import type { HeroWithExtras, OfficialSkill, HeroSubskillChoice, SubclassInfo } from '../types';
 import { WaxSealBadge } from './ui/WaxSealBadge';
+import { ResolvedText } from './ui/ResolvedText';
 import { useStickyState } from '../utils/useStickyState';
 import {
   Sparkles,
@@ -37,13 +38,13 @@ interface RecommendedHeroesProps {
   onOpenSimulator?: (heroId: string) => void;
 }
 
-const FACTION_CLASS_NAMES: Record<FactionId, { guerrero: string; mago: string }> = {
-  Mazmorra: { guerrero: 'Adalid', mago: 'Brujo' },
-  Templo: { guerrero: 'Caballero', mago: 'Clérigo' },
-  Foresta: { guerrero: 'Guardián', mago: 'Sabio' },
-  Necrópolis: { guerrero: 'Caballero de la muerte', mago: 'Nigromante' },
-  Colmena: { guerrero: 'Ejecutor', mago: 'Heraldo' },
-  Cisma: { guerrero: 'Juramentado', mago: 'Portavoz de la Grieta' },
+const FACTION_CLASS_NAMES: Record<FactionId, { might: string; magic: string }> = {
+  Mazmorra: { might: 'Adalid', magic: 'Brujo' },
+  Templo: { might: 'Caballero', magic: 'Clérigo' },
+  Foresta: { might: 'Guardián', magic: 'Sabio' },
+  Necrópolis: { might: 'Caballero de la muerte', magic: 'Nigromante' },
+  Colmena: { might: 'Ejecutor', magic: 'Heraldo' },
+  Cisma: { might: 'Juramentado', magic: 'Portavoz de la Grieta' },
 };
 
 const FACTION_HERO_HIGHLIGHTS: Record<FactionId, {
@@ -189,7 +190,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
     });
   };
 
-  const factionClassInfo = FACTION_CLASS_NAMES[selectedFaction] || { guerrero: 'Guerrero', mago: 'Mago' };
+  const factionClassInfo = FACTION_CLASS_NAMES[selectedFaction] || { might: 'Poder', magic: 'Magia' };
 
   const filteredHeroes = heroes.filter((hero) => {
     const matchesClass = classFilter === 'all' || hero.classType === classFilter;
@@ -267,12 +268,12 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
             {[
               { id: 'all', label: `Todas (${heroes.length})` },
               {
-                id: 'Guerrero',
-                label: `Guerrero / ${factionClassInfo.guerrero} (${heroes.filter((h) => h.classType === 'might').length})`,
+                id: 'Poder',
+                label: `Poder / ${factionClassInfo.might} (${heroes.filter((h) => h.classType === 'might').length})`,
               },
               {
-                id: 'Mago',
-                label: `Mago / ${factionClassInfo.mago} (${heroes.filter((h) => h.classType === 'magic').length})`,
+                id: 'Magia',
+                label: `Magia / ${factionClassInfo.magic} (${heroes.filter((h) => h.classType === 'magic').length})`,
               },
             ].map((c) => (
               <button
@@ -629,7 +630,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
               <p className={`text-xs leading-relaxed font-sans ${
                 themeMode === 'light' ? 'text-slate-700 font-medium' : 'text-slate-200'
               }`}>
-                {selectedHero.specializationDescription}
+                <ResolvedText text={selectedHero.specializationDescription} />
               </p>
             </div>
 
@@ -1670,7 +1671,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+        {/*<div className="grid grid-cols-1 md:grid-cols-4 gap-3">
           {HERO_SELECTION_GUIDELINES.keyMilestones.map((ms, idx) => (
             <div
               key={idx}
@@ -1692,7 +1693,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
               </p>
             </div>
           ))}
-        </div>
+        </div>*/}
       </div>
     </div>
   );

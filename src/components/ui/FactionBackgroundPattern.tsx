@@ -48,12 +48,7 @@ export const FactionBackgroundPattern: React.FC<FactionBackgroundPatternProps> =
     },
   };
 
-  const currentColors =
-    faction === 'Arboleda'
-      ? palette.Foresta
-      : faction === 'Enjambre'
-      ? palette.Colmena
-      : palette[faction as keyof typeof palette] || palette.Mazmorra;
+  const currentColors = palette[faction as keyof typeof palette] || palette.Mazmorra;
 
   return (
     <div
@@ -131,7 +126,7 @@ export const FactionBackgroundPattern: React.FC<FactionBackgroundPatternProps> =
       )}
 
       {/* Foresta: Druidic Leaf Veins & Celtic Interlace */}
-      {(faction === 'Foresta' || faction === 'Arboleda') && (
+      {(faction === 'Foresta') && (
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="pattern-sylvan" width="110" height="110" patternUnits="userSpaceOnUse">
@@ -156,7 +151,7 @@ export const FactionBackgroundPattern: React.FC<FactionBackgroundPatternProps> =
       )}
 
       {/* Colmena / Enjambre: Chitinous Honeycomb Grid & Demonic Tendrils */}
-      {(faction === 'Colmena' || faction === 'Enjambre') && (
+      {(faction === 'Colmena') && (
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="pattern-hive" width="90" height="155.88" patternUnits="userSpaceOnUse">

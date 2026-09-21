@@ -29,7 +29,6 @@ export type FactionId = 'Mazmorra' | 'Templo' | 'Foresta' | 'Necrópolis' | 'Col
 
 export interface FactionTheme {
   id: FactionId;
-  name: string;
   themeName: string;
   primary: 'purple' | 'amber' | 'emerald' | 'sky' | 'slate' | 'orange';
   hexPrimary: string;
@@ -87,7 +86,6 @@ export interface FactionMetadata {
 export const FACTION_THEMES: Record<FactionId, FactionTheme> = {
   Mazmorra: {
     id: 'Mazmorra',
-    name: 'Mazmorra',
     themeName: 'Morado Sombrío',
     primary: 'purple',
     hexPrimary: '#a855f7',
@@ -124,7 +122,6 @@ export const FACTION_THEMES: Record<FactionId, FactionTheme> = {
   },
   Templo: {
     id: 'Templo',
-    name: 'Templo',
     themeName: 'Dorado Sagrado',
     primary: 'amber',
     hexPrimary: '#f59e0b',
@@ -161,7 +158,6 @@ export const FACTION_THEMES: Record<FactionId, FactionTheme> = {
   },
   Foresta: {
     id: 'Foresta',
-    name: 'Foresta',
     themeName: 'Verde Silvano',
     primary: 'emerald',
     hexPrimary: '#10b981',
@@ -198,7 +194,6 @@ export const FACTION_THEMES: Record<FactionId, FactionTheme> = {
   },
   Necrópolis: {
     id: 'Necrópolis',
-    name: 'Necrópolis',
     themeName: 'Gris Nigromántico & Espectral',
     primary: 'slate',
     hexPrimary: '#94a3b8',
@@ -235,7 +230,6 @@ export const FACTION_THEMES: Record<FactionId, FactionTheme> = {
   },
   Colmena: {
     id: 'Colmena',
-    name: 'Colmena',
     themeName: 'Fuego Colmena',
     primary: 'orange',
     hexPrimary: '#ea580c',
@@ -272,7 +266,6 @@ export const FACTION_THEMES: Record<FactionId, FactionTheme> = {
   },
   Cisma: {
     id: 'Cisma',
-    name: 'Cisma',
     themeName: 'Celeste Arcano & Vacío',
     primary: 'sky',
     hexPrimary: '#38bdf8',
@@ -312,7 +305,6 @@ export const FACTION_THEMES: Record<FactionId, FactionTheme> = {
 export const FACTION_THEMES_LIGHT: Record<FactionId, FactionTheme> = {
   Mazmorra: {
     id: 'Mazmorra',
-    name: 'Mazmorra',
     themeName: 'Amatista Luminosa',
     primary: 'purple',
     hexPrimary: '#9333ea',
@@ -349,7 +341,6 @@ export const FACTION_THEMES_LIGHT: Record<FactionId, FactionTheme> = {
   },
   Templo: {
     id: 'Templo',
-    name: 'Templo',
     themeName: 'Dorado Solar',
     primary: 'amber',
     hexPrimary: '#d97706',
@@ -386,7 +377,6 @@ export const FACTION_THEMES_LIGHT: Record<FactionId, FactionTheme> = {
   },
   Foresta: {
     id: 'Foresta',
-    name: 'Foresta',
     themeName: 'Esmeralda Silvana',
     primary: 'emerald',
     hexPrimary: '#059669',
@@ -423,7 +413,6 @@ export const FACTION_THEMES_LIGHT: Record<FactionId, FactionTheme> = {
   },
   Necrópolis: {
     id: 'Necrópolis',
-    name: 'Necrópolis',
     themeName: 'Ceniza Argéntea & Espectral',
     primary: 'slate',
     hexPrimary: '#475569',
@@ -460,7 +449,6 @@ export const FACTION_THEMES_LIGHT: Record<FactionId, FactionTheme> = {
   },
   Colmena: {
     id: 'Colmena',
-    name: 'Colmena',
     themeName: 'Ámbar Volcánico',
     primary: 'orange',
     hexPrimary: '#ea580c',
@@ -497,7 +485,6 @@ export const FACTION_THEMES_LIGHT: Record<FactionId, FactionTheme> = {
   },
   Cisma: {
     id: 'Cisma',
-    name: 'Cisma',
     themeName: 'Zafiro Etéreo & Vacío',
     primary: 'sky',
     hexPrimary: '#0284c7',

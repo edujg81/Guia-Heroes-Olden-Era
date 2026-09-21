@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { ResolvedText } from '../../ui/ResolvedText';
 import type { HeroWithExtras, UnitInfo } from '../../../types';
 import { getHeroesByFactionKey } from '../../../data/heroesData';
 import { FactionId, getFactionTheme, getUnitsForFaction, getHeroesForFaction } from '../../../data/factionDataProvider';
@@ -446,7 +447,7 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
                   <Sparkles className="w-4 h-4" />
                   <span>Especialidad: {heroA.specializationName}</span>
                 </div>
-                <p className="text-[11px] text-slate-300 leading-relaxed">{heroA.specializationDescription}</p>
+                <p className="text-[11px] text-slate-300 leading-relaxed"><ResolvedText text={heroA.specializationDescription} /></p>
               </div>
 
               {/* Tactical Quick Overview */}
@@ -543,7 +544,7 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
                   <Sparkles className="w-4 h-4" />
                   <span>Especialidad: {heroB.specializationName}</span>
                 </div>
-                <p className="text-[11px] text-slate-300 leading-relaxed">{heroB.specializationDescription}</p>
+                <p className="text-[11px] text-slate-300 leading-relaxed"><ResolvedText text={heroB.specializationDescription} /></p>
               </div>
 
               {/* Tactical Quick Overview */}

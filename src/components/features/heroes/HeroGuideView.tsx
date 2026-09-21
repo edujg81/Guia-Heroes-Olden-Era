@@ -8,10 +8,8 @@ const spanishToApiFactionMap: Record<FactionId, string> = {
   'Mazmorra': 'dungeon',
   'Templo': 'human',
   'Foresta': 'nature',
-  'Arboleda': 'nature',
   'Necrópolis': 'necromancer',
   'Colmena': 'demon',
-  'Enjambre': 'demon',
   'Cisma': 'unfrozen',
 };
 import { GenericGuideTemplate } from '../../ui/GenericGuideTemplate';
