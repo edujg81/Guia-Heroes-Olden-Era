@@ -217,7 +217,8 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
     }
 
     // 2. Sinergia de Ejército Inicial (Creeping Temprano Día 1-7)
-    if ((hero.startingArmy || '').toLowerCase().includes((unit.name || '').toLowerCase())) {
+    const startingArmyNames = (hero.startingArmy || []).map((u) => u.unitName || '');
+    if (startingArmyNames.some((name) => name.toLowerCase().includes((unit.name || '').toLowerCase()))) {
       return {
         level: 'starter' as const,
         badge: '🛡️ Tropa de Choque Día 1',
@@ -456,7 +457,7 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
                 </div>
                 <div className="p-2.5 rounded-lg bg-black/40 border border-slate-800">
                   <div className="text-slate-400 text-[10px] uppercase">Ejército Inicial:</div>
-                  <div className="text-slate-200 mt-0.5 line-clamp-2">{heroA.startingArmy}</div>
+                  <div className="text-slate-200 mt-0.5 line-clamp-2">{(heroA.startingArmy || []).map((u) => u.unitName).join(', ')}</div>
                 </div>
               </div>
             </div>
@@ -553,7 +554,7 @@ export const HeroComparatorSplitScreen: React.FC<HeroComparatorSplitScreenProps>
                 </div>
                 <div className="p-2.5 rounded-lg bg-black/40 border border-slate-800">
                   <div className="text-slate-400 text-[10px] uppercase">Ejército Inicial:</div>
-                  <div className="text-slate-200 mt-0.5 line-clamp-2">{heroB.startingArmy}</div>
+                  <div className="text-slate-200 mt-0.5 line-clamp-2">{(heroB.startingArmy || []).map((u) => u.unitName).join(', ')}</div>
                 </div>
               </div>
             </div>

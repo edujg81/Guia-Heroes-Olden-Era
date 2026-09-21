@@ -520,7 +520,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                     <span className={`text-[10px] shrink-0 font-mono ${
                       themeMode === 'light' ? 'text-slate-500' : 'text-slate-400'
                     }`}>
-                      {(hero.startingArmy || '').split(',')[0]}
+                      {(hero.startingArmy || []).map((u) => u.unitName).join(', ').split(',')[0]}
                     </span>
                   </div>
                 </div>
@@ -763,7 +763,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                         ? 'bg-amber-50 border-amber-200 text-amber-950'
                         : `text-yellow-300 bg-black/60 border ${theme.borderSubtle}`
                     }`}>
-                      {selectedHero.startingArmy}
+                      {(selectedHero.startingArmy || []).map((u) => u.unitName).join(', ')}
                     </div>
                   </div>
 
@@ -783,7 +783,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                               : `${theme.bgBadge} ${theme.textAccent} border ${theme.borderSubtle}`
                           }`}
                         >
-                          {sk}
+                          {sk.skillName}
                         </span>
                       ))}
                     </div>

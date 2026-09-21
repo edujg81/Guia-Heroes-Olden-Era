@@ -113,11 +113,11 @@ export const HeroBuildSimulator: React.FC<HeroBuildSimulatorProps> = ({
   // Get initial 2 basic skills for a hero (Level 1 starting state)
   const getInitialAllocationsForHero = (hero: HeroWithExtras): Record<string, AllocatedSkillState> => {
     const initialMap: Record<string, AllocatedSkillState> = {};
-    hero.startingSkills.forEach((skillObj) => {
-      const skillStr = typeof skillObj === 'string' ? skillObj : (skillObj as any).skillName || '';
-      const isExperta = skillStr.includes('(Experta)');
-      const isAvanzada = skillStr.includes('(Avanzada)');
-      const cleanName = skillStr.replace(/\s*\((Experta|Avanzada|Básica)\)/, '').trim();
+hero.startingSkills.forEach((skillObj) => {
+      const skillName = typeof skillObj === 'string' ? skillObj : (skillObj as any).skillName || '';
+      const isExperta = skillName.includes('(Experta)');
+      const isAvanzada = skillName.includes('(Avanzada)');
+      const cleanName = skillName.replace(/\s*\((Experta|Avanzada|Básica)\)/, '').trim();
       const offSkill = findOfficialSkillByName(cleanName);
       if (offSkill) {
         const tier = isExperta ? 'expert' : isAvanzada ? 'advanced' : 'basic';
