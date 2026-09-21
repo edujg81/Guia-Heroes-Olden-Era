@@ -2042,7 +2042,7 @@ export const CISMA_UNITS: UnitInfo[] = [
 
 export const CISMA_HEROES_LOCAL: HeroExtension[] = [
   {
-    id: 'hero-nihil',
+    id: 'unfrozen_hero_1',
     name: 'Nihil',
     title: 'El Negador de la Grieta',
     role: 'Principal Físico / Movilidad',
@@ -2055,7 +2055,7 @@ export const CISMA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Avanza y banderea depósitos de mercurio y minas exteriores el Día 1 gracias a su elevado movimiento.',
   },
   {
-    id: 'hero-cuerno-negro',
+    id: 'unfrozen_hero_2',
     name: 'Cuerno Negro',
     title: 'El Tejedor de Magia y Guerra',
     role: 'Principal Físico / Híbrido',
@@ -2068,7 +2068,7 @@ export const CISMA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Lanza hechizos tempranos y lidera a los Ra\'shoth para despejar guardias medianos.',
   },
   {
-    id: 'hero-matastala-la-blanca',
+    id: 'unfrozen_hero_3',
     name: 'Matastala la Blanca',
     title: 'La Estratega del Tablero Abisal',
     role: 'Principal Físico / Tácticas',
@@ -2081,7 +2081,7 @@ export const CISMA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Acomoda a sus tropas de vanguardia para aniquilar campamentos neutrales sin sufrir un solo golpe.',
   },
   {
-    id: 'hero-janhei',
+    id: 'unfrozen_hero_4',
     name: 'Jänhei',
     title: 'El Filibustero de los Pasajes Sombríos',
     role: 'Apertura Rápida Día 1',
@@ -2094,7 +2094,7 @@ export const CISMA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Limpia todos los bancos de recursos exteriores el Día 1 gracias a su masa inicial de Cultores.',
   },
   {
-    id: 'hero-mara-matha',
+    id: 'unfrozen_hero_5',
     name: 'Mara Mat\'ha',
     title: 'La Señora de los Corceles Abisales',
     role: 'Principal Físico / Choque',
@@ -2107,7 +2107,7 @@ export const CISMA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Arrolla campamentos neutrales pesados el Día 1 con su escuadrón de Jinetes sin sufrir bajas.',
   },
   {
-    id: 'hero-el-doncel-de-hierro',
+    id: 'unfrozen_hero_6',
     name: 'El Doncel de Hierro',
     title: 'El Encadenador de las Almas Sometidas',
     role: 'Principal Físico / Cóncubos',
@@ -2120,7 +2120,7 @@ export const CISMA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Conquista minas complejas en Día 1 gracias a la potencia y ataduras de sus Cóncubos.',
   },
   {
-    id: 'hero-walkha',
+    id: 'unfrozen_hero_7',
     name: 'Wal\'kha',
     title: 'El Tejedur de la Trama Primigenia',
     role: 'Principal Físico / Híbrido Elemental',
@@ -2133,7 +2133,7 @@ export const CISMA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Limpia neutrales combinando proyectiles elementales y asalto de infantería.',
   },
   {
-    id: 'hero-urgo-el-cambiante',
+    id: 'unfrozen_hero_8',
     name: 'Urgo el Cambiante',
     title: 'El Señor de las Formas Mutables',
     role: 'Principal Físico / Invocación',
@@ -2146,7 +2146,7 @@ export const CISMA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Invoca un avatar el Día 1 para absorber contragolpes y ganar sin sufrir bajas.',
   },
   {
-    id: 'hero-martir-tho',
+    id: 'unfrozen_hero_9',
     name: 'Mártir Tho',
     title: 'El Alquimista de los Brebajes Prohibidos',
     role: 'Principal Físico / Magia Arcana',
@@ -2159,7 +2159,7 @@ export const CISMA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Limpia campamentos neutrales aprovechando escudos arcanos para mitigar el daño.',
   },
   {
-    id: 'hero-grellekh-el-traidor',
+    id: 'unfrozen_hero_10',
     name: 'Grellekh el Traidor',
     title: 'El Señor de la Ruptura y la Ofensiva',
     role: 'Principal Mágico / Ofensivo',
@@ -2172,7 +2172,7 @@ export const CISMA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Aniquila neutrales con una mezcla letal de magia y daño físico potenciado.',
   },
   {
-    id: 'hero-reina-de-hielo-helghat',
+    id: 'unfrozen_hero_11',
     name: 'Reina de Hielo Hel\'Ghat',
     title: 'La Soberana del Frío Imperecedero',
     role: 'Principal Mágico / Fortaleza',
@@ -2185,7 +2185,7 @@ export const CISMA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Asegura pasos estrechos y minas sin sufrir pérdidas gracias a su alta defensa.',
   },
   {
-    id: 'hero-kwinri',
+    id: 'unfrozen_hero_12',
     name: 'Kwinri',
     title: 'El Invocador de las Mareas Menores',
     role: 'Apertura Rápida Día 1',
@@ -2198,7 +2198,7 @@ export const CISMA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Limpia minas exteriores y campamentos neutrales el Día 1 con su masa de casi 50 Ra\'shoth.',
   },
   {
-    id: 'hero-la-mirada-colectiva',
+    id: 'unfrozen_hero_13',
     name: 'La Mirada Colectiva',
     title: 'El Ojo de las Legiones de la Grieta',
     role: 'Principal Mágico / Shoths Majestuosos',
@@ -2211,7 +2211,7 @@ export const CISMA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Limpia unidades a distancia neutrales en Turno 1 volando con sus Shoths majestuosos.',
   },
   {
-    id: 'hero-tolketh',
+    id: 'unfrozen_hero_14',
     name: 'Tölketh',
     title: 'El Señor del Tiempo y la Gravedad Estelar',
     role: 'Principal Mágico / Movilidad',
@@ -2224,7 +2224,7 @@ export const CISMA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Se mueve rápidamente por el mapa capturando objetivos de alto valor mágico.',
   },
   {
-    id: 'hero-ulkuth',
+    id: 'unfrozen_hero_15',
     name: 'Ulkuth',
     title: 'El Rastreador de los Confines de la Grieta',
     role: 'Secundario & Exploración',
@@ -2237,7 +2237,7 @@ export const CISMA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Levanta la niebla de guerra revelando minas de mercurio y santuarios.',
   },
   {
-    id: 'hero-radavok',
+    id: 'unfrozen_hero_16',
     name: 'Ra\'Davok',
     title: 'El Bastión Arcano de la Falla',
     role: 'Principal Mágico / Escudos',
@@ -2250,7 +2250,7 @@ export const CISMA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Limpia campamentos neutrales absorbiendo el primer golpe con su escudo arcano.',
   },
   {
-    id: 'hero-hermana-keiri',
+    id: 'unfrozen_hero_17',
     name: 'Hermana Keiri',
     title: 'La Guardiana de la Luna y las Sombras Abisales',
     role: 'Principal Mágico / S-Tier Supremo',
@@ -2263,7 +2263,7 @@ export const CISMA_HEROES_LOCAL: HeroExtension[] = [
     day1Action: 'Limpia objetivos neutrales de alto rango en Día 1 con conjuros de Nochesombra sin sufrir bajas.',
   },
   {
-    id: 'hero-dhuvri',
+    id: 'unfrozen_hero_18',
     name: 'Dhüvri',
     title: 'La Suma Tejedora de la Comunión Abisal',
     role: 'Principal Mágico / Escalado de Ejército',

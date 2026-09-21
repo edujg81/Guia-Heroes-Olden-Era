@@ -6,16 +6,14 @@ import { NECROPOLIS_HEROES } from '../necropolisData';
 import { ENJAMBRE_HEROES } from '../enjambreData';
 import { CISMA_HEROES } from '../cismaData';
 
-export type FactionIdentifier = 'Mazmorra' | 'Templo' | 'Foresta' | 'Arboleda' | 'Necrópolis' | 'Colmena' | 'Enjambre' | 'Cisma';
+export type FactionIdentifier = 'Mazmorra' | 'Templo' | 'Foresta' | 'Necrópolis' | 'Colmena' | 'Cisma';
 
 export const FACTION_HEROES_REGISTRY: Record<string, HeroWithExtras[]> = {
   Mazmorra: DUNGEON_HEROES,
   Templo: TEMPLE_HEROES,
   Foresta: ARBOLEDA_HEROES,
-  Arboleda: ARBOLEDA_HEROES,
   Necrópolis: NECROPOLIS_HEROES,
   Colmena: ENJAMBRE_HEROES,
-  Enjambre: ENJAMBRE_HEROES,
   Cisma: CISMA_HEROES,
 };
 
