@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FactionId, getHeroesForFaction, FACTIONS_METADATA, getFactionTheme } from '../data/factionDataProvider';
-import { HERO_SELECTION_GUIDELINES } from '../data/dungeonData';
+//import { HERO_SELECTION_GUIDELINES } from '../data/dungeonData';
 import { OFFICIAL_SKILLS_DATA } from '../data/officialSkillsData';
 import { OFFICIAL_SUBCLASSES } from '../data/subclassesData';
 import { HERO_SUBSKILL_CHOICES, SKILL_SELECTION_GUIDES } from '../data/subskillsRecommendationData';
@@ -496,7 +496,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                     <span className={`text-[10px] shrink-0 font-mono ${
                       themeMode === 'light' ? 'text-slate-500' : 'text-slate-400'
                     }`}>
-                      {(hero.startingArmy || '').split(',')[0]}
+                      {(hero.startingArmy[1] || hero.startingArmy[0])?.unitName} & {hero.startingArmy[2]?.unitName || 'Unidad Secundaria'}
                     </span>
                   </div>
                 </div>
@@ -739,7 +739,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                         ? 'bg-amber-50 border-amber-200 text-amber-950'
                         : `text-yellow-300 bg-black/60 border ${theme.borderSubtle}`
                     }`}>
-                      {selectedHero.startingArmy}
+                      {selectedHero.startingArmy[0]?.unitName} x {selectedHero.startingArmy[0]?.countInterval}
                     </div>
                   </div>
 
@@ -759,7 +759,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                               : `${theme.bgBadge} ${theme.textAccent} border ${theme.borderSubtle}`
                           }`}
                         >
-                          {sk}
+                          {(sk.skillName)}
                         </span>
                       ))}
                     </div>
