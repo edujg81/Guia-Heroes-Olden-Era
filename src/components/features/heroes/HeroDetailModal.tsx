@@ -152,7 +152,7 @@ export const HeroDetailModal: React.FC<HeroDetailModalProps> = ({
 
         {/* Hero Header */}
         <div className="flex items-start gap-4 mb-6">
-          <div className="w-20 shrink-0">
+          <div className="w-28 shrink-0">
             <HeroImage
               heroId={hero.id}
               heroName={hero.name}
@@ -160,18 +160,47 @@ export const HeroDetailModal: React.FC<HeroDetailModalProps> = ({
               iconPath={hero.iconPath}
               alt={`Retrato de ${hero.name}`}
               size="xl"
-              className="rounded-xl border-2 border-slate-700 shadow-md bg-slate-800"
+              className="rounded-2xl border-2 border-slate-700 shadow-xl bg-slate-800"
             />
           </div>
 
-          <div>
+          <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
-              <h2 className="text-2xl font-serif font-bold">{hero.name}</h2>
-              <TierBadge tier={hero.classDisplay} />
+              <h2 className="text-2xl font-serif font-bold text-white">{hero.name}</h2>
+              <span className="text-sm font-mono text-slate-400">({hero.classDisplay})</span>
+              <TierBadge tier={hero.tierRank} size="sm" className="max-w-full whitespace-normal text-center" />
             </div>
-            <p className="text-xs font-mono text-slate-400">
-              {hero.classDisplay} • <span className="font-semibold text-slate-200">{isMage ? 'Mago' : 'Guerrero'}</span>
+
+            <p className="mt-1 text-[16px] leading-snug break-words text-slate-400 font-mono">
+              {hero.title}
             </p>
+
+            <div className="flex items-center gap-2 mb-1 text-sm font-mono text-slate-400">
+              {hero.classType === 'magic' ? 'Magia' : 'Poder'}
+            </div>
+
+            <div className="grid grid-cols-8 gap-1.5 mt-3">
+              <div className="p-2 rounded-lg bg-slate-950/40 border border-slate-800 text-center">
+                <img src="/src/assets/icons/hero_stats/offence.png" alt="ATQ" className="w-5 h-5 mx-auto mb-1" />
+                <div className="font-bold text-slate-200">{hero.attack}</div>
+                <div className="text-[10px] text-slate-500">{hero.statGrowth.attack > 0 ? `+${hero.statGrowth.attack}` : ''}</div>
+              </div>
+              <div className="p-2 rounded-lg bg-slate-950/40 border border-slate-800 text-center">
+                <img src="/src/assets/icons/hero_stats/defence.png" alt="DEF" className="w-5 h-5 mx-auto mb-1" />
+                <div className="font-bold text-slate-200">{hero.defence}</div>
+                <div className="text-[10px] text-slate-500">{hero.statGrowth.defense > 0 ? `+${hero.statGrowth.defense}` : ''}</div>
+              </div>
+              <div className="p-2 rounded-lg bg-slate-950/40 border border-slate-800 text-center">
+                <img src="/src/assets/icons/hero_stats/spellpower.png" alt="PODER" className="w-5 h-5 mx-auto mb-1" />
+                <div className="font-bold text-slate-200">{hero.spellPower}</div>
+                <div className="text-[10px] text-slate-500">{hero.statGrowth.spellPower > 0 ? `+${hero.statGrowth.spellPower}` : ''}</div>
+              </div>
+              <div className="p-2 rounded-lg bg-slate-950/40 border border-slate-800 text-center">
+                <img src="/src/assets/icons/hero_stats/intelligence.png" alt="CONOC" className="w-5 h-5 mx-auto mb-1" />
+                <div className="font-bold text-slate-200">{hero.knowledge}</div>
+                <div className="text-[10px] text-slate-500">{hero.statGrowth.knowledge > 0 ? `+${hero.statGrowth.knowledge}` : ''}</div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -320,6 +349,70 @@ const OverviewTab: React.FC<{
                 {unit.unitName} ({unit.countInterval})
               </span>
             ))}
+          </div>
+        </div>
+
+        {/* Starting Skills & Starting Spells */}
+        <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+          <div className="flex items-center gap-2 text-sm font-bold text-slate-200 mb-2">
+            <BookOpen className="w-4 h-4 text-blue-400" />
+            <span>Habilidades & Hechizos Iniciales</span>
+          </div>
+          <div className="space-y-2">
+            {hero.startingSkills && hero.startingSkills.length > 0 && (
+              <div className="flex flex-wrap gap-1.5">
+                {hero.startingSkills.map((skill, i) => (
+                  <span key={i} className="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 font-mono text-[11px]">
+                    {skill.skillName}
+                  </span>
+                ))}
+              </div>
+            )}
+            {hero.startingSpells && hero.startingSpells.length > 0 && (
+              <div className="flex flex-wrap gap-1.5">
+                {hero.startingSpells.map((spell, i) => (
+                  <span key={i} className="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 font-mono text-[11px]">
+                    {spell.spellName}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Biography */}
+        <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+          <div className="flex items-center gap-2 text-sm font-bold text-slate-200 mb-2">
+            <BookOpen className="w-4 h-4 text-emerald-400" />
+            <span>Biografía</span>
+          </div>
+          <p className="text-xs text-slate-300 leading-relaxed"><ResolvedText text={hero.description} /></p>
+        </div>
+
+        {/* Motto */}
+        <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+          <div className="flex items-center gap-2 text-sm font-bold text-slate-200 mb-2">
+            <Flame className="w-4 h-4 text-amber-400" />
+            <span>Lema</span>
+          </div>
+          <p className="text-xs text-slate-300 italic leading-relaxed">&ldquo;{hero.motto}&rdquo;</p>
+        </div>
+
+        {/* Recommendation & Role */}
+        <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
+          <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+            <div className="flex items-center gap-2 text-sm font-bold text-slate-200 mb-2">
+              <Award className="w-4 h-4 text-yellow-400" />
+              <span>Recomendación de Inicio</span>
+            </div>
+            <p className="text-xs text-slate-300 leading-relaxed">{hero.recommendedStartingTier}</p>
+          </div>
+          <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+            <div className="flex items-center gap-2 text-sm font-bold text-slate-200 mb-2">
+              <Target className="w-4 h-4 text-rose-400" />
+              <span>Rol Competitivo</span>
+            </div>
+            <p className="text-xs text-slate-300 leading-relaxed">{hero.role}</p>
           </div>
         </div>
       </div>

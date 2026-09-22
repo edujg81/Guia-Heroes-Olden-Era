@@ -1,6 +1,8 @@
 import React from 'react';
 
 interface MedievalCardProps {
+  title: string;
+  subtitle?: string;
   children: React.ReactNode;
   className?: string;
   isInteractive?: boolean;
@@ -9,7 +11,10 @@ interface MedievalCardProps {
   onClick?: () => void;
 }
 
-export const MedievalCard: React.FC<MedievalCardProps> = ({
+
+const MedievalCard: React.FC<MedievalCardProps> = ({
+  title,
+  subtitle,
   children,
   className = '',
   isInteractive = false,
@@ -33,7 +38,11 @@ export const MedievalCard: React.FC<MedievalCardProps> = ({
           : ''
       } ${className}`}
     >
-      {children}
+      <h3 className="text-xl font-bold text-white">{title}</h3>
+      {subtitle && <p className="text-gray-400 text-sm">{subtitle}</p>}
+      <div className="mt-2">{children}</div>
     </div>
   );
 };
+
+export default MedievalCard;
