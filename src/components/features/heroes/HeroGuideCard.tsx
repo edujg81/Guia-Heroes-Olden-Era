@@ -117,28 +117,20 @@ export const HeroGuideCard: React.FC<HeroGuideCardProps> = ({
           {/* Stat Growth Matrix */}
           <div className="grid grid-cols-4 gap-1.5 mb-3 text-center">
             <div className="p-1.5 rounded-lg bg-slate-950/40 border border-slate-800">
-              <div className="text-[10px] text-rose-400 font-mono uppercase font-bold">Atq</div>
-              <div className="text-xs font-mono font-bold text-slate-200">
-                {hero.statGrowth?.attack ?? 25}%
-              </div>
+              <img src="/src/assets/icons/hero_stats/offence.png" alt="ATQ" className="w-6 h-6 mx-auto mb-1" />
+              <div className="text-xs font-mono font-bold text-slate-200">{hero.attack}</div>
             </div>
             <div className="p-1.5 rounded-lg bg-slate-950/40 border border-slate-800">
-              <div className="text-[10px] text-blue-400 font-mono uppercase font-bold">Def</div>
-              <div className="text-xs font-mono font-bold text-slate-200">
-                {hero.statGrowth?.defense ?? 25}%
-              </div>
+              <img src="/src/assets/icons/hero_stats/defence.png" alt="DEF" className="w-6 h-6 mx-auto mb-1" />
+              <div className="text-xs font-mono font-bold text-slate-200">{hero.defence}</div>
             </div>
             <div className="p-1.5 rounded-lg bg-slate-950/40 border border-slate-800">
-              <div className="text-[10px] text-purple-400 font-mono uppercase font-bold">Poder</div>
-              <div className="text-xs font-mono font-bold text-slate-200">
-                {hero.statGrowth?.spellPower ?? 25}%
-              </div>
+              <img src="/src/assets/icons/hero_stats/spellpower.png" alt="PODER" className="w-6 h-6 mx-auto mb-1" />
+              <div className="text-xs font-mono font-bold text-slate-200">{hero.spellPower}</div>
             </div>
             <div className="p-1.5 rounded-lg bg-slate-950/40 border border-slate-800">
-              <div className="text-[10px] text-amber-400 font-mono uppercase font-bold">Conoc</div>
-              <div className="text-xs font-mono font-bold text-slate-200">
-                {hero.statGrowth?.knowledge ?? 25}%
-              </div>
+              <img src="/src/assets/icons/hero_stats/intelligence.png" alt="CONOC" className="w-6 h-6 mx-auto mb-1" />
+              <div className="text-xs font-mono font-bold text-slate-200">{hero.knowledge}</div>
             </div>
           </div>
 
