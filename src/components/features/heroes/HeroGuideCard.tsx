@@ -40,10 +40,10 @@ export const HeroGuideCard: React.FC<HeroGuideCardProps> = ({
           : 'bg-slate-900/60 border-slate-800 hover:border-slate-700 hover:bg-slate-900'
       }`}
     >
-      {/* Header: Name, Title & Archetype Badge */}
-      <div className="flex items-start justify-between gap-3 mb-3">
+      {/* Header: Tier, portrait, name & title */}
+      <div className="mb-3">
         <div className="flex items-start gap-3">
-          {/* Hero Portrait */}
+          {/* Portrait: ocupa 4 filas verticales */}
           <HeroImage
             heroId={hero.id}
             heroName={hero.name}
@@ -51,12 +51,24 @@ export const HeroGuideCard: React.FC<HeroGuideCardProps> = ({
             iconPath={hero.iconPath}
             alt={`Retrato de ${hero.name}`}
             size="lg"
-            className="rounded-xl border-2 border-slate-700 shadow-lg bg-slate-800"
+            className="rounded-xl border-2 border-slate-700 shadow-lg bg-slate-800 shrink-0 self-start"
           />
-          <div>
-            <div className="flex items-center gap-2">
+
+          {/* Columna derecha: Tier (fila 1) + nombre + título */}
+          <div className="min-w-0 flex-1">
+            {/* Fila 1: TierBadge alineado arriba */}
+            <div className="flex justify-end mb-2">
+              <TierBadge
+                tier={hero.tierRank}
+                size="sm"
+                className="max-w-full whitespace-normal text-center"
+              />
+            </div>
+
+            {/* Fila 2-4: nombre, icono, título */}
+            <div className="flex items-start gap-2">
               <span
-                className={`p-1.5 rounded-lg border text-xs ${
+                className={`mt-0.5 p-1.5 rounded-lg border text-xs shrink-0 ${
                   isMage
                     ? 'bg-blue-500/10 text-blue-400 border-blue-500/30'
                     : 'bg-rose-500/10 text-rose-400 border-rose-500/30'
@@ -64,23 +76,20 @@ export const HeroGuideCard: React.FC<HeroGuideCardProps> = ({
               >
                 {isMage ? <Wand2 className="w-3.5 h-3.5" /> : <Swords className="w-3.5 h-3.5" />}
               </span>
-              <h3
-                className={`font-serif font-bold text-base sm:text-lg ${
-                  themeMode === 'light' ? 'text-slate-900' : 'text-white'
-                }`}
-              >
-                {hero.name}
-              </h3>
+                <div className="min-w-0">
+                <h3
+                  className={`font-serif font-bold text-base leading-tight break-words ${
+                    themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                  }`}
+                >
+                  {hero.name}
+                </h3>
+                <p className="mt-1 text-[12px] leading-snug break-words text-slate-400 font-mono">
+                  {hero.title}
+                </p>
+              </div>
             </div>
-            <p className="text-[11px] text-slate-400 font-mono mt-0.5">{hero.title}</p>
           </div>
-        </div>
-
-        <div className="flex flex-col items-end gap-1 shrink-0">
-          <TierBadge tier={hero.tierRank} size="sm" />
-          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700">
-            {hero.classDisplay}
-          </span>
         </div>
       </div>
 
@@ -98,7 +107,9 @@ export const HeroGuideCard: React.FC<HeroGuideCardProps> = ({
             {hero.specializationName}
           </span>
         </div>
-        <p className="text-[11px] text-slate-400 leading-snug"><ResolvedText text={hero.specializationDescription} /></p>
+        <p className="text-[11px] text-slate-400 leading-snug break-words">
+          <ResolvedText text={hero.specializationDescription} />
+        </p>
       </div>
 
       {!isCompact && (

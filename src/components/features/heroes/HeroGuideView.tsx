@@ -19,7 +19,7 @@ import { HeroGuideCard } from './HeroGuideCard';
 import { HeroDetailModal } from './HeroDetailModal';
 import { HeroComparatorSplitScreen } from './HeroComparatorSplitScreen';
 import { HeroBuildSimulator } from '../../HeroBuildSimulator';
-import { Users, Wand2, Swords, Sparkles, Filter, ArrowRightLeft, GitBranch } from 'lucide-react';
+import { Users, Wand2, Swords, Sparkles, ArrowRightLeft, GitBranch } from 'lucide-react';
 
 interface HeroGuideViewProps {
   selectedFaction?: FactionId;
@@ -34,7 +34,7 @@ export const HeroGuideView: React.FC<HeroGuideViewProps> = ({
 }) => {
   const [viewMode, setViewMode] = useState<'roster' | 'comparator' | 'simulator'>('roster');
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedArchetype, setSelectedArchetype] = useState<'all' | 'Guerrero' | 'Mago'>('all');
+  const [selectedArchetype, setSelectedArchetype] = useState<'all' | 'might' | 'magic'>('all');
   const [selectedRole, setSelectedRole] = useState<string>('all');
   const [inspectedHero, setInspectedHero] = useState<HeroWithExtras | null>(null);
 
@@ -76,16 +76,16 @@ export const HeroGuideView: React.FC<HeroGuideViewProps> = ({
   }, [heroes, searchTerm, selectedArchetype, selectedRole]);
 
   // 3. Opciones de filtros
-  const archetypeOptions: FilterOption<'all' | 'Poder' | 'Magia'>[] = [
+  const archetypeOptions: FilterOption<'all' | 'might' | 'magic'>[] = [
     { id: 'all', label: 'Todos', count: heroes.length, icon: <Users className="w-3.5 h-3.5" /> },
     {
-      id: 'Poder',
+      id: 'might',
       label: 'Poder',
       count: heroes.filter((h) => h.classType === 'might').length,
       icon: <Swords className="w-3.5 h-3.5" />,
     },
     {
-      id: 'Magia',
+      id: 'magic',
       label: 'Magia',
       count: heroes.filter((h) => h.classType === 'magic').length,
       icon: <Wand2 className="w-3.5 h-3.5" />,
@@ -165,13 +165,14 @@ export const HeroGuideView: React.FC<HeroGuideViewProps> = ({
               <SearchBar
                 value={searchTerm}
                 onChange={setSearchTerm}
-                placeholder={`Buscar héroe de ${selectedFaction} por nombre, clase o especialidad...`}
+                placeholder={`Buscar héroe de ${selectedFaction}...`}
                 themeMode={themeMode}
+                className="max-w-md w-full"
               />
               <FilterChipGroup
                 options={archetypeOptions}
                 selectedValue={selectedArchetype}
-                onChange={(v) => setSelectedArchetype(v as 'all' | 'Guerrero' | 'Mago')}
+                onChange={(v) => setSelectedArchetype(v as 'all' | 'might' | 'magic')}
                 themeMode={themeMode}
               />
             </div>

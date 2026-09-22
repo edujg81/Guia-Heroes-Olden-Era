@@ -35,7 +35,7 @@ export const ResolvedText: React.FC<ResolvedTextProps> = ({ text, className = ''
       // Si estamos dentro de una etiqueta resaltada, envolvemos el texto en un span amarillo
       if (inResolved) {
         result.push(
-          <span key={keyCounter++} className="text-yellow-300 font-bold bg-yellow-500/10 px-1 rounded">
+          <span key={keyCounter++} className="text-yellow-300 font-bold rounded">
             {part}
           </span>
         );
