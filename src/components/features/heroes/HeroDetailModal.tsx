@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import type { HeroWithExtras, OfficialSkill, HeroSubskillChoice, SubclassInfo } from '../../../types';
+import type { HeroWithExtras, HeroSubskillChoice, SubclassInfo } from '../../../types';
+import type { ApiSkill } from '../../../types-api';
 import { TierBadge } from '../../ui/TierBadge';
 import { ResolvedText } from '../../ui/ResolvedText';
 import {
@@ -50,7 +51,7 @@ const normalize = (str: string) =>
     .toLowerCase()
     .trim();
 
-const findOfficialSkill = (skillStr: string): OfficialSkill | undefined => {
+const findOfficialSkill = (skillStr: string): ApiSkill | undefined => {
   const clean = normalize(skillStr.replace(/\s*\((Experta|Avanzada|Básica)\)/, ''));
   return OFFICIAL_SKILLS_DATA.find((s) => {
     const sNorm = normalize(s.name);
@@ -69,8 +70,8 @@ const getSubskillChoicesForHero = (hero: HeroWithExtras): HeroSubskillChoice[] =
     const skillId = offSkill?.id || clean.toLowerCase().replace(/\s+/g, '-');
 
     // Simple fallback - use first subskills if no guide available
-    const advSub = offSkill?.subskills.advanced[0] || { name: 'Subhabilidad Avanzada' };
-    const expSub = offSkill?.subskills.expert[0] || { name: 'Subhabilidad Experta' };
+    const advSub = offSkill?.level2.subSkillChoices[0] || { name: 'Subhabilidad Avanzada' };
+    const expSub = offSkill?.level3.subSkillChoices[0] || { name: 'Subhabilidad Experta' };
 
     return {
       skillName: skillStr,
@@ -93,7 +94,7 @@ export const HeroDetailModal: React.FC<HeroDetailModalProps> = ({
 
   const isMage = hero.classType === 'magic';
   const [activeTab, setActiveTab] = useStickyState<'overview' | 'skills' | 'tactics' | 'subclasses' | 'simulator'>('overview', `hero_detail_tab_${hero.id}`);
-  const [inspectedSkill, setInspectedSkill] = useState<OfficialSkill | null>(null);
+  const [inspectedSkill, setInspectedSkill] = useState<ApiSkill | null>(null);
   const [showSubskillsDetails, setShowSubskillsDetails] = useStickyState<boolean>(true, 'hero_show_subskills_details');
 
   // Calculate subclasses progress for this hero's faction and class
@@ -330,8 +331,12 @@ const OverviewTab: React.FC<{
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         {/* Specialty Box */}
         <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
-          <div className="flex items-center gap-2 text-sm font-bold text-amber-400 mb-2">
-            <Sparkles className="w-4 h-4" />
+          <div className="flex items-center gap-3 text-sm font-bold text-amber-400 mb-2">
+            {hero.specializationIcon ? (
+              <img src={`/src/assets/${hero.specializationIcon}`} alt="Especialidad" className="w-6 h-6 rounded-md object-cover" />
+            ) : (
+              <Sparkles className="w-4 h-4" />
+            )}
             <span>Especialidad: {hero.specializationName}</span>
           </div>
           <p className="text-xs text-slate-300 leading-relaxed"><ResolvedText text={hero.specializationDescription} /></p>
@@ -345,8 +350,11 @@ const OverviewTab: React.FC<{
           </div>
           <div className="flex flex-wrap gap-2">
             {hero.startingArmy?.map((unit, i) => (
-              <span key={i} className="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 font-mono text-[11px]">
-                {unit.unitName} ({unit.countInterval})
+              <span key={i} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 font-mono text-[11px]">
+                {unit.icon ? (
+                  <img src={`/src/assets/${unit.icon}`} alt={unit.unitName} className="w-4 h-4 rounded-sm object-cover" />
+                ) : null}
+                <span>{unit.unitName} ({unit.countInterval})</span>
               </span>
             ))}
           </div>
@@ -362,8 +370,11 @@ const OverviewTab: React.FC<{
             {hero.startingSkills && hero.startingSkills.length > 0 && (
               <div className="flex flex-wrap gap-1.5">
                 {hero.startingSkills.map((skill, i) => (
-                  <span key={i} className="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 font-mono text-[11px]">
-                    {skill.skillName}
+                  <span key={i} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 font-mono text-[11px]">
+                    {skill.icon ? (
+                      <img src={`/src/assets/${skill.icon}`} alt={skill.skillName} className="w-4 h-4 rounded-sm object-cover" />
+                    ) : null}
+                    <span>{skill.skillName}</span>
                   </span>
                 ))}
               </div>
@@ -371,8 +382,11 @@ const OverviewTab: React.FC<{
             {hero.startingSpells && hero.startingSpells.length > 0 && (
               <div className="flex flex-wrap gap-1.5">
                 {hero.startingSpells.map((spell, i) => (
-                  <span key={i} className="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 font-mono text-[11px]">
-                    {spell.spellName}
+                  <span key={i} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 font-mono text-[11px]">
+                    {spell.icon ? (
+                      <img src={`/src/assets/${spell.icon}`} alt={spell.spellName} className="w-4 h-4 rounded-sm object-cover" />
+                    ) : null}
+                    <span>{spell.spellName}</span>
                   </span>
                 ))}
               </div>
@@ -380,8 +394,8 @@ const OverviewTab: React.FC<{
           </div>
         </div>
 
-        {/* Biography */}
-        <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+        {/* Biography - full row */}
+        <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 md:col-span-2">
           <div className="flex items-center gap-2 text-sm font-bold text-slate-200 mb-2">
             <BookOpen className="w-4 h-4 text-emerald-400" />
             <span>Biografía</span>
@@ -389,8 +403,8 @@ const OverviewTab: React.FC<{
           <p className="text-xs text-slate-300 leading-relaxed"><ResolvedText text={hero.description} /></p>
         </div>
 
-        {/* Motto */}
-        <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+        {/* Motto - full row */}
+        <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 md:col-span-2">
           <div className="flex items-center gap-2 text-sm font-bold text-slate-200 mb-2">
             <Flame className="w-4 h-4 text-amber-400" />
             <span>Lema</span>
@@ -398,8 +412,8 @@ const OverviewTab: React.FC<{
           <p className="text-xs text-slate-300 italic leading-relaxed">&ldquo;{hero.motto}&rdquo;</p>
         </div>
 
-        {/* Recommendation & Role */}
-        <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
+        {/* Recommendation & Role - shared row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:col-span-2">
           <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
             <div className="flex items-center gap-2 text-sm font-bold text-slate-200 mb-2">
               <Award className="w-4 h-4 text-yellow-400" />
@@ -417,46 +431,7 @@ const OverviewTab: React.FC<{
         </div>
       </div>
 
-      {/* Strategy and Tactical Playstyle */}
-      <div className="space-y-4 text-xs leading-relaxed">
-        <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
-          <div className="flex items-center gap-2 font-bold text-slate-200 mb-1.5">
-            <Target className="w-4 h-4 text-rose-400" />
-            <span>Estilo de Juego Táctico & Despliegue</span>
-          </div>
-          <p className="text-slate-300">{hero.tacticalPlaystyle}</p>
-        </div>
 
-        <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
-          <div className="flex items-center gap-2 font-bold text-slate-200 mb-1.5">
-            <BookOpen className="w-4 h-4 text-blue-400" />
-            <span>Ruta de Habilidades Recomendada (Build Óptima)</span>
-          </div>
-          <div className="flex flex-wrap gap-1.5 mt-2">
-            {hero.idealSkillBuild?.map((skill, i) => (
-              <span
-                key={i}
-                className="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 font-mono text-[11px]"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
-          <div className="flex items-center gap-2 font-bold text-slate-200 mb-1.5">
-            <Compass className="w-4 h-4 text-emerald-400" />
-            <span>Sinergia de Facción & Tácticas de Apertura</span>
-          </div>
-          <p className="text-slate-300">{hero.synergyCombo}</p>
-          {hero.day1Action && (
-            <p className="text-slate-400 mt-1.5">
-              <strong className="text-slate-200">Apertura Día 1:</strong> {hero.day1Action}
-            </p>
-          )}
-        </div>
-      </div>
     </div>
   );
 };
@@ -465,8 +440,8 @@ const OverviewTab: React.FC<{
 const SkillsTab: React.FC<{
   hero: HeroWithExtras;
   skillRecommendations: HeroSubskillChoice[];
-  inspectedSkill: OfficialSkill | null;
-  setInspectedSkill: (skill: OfficialSkill | null) => void;
+  inspectedSkill: ApiSkill | null;
+  setInspectedSkill: (skill: ApiSkill | null) => void;
   showSubskillsDetails: boolean;
   setShowSubskillsDetails: (show: boolean) => void;
   themeMode?: 'dark' | 'light';
@@ -563,7 +538,7 @@ const SkillsTab: React.FC<{
                     <Zap className="w-4 h-4 text-blue-400" />
                     <span className="font-semibold text-slate-200">Básica</span>
                   </div>
-                  <p className="text-slate-300">{inspectedSkill.upgrades.basic}</p>
+                  <p className="text-slate-300">{inspectedSkill.level1.levelName}</p>
                 </div>
                 
                 <div className="border rounded-xl p-4">
@@ -571,14 +546,14 @@ const SkillsTab: React.FC<{
                     <Sparkles className="w-4 h-4 text-amber-400" />
                     <span className="font-semibold text-slate-200">Avanzada</span>
                   </div>
-                  <p className="text-slate-300">{inspectedSkill.upgrades.advanced}</p>
-                  {showSubskillsDetails && inspectedSkill.subskills.advanced.length > 0 && (
+                  <p className="text-slate-300">{inspectedSkill.level2.levelName}</p>
+                  {showSubskillsDetails && inspectedSkill.level2.subSkillChoices.length > 0 && (
                     <div className="mt-3 space-y-2">
                       <div className="flex items-center gap-2 mb-1 text-xs font-mono">
                         <Sparkles className="w-3 h-3" />
                         <span>Subskills Avanzadas:</span>
                       </div>
-                      {inspectedSkill.subskills.advanced.map((sub, idx) => (
+                      {inspectedSkill.level2.subSkillChoices.map((sub, idx) => (
                         <div key={idx} className="flex items-center gap-2">
                           <CheckCircle2 className="w-3 h-3 text-emerald-400" />
                           <span className="text-slate-300">{sub.name}</span>
@@ -593,14 +568,14 @@ const SkillsTab: React.FC<{
                     <Award className="w-4 h-4 text-yellow-400" />
                     <span className="font-semibold text-slate-200">Experta</span>
                   </div>
-                  <p className="text-slate-300">{inspectedSkill.upgrades.expert}</p>
-                  {showSubskillsDetails && inspectedSkill.subskills.expert.length > 0 && (
+                  <p className="text-slate-300">{inspectedSkill.level3.levelName}</p>
+                  {showSubskillsDetails && inspectedSkill.level3.subSkillChoices.length > 0 && (
                     <div className="mt-3 space-y-2">
                       <div className="flex items-center gap-2 mb-1 text-xs font-mono">
                         <Award className="w-3 h-3 text-yellow-400" />
                         <span>Subskills Expertas:</span>
                       </div>
-                      {inspectedSkill.subskills.expert.map((sub, idx) => (
+                      {inspectedSkill.level3.subSkillChoices.map((sub, idx) => (
                         <div key={idx} className="flex items-center gap-2">
                           <CheckCircle2 className="w-3 h-3 text-emerald-400" />
                           <span className="text-slate-300">{sub.name}</span>

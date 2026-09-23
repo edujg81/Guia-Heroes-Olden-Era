@@ -225,6 +225,8 @@ export interface ApiLawInGroup {
 
 export interface ApiSkill {
   id: string;
+  name: string;
+  icon: string;
   skillType: 'Class' | 'Common' | 'Faction';
   level1: {
     levelName: string;
@@ -232,13 +234,13 @@ export interface ApiSkill {
     icon: string;
     subSkillChoices: ApiSubSkillChoice[];
   };
-  level2?: {
+  level2: {
     levelName: string;
     description: string;
     icon: string;
     subSkillChoices: ApiSubSkillChoice[];
   };
-  level3?: {
+  level3: {
     levelName: string;
     description: string;
     icon: string;

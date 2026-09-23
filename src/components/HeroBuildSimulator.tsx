@@ -3,7 +3,8 @@ import { FactionId, getHeroesForFaction, FACTIONS_METADATA, getFactionTheme } fr
 import { OFFICIAL_SKILLS_DATA } from '../data/officialSkillsData';
 import { OFFICIAL_SUBCLASSES } from '../data/subclassesData';
 import { HERO_SUBSKILL_CHOICES } from '../data/subskillsRecommendationData';
-import type { HeroWithExtras, OfficialSkill, SubclassInfo } from '../types';
+import type { HeroWithExtras, SubclassInfo } from '../types';
+import type { ApiSkill } from '../types-api';
 import { WaxSealBadge } from './ui/WaxSealBadge';
 import { useStickyState } from '../utils/useStickyState';
 import {
@@ -65,7 +66,7 @@ export const HeroBuildSimulator: React.FC<HeroBuildSimulatorProps> = ({
   
   // Skill Allocation State: map of skillId -> AllocatedSkillState
   const [allocations, setAllocations] = useState<Record<string, AllocatedSkillState>>({});
-  const [activeModalSkill, setActiveModalSkill] = useState<OfficialSkill | null>(null);
+  const [activeModalSkill, setActiveModalSkill] = useState<ApiSkill | null>(null);
   const [copiedSuccess, setCopiedSuccess] = useState<boolean>(false);
   const [filterCategory, setFilterCategory] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -102,7 +103,7 @@ export const HeroBuildSimulator: React.FC<HeroBuildSimulatorProps> = ({
       .trim();
 
   // Find matching official skill
-  const findOfficialSkillByName = (name: string): OfficialSkill | undefined => {
+  const findOfficialSkillByName = (name: string): ApiSkill | undefined => {
     const clean = normalize(name.replace(/\s*\((Experta|Avanzada|Básica)\)/, ''));
     return OFFICIAL_SKILLS_DATA.find((s) => {
       const sNorm = normalize(s.name);

@@ -1,7 +1,7 @@
 import { SubskillSelectionGuide, HeroSubskillChoice } from '../types';
 
 export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
-  'arte-de-asedio': {
+  'skill_siege': {
     advanced: {
       recommendedName: 'Andanada',
       why: 'Otorga una aptitud activa que ataca la casilla seleccionada y todas las adyacentes una vez por ronda. Es la mejor herramienta para limpiar formaciones defensivas amontonadas tras los muros.',
@@ -16,7 +16,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Habilidad especializada para asaltar castillos fuertemente defendidos sin sufrir desgaste.',
   },
-  'arte-de-batalla': {
+  'skill_formation': {
     advanced: {
       recommendedName: 'Maestría en cuerpo a cuerpo',
       why: '+10% de daño infligido y -10% de daño recibido en combates de melé. Una ventaja matemática permanente para todas tus unidades de choque.',
@@ -31,7 +31,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Esencial para maximizar la eficacia táctica de ejércitos físicos basados en posicionamiento y turnos de espera.',
   },
-  'combate': {
+  'skill_battle_artistry': {
     advanced: {
       recommendedName: 'Golpe poderoso',
       why: 'Aumenta el daño de Golpe heroico en un 10% adicional por nivel del héroe. Permite eliminar pilas completas de criaturas neutrales sin arriesgar tropas.',
@@ -46,7 +46,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Pilar obligatorio para todo Señor de la Guerra de Mazmorra (Enatee, Devir, Aguijón, Baluarte).',
   },
-  'comunion-abisal': {
+  'skill_faction_unfrozen': {
     advanced: {
       recommendedName: 'Nuestro verdadero hogar',
       why: '+10% de daño y -10% recibido en terreno nativo del Cisma. Proporciona una ventaja territorial masiva en tu zona.',
@@ -61,7 +61,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Habilidad de facción exclusiva del Cisma.',
   },
-  'defensa': {
+  'skill_protection': {
     advanced: {
       recommendedName: 'Cobertura',
       why: 'Reduce un 20% el daño a distancia y de largo alcance recibido. Vital para cruzar el campo de batalla frente a arqueros neutrales o enemigos sin perder efectivos.',
@@ -76,7 +76,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Excelente para preservar ejércitos en el farmeo inicial de la Semana 1 y 2.',
   },
-  'diplomacia': {
+  'skill_diplomacy': {
     advanced: {
       recommendedName: 'Más grande que la vida',
       why: 'Las formaciones neutrales ven tu ejército un 25% más poderoso (50% con Arte de batalla), disparando las probabilidades de que huyan o se unan a ti.',
@@ -91,7 +91,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Multiplica tu ejército sin consumir el crecimiento semanal de tus ciudades.',
   },
-  'economia': {
+  'skill_economy': {
     advanced: {
       recommendedName: 'Recaudador de impuestos',
       why: '+250 de oro diario (+500 si tienes Logística). Permite erigir la Fortificaciones II, Fortificaciones III y Sede Municipal / Metropolis III días antes.',
@@ -106,7 +106,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Ideal para héroes secundarios y en Glastor para una economía explosiva.',
   },
-  'exploracion': {
+  'skill_scouting': {
     advanced: {
       recommendedName: 'Caminos familiares',
       why: '+10 a +20 puntos de movimiento si comienzas el día en territorio controlado. Limpia zonas de origen a velocidad récord.',
@@ -121,7 +121,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Imprescindible para scouting y control de mapa global.',
   },
-  'fuerza-del-triunvirato': {
+  'skill_faction_dungeon': {
     advanced: {
       recommendedName: 'Pasajes subterráneos',
       why: '+10% de daño infligido y -10% de daño recibido en terreno subterráneo/nativo para todas las tropas de Mazmorra. Un multiplicador pasivo bilateral constante.',
@@ -136,7 +136,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Habilidad de facción obligatoria de Mazmorra. Sincroniza la postura de Ataque, Defensa o Poder Mágico según cada situación de combate.',
   },
-  'hechiceria': {
+  'skill_sorcery': {
     advanced: {
       recommendedName: 'Energía sin procesar',
       why: '+10% adicional de daño mágico infligido (+20% con Ofensiva). Maximiza la letalidad de Rayo Arcano, Crepúsculo e Implosión.',
@@ -151,7 +151,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Núcleo obligatorio para todo Brujo de daño mágico directo.',
   },
-  'invocar-avatar': {
+  'skill_summoner': {
     advanced: {
       recommendedName: 'Avatar de furia',
       why: '+40% a +80% de daño al Avatar invocado. Lo convierte en una unidad de ataque letal capaz de eliminar formaciones enemigas.',
@@ -166,7 +166,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Ideal para builds de invocaciones y control del tempo de combate.',
   },
-  'invocar-enjambre': {
+  'skill_faction_demons': {
     advanced: {
       recommendedName: 'Tu descendencia',
       why: '+1 larvas de fuego por cada nivel del héroe. Escala de forma continua aumentando el tamaño de la enjambrazón.',
@@ -181,7 +181,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Habilidad de facción exclusiva del Enjambre.',
   },
-  'justicia': {
+  'skill_faction_humans': {
     advanced: {
       recommendedName: 'Campos de serenidad',
       why: '+10% de daño y -10% recibido en terreno de Templo.',
@@ -196,7 +196,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Habilidad de facción exclusiva del Templo.',
   },
-  'liderazgo': {
+  'skill_leadership': {
     advanced: {
       recommendedName: 'Resolución',
       why: 'Aumenta la probabilidad de que las tropas ganen turnos adicionales con Moral (+1% por punto, duplicado con Arte de batalla).',
@@ -211,7 +211,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Esencial en ejércitos físicos para asegurar la primera acción en el tablero.',
   },
-  'logistica': {
+  'skill_logistic': {
     advanced: {
       recommendedName: 'Pasos agigantados',
       why: 'Recupera 5 puntos de movimiento tras cada victoria en combate. Permite limpiar 4 a 6 campamentos seguidos en un solo día.',
@@ -226,7 +226,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'La habilidad más importante de todo el juego para dominar el mapa de aventura.',
   },
-  'magia-arcana': {
+  'skill_magic_space': {
     advanced: {
       recommendedName: 'Tiempo arcano',
       why: 'Reduce en 1 ronda las recargas de todos los hechizos arcanos, permitiendo lanzar Rayos y hechizos clave casi por turno.',
@@ -241,7 +241,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'La escuela arcana es la reina del daño directo masivo en Mazmorra.',
   },
-  'magia-de-batalla': {
+  'skill_battlemage': {
     advanced: {
       recommendedName: 'Aura de hechicería',
       why: 'Cada vez que el héroe lanza un hechizo, gana +1 de poder de hechizo permanente hasta el final del combate.',
@@ -256,7 +256,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Excelente sinergia entre lanzadores de conjuros y unidades de combate cuerpo a cuerpo.',
   },
-  'magia-de-luz-solar': {
+  'skill_magic_day': {
     advanced: {
       recommendedName: 'Tiempo de luz solar',
       why: 'Reduce en 1 ronda la recarga de todos los hechizos de luz solar (Bendición, Celeridad, Luz abrasadora).',
@@ -271,7 +271,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Ideal para maximizar tiradas de daño con Bendición y optimizar turnos de acción.',
   },
-  'magia-de-nochesombra': {
+  'skill_magic_night': {
     advanced: {
       recommendedName: 'Tiempo de nochesombra',
       why: 'Reduce en 1 ronda la recarga de conjuros de sombras (Crepúsculo, Sueño, Velo oscuro), permitiendo control constante de tropas enemigas.',
@@ -286,7 +286,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'La escuela de magia por excelencia de Mazmorra, con altísimo control de masas y debilitación.',
   },
-  'magia-primigenia': {
+  'skill_magic_primal': {
     advanced: {
       recommendedName: 'Fuerza primigenia',
       why: 'Aumenta en 1 ronda la duración de todos los efectos positivos y negativos aplicados por el héroe y sus tropas.',
@@ -301,7 +301,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'La mejor escuela para builds centradas en Suerte y estados alterados duraderos.',
   },
-  'murmullo': {
+  'skill_faction_nature': {
     advanced: {
       recommendedName: 'Suelo del Micelio',
       why: '+10% de daño y -10% recibido en terreno de Foresta.',
@@ -316,7 +316,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Habilidad de facción exclusiva de la Arboleda.',
   },
-  'nigromancia': {
+  'skill_faction_undead': {
     advanced: {
       recommendedName: 'Tierra de sepultura',
       why: '+10% de daño y -10% recibido en terreno nativo de Necrópolis.',
@@ -331,7 +331,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Habilidad de facción exclusiva de Necrópolis para un crecimiento militar ilimitado.',
   },
-  'ofensiva': {
+  'skill_assault': {
     advanced: {
       recommendedName: 'Frenesí de batalla',
       why: 'Las criaturas aliadas obtienen +2 de ataque por cada punto de moral positiva, disparando su daño en combinaciones con Liderazgo.',
@@ -346,7 +346,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'El mejor potenciador de daño físico directo para ejércitos agresivos.',
   },
-  'percepcion': {
+  'skill_enlightenment': {
     advanced: {
       recommendedName: 'Iluminación',
       why: '+10% de EXP adicional (acumulable con el +40% de Experto). Permite subir de nivel y alcanzar habilidades de Tier 3 mucho antes.',
@@ -361,7 +361,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Acelera la progresión de niveles de tu héroe principal en partidas competitivas.',
   },
-  'reclutamiento': {
+  'skill_trainer': {
     advanced: {
       recommendedName: 'Supervisión directa',
       why: 'Si el héroe está en la ciudad al comenzar la semana, el crecimiento de TODAS las criaturas de esa ciudad aumenta un +50%. Una ventaja de tropas insuperable.',
@@ -376,7 +376,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Reclutamiento transforma la economía militar en una avalancha de tropas imparable.',
   },
-  'resistencia': {
+  'skill_resistance': {
     advanced: {
       recommendedName: 'Obstrucción',
       why: 'Los hechizos enemigos cuestan un 20% a 40% más de maná, agotando la reserva del lanzador rival en 2 rondas.',
@@ -391,7 +391,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'La contra definitiva contra Brujos y héroes especializados en magia destructiva en PvP.',
   },
-  'sabiduria': {
+  'skill_mastery': {
     advanced: {
       recommendedName: 'Entre líneas',
       why: 'Permite al héroe aprender magia neutral alta independientemente de su nivel actual, accediendo a conjuros de mapa y combate avanzados.',
@@ -406,7 +406,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Imprescindible para desbloquear y aprender hechizos de niveles 3, 4 y 5.',
   },
-  'suerte': {
+  'skill_luck': {
     advanced: {
       recommendedName: 'Confianza bestial',
       why: '+1% de probabilidad de golpe de suerte por cada punto de suerte (+2% con Magia primigenia).',
@@ -421,7 +421,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Combina daño masivo con anulación de represalias.',
   },
-  'taumaturgia': {
+  'skill_wisdom': {
     advanced: {
       recommendedName: 'Brillo del taumaturgo',
       why: '+2 de poder de hechizo y conocimiento directos, aumentando la potencia de los conjuros y la reserva de maná.',
@@ -436,7 +436,7 @@ export const SKILL_SELECTION_GUIDES: Record<string, SubskillSelectionGuide> = {
     },
     generalTacticalTip: 'Permite lanzar dos hechizos de diferentes escuelas en la misma ronda de combate.',
   },
-  'tacticas': {
+  'skill_tactics': {
     advanced: {
       recommendedName: 'Uno para todos',
       why: 'Las criaturas aliadas obtienen +2 de ataque (+4 con Ofensiva) por cada enemigo adyacente. Ideal para tropas que combaten rodeadas como Minotauros o Hidras.',

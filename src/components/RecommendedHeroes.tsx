@@ -153,7 +153,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
       .toLowerCase()
       .trim();
 
-  const findOfficialSkill = (skillStr: string): OfficialSkill | undefined => {
+  const findOfficialSkill = (skillStr: string): OfficialSkill => {
     const clean = normalize(skillStr.replace(/\s*\((Experta|Avanzada|Básica)\)/, ''));
     return OFFICIAL_SKILLS_DATA.find((s) => {
       const sNorm = normalize(s.name);
