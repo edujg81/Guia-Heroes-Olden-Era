@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { FactionId, getHeroesForFaction, FACTIONS_METADATA, getFactionTheme } from '../data/factionDataProvider';
-//import { HERO_SELECTION_GUIDELINES } from '../data/dungeonData';
 import { OFFICIAL_SKILLS_DATA } from '../data/officialSkillsData';
 import { OFFICIAL_SUBCLASSES } from '../data/subclassesData';
 import { HERO_SUBSKILL_CHOICES, SKILL_SELECTION_GUIDES } from '../data/subskillsRecommendationData';
-import type { HeroWithExtras, OfficialSkill, HeroSubskillChoice, SubclassInfo } from '../types';
+import type { HeroWithExtras, HeroSubskillChoice, SubclassInfo } from '../types';
+import type { ApiSkill, ApiSubSkillChoice } from '../types-api';
 import { WaxSealBadge } from './ui/WaxSealBadge';
 import { ResolvedText } from './ui/ResolvedText';
 import { useStickyState } from '../utils/useStickyState';
@@ -143,7 +143,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
   const [roleFilter, setRoleFilter] = useStickyState<string>('all', 'heroes_role_filter');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [compareHeroId, setCompareHeroId] = useState<string | null>(null);
-  const [inspectedSkill, setInspectedSkill] = useState<OfficialSkill | null>(null);
+  const [inspectedSkill, setInspectedSkill] = useState<ApiSkill | null>(null);
   const [showSubskillsDetails, setShowSubskillsDetails] = useStickyState<boolean>(true, 'heroes_show_subskills');
 
   const normalize = (str: string) =>
@@ -153,7 +153,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
       .toLowerCase()
       .trim();
 
-  const findOfficialSkill = (skillStr: string): OfficialSkill => {
+  const findOfficialSkill = (skillStr: string): ApiSkill | undefined => {
     const clean = normalize(skillStr.replace(/\s*\((Experta|Avanzada|Básica)\)/, ''));
     return OFFICIAL_SKILLS_DATA.find((s) => {
       const sNorm = normalize(s.name);
@@ -172,13 +172,13 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
       const skillId = offSkill?.id || clean.toLowerCase().replace(/\s+/g, '-');
       const guide = SKILL_SELECTION_GUIDES[skillId];
 
-      const advSub = offSkill?.subskills.advanced.find(
+      const advSub = offSkill?.level2.subSkillChoices.find(
         (s) => s.name.toLowerCase() === (guide?.advanced.recommendedName || '').toLowerCase()
-      ) || offSkill?.subskills.advanced[0];
+      ) || offSkill?.level2.subSkillChoices[0];
 
-      const expSub = offSkill?.subskills.expert.find(
+      const expSub = offSkill?.level3.subSkillChoices.find(
         (s) => s.name.toLowerCase() === (guide?.expert.recommendedName || '').toLowerCase()
-      ) || offSkill?.subskills.expert[0];
+      ) || offSkill?.level3.subSkillChoices[0];
 
       return {
         skillName: skillStr,
@@ -188,6 +188,16 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
         expertReason: guide?.expert.why || 'Proporciona la ventaja definitiva en combate tardío.',
       };
     });
+  };
+
+  const isSubskillRecommended = (skill: ApiSkill, sub: ApiSubSkillChoice, tier: 'advanced' | 'expert'): boolean => {
+    const choice = HERO_SUBSKILL_CHOICES[selectedHero.id]?.find(
+      (c) => normalize(c.skillName.replace(/\s*\((Experta|Avanzada|Básica)\)/, '')) === normalize(skill.name)
+    );
+    if (!choice) return false;
+    const recommendedName = tier === 'advanced' ? choice.advancedSubskill : choice.expertSubskill;
+    if (!recommendedName) return false;
+    return normalize(sub.name) === normalize(recommendedName);
   };
 
   const factionClassInfo = FACTION_CLASS_NAMES[selectedFaction] || { might: 'Poder', magic: 'Magia' };
@@ -994,7 +1004,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
                               {/* Advanced Recommended */}
                               {(() => {
-                                const advSubObj = offSkill?.subskills.advanced.find(
+                                const advSubObj = offSkill?.level2.subSkillChoices.find(
                                   (s) => normalize(s.name) === normalize(choice.advancedSubskill)
                                 );
                                 return (
@@ -1029,7 +1039,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                                       <p className={`text-[11px] leading-snug ${
                                         themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
                                       }`}>
-                                        {advSubObj.effect}
+                                        {advSubObj.description}
                                       </p>
                                     )}
 
@@ -1050,7 +1060,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                               {/* Expert Recommended */}
                               {choice.expertSubskill ? (
                                 (() => {
-                                  const expSubObj = offSkill?.subskills.expert.find(
+                                  const expSubObj = offSkill?.level3.subSkillChoices.find(
                                     (s) => normalize(s.name) === normalize(choice.expertSubskill || '')
                                   );
                                   return (
@@ -1085,7 +1095,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                                         <p className={`text-[11px] leading-snug ${
                                           themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
                                         }`}>
-                                          {expSubObj.effect}
+                                          {expSubObj.description}
                                         </p>
                                       )}
 
@@ -1350,7 +1360,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                             ? 'bg-purple-100 text-purple-900 border-purple-300'
                             : `${theme.bgBadge} ${theme.textAccent} ${theme.borderSubtle}`
                         }`}>
-                          {inspectedSkill.category} {inspectedSkill.faction ? `• ${inspectedSkill.faction}` : ''}
+                          {inspectedSkill.skillType ? `• ${inspectedSkill.skillType}` : ''}
                         </span>
                       </h3>
                       <span className={`text-[11px] font-mono ${
@@ -1373,7 +1383,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                 </div>
 
                 {/* Selection Guide in Modal */}
-                {inspectedSkill.selectionGuide && (
+                {SKILL_SELECTION_GUIDES[inspectedSkill.id] && (
                   <div className={`p-3.5 rounded-xl space-y-2 text-xs border ${
                     themeMode === 'light'
                       ? 'bg-amber-50/80 border-amber-300'
@@ -1394,10 +1404,10 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                         <span className={`font-bold block mb-0.5 ${
                           themeMode === 'light' ? 'text-purple-900' : 'text-yellow-400'
                         }`}>
-                          ★ Avanzado: {inspectedSkill.selectionGuide.advanced.recommendedName}
+                          ★ Avanzado: {SKILL_SELECTION_GUIDES[inspectedSkill.id].advanced.recommendedName}
                         </span>
                         <p className={themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}>
-                          {inspectedSkill.selectionGuide.advanced.why}
+                          {SKILL_SELECTION_GUIDES[inspectedSkill.id].advanced.why}
                         </p>
                       </div>
                       <div className={`p-2 rounded border ${
@@ -1408,10 +1418,10 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                         <span className={`font-bold block mb-0.5 ${
                           themeMode === 'light' ? 'text-amber-900' : 'text-yellow-400'
                         }`}>
-                          ★ Experto: {inspectedSkill.selectionGuide.expert.recommendedName}
+                          ★ Experto: {SKILL_SELECTION_GUIDES[inspectedSkill.id].expert.recommendedName}
                         </span>
                         <p className={themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}>
-                          {inspectedSkill.selectionGuide.expert.why}
+                          {SKILL_SELECTION_GUIDES[inspectedSkill.id].expert.why}
                         </p>
                       </div>
                     </div>
@@ -1436,7 +1446,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                         themeMode === 'light' ? 'text-purple-800' : theme.textAccent
                       }`}>Básico</span>
                       <p className={`text-[11px] ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>
-                        {inspectedSkill.upgrades.basic}
+                        {inspectedSkill.level1.levelName}
                       </p>
                     </div>
                     <div className={`p-2.5 rounded-lg border ${
@@ -1448,7 +1458,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                         themeMode === 'light' ? 'text-purple-800' : theme.textAccent
                       }`}>Avanzado</span>
                       <p className={`text-[11px] ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>
-                        {inspectedSkill.upgrades.advanced}
+                        {inspectedSkill.level2.levelName}
                       </p>
                     </div>
                     <div className={`p-2.5 rounded-lg border ${
@@ -1460,7 +1470,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                         themeMode === 'light' ? 'text-amber-900' : 'text-yellow-300'
                       }`}>Experto</span>
                       <p className={`text-[11px] ${themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'}`}>
-                        {inspectedSkill.upgrades.expert}
+                        {inspectedSkill.level3.levelName}
                       </p>
                     </div>
                   </div>
@@ -1475,11 +1485,11 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                     Subhabilidades de Nivel Avanzado (Selecciona 1 de 3 en Nivel 2)
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                    {inspectedSkill.subskills.advanced.map((sub, idx) => (
+                    {inspectedSkill.level2.subSkillChoices.map((sub, idx) => (
                       <div
                         key={idx}
                         className={`p-2.5 rounded-lg space-y-1 border ${
-                          sub.isRecommendedMeta
+                          isSubskillRecommended(inspectedSkill, sub, 'advanced')
                             ? themeMode === 'light'
                               ? 'bg-purple-50 border-2 border-purple-300'
                               : 'bg-yellow-950/30 border-2 border-yellow-500/80'
@@ -1501,7 +1511,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                               themeMode === 'light' ? 'text-slate-900' : 'text-white'
                             }`}>{sub.name}</span>
                           </div>
-                          {sub.isRecommendedMeta && (
+                          {isSubskillRecommended(inspectedSkill, sub, 'advanced') && (
                             <span className={`text-[8px] font-mono font-bold px-1.5 py-0.2 rounded border ${
                               themeMode === 'light'
                                 ? 'bg-amber-100 text-amber-900 border-amber-300'
@@ -1513,7 +1523,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                         </div>
                         <p className={`text-[11px] leading-snug ${
                           themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
-                        }`}>{sub.effect}</p>
+                        }`}>{sub.description}</p>
                       </div>
                     ))}
                   </div>
@@ -1528,11 +1538,11 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                     Subhabilidades de Nivel Experto (Selecciona 1 de 3 en Nivel 3)
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                    {inspectedSkill.subskills.expert.map((sub, idx) => (
+                    {inspectedSkill.level3.subSkillChoices.map((sub, idx) => (
                       <div
                         key={idx}
                         className={`p-2.5 rounded-lg space-y-1 border ${
-                          sub.isRecommendedMeta
+                          isSubskillRecommended(inspectedSkill, sub, 'expert')
                             ? themeMode === 'light'
                               ? 'bg-amber-50 border-2 border-amber-300'
                               : 'bg-yellow-950/30 border-2 border-yellow-500/80'
@@ -1554,7 +1564,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                               themeMode === 'light' ? 'text-slate-900' : 'text-yellow-100'
                             }`}>{sub.name}</span>
                           </div>
-                          {sub.isRecommendedMeta && (
+                          {isSubskillRecommended(inspectedSkill, sub, 'expert') && (
                             <span className={`text-[8px] font-mono font-bold px-1.5 py-0.2 rounded border ${
                               themeMode === 'light'
                                 ? 'bg-amber-100 text-amber-900 border-amber-300'
@@ -1566,7 +1576,7 @@ export const RecommendedHeroes: React.FC<RecommendedHeroesProps> = ({
                         </div>
                         <p className={`text-[11px] leading-snug ${
                           themeMode === 'light' ? 'text-slate-700' : 'text-slate-300'
-                        }`}>{sub.effect}</p>
+                        }`}>{sub.description}</p>
                       </div>
                     ))}
                   </div>

@@ -5,7 +5,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_assault",
     name: "Ofensiva",
-    icon: "",
+    icon: "icons/hero_skills/skill_assault",
     skillType: "Common",
     level1: {
       levelName: "Ofensiva básica",
@@ -80,7 +80,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_battle_artistry",
     name: "Combate",
-    icon: "",
+    icon: "icons/hero_skills/skill_battle_artistry",    
     skillType: "Class",
     level1: {
       levelName: "Combate básico",
@@ -155,7 +155,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_battlemage",
     name: "Magia de batalla",
-    icon: "",
+    icon: "icons/hero_skills/skill_battlemage",    
     skillType: "Common",
     level1: {
       levelName: "Magia de batalla básica",
@@ -230,7 +230,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_diplomacy",
     name: "Diplomacia",
-    icon: "",
+    icon: "icons/hero_skills/skill_diplomacy",    
     skillType: "Common",
     level1: {
       levelName: "Diplomacia básica",
@@ -305,7 +305,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_economy",
     name: "Economía",
-    icon: "",
+    icon: "icons/hero_skills/skill_economy",    
     skillType: "Common",
     level1: {
       levelName: "Economía básica",
@@ -380,7 +380,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_enlightenment",
     name: "Percepción",
-    icon: "",
+    icon: "icons/hero_skills/skill_enlightenment",    
     skillType: "Common",
     level1: {
       levelName: "Percepción básica",
@@ -455,7 +455,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_faction_demons",
     name: "Invocar enjambre",
-    icon: "",
+    icon: "icons/hero_skills/skill_faction_demons",    
     skillType: "Faction",
     level1: {
       levelName: "Invocar enjambre básica",
@@ -530,7 +530,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_faction_dungeon",
     name: "Fuerza del Triunvirato",
-    icon: "",
+    icon: "icons/hero_skills/skill_faction_dungeon",    
     skillType: "Faction",
     level1: {
       levelName: "Fuerza del Triunvirato básica",
@@ -605,7 +605,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_faction_humans",
     name: "Justicia",
-    icon: "",
+    icon: "icons/hero_skills/skill_faction_humans",    
     skillType: "Faction",
     level1: {
       levelName: "Justicia básica",
@@ -680,7 +680,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_faction_nature",
     name: "Murmullo",
-    icon: "",
+    icon: "icons/hero_skills/skill_faction_nature",    
     skillType: "Faction",
     level1: {
       levelName: "Murmullo básico",
@@ -755,7 +755,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_faction_undead",
     name: "Nigromancia",
-    icon: "",
+    icon: "icons/hero_skills/skill_faction_undead",    
     skillType: "Faction",
     level1: {
       levelName: "Nigromancia básica",
@@ -830,7 +830,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_faction_unfrozen",
     name: "Comunión abisal",
-    icon: "",
+    icon: "icons/hero_skills/skill_faction_unfrozen",    
     skillType: "Faction",
     level1: {
       levelName: "Comunión abisal básica",
@@ -905,7 +905,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_formation",
     name: "Arte de batalla",
-    icon: "",
+    icon: "icons/hero_skills/skill_formation",    
     skillType: "Common",
     level1: {
       levelName: "Arte de batalla básico",
@@ -980,7 +980,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_leadership",
     name: "Liderazgo",
-    icon: "",
+    icon: "icons/hero_skills/skill_leadership",    
     skillType: "Common",
     level1: {
       levelName: "Liderazgo básico",
@@ -1055,7 +1055,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_logistic",
     name: "Logística",
-    icon: "",
+    icon: "icons/hero_skills/skill_logistic",    
     skillType: "Common",
     level1: {
       levelName: "Logística básica",
@@ -1130,7 +1130,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_luck",
     name: "Suerte",
-    icon: "",
+    icon: "icons/hero_skills/skill_luck",    
     skillType: "Common",
     level1: {
       levelName: "Suerte básica",
@@ -1205,7 +1205,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_magic_day",
     name: "Magia de luz solar",
-    icon: "",
+    icon: "icons/hero_skills/skill_magic_day",    
     skillType: "Common",
     level1: {
       levelName: "Magia de luz solar básica",
@@ -1280,7 +1280,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_magic_night",
     name: "Magia de nochesombra",
-    icon: "",
+    icon: "icons/hero_skills/skill_magic_night",    
     skillType: "Common",
     level1: {
       levelName: "Magia de nochesombra básica",
@@ -1355,7 +1355,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_magic_primal",
     name: "Magia primigenia",
-    icon: "",
+    icon: "icons/hero_skills/skill_magic_primal",    
     skillType: "Common",
     level1: {
       levelName: "Magia primigenia básica",
@@ -1430,7 +1430,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_magic_space",
     name: "Magia arcana",
-    icon: "",
+    icon: "icons/hero_skills/skill_magic_space",    
     skillType: "Common",
     level1: {
       levelName: "Magia arcana básica",
@@ -1505,7 +1505,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_mastery",
     name: "Sabiduría",
-    icon: "",
+    icon: "icons/hero_skills/skill_mastery",    
     skillType: "Common",
     level1: {
       levelName: "Sabiduría básica",
@@ -1580,7 +1580,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_protection",
     name: "Defensa",
-    icon: "",
+    icon: "icons/hero_skills/skill_protection",    
     skillType: "Common",
     level1: {
       levelName: "Defensa básica",
@@ -1655,7 +1655,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_resistance",
     name: "Resistencia",
-    icon: "",
+    icon: "icons/hero_skills/skill_resistance",    
     skillType: "Common",
     level1: {
       levelName: "Resistencia básica",
@@ -1730,7 +1730,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_scouting",
     name: "Exploración",
-    icon: "",
+    icon: "icons/hero_skills/skill_scouting",    
     skillType: "Common",
     level1: {
       levelName: "Exploración básica",
@@ -1805,7 +1805,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_siege",
     name: "Arte de asedio",
-    icon: "",
+    icon: "icons/hero_skills/skill_siege",    
     skillType: "Common",
     level1: {
       levelName: "Arte de asedio básico",
@@ -1880,7 +1880,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_sorcery",
     name: "Hechicería",
-    icon: "",
+    icon: "icons/hero_skills/skill_sorcery",    
     skillType: "Common",
     level1: {
       levelName: "Hechicería básica",
@@ -1955,7 +1955,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_summoner",
     name: "Invocar avatar",
-    icon: "",
+    icon: "icons/hero_skills/skill_summoner",    
     skillType: "Common",
     level1: {
       levelName: "Invocar avatar básica",
@@ -2030,7 +2030,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_tactics",
     name: "Tácticass",
-    icon: "",
+    icon: "icons/hero_skills/skill_tactics",
     skillType: "Common",
     level1: {
       levelName: "Tácticas básicas",
@@ -2105,7 +2105,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_trainer",
     name: "Reclutamiento",
-    icon: "",
+    icon: "icons/hero_skills/skill_trainer",    
     skillType: "Class",
     level1: {
       levelName: "Reclutamiento básico",
@@ -2180,7 +2180,7 @@ const OFFICIAL_SKILLS_RAW_DATA: ApiSkill[] = [
   {
     id: "skill_wisdom",
     name: "Taumaturgia",
-    icon: "",
+    icon: "icons/hero_skills/skill_wisdom",    
     skillType: "Class",
     level1: {
       levelName: "Taumaturgia básica",
@@ -2279,3 +2279,4 @@ export const OFFICIAL_SKILLS_DATA: (ApiSkill & SkillLocalExtras)[] = OFFICIAL_SK
   };
   return { ...skill, ...extras };
 });
+

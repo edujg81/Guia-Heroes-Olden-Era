@@ -125,6 +125,8 @@ hero.startingSkills.forEach((skillObj) => {
         initialMap[offSkill.id] = {
           skillId: offSkill.id,
           tier,
+          chosenAdvancedSubskill: tier !== 'basic' ? (offSkill.level2.subSkillChoices[0]?.name || undefined) : undefined,
+          chosenExpertSubskill: tier === 'expert' ? (offSkill.level3.subSkillChoices[0]?.name || undefined) : undefined,
         };
       }
     });
@@ -154,8 +156,8 @@ hero.startingSkills.forEach((skillObj) => {
         const tier = isExperta ? 'expert' : isAvanzada ? 'advanced' : 'basic';
         const choice = heroChoices.find((c) => normalize(c.skillName).includes(normalize(cleanName)));
 
-        const chosenAdv = choice?.advancedSubskill || officialSkill.subskills.advanced[0]?.name;
-        const chosenExp = isExperta ? (choice?.expertSubskill || officialSkill.subskills.expert[0]?.name) : undefined;
+        const chosenAdv = choice?.advancedSubskill || officialSkill.level2.subSkillChoices[0]?.name;
+        const chosenExp = isExperta ? (choice?.expertSubskill || officialSkill.level3.subSkillChoices[0]?.name) : undefined;
 
         newAllocations[officialSkill.id] = {
           skillId: officialSkill.id,
@@ -333,14 +335,14 @@ Generado con Compendio Táctico HoMM: Olden Era`;
     return OFFICIAL_SKILLS_DATA.filter((s) => {
       const matchCat =
         filterCategory === 'all' ||
-        (filterCategory === 'Común' && s.category === 'Común') ||
+        (filterCategory === 'Común' && s.skillType === 'Common') ||
         (filterCategory === 'Magia' && s.name.toLowerCase().includes('magia')) ||
         (filterCategory === 'allocated' && allocations[s.id] && allocations[s.id].tier !== 'none');
 
       const matchSearch =
         s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        s.upgrades.basic.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        s.upgrades.expert.toLowerCase().includes(searchTerm.toLowerCase());
+        s.level1.levelName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        s.level3.levelName.toLowerCase().includes(searchTerm.toLowerCase());
 
       return matchCat && matchSearch;
     });
@@ -773,11 +775,11 @@ Generado con Compendio Táctico HoMM: Olden Era`;
                     isDark ? 'text-slate-300' : 'text-slate-700'
                   }`}>
                     {tier === 'expert'
-                      ? skill.upgrades.expert
+                      ? skill.level3.levelName
                       : tier === 'advanced'
-                      ? skill.upgrades.advanced
+                      ? skill.level2.levelName
                       : tier === 'basic'
-                      ? skill.upgrades.basic
+                      ? skill.level1.levelName
                       : 'No aprendida. Asigna al menos nivel Básico (1 pt) para activarla.'}
                   </p>
 
@@ -790,7 +792,7 @@ Generado con Compendio Táctico HoMM: Olden Era`;
                         Subhabilidad Avanzada:
                       </div>
                       <div className="space-y-1">
-                        {skill.subskills.advanced.map((sub, sIdx) => {
+                        {skill.level2.subSkillChoices.map((sub, sIdx) => {
                           const isSelected = currentAlloc.chosenAdvancedSubskill === sub.name;
                           return (
                             <button
@@ -818,7 +820,7 @@ Generado con Compendio Táctico HoMM: Olden Era`;
                             Subhabilidad Experta:
                           </div>
                           <div className="space-y-1">
-                            {skill.subskills.expert.map((sub, sIdx) => {
+                            {skill.level3.subSkillChoices.map((sub, sIdx) => {
                               const isSelected = currentAlloc.chosenExpertSubskill === sub.name;
                               return (
                                 <button
@@ -859,7 +861,7 @@ Generado con Compendio Táctico HoMM: Olden Era`;
             <div className="flex items-center justify-between border-b pb-3 border-slate-800">
               <div>
                 <span className="text-[10px] font-mono uppercase font-bold text-amber-400">
-                  {activeModalSkill.category}
+                  {activeModalSkill.name}
                 </span>
                 <h3 className="text-xl font-bold font-serif">{activeModalSkill.name}</h3>
               </div>
@@ -872,18 +874,18 @@ Generado con Compendio Táctico HoMM: Olden Era`;
               </button>
             </div>
 
-            {/* Upgrades */}
+            {/* Niveles de Maestría */}
             <div className="space-y-2">
               <h4 className="text-xs font-mono font-bold uppercase text-slate-400">Niveles de Maestría:</h4>
               <div className="space-y-1.5 text-xs font-mono">
                 <div className={`p-2 rounded border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <span className="text-blue-400 font-bold">Básica (1 pt):</span> {activeModalSkill.upgrades.basic}
+                  <span className="text-blue-400 font-bold">Básica (1 pt):</span> {activeModalSkill.level1.levelName}
                 </div>
                 <div className={`p-2 rounded border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <span className="text-purple-400 font-bold">Avanzada (2 pts):</span> {activeModalSkill.upgrades.advanced}
+                  <span className="text-purple-400 font-bold">Avanzada (2 pts):</span> {activeModalSkill.level2.levelName}
                 </div>
                 <div className={`p-2 rounded border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <span className="text-yellow-400 font-bold">Experta (3 pts):</span> {activeModalSkill.upgrades.expert}
+                  <span className="text-yellow-400 font-bold">Experta (3 pts):</span> {activeModalSkill.level3.levelName}
                 </div>
               </div>
             </div>
@@ -894,10 +896,10 @@ Generado con Compendio Táctico HoMM: Olden Era`;
                 3 Subhabilidades Avanzadas:
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                {activeModalSkill.subskills.advanced.map((sub, sIdx) => (
+                {activeModalSkill.level2.subSkillChoices.map((sub, sIdx) => (
                   <div key={sIdx} className={`p-2.5 rounded-lg border text-xs ${isDark ? 'bg-black/60 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
                     <div className="font-bold text-slate-200 mb-1">{sub.name}</div>
-                    <p className="text-[11px] text-slate-400 leading-tight">{sub.effect}</p>
+                    <p className="text-[11px] text-slate-400 leading-tight">{sub.description}</p>
                   </div>
                 ))}
               </div>
@@ -906,10 +908,10 @@ Generado con Compendio Táctico HoMM: Olden Era`;
                 3 Subhabilidades Expertas:
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                {activeModalSkill.subskills.expert.map((sub, sIdx) => (
+                {activeModalSkill.level3.subSkillChoices.map((sub, sIdx) => (
                   <div key={sIdx} className={`p-2.5 rounded-lg border text-xs ${isDark ? 'bg-black/60 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
                     <div className="font-bold text-slate-200 mb-1">{sub.name}</div>
-                    <p className="text-[11px] text-slate-400 leading-tight">{sub.effect}</p>
+                    <p className="text-[11px] text-slate-400 leading-tight">{sub.description}</p>
                   </div>
                 ))}
               </div>
