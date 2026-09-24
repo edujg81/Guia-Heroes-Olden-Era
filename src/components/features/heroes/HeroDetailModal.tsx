@@ -153,7 +153,7 @@ export const HeroDetailModal: React.FC<HeroDetailModalProps> = ({
 
         {/* Hero Header */}
         <div className="flex items-start gap-4 mb-6">
-          <div className="w-28 shrink-0">
+          <div className="w-33 shrink-0 flex flex-col items-center">
             <HeroImage
               heroId={hero.id}
               heroName={hero.name}
@@ -161,45 +161,47 @@ export const HeroDetailModal: React.FC<HeroDetailModalProps> = ({
               iconPath={hero.iconPath}
               alt={`Retrato de ${hero.name}`}
               size="xl"
-              className="rounded-2xl border-2 border-slate-700 shadow-xl bg-slate-800"
+              className="rounded-2xl border-2 border-slate-700 shadow-xl bg-slate-800 w-32 h-32"
             />
+            <div className="mt-2 flex items-center justify-center gap-3 text-sm">
+              <div className="flex items-center gap-1.5">
+                <img src={`/src/assets/${hero.factionIcon}.png`} alt={`Facción ${hero.factionDisplay}`} className="w-10 h-10 object-cover" />
+                <span className="text-slate-300 font-medium">{hero.factionDisplay}</span>
+              </div>
+            </div>
           </div>
 
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
-              <h2 className="text-2xl font-serif font-bold text-white">{hero.name}</h2>
-              <span className="text-sm font-mono text-slate-400">({hero.classDisplay})</span>
+              <h2 className="text-2xl font-serif font-bold text-yellow-200">{hero.name}</h2>
               <TierBadge tier={hero.tierRank} size="sm" className="max-w-full whitespace-normal text-center" />
             </div>
 
-            <p className="mt-1 text-[16px] leading-snug break-words text-slate-400 font-mono">
+            <p className="mt-1 text-[16px] leading-snug break-words text-slate-400 font-cursive italic">
               {hero.title}
             </p>
 
-            <div className="flex items-center gap-2 mb-1 text-sm font-mono text-slate-400">
-              {hero.classType === 'magic' ? 'Magia' : 'Poder'}
+            <div className="flex items-center gap-1.5">
+                <img src={`/src/assets/${hero.classIcon}.png`} alt={`Clase ${hero.classDisplay}`} className="w-10 h-10 object-cover" />
+                <span className="text-slate-300 font-medium">{hero.classDisplay}</span>
             </div>
 
-            <div className="grid grid-cols-8 gap-1.5 mt-3">
-              <div className="p-2 rounded-lg bg-slate-950/40 border border-slate-800 text-center">
+            <div className="grid grid-cols-16 gap-1 mt-3">
+              <div className="p-2 rounded-lg bg-slate-950/40 text-center">
                 <img src="/src/assets/icons/hero_stats/offence.png" alt="ATQ" className="w-5 h-5 mx-auto mb-1" />
                 <div className="font-bold text-slate-200">{hero.attack}</div>
-                <div className="text-[10px] text-slate-500">{hero.statGrowth.attack > 0 ? `+${hero.statGrowth.attack}` : ''}</div>
               </div>
-              <div className="p-2 rounded-lg bg-slate-950/40 border border-slate-800 text-center">
+              <div className="p-2 rounded-lg bg-slate-950/40 text-center">
                 <img src="/src/assets/icons/hero_stats/defence.png" alt="DEF" className="w-5 h-5 mx-auto mb-1" />
                 <div className="font-bold text-slate-200">{hero.defence}</div>
-                <div className="text-[10px] text-slate-500">{hero.statGrowth.defense > 0 ? `+${hero.statGrowth.defense}` : ''}</div>
               </div>
-              <div className="p-2 rounded-lg bg-slate-950/40 border border-slate-800 text-center">
+              <div className="p-2 rounded-lg bg-slate-950/40 text-center">
                 <img src="/src/assets/icons/hero_stats/spellpower.png" alt="PODER" className="w-5 h-5 mx-auto mb-1" />
                 <div className="font-bold text-slate-200">{hero.spellPower}</div>
-                <div className="text-[10px] text-slate-500">{hero.statGrowth.spellPower > 0 ? `+${hero.statGrowth.spellPower}` : ''}</div>
               </div>
-              <div className="p-2 rounded-lg bg-slate-950/40 border border-slate-800 text-center">
+              <div className="p-2 rounded-lg bg-slate-950/40 text-center">
                 <img src="/src/assets/icons/hero_stats/intelligence.png" alt="CONOC" className="w-5 h-5 mx-auto mb-1" />
                 <div className="font-bold text-slate-200">{hero.knowledge}</div>
-                <div className="text-[10px] text-slate-500">{hero.statGrowth.knowledge > 0 ? `+${hero.statGrowth.knowledge}` : ''}</div>
               </div>
             </div>
           </div>
@@ -333,7 +335,7 @@ const OverviewTab: React.FC<{
         <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
           <div className="flex items-center gap-3 text-sm font-bold text-amber-400 mb-2">
             {hero.specializationIcon ? (
-              <img src={`/src/assets/${hero.specializationIcon}`} alt="Especialidad" className="w-6 h-6 rounded-md object-cover" />
+              <img src={`/src/assets/${hero.specializationIcon}.png`} alt="Especialidad" className="w-6 h-6 rounded-md object-cover" />
             ) : (
               <Sparkles className="w-4 h-4" />
             )}
@@ -348,51 +350,56 @@ const OverviewTab: React.FC<{
             <Shield className="w-4 h-4 text-rose-400" />
             <span>Ejército Inicial</span>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap justify-center gap-6">
             {hero.startingArmy?.map((unit, i) => (
-              <span key={i} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 font-mono text-[11px]">
+              <div key={i} className="flex flex-col items-center gap-2 text-center">
                 {unit.icon ? (
-                  <img src={`/src/assets/${unit.icon}`} alt={unit.unitName} className="w-4 h-4 rounded-sm object-cover" />
+                  <img src={`/src/assets/${unit.icon}.png`} alt={unit.unitName} className="w-16 h-16 rounded-sm object-cover" />
                 ) : null}
-                <span>{unit.unitName} ({unit.countInterval})</span>
-              </span>
+                <div className="text-xs font-mono text-slate-200 max-w-[4.5rem] leading-tight">{unit.unitName}</div>
+                <div className="text-xs font-mono text-amber-300">{unit.countInterval}</div>
+              </div>
             ))}
           </div>
         </div>
 
-        {/* Starting Skills & Starting Spells */}
+        {/* Starting Skills */}
         <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
           <div className="flex items-center gap-2 text-sm font-bold text-slate-200 mb-2">
             <BookOpen className="w-4 h-4 text-blue-400" />
-            <span>Habilidades & Hechizos Iniciales</span>
+            <span>Habilidades Iniciales</span>
           </div>
-          <div className="space-y-2">
-            {hero.startingSkills && hero.startingSkills.length > 0 && (
-              <div className="flex flex-wrap gap-1.5">
-                {hero.startingSkills.map((skill, i) => (
-                  <span key={i} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 font-mono text-[11px]">
-                    {skill.icon ? (
-                      <img src={`/src/assets/${skill.icon}`} alt={skill.skillName} className="w-4 h-4 rounded-sm object-cover" />
-                    ) : null}
-                    <span>{skill.skillName}</span>
-                  </span>
-                ))}
+          <div className="flex flex-wrap justify-center gap-6">
+            {hero.startingSkills.map((skill, i) => (
+              <div key={i} className="flex flex-col items-center gap-2 text-center">
+                {skill.icon ? (
+                  <img src={`/src/assets/${skill.icon}.png`} alt={skill.skillName} className="w-16 h-16 rounded-sm object-cover" />
+                ) : null}
+                <div className="text-xs font-mono text-slate-200 max-w-[4.5rem] leading-tight">{skill.skillName}</div>
               </div>
-            )}
-            {hero.startingSpells && hero.startingSpells.length > 0 && (
-              <div className="flex flex-wrap gap-1.5">
-                {hero.startingSpells.map((spell, i) => (
-                  <span key={i} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 font-mono text-[11px]">
-                    {spell.icon ? (
-                      <img src={`/src/assets/${spell.icon}`} alt={spell.spellName} className="w-4 h-4 rounded-sm object-cover" />
-                    ) : null}
-                    <span>{spell.spellName}</span>
-                  </span>
-                ))}
-              </div>
-            )}
+            ))}
           </div>
         </div>
+
+        {/* Starting Spells */}
+        {hero.startingSpells && hero.startingSpells.length > 0 && (
+          <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+            <div className="flex items-center gap-2 text-sm font-bold text-slate-200 mb-2">
+              <Wand2 className="w-4 h-4 text-purple-400" />
+              <span>Hechizos Iniciales</span>
+            </div>
+            <div className="flex flex-wrap justify-center gap-6">
+              {hero.startingSpells.map((spell, i) => (
+                <div key={i} className="flex flex-col items-center gap-2 text-center">
+                  {spell.icon ? (
+                    <img src={`/src/assets/${spell.icon}.png`} alt={spell.spellName} className="w-16 h-16 rounded-sm object-cover" />
+                  ) : null}
+                  <div className="text-xs font-mono text-slate-200 max-w-[4.5rem] leading-tight">{spell.spellName}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Biography - full row */}
         <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 md:col-span-2">
