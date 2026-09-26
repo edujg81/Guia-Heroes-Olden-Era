@@ -9,7 +9,7 @@ interface HeroImageProps {
   iconPath?: string;
   alt?: string;
   className?: string;
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
   fallbackIcon?: React.ReactNode;
 }
 
@@ -33,22 +33,22 @@ export const HeroImage: React.FC<HeroImageProps> = ({
   fallbackIcon,
 }) => {
   const [hasError, setHasError] = useState(false);
-  // Normaliza iconPath: puede venir sin "/src/assets/" y sin ".png".
+  // Normaliza iconPath: puede venir sin "src/assets/" y sin ".png".
   const normalizeIconPath = (raw?: string): string | null => {
     if (!raw) return null;
     let p = raw.trim();
     if (!p) return null;
-    // Quitar "/src/assets/" si lo incluye, para construir la ruta canónica.
-    if (p.startsWith('/src/assets/')) {
-      p = p.substring('/src/assets/'.length);
+    // Quitar "src/assets/" si lo incluye, para construir la ruta canónica.
+    if (p.startsWith('src/assets/')) {
+      p = p.substring('src/assets/'.length);
     } else if (p.startsWith('src/assets/')) {
       p = p.substring('src/assets/'.length);
     }
     if (!p.endsWith('.png')) p += '.png';
-    return `/src/assets/${p}`;
+    return `src/assets/${p}`;
   };
 
-  const iconSrc = normalizeIconPath(iconPath) || `/src/assets/icons/heroes/${heroId ? heroId.toLowerCase() : 'default'}/${heroId || 'default'}.png`;
+const iconSrc = normalizeIconPath(iconPath) || `src/assets/icons/heroes/${heroId ? heroId.toLowerCase() : 'default'}/${heroId || 'default'}.png`;
 
   const sizeClass = SIZE_MAP[size] || SIZE_MAP.md;
 

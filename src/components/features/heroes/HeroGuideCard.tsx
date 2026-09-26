@@ -117,19 +117,19 @@ export const HeroGuideCard: React.FC<HeroGuideCardProps> = ({
           {/* Stat Growth Matrix */}
           <div className="grid grid-cols-4 gap-1.5 mb-3 text-center">
             <div className="p-1.5 rounded-lg bg-slate-950/40 border border-slate-800">
-              <img src="/src/assets/icons/hero_stats/offence.png" alt="ATQ" className="w-6 h-6 mx-auto mb-1" />
+              <img src="src/assets/icons/hero_stats/offence.png" alt="ATQ" className="w-6 h-6 mx-auto mb-1" />
               <div className="text-xs font-mono font-bold text-slate-200">{hero.attack}</div>
             </div>
             <div className="p-1.5 rounded-lg bg-slate-950/40 border border-slate-800">
-              <img src="/src/assets/icons/hero_stats/defence.png" alt="DEF" className="w-6 h-6 mx-auto mb-1" />
+              <img src="src/assets/icons/hero_stats/defence.png" alt="DEF" className="w-6 h-6 mx-auto mb-1" />
               <div className="text-xs font-mono font-bold text-slate-200">{hero.defence}</div>
             </div>
             <div className="p-1.5 rounded-lg bg-slate-950/40 border border-slate-800">
-              <img src="/src/assets/icons/hero_stats/spellpower.png" alt="PODER" className="w-6 h-6 mx-auto mb-1" />
+              <img src="src/assets/icons/hero_stats/spellpower.png" alt="PODER" className="w-6 h-6 mx-auto mb-1" />
               <div className="text-xs font-mono font-bold text-slate-200">{hero.spellPower}</div>
             </div>
             <div className="p-1.5 rounded-lg bg-slate-950/40 border border-slate-800">
-              <img src="/src/assets/icons/hero_stats/intelligence.png" alt="CONOC" className="w-6 h-6 mx-auto mb-1" />
+              <img src="src/assets/icons/hero_stats/intelligence.png" alt="CONOC" className="w-6 h-6 mx-auto mb-1" />
               <div className="text-xs font-mono font-bold text-slate-200">{hero.knowledge}</div>
             </div>
           </div>

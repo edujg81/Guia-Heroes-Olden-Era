@@ -152,26 +152,20 @@ export const HeroDetailModal: React.FC<HeroDetailModalProps> = ({
         </button>
 
         {/* Hero Header */}
-        <div className="flex items-start gap-4 mb-6">
-          <div className="w-33 shrink-0 flex flex-col items-center">
+        <div className="flex items-start grid grid-cols-1 lg:grid-cols-[1fr_2fr_1fr] gap-4 mb-4">
+          <div className="w-40 shrink-0 flex flex-col items-center">
             <HeroImage
               heroId={hero.id}
               heroName={hero.name}
               faction={hero.faction}
               iconPath={hero.iconPath}
               alt={`Retrato de ${hero.name}`}
-              size="xl"
+              size="2xl"
               className="rounded-2xl border-2 border-slate-700 shadow-xl bg-slate-800 w-32 h-32"
             />
-            <div className="mt-2 flex items-center justify-center gap-3 text-sm">
-              <div className="flex items-center gap-1.5">
-                <img src={`/src/assets/${hero.factionIcon}.png`} alt={`Facción ${hero.factionDisplay}`} className="w-10 h-10 object-cover" />
-                <span className="text-slate-300 font-medium">{hero.factionDisplay}</span>
-              </div>
-            </div>
           </div>
 
-          <div className="flex-1 min-w-0">
+          <div className="flex flex-col min-w-0">
             <div className="flex items-center gap-2 mb-1">
               <h2 className="text-2xl font-serif font-bold text-yellow-200">{hero.name}</h2>
               <TierBadge tier={hero.tierRank} size="sm" className="max-w-full whitespace-normal text-center" />
@@ -181,27 +175,78 @@ export const HeroDetailModal: React.FC<HeroDetailModalProps> = ({
               {hero.title}
             </p>
 
-            <div className="flex items-center gap-1.5">
-                <img src={`/src/assets/${hero.classIcon}.png`} alt={`Clase ${hero.classDisplay}`} className="w-10 h-10 object-cover" />
+            
+            <div className="mt-3 flex gap-3 text-sm">
+              <div className="flex items-center gap-2 mt-2">
+                <img src={`src/assets/${hero.classIcon}.png`} alt={`Clase ${hero.classDisplay}`} className="w-10 h-10 object-cover" />
                 <span className="text-slate-300 font-medium">{hero.classDisplay}</span>
+              </div>
+              <div className="flex items-center gap-2 mt-2">
+                <img src={`src/assets/${hero.factionIcon}.png`} alt={`Facción ${hero.factionDisplay}`} className="w-10 h-10 object-cover" />
+                <span className="text-slate-300 font-medium">{hero.factionDisplay}</span>
+              </div>
             </div>
 
-            <div className="grid grid-cols-16 gap-1 mt-3">
-              <div className="p-2 rounded-lg bg-slate-950/40 text-center">
-                <img src="/src/assets/icons/hero_stats/offence.png" alt="ATQ" className="w-5 h-5 mx-auto mb-1" />
-                <div className="font-bold text-slate-200">{hero.attack}</div>
+            <div className="grid grid-cols-8 gap-0 mt-4">
+              <div className="rounded-lg bg-slate-950/40 text-center">
+                <img src="src/assets/icons/hero_stats/offence.png" alt="ATQ" className="w-6 h-6 mx-auto mb-1" />
               </div>
-              <div className="p-2 rounded-lg bg-slate-950/40 text-center">
-                <img src="/src/assets/icons/hero_stats/defence.png" alt="DEF" className="w-5 h-5 mx-auto mb-1" />
-                <div className="font-bold text-slate-200">{hero.defence}</div>
+              <div className="font-bold text-slate-200">{hero.attack}</div>
+              <div className="rounded-lg bg-slate-950/40 text-center">
+                <img src="src/assets/icons/hero_stats/defence.png" alt="DEF" className="w-6 h-6 mx-auto mb-1" />
               </div>
-              <div className="p-2 rounded-lg bg-slate-950/40 text-center">
-                <img src="/src/assets/icons/hero_stats/spellpower.png" alt="PODER" className="w-5 h-5 mx-auto mb-1" />
-                <div className="font-bold text-slate-200">{hero.spellPower}</div>
+              <div className="font-bold text-slate-200">{hero.defence}</div>
+              <div className="rounded-lg bg-slate-950/40 text-center">
+                <img src="src/assets/icons/hero_stats/spellpower.png" alt="PODER" className="w-6 h-6 mx-auto mb-1" />
               </div>
-              <div className="p-2 rounded-lg bg-slate-950/40 text-center">
-                <img src="/src/assets/icons/hero_stats/intelligence.png" alt="CONOC" className="w-5 h-5 mx-auto mb-1" />
-                <div className="font-bold text-slate-200">{hero.knowledge}</div>
+              <div className="font-bold text-slate-200">{hero.spellPower}</div>
+              <div className="rounded-lg bg-slate-950/40 text-center">
+                <img src="src/assets/icons/hero_stats/intelligence.png" alt="CONOC" className="w-6 h-6 mx-auto mb-1" />
+              </div>
+              <div className="font-bold text-slate-200">{hero.knowledge}</div>
+            </div>
+            
+          </div>
+
+          <div className="flex flex-col justify-right mt-5">
+            <div className="p-4 rounded-xl">
+              <div className="space-y-2.5">
+                <div>
+                  <div className="flex items-center justify-between text-xs mb-1">
+                    <span className="text-red-400 font-medium">Ataque Físico</span>
+                    <span className="text-slate-300 font-mono">{hero.statGrowth.attack}%</span>
+                  </div>
+                  <div className="h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                    <div className="h-full bg-red-500" style={{ width: `${hero.statGrowth.attack}%` }} />
+                  </div>
+                </div>
+                <div>
+                  <div className="flex items-center justify-between text-xs mb-1">
+                    <span className="text-blue-400 font-medium">Defensa</span>
+                    <span className="text-slate-300 font-mono">{hero.statGrowth.defense}%</span>
+                  </div>
+                  <div className="h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                    <div className="h-full bg-blue-500" style={{ width: `${hero.statGrowth.defense}%` }} />
+                  </div>
+                </div>
+                <div>
+                  <div className="flex items-center justify-between text-xs mb-1">
+                    <span className="text-purple-400 font-medium">Poder Mágico (SP)</span>
+                    <span className="text-slate-300 font-mono">{hero.statGrowth.spellPower}%</span>
+                  </div>
+                  <div className="h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                    <div className="h-full bg-purple-500" style={{ width: `${hero.statGrowth.spellPower}%` }} />
+                  </div>
+                </div>
+                <div>
+                  <div className="flex items-center justify-between text-xs mb-1">
+                    <span className="text-cyan-400 font-medium">Conocimiento (Maná)</span>
+                    <span className="text-slate-300 font-mono">{hero.statGrowth.knowledge}%</span>
+                  </div>
+                  <div className="h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                    <div className="h-full bg-cyan-500" style={{ width: `${hero.statGrowth.knowledge}%` }} />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -332,14 +377,14 @@ const OverviewTab: React.FC<{
       {/* 2-Column Info Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         {/* Specialty Box */}
-        <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
-          <div className="flex items-center gap-3 text-sm font-bold text-amber-400 mb-2">
+        <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 flex flex-col items-center text-center">
+          <div className="flex flex-col items-center gap-3 mb-2">
             {hero.specializationIcon ? (
-              <img src={`/src/assets/${hero.specializationIcon}.png`} alt="Especialidad" className="w-6 h-6 rounded-md object-cover" />
+              <img src={`src/assets/${hero.specializationIcon}.png`} alt="Especialidad" className="w-16 h-16 rounded-md object-cover" />
             ) : (
-              <Sparkles className="w-4 h-4" />
+              <Sparkles className="w-10 h-10 text-amber-400" />
             )}
-            <span>Especialidad: {hero.specializationName}</span>
+            <span className="text-sm font-bold text-amber-400">Especialidad: {hero.specializationName}</span>
           </div>
           <p className="text-xs text-slate-300 leading-relaxed"><ResolvedText text={hero.specializationDescription} /></p>
         </div>
@@ -354,7 +399,7 @@ const OverviewTab: React.FC<{
             {hero.startingArmy?.map((unit, i) => (
               <div key={i} className="flex flex-col items-center gap-2 text-center">
                 {unit.icon ? (
-                  <img src={`/src/assets/${unit.icon}.png`} alt={unit.unitName} className="w-16 h-16 rounded-sm object-cover" />
+                  <img src={`src/assets/${unit.icon}.png`} alt={unit.unitName} className="w-16 h-16 rounded-sm object-cover" />
                 ) : null}
                 <div className="text-xs font-mono text-slate-200 max-w-[4.5rem] leading-tight">{unit.unitName}</div>
                 <div className="text-xs font-mono text-amber-300">{unit.countInterval}</div>
@@ -373,7 +418,7 @@ const OverviewTab: React.FC<{
             {hero.startingSkills.map((skill, i) => (
               <div key={i} className="flex flex-col items-center gap-2 text-center">
                 {skill.icon ? (
-                  <img src={`/src/assets/${skill.icon}.png`} alt={skill.skillName} className="w-16 h-16 rounded-sm object-cover" />
+                  <img src={`src/assets/${skill.icon}.png`} alt={skill.skillName} className="w-16 h-16 rounded-sm object-cover" />
                 ) : null}
                 <div className="text-xs font-mono text-slate-200 max-w-[4.5rem] leading-tight">{skill.skillName}</div>
               </div>
@@ -392,7 +437,7 @@ const OverviewTab: React.FC<{
               {hero.startingSpells.map((spell, i) => (
                 <div key={i} className="flex flex-col items-center gap-2 text-center">
                   {spell.icon ? (
-                    <img src={`/src/assets/${spell.icon}.png`} alt={spell.spellName} className="w-16 h-16 rounded-sm object-cover" />
+                    <img src={`src/assets/${spell.icon}.png`} alt={spell.spellName} className="w-16 h-16 rounded-sm object-cover" />
                   ) : null}
                   <div className="text-xs font-mono text-slate-200 max-w-[4.5rem] leading-tight">{spell.spellName}</div>
                 </div>
